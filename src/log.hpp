@@ -50,7 +50,7 @@ void bench(bool longLog)
    muduo::ThreadPool pool("pool");
     pool.start(5);
     for(int i=0;i<5;++i)
-      pool.run([](){LOG_INFO<<"info"<<" dsds";;sleep(1);});
+      pool.run([](){LOG_INFO<<"info"<<" dsds";sleep(1);});
     LOG_DEBUG<<"DEBUG";
 }
 
