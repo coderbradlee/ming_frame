@@ -14,7 +14,6 @@ set(SRC_LIST config.cpp main.cpp)
 
 add_executable(ming ${SRC_LIST})
 target_link_libraries(ming muduo_base)
-target_link_libraries(ming ming_config)
 target_link_libraries(ming boost_system)
 target_link_libraries(ming ssl)
 target_link_libraries(ming boost_program_options) 
