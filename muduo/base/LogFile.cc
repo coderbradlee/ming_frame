@@ -114,14 +114,14 @@ string LogFile::getLogFileName(const string& basename, time_t* now)
   struct tm tm;
   *now = time(NULL);
   gmtime_r(now, &tm); // FIXME: localtime_r ?
-  strftime(timebuf, sizeof timebuf, ".%Y%m%d-%H%M%S.", &tm);
+  strftime(timebuf, sizeof timebuf, "_%Y%m%d_%H%M%S", &tm);
   filename += timebuf;
 
-  filename += ProcessInfo::hostname();
+  //filename += ProcessInfo::hostname();
 
   char pidbuf[32];
   snprintf(pidbuf, sizeof pidbuf, ".%d", ProcessInfo::pid());
-  filename += pidbuf;
+  //filename += pidbuf;
 
   filename += ".log";
 
