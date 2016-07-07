@@ -54,7 +54,23 @@ void init_log()
 		}
  
 	  muduo::Logger::setOutput(asyncOutput);
-
+	    if(get_config->m_log_level=="info")
+		{
+			muduo::Logger::setLogLevel(muduo::Logger::LogLevel::INFO);
+		}
+		else if(get_config->m_log_level=="debug")
+		{
+			muduo::Logger::setLogLevel(muduo::Logger::LogLevel::DEBUG);
+		}
+		else if(get_config->m_log_level=="err")
+		{
+			muduo::Logger::setLogLevel(muduo::Logger::LogLevel::ERROR);
+		}
+		else
+		{
+			muduo::Logger::setLogLevel(muduo::Logger::LogLevel::WARN);
+		}
+	  
 	  muduo::string file_name(get_config->m_log_name.c_str());
 
 	  //cout<<get_config->m_log_name<<endl;
