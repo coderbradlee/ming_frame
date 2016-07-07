@@ -6,9 +6,11 @@ int main()
   {
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
-    LOG_DEBUG<<"debug";
-    LOG_INFO<<"info";
-    LOG_ERROR<<"error";
+    muduo::ThreadPool pool("pool");
+    pool.start(5);
+    for(int i=0;i<5;++i)
+      pool.run([](){LOG_INFO<<"info";});
+    LOG_DEBUG<<"DEBUG";
 
 
 

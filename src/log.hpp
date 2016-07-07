@@ -66,7 +66,7 @@ void init_log()
 		{
 			muduo::Logger::setLogLevel(muduo::Logger::LogLevel::DEBUG);
 		}
-		else if(get_config->m_log_level=="err")
+		else if(get_config->m_log_level=="error")
 		{
 			muduo::Logger::setLogLevel(muduo::Logger::LogLevel::ERROR);
 		}
