@@ -16,6 +16,7 @@ set(SRC_LIST log.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc sudoku/sudok
 
 
 add_executable(ming ${SRC_LIST})
+target_link_libraries(ming muduo_net)
 target_link_libraries(ming muduo_base)
 target_link_libraries(ming boost_system)
 target_link_libraries(ming ssl)
