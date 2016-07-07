@@ -15,6 +15,7 @@ int main()
 
     muduo::Timestamp end = muduo::Timestamp::now();
     printf("%f\n", timeDifference(end, start)*1000000);
+    sleep(10);
   }
   catch (std::exception& e)
   {
