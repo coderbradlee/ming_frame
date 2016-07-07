@@ -9,7 +9,7 @@
 #include <sys/resource.h>
 #include "config.hpp"
 //int kRollSize = 50*1000*1000;
-int kRollSize=boost::lexical_cast<int>(get_config->m_log_size)*1000*1000;
+size_t kRollSize=boost::lexical_cast<int>(get_config->m_log_size)*1000*1000;
 muduo::AsyncLogging* g_asyncLog = NULL;
 
 void asyncOutput(const char* msg, int len)

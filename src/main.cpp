@@ -17,9 +17,7 @@ int main()
 
 
     muduo::Timestamp end = muduo::Timestamp::now();
-    printf("%f\n", timeDifference(end, start)*1000000/kBatch);
-    struct timespec ts = { 0, 500*1000*1000 };
-    nanosleep(&ts, NULL);
+    printf("%f\n", timeDifference(end, start)*1000000);
   }
   catch (std::exception& e)
   {
