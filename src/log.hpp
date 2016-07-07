@@ -70,6 +70,7 @@ void init_log()
 		{
 			muduo::Logger::setLogLevel(muduo::Logger::LogLevel::WARN);
 		}
+		muduo::TimeZone beijing(8*3600, "CST");
 	  muduo::Logger::setTimeZone(beijing);
 	  muduo::string file_name(get_config->m_log_name.c_str());
 
