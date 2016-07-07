@@ -1,15 +1,7 @@
-#include <examples/fastcgi/fastcgi.h>
-#include <examples/sudoku/sudoku.h>
-
-#include <muduo/base/Logging.h>
-#include <muduo/net/EventLoop.h>
-#include <muduo/net/TcpServer.h>
-
-#include <boost/bind.hpp>
+#include "fastcgi_resource.h"
 
 using namespace muduo::net;
 
-const string kPath = "/sudoku/";
 
 void onRequest(const TcpConnectionPtr& conn,
                FastCgiCodec::ParamMap& params,
@@ -54,16 +46,13 @@ void onConnection(const TcpConnectionPtr& conn)
   }
 }
 
-int main(int argc, char* argv[])
+void start_fastcgi()
 {
-  int port = 19981;
-  int threads = 0;
-  if (argc > 1)
-    port = atoi(argv[1]);
-  if (argc > 2)
-    threads = atoi(argv[2]);
+  int port = boost::lexical_cast<int>(get_config->m_port);
+  int threads = boost::lexical_cast<int>(get_config->m_threads);
+  
   InetAddress addr(static_cast<uint16_t>(port));
-  LOG_INFO << "Sudoku FastCGI listens on " << addr.toIpPort()
+  LOG_INFO << "FastCGI listens on " << addr.toIpPort()
            << " threads " << threads;
   muduo::net::EventLoop loop;
   TcpServer server(&loop, addr, "FastCGI");

@@ -1,12 +1,12 @@
 #include "log.hpp"
-
+#include "fastcgi_resource.h"
 int main()
 {
   try
   {
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
-    
+    start_fastcgi();
 
 
 
