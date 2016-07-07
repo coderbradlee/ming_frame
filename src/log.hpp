@@ -10,7 +10,7 @@
 #include "config.hpp"
 //int kRollSize = 50*1000*1000;
 size_t kRollSize=boost::lexical_cast<int>(get_config->m_log_size)*1000*1000;
-muduo::AsyncLogging* g_asyncLog = NULL;
+boost::shared_ptr<muduo::AsyncLogging> g_asyncLog = nullptr;
 
 void asyncOutput(const char* msg, int len)
 {
@@ -59,9 +59,9 @@ void init_log()
 
 	  cout<<get_config->m_log_name<<endl;
 	  
-	  muduo::AsyncLogging log(file_name, kRollSize);
-	  log.start();
-	  g_asyncLog = &log;
+	  boost::shared_ptr<muduo::AsyncLogging> log(new muduo::AsyncLogging(file_name, kRollSize));
+	  log->start();
+	  g_asyncLog = log;
 
 }
 #endif
