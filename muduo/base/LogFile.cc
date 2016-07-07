@@ -93,7 +93,7 @@ bool LogFile::rollFile()
   string filename = getLogFileName(basename_, &now);
   string file_full;
   file_full+="logs/";
-  file_full+=filename;
+  file_full.append(filename);
   time_t start = now / kRollPerSeconds_ * kRollPerSeconds_;
 
   if (now > lastRoll_)
