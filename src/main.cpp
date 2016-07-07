@@ -4,6 +4,7 @@ int main()
 {
   try
   {
+    cout<<get_config->m_log_name<<endl;
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
 
