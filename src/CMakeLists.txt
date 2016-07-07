@@ -9,7 +9,10 @@
 #add_library(ming_config config.cpp)
 #target_link_libraries(ming_config muduo_net)
 
-set(SRC_LIST config.cpp main.cpp)
+add_subdirectory(fastcgi)
+add_subdirectory(sudoku)
+
+set(SRC_LIST fastcgi.cc sudoku.cc config.cpp main.cpp)
 
 
 add_executable(ming ${SRC_LIST})

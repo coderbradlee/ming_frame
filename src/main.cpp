@@ -6,7 +6,7 @@ int main()
   {
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
-    bench(false);
+    
 
 
 
