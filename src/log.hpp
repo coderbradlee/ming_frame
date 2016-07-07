@@ -52,6 +52,7 @@ void init_log()
  
   muduo::Logger::setOutput(asyncOutput);
   muduo::string name=get_config->m_log_name.c_str();
+  cout<<name<<endl;
   muduo::AsyncLogging log(name, kRollSize);
   log.start();
   g_asyncLog = &log;
