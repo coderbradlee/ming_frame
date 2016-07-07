@@ -46,7 +46,7 @@ void bench(bool longLog)
 
 void init_log()
 {
-		cout<<get_config->m_log_name<<endl;
+		//cout<<get_config->m_log_name<<endl;
 	    {
 	    	size_t kOneGB = 1000*1024*1024;
 	    	rlimit rl = { 1*kOneGB, 1*kOneGB };
@@ -57,7 +57,7 @@ void init_log()
 
 	  muduo::string file_name(get_config->m_log_name.c_str());
 
-	  cout<<get_config->m_log_name<<endl;
+	  //cout<<get_config->m_log_name<<endl;
 	  
 	  boost::shared_ptr<muduo::AsyncLogging> log(new muduo::AsyncLogging(file_name, kRollSize));
 	  log->start();
