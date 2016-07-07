@@ -4,6 +4,10 @@
 #include <muduo/base/AsyncLogging.h>
 #include <muduo/base/Logging.h>
 #include <muduo/base/Timestamp.h>
+#include <muduo/base/Logging.h>
+#include <muduo/base/LogFile.h>
+#include <muduo/base/ThreadPool.h>
+#include <muduo/base/TimeZone.h>
 
 #include <stdio.h>
 #include <sys/resource.h>
@@ -43,7 +47,10 @@ void bench(bool longLog)
     nanosleep(&ts, NULL);
   }
 }
-
+void flushFunc()
+{
+  g_logFile->flush();
+}
 void init_log()
 {
 		//cout<<get_config->m_log_name<<endl;
@@ -70,6 +77,7 @@ void init_log()
 		{
 			muduo::Logger::setLogLevel(muduo::Logger::LogLevel::WARN);
 		}
+		muduo::Logger::setFlush(flushFunc);
 		muduo::TimeZone beijing(8*3600, "CST");
 	  muduo::Logger::setTimeZone(beijing);
 	  muduo::string file_name(get_config->m_log_name.c_str());
