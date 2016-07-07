@@ -1,5 +1,5 @@
 #include "log.hpp"
-#include "fastcgi_resource.h"
+#include "fastcgi/fastcgi_resource.h"
 int main()
 {
   try
