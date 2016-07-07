@@ -1,0 +1,14 @@
+/root/ming_frame/Build/release/src/CMakeFiles/config.dir
+/root/ming_frame/Build/release/src/CMakeFiles/ming.dir
+/root/ming_frame/Build/release/muduo/base/CMakeFiles/muduo_base.dir
+/root/ming_frame/Build/release/muduo/base/CMakeFiles/muduo_base_cpp11.dir
+/root/ming_frame/Build/release/muduo/net/http/CMakeFiles/muduo_http.dir
+/root/ming_frame/Build/release/muduo/net/inspect/CMakeFiles/muduo_inspect.dir
+/root/ming_frame/Build/release/muduo/net/CMakeFiles/muduo_net.dir
+/root/ming_frame/Build/release/muduo/net/CMakeFiles/muduo_net_cpp11.dir
+/root/ming_frame/Build/release/muduo/net/protobuf/CMakeFiles/muduo_protobuf_codec.dir
+/root/ming_frame/Build/release/muduo/net/protobuf/CMakeFiles/muduo_protobuf_codec_cpp11.dir
+/root/ming_frame/Build/release/muduo/net/protorpc/CMakeFiles/muduo_protorpc.dir
+/root/ming_frame/Build/release/muduo/net/protorpc/CMakeFiles/muduo_protorpc_wire.dir
+/root/ming_frame/Build/release/muduo/net/protorpc/CMakeFiles/muduo_protorpc_wire_cpp11.dir
+/root/ming_frame/Build/release/muduo/net/protorpc/CMakeFiles/protobuf_rpc_wire_test.dir
