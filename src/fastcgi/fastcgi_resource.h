@@ -12,7 +12,7 @@
 #include "../log.hpp"
 using namespace muduo::net;
 
-const string kPath = "/sudoku/";
+const muduo::string kPath = "/sudoku/";
 
 void onRequest(const TcpConnectionPtr& conn,
                FastCgiCodec::ParamMap& params,
