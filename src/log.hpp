@@ -49,7 +49,7 @@ void bench(bool longLog)
 }
 void flushFunc()
 {
-  g_logFile->flush();
+  g_asyncLog->flush();
 }
 void init_log()
 {
