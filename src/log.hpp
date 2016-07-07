@@ -51,7 +51,8 @@ void init_log()
     setrlimit(RLIMIT_AS, &rl);
  
   muduo::Logger::setOutput(asyncOutput);
-  muduo::AsyncLogging log(get_config->m_log_name, kRollSize);
+  muduo::string name=get_config->m_log_name;
+  muduo::AsyncLogging log(name, kRollSize);
   log.start();
   g_asyncLog = &log;
 
