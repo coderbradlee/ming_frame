@@ -6,11 +6,13 @@
 #else()
 #  add_subdirectory(curl EXCLUDE_FROM_ALL)
 #endif()
-add_library(ming_config config.cpp)
-target_link_libraries(ming_config muduo_net)
+#add_library(ming_config config.cpp)
+#target_link_libraries(ming_config muduo_net)
+
+set(SRC_LIST config.cpp main.cpp)
 
 
-add_executable(ming main.cpp)
+add_executable(ming ${SRC_LIST})
 target_link_libraries(ming muduo_base)
 target_link_libraries(ming ming_config)
 target_link_libraries(ming boost_system)
@@ -27,3 +29,4 @@ target_link_libraries(ming boost_regex)
 target_link_libraries(ming boost_timer) 
 target_link_libraries(ming boost_signals) 
 target_link_libraries(ming boost_locale)
+set_target_properties(ming PROPERTIES COMPILE_FLAGS "-std=c++14")
