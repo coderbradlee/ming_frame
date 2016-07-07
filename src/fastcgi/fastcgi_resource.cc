@@ -1,13 +1,13 @@
 #include "fastcgi_resource.h"
 
 using namespace muduo::net;
-using muduo::string;
+
 
 void onRequest(const TcpConnectionPtr& conn,
                FastCgiCodec::ParamMap& params,
                Buffer* in)
 {
-  string uri = params["REQUEST_URI"];
+  muduo::string uri = params["REQUEST_URI"];
   LOG_INFO << conn->name() << ": " << uri;
 
   for (FastCgiCodec::ParamMap::const_iterator it = params.begin();
