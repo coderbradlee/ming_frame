@@ -11,7 +11,7 @@
 #include <boost/bind.hpp>
 #include "../log.hpp"
 using namespace muduo::net;
-using muduo::string;
+
 const muduo::string kPath = "/sudoku/";
 
 void onRequest(const TcpConnectionPtr& conn,

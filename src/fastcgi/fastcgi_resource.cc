@@ -1,7 +1,7 @@
 #include "fastcgi_resource.h"
 
 using namespace muduo::net;
-
+using muduo::string;
 
 void onRequest(const TcpConnectionPtr& conn,
                FastCgiCodec::ParamMap& params,
