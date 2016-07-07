@@ -6,13 +6,13 @@
 #else()
 #  add_subdirectory(curl EXCLUDE_FROM_ALL)
 #endif()
-add_library(config config.cpp)
-target_link_libraries(config muduo_net)
-#target_link_libraries(ming_curl curl)
+add_library(ming_config config.cpp)
+target_link_libraries(ming_config muduo_net)
+
 
 add_executable(ming main.cpp)
 target_link_libraries(ming muduo_base)
-target_link_libraries(ming config)
+target_link_libraries(ming ming_config)
 target_link_libraries(ming boost_system)
 target_link_libraries(ming ssl)
 target_link_libraries(ming boost_program_options) 
