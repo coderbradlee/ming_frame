@@ -21,9 +21,11 @@
 using namespace muduo;
 
 FileUtil::AppendFile::AppendFile(StringArg filename)
-  : fp_(::fopen(filename.c_str(), "ae")),  // 'e' for O_CLOEXEC
+  :   // 'e' for O_CLOEXEC
     writtenBytes_(0)
 {
+  string temp="logs/"+filename;
+  fp_(::fopen(temp.c_str(), "ae"));
   assert(fp_);
   ::setbuffer(fp_, buffer_, sizeof buffer_);
   // posix_fadvise POSIX_FADV_DONTNEED ?
