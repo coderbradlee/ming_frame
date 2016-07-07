@@ -6,9 +6,8 @@ int main()
   {
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
-
-    bench(false);
-    //LOG_INFO << "Hello 0123456789";
+    for(size_t i=0;i<1000000;++i)
+      LOG_INFO << "Hello 0123456789";
 
 
 
