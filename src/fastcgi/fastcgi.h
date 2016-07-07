@@ -4,7 +4,7 @@
 #include <muduo/net/TcpConnection.h>
 #include <map>
 
-using muduo::string;
+//using muduo::string;
 
 // one FastCgiCodec per TcpConnection
 // both lighttpd and nginx do not implement multiplexing,
