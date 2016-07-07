@@ -26,7 +26,7 @@ set(CXX_FLAGS
  -Wwrite-strings
  -march=native
  # -MMD
- #-std=c++14
+ -std=c++11
  -rdynamic
  )
 if(CMAKE_BUILD_BITS EQUAL 32)
