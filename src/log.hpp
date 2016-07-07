@@ -46,18 +46,20 @@ void bench(bool longLog)
 
 void init_log()
 {
-	cout<<get_config->m_log_name<<endl;
-    size_t kOneGB = 1000*1024*1024;
-    rlimit rl = { 2*kOneGB, 2*kOneGB };
-    setrlimit(RLIMIT_AS, &rl);
+		cout<<get_config->m_log_name<<endl;
+	    {
+	    	size_t kOneGB = 1000*1024*1024;
+	    	rlimit rl = { 1*kOneGB, 1*kOneGB };
+	    	setrlimit(RLIMIT_AS, &rl);
+		}
  
-  muduo::Logger::setOutput(asyncOutput);
+	  muduo::Logger::setOutput(asyncOutput);
 
-  muduo::string file_name(get_config->m_log_name.c_str());
- 
-  muduo::AsyncLogging log(file_name, kRollSize);
-  log.start();
-  g_asyncLog = &log;
+	  muduo::string file_name(get_config->m_log_name.c_str());
+	 
+	  muduo::AsyncLogging log(file_name, kRollSize);
+	  log.start();
+	  g_asyncLog = &log;
 
 }
 #endif
