@@ -10,16 +10,13 @@ void onRequest(const TcpConnectionPtr& conn,
   muduo::string uri = params["REQUEST_URI"];
   LOG_INFO << conn->name() << ": " << uri;
 
+#ifdef MING_DEBUG
+      std::cout<< "QUERY_STRING:" <<params["QUERY_STRING"];
+#endif
   for (FastCgiCodec::ParamMap::const_iterator it = params.begin();
        it != params.end(); ++it)
   {
     LOG_DEBUG << it->first << " = " << it->second;
-    if(it->first=="QUERY_STRING")
-    {
-#ifdef MING_DEBUG
-      std::cout<< "QUERY_STRING:" << it->second;
-#endif
-    }
   }
   if (in->readableBytes() > 0)
    {
