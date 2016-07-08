@@ -14,9 +14,20 @@ void onRequest(const TcpConnectionPtr& conn,
        it != params.end(); ++it)
   {
     LOG_DEBUG << it->first << " = " << it->second;
+    if(it->first=="QUERY_STRING")
+    {
+#ifdef MING_DEBUG
+      std::cout<< "QUERY_STRING:" << it->second;
+#endif
+    }
   }
   if (in->readableBytes() > 0)
-    LOG_DEBUG << "stdin " << in->retrieveAllAsString();
+   {
+      LOG_DEBUG << "stdin " << in->retrieveAllAsString();
+#ifdef MING_DEBUG
+      std::cout<< "content:" << in->retrieveAllAsString();
+#endif
+   } 
   Buffer response;
   response.append("Context-Type: text/plain\r\n\r\n");
   if (uri.size() == kCells + kPath.size() && uri.find(kPath) == 0)

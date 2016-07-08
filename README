@@ -3,4 +3,4 @@ yum install spawn-fcgi
 yum install fcgi fcgi-devel
 config nginx 
 
-spawn-fcgi -a 127.0.0.1 -p 8081 -f 
+curl -X GET -d "param1=value1&param2=value2" http://127.0.0.1/fastcgi/?test1=1\&test2=2
