@@ -56,9 +56,9 @@ void onRequest(const TcpConnectionPtr& conn,
                FastCgiCodec::ParamMap& params,
                Buffer* in)
 {
-  string uri = params["REQUEST_URI"];
+  string uri(params["REQUEST_URI"].c_str());
   LOG_INFO << conn->name() << ": " << uri;
-  string query_string = params["QUERY_STRING"];
+  string query_string(params["QUERY_STRING"].c_str());
   LOG_INFO << "query_string: " << query_string;
   // for (FastCgiCodec::ParamMap::const_iterator it = params.begin();
   //      it != params.end(); ++it)
