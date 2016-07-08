@@ -10,6 +10,7 @@
 
 #include <boost/bind.hpp>
 #include "../log.hpp"
+#include "../mysql_connect.hpp"
 using namespace muduo::net;
 
 const muduo::string kPath = "/sudoku/";
@@ -25,6 +26,7 @@ void parser_param(
   const muduo::string& content,
   const TcpConnectionPtr& conn);
 void start_fastcgi();
+
 class request_parser_base:boost::noncopyable
 {
 public:

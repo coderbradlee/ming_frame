@@ -7,3 +7,5 @@ nginx -s reload
 
 
 curl -u test:test -X GET http://192.168.3.132/exchange_rate/?source=USD\&target=CNY\&time=2016-07-04\&database=os
+
+2、mysql connect ok based on mysql-connector-cpp,tag 1.1.6
