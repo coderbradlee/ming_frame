@@ -26,11 +26,14 @@ public:
 	void test();
 private:
 	boost::shared_ptr<mysql_info> m_mysql_info;
+	boost::shared_ptr<sql::ResultSet> m_res;
+	boost::shared_ptr<sql::Statement> m_stmt;
+	boost::shared_ptr<sql::PreparedStatement> m_pstmt;
 	boost::shared_ptr<sql::Driver> m_drivers;
 	boost::shared_ptr<sql::Connection> m_con;
-	boost::shared_ptr<sql::Statement> m_stmt;
-	boost::shared_ptr<sql::ResultSet> m_res;
-	boost::shared_ptr<sql::PreparedStatement> m_pstmt;
+	
+	
+	
 	sql::Driver* m_driver;
 	
 };
