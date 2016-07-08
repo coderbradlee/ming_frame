@@ -70,7 +70,8 @@ void onRequest(const TcpConnectionPtr& conn,
       LOG_DEBUG << "stdin " << in->retrieveAllAsString();
    } 
    string content(in->retrieveAllAsString().c_str());
-   parser_param(uri,params["REQUEST_METHOD"],query_string,content,conn);
+   string method(params["REQUEST_METHOD"].c_str());
+   parser_param(uri,method,query_string,content,conn);
   
 }
 
