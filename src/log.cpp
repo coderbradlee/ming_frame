@@ -44,14 +44,13 @@ void bench(bool longLog)
 
 void init_log()
 {
-		//cout<<get_config->m_log_name<<endl;
-	    {
-	    	size_t kOneGB = 1000*1024*1024;
-	    	rlimit rl = { 1*kOneGB, 1*kOneGB };
-	    	setrlimit(RLIMIT_AS, &rl);
-		}
- 
-	  muduo::Logger::setOutput(asyncOutput);
+	try
+	{
+		size_t kOneGB = 1000*1024*1024;
+	    rlimit rl = { 1*kOneGB, 1*kOneGB };
+	    setrlimit(RLIMIT_AS, &rl);
+	
+	    muduo::Logger::setOutput(asyncOutput);
 	    if(get_config->m_log_level=="info")
 		{
 			muduo::Logger::setLogLevel(muduo::Logger::LogLevel::INFO);
@@ -79,4 +78,14 @@ void init_log()
 	  log->start();
 	  g_asyncLog = log;
 
+	}
+	  catch (std::exception& e)
+	  {
+	    //cout << diagnostic_information(e) << endl;
+	    std::cout << e.what() << std::endl;
+	  }
+	  catch (...)
+	  {
+	    std::cout << "unknown error" << std::endl;
+	  }	
 }
