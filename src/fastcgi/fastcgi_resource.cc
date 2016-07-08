@@ -37,7 +37,7 @@ void parser_param(
     
     //str.compare(4, 4, "soft")
     //uri.compare(0,get_config->m_url.length(),get_config->m_url)
-    int len=get_config->m_url.length();
+    int len=(get_config->m_url).length();
     if(request_method=="GET"&&uri.compare(0,len,get_config->m_url) == 0)
       boost::shared_ptr<request_parser_base> pa(new request_parser_get(query_string));
     string result=pa->get_result();
