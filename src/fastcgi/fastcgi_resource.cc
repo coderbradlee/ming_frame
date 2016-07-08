@@ -10,9 +10,6 @@ void onRequest(const TcpConnectionPtr& conn,
   muduo::string uri = params["REQUEST_URI"];
   LOG_INFO << conn->name() << ": " << uri;
 
-#ifdef MING_DEBUG
-      std::cout<< "QUERY_STRING:" <<params["QUERY_STRING"];
-#endif
   for (FastCgiCodec::ParamMap::const_iterator it = params.begin();
        it != params.end(); ++it)
   {
@@ -21,9 +18,6 @@ void onRequest(const TcpConnectionPtr& conn,
   if (in->readableBytes() > 0)
    {
       LOG_DEBUG << "stdin " << in->retrieveAllAsString();
-#ifdef MING_DEBUG
-      std::cout<< "content:" << in->retrieveAllAsString();
-#endif
    } 
   Buffer response;
   response.append("Context-Type: text/plain\r\n\r\n");

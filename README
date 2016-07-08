@@ -4,3 +4,5 @@ yum install fcgi fcgi-devel
 config nginx 
 
 curl -X GET -d "param1=value1&param2=value2" http://127.0.0.1/fastcgi/?test1=1\&test2=2
+
+curl -u test:test -X GET http://172.30.1.5:8688/exchange_rate/?source=USD\&target=CNY\&time=2016-07-04\&database=os
