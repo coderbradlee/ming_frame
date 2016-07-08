@@ -9,11 +9,12 @@ void onRequest(const TcpConnectionPtr& conn,
 {
   muduo::string uri = params["REQUEST_URI"];
   LOG_INFO << conn->name() << ": " << uri;
-
+  muduo::string query_string = params["QUERY_STRING"];
+  LOG_INFO << "query_string: " << query_string;
   for (FastCgiCodec::ParamMap::const_iterator it = params.begin();
        it != params.end(); ++it)
   {
-    LOG_DEBUG << it->first << " = " << it->second;
+    //LOG_DEBUG << it->first << " = " << it->second;
   }
   if (in->readableBytes() > 0)
    {
