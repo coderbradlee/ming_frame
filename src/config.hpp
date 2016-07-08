@@ -38,8 +38,8 @@ class iconfig:public boost::enable_shared_from_this<iconfig>, boost::noncopyable
 		//////////////////////////
 		string m_mysql_table;
 		string m_mysql_table2;
-		size_t m_threads;
-		size_t m_port;
+		int m_threads;
+		int m_port;
 		string m_orderbot_username;
 		string m_orderbot_password;
 		string m_orderbot_url;	

@@ -21,8 +21,8 @@ iconfig::iconfig(const std::string& filename)
 	m_mysql_database = m_pt.get<std::string>("mysql.database");
 	m_mysql_table = m_pt.get<std::string>("mysql.table");
 	m_mysql_table2 = m_pt.get<std::string>("mysql.table2");
-	m_threads = boost::lexical_cast<size_t>(m_pt.get<std::string>("webserver.threads"));
-	m_port = boost::lexical_cast<size_t>(m_pt.get<std::string>("webserver.port"));
+	m_threads = boost::lexical_cast<int>(m_pt.get<std::string>("webserver.threads"));
+	m_port = boost::lexical_cast<int>(m_pt.get<std::string>("webserver.port"));
 	m_orderbot_username = m_pt.get<std::string>("orderbot.username");
 	m_orderbot_password = m_pt.get<std::string>("orderbot.password");
 	m_orderbot_url = m_pt.get<std::string>("orderbot.url");	
