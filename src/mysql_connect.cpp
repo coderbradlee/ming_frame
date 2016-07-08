@@ -1,13 +1,32 @@
 #include "mysql_connect.hpp"
 
 
-mysql_connect::mysql_connect(boost::shared_ptr<mysql_info> in):m_mysql_info(in)
+mysql_connect::mysql_connect(boost::shared_ptr<mysql_info> in):m_mysql_info(in),m_res(nullptr),m_stmt(nullptr),m_pstmt(nullptr)
 {
 	m_driver = get_driver_instance();
 	m_con = boost::shared_ptr<sql::Connection>(m_driver->connect("tcp://"+m_mysql_info->ip+":"+m_mysql_info->port, m_mysql_info->username, m_mysql_info->password));
 	
 	m_con->setSchema(m_mysql_info->database);
 
+}
+void mysql_connect::query(const string& query)
+{
+	try 
+	{
+	  m_pstmt = boost::shared_ptr<sql::PreparedStatement>(m_con->prepareStatement(query));
+	  m_res = boost::shared_ptr<sql::ResultSet>(m_pstmt->executeQuery());
+
+	} 
+	catch (sql::SQLException &e) 
+	{
+	  //ming_log->get_log_console()->info()<< "# ERR: " << e.what();
+	  //ming_log->get_log_console()->info()<< " (MySQL error code: " << e.getErrorCode();
+	  //ming_log->get_log_console()->info()<< ", SQLState: " << e.getSQLState();
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
 }
 void mysql_connect::test()
 {

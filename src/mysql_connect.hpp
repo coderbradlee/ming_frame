@@ -20,7 +20,8 @@ class mysql_connect
 {
 public:
 	mysql_connect(boost::shared_ptr<mysql_info> in);
-	
+	void query(const string& sql);
+	boost::shared_ptr<sql::ResultSet> get_res()const;
 	void test();
 private:
 	boost::shared_ptr<sql::Driver> m_drivers;

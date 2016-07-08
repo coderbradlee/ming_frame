@@ -43,4 +43,19 @@ public:
 	request_parser_get(const string& query_string,const string& content);
 	string get_result();
 };
+class get_rate
+{
+public:
+	get(const string& src,const string& des,const string& time,boost::shared_ptr<mysql_connect> m);
+	string get_rates();
+private:
+	string get_currucy_id(const string& code);
+	string get_rate_from_myql(const string& exchange_rate_id,const string& which_day);
+	string get_exchange_rate_id(const string& source,const string& target);
+	boost::shared_ptr<mysql_connect> m_conn;
+	string m_src;
+	string m_des;
+	string m_time;
+
+};
 #endif  
