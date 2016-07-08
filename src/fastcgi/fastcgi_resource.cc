@@ -50,7 +50,7 @@ void start_fastcgi()
 {
   int port = boost::lexical_cast<int>(get_config->m_port);
   int threads = boost::lexical_cast<int>(get_config->m_threads);
-  
+  LOG_INFO <<port<<":"<<threads;
   InetAddress addr(static_cast<uint16_t>(port));
   LOG_INFO << "FastCGI listens on " << addr.toIpPort()
            << " threads " << threads;
