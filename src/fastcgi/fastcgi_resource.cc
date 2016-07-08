@@ -1,7 +1,32 @@
 #include "fastcgi_resource.h"
 
 using namespace muduo::net;
+void parser_param(
+  const muduo::string& query_string,
+  const muduo::string& content,
+  const TcpConnectionPtr& conn)
+{
+    std::vector<std::string> params_value_pair;
+    boost::split(params_value_pair,query_string , boost::is_any_of("&="));
+    for(const auto& p:params_value_pair)
+    {
+      LOG_INFO << p;
+    }
+    Buffer response;
+    response.append("Context-Type: text/plain\r\n\r\n");
+    if (uri.size() == kCells + kPath.size() && uri.find(kPath) == 0)
+    {
+      response.append(solveSudoku(uri.substr(kPath.size())));
+    }
+    else
+    {
+      // FIXME: set http status code 400
+      response.append("bad request");
+    }
 
+    FastCgiCodec::respond(&response);
+    conn->send(&response);
+}
 
 void onRequest(const TcpConnectionPtr& conn,
                FastCgiCodec::ParamMap& params,
@@ -11,29 +36,17 @@ void onRequest(const TcpConnectionPtr& conn,
   LOG_INFO << conn->name() << ": " << uri;
   muduo::string query_string = params["QUERY_STRING"];
   LOG_INFO << "query_string: " << query_string;
-  for (FastCgiCodec::ParamMap::const_iterator it = params.begin();
-       it != params.end(); ++it)
-  {
-    //LOG_DEBUG << it->first << " = " << it->second;
-  }
+  // for (FastCgiCodec::ParamMap::const_iterator it = params.begin();
+  //      it != params.end(); ++it)
+  // {
+  //   //LOG_DEBUG << it->first << " = " << it->second;
+  // }
   if (in->readableBytes() > 0)
    {
       LOG_DEBUG << "stdin " << in->retrieveAllAsString();
    } 
-  Buffer response;
-  response.append("Context-Type: text/plain\r\n\r\n");
-  if (uri.size() == kCells + kPath.size() && uri.find(kPath) == 0)
-  {
-    response.append(solveSudoku(uri.substr(kPath.size())));
-  }
-  else
-  {
-    // FIXME: set http status code 400
-    response.append("bad request");
-  }
-
-  FastCgiCodec::respond(&response);
-  conn->send(&response);
+   parser_param(query_string,in->retrieveAllAsString(),conn);
+  
 }
 
 void onConnection(const TcpConnectionPtr& conn)
@@ -62,9 +75,9 @@ void start_fastcgi()
            << " threads " << threads<<std::endl;
 #endif
   muduo::net::EventLoop loop;
-  TcpServer server(&loop, addr, "FastCGI");
-  server.setConnectionCallback(onConnection);
-  server.setThreadNum(threads);
-  server.start();
+  boost::shared_ptr<TcpServer> server(new TcpServer(&loop, addr, "FastCGI"));
+  server->setConnectionCallback(onConnection);
+  server->setThreadNum(threads);
+  server->start();
   loop.loop();
 }

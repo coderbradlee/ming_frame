@@ -21,6 +21,10 @@ void onRequest(const TcpConnectionPtr& conn,
 void onConnection(const TcpConnectionPtr& conn);
 
 void start_fastcgi();
+class request_parser:public boost::noncopyable
+{
+private:
 
+};
 
 #endif  
