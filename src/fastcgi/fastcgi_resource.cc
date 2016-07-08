@@ -15,7 +15,7 @@ request_parser_base::request_parser_base(const string& query_string,const string
 }
 
 request_parser_get::request_parser_get(const string& query_string,const string& content):request_parser_base(query_string,content){}
-string request_parser_get::result()
+string request_parser_get::get_result()
 {
     LOG_INFO << m_query_string["source"];
     return "0";
@@ -42,7 +42,7 @@ void parser_param(
     string result="0";
     if(request_method=="GET"&&uri.compare(0,len,url) == 0)
     {
-        boost::shared_ptr<request_parser_base> pa(new request_parser_get(query_string));
+        boost::shared_ptr<request_parser_base> pa(new request_parser_get(query_string,content));
         result=pa->get_result();
     } 
     Buffer response;

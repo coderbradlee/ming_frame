@@ -39,6 +39,6 @@ class request_parser_get:public request_parser_base
 {
 public:
 	request_parser_get(const string& query_string,const string& content);
-	string result();
+	string get_result();
 };
 #endif  
