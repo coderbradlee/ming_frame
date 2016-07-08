@@ -1,18 +1,43 @@
 #include "fastcgi_resource.h"
 
 using namespace muduo::net;
+
+request_parser_base::request_parser_base(const string& query_string,const string& content):m_content(content)
+{
+  std::vector<std::string> param_pair;
+  boost::split(param_pair,query_string , boost::is_any_of("&"));
+  for(auto& p:param_pair)
+  {
+     std::vector<std::string> one_pair;
+     boost::split(one_pair,p , boost::is_any_of("="));
+     m_query_string.insert(std::make_pair(one_pair[0],one_pair[1]));
+  }
+}
+
+request_parser_get::request_parser_get(const string& query_string,const string& content):request_parser_base(query_string,content){}
+string request_parser_get::result()
+{
+    LOG_INFO << m_query_string[source];
+    return "0";
+}
+
+
+
+
+
+
+
 void parser_param(
   const muduo::string& uri,
+  const muduo::string& request_method,
   const muduo::string& query_string,
   const muduo::string& content,
   const TcpConnectionPtr& conn)
 {
-    std::vector<std::string> params_value_pair;
-    boost::split(params_value_pair,query_string , boost::is_any_of("&="));
-    for(const auto& p:params_value_pair)
-    {
-      LOG_INFO << p;
-    }
+    
+    if(request_method=="GET"&&uri.compare(0,get_config->m_url.length(),get_config->m_url) == 0)
+      boost::shared_ptr<request_parser_base> pa(new request_parser_get(query_string));
+    string result=pa->get_result();
     Buffer response;
     response.append("Context-Type: text/plain\r\n\r\n");
     if (uri.size() == kCells + kPath.size() && uri.find(kPath) == 0)
@@ -22,7 +47,7 @@ void parser_param(
     else
     {
       // FIXME: set http status code 400
-      response.append("request ok");
+      response.append(result);
     }
 
     FastCgiCodec::respond(&response);
@@ -46,7 +71,7 @@ void onRequest(const TcpConnectionPtr& conn,
    {
       LOG_DEBUG << "stdin " << in->retrieveAllAsString();
    } 
-   parser_param(uri,query_string,in->retrieveAllAsString(),conn);
+   parser_param(uri,params["REQUEST_METHOD"],query_string,in->retrieveAllAsString(),conn);
   
 }
 

@@ -25,10 +25,20 @@ void parser_param(
   const muduo::string& content,
   const TcpConnectionPtr& conn);
 void start_fastcgi();
-class request_parser:public boost::noncopyable
+class request_parser_base:boost::noncopyable
 {
-private:
-
+public:
+	request_parser_base(const string& query_string,const string& content);
+	virtual string result()=0;
+	virtual ~request_parser_base(){}
+protected:
+	std::map<string,string> m_query_string;
+	string m_content;
 };
-
+class request_parser_get:public request_parser_base
+{
+public:
+	request_parser_get(const string& query_string,const string& content);
+	string result();
+};
 #endif  
