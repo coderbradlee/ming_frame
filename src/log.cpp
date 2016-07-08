@@ -35,7 +35,7 @@ void bench(bool longLog)
   //   nanosleep(&ts, NULL);
   // }
 
-   muduo::ThreadPool pool("pool");
+    muduo::ThreadPool pool("pool");
     pool.start(5);
     for(int i=0;i<5;++i)
       pool.run([](){LOG_INFO<<"info"<<" dsds";sleep(1);});
@@ -69,14 +69,14 @@ void init_log()
 		}
 		
 		muduo::TimeZone beijing(8*3600, "CST");
-	  muduo::Logger::setTimeZone(beijing);
-	  muduo::string file_name(get_config->m_log_name.c_str());
+	  	muduo::Logger::setTimeZone(beijing);
+	  	muduo::string file_name(get_config->m_log_name.c_str());
 
-	  //cout<<get_config->m_log_name<<endl;
+	    cout<<get_config->m_log_name<<endl;
 	  
-	  boost::shared_ptr<muduo::AsyncLogging> log(new muduo::AsyncLogging(file_name, kRollSize));
-	  log->start();
-	  g_asyncLog = log;
+	  	boost::shared_ptr<muduo::AsyncLogging> log(new muduo::AsyncLogging(file_name, kRollSize));
+	  	log->start();
+	  	g_asyncLog = log;
 
 	}
 	  catch (std::exception& e)
