@@ -17,7 +17,7 @@ request_parser_base::request_parser_base(const string& query_string,const string
 request_parser_get::request_parser_get(const string& query_string,const string& content):request_parser_base(query_string,content){}
 string request_parser_get::result()
 {
-    LOG_INFO << m_query_string[source];
+    LOG_INFO << m_query_string["source"];
     return "0";
 }
 
