@@ -6,7 +6,8 @@ int main()
   {
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
-    start_fastcgi();
+
+    //start_fastcgi();
 
 
 
