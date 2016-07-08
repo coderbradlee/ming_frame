@@ -28,10 +28,10 @@ string request_parser_get::result()
 
 
 void parser_param(
-  const muduo::string& uri,
-  const muduo::string& request_method,
-  const muduo::string& query_string,
-  const muduo::string& content,
+  const string& uri,
+  const string& request_method,
+  const string& query_string,
+  const string& content,
   const TcpConnectionPtr& conn)
 {
     
@@ -65,9 +65,9 @@ void onRequest(const TcpConnectionPtr& conn,
                FastCgiCodec::ParamMap& params,
                Buffer* in)
 {
-  muduo::string uri = params["REQUEST_URI"];
+  string uri = params["REQUEST_URI"];
   LOG_INFO << conn->name() << ": " << uri;
-  muduo::string query_string = params["QUERY_STRING"];
+  string query_string = params["QUERY_STRING"];
   LOG_INFO << "query_string: " << query_string;
   // for (FastCgiCodec::ParamMap::const_iterator it = params.begin();
   //      it != params.end(); ++it)
