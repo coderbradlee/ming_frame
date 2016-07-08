@@ -35,7 +35,9 @@ void parser_param(
   const TcpConnectionPtr& conn)
 {
     
-    if(request_method=="GET"&&uri.compare(0,get_config->m_url.length(),get_config->m_url) == 0)
+    //str.compare(4, 4, "soft")
+    //uri.compare(0,get_config->m_url.length(),get_config->m_url)
+    if(request_method=="GET"&&uri.compare(0,5,"/exchange") == 0)
       boost::shared_ptr<request_parser_base> pa(new request_parser_get(query_string));
     string result=pa->get_result();
     Buffer response;
