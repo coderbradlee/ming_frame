@@ -17,7 +17,7 @@ request_parser_base::request_parser_base(const string& query_string,const string
 request_parser_get::request_parser_get(const string& query_string,const string& content):request_parser_base(query_string,content){}
 
 
-  get_rate::get_rate(const string& src,const string& des,const string& times,boost::shared_ptr<mysql_connect> m):m_src(src),m_des(des),m_time(times),m_conn(m){}
+  get_rate::get_rate(const string& src,const string& des,const string& times,boost::shared_ptr<mysql_connect> m_):m_src(src),m_des(des),m_time(times),m_conn(m_){}
   string get_rate::get_rates()
   {
      string id=get_exchange_rate_id(m_src,m_des);

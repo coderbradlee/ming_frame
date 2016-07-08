@@ -46,7 +46,7 @@ public:
 class get_rate
 {
 public:
-	get(const string& src,const string& des,const string& time,boost::shared_ptr<mysql_connect> m);
+	get_rate(const string& src,const string& des,const string& time,boost::shared_ptr<mysql_connect> m_);
 	string get_rates();
 private:
 	string get_currucy_id(const string& code);
