@@ -54,6 +54,10 @@ void start_fastcgi()
   InetAddress addr(static_cast<uint16_t>(port));
   LOG_INFO << "FastCGI listens on " << addr.toIpPort()
            << " threads " << threads;
+#ifdef DEBUG
+  std::cout<< "FastCGI listens on " << addr.toIpPort()
+           << " threads " << threads<<std::endl;
+#endif
   muduo::net::EventLoop loop;
   TcpServer server(&loop, addr, "FastCGI");
   server.setConnectionCallback(onConnection);

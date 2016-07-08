@@ -4,9 +4,9 @@ project(muduo C CXX)
 
 enable_testing()
 
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release")
-endif()
+#if(NOT CMAKE_BUILD_TYPE)
+#  set(CMAKE_BUILD_TYPE "Release")
+#endif()
 
 set(CXX_FLAGS
  -g
