@@ -97,3 +97,4 @@ add_subdirectory(muduo/net)
 add_subdirectory(src)
 
 add_definitions(-DMUDUO_STD_STRING)
+add_definitions(-DDEBUG)
