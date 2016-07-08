@@ -1,14 +1,13 @@
 #include "log.hpp"
-//#include "fastcgi/fastcgi_resource.h"
+#include "fastcgi/fastcgi_resource.h"
 int main()
 {
   try
   {
-    std::cout<<"start:"<<std::endl;
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
 
-    //start_fastcgi();
+    start_fastcgi();
 
 
 

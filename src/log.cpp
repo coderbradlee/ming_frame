@@ -72,7 +72,7 @@ void init_log()
 	  	muduo::Logger::setTimeZone(beijing);
 	  	muduo::string file_name(get_config->m_log_name.c_str());
 
-	    cout<<get_config->m_log_name<<endl;
+	    //cout<<get_config->m_log_name<<endl;
 	  
 	  	boost::shared_ptr<muduo::AsyncLogging> log(new muduo::AsyncLogging(file_name, kRollSize));
 	  	log->start();
