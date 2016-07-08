@@ -52,10 +52,10 @@ private:
 	string get_currucy_id(const string& code);
 	string get_rate_from_myql(const string& exchange_rate_id,const string& which_day);
 	string get_exchange_rate_id(const string& source,const string& target);
-	boost::shared_ptr<mysql_connect> m_conn;
+	
 	string m_src;
 	string m_des;
 	string m_time;
-
+	boost::shared_ptr<mysql_connect> m_conn;
 };
 #endif  
