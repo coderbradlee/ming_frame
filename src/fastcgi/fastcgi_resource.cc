@@ -2,6 +2,7 @@
 
 using namespace muduo::net;
 void parser_param(
+  const muduo::string& uri,
   const muduo::string& query_string,
   const muduo::string& content,
   const TcpConnectionPtr& conn)
@@ -21,7 +22,7 @@ void parser_param(
     else
     {
       // FIXME: set http status code 400
-      response.append("bad request");
+      response.append("request ok");
     }
 
     FastCgiCodec::respond(&response);
@@ -45,7 +46,7 @@ void onRequest(const TcpConnectionPtr& conn,
    {
       LOG_DEBUG << "stdin " << in->retrieveAllAsString();
    } 
-   parser_param(query_string,in->retrieveAllAsString(),conn);
+   parser_param(uri,query_string,in->retrieveAllAsString(),conn);
   
 }
 

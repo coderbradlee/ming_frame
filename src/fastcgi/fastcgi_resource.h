@@ -19,7 +19,11 @@ void onRequest(const TcpConnectionPtr& conn,
                Buffer* in);
 
 void onConnection(const TcpConnectionPtr& conn);
-
+void parser_param(
+	const muduo::string& uri,
+  const muduo::string& query_string,
+  const muduo::string& content,
+  const TcpConnectionPtr& conn);
 void start_fastcgi();
 class request_parser:public boost::noncopyable
 {
