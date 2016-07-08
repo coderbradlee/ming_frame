@@ -47,16 +47,7 @@ void parser_param(
     } 
     Buffer response;
     response.append("Context-Type: text/plain\r\n\r\n");
-    if (uri.size() == kCells + kPath.size() && uri.find(kPath) == 0)
-    {
-      response.append(solveSudoku(uri.substr(kPath.size())));
-    }
-    else
-    {
-      // FIXME: set http status code 400
-      response.append(result);
-    }
-
+    response.append(result);
     FastCgiCodec::respond(&response);
     conn->send(&response);
 }
@@ -78,7 +69,8 @@ void onRequest(const TcpConnectionPtr& conn,
    {
       LOG_DEBUG << "stdin " << in->retrieveAllAsString();
    } 
-   parser_param(uri,params["REQUEST_METHOD"],query_string,in->retrieveAllAsString(),conn);
+   string content=in->retrieveAllAsString();
+   parser_param(uri,params["REQUEST_METHOD"],query_string,content,conn);
   
 }
 
