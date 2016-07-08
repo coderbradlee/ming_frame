@@ -29,7 +29,7 @@ class request_parser_base:boost::noncopyable
 {
 public:
 	request_parser_base(const string& query_string,const string& content);
-	virtual string result()=0;
+	virtual string get_result()=0;
 	virtual ~request_parser_base(){}
 protected:
 	std::map<string,string> m_query_string;
