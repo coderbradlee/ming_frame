@@ -5,7 +5,7 @@ int main()
   try
   {
     std::cout<<"start:"<<std::endl;
-    init_log();
+    //init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
 
     //start_fastcgi();
