@@ -49,7 +49,7 @@ public:
 	get_rate(const string& src,const string& des,const string& time,boost::shared_ptr<mysql_connect> m_);
 	string get_rates();
 private:
-	string get_currucy_id(const string& code);
+	string get_currency_id(const string& code)
 	string get_rate_from_myql(const string& exchange_rate_id,const string& which_day);
 	string get_exchange_rate_id(const string& source,const string& target);
 	
