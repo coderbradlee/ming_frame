@@ -28,7 +28,10 @@ namespace test1
 	}
 	namespace test_model_design_prototype
 	{
-		
+		txt_spitter::txt_spitter(const txt_spitter& t)
+		{
+			LOG_INFO<<"txt_spitter copy constructor";
+		}
 		void txt_spitter::split()
 		{
 			LOG_INFO<<"txt_spitter";

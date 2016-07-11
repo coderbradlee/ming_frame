@@ -50,6 +50,7 @@ namespace test1
 		class txt_spitter
 		{
 		public:
+			txt_spitter(const txt_spitter& t);
 			void split();
 			boost::shared_ptr<ispitter> clone();
 		};
