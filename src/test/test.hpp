@@ -1,6 +1,6 @@
 #ifndef TEST_HPP
 #define	TEST_HPP
-
+#include "../log.hpp"
 #include "../include.hpp"
 namespace test1
 {
