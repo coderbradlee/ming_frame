@@ -45,17 +45,17 @@ string get_rate::get_exchange_rate_id(const string& source,const string& target)
       }
     }
     catch (sql::SQLException &e) 
-  {
-    LOG_ERROR<<"# ERR: " << e.what();
-    LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
-    LOG_ERROR<<", SQLState: " << e.getSQLState();
-    return "0";
-  }
-  catch (exception &e) 
-  {
-    LOG_ERROR<<"# ERR: " << e.what();
-    return "0";
-  }  
+    {
+      LOG_ERROR<<"# ERR: " << e.what();
+      LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+      LOG_ERROR<<", SQLState: " << e.getSQLState();
+      return "";
+    }
+    catch (exception &e) 
+    {
+      LOG_ERROR<<"# ERR: " << e.what();
+      return "";
+    }  
   }
   string get_rate::get_rate_from_myql(const string& exchange_rate_id,const string& which_day)
   {
