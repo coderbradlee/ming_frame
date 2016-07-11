@@ -86,7 +86,7 @@ string get_rate::get_exchange_rate_id(const string& source,const string& target)
   }
   string get_rate::get_currency_id(const string& code)
   {
-    string query_string="select currency_id from t_currency where code='"+m_query_string["source"]+"'";
+    string query_string="select currency_id from t_currency where code='"+code+"'";
     m_conn->query(query_string);
     while (m_conn->get_res()->next()) 
     {
