@@ -38,6 +38,30 @@ namespace test1
 		};
 		void test();
 	}
+	namespace test_model_design_prototype
+	{
+		class ispitter
+		{
+		public:
+			virtual void split()=0;
+			virtual boost::shared_ptr<ispitter> clone()=0;
+			virtual ~ispitter(){}
+		};
+		class txt_spitter
+		{
+		public:
+			void split();
+			boost::shared_ptr<ispitter> clone();
+		};
+		class caller
+		{
+		public:
+			void start();
+		private:
+			boost::shared_ptr<ispitter> m_is;
+		};
+		void test();
+	}
 	void test();
 }
 #endif

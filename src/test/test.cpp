@@ -26,8 +26,29 @@ namespace test1
 			c->start();
 		}
 	}
+	namespace test_model_design_prototype
+	{
+		
+		void txt_spitter::split()
+		{
+			LOG_INFO<<"txt_spitter";
+		}
+		boost::shared_ptr<ispitter> txt_spitter::clone()
+		{
+			return boost::shared_ptr<ispitter>(new txt_spitter(*this));
+		}
+		caller::caller(boost::shared_ptr<ispitter> is):m_is(is){}
+		void caller::start()
+		{
+			boost::shared_ptr<ispitter> t=m_is->clone();
+			t->split();
+		}
+		
+		void test();
+	}
 void test()
 {
-	test_model_design_factory::test();
+	//test_model_design_factory::test();
+	test_model_design_prototype::test();
 }
 }
