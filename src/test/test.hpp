@@ -36,17 +36,9 @@ namespace test1
 		private:
 			boost::shared_ptr<factory_base> m_ib;
 		};
-		void test()
-		{
-			boost::shared_ptr<factory_base> fb(new binary_factory());
-			boost::shared_ptr<caller> c(new caller(fb));
-			c->start();
-		}
+		void test();
 	}
-	void test()
-	{
-		test_model_design_factory::test();
-	}
+	void test();
 }
 #endif
 
