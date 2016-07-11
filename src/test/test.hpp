@@ -56,6 +56,7 @@ namespace test1
 		class caller
 		{
 		public:
+			caller(boost::shared_ptr<ispitter>);
 			void start();
 		private:
 			boost::shared_ptr<ispitter> m_is;
