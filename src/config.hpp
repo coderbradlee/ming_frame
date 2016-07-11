@@ -9,7 +9,7 @@
 //#define DEBUG
 #include "include.hpp"
 using std::string;
-class iconfig:public boost::enable_shared_from_this<iconfig>, boost::noncopyable
+class iconfig:boost::noncopyable
 {
 	public:
 		static boost::shared_ptr<iconfig> get_instance(const std::string& filename);
@@ -64,7 +64,7 @@ class iconfig:public boost::enable_shared_from_this<iconfig>, boost::noncopyable
 		string m_exchange_rate_key;
 		string m_exchange_rate_write_rate_queue;
 		static boost::mutex m_mu;	
-		static boost::shared_ptr<iconfig> m_ps;
+		static volatile boost::shared_ptr<iconfig> m_ps;
 		string m_log_name;
 		string m_log_level;
 		string m_log_console_level;
