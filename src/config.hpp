@@ -64,7 +64,7 @@ class iconfig:boost::noncopyable
 		string m_exchange_rate_key;
 		string m_exchange_rate_write_rate_queue;
 		static boost::mutex m_mu;	
-		static volatile boost::shared_ptr<iconfig> m_ps;
+		static boost::shared_ptr<iconfig> volatile m_ps;
 		string m_log_name;
 		string m_log_level;
 		string m_log_console_level;
