@@ -28,7 +28,7 @@ void mysql_connect::query(const string& query)
 
 	}
 }
-boost::shared_ptr<sql::ResultSet> mysql_connect::get_res()
+boost::shared_ptr<sql::ResultSet> mysql_connect::get_res()const
 {
 	return m_res;
 }
