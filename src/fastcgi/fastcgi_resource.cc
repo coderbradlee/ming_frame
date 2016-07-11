@@ -43,6 +43,7 @@ string get_rate::get_exchange_rate_id(const string& source,const string& target)
         //ming_log->get_log_console()->info()<< m_res->getString(6)<<":" << m_res->getString("exchange_ratio"); 
         return m_conn->get_res()->getString(1);
       }
+      return "";
     }
     catch (sql::SQLException &e) 
     {
@@ -69,6 +70,7 @@ string get_rate::get_exchange_rate_id(const string& source,const string& target)
         //ming_log->get_log_console()->info()<< m_res->getString(6)<<":" << m_res->getString("exchange_ratio"); 
         return m_conn->get_res()->getString(1);
       }
+      return "0";
     }
     catch (sql::SQLException &e) 
     {
