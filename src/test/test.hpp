@@ -97,6 +97,7 @@ namespace test1
 		class house_builder
 		{
 		public:
+			house_builder(boost::shared_ptr<house> m):m_house(m){}
 			virtual void build_windows()=0;
 			virtual void build_doors()=0;
 			virtual ~house_builder(){}
@@ -114,6 +115,7 @@ namespace test1
 		class house_director
 		{
 		public:
+			house_director(boost::shared_ptr<house_builder> m):m_builder(m){}
 			boost::shared_ptr<house> constuct();
 		private:
 			boost::shared_ptr<house_builder> m_builder;
