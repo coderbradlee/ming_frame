@@ -77,7 +77,7 @@ namespace test1
 		
 		void test()
 		{
-			house_director h(boost::shared_ptr<house_builder>(new stone_house_builder(boost::shared_ptr<house>(new stone_house()))));
+			house_director h(boost::shared_ptr<house_builder>(new stone_house_builder()));
 			boost::shared_ptr<house> hou=h.constuct();
 			LOG_INFO<<hou->get_windows()<<":"<<hou->get_doors();
 		}
