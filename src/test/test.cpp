@@ -86,6 +86,6 @@ void test()
 {
 	//test_model_design_factory::test();
 	//test_model_design_prototype::test();
-	test_model_design_builder::::test();
+	test_model_design_builder::test();
 }
 }
