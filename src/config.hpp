@@ -35,6 +35,12 @@ class iconfig:public boost::enable_shared_from_this<iconfig>, boost::noncopyable
 		string m_mysql_js_username;
 		string m_mysql_js_password;
 		string m_mysql_js_database;
+		//////////////////
+		string m_mysql_as_ip;
+		unsigned short m_mysql_as_port;
+		string m_mysql_as_username;
+		string m_mysql_as_password;
+		string m_mysql_as_database;
 		//////////////////////////
 		string m_mysql_table;
 		string m_mysql_table2;

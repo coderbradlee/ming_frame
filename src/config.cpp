@@ -48,11 +48,16 @@ iconfig::iconfig(const std::string& filename)
 	m_mysql_eu_database = m_pt.get<std::string>("mysql_eu.database");
 
 	m_mysql_js_ip = m_pt.get<std::string>("mysql_js.ip");
-	m_mysql_js_port = boost::lexical_cast<unsigned short>(m_pt.get<std::string>("mysql_eu.port"));
+	m_mysql_js_port = boost::lexical_cast<unsigned short>(m_pt.get<std::string>("mysql_js.port"));
 	m_mysql_js_username = m_pt.get<std::string>("mysql_js.username");
 	m_mysql_js_password = m_pt.get<std::string>("mysql_js.password");
 	m_mysql_js_database = m_pt.get<std::string>("mysql_js.database");
 
+	m_mysql_as_ip = m_pt.get<std::string>("mysql_as.ip");
+	m_mysql_as_port = boost::lexical_cast<unsigned short>(m_pt.get<std::string>("mysql_as.port"));
+	m_mysql_as_username = m_pt.get<std::string>("mysql_as.username");
+	m_mysql_as_password = m_pt.get<std::string>("mysql_as.password");
+	m_mysql_as_database = m_pt.get<std::string>("mysql_as.database");
 
 	m_log_name = m_pt.get<std::string>("log.name");
 	m_log_level = m_pt.get<std::string>("log.level");
