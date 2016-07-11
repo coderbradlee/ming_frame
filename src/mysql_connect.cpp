@@ -28,6 +28,10 @@ void mysql_connect::query(const string& query)
 
 	}
 }
+boost::shared_ptr<sql::ResultSet> mysql_connect::get_res()
+{
+	return m_res;
+}
 void mysql_connect::test()
 {
 	try 
