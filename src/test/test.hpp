@@ -6,7 +6,7 @@ namespace test
 {
 	namespace test_model_design_factory
 	{
-		class isplitter_base()
+		class isplitter_base
 		{
 		public:
 			virtual void split()=0;
