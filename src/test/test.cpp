@@ -10,7 +10,7 @@ namespace test1
 		}
 	    boost::shared_ptr<isplitter_base> binary_factory::create()
 	    {
-	    	return new binary_spitter();
+	    	return boost::shared_ptr<isplitter_base>(new binary_spitter());
 	    }
 		
 		caller::caller(boost::shared_ptr<factory_base> fb):m_ib(fb){}
