@@ -9,7 +9,7 @@ int main()
 
     //start_fastcgi();
 
-    test::test();
+    test1::test();
 
 
     muduo::Timestamp end = muduo::Timestamp::now();

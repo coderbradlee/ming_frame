@@ -1,5 +1,5 @@
 #include "test.hpp"
-namespace test
+namespace test1
 {
 	namespace test_model_design_factory
 	{ 

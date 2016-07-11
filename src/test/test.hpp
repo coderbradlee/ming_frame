@@ -2,7 +2,7 @@
 #define	TEST_HPP
 
 #include "../include.hpp"
-namespace test
+namespace test1
 {
 	namespace test_model_design_factory
 	{
