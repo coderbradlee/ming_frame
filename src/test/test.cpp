@@ -47,7 +47,14 @@ namespace test1
 			t->split();
 		}
 		
-		void test();
+		void test()
+		{
+			boost::shared_ptr<ispitter> is(new txt_spitter());
+
+			caller c(is);
+			c.start();
+
+		}
 	}
 void test()
 {
