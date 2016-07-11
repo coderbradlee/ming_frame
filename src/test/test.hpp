@@ -1,7 +1,7 @@
 #ifndef TEST_HPP
 #define	TEST_HPP
 
-#include "include.hpp"
+#include "../include.hpp"
 namespace test
 {
 	namespace test_model_design_factory
