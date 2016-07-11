@@ -44,15 +44,15 @@ namespace test1
 		{
 		public:
 			virtual void split()=0;
-			virtual boost::shared_ptr<ispitter> clone()=0;
+			virtual boost::shared_ptr<ispitter> clone()const=0;
 			virtual ~ispitter(){}
 		};
-		class txt_spitter
+		class txt_spitter:public ispitter
 		{
 		public:
-			txt_spitter(const txt_spitter& t);
+			//txt_spitter(const txt_spitter& t);
 			void split();
-			boost::shared_ptr<ispitter> clone();
+			boost::shared_ptr<ispitter> clone()const;
 		};
 		class caller
 		{
