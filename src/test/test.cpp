@@ -56,6 +56,32 @@ namespace test1
 
 		}
 	}
+	namespace test_model_design_builder
+	{
+		void stone_house_builder::build_windows()
+		{
+			m_house->set_windows("stone windows");
+
+		}
+		void stone_house_builder::build_doors()
+		{
+			m_house->set_doors("stone doors");
+		}
+
+		boost::shared_ptr<house> house_director::constuct()
+		{
+			m_builder->build_windows();
+			m_builder->build_doors();
+			return m_builder->get_house();
+		}
+		
+		void test()
+		{
+			house_director h(boost::shared_ptr<house_builder>(new stone_house_builder()));
+			boost::shared_ptr<house> hou=h.constuct();
+			LOG_INFO<<hou->get_windows()<<":"<<hou->get_doors();
+		}
+	}
 void test()
 {
 	//test_model_design_factory::test();

@@ -64,6 +64,62 @@ namespace test1
 		};
 		void test();
 	}
+	namespace test_model_design_builder
+	{
+		class house
+		{
+		public:
+			virtual ~house(){}
+			void set_windows(const string& w)
+			{
+				windows=w;
+			}
+			void set_doors(const string& d)
+			{
+				doors=d;
+			}
+			string get_windows()const
+			{
+				return windows;
+			}
+			string get_doors()const
+			{
+				return doors;
+			}
+		protected:
+			string windows;
+			string doors;
+		};
+		class stone_house:public house
+		{
+
+		};
+		class house_builder
+		{
+		public:
+			virtual void build_windows()=0;
+			virtual void build_doors()=0;
+			virtual ~house_builder(){}
+			boost::shared_ptr<house> get_house(){return m_house;}
+		protected:
+			boost::shared_ptr<house> m_house;
+		};
+		class stone_house_builder:public house_builder
+		{
+		public:
+			void build_windows();
+			void build_doors();
+
+		};
+		class house_director
+		{
+		public:
+			boost::shared_ptr<house> constuct();
+		private:
+			boost::shared_ptr<house_builder> m_builder;
+		};
+		void test();
+	}
 	void test();
 }
 #endif
