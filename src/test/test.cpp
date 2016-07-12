@@ -98,8 +98,8 @@ namespace test1
 	 			string hour=hms[0];
 	 			string minute=hms[1];
 	 			
-	        	string hour_minute="11:30";
-	        	if(hour_minute==get_config->m_exchange_rate_insert_time)
+	        	string hour_minute=hour+":"+minute;
+	        	if(hour_minute=="12:00")
 	        	{
 	        		LOG_INFO<<"XX";
 	        		boost::this_thread::sleep(boost::posix_time::millisec(60000));
