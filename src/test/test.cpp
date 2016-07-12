@@ -100,7 +100,7 @@ namespace test1
 	 			
 	        	string hour_minute=hour+":"+minute;
 	        	LOG_INFO<<hour_minute;
-	        	if(hour_minute=="12:00")
+	        	if(hour_minute=="13:25")
 	        	{
 	        		LOG_INFO<<"XX";
 	        		boost::this_thread::sleep(boost::posix_time::millisec(60000));
