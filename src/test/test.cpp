@@ -84,7 +84,8 @@ namespace test1
 	}
 	namespace test_deadline_timer
 	{
-		void handle_wait_(const boost::system::error_code& error)  
+
+		void test_deadline::handle_wait_(const boost::system::error_code& error)  
 	    {  
 	        if(!error)  
 	        {  
@@ -109,13 +110,17 @@ namespace test1
 	            m_d_t.async_wait(boost::bind(&exchange_rate_on_time::handle_wait_,shared_from_this(), boost::asio::placeholders::error));                 
 	    	}   
 		}  
-		void test()
+		void test_deadline::start()
 		{
-
 			m_d_t.expires_from_now(boost::posix_time::seconds(10);
 		  
 		    m_d_t.async_wait(boost::bind(&exchange_rate_on_time::handle_wait_, shared_from_this(), boost::asio::placeholders::error));  
 			m_io_s.run();
+		}
+		void test()
+		{
+			boost::shared_ptr<test_deadline> t(new test_deadline());
+			t->start();
 		}
 	}
 void test()

@@ -127,9 +127,16 @@ namespace test1
 	}
 	namespace test_deadline_timer
 	{
-		boost::asio::deadline_timer m_d_t;
-		boost::asio::io_service m_io_s;
-		void handle_wait_(const boost::system::error_code& error); 
+		class test_deadline:public boost::enable_shared_from_this<test_deadline>
+		{
+		public:
+			void start();
+			void handle_wait_(const boost::system::error_code& error); 
+		private:
+			boost::asio::deadline_timer m_d_t;
+			boost::asio::io_service m_io_s;
+		};
+		
 		void test();
 	}
 	void test();
