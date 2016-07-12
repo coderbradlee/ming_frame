@@ -99,6 +99,7 @@ namespace test1
 	 			string minute=hms[1];
 	 			
 	        	string hour_minute=hour+":"+minute;
+	        	LOG_INFO<<hour_minute;
 	        	if(hour_minute=="12:00")
 	        	{
 	        		LOG_INFO<<"XX";
