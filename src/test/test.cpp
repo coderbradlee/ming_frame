@@ -84,7 +84,7 @@ namespace test1
 	}
 	namespace test_deadline_timer
 	{
-
+		test_deadline::test_deadline():m_d_t(m_io_s){}
 		void test_deadline::handle_wait_(const boost::system::error_code& error)  
 	    {  
 	        if(!error)  
@@ -112,7 +112,7 @@ namespace test1
 		}  
 		void test_deadline::start()
 		{
-			m_d_t.expires_from_now(boost::posix_time::seconds(10);
+			m_d_t.expires_from_now(boost::posix_time::seconds(10));
 		  
 		    m_d_t.async_wait(boost::bind(&test_deadline::handle_wait_, shared_from_this(), boost::asio::placeholders::error));  
 			m_io_s.run();

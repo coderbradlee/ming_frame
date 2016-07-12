@@ -130,6 +130,7 @@ namespace test1
 		class test_deadline:public boost::enable_shared_from_this<test_deadline>
 		{
 		public:
+			test_deadline();
 			void start();
 			void handle_wait_(const boost::system::error_code& error); 
 		private:
