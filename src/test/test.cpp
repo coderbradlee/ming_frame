@@ -84,7 +84,7 @@ namespace test1
 	}
 	namespace test_deadline_timer
 	{
-		void handle_wait(const boost::system::error_code& error)  
+		void handle_wait_(const boost::system::error_code& error)  
 	    {  
 	        if(!error)  
 	        {  
@@ -106,7 +106,7 @@ namespace test1
 	        	
 	        	//cout<<"handle wait"<<endl;
 	            m_d_t.expires_from_now(boost::posix_time::seconds(10);  
-	            m_d_t.async_wait(boost::bind(&exchange_rate_on_time::handle_wait,shared_from_this(), boost::asio::placeholders::error));                 
+	            m_d_t.async_wait(boost::bind(&exchange_rate_on_time::handle_wait_,shared_from_this(), boost::asio::placeholders::error));                 
 	    	}   
 		}  
 		void test()
@@ -114,7 +114,7 @@ namespace test1
 
 			m_d_t.expires_from_now(boost::posix_time::seconds(10);
 		  
-		    m_d_t.async_wait(boost::bind(&exchange_rate_on_time::handle_wait, shared_from_this(), boost::asio::placeholders::error));  
+		    m_d_t.async_wait(boost::bind(&exchange_rate_on_time::handle_wait_, shared_from_this(), boost::asio::placeholders::error));  
 			m_io_s.run();
 		}
 	}

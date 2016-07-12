@@ -129,7 +129,7 @@ namespace test1
 	{
 		deadline_timer m_d_t;
 		boost::asio::io_service
-		void handle_wait(const boost::system::error_code& error); 
+		void handle_wait_(const boost::system::error_code& error); 
 		void test();
 	}
 	void test();
