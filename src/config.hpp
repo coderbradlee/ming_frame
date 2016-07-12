@@ -63,6 +63,9 @@ class iconfig:boost::noncopyable
 		size_t m_exchange_rate_request_interval;	
 		string m_exchange_rate_key;
 		string m_exchange_rate_write_rate_queue;
+		string m_exchange_rate_insert_time;
+		string m_exchange_rate_username;
+		string m_exchange_rate_password;
 		static boost::mutex m_mu;	
 		//static boost::shared_ptr<iconfig> volatile m_ps;
 		static boost::shared_ptr<iconfig> m_ps;

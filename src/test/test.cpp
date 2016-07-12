@@ -100,7 +100,7 @@ namespace test1
 	 			
 	        	string hour_minute=hour+":"+minute;
 	        	LOG_INFO<<hour_minute;
-	        	if(hour_minute=="13:25")
+	        	if(hour_minute==get_config->m_exchange_rate_insert_time)
 	        	{
 	        		LOG_INFO<<"XX";
 	        		//boost::this_thread::sleep(boost::posix_time::millisec(60000));
@@ -120,8 +120,18 @@ namespace test1
 		}
 		void test()
 		{
-			boost::shared_ptr<test_deadline> t(new test_deadline());
-			t->start();
+
+		boost::shared_ptr<test_deadline> t1(new test_deadline());
+		boost::shared_ptr<test_deadline> t2(new test_deadline());
+		boost::shared_ptr<test_deadline> t3(new test_deadline());
+			
+		thread t11([&t1](){t1->start();});
+		thread t22([&t2](){t2->start();});
+		thread t33([&t3](){t3->start();});
+		t11.join();
+		t22.join();
+		t33.join();
+			
 		}
 	}
 void test()

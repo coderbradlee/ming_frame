@@ -60,6 +60,9 @@ iconfig::iconfig(const std::string& filename)
 	m_exchange_rate_request_interval=m_pt.get<size_t>("exchange_rate.request_interval");
 	m_exchange_rate_key=m_pt.get<std::string>("exchange_rate.key");
 	m_exchange_rate_write_rate_queue=m_pt.get<std::string>("exchange_rate.write_rate_queue");
+			m_exchange_rate_insert_time=m_pt.get<std::string>("exchange_rate.insert_time");
+			m_exchange_rate_username=m_pt.get<std::string>("exchange_rate.username");
+			m_exchange_rate_password=m_pt.get<std::string>("exchange_rate.password");
 	/////////////////////////////////////////
 	m_mysql_eu_ip = m_pt.get<std::string>("mysql_eu.ip");
 	m_mysql_eu_port = boost::lexical_cast<unsigned short>(m_pt.get<std::string>("mysql_eu.port"));
