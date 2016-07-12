@@ -103,7 +103,7 @@ namespace test1
 	        	if(hour_minute==get_config->m_exchange_rate_insert_time)
 	        	{
 	        		LOG_INFO<<"XX";
-	        		//boost::this_thread::sleep(boost::posix_time::millisec(60000));
+	        		boost::this_thread::sleep(boost::posix_time::millisec(60000));
 	        	}
 	        	
 	        	//cout<<"handle wait"<<endl;
