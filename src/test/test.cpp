@@ -82,10 +82,47 @@ namespace test1
 			LOG_INFO<<hou->get_windows()<<":"<<hou->get_doors();
 		}
 	}
+	namespace test_deadline_timer
+	{
+		void handle_wait(const boost::system::error_code& error)  
+	    {  
+	        if(!error)  
+	        {  
+	        	ptime now = second_clock::local_time();			
+				string hour_minute_second = to_simple_string(now.time_of_day());
+				std::vector<std::string> hms;
+	 			
+				boost::split(hms,hour_minute_second , boost::is_any_of(":"));
+	 			//string [] ymd=to_iso_extended_string(now.date()).split('-');
+	 			string hour=hms[0];
+	 			string minute=hms[1];
+	 			
+	        	string hour_minute="11:30";
+	        	if(hour_minute==get_config->m_exchange_rate_insert_time)
+	        	{
+	        		LOG_INFO<<"XX";
+	        		boost::this_thread::sleep(boost::posix_time::millisec(60000));
+	        	}
+	        	
+	        	//cout<<"handle wait"<<endl;
+	            m_d_t.expires_from_now(boost::posix_time::seconds(10);  
+	            m_d_t.async_wait(boost::bind(&exchange_rate_on_time::handle_wait,shared_from_this(), boost::asio::placeholders::error));                 
+	    	}   
+		}  
+		void test()
+		{
+
+			m_d_t.expires_from_now(boost::posix_time::seconds(10);
+		  
+		    m_d_t.async_wait(boost::bind(&exchange_rate_on_time::handle_wait, shared_from_this(), boost::asio::placeholders::error));  
+			m_io_s.run();
+		}
+	}
 void test()
 {
 	//test_model_design_factory::test();
 	//test_model_design_prototype::test();
-	test_model_design_builder::test();
+	//test_model_design_builder::test();
+	test_deadline_timer::test();
 }
 }
