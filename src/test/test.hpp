@@ -141,6 +141,13 @@ namespace test1
 		
 		void test();
 	}
+	namespace test_json_parser
+	{
+		string convert_json(const string& source);
+	
+		void test();
+
+	}
 	void test();
 }
 #endif

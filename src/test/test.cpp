@@ -134,11 +134,48 @@ namespace test1
 			
 		}
 	}
+	namespace test_json_parser
+	{
+		string convert_json(const string& source)
+		{
+				//{
+	//   "quotes":{
+	//     "USDCNY":6.683198,
+	//     "USDEUR":0.8993
+	//   }
+	// }
+			//{"query":{"count":27,"created":"2016-07-12T09:16:05Z","lang":"zh-CN","results":{"rate":[{"id":"USDEUR","Rate":"0.9049"},{"id":"USDJPY","Rate":"103.4770"},{"id":"USDBGN","Rate":"1.7701"},{"id":"USDGBP","Rate":"0.7645"},{"id":"USDPLN","Rate":"4.0007"},{"id":"USDRON","Rate":"4.0594"},{"id":"USDSEK","Rate":"8.5780"},{"id":"USDHRK","Rate":"6.7240"},{"id":"USDRUB","Rate":"64.0240"},{"id":"USDTRY","Rate":"2.9010"},{"id":"USDAUD","Rate":"1.3181"},{"id":"USDBRL","Rate":"3.3098"},{"id":"USDCAD","Rate":"1.3097"},{"id":"USDCNY","Rate":"6.6917"},{"id":"USDHKD","Rate":"7.7575"},{"id":"USDIDR","Rate":"13080.0000"},{"id":"USDINR","Rate":"67.1380"},{"id":"USDKRW","Rate":"1148.3000"},{"id":"USDMXN","Rate":"18.4196"},{"id":"USDNZD","Rate":"1.3812"},{"id":"USDPHP","Rate":"47.2500"},{"id":"USDSGD","Rate":"1.3520"},{"id":"USDTHB","Rate":"35.1400"},{"id":"USDZAR","Rate":"14.4255"},{"id":"USDTWD","Rate":"32.1880"},{"id":"USDCNY","Rate":"6.6917"},{"id":"USDPHP","Rate":"47.2500"}]}}}
+			const auto& j = nlohmann_map::json::parse(source);
+			const auto& query = j["query"];//results":{"rate
+			const auto& results =query["results"];
+			if (results.find("rate") == results.end()) 
+			{
+				cout<<"get json error from yahoo.finance.xchange:"<<__FILE__<<":"<<__LINE__<<endl;
+				return;
+			}
+			const auto& rate=results["rate"];
+			for(const auto& r:rate)
+			{
+				string id=r["id"];
+				string rate=r["Rate"];
+				cout<<id<<":"<<rate<<endl;
+			}
+		}
+	
+		void test()
+		{
+			string source="{\"query\":{\"count\":27,\"created\":\"2016-07-12T09:16:05Z\",\"lang\":\"zh-CN\",\"results\":{\"rate\":[{\"id\":\"USDEUR\",\"Rate\":\"0.9049\"},{\"id\":\"USDJPY\",\"Rate\":\"103.4770\"},{\"id\":\"USDBGN\",\"Rate\":\"1.7701\"},{\"id\":\"USDGBP\",\"Rate\":\"0.7645\"},{\"id\":\"USDPLN\",\"Rate\":\"4.0007\"},{\"id\":\"USDRON\",\"Rate\":\"4.0594\"},{\"id\":\"USDSEK\",\"Rate\":\"8.5780\"},{\"id\":\"USDHRK\",\"Rate\":\"6.7240\"},{\"id\":\"USDRUB\",\"Rate\":\"64.0240\"},{\"id\":\"USDTRY\",\"Rate\":\"2.9010\"},{\"id\":\"USDAUD\",\"Rate\":\"1.3181\"},{\"id\":\"USDBRL\",\"Rate\":\"3.3098\"},{\"id\":\"USDCAD\",\"Rate\":\"1.3097\"},{\"id\":\"USDCNY\",\"Rate\":\"6.6917\"},{\"id\":\"USDHKD\",\"Rate\":\"7.7575\"},{\"id\":\"USDIDR\",\"Rate\":\"13080.0000\"},{\"id\":\"USDINR\",\"Rate\":\"67.1380\"},{\"id\":\"USDKRW\",\"Rate\":\"1148.3000\"},{\"id\":\"USDMXN\",\"Rate\":\"18.4196\"},{\"id\":\"USDNZD\",\"Rate\":\"1.3812\"},{\"id\":\"USDPHP\",\"Rate\":\"47.2500\"},{\"id\":\"USDSGD\",\"Rate\":\"1.3520\"},{\"id\":\"USDTHB\",\"Rate\":\"35.1400\"},{\"id\":\"USDZAR\",\"Rate\":\"14.4255\"},{\"id\":\"USDTWD\",\"Rate\":\"32.1880\"},{\"id\":\"USDCNY\",\"Rate\":\"6.6917\"},{\"id\":\"USDPHP\",\"Rate\":\"47.2500\"}]}}}";
+			string temp=convert_json(source);
+			LOG_INFO<<temp;
+		}
+
+	}
 void test()
 {
 	//test_model_design_factory::test();
 	//test_model_design_prototype::test();
 	//test_model_design_builder::test();
-	test_deadline_timer::test();
+	//test_deadline_timer::test();
+	test_json_parser::test();
 }
 }
