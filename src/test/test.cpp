@@ -160,6 +160,7 @@ namespace test1
 				string Rate=r["Rate"];
 				cout<<id<<":"<<Rate<<endl;
 			}
+			return "";
 		}
 	
 		void test()
