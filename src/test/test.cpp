@@ -162,7 +162,8 @@ namespace test1
 				//cout<<id<<":"<<Rate<<endl;
 				temp+="\""+id+"\":"+Rate+",";
 			}
-			return temp+"}}";
+			string a=temp.substr(0,temp.length()-1);
+			return a+"}}";
 		}
 	
 		void test()
