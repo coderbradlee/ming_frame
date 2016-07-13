@@ -151,14 +151,14 @@ namespace test1
 			if (results.find("rate") == results.end()) 
 			{
 				cout<<"get json error from yahoo.finance.xchange:"<<__FILE__<<":"<<__LINE__<<endl;
-				return;
+				return "";
 			}
 			const auto& rate=results["rate"];
 			for(const auto& r:rate)
 			{
 				string id=r["id"];
-				string rate=r["Rate"];
-				cout<<id<<":"<<rate<<endl;
+				string Rate=r["Rate"];
+				cout<<id<<":"<<Rate<<endl;
 			}
 		}
 	
