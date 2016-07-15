@@ -161,7 +161,7 @@ namespace test1
 		class font_factory
 		{
 		public:
-			boost::shared_ptr<font> get_font();
+			boost::shared_ptr<font> get_font(const string& f);
 		private:
 			std::map<string,boost::shared_ptr<font>> m_font;
 		};

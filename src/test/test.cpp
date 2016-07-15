@@ -191,7 +191,7 @@ namespace test1
 			else
 			{
 				boost::shared_ptr<font> t(new font(f));
-				m_font["zheng"]=t;
+				m_font[f]=t;
 				cout<<m_font.size()<<endl;
 				return t;
 			}
