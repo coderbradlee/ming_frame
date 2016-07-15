@@ -175,12 +175,41 @@ namespace test1
 		}
 
 	}
+	namespace test_design_model_flyweight
+	{
+		
+		font::font(const string& key):m_key(key){}
+		string font::get_key()const
+		{
+			return m_key;
+		}
+		boost::shared_ptr<font> font_factory::get_font(const string& f)
+		{
+			auto ret=m_font.find(f);
+			if(ret!=m_font.end())
+				return m_font[f];
+			else
+			{
+				boost::shared_ptr<font> t(new font(f));
+				m_font["zheng"]=t;
+				cout<<m_font.size()<<endl;
+				return t;
+			}
+		}
+		
+		void test()
+		{
+			font_factory f;
+			cout<<f.get_font("zheng")->get_key()<<endl;
+		}
+	}
 void test()
 {
 	//test_model_design_factory::test();
 	//test_model_design_prototype::test();
 	//test_model_design_builder::test();
 	//test_deadline_timer::test();
-	test_json_parser::test();
+	//test_json_parser::test();
+	test_design_model_flyweight::test();
 }
 }

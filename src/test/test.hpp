@@ -148,6 +148,25 @@ namespace test1
 		void test();
 
 	}
+	namespace test_design_model_flyweight
+	{
+		class font
+		{
+		public:
+			font(const string& key);
+			string get_key()const;
+		private:
+			string m_key;
+		};
+		class font_factory
+		{
+		public:
+			boost::shared_ptr<font> get_font();
+		private:
+			std::<string,boost::shared_ptr<font>> m_font;
+		};
+		void test();
+	}
 	void test();
 }
 #endif
