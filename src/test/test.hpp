@@ -163,7 +163,7 @@ namespace test1
 		public:
 			boost::shared_ptr<font> get_font();
 		private:
-			std::<string,boost::shared_ptr<font>> m_font;
+			std::map<string,boost::shared_ptr<font>> m_font;
 		};
 		void test();
 	}
