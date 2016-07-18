@@ -84,7 +84,12 @@ namespace test1
 	}
 	namespace test_deadline_timer
 	{
+
 		test_deadline::test_deadline():m_d_t(m_io_s){}
+		void test_deadline::handle_wait_method()
+		{
+			boost::this_thread::sleep(boost::posix_time::millisec(60000));
+		}
 		void test_deadline::handle_wait_(const boost::system::error_code& error)  
 	    {  
 	        if(!error)  
@@ -103,7 +108,7 @@ namespace test1
 	        	if(hour_minute==get_config->m_exchange_rate_insert_time)
 	        	{
 	        		LOG_INFO<<"XX";
-	        		boost::this_thread::sleep(boost::posix_time::millisec(60000));
+	        		handle_wait_method();
 	        	}
 	        	
 	        	//cout<<"handle wait"<<endl;
