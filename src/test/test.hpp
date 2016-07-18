@@ -133,6 +133,7 @@ namespace test1
 			test_deadline();
 			void start();
 			void handle_wait_(const boost::system::error_code& error); 
+			void handle_wait_method();
 		private:
 			boost::asio::io_service m_io_s;
 			boost::asio::deadline_timer m_d_t;
