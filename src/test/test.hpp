@@ -251,9 +251,9 @@ namespace test1
 	{
 		enum class request_type
 		{
-			handler1;
-			handler2;
-			handler3;
+			handler1,
+			handler2,
+			handler3
 		};
 		class request
 		{
