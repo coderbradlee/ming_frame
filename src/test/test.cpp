@@ -432,16 +432,16 @@ namespace test1
 					case '+':
 						left=s.top();
 						right=shared_ptr<expression>(new var_expression(expr[++i]));
-						s.push_back(shared_ptr<expression>(new add_expression(left,right)));
+						s.push(shared_ptr<expression>(new add_expression(left,right)));
 						break;
 
 					case '-':
 						left=s.top();
 						right=shared_ptr<expression>(new var_expression(expr[++i]));
-						s.push_back(shared_ptr<expression>(new sub_expression(left,right)));
+						s.push(shared_ptr<expression>(new sub_expression(left,right)));
 						break;
 					default:
-						s.push_back(new var_expression(expr[i]));
+						s.push(new var_expression(expr[i]));
 						break;
 				}
 				return s.top();
