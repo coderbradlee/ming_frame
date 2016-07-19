@@ -454,7 +454,7 @@ namespace test1
 			var.insert(make_pair('a',4));
 			var.insert(make_pair('b',5));
 			var.insert(make_pair('c',10));
-			var.insert(make_pair('e',1));
+			var.insert(make_pair('e',3));
 			shared_ptr<expression> ex=analyse(expr);
 			LOG_INFO<<ex->interpreter(var); 
 		}
