@@ -274,7 +274,7 @@ namespace test1
 			virtual void handle(boost::shared_ptr<request> re)=0;
 			void start(boost::shared_ptr<request> re)
 			{
-				if(can_handle())
+				if(can_handle(re))
 					handle(re);
 				send_request(re);
 				
