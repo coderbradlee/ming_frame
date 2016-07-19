@@ -219,6 +219,7 @@ namespace test1
 		class component
 		{
 		public:
+			component(const string& m):m_name(m){}
 			virtual void process()=0;
 			virtual ~component(){}
 			string get_name()
@@ -231,7 +232,7 @@ namespace test1
 		class composite:public component
 		{
 		public:
-			composite(const string& s):component::m_name(s){}
+			composite(const string& s):component(s){}
 			void add(boost::shared_ptr<component>);
 			void remove(boost::shared_ptr<component>);
 			void process();
@@ -241,7 +242,7 @@ namespace test1
 		class leaf:public component
 		{
 		public:
-			leaf(const string& s):component::m_name(s){}	
+			leaf(const string& s):component(s){}	
 			void process();		
 		};
 		void test();
