@@ -211,7 +211,7 @@ namespace test1
 	namespace test_design_model_state
 	{
 		
-		static boost::shared_ptr<network_state> open_state::get_instance()
+		boost::shared_ptr<network_state> open_state::get_instance()
 		{
 			if(m_instance==nullptr)
 			{
