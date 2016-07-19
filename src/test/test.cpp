@@ -230,9 +230,9 @@ namespace test1
 		}
 		
 	
-		static boost::shared_ptr<network_state> open_state::m_instance=nullptr;
+		boost::shared_ptr<network_state> open_state::m_instance=nullptr;
 
-		static boost::shared_ptr<network_state> close_state::get_instance()
+		boost::shared_ptr<network_state> close_state::get_instance()
 		{
 			if(m_instance==nullptr)
 			{
@@ -250,7 +250,7 @@ namespace test1
 			LOG_INFO<<"close_state::operation2";
 		}
 	
-		static boost::shared_ptr<network_state> close_state::m_instance=nullptr;
+		boost::shared_ptr<network_state> close_state::m_instance=nullptr;
 
 		network_processor::network_processor(boost::shared_ptr<network_state> x):
 		m_state(x){}
