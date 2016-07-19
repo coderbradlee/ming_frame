@@ -303,7 +303,7 @@ namespace test1
 		
 		void leaf::process()
 		{
-			LOG_INFO<<m->get_name();
+			LOG_INFO<<m_name;
 		}		
 		
 		void test()
