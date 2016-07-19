@@ -267,7 +267,7 @@ namespace test1
 			m_state->operation2();	
 		}
 		
-		void start()
+		void network_processor::start()
 		{
 			operation1();
 			operation2();
