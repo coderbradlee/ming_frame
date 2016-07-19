@@ -357,7 +357,7 @@ namespace test1
 		void test()
 		{
 
-			boost::shared_ptr<request> r(new request(request_type::handler1));
+			boost::shared_ptr<request> r(new request(request_type::handler2));
 			boost::shared_ptr<chain> c1(new handler1_chain());
 			boost::shared_ptr<chain> c2(new handler2_chain());
 			c1->set_next_chain(c2);
@@ -373,6 +373,7 @@ void test()
 	//test_json_parser::test();
 	//test_design_model_flyweight::test();
 	//test_design_model_state::test();
-	test_design_model_composite::test();
+	//test_design_model_composite::test();
+	test_design_model_chainofresponsibility::test();
 }
 }
