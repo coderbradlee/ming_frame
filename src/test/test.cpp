@@ -441,7 +441,7 @@ namespace test1
 						s.push(shared_ptr<expression>(new sub_expression(left,right)));
 						break;
 					default:
-						s.push(new var_expression(expr[i]));
+						s.push(shared_ptr<expression>(new var_expression(expr[i]));
 						break;
 				}
 				return s.top();
