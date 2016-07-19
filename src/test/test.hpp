@@ -204,6 +204,7 @@ namespace test1
 		class network_processor
 		{
 		public:
+			network_processor(boost::shared_ptr<network_state> x);
 			void operation1();
 			void operation2();
 			
