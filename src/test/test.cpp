@@ -430,13 +430,13 @@ namespace test1
 				switch(expr[i])
 				{
 					case '+':
-						left=s.pop();
+						left=s.top();
 						right=shared_ptr<expression>(new var_expression(expr[++i]));
 						s.push_back(shared_ptr<expression>(new add_expression(left,right)));
 						break;
 
 					case '-':
-						left=s.pop();
+						left=s.top();
 						right=shared_ptr<expression>(new var_expression(expr[++i]));
 						s.push_back(shared_ptr<expression>(new sub_expression(left,right)));
 						break;
