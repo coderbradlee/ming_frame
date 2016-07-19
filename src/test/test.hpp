@@ -283,6 +283,7 @@ namespace test1
 		private:
 			void send_request(boost::shared_ptr<request> re)
 			{
+				if(m_next!=nullptr)
 				m_next->start(re);
 			}
 		private:

@@ -328,7 +328,7 @@ namespace test1
 			request_type t=re->get_request_type();
 			if(t==request_type::handler1)
 			{
-				LOG_INFO<<"handler1";
+				LOG_INFO<<"can handle handler1";
 				return true;
 			}	
 			return false;
@@ -343,7 +343,7 @@ namespace test1
 			request_type t=re->get_request_type();
 			if(t==request_type::handler2)
 			{
-				LOG_INFO<<"handler2";
+				LOG_INFO<<"can handle handler2";
 				return true;
 			}	
 			return false;
