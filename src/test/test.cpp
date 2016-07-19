@@ -294,7 +294,7 @@ namespace test1
 		}
 		void composite::process()
 		{
-			LOG_INFO<<m->get_name();
+			LOG_INFO<<m_name;
 			for(const auto& m:m_elment)
 			{
 				m->process();
