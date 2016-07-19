@@ -177,7 +177,7 @@ namespace test1
 			virtual void operation2()=0;
 			
 			virtual ~network_state(){}
-		protected:
+		public:
 			boost::shared_ptr<network_state> m_next;
 
 		};
