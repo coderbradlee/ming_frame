@@ -308,7 +308,7 @@ namespace test1
 		
 		void test()
 		{
-			boost::shared_ptr<component> root(new composite("node1"));
+			boost::shared_ptr<composite> root(new composite("node1"));
 			boost::shared_ptr<component> leaf1(new leaf("leaf1"));
 			boost::shared_ptr<component> leaf2(new leaf("leaf2"));
 			root->add(leaf1);
