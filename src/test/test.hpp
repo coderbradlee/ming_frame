@@ -247,6 +247,61 @@ namespace test1
 		};
 		void test();
 	}
+	namespace test_design_model_chainofresponsibility
+	{
+		enum class request_type
+		{
+			handler1;
+			handler2;
+			handler3;
+		};
+		class request
+		{
+		public:
+			request(request_type r):m_request_type(r){}
+			request_type get_request_type()const{return m_request_type}
+		private:
+			request_type m_request_type;
+		};
+		class chain
+		{
+		public:
+			void set_next_chain(boost::shared_ptr<chain> c)
+			{
+				m_next=c;
+			} 
+			virtual bool can_handle(boost::shared_ptr<request> re)=0;
+			virtual void handle(boost::shared_ptr<request> re)=0;
+			void start(boost::shared_ptr<request> re)
+			{
+				if(can_handle())
+					handle(re);
+				send_request(re);
+				
+			}
+			virtual ~chain(){}
+		private:
+			void send_request(boost::shared_ptr<request> re)
+			{
+				m_next->start(re);
+			}
+		private:
+			boost::shared_ptr<chain> m_next;
+		};
+		class handler1_chain:public chain
+		{
+		public:
+			bool can_handle(boost::shared_ptr<request> re);
+			void handle(boost::shared_ptr<request> re);
+		};
+		class handler2_chain:public chain
+		{
+		public:
+			bool can_handle(boost::shared_ptr<request> re);
+			void handle(boost::shared_ptr<request> re);
+		};
+		void test();
+	}
 	void test();
 }
 #endif

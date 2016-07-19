@@ -320,6 +320,50 @@ namespace test1
 			leaf2->process();
 		}
 	}
+	namespace test_design_model_chainofresponsibility
+	{
+		
+		bool handler1_chain::can_handle(boost::shared_ptr<request> re)
+		{
+			request_type t=re->get_request_type();
+			if(t==request_type::handler1)
+			{
+				LOG_INFO<<"handler1";
+				return true;
+			}	
+			return false;
+			
+		}
+		void handler1_chain::handle(boost::shared_ptr<request> re)
+		{
+			LOG_INFO<<"handle handler1";
+		}
+		bool handler2_chain::can_handle(boost::shared_ptr<request> re)
+		{
+			request_type t=re->get_request_type();
+			if(t==request_type::handler2)
+			{
+				LOG_INFO<<"handler2";
+				return true;
+			}	
+			return false;
+			
+		}
+		void handler2_chain::handle(boost::shared_ptr<request> re)
+		{
+			LOG_INFO<<"handle handler2";
+		}
+		
+		void test()
+		{
+
+			boost::shared_ptr<request> r(new request(request_type::handler1));
+			boost::shared_ptr<chain> c1(new handler1_chain());
+			boost::shared_ptr<chain> c2(new handler2_chain());
+			c1->set_next_chain(c2);
+			c1->start(r);
+		}
+	}
 void test()
 {
 	//test_model_design_factory::test();
