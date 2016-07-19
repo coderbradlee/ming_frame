@@ -366,31 +366,31 @@ namespace test1
 	}
 	namespace test_design_model_visitor
 	{
-		void element1::accept(visitor&)
+		void element1::accept(visitor& v)
 		{
-			visitor.visit_1(*this);
+			v.visit_1(*this);
 		}
-		void element2::accept(visitor&)
+		void element2::accept(visitor& v)
 		{
-			visitor.visit_2(*this);
+			v.visit_2(*this);
 		}
 	
-		void visitor1::visit_1(element&)
+		void visitor1::visit_1(element& e)
 		{
-			LOG_INFO<<"visitor1 process element:"<<typeid(element).name();
+			LOG_INFO<<"visitor1 process element:"<<typeid(e).name();
 		}
-		void visitor1::visit_2(element&)
+		void visitor1::visit_2(element& e)
 		{
-			LOG_INFO<<"visitor1 process element:"<<typeid(element).name();
+			LOG_INFO<<"visitor1 process element:"<<typeid(e).name();
 		}
 		
-		void visitor2::visit_1(element&)
+		void visitor2::visit_1(element& e)
 		{
-			LOG_INFO<<"visitor2 process element:"<<typeid(element).name();
+			LOG_INFO<<"visitor2 process element:"<<typeid(e).name();
 		}
-		void visitor2::visit_2(element&)
+		void visitor2::visit_2(element& e)
 		{
-			LOG_INFO<<"visitor2 process element:"<<typeid(element).name();
+			LOG_INFO<<"visitor2 process element:"<<typeid(e).name();
 		}
 		void test()
 		{
