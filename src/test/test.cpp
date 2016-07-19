@@ -443,9 +443,9 @@ namespace test1
 					default:
 						s.push(shared_ptr<expression>(new var_expression(expr[i])));
 						break;
-				}
-				return s.top();
+				}	
 			}
+			return s.top();
 		}
 		void test()
 		{
