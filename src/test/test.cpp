@@ -282,6 +282,44 @@ namespace test1
 			p->start();
 		}
 	}
+	namespace test_design_model_composite
+	{
+		void composite::add(boost::shared_ptr<component> c)
+		{
+			m_elment.push_back(c);
+		}
+		void composite::remove(boost::shared_ptr<component> c)
+		{
+			m_elment.remove(c);
+		}
+		void composite::process()
+		{
+			LOG_INFO<<m->get_name();
+			for(const auto& m:m_elment)
+			{
+				m->process();
+			}
+		}
+		
+		void leaf::process()
+		{
+			LOG_INFO<<m->get_name();
+		}		
+		
+		void test()
+		{
+			boost::shared_ptr<component> root(new composite("node1"));
+			boost::shared_ptr<component> leaf1(new leaf("leaf1"));
+			boost::shared_ptr<component> leaf2(new leaf("leaf2"));
+			root->add(leaf1);
+			root->add(leaf2);
+
+			root->process();
+			root->remove(leaf2);
+			root->process();
+			leaf2->process();
+		}
+	}
 void test()
 {
 	//test_model_design_factory::test();
@@ -290,6 +328,7 @@ void test()
 	//test_deadline_timer::test();
 	//test_json_parser::test();
 	//test_design_model_flyweight::test();
-	test_design_model_state::test();
+	//test_design_model_state::test();
+	test_design_model_composite::test();
 }
 }

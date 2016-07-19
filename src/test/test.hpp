@@ -214,6 +214,38 @@ namespace test1
 		};
 		void test();
 	}
+	namespace test_design_model_composite
+	{
+		class component
+		{
+		public:
+			virtual void process()=0;
+			virtual ~component(){}
+			string get_name()
+			{
+				return m_name;
+			}
+		protected:
+			string m_name;
+		};
+		class composite:public component
+		{
+		public:
+			composite(const string& s):m_name(s){}
+			void add(boost::shared_ptr<component>);
+			void remove(boost::shared_ptr<component>);
+			void process();
+		
+			std::list<boost::shared_ptr<component>> m_elment;
+		};
+		class leaf:public component
+		{
+		public:
+			leaf(const string& s):m_name(s){}	
+			void process();		
+		};
+		void test();
+	}
 	void test();
 }
 #endif
