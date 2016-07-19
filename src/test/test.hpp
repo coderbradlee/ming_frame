@@ -344,6 +344,47 @@ namespace test1
 		};
 		void test();
 	}
+	namespace test_design_model_interpreter
+	{
+		using boost::shared_ptr;
+		class expression
+		{
+		public:
+			virtual int interpreter(std::map<char,int>)=0;
+			virtual ~expression(){}
+		};
+		class var_expression:public expression
+		{
+		public:
+			var_expression(char key):m_key(key){}
+			int interpreter(std::map<char,int>);
+		private:
+			char m_key;
+		};
+		class symbol_expression:public expression
+		{
+		public:
+			symbol_expression(shared_ptr<expression> left,shared_ptr<expression> right):m_left(left),m_right(right){}
+			
+		protected:
+			shared_ptr<expression> m_left;
+			shared_ptr<expression> m_right;
+		};
+		class add_expression:public symbol_expression
+		{
+		public:
+			add_expression(shared_ptr<expression> left,shared_ptr<expression> right):symbol_expression(left,right){}
+			int interpreter(std::map<char,int>);
+		};
+		class sub_expression:public symbol_expression
+		{
+		public:
+			sub_expression(shared_ptr<expression> left,shared_ptr<expression> right):symbol_expression(left,right){}
+			int interpreter(std::map<char,int>);
+		};
+		shared_ptr<expression> analyse(string& expr);
+		void test();
+	}
 	void test();
 }
 #endif

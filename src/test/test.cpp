@@ -402,6 +402,63 @@ namespace test1
 			e2.accept(v2);
 		}
 	}
+	namespace test_design_model_interpreter
+	{
+		using boost::shared_ptr;
+
+		int var_expression::interpreter(std::map<char,int> var)
+		{
+			return var[m_key];
+		}
+
+		int add_expression::interpreter(std::map<char,int> var)
+		{
+			return m_left->interpreter(var)+m_right->interpreter(var);
+		}
+		
+		int interpreter(std::map<char,int> var)
+		{
+			return m_left->interpreter(var)-m_right->interpreter(var);
+		}
+		shared_ptr<expression> analyse(string& expr)
+		{
+			std::stack<shared_ptr<expression>> s;
+			shared_ptr<expression> left;
+			shared_ptr<expression> right;
+			for(int i=0;i<expr.length;++i)
+			{
+				switch(expr[i])
+				{
+					case '+':
+						left=s.pop();
+						right=shared_ptr<expression>(new var_expression(expr[++i]));
+						s.push_back(shared_ptr<expression>(new add_expression(left,right)));
+						break;
+
+					case '-':
+						left=s.pop();
+						right=shared_ptr<expression>(new var_expression(expr[++i]));
+						s.push_back(shared_ptr<expression>(new sub_expression(left,right)));
+						break;
+					default:
+						s.push_back(new var_expression(expr[i]));
+						break;
+				}
+				return s.top();
+			}
+		}
+		void test()
+		{
+			string expr="a+b-c+e";
+			std::map<char,int> var;
+			var.insert(make_pair('a',4));
+			var.insert(make_pair('b',5));
+			var.insert(make_pair('c',10));
+			var.insert(make_pair('e',1));
+			shared_ptr<expression> ex=analyse(expr);
+			LOG_INFO<<ex->interpreter(var); 
+		}
+	}
 void test()
 {
 	//test_model_design_factory::test();
@@ -413,6 +470,7 @@ void test()
 	//test_design_model_state::test();
 	//test_design_model_composite::test();
 	//test_design_model_chainofresponsibility::test();
-	test_design_model_visitor::test();
+	//test_design_model_visitor::test();
+	test_design_model_interpreter::test();
 }
 }
