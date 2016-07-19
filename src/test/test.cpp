@@ -375,20 +375,20 @@ namespace test1
 			visitor.visit_2(*this);
 		}
 	
-		void visitor1::visit_1(element&)override
+		void visitor1::visit_1(element&)
 		{
 			LOG_INFO<<"visitor1 process element:"<<typeid(element).name();
 		}
-		void visitor1::visit_2(element&)override
+		void visitor1::visit_2(element&)
 		{
 			LOG_INFO<<"visitor1 process element:"<<typeid(element).name();
 		}
 		
-		void visitor2::visit_1(element&)override
+		void visitor2::visit_1(element&)
 		{
 			LOG_INFO<<"visitor2 process element:"<<typeid(element).name();
 		}
-		void visitor2::visit_2(element&)override
+		void visitor2::visit_2(element&)
 		{
 			LOG_INFO<<"visitor2 process element:"<<typeid(element).name();
 		}
