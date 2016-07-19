@@ -416,7 +416,7 @@ namespace test1
 			return m_left->interpreter(var)+m_right->interpreter(var);
 		}
 		
-		int interpreter(std::map<char,int> var)
+		int sub_expression::interpreter(std::map<char,int> var)
 		{
 			return m_left->interpreter(var)-m_right->interpreter(var);
 		}
