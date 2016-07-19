@@ -210,18 +210,7 @@ namespace test1
 	}
 	namespace test_design_model_state
 	{
-		// class network_state
-		// {
-		// public:
-		// 	virtual void operation1()=0;
-		// 	virtual void operation2()=0;
-		// 	virtual void operation3()=0;
-		// 	virtual ~network_state(){}
-		// protected:
-		// 	boost::shared_ptr<network_state> m_next;
-
-		// };
-	
+		
 		static boost::shared_ptr<network_state> open_state::get_instance()
 		{
 			if(m_instance==nullptr)
@@ -296,8 +285,9 @@ void test()
 	//test_model_design_factory::test();
 	//test_model_design_prototype::test();
 	//test_model_design_builder::test();
-	test_deadline_timer::test();
+	//test_deadline_timer::test();
 	//test_json_parser::test();
 	//test_design_model_flyweight::test();
+	test_design_model_state::test();
 }
 }
