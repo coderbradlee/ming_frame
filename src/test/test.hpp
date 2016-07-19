@@ -168,6 +168,51 @@ namespace test1
 		};
 		void test();
 	}
+	namespace test_design_model_state
+	{
+		class network_state
+		{
+		public:
+			virtual void operation1()=0;
+			virtual void operation2()=0;
+			
+			virtual ~network_state(){}
+		protected:
+			boost::shared_ptr<network_state> m_next;
+
+		};
+		class open_state:public network_state
+		{
+		public:
+			static boost::shared_ptr<network_state> get_instance();
+			virtual void operation1();
+			virtual void operation2();
+			
+		private:
+			static boost::shared_ptr<network_state> m_instance;
+		};
+		class close_state:public network_state
+		{
+		public:
+			static boost::shared_ptr<network_state> get_instance();
+			virtual void operation1();
+			virtual void operation2();
+			
+		private:
+			static boost::shared_ptr<network_state> m_instance;
+		};
+		class network_processor
+		{
+		public:
+			void operation1();
+			void operation2();
+			
+			void start();
+		private:
+			boost::shared_ptr<network_state> m_state;
+		};
+		void test();
+	}
 	void test();
 }
 #endif

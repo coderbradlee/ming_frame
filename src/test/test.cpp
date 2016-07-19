@@ -208,6 +208,89 @@ namespace test1
 			cout<<f.get_font("zheng")->get_key()<<endl;
 		}
 	}
+	namespace test_design_model_state
+	{
+		// class network_state
+		// {
+		// public:
+		// 	virtual void operation1()=0;
+		// 	virtual void operation2()=0;
+		// 	virtual void operation3()=0;
+		// 	virtual ~network_state(){}
+		// protected:
+		// 	boost::shared_ptr<network_state> m_next;
+
+		// };
+	
+		static boost::shared_ptr<network_state> open_state::get_instance()
+		{
+			if(m_instance==nullptr)
+			{
+				m_instance=boost::shared_ptr<network_state>(new open_state());
+			}
+			return m_instance;
+		}
+		void open_state::operation1()
+		{
+			LOG_INFO<<"open_state::operation1";
+			m_next=boost::shared_ptr<network_state>(new close_state());
+		}
+		void open_state::operation2()
+		{
+			LOG_INFO<<"open_state::operation2";
+		}
+		
+	
+		static boost::shared_ptr<network_state> open_state::m_instance=nullptr;
+
+		static boost::shared_ptr<network_state> close_state::get_instance()
+		{
+			if(m_instance==nullptr)
+			{
+				m_instance=boost::shared_ptr<network_state>(new close_state());
+			}
+			return m_instance;
+		}
+		virtual void close_state::operation1()
+		{
+			LOG_INFO<<"close_state::operation1";
+		}
+		
+		virtual void close_state::operation2()
+		{
+			LOG_INFO<<"close_state::operation2";
+		}
+	
+		static boost::shared_ptr<network_state> close_state::m_instance=nullptr;
+
+		network_processor::network_processor(boost::shared_ptr<network_state> x):
+		m_state(x){}
+		
+		void network_processor::operation1()
+		{
+			LOG_INFO<<"network_processor::operation1";
+			m_state->operation1();	
+			m_state=m_state->m_next;
+		}
+		void network_processor::operation2()
+		{
+			LOG_INFO<<"network_processor::operation2";
+			m_state->operation2();	
+		}
+		
+		void start()
+		{
+			operation1();
+			operation2();
+		}
+		
+		void test()
+		{
+			boost::shared_ptr<network_state> o(new open_state());
+			boost::shared_ptr<network_processor> p(new network_processor(o));
+			p->start();
+		}
+	}
 void test()
 {
 	//test_model_design_factory::test();
