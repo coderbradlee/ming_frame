@@ -377,20 +377,20 @@ namespace test1
 	
 		void visitor1::visit_1(element&)override
 		{
-			LOG_INFO<<"visitor1 process element:"<<typeid(element);
+			LOG_INFO<<"visitor1 process element:"<<typeid(element).name();
 		}
 		void visitor1::visit_2(element&)override
 		{
-			LOG_INFO<<"visitor1 process element:"<<typeid(element);
+			LOG_INFO<<"visitor1 process element:"<<typeid(element).name();
 		}
 		
 		void visitor2::visit_1(element&)override
 		{
-			LOG_INFO<<"visitor2 process element:"<<typeid(element);
+			LOG_INFO<<"visitor2 process element:"<<typeid(element).name();
 		}
 		void visitor2::visit_2(element&)override
 		{
-			LOG_INFO<<"visitor2 process element:"<<typeid(element);
+			LOG_INFO<<"visitor2 process element:"<<typeid(element).name();
 		}
 		void test()
 		{
