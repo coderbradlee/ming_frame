@@ -259,7 +259,7 @@ namespace test1
 		{
 		public:
 			request(request_type r):m_request_type(r){}
-			request_type get_request_type()const{return m_request_type}
+			request_type get_request_type()const{return m_request_type;}
 		private:
 			request_type m_request_type;
 		};
