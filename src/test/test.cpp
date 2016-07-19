@@ -259,11 +259,13 @@ namespace test1
 		{
 			LOG_INFO<<"network_processor::operation1";
 			m_state->operation1();	
+			m_state->operation2();
 			m_state=m_state->m_next;
 		}
 		void network_processor::operation2()
 		{
 			LOG_INFO<<"network_processor::operation2";
+			m_state->operation1();
 			m_state->operation2();	
 		}
 		
