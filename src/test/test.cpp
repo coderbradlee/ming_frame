@@ -364,6 +364,44 @@ namespace test1
 			c1->start(r);
 		}
 	}
+	namespace test_design_model_visitor
+	{
+		void element1::accept(visitor&)
+		{
+			visitor.visit_1(*this);
+		}
+		void element2::accept(visitor&)
+		{
+			visitor.visit_2(*this);
+		}
+	
+		void visitor1::visit_1(element&)override
+		{
+			LOG_INFO<<"visitor1 process element:"<<typeid(element);
+		}
+		void visitor1::visit_2(element&)override
+		{
+			LOG_INFO<<"visitor1 process element:"<<typeid(element);
+		}
+		
+		void visitor2::visit_1(element&)override
+		{
+			LOG_INFO<<"visitor2 process element:"<<typeid(element);
+		}
+		void visitor2::visit_2(element&)override
+		{
+			LOG_INFO<<"visitor2 process element:"<<typeid(element);
+		}
+		void test()
+		{
+			visitor1 v1;
+			visitor2 v2;
+			element1 e1;
+			e1.accept(v1);
+			element2 e2;
+			e2.accept(v2);
+		}
+	}
 void test()
 {
 	//test_model_design_factory::test();
@@ -374,6 +412,7 @@ void test()
 	//test_design_model_flyweight::test();
 	//test_design_model_state::test();
 	//test_design_model_composite::test();
-	test_design_model_chainofresponsibility::test();
+	//test_design_model_chainofresponsibility::test();
+	test_design_model_visitor::test();
 }
 }

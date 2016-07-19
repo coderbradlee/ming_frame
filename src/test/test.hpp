@@ -303,6 +303,47 @@ namespace test1
 		};
 		void test();
 	}
+	namespace test_design_model_visitor
+	{
+		class visitor;
+		class element
+		{
+		public:
+			virtual void accept(visitor&)=0;
+			virtual ~element(){}
+		};
+		class element1:public element
+		{
+		public:
+			void accept(visitor&);
+		};
+		class element2:public element
+		{
+		public:
+			void accept(visitor&);
+		};
+		class visitor
+		{
+		public:
+			virtual void visit_1(element&)=0;
+			virtual void visit_2(element&)=0;
+			virtual ~visitor(){}
+
+		};
+		class visitor1:public visitor
+		{
+		public:
+			void visit_1(element&)override;
+			void visit_2(element&)override;
+		};
+		class visitor2:public visitor
+		{
+		public:
+			void visit_1(element&)override;
+			void visit_2(element&)override;
+		};
+		void test();
+	}
 	void test();
 }
 #endif
