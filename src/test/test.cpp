@@ -240,12 +240,12 @@ namespace test1
 			}
 			return m_instance;
 		}
-		virtual void close_state::operation1()
+		void close_state::operation1()
 		{
 			LOG_INFO<<"close_state::operation1";
 		}
 		
-		virtual void close_state::operation2()
+		void close_state::operation2()
 		{
 			LOG_INFO<<"close_state::operation2";
 		}
