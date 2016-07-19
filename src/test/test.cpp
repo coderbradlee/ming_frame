@@ -425,7 +425,7 @@ namespace test1
 			std::stack<shared_ptr<expression>> s;
 			shared_ptr<expression> left;
 			shared_ptr<expression> right;
-			for(int i=0;i<expr.length;++i)
+			for(int i=0;i<expr.length();++i)
 			{
 				switch(expr[i])
 				{
