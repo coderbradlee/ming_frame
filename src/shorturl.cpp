@@ -16,14 +16,14 @@ using namespace muduo::net;
 namespace short_url
 {
   bool benchmark= false;
-  std::map<std::string, std::string> redirections;
+  std::map<muduo::string, muduo::string> redirections;
   void onRequest(const HttpRequest& req, HttpResponse* resp)
   {
     LOG_INFO << "Headers " << req.methodString() << " " << req.path();
     if (!benchmark)
     {
-      const std::map<std::string, std::string>& headers = req.headers();
-      for (std::map<std::string, std::string>::const_iterator it = headers.begin();
+      const std::map<muduo::string, muduo::string>& headers = req.headers();
+      for (std::map<muduo::string, muduo::string>::const_iterator it = headers.begin();
           it != headers.end();
           ++it)
       {
@@ -33,7 +33,7 @@ namespace short_url
 
     // TODO: support PUT and DELETE to create new redirections on-the-fly.
 
-    std::map<std::string, std::string>::const_iterator it = redirections.find(req.path());
+    std::map<muduo::string, muduo::string>::const_iterator it = redirections.find(req.path());
     if (it != redirections.end())
     {
       resp->setStatusCode(HttpResponse::k301MovedPermanently);
@@ -46,9 +46,9 @@ namespace short_url
       resp->setStatusCode(HttpResponse::k200Ok);
       resp->setStatusMessage("OK");
       resp->setContentType("text/html");
-      std::string now = Timestamp::now().toFormattedString();
-      std::map<std::string, std::string>::const_iterator i = redirections.begin();
-      std::string text;
+      muduo::string now = Timestamp::now().toFormattedString();
+      std::map<muduo::string, muduo::string>::const_iterator i = redirections.begin();
+      muduo::string text;
       for (; i != redirections.end(); ++i)
       {
         text.append("<ul>" + i->first + " =&gt; " + i->second + "</ul>");
@@ -65,7 +65,7 @@ namespace short_url
       resp->setStatusCode(HttpResponse::k200Ok);
       resp->setStatusMessage("OK");
       resp->setContentType("image/png");
-      resp->setBody(std::string(favicon, sizeof favicon));
+      resp->setBody(muduo::string(favicon, sizeof favicon));
     }
     else
     {
