@@ -15,11 +15,11 @@
 #include <sys/socket.h>  // SO_REUSEPORT
 
 //using namespace muduo;
-using namespace muduo::net;
+//using namespace muduo::net;
 namespace short_url
 {
   extern char favicon[555];
-  void onRequest(const HttpRequest& req, HttpResponse* resp);
+  void onRequest(const muduo::net::HttpRequest& req, muduo::net::HttpResponse* resp);
 
   void test();
 
