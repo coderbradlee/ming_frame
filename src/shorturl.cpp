@@ -10,7 +10,7 @@
 #include <boost/ptr_container/ptr_vector.hpp>
 
 #include <sys/socket.h>  // SO_REUSEPORT
-
+#include "shorturl.hpp"
 using namespace muduo;
 using namespace muduo::net;
 namespace short_url
