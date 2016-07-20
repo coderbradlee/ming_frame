@@ -87,14 +87,8 @@ namespace short_url
     LOG_WARN << "SO_REUSEPORT";
     EventLoop loop;
     EventLoopThreadPool threadPool(&loop, "shorturl");
-    if (numThreads > 1)
-    {
-      threadPool.setThreadNum(numThreads);
-    }
-    else
-    {
-      numThreads = 1;
-    }
+    threadPool.setThreadNum(numThreads);
+    
     threadPool.start();
 
     boost::ptr_vector<HttpServer> servers;
