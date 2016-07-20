@@ -18,6 +18,7 @@
 using namespace muduo::net;
 namespace short_url
 {
+  extern char favicon[555];
   void onRequest(const HttpRequest& req, HttpResponse* resp);
 
   int test();
