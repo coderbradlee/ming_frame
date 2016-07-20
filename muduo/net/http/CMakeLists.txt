@@ -5,8 +5,8 @@ set(http_SRCS
   )
 
 add_library(muduo_http ${http_SRCS})
-target_link_libraries(muduo_http muduo_net)
-
+#target_link_libraries(muduo_http muduo_net)
+target_link_libraries(muduo_http muduo_net_cpp11)
 install(TARGETS muduo_http DESTINATION lib)
 set(HEADERS
   HttpRequest.h
