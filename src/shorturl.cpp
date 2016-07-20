@@ -20,8 +20,8 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
   LOG_INFO << "Headers " << req.methodString() << " " << req.path();
   if (!benchmark)
   {
-    const std::map<string, string>& headers = req.headers();
-    for (std::map<string, string>::const_iterator it = headers.begin();
+    const std::map<std::string, std::string>& headers = req.headers();
+    for (std::map<std::string, std::string>::const_iterator it = headers.begin();
         it != headers.end();
         ++it)
     {
@@ -31,7 +31,7 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
 
   // TODO: support PUT and DELETE to create new redirections on-the-fly.
 
-  std::map<string, string>::const_iterator it = redirections.find(req.path());
+  std::map<std::string, std::string>::const_iterator it = redirections.find(req.path());
   if (it != redirections.end())
   {
     resp->setStatusCode(HttpResponse::k301MovedPermanently);
@@ -44,9 +44,9 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
     resp->setStatusCode(HttpResponse::k200Ok);
     resp->setStatusMessage("OK");
     resp->setContentType("text/html");
-    string now = Timestamp::now().toFormattedString();
-    std::map<string, string>::const_iterator i = redirections.begin();
-    string text;
+    std::string now = Timestamp::now().toFormattedString();
+    std::map<std::string, std::string>::const_iterator i = redirections.begin();
+    std::string text;
     for (; i != redirections.end(); ++i)
     {
       text.append("<ul>" + i->first + " =&gt; " + i->second + "</ul>");
@@ -63,7 +63,7 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
     resp->setStatusCode(HttpResponse::k200Ok);
     resp->setStatusMessage("OK");
     resp->setContentType("image/png");
-    resp->setBody(string(favicon, sizeof favicon));
+    resp->setBody(std::string(favicon, sizeof favicon));
   }
   else
   {

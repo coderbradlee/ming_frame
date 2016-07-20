@@ -21,7 +21,7 @@ namespace short_url
 extern char favicon[555];
 bool benchmark = false;
 
-std::map<string, string> redirections;
+std::map<std::string, std::string> redirections;
 
 void onRequest(const HttpRequest& req, HttpResponse* resp);
 
