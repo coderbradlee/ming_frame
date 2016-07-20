@@ -75,7 +75,7 @@ namespace short_url
     }
   }
 
-  int test()
+  void test()
   {
     redirections["/1"] = "http://chenshuo.com";
     redirections["/2"] = "http://blog.csdn.net/Solstice";

@@ -21,7 +21,7 @@ namespace short_url
   extern char favicon[555];
   void onRequest(const HttpRequest& req, HttpResponse* resp);
 
-  int test();
+  void test();
 
 }
 #endif
