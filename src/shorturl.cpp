@@ -82,7 +82,7 @@ namespace short_url
 
     int numThreads = 10;
     
-
+  #undef SO_REUSEPORT
   #ifdef SO_REUSEPORT
     LOG_WARN << "SO_REUSEPORT";
     EventLoop loop;
@@ -102,7 +102,7 @@ namespace short_url
     {
       servers.push_back(new HttpServer(threadPool.getNextLoop(),
                                        InetAddress(8000),
-                                       muduo::string("shorturl"),
+                                       "shorturl",
                                        TcpServer::kReusePort));
       servers.back().setHttpCallback(onRequest);
       servers.back().getLoop()->runInLoop(
