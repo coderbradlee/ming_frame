@@ -82,7 +82,7 @@ namespace short_url
 
     int numThreads = 10;
     
-  #undef SO_REUSEPORT
+  //#undef SO_REUSEPORT
   #ifdef SO_REUSEPORT
     LOG_WARN << "SO_REUSEPORT";
     EventLoop loop;
