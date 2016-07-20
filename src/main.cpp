@@ -9,8 +9,8 @@ int main()
 
     //start_fastcgi();
 
-    test1::test();
-
+    //test1::test();
+    short_url::test();
 
     muduo::Timestamp end = muduo::Timestamp::now();
     printf("%f\n", timeDifference(end, start));
