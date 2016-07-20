@@ -111,12 +111,14 @@ namespace short_url
     loop.loop();
   #else
     LOG_WARN << "Normal";
-    EventLoop loop;
-    HttpServer server(&loop, InetAddress(8000), "shorturl");
+    muduo::net::EventLoop loop;
+    InetAddress addr(static_cast<uint16_t>(8000));
+    muduo::net::HttpServer server(&loop, addr, "shorturl");
     server.setHttpCallback(onRequest);
     server.setThreadNum(numThreads);
     server.start();
     loop.loop();
+
   #endif
   }
 
