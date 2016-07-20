@@ -16,6 +16,7 @@ add_subdirectory(sudoku)
 set(SRC_LIST config.cpp log.cpp sudoku/sudoku.cc mysql_connect.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc test/test.cpp shorturl.cpp main.cpp)
 
 add_executable(ming ${SRC_LIST})
+target_link_libraries(ming muduo_base)
 target_link_libraries(ming muduo_net)
 target_link_libraries(ming muduo_net_cpp11)
 target_link_libraries(ming muduo_base_cpp11)
