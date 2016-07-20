@@ -102,7 +102,7 @@ namespace short_url
     {
       servers.push_back(new HttpServer(threadPool.getNextLoop(),
                                        InetAddress(8000),
-                                       "shorturl",
+                                       muduo::string("shorturl"),
                                        TcpServer::kReusePort));
       servers.back().setHttpCallback(onRequest);
       servers.back().getLoop()->runInLoop(
