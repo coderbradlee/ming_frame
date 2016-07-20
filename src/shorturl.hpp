@@ -18,16 +18,9 @@
 using namespace muduo::net;
 namespace short_url
 {
-extern char favicon[555];
-extern bool benchmark;
+  void onRequest(const HttpRequest& req, HttpResponse* resp);
 
-extern std::map<std::string, std::string> redirections;
-
-void onRequest(const HttpRequest& req, HttpResponse* resp);
-
-int test();
-
-
+  int test();
 
 }
 #endif
