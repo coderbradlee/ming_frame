@@ -15,6 +15,8 @@
 using namespace muduo::net;
 namespace short_url
 {
+  bool benchmark= false;
+  std::map<std::string, std::string> redirections;
   void onRequest(const HttpRequest& req, HttpResponse* resp)
   {
     LOG_INFO << "Headers " << req.methodString() << " " << req.path();
