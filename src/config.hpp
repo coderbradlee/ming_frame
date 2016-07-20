@@ -8,6 +8,7 @@
 #include <map>
 //#define DEBUG
 #include "include.hpp"
+#include "shorturl.hpp"
 using std::string;
 class iconfig:boost::noncopyable
 {
