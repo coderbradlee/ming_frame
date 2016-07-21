@@ -27,8 +27,6 @@ if (WIN32)
     list(REMOVE_ITEM SRC_LIST ${PROJECT_SOURCE_DIR}/sample11_await.cpp)
     target_link_libraries(sample2_yield.t ${LINK_ARGS} libgo_main)
 else()
-    target_link_libraries(sample2_yield.t ${LINK_ARGS} rt)
-
     add_executable(sample9_curl.t sample9_curl.cpp)
     if (depend_libgo)
         add_dependencies(sample9_curl.t ${depend_libgo})
