@@ -1,11 +1,11 @@
 #add_executable(ming_log config.cpp)
 #target_link_libraries(ming_log muduo_base)
 
-if(CURL_FOUND)
-  add_subdirectory(curl)
-else()
-  add_subdirectory(curl EXCLUDE_FROM_ALL)
-endif()
+#if(CURL_FOUND)
+#  add_subdirectory(curl)
+#else()
+#  add_subdirectory(curl EXCLUDE_FROM_ALL)
+#endif()
 #add_library(ming_config config.cpp)
 #target_link_libraries(ming_config muduo_net)
 
