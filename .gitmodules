@@ -1,0 +1,3 @@
+[submodule "libgo"]
+	path = libgo
+	url = https://github.com/lzxm160/libgo.git

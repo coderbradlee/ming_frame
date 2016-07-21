@@ -4,10 +4,10 @@ project(muduo C CXX)
 
 enable_testing()
 
-#if(NOT CMAKE_BUILD_TYPE)
-#  set(CMAKE_BUILD_TYPE "Release")
-#endif()
-set(CMAKE_BUILD_TYPE "Debug")
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Release")
+endif()
+
 set(CXX_FLAGS
  -g
  # -DVALGRIND
@@ -96,5 +96,10 @@ add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(src)
 add_subdirectory(libgo)
-add_subdirectory(go)
+#add_subdirectory(go)
 add_definitions(-DMUDUO_STD_STRING)
+#########################add libgo submodule
+set(ENABLE_SSL 1)
+include_directories("${PROJECT_SOURCE_DIR}/libgo")
+include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo")
+include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo/linux")
