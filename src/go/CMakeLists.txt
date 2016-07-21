@@ -10,17 +10,6 @@ else ()
     set(CMAKE_CXX_FLAGS "-std=c++11 -g -Wall")
 endif()
 
-include(${PROJECT_SOURCE_DIR}/../boost.cmake)
-
-include_directories(${PROJECT_SOURCE_DIR}/../src)
-if (UNIX)
-    include_directories(${PROJECT_SOURCE_DIR}/../src/linux)
-    link_directories(/usr/local/lib)
-else()
-    include_directories(${PROJECT_SOURCE_DIR}/../src/windows)
-    set(depend_libgo libgo_static libgo_main)
-endif()
-link_directories(${PROJECT_SOURCE_DIR}/../build)
 
 if (UNIX)
     set(LINK_ARGS libgo libgo_main boost_coroutine boost_context boost_system boost_thread pthread dl)
@@ -30,11 +19,6 @@ endif()
 
 aux_source_directory(${PROJECT_SOURCE_DIR} SRC_LIST)
 
-list(REMOVE_ITEM SRC_LIST ${PROJECT_SOURCE_DIR}/sample2_yield.cpp)
-add_executable(sample2_yield.t sample2_yield.cpp)
-if (depend_libgo)
-    add_dependencies(sample2_yield.t ${depend_libgo})
-endif()
 
 list(REMOVE_ITEM SRC_LIST ${PROJECT_SOURCE_DIR}/sample9_curl.cpp)
 
