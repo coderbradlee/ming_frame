@@ -100,7 +100,7 @@ endif()
 add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(src)
-add_subdirectory(go)
+add_subdirectory(src/go)
 add_definitions(-DMUDUO_STD_STRING)
 #########################add libgo submodule
 set(ENABLE_SSL 1)
