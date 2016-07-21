@@ -35,11 +35,11 @@ endif()
 string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
 
 #set(CMAKE_CXX_COMPILER "g++")
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -static")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -finline-limit=1000 -DNDEBUG")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-
+LINK_DIRECTORIES(${PROJECT_BINARY_DIR}/lib)
 find_package(Boost REQUIRED)
 find_package(Protobuf)
 find_package(CURL)
