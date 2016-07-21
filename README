@@ -1,3 +1,6 @@
+
+
+
 1、fastcgi
 yum install spawn-fcgi
 yum install fcgi fcgi-devel
@@ -11,6 +14,13 @@ curl -u test:test -X GET http://192.168.3.132/exchange_rate/?source=USD\&target=
 2、mysql connect ok based on mysql-connector-cpp,tag 1.1.6
 
 3、extends QuotationService  exportPDF 
+
+4、test shorturl 
+curl -X GET http://192.168.3.132:8000/shorturl
+
+
+
+
 
 /usr/local/bin/wkhtmltopdf --lowquality --image-dpi '150' --image-quality '90' --margin-bottom '15' --margin-top '30' --encoding 'UTF-8' --disable-javascript --load-error-handling 'ignore' --load-media-error-handling 'ignore' --enable-smart-shrinking --user-style-sheet '/var/www/test/htdocs/wp-content/plugins/pdfgen2/pdf.css' --footer-right '[page]' --footer-spacing '5' --header-html 'header.html' --header-spacing '5' '/tmp/knp_snappy564f1419df1016.89307204.html' '/var/www/test/htdocs/wp-content/uploads/pdf/handbuch-finanzbuchhaltung-dauerbuchung-erfassen-17352-p.pdf'
 
