@@ -95,7 +95,7 @@ message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_T
 add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(src)
-add_subdirectory(libgo)
+#add_subdirectory(libgo)
 #add_subdirectory(go)
 add_definitions(-DMUDUO_STD_STRING)
 #########################add libgo submodule
