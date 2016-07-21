@@ -16,6 +16,12 @@ add_subdirectory(sudoku)
 set(SRC_LIST config.cpp log.cpp sudoku/sudoku.cc mysql_connect.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc test/test.cpp shorturl.cpp main.cpp)
 
 add_executable(ming ${SRC_LIST})
+
+file(WRITE ${PROJECT_SOURCE_DIR}/config.ini "${PROJECT_BIN_DIR}/bin")
+#install(FILES ${PROJECT_SOURCE_DIR}/config.ini DESTINATION "/etc/ld.so.conf.d")
+#install(TARGETS ${TARGET} LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
+#install(DIRECTORY libgonet/ DESTINATION "include/libgonet" FILES_MATCHING PATTERN "*.h")
+
 #target_link_libraries(ming muduo_base)
 #target_link_libraries(ming muduo_net)
 target_link_libraries(ming muduo_net_cpp11)
