@@ -19,8 +19,7 @@ add_executable(ming ${SRC_LIST})
 
 #file(WRITE ${PROJECT_SOURCE_DIR}/config.ini "${PROJECT_BIN_DIR}/bin")
 
-configure_file(${PROJECT_SOURCE_DIR}/config.ini
-    ${PROJECT_BIN_DIR}/bin/config.ini COPYONLY)
+
 
 #install(FILES ${PROJECT_SOURCE_DIR}/config.ini DESTINATION "/etc/ld.so.conf.d")
 #install(TARGETS ${TARGET} LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
