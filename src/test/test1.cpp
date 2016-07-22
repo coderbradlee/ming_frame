@@ -156,7 +156,7 @@ namespace test1
 			muduo::MutexLockGuard lock(mutex);
 			for(auto& i:foos)
 			{
-				i->do();
+				i->doit();
 			}
 		}
 

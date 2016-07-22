@@ -98,7 +98,7 @@ namespace test1
 		class foo
 		{
 		public:
-			void do()
+			void doit()
 			{
 				LOG_INFO<<"do";
 				post(this);
