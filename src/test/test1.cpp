@@ -144,19 +144,19 @@ namespace test1
 	}
 	namespace test_using_nonrecursive_mutex
 	{
-		//muduo::MutexLock mutex;
-		std::recursive_mutex mutex;
+		muduo::MutexLock mutex;
+		//std::recursive_mutex mutex;
 		std::vector<foo> foos;
 		void post(const foo& f)
 		{
-			//muduo::MutexLockGuard lock(mutex);
-			std::lock_guard<recursive_mutex> l(mutex);
+			muduo::MutexLockGuard lock(mutex);
+			//std::lock_guard<recursive_mutex> l(mutex);
 			foos.push_back(f);
 		}
 		void traverse()
 		{
-			//muduo::MutexLockGuard lock(mutex);
-			std::lock_guard<recursive_mutex> l(mutex);
+			muduo::MutexLockGuard lock(mutex);
+			//std::lock_guard<recursive_mutex> l(mutex);
 			for(auto& i:foos)
 			{
 				i.doit();
