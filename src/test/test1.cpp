@@ -149,12 +149,14 @@ namespace test1
 		std::vector<foo> foos;
 		void post(const foo& f)
 		{
-			muduo::MutexLockGuard lock(mutex);
+			//muduo::MutexLockGuard lock(mutex);
+			std::lock<recursive_mutex> lock(mutex);
 			foos.push_back(f);
 		}
 		void traverse()
 		{
-			muduo::MutexLockGuard lock(mutex);
+			//muduo::MutexLockGuard lock(mutex);
+			std::lock<recursive_mutex> lock(mutex);
 			for(auto& i:foos)
 			{
 				i->doit();
