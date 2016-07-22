@@ -144,7 +144,8 @@ namespace test1
 	}
 	namespace test_using_nonrecursive_mutex
 	{
-		muduo::MutexLock mutex;
+		//muduo::MutexLock mutex;
+		std::recursive_mutex mutex;
 		std::vector<foo> foos;
 		void post(const foo& f)
 		{
