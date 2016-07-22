@@ -47,6 +47,7 @@ namespace test1
 				}
 				else
 				{
+					LOG_INFO<<"erase observer";
 					it=m_observers.erase(it);
 				}
 			}

@@ -24,7 +24,10 @@ namespace test1
 		class observer:public boost::enable_shared_from_this<observer>
 		{
 		public:
-			virtual ~observer(){}
+			virtual ~observer()
+			{
+				LOG_INFO<<"observer destructor";
+			}
 			virtual void update()=0;
 			void observe(observable* s);
 		protected:
