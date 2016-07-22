@@ -150,13 +150,13 @@ namespace test1
 		void post(const foo& f)
 		{
 			//muduo::MutexLockGuard lock(mutex);
-			std::lock<recursive_mutex> lock(mutex);
+			std::lock<recursive_mutex> l(mutex);
 			foos.push_back(f);
 		}
 		void traverse()
 		{
 			//muduo::MutexLockGuard lock(mutex);
-			std::lock<recursive_mutex> lock(mutex);
+			std::lock<recursive_mutex> l(mutex);
 			for(auto& i:foos)
 			{
 				i->doit();
