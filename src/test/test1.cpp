@@ -21,7 +21,53 @@ namespace test1
 
 		}
 	}
-	
+	namespace test_observer_thread_safe
+	{
+		void observer::observe(observable* s)
+		{
+			s->register(shared_from_this());
+			m_subject=s;
+		}
+		
+		void observable::register(const boost::weak_ptr<observer>& x)
+		{
+			m_observers.push_back(x);
+		}
+		void observable::notify()
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+			auto it=m_observers.begin();
+			while(it!=m_observers.end())
+			{
+				boost::shared_ptr<observer> obj(it->lock());
+				if(obj)
+				{
+					obj->update();
+					++it;
+				}
+				else
+				{
+					it=m_observers.erase(it);
+				}
+			}
+		}
+		
+		void foo::update()
+		{
+			LOG_INFO<<"FOO update:"<<(size_t)this;
+		}
+		
+		void test()
+		{
+			observable sub;
+			{
+				boost::shared_ptr<foo> p(new foo());
+				p->observe(&sub);
+				sub.notify();
+			}
+			sub.notify();
+		}
+	}
 	void test1()
 	{
 		//test_model_design_factory::test();
@@ -34,6 +80,7 @@ namespace test1
 		//test_design_model_composite::test();
 		//test_design_model_chainofresponsibility::test();
 		//test_design_model_visitor::test();
-		test_design_model_interpreter::test();
+		//test_design_model_interpreter::test();
+		test_observer_thread_safe::test();
 	}
 }

@@ -18,7 +18,35 @@ namespace test1
 		};
 		void test();
 	}
-	
+	namespace test_observer_thread_safe
+	{
+		class observable;
+		class observer:public boost::enable_shared_from_this<observer>
+		{
+		public:
+			virtual ~observer(){}
+			virtual void update()=0;
+			void observe(observable* s);
+		protected:
+			observable* m_subject;
+		};
+		class observable
+		{
+		public:
+			void register(const boost::weak_ptr<observer>& x);
+			void notify();
+		private:
+			mutable muduo::MutexLock m_mutex;
+			std::vector<boost::weak_ptr<observer>> m_observers;
+
+		};
+		class foo:public observer
+		{
+		public:
+			void update();
+		}
+		void test();
+	}
 	void test1();
 }
 #endif
