@@ -56,6 +56,41 @@ namespace test1
 		};
 		void test();
 	}
+	name test_weak_ptr
+	{
+		class stock:boost::noncopyable
+		{
+		public:
+			stock(const string& name):m_name(name)
+			{
+				LOG_INFO<<"constructor:"<<this<<":"<<m_name;
+			}
+			~stock()
+			{
+				LOG_INFO<<"destructor:"<<this<<":"<<m_name;
+			}
+			const string get_key()const
+			{
+				return m_name;
+			}
+		private:
+			string m_name;
+		};
+		class stock_factory:public boost::enable_shared_from_this<stock_factory>,boost::noncopyable
+		{
+		public:
+			boost::shared_ptr<stock> get(const string& key);
+		private:
+			static void weak_delete_stock(const boost::weak_ptr<stock_factory>& wk,stock* s);
+			void remove_stock(stock* s);
+		private:
+			mutable muduo::MutexLock m_mutex;
+			std::map<string,boost::weak_ptr<stock>> m_stocks;
+		};
+		void testLongLifeFactory();
+		void testShortLifeFactory();
+		void test();
+	}
 	void test1();
 }
 #endif

@@ -76,6 +76,72 @@ namespace test1
 			
 		}
 	}
+	name test_weak_ptr
+	{
+		
+		boost::shared_ptr<stock> stock_factory::get(const string& key)
+		{
+			boost::shared_ptr<stock> p;
+			muduo::MutexLockGuard lock(m_mutex);
+			boost::weak_ptr<stock>& wk_stock=m_stocks[key];
+			p=wk_stock.lock();
+			if(!p)
+			{
+				p.reset(new stock(key),boost::bind(&stock_factory::weak_delete_stock,boost::weak_ptr<stock_factory>(shared_from_this()),_1));
+				wk_stock=p;
+			}
+			return p;
+		}
+	
+		static void stock_factory::weak_delete_stock(const boost::weak_ptr<stock_factory>& wk,stock* s)
+		{
+			LOG_INFO<<"delete stock:"<<stock;
+			boost::shared_ptr<stock_factory> f(wk.lock());
+			if(f)
+			{
+				f->remove_stock(s);
+			}
+			else
+			{
+				LOG_INFO<<"factory died";
+			}
+			delete s;
+		}
+
+		void stock_factory::remove_stock(stock* s)
+		{
+			if(s)
+			{
+				muduo::MutexLockGuard lock(m_mutex);
+				m_stocks.erase(s->key());
+			}
+		}
+		void testLongLifeFactory()
+		{
+			boost::shared_ptr<stock_factory> fa(new stock_factory);
+			{
+				boost::shared_ptr<stock> s1=fa->get("nyse");
+				boost::shared_ptr<stock> s2=fa->get("nyse");
+
+			}
+		}
+		void testShortLifeFactory()
+		{
+			boost::shared_ptr<stock> s;
+			{
+				boost::shared_ptr<stock_factory> f(new stock_factory);
+				s=f->get("nyse");
+				boost::shared_ptr<stock> s1=f->get("nyse");
+
+			}
+			
+		}
+		void test()
+		{
+			 testLongLifeFactory();
+			 testShortLifeFactory();
+		}
+	}
 	void test1()
 	{
 		//test_model_design_factory::test();
@@ -89,6 +155,7 @@ namespace test1
 		//test_design_model_chainofresponsibility::test();
 		//test_design_model_visitor::test();
 		//test_design_model_interpreter::test();
-		test_observer_thread_safe::test();
+		//test_observer_thread_safe::test();
+		test_weak_ptr::test();
 	}
 }
