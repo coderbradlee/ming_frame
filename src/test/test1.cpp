@@ -159,7 +159,7 @@ namespace test1
 			std::lock_guard<recursive_mutex> l(mutex);
 			for(auto& i:foos)
 			{
-				i->doit();
+				i.doit();
 			}
 		}
 
