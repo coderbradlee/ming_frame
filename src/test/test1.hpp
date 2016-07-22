@@ -93,6 +93,24 @@ namespace test1
 		void testShortLifeFactory();
 		void test();
 	}
+	namespace test_using_nonrecursive_mutex
+	{
+		class foo
+		{
+		public:
+			void do()
+			{
+				LOG_INFO<<"do";
+				post(this);
+			}
+		};
+		void post(const foo& f);
+		void traverse();
+
+
+		void test();
+
+	}
 	void test1();
 }
 #endif

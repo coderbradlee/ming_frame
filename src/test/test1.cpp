@@ -142,6 +142,35 @@ namespace test1
 			 testShortLifeFactory();
 		}
 	}
+	namespace test_using_nonrecursive_mutex
+	{
+		muduo::MutexLock mutex;
+		std::vector<foo> foos;
+		void post(const foo& f)
+		{
+			muduo::MutexLockGuard lock(mutex);
+			foos.push_back(f);
+		}
+		void traverse()
+		{
+			muduo::MutexLockGuard lock(mutex);
+			for(auto& i:foos)
+			{
+				i->do();
+			}
+		}
+
+
+		void test()
+		{
+			foo f1;
+			post(&f1);
+			foo f2;
+			post(&f2);
+			traverse();
+		}
+
+	}
 	void test1()
 	{
 		//test_model_design_factory::test();
