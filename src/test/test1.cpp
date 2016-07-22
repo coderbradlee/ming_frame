@@ -188,6 +188,7 @@ namespace test1
 		//test_design_model_visitor::test();
 		//test_design_model_interpreter::test();
 		//test_observer_thread_safe::test();
-		test_weak_ptr::test();
+		//test_weak_ptr::test();
+		test_using_nonrecursive_mutex::test();
 	}
 }
