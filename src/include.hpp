@@ -72,6 +72,7 @@ using namespace boost::posix_time;
 #include <boost/random.hpp>
 #include <boost/nondet_random.hpp>
 #include "test/test.hpp"
+#include "test/test1.hpp"
 #include "shorturl.hpp"
 #endif
 
