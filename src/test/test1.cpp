@@ -171,6 +171,7 @@ namespace test1
 			foo f2;
 			post(f2);
 			traverse();
+			LOG_INFO<<foos.size();
 		}
 
 	}
