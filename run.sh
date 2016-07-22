@@ -1,1 +1,2 @@
-build/debug/bin/ming
+cd build/debug/bin/
+./ming
