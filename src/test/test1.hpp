@@ -19,7 +19,7 @@ namespace test1
 		void test();
 	}
 	
-	void test();
+	void test1();
 }
 #endif
 

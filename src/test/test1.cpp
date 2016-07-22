@@ -22,7 +22,7 @@ namespace test1
 		}
 	}
 	
-	void test()
+	void test1()
 	{
 		//test_model_design_factory::test();
 		//test_model_design_prototype::test();
