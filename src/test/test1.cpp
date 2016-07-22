@@ -95,7 +95,7 @@ namespace test1
 	
 		static void stock_factory::weak_delete_stock(const boost::weak_ptr<stock_factory>& wk,stock* s)
 		{
-			LOG_INFO<<"delete stock:"<<(size_t)stock;
+			LOG_INFO<<"delete stock:"<<(size_t)s;
 			boost::shared_ptr<stock_factory> f(wk.lock());
 			if(f)
 			{
