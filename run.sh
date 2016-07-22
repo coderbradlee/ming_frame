@@ -1,1 +1,1 @@
-Build/release/bin/ming
+build/debug/bin/ming
