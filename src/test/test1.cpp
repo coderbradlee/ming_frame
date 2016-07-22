@@ -71,6 +71,7 @@ namespace test1
 				}
 				sub.notify();
 			}
+			LOG_INFO<<"after observable destructor";
 			//sub 析构后，observer会不会调用析构函数？
 			
 		}

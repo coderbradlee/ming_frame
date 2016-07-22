@@ -39,6 +39,10 @@ namespace test1
 			//void register1(const boost::weak_ptr<observer>& x);
 			void register1(const boost::shared_ptr<observer>& x);
 			void notify();
+			~observable()
+			{
+				LOG_INFO<<"observable destructor";
+			}
 		private:
 			mutable muduo::MutexLock m_mutex;
 			//std::vector<boost::weak_ptr<observer>> m_observers;
