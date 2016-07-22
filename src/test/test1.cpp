@@ -167,9 +167,9 @@ namespace test1
 		void test()
 		{
 			foo f1;
-			post(&f1);
+			post(f1);
 			foo f2;
-			post(&f2);
+			post(f2);
 			traverse();
 		}
 
