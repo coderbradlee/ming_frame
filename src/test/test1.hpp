@@ -103,7 +103,7 @@ namespace test1
 			void doit()
 			{
 				LOG_INFO<<"do";
-				post(this);
+				post(*this);
 			}
 		};
 		
