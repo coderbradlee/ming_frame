@@ -80,9 +80,10 @@ namespace test1
 		{
 		public:
 			boost::shared_ptr<stock> get(const string& key);
-		private:
+		
 			//static 
 			void weak_delete_stock(const boost::weak_ptr<stock_factory>& wk,stock* s);
+		private:
 			void remove_stock(stock* s);
 		private:
 			mutable muduo::MutexLock m_mutex;
