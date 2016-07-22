@@ -63,11 +63,11 @@ namespace test1
 		public:
 			stock(const string& name):m_name(name)
 			{
-				LOG_INFO<<"constructor:"<<this<<":"<<m_name;
+				LOG_INFO<<"constructor:"<<(intptr_t)this<<":"<<m_name;
 			}
 			~stock()
 			{
-				LOG_INFO<<"destructor:"<<this<<":"<<m_name;
+				LOG_INFO<<"destructor:"<<(intptr_t)this<<":"<<m_name;
 			}
 			const string get_key()const
 			{
