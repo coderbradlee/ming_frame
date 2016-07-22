@@ -33,7 +33,7 @@ namespace test1
 		class observable
 		{
 		public:
-			void register(const boost::weak_ptr<observer>& x);
+			void register1(const boost::weak_ptr<observer>& x);
 			void notify();
 		private:
 			mutable muduo::MutexLock m_mutex;

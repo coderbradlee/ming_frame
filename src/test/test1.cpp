@@ -25,11 +25,11 @@ namespace test1
 	{
 		void observer::observe(observable* s)
 		{
-			s->register(shared_from_this());
+			s->register1(shared_from_this());
 			m_subject=s;
 		}
 		
-		void observable::register(const boost::weak_ptr<observer>& x)
+		void observable::register1(const boost::weak_ptr<observer>& x)
 		{
 			m_observers.push_back(x);
 		}
