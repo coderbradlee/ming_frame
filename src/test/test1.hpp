@@ -40,8 +40,9 @@ namespace test1
 			void notify();
 		private:
 			mutable muduo::MutexLock m_mutex;
-			std::vector<boost::weak_ptr<observer>> m_observers;
-
+			//std::vector<boost::weak_ptr<observer>> m_observers;
+			std::vector<boost::shared_ptr<observer>> m_observers;
+			//换成shared_ptr observer的析构不会被调用？
 		};
 		class foo:public observer
 		{

@@ -39,7 +39,8 @@ namespace test1
 			auto it=m_observers.begin();
 			while(it!=m_observers.end())
 			{
-				boost::shared_ptr<observer> obj(it->lock());
+				//boost::shared_ptr<observer> obj(it->lock());
+				boost::shared_ptr<observer> obj=*it;
 				if(obj)
 				{
 					obj->update();
@@ -60,13 +61,17 @@ namespace test1
 		
 		void test()
 		{
-			observable sub;
 			{
-				boost::shared_ptr<foo> p(new foo());
-				p->observe(&sub);
+				observable sub;
+				{
+					boost::shared_ptr<foo> p(new foo());
+					p->observe(&sub);
+					sub.notify();
+				}
 				sub.notify();
 			}
-			sub.notify();
+			//sub 析构后，observer会不会调用析构函数？
+			
 		}
 	}
 	void test1()
