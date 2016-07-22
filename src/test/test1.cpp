@@ -95,7 +95,7 @@ namespace test1
 	
 		static void stock_factory::weak_delete_stock(const boost::weak_ptr<stock_factory>& wk,stock* s)
 		{
-			LOG_INFO<<"delete stock:"<<stock;
+			LOG_INFO<<"delete stock:"<<(size_t)stock;
 			boost::shared_ptr<stock_factory> f(wk.lock());
 			if(f)
 			{
@@ -113,7 +113,7 @@ namespace test1
 			if(s)
 			{
 				muduo::MutexLockGuard lock(m_mutex);
-				m_stocks.erase(s->key());
+				m_stocks.erase(s->get_key());
 			}
 		}
 		void testLongLifeFactory()
