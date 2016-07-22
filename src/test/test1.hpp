@@ -56,7 +56,7 @@ namespace test1
 		};
 		void test();
 	}
-	name test_weak_ptr
+	namespace test_weak_ptr
 	{
 		class stock:boost::noncopyable
 		{
