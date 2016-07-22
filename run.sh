@@ -2,5 +2,5 @@
 
 SOURCE_DIR=`pwd`
 
-cd $BUILD_DIR/build/debug/bin
+cd $SOURCE_DIR/build/debug/bin
 ./ming
