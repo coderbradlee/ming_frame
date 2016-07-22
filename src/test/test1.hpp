@@ -95,6 +95,8 @@ namespace test1
 	}
 	namespace test_using_nonrecursive_mutex
 	{
+		class foo;
+		void post(const foo& f);
 		class foo
 		{
 		public:
@@ -104,7 +106,7 @@ namespace test1
 				post(this);
 			}
 		};
-		void post(const foo& f);
+		
 		void traverse();
 
 
