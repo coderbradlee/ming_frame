@@ -44,7 +44,7 @@ namespace test1
 		{
 		public:
 			void update();
-		}
+		};
 		void test();
 	}
 	void test1();
