@@ -29,7 +29,8 @@ namespace test1
 			m_subject=s;
 		}
 		
-		void observable::register1(const boost::weak_ptr<observer>& x)
+		//void observable::register1(const boost::weak_ptr<observer>& x)
+		void observable::register1(const boost::shared_ptr<observer>& x)
 		{
 			m_observers.push_back(x);
 		}
