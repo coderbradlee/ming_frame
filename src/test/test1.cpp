@@ -76,7 +76,7 @@ namespace test1
 			
 		}
 	}
-	name test_weak_ptr
+	namespace test_weak_ptr
 	{
 		
 		boost::shared_ptr<stock> stock_factory::get(const string& key)
