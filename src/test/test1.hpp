@@ -113,6 +113,18 @@ namespace test1
 		void test();
 
 	}
+	namespace test_dead_lock
+	{
+		class request
+		{
+		public:
+			void process();
+			void print()const;
+		private:
+			mutable muduo::MutexLock m_mutex;
+		};
+		void test();
+	}
 	void test1();
 }
 #endif

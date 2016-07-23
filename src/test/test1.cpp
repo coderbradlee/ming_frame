@@ -3,7 +3,44 @@ namespace test1
 {
 	namespace test_thread_safe_counter
 	{
+		void test1()
+		{
+			//test_model_design_factory::test();
+			//test_model_design_prototype::test();
+			//test_model_design_builder::test();
+			//test_deadline_timer::test();
+			//test_json_parser::test();
+			//test_design_model_flyweight::test();
+			//test_design_model_state::test();
+			//test_design_model_composite::test();
+			//test_design_model_chainofresponsibility::test();
+			//test_design_model_visitor::test();
+			//test_design_model_interpreter::test();
+			//test_observer_thread_safe::test();
+			//test_weak_ptr::test();
+			//test_using_nonrecursive_mutex::test();
+			test_dead_lock::test();
+		}
+		namespace test_dead_lock
+		{
+			
+			void request::process()
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				LOG_INFO<<"process";
+			}
+			void request::print()
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				LOG_INFO<<"print";
+			}
 		
+			void test()
+			{
+				request r;
+				r.process();
+			}
+		}
 		int64_t counter::value()const
 		{
 			muduo::MutexLockGuard lock(m_mutex);
@@ -175,21 +212,5 @@ namespace test1
 		}
 
 	}
-	void test1()
-	{
-		//test_model_design_factory::test();
-		//test_model_design_prototype::test();
-		//test_model_design_builder::test();
-		//test_deadline_timer::test();
-		//test_json_parser::test();
-		//test_design_model_flyweight::test();
-		//test_design_model_state::test();
-		//test_design_model_composite::test();
-		//test_design_model_chainofresponsibility::test();
-		//test_design_model_visitor::test();
-		//test_design_model_interpreter::test();
-		//test_observer_thread_safe::test();
-		//test_weak_ptr::test();
-		test_using_nonrecursive_mutex::test();
-	}
+	
 }
