@@ -27,7 +27,7 @@ namespace test1
 				muduo::MutexLockGuard lo(m_mutex);
 				LOG_INFO<<"process";
 			}
-			void request::print()
+			void request::print()const
 			{
 				muduo::MutexLockGuard lo(m_mutex);
 				LOG_INFO<<"print";
@@ -41,7 +41,7 @@ namespace test1
 		}
 
 
-		
+
 	namespace test_thread_safe_counter
 	{
 
