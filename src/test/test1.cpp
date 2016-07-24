@@ -54,7 +54,7 @@ namespace test1
 				muduo::MutexLockGuard lo(m_mutex);
 				LOG_INFO<<"print";
 			}
-			void request::~request()
+			request::~request()
 			{
 				muduo::MutexLockGuard lo(m_mutex);
 				sleep(1);
