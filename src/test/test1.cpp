@@ -75,7 +75,8 @@ namespace test1
 				// r.process();
 				muduo::Thread t(thread_func);
 				t.start();
-				usleep(500*1000);
+				///usleep(5000*1000);
+				sleep(3);
 				g_inventory.print_all();
 				t.join();
 			}
