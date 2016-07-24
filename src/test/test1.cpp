@@ -69,7 +69,7 @@ namespace test1
 				request* req=new request;
 				req->process();
 				delete req;
-				g_inventory.print();
+				g_inventory.print_all();
 			}
 		}
 
