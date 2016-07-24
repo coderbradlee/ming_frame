@@ -134,6 +134,7 @@ namespace test1
 			mutable muduo::MutexLock m_mutex;
 			std::set<request*> m_requests;
 		};
+		void thread_func();
 		void test();
 	}
 	void test1();

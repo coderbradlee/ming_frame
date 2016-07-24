@@ -62,14 +62,22 @@ namespace test1
 				LOG_INFO<<"request destructor";
 			
 			}
+			void thread_func()
+			{
+				request* req=new request;
+				req->process();
+				delete req;
+				//g_inventory.print_all();
+			}
 			void test()
 			{
 				// request r;
 				// r.process();
-				request* req=new request;
-				req->process();
-				delete req;
+				muduo::Thread t(thread_func);
+				t.start();
+				usleep(500*1000);
 				g_inventory.print_all();
+				t.join();
 			}
 		}
 
