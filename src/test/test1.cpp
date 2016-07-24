@@ -26,6 +26,7 @@ namespace test1
 			{
 				muduo::MutexLockGuard lo(m_mutex);
 				LOG_INFO<<"process";
+				print();
 			}
 			void request::print()const
 			{
