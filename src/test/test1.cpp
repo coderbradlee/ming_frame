@@ -21,23 +21,55 @@ namespace test1
 		}
 		namespace test_dead_lock
 		{
-			
+			inventory g_inventory;
+			void inventory::add(request* req)
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				m_requests.insert(req);
+			}
+			void inventory::remove(request* req)
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				m_requests.erase(req);
+			}
+			void inventory::print_all()const
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				sleep(1);
+				for(auto& i:m_requests)
+				{
+					i->print();
+				}
+				LOG_INFO<<"all unlocked";
+			}
+		
 			void request::process()
 			{
 				muduo::MutexLockGuard lo(m_mutex);
 				LOG_INFO<<"process";
-				print();
+				g_inventory.add(this);
 			}
 			void request::print()const
 			{
 				muduo::MutexLockGuard lo(m_mutex);
 				LOG_INFO<<"print";
 			}
-		
+			void ~request::request()
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				sleep(1);
+				g_inventory.remove(this);
+				LOG_INFO<<"request destructor";
+			
+			}
 			void test()
 			{
-				request r;
-				r.process();
+				// request r;
+				// r.process();
+				request* req=new request;
+				req->process();
+				delete req;
+				g_inventory.print();
 			}
 		}
 

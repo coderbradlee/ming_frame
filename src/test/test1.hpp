@@ -120,8 +120,19 @@ namespace test1
 		public:
 			void process();
 			void print()const;
+			~request();
 		private:
 			mutable muduo::MutexLock m_mutex;
+		};
+		class inventory
+		{
+		public:
+			void add(request* req);
+			void remove(request* req);
+			void print_all()const;
+		private:
+			mutable muduo::MutexLock m_mutex;
+			std::set<request*> m_requests;
 		};
 		void test();
 	}
