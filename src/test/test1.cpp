@@ -1,9 +1,7 @@
 #include "test1.hpp"
 namespace test1
 {
-	namespace test_thread_safe_counter
-	{
-		void test1()
+	void test1()
 		{
 			//test_model_design_factory::test();
 			//test_model_design_prototype::test();
@@ -41,6 +39,12 @@ namespace test1
 				r.process();
 			}
 		}
+
+
+		
+	namespace test_thread_safe_counter
+	{
+
 		int64_t counter::value()const
 		{
 			muduo::MutexLockGuard lock(m_mutex);
