@@ -9,23 +9,23 @@ namespace test1
 		class calendar:boost::noncopyable
 		{
 		public:
-			virtual bool is_holiday(muduo::Date d)const=0;
+			virtual bool is_holiday(const string&)const=0;
 			virtual ~calendar(){}
 		};
 		class american_calendar:public calendar
 		{
 		public:
-			bool is_holiday(muduo::Date d)const;
+			bool is_holiday(const string&)const;
 
 		};
 		class british_calendar:public calendar
 		{
 		public:
-			bool is_holiday(muduo::Date d)const;
+			bool is_holiday(const string&)const;
 			
 		};
-		calendar& get_calendar(const string& region);
-		
+		calendar& get_calendar();
+
 		void test();
 	}
 	namespace test_thread_safe_counter
