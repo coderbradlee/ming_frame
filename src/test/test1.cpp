@@ -17,7 +17,38 @@ namespace test1
 			//test_observer_thread_safe::test();
 			//test_weak_ptr::test();
 			//test_using_nonrecursive_mutex::test();
-			test_dead_lock::test();
+			//test_dead_lock::test();
+			test_exit_thread::test();
+		}
+		namespace test_exit_thread
+		{	
+			american_calendar ac;
+			british_calendar bc;
+			bool american_calendar::is_holiday(const string& )const
+			{
+				return true;
+			}
+			bool british_calendar::is_holiday(const string&)const
+			{
+
+				return true;
+			}
+			calendar& get_calendar()
+			{
+				british_calendar* b=new british_calendar();
+				return *b;
+			}
+			
+			void test()
+			{
+				calendar& c=get_calendar();
+				exit(0);
+				if(c.is_holiday("yes"))
+				{
+					LOG_INFO<<"is_holiday";
+				}
+			}
+			
 		}
 		namespace test_dead_lock
 		{

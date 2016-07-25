@@ -4,6 +4,30 @@
 #include "../include.hpp"
 namespace test1
 {
+	namespace test_exit_thread
+	{
+		class calendar:boost::noncopyable
+		{
+		public:
+			virtual bool is_holiday(muduo::Date d)const=0;
+			virtual ~calendar(){}
+		};
+		class american_calendar:public calendar
+		{
+		public:
+			bool is_holiday(muduo::Date d)const;
+
+		};
+		class british_calendar:public calendar
+		{
+		public:
+			bool is_holiday(muduo::Date d)const;
+			
+		};
+		calendar& get_calendar(const string& region);
+		
+		void test();
+	}
 	namespace test_thread_safe_counter
 	{
 		class counter:boost::noncopyable
