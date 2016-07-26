@@ -9,7 +9,7 @@ for nosessions in 100 1000; do
     sleep 5
     echo "Bufsize: $bufsize Threads: $nothreads Sessions: $nosessions"
     ./server 0.0.0.0 55555 $nothreads $bufsize & srvpid=$!
-    ./client 127.0.0.1 55555 $nothreads $bufsize $nosessions $timeout
+    ./client 192.168.3.132 55555 $nothreads $bufsize $nosessions $timeout
     kill -9 $srvpid
   done
 done
