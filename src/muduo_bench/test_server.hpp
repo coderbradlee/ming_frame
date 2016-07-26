@@ -31,7 +31,7 @@ private:
                  muduo::Timestamp time)
     {
     	string msg(buf->retrieveAllAsString());
-    	LOG_INFO<<conn->name()<<" discards "<<msg.size()<<" "<<time.toString();
+    	LOG_INFO<<conn->name()<<" discards "<<msg.size()<<" "<<msg;
     }
 
   muduo::net::TcpServer server_;
