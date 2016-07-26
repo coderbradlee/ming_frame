@@ -85,7 +85,7 @@ class Client : boost::noncopyable
          int timeout,
          int threadCount)
     : loop_(loop),
-      threadPool_(loop),
+      threadPool_(loop,"client"),
       sessionCount_(sessionCount),
       timeout_(timeout)
   {
