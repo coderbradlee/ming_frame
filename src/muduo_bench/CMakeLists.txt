@@ -1,8 +1,8 @@
-add_executable(server ping_pong_server.cc)
+add_executable(server pingpong_server.cc)
 target_link_libraries(server muduo_net_cpp11)
 target_link_libraries(server muduo_base_cpp11)
 
 
-add_executable(client ping_pong_client.cc)
+add_executable(client pingpong_client.cc)
 target_link_libraries(client muduo_net_cpp11)
 target_link_libraries(client muduo_base_cpp11)
