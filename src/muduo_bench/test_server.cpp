@@ -32,8 +32,8 @@ int main(int argc, char* argv[])
   DiscardServer discardServer(&loop, InetAddress(2009));
   discardServer.start();
 
-  // EchoServer echoServer(&loop, InetAddress(2007));
-  // echoServer.start();
+  EchoServer echoServer(&loop, InetAddress(2007));
+  echoServer.start();
 
   // TimeServer timeServer(&loop, InetAddress(2037));
   // timeServer.start();
