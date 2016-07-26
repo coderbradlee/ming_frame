@@ -23,8 +23,8 @@ int main(int argc, char* argv[])
   LOG_INFO << "pid = " << getpid();
   EventLoop loop;  // one loop shared by multiple servers
 
-  // ChargenServer chargenServer(&loop, InetAddress(2019));
-  // chargenServer.start();
+  ChargenServer chargenServer(&loop, InetAddress(2019),true);
+  chargenServer.start();
 
   DaytimeServer daytimeServer(&loop, InetAddress(2013));
   daytimeServer.start();
