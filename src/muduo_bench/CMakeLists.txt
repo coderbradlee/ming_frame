@@ -10,3 +10,7 @@ target_link_libraries(client muduo_base_cpp11)
 add_executable(pingpong_bench pingpong_bench.cc)
 target_link_libraries(pingpong_bench muduo_net_cpp11)
 target_link_libraries(pingpong_bench muduo_base_cpp11)
+
+add_executable(test_server test_server.cpp)
+target_link_libraries(test_server muduo_net_cpp11)
+target_link_libraries(test_server muduo_base_cpp11)
