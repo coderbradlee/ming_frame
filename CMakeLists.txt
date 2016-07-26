@@ -110,3 +110,4 @@ add_subdirectory(src/go)
 add_definitions(-DMUDUO_STD_STRING)
 
 configure_file(${PROJECT_SOURCE_DIR}/config.ini  ${PROJECT_BINARY_DIR}/bin/config.ini COPYONLY)
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/bin/logs)
