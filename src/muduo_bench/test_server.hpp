@@ -36,6 +36,44 @@ private:
 
   muduo::net::TcpServer server_;
 };
+class DaytimeServer
+{
+public:
+  DaytimeServer(muduo::net::EventLoop* loop,
+             const muduo::net::InetAddress& listenAddr):server_(loop,listenAddr,"DaytimeServer")
+  {
+  	server_.setConnectionCallback(
+      boost::bind(&DaytimeServer::onConnection, this, _1));
+    server_.setMessageCallback(
+      boost::bind(&DaytimeServer::onMessage, this, _1, _2, _3));
+  }
+  void start()
+  {
+  	server_.start();
+  }
+private:
+	void onConnection(const muduo::net::TcpConnectionPtr& conn)
+	{
+		LOG_INFO<<"DaytimeServer - " << conn->peerAddress().toIpPort() << " -> "
+           << conn->localAddress().toIpPort() << " is "
+           << (conn->connected() ? "UP" : "DOWN");
+        if(conn->connected())
+        {
+        	conn->send(Timestamp::now().toFormattedString()+"\n");
+        	conn->shutdown();
+        }
+	}
+
+    void onMessage(const muduo::net::TcpConnectionPtr& conn,
+                 muduo::net::Buffer* buf,
+                 muduo::Timestamp time)
+    {
+    	string msg(buf->retrieveAllAsString());
+    	LOG_INFO<<conn->name()<<" "<<msg.length()<<" "<<msg;
+    }
+
+  muduo::net::TcpServer server_;
+};
 // RFC 868
 class TimeServer
 {

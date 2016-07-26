@@ -26,8 +26,8 @@ int main(int argc, char* argv[])
   // ChargenServer chargenServer(&loop, InetAddress(2019));
   // chargenServer.start();
 
-  // DaytimeServer daytimeServer(&loop, InetAddress(2013));
-  // daytimeServer.start();
+  DaytimeServer daytimeServer(&loop, InetAddress(2013));
+  daytimeServer.start();
 
   DiscardServer discardServer(&loop, InetAddress(2009));
   discardServer.start();
