@@ -4,6 +4,27 @@
 #include "../include.hpp"
 namespace test1
 {
+	namespace test_muduo_multithread_timer_shortcritical_section
+	{
+		class printer:boost::noncopyable
+		{
+		public:
+			printer(muduo::net::EventLoop* loop1,muduo::net::EventLoop* loop2);
+			~printer()
+			{
+				LOG_INFO<<"printer destructor";
+			}
+		private:
+			void print1();
+			void print2();
+		private:	
+			muduo::MutexLock m_mutex;		
+			muduo::net::EventLoop* m_loop1;
+			muduo::net::EventLoop* m_loop2;
+			int m_count;
+		};
+		void test();
+	}
 	namespace test_muduo_multithread_timer
 	{
 		class printer:boost::noncopyable
