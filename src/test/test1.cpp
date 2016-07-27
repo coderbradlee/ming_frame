@@ -18,7 +18,38 @@ namespace test1
 			//test_weak_ptr::test();
 			//test_using_nonrecursive_mutex::test();
 			//test_dead_lock::test();
-			test_exit_thread::test();
+			//test_exit_thread::test();
+			test_muduo_asio_timer::test();
+		}
+		namespace test_muduo_asio_timer
+		{
+			
+			printer::printer(muduo::net::EventLoop* loop):m_loop(loop),m_count(0)
+			{
+				m_loop->runAfter(1,boost::bind(&printer::print,this));
+			}
+		
+			void printer::print()
+			{
+				if(m_count<5)
+				{
+					LOG_INFO<<m_count;
+					++m_count;
+					m_loop->runAfter(1,boost::bind(&printer::print,this));
+				}
+				else
+				{
+					m_loop->quit();
+				}
+			}
+		
+			void test()
+			{
+				muduo::net::EventLoop loop;
+				printer p(&loop);
+				loop.loop();
+			}
+
 		}
 		namespace test_exit_thread
 		{	

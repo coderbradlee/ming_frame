@@ -4,6 +4,25 @@
 #include "../include.hpp"
 namespace test1
 {
+	namespace test_muduo_asio_timer
+	{
+		class printer:boost::noncopyable
+		{
+		public:
+			printer(muduo::net::EventLoop* loop);
+			~printer()
+			{
+				LOG_INFO<<"printer destructor";
+			}
+		private:
+			void print();
+		private:
+			int m_count;
+			muduo::net::EventLoop* m_loop;
+		};
+		void test();
+
+	}
 	namespace test_exit_thread
 	{
 		class calendar:boost::noncopyable
