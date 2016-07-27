@@ -26,6 +26,7 @@ namespace test1
 		}
 		namespace test_round_trip
 		{
+			using muduo::net;
 			const size_t frameLen = 2*sizeof(int64_t);
 
 			void serverConnectionCallback(const TcpConnectionPtr& conn)
