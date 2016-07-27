@@ -62,7 +62,7 @@ namespace test1
 			}
 			void echo_server::on_message(const muduo::net::TcpConnectionPtr& conn,muduo::net::Buffer* buf,muduo::Timestamp time)
 			{
-				string msg(buf->retrieveAllAsString());
+				muduo::string msg(buf->retrieveAllAsString());
 				  LOG_INFO << conn->name() << " echo " << msg.size()
 				           << " bytes at " << time.toString();
 				  conn->send(msg);
