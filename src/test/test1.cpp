@@ -21,7 +21,117 @@ namespace test1
 			//test_exit_thread::test();
 			//test_muduo_asio_timer::test();
 			//test_muduo_multithread_timer::test();
-			test_muduo_multithread_timer_shortcritical_section::test();
+			//test_muduo_multithread_timer_shortcritical_section::test();
+			test_round_trip::test();
+		}
+		namespace test_round_trip
+		{
+			const size_t frameLen = 2*sizeof(int64_t);
+
+			void serverConnectionCallback(const TcpConnectionPtr& conn)
+			{
+			  LOG_TRACE << conn->name() << " " << conn->peerAddress().toIpPort() << " -> "
+			        << conn->localAddress().toIpPort() << " is "
+			        << (conn->connected() ? "UP" : "DOWN");
+			  if (conn->connected())
+			  {
+			    conn->setTcpNoDelay(true);
+			  }
+			  else
+			  {
+			  }
+			}
+
+			void serverMessageCallback(const TcpConnectionPtr& conn,
+			                           Buffer* buffer,
+			                           muduo::Timestamp receiveTime)
+			{
+			  int64_t message[2];
+			  while (buffer->readableBytes() >= frameLen)
+			  {
+			    memcpy(message, buffer->peek(), frameLen);
+			    buffer->retrieve(frameLen);
+			    message[1] = receiveTime.microSecondsSinceEpoch();
+			    conn->send(message, sizeof message);
+			  }
+			}
+
+			void runServer(uint16_t port)
+			{
+			  EventLoop loop;
+			  TcpServer server(&loop, InetAddress(port), "ClockServer");
+			  server.setConnectionCallback(serverConnectionCallback);
+			  server.setMessageCallback(serverMessageCallback);
+			  server.start();
+			  loop.loop();
+			}
+
+			TcpConnectionPtr clientConnection;
+
+			void clientConnectionCallback(const TcpConnectionPtr& conn)
+			{
+			  LOG_TRACE << conn->localAddress().toIpPort() << " -> "
+			        << conn->peerAddress().toIpPort() << " is "
+			        << (conn->connected() ? "UP" : "DOWN");
+			  if (conn->connected())
+			  {
+			    clientConnection = conn;
+			    conn->setTcpNoDelay(true);
+			  }
+			  else
+			  {
+			    clientConnection.reset();
+			  }
+			}
+
+			void clientMessageCallback(const TcpConnectionPtr&,
+			                           Buffer* buffer,
+			                           muduo::Timestamp receiveTime)
+			{
+			  int64_t message[2];
+			  while (buffer->readableBytes() >= frameLen)
+			  {
+			    memcpy(message, buffer->peek(), frameLen);
+			    buffer->retrieve(frameLen);
+			    int64_t send = message[0];
+			    int64_t their = message[1];
+			    int64_t back = receiveTime.microSecondsSinceEpoch();
+			    int64_t mine = (back+send)/2;
+			    LOG_INFO << "round trip " << back - send
+			             << " clock error " << their - mine;
+			  }
+			}
+
+			void sendMyTime()
+			{
+			  if (clientConnection)
+			  {
+			    int64_t message[2] = { 0, 0 };
+			    message[0] = Timestamp::now().microSecondsSinceEpoch();
+			    clientConnection->send(message, sizeof message);
+			  }
+			}
+
+			void runClient(const char* ip, uint16_t port)
+			{
+			  EventLoop loop;
+			  TcpClient client(&loop, InetAddress(ip, port), "ClockClient");
+			  client.enableRetry();
+			  client.setConnectionCallback(clientConnectionCallback);
+			  client.setMessageCallback(clientMessageCallback);
+			  client.connect();
+			  loop.runEvery(0.2, sendMyTime);
+			  loop.loop();
+			}
+			void test()
+			{
+				muduo::Thread t1(boost::bind(runServer, 4321));
+				muduo::Thread t2(boost::bind(runClient, "127.0.0.1",4321));
+				t1.start();
+				t2.start();
+				t1.join();
+				t2.join();				
+			}
 		}
 		namespace test_muduo_multithread_timer_shortcritical_section
 		{

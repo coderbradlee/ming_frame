@@ -4,6 +4,27 @@
 #include "../include.hpp"
 namespace test1
 {
+	namespace test_round_trip
+	{
+		void serverConnectionCallback(const TcpConnectionPtr& conn);
+
+		void serverMessageCallback(const TcpConnectionPtr& conn,
+		                           Buffer* buffer,
+		                           muduo::Timestamp receiveTime);
+
+		void runServer(uint16_t port);
+
+		void clientConnectionCallback(const TcpConnectionPtr& conn);
+
+		void clientMessageCallback(const TcpConnectionPtr&,
+		                           Buffer* buffer,
+		                           muduo::Timestamp receiveTime);
+
+		void sendMyTime();
+
+		void runClient(const char* ip, uint16_t port);
+		void test();
+	}
 	namespace test_muduo_multithread_timer_shortcritical_section
 	{
 		class printer:boost::noncopyable

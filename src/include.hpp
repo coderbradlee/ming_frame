@@ -77,6 +77,8 @@ using namespace boost::posix_time;
 #include <muduo/net/Channel.h>
 #include <muduo/net/EventLoop.h>
 #include <muduo/net/EventLoopThread.h>
+#include <muduo/net/TcpClient.h>
+#include <muduo/net/TcpServer.h>
 #include "test/test.hpp"
 #include "test/test1.hpp"
 #include "shorturl.hpp"
