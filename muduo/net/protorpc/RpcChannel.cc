@@ -12,7 +12,7 @@
 #include <muduo/net/protorpc/rpc.pb.h>
 
 #include <google/protobuf/descriptor.h>
-
+#include <google/protobuf/stubs/callback.h>
 #include <boost/bind.hpp>
 #include <boost/scoped_ptr.hpp>
 
