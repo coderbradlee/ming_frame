@@ -4,6 +4,41 @@
 #include "../include.hpp"
 namespace test1
 {
+	namespace test_timing_wheel_idleconnection
+	{
+		class echo_server
+		{
+		public:
+			echo_server(muduo::net::EventLoop* loop,const muduo::net::InetAddress& la,int idle_seconds);
+			void start();
+		private:
+			void on_connection(const muduo::net::TcpConnectionPtr& conn);
+			void on_message(const muduo::net::TcpConnectionPtr& conn,muduo::net::Buffer* buf,muduo::Timestamp time);
+			void on_timer();
+			void dump_connection_buckets()const;
+			typedef boost::weak_ptr<muduo::net::TcpConnection> weak_tcpconnection_ptr;
+			struct entry:public muduo::copyable
+			{
+				explicit entry(const weak_tcpconnection_ptr& w):m_weak_conn(w){}
+				~entry()
+				{
+					muduo::net::TcpConnectionPtr conn=m_weak_conn.lock();
+					if(conn)
+					{
+						conn->shutdown();
+					}
+				}
+				weak_tcpconnection_ptr m_weak_conn;
+			};
+			typedef boost::shared_ptr<entry> entry_ptr;
+			typedef boost::weak_ptr<entry> weak_entry_ptr;
+			typedef boost::unordered_set<entry_ptr> bucket;
+			typedef boost::circular_buffer<bucket> weak_connection_list;
+			muduo::net::TcpServer m_server;
+			weak_connection_list m_connection_buckets;
+		};
+		void test();
+	}
 	namespace test_round_trip
 	{
 		typedef boost::shared_ptr<muduo::net::TcpConnection> TcpConnectionPtr;

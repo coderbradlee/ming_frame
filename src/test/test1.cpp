@@ -22,7 +22,96 @@ namespace test1
 			//test_muduo_asio_timer::test();
 			//test_muduo_multithread_timer::test();
 			//test_muduo_multithread_timer_shortcritical_section::test();
-			test_round_trip::test();
+			//test_round_trip::test();
+			test_timing_wheel_idleconnection::test();
+		}
+		namespace test_timing_wheel_idleconnection
+		{
+			
+			echo_server::echo_server(muduo::net::EventLoop* loop,const muduo::net::InetAddress& la,int idle_seconds):m_server(loop,la,"echo_server"),m_connection_buckets(idle_seconds)
+			{
+				m_server.setConnectionCallback(boost::bind(&echo_server::on_connection,this,_1));
+				m_server.setMessageCallback(boost::bind(&echo_server::on_message,this,_1,_2._3));
+				loop->runEvery(1,boost::bind(&echo_server::on_timer,this));
+				m_connection_buckets.resize(idle_seconds);
+				dump_connection_buckets();
+			}
+			void echo_server::start()
+			{
+				m_server.start();
+			}
+		
+			void echo_server::on_connection(const muduo::net::TcpConnectionPtr& conn)
+			{
+				LOG_INFO<< "EchoServer - " << conn->peerAddress().toIpPort() << " -> "<< conn->localAddress().toIpPort() << " is "<< (conn->connected() ? "UP" : "DOWN");
+				if(conn->connected())
+				{
+					entry_ptr en(new entry(conn));
+					m_connection_buckets.back().insert(en);
+					dump_connection_buckets();
+					weak_entry_ptr we(en);
+					conn->setContext(we);
+				}
+				else
+				{
+					weak_entry_ptr we(boost::any_cast<weak_entry_ptr>(conn->getContext()));
+					LOG_INFO<<we.use_count();
+				}
+				
+			}
+			void echo_server::on_message(const muduo::net::TcpConnectionPtr& conn,muduo::net::Buffer* buf,muduo::Timestamp time)
+			{
+				string msg(buf->retrieveAllAsString());
+				  LOG_INFO << conn->name() << " echo " << msg.size()
+				           << " bytes at " << time.toString();
+				  conn->send(msg);
+
+				  assert(!conn->getContext().empty());
+				  WeakEntryPtr weakEntry(boost::any_cast<WeakEntryPtr>(conn->getContext()));
+				  EntryPtr entry(weakEntry.lock());
+				  if (entry)
+				  {
+				    connectionBuckets_.back().insert(entry);
+				    dumpConnectionBuckets();
+				  }
+			}
+			void echo_server::on_timer()
+			{
+			  connectionBuckets_.push_back(Bucket());
+			  dumpConnectionBuckets();
+			}
+			void echo_server::dump_connection_buckets()const
+			{
+			  LOG_INFO << "size = " << connectionBuckets_.size();
+			  int idx = 0;
+			  for (WeakConnectionList::const_iterator bucketI = connectionBuckets_.begin();
+			      bucketI != connectionBuckets_.end();
+			      ++bucketI, ++idx)
+			  {
+			    const Bucket& bucket = *bucketI;
+			    printf("[%d] len = %zd : ", idx, bucket.size());
+			    for (Bucket::const_iterator it = bucket.begin();
+			        it != bucket.end();
+			        ++it)
+			    {
+			      bool connectionDead = (*it)->weakConn_.expired();
+			      printf("%p(%ld)%s, ", get_pointer(*it), it->use_count(),
+			          connectionDead ? " DEAD" : "");
+			    }
+			    puts("");
+			  }
+			}
+			void test()
+			{
+				EventLoop loop;
+			  InetAddress listenAddr(2007);
+			  int idleSeconds = 10;
+			  
+			  LOG_INFO << "pid = " << getpid() << ", idle seconds = " << idleSeconds;
+			  EchoServer server(&loop, listenAddr, idleSeconds);
+			  server.start();
+			  loop.loop();
+			}
 		}
 		namespace test_round_trip
 		{
