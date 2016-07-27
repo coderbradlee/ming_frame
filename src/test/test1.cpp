@@ -27,7 +27,8 @@ namespace test1
 		}
 		namespace test_timing_wheel_idleconnection
 		{
-			
+			using namespace muduo;
+			using namespace muduo::net;
 			echo_server::echo_server(muduo::net::EventLoop* loop,const muduo::net::InetAddress& la,int idle_seconds):m_server(loop,la,"echo_server"),m_connection_buckets(idle_seconds)
 			{
 				m_server.setConnectionCallback(boost::bind(&echo_server::on_connection,this,_1));
@@ -108,7 +109,7 @@ namespace test1
 			  int idleSeconds = 10;
 			  
 			  LOG_INFO << "pid = " << getpid() << ", idle seconds = " << idleSeconds;
-			  EchoServer server(&loop, listenAddr, idleSeconds);
+			  echo_server server(&loop, listenAddr, idleSeconds);
 			  server.start();
 			  loop.loop();
 			}
