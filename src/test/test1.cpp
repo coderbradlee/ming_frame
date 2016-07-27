@@ -69,10 +69,10 @@ namespace test1
 
 				  assert(!conn->getContext().empty());
 				  weak_entry_ptr weakEntry(boost::any_cast<weak_entry_ptr>(conn->getContext()));
-				  entry_ptr entry(weakEntry.lock());
-				  if (entry)
+				  entry_ptr entrys(weakEntry.lock());
+				  if (entrys)
 				  {
-				    m_connection_buckets.back().insert(entry);
+				    m_connection_buckets.back().insert(entrys);
 				    dumpConnectionBuckets();
 				  }
 			}
