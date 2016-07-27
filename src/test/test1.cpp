@@ -43,7 +43,7 @@ namespace test1
 			}
 
 			void serverMessageCallback(const TcpConnectionPtr& conn,
-			                           Buffer* buffer,
+			                           muduo::net::Buffer* buffer,
 			                           muduo::Timestamp receiveTime)
 			{
 			  int64_t message[2];
@@ -85,7 +85,7 @@ namespace test1
 			}
 
 			void clientMessageCallback(const TcpConnectionPtr&,
-			                           Buffer* buffer,
+			                           muduo::net::Buffer* buffer,
 			                           muduo::Timestamp receiveTime)
 			{
 			  int64_t message[2];

@@ -6,6 +6,7 @@ namespace test1
 {
 	namespace test_round_trip
 	{
+		typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
 		void serverConnectionCallback(const TcpConnectionPtr& conn);
 
 		void serverMessageCallback(const TcpConnectionPtr& conn,
