@@ -139,7 +139,7 @@ void RpcChannel::onRpcMessage(const TcpConnectionPtr& conn,
             // response is deleted in doneCallback
             int64_t id = message.id();
             service->CallMethod(method, NULL, get_pointer(request), response,
-                                NewCallback(this, &RpcChannel::doneCallback, response, id));
+                                NewCallback<RpcChannel,google::protobuf::Message*,int64_t>(this, &RpcChannel::doneCallback, response, id));
             error = NO_ERROR;
           }
           else
