@@ -16,9 +16,9 @@ namespace test1
 			}
 		private:
 			void print();
-		private:
-			int m_count;
+		private:			
 			muduo::net::EventLoop* m_loop;
+			int m_count;
 		};
 		void test();
 
