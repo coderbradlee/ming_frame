@@ -22,7 +22,7 @@ namespace test1
 		                           muduo::Timestamp receiveTime);
 
 		void sendMyTime();
-
+		void testHash();
 		void runClient(const char* ip, uint16_t port);
 		void test();
 	}

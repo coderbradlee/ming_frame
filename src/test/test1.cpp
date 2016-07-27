@@ -125,14 +125,29 @@ namespace test1
 			  loop.runEvery(0.2, sendMyTime);
 			  loop.loop();
 			}
+			void testHash()
+			{
+			  boost::hash<boost::shared_ptr<int> > h;
+			  boost::shared_ptr<int> x1(new int(10));
+			  boost::shared_ptr<int> x2(new int(10));
+			  h(x1);
+			  assert(h(x1) != h(x2));
+			  x1 = x2;
+			  assert(h(x1) == h(x2));
+			  x1.reset();
+			  assert(h(x1) != h(x2));
+			  x2.reset();
+			  assert(h(x1) == h(x2));
+			}
 			void test()
 			{
-				muduo::Thread t1(boost::bind(runServer, 4321));
-				muduo::Thread t2(boost::bind(runClient, "127.0.0.1",4321));
-				t1.start();
-				t2.start();
-				t1.join();
-				t2.join();				
+				// muduo::Thread t1(boost::bind(runServer, 4321));
+				// muduo::Thread t2(boost::bind(runClient, "127.0.0.1",4321));
+				// t1.start();
+				// t2.start();
+				// t1.join();
+				// t2.join();	
+				testHash();			
 			}
 		}
 		namespace test_muduo_multithread_timer_shortcritical_section

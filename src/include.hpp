@@ -56,6 +56,9 @@ using namespace boost::asio;
 using namespace std;
 using namespace boost::property_tree;
 using namespace boost::posix_time;
+#include <boost/circular_buffer.hpp>
+#include <boost/unordered_set.hpp>
+#include <boost/version.hpp>
 #include <limits.h>
 #include <sstream>
 #include <boost/assign/list_of.hpp>
