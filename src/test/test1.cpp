@@ -68,31 +68,31 @@ namespace test1
 				  conn->send(msg);
 
 				  assert(!conn->getContext().empty());
-				  WeakEntryPtr weakEntry(boost::any_cast<WeakEntryPtr>(conn->getContext()));
-				  EntryPtr entry(weakEntry.lock());
+				  weak_entry_ptr weakEntry(boost::any_cast<weak_entry_ptr>(conn->getContext()));
+				  entry_ptr entry(weakEntry.lock());
 				  if (entry)
 				  {
-				    connectionBuckets_.back().insert(entry);
+				    m_connection_buckets.back().insert(entry);
 				    dumpConnectionBuckets();
 				  }
 			}
 			void echo_server::on_timer()
 			{
-			  connectionBuckets_.push_back(Bucket());
+			  m_connection_buckets.push_back(bucket());
 			  dumpConnectionBuckets();
 			}
 			void echo_server::dump_connection_buckets()const
 			{
-			  LOG_INFO << "size = " << connectionBuckets_.size();
+			  LOG_INFO << "size = " << m_connection_buckets.size();
 			  int idx = 0;
-			  for (WeakConnectionList::const_iterator bucketI = connectionBuckets_.begin();
-			      bucketI != connectionBuckets_.end();
+			  for (weak_connection_list::const_iterator bucketI = m_connection_buckets.begin();
+			      bucketI != m_connection_buckets.end();
 			      ++bucketI, ++idx)
 			  {
-			    const Bucket& bucket = *bucketI;
-			    printf("[%d] len = %zd : ", idx, bucket.size());
-			    for (Bucket::const_iterator it = bucket.begin();
-			        it != bucket.end();
+			    const bucket& bu = *bucketI;
+			    printf("[%d] len = %zd : ", idx, bu.size());
+			    for (bucket::const_iterator it = bu.begin();
+			        it != bu.end();
 			        ++it)
 			    {
 			      bool connectionDead = (*it)->weakConn_.expired();
