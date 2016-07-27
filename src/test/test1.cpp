@@ -32,7 +32,7 @@ namespace test1
 			echo_server::echo_server(muduo::net::EventLoop* loop,const muduo::net::InetAddress& la,int idle_seconds):m_server(loop,la,"echo_server"),m_connection_buckets(idle_seconds)
 			{
 				m_server.setConnectionCallback(boost::bind(&echo_server::on_connection,this,_1));
-				m_server.setMessageCallback(boost::bind(&echo_server::on_message,this,_1,_2._3));
+				m_server.setMessageCallback(boost::bind(&echo_server::on_message,this,_1,_2,_3));
 				loop->runEvery(1,boost::bind(&echo_server::on_timer,this));
 				m_connection_buckets.resize(idle_seconds);
 				dump_connection_buckets();
