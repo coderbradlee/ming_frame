@@ -10,7 +10,7 @@ namespace test1
 		void serverConnectionCallback(const TcpConnectionPtr& conn);
 
 		void serverMessageCallback(const TcpConnectionPtr& conn,
-		                           Buffer* buffer,
+		                           muduo::net::Buffer* buffer,
 		                           muduo::Timestamp receiveTime);
 
 		void runServer(uint16_t port);
@@ -18,7 +18,7 @@ namespace test1
 		void clientConnectionCallback(const TcpConnectionPtr& conn);
 
 		void clientMessageCallback(const TcpConnectionPtr&,
-		                           Buffer* buffer,
+		                           muduo::net::Buffer* buffer,
 		                           muduo::Timestamp receiveTime);
 
 		void sendMyTime();
