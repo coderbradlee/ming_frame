@@ -19,7 +19,56 @@ namespace test1
 			//test_using_nonrecursive_mutex::test();
 			//test_dead_lock::test();
 			//test_exit_thread::test();
-			test_muduo_asio_timer::test();
+			//test_muduo_asio_timer::test();
+			test_muduo_multithread_timer::test();
+		}
+		namespace test_muduo_multithread_timer
+		{
+			
+			printer::printer(muduo::net::EventLoop* loop1,muduo::net::EventLoop* loop2):m_loop1(loop1),m_loop2(loop2),m_count(0)
+			{
+				m_loop1->runAfter(1,boost::bind(&printer::print1,this));
+				m_loop2->runAfter(1,boost::bind(&printer::print2,this));
+			}
+			
+			void printer::print1()
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				if(m_count<10)
+				{
+					LOG_INFO<<m_count;
+					++m_count;
+					m_loop1->runAfter(1,boost::bind(&printer::print1,this));
+				}
+				else
+				{
+					m_loop1->quit();
+				}
+			}
+			void printer::print2()
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				if(m_count<10)
+				{
+					LOG_INFO<<m_count;
+					++m_count;
+					m_loop2->runAfter(1,boost::bind(&printer::print2,this));
+				}
+				else
+				{
+					m_loop2->quit();
+				}
+			}
+		
+			void test()
+			{
+				boost::scoped_ptr<printer> p;
+				muduo::net::EventLoop loop;
+				muduo::net::EventLoopThread loop_thread;
+				muduo::net::EventLoop* loop2=loop_thread.startLoop();
+				p.reset(new printer(&loop,loop2));
+				loop.loop();
+			}
 		}
 		namespace test_muduo_asio_timer
 		{
