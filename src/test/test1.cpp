@@ -50,7 +50,7 @@ namespace test1
 				}
 				if(!quit)
 				{
-					LOG_INFO<<m_count;
+					LOG_INFO<<count;
 					m_loop1->runAfter(1,boost::bind(&printer::print1,this));
 				}
 				else
@@ -76,7 +76,7 @@ namespace test1
 				}
 				if(!quit)
 				{
-					LOG_INFO<<m_count;
+					LOG_INFO<<count;
 					m_loop2->runAfter(1,boost::bind(&printer::print2,this));
 				}
 				else
