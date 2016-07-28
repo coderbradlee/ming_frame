@@ -2,6 +2,9 @@
 #include "fastcgi/fastcgi_resource.h"
 int main()
 {
+  using std::string;
+  using std::cout;
+  using std::endl;
   try
   {
     init_log();

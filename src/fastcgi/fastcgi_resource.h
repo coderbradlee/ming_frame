@@ -12,7 +12,7 @@
 #include "../log.hpp"
 #include "../mysql_connect.hpp"
 using namespace muduo::net;
-
+using muduo::string;
 const muduo::string kPath = "/sudoku/";
 
 void onRequest(const TcpConnectionPtr& conn,
