@@ -8,19 +8,19 @@ enum parse_result
 {
    k_error,k_success,k_continue
 };
-parse_result parse_message(muduo::net::Buffer* buf,string* cmd,string* topic,string* content);
+parse_result parse_message(muduo::net::Buffer* buf,muduo::string* cmd,muduo::string* topic,muduo::string* content);
 class topic:public muduo::copyable
 {
 public:
-  topic(const string& topic);
+  topic(const muduo::string& topic);
   void add(const TcpConnectionPtr& conn);
   void remove(const TcpConnectionPtr& conn);
-  void publish(const string& content,Timestamp time);
+  void publish(const muduo::string& content,Timestamp time);
 private:
-  string make_message();
+  muduo::string make_message();
 private:
-  string m_topic;
-  string m_content;
+  muduo::string m_topic;
+  muduo::string m_content;
   Timestamp m_last_pubtime;
   std::set<TcpConnectionPtr> m_audiences;
 };
@@ -33,13 +33,13 @@ private:
   void on_connection(const TcpConnectionPtr& conn);
   void on_message(const TcpConnectionPtr&conn,muduo::net::Buffer* buf,Timestamp receive_time);
   void time_publish();
-  void subscribe(const TcpConnectionPtr& conn,const string& topic);
-  void unsubscribe(const TcpConnectionPtr&conn,const string& topic);
-  void publish(const string& source,const string& topic,const string& content,Timestamp time);
-  topic& get_topic(const string& topic);
+  void subscribe(const TcpConnectionPtr& conn,const muduo::string& topic);
+  void unsubscribe(const TcpConnectionPtr&conn,const muduo::string& topic);
+  void publish(const muduo::string& source,const muduo::string& topic,const muduo::string& content,Timestamp time);
+  topic& get_topic(const muduo::string& topic);
 private:
   EventLoop* m_loop;
   TcpServer m_server;
-  std::map<string,topic> m_topics;
+  std::map<muduo::string,topic> m_topics;
 };
 #endif
