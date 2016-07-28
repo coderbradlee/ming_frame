@@ -22,7 +22,7 @@ class pubsubclient:boost::noncopyable
 {
 public:
   typedef boost::function<void(pubsubclient*)> connection_callback;
-  typedef boost::function<void (const muduo::string& topic,const muduo::string& content,Timestamp)> subscribe_callback;
+  typedef boost::function<void (const muduo::string& topic,const muduo::string& content,muduo::Timestamp)> subscribe_callback;
   pubsubclient(EventLoop* loop,const InetAddress& hub,const muduo::string& name);
   void start();
   void stop();
@@ -36,7 +36,7 @@ public:
   bool publish(const muduo::string& topic,const muduo::string& content);
 private:
   void on_connection(const TcpConnectionPtr& conn);
-  void on_message(const TcpConnectionPtr& conn,Buffer* buf,Timestamp receive);
+  void on_message(const TcpConnectionPtr& conn,Buffer* buf,muduo::Timestamp receive);
   bool send(const muduo::string& message);
 private:
   TcpClient m_client;
