@@ -35,12 +35,12 @@ public:
   void unsubscribe(const muduo::string& topic);
   bool publish(const muduo::string& topic,const muduo::string& content);
 private:
-  void on_connection(const TcpConnectionPtr& conn);
-  void on_message(const TcpConnectionPtr& conn,muduo::net::Buffer* buf,muduo::Timestamp receive);
+  void on_connection(const muduo::net::TcpConnectionPtr& conn);
+  void on_message(const muduo::net::TcpConnectionPtr& conn,muduo::net::Buffer* buf,muduo::Timestamp receive);
   bool send(const muduo::string& message);
 private:
   TcpClient m_client;
-  TcpConnectionPtr m_conn;
+  muduo::net::TcpConnectionPtr m_conn;
   connection_callback m_connection_callback;
   subscribe_callback m_subscribe_callback;
 };
