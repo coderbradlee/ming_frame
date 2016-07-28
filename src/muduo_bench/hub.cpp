@@ -124,7 +124,7 @@ void hub::on_message(const TcpConnectionPtr& conn,Buffer* buf,Timestamp receive_
     muduo::string cmd;
     muduo::string topics;
     muduo::string content;
-    result=parse_result(buf,&cmd,&topic,&content);
+    result=parse_result(buf,&cmd,&topics,&content);
     if(result==k_success)
     {
       if(cmd=="pub")
