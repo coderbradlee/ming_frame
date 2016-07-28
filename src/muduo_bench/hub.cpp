@@ -16,7 +16,7 @@
 #include "hub.hpp"
 using namespace muduo;
 using namespace muduo::net;
-using muduo::string;
+using std::string;
 
 parse_result parse_message(Buffer* buf,string* cmd,string* topics,string* content)
 {
