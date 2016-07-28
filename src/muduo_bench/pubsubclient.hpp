@@ -39,7 +39,7 @@ private:
   void on_message(const muduo::net::TcpConnectionPtr& conn,muduo::net::Buffer* buf,muduo::Timestamp receive);
   bool send(const muduo::string& message);
 private:
-  TcpClient m_client;
+  muduo::net::TcpClient m_client;
   muduo::net::TcpConnectionPtr m_conn;
   connection_callback m_connection_callback;
   subscribe_callback m_subscribe_callback;
