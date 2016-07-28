@@ -2,6 +2,7 @@
 namespace test1
 {
 	using namespace boost::posix_time;
+	using std::string;
 	void test1()
 		{
 			//test_model_design_factory::test();
