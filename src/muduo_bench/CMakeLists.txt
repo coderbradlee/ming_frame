@@ -18,3 +18,7 @@
 #add_executable(file_transfer file_transfer.cpp)
 #target_link_libraries(file_transfer muduo_net_cpp11)
 #target_link_libraries(file_transfer muduo_base_cpp11)
+
+add_executable(hub hub.cpp)
+target_link_libraries(hub muduo_net_cpp11)
+target_link_libraries(hub muduo_base_cpp11)
