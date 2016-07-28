@@ -175,7 +175,7 @@ void hub::publish(const string&,const string& topics,const string& content,Times
 {
   get_topic(topics).publish(content,time);
 }
-topic& get_topic(const string& to)
+topic& hub::get_topic(const string& to)
 {
   auto it=m_topics.find(to);
   if(it==m_topics.end())
@@ -187,7 +187,7 @@ topic& get_topic(const string& to)
 int main()
 {
   EventLoop loop;
-  hub server(&loop,12345);
+  hub server(&loop,InetAddress(12345));
   server.start();
   loop.loop();
 }
