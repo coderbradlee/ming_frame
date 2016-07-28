@@ -19,7 +19,7 @@ using namespace muduo::net;
 using muduo::string;
 
 
-
+typedef std::set<string> ConnectionSubscription;
 parse_result parse_message(Buffer* buf,muduo::string* cmd,muduo::string* topics,muduo::string* content)
 {
   parse_result result=k_error;
