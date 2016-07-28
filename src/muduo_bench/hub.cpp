@@ -43,7 +43,7 @@ parse_result parse_message(Buffer* buf,muduo::string* cmd,muduo::string* topics,
         }
         else
         {
-          result=k_continue
+          result=k_continue;
         }
       }
       else
@@ -63,7 +63,7 @@ parse_result parse_message(Buffer* buf,muduo::string* cmd,muduo::string* topics,
   }
   return result;
 }
-topic::topic(const muduo::string& topic):m_topic(topic)
+topic::topic(const muduo::string& topics):m_topic(topics)
 {}
 void topic::add(const TcpConnectionPtr& conn)
 {

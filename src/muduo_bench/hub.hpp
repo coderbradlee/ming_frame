@@ -13,7 +13,7 @@ parse_result parse_message(muduo::net::Buffer* buf,muduo::string* cmd,muduo::str
 class topic:public muduo::copyable
 {
 public:
-  topic(const muduo::string& topic);
+  topic(const muduo::string& topics);
   void add(const muduo::net::TcpConnectionPtr& conn);
   void remove(const muduo::net::TcpConnectionPtr& conn);
   void publish(const muduo::string& content,muduo::Timestamp time);
