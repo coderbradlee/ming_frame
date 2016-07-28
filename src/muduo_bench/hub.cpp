@@ -20,7 +20,7 @@ using muduo::string;
 
 
 
-parse_result parse_message(Buffer* buf,string* cmd,string* topics,string* content)
+parse_result parse_message(Buffer* buf,muduo::string* cmd,muduo::string* topics,muduo::string* content)
 {
   parse_result result=k_error;
   const char* crlf=buf->findCRLF();
@@ -63,7 +63,7 @@ parse_result parse_message(Buffer* buf,string* cmd,string* topics,string* conten
   }
   return result;
 }
-topic::topic(const string& topic):m_topic(topic)
+topic::topic(const muduo::string& topic):m_topic(topic)
 {}
 void topic::add(const TcpConnectionPtr& conn)
 {
@@ -77,17 +77,17 @@ void topic::remove(const TcpConnectionPtr& conn)
 {
   m_audiences.erase(conn);
 }
-void topic::publish(const string& content,Timestamp time)
+void topic::publish(const muduo::string& content,Timestamp time)
 {
   m_content=content;
   m_last_pubtime=time;
-  string mess=make_message();
+  muduo::string mess=make_message();
   for(auto& i:m_audiences)
   {
     i->send(mess);
   }
 }
-string topic::make_message()
+muduo::string topic::make_message()
 {
   return "pub "+m_topic+"\r\n"+m_content+"\r\n";
 }
@@ -121,9 +121,9 @@ void hub::on_message(const TcpConnectionPtr& conn,Buffer* buf,Timestamp receive_
   parse_result result=k_success;
   while(result==k_success)
   {
-    string cmd;
-    string topics;
-    string content;
+    muduo::string cmd;
+    muduo::string topics;
+    muduo::string content;
     result=parse_result(buf,&cmd,&topic,&content);
     if(result==k_success)
     {
@@ -158,13 +158,13 @@ void hub::time_publish()
   Timestamp now=Timestamp::now();
   publish("internal","utc_time",now.toFormattedString(),now);
 }
-void hub::subscribe(const TcpConnectionPtr& conn,const string& topics)
+void hub::subscribe(const TcpConnectionPtr& conn,const muduo::string& topics)
 {
   ConnectionSubscription* conn_sub=boost::any_cast<ConnectionSubscription>(conn->getMutableContext());
   conn_sub->insert(topics);
   get_topic(topics).add(conn);
 }
-void hub::unsubscribe(const TcpConnectionPtr& conn,const string& topics)
+void hub::unsubscribe(const TcpConnectionPtr& conn,const muduo::string& topics)
 {
   LOG_INFO << conn->name() << " unsubscribes " << topics;
     get_topic(topics).remove(conn);
@@ -173,11 +173,11 @@ void hub::unsubscribe(const TcpConnectionPtr& conn,const string& topics)
       = boost::any_cast<ConnectionSubscription>(conn->getMutableContext());
     connSub->erase(topics);
 }
-void hub::publish(const string&,const string& topics,const string& content,Timestamp time)
+void hub::publish(const muduo::string&,const muduo::string& topics,const muduo::string& content,Timestamp time)
 {
   get_topic(topics).publish(content,time);
 }
-topic& hub::get_topic(const string& to)
+topic& hub::get_topic(const muduo::string& to)
 {
   auto it=m_topics.find(to);
   if(it==m_topics.end())
