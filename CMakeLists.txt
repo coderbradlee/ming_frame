@@ -10,7 +10,7 @@ project(muduo C CXX)
 #add_custom_target(muduo C CXX
 #    COMMAND sh -c 'cd ${CMAKE_SOURCE_DIR}/libmicrohttpd && configure&&make'
 #)
-add_custom_command(
+add_custom_command(OUTPUT ""
   COMMAND cd ${CMAKE_SOURCE_DIR}/libmicrohttpd && configure&&make
  )
 
