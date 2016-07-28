@@ -34,7 +34,7 @@ namespace test1
 				m_server.setConnectionCallback(boost::bind(&echo_server::on_connection,this,_1));
 				m_server.setMessageCallback(boost::bind(&echo_server::on_message,this,_1,_2,_3));
 				loop->runEvery(1,boost::bind(&echo_server::on_timer,this));
-				m_connection_buckets.resize(idle_seconds);
+				//m_connection_buckets.resize(idle_seconds);
 				dump_connection_buckets();
 			}
 			void echo_server::start()
