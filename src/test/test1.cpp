@@ -1,6 +1,7 @@
 #include "test1.hpp"
 namespace test1
 {
+	using namespace boost::posix_time;
 	void test1()
 		{
 			//test_model_design_factory::test();
