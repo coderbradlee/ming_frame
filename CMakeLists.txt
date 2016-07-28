@@ -5,12 +5,9 @@ cmake_minimum_required(VERSION 2.8)
 #set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 #set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
-
-
-
 project(muduo C CXX)
 
-add_custom_target(muduo
+add_custom_target(muduo C CXX
     COMMAND sh -c 'cd ${CMAKE_SOURCE_DIR}/libmicrohttpd && configure&&make'
 )
 
