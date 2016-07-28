@@ -4,7 +4,7 @@
 #include <muduo/base/Types.h>
 #include <muduo/net/Buffer.h>
 #include <boost/noncopyable.hpp>
-
+#include <muduo/net/TcpClient.h>
 #include <set>
 #include <boost/any.hpp>
 enum parse_result
