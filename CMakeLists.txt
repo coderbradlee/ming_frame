@@ -1,6 +1,19 @@
 cmake_minimum_required(VERSION 2.8)
 
+#project(libmicrohttpd-makefile)
+
+#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+#set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+
+
+
+
 project(muduo C CXX)
+
+add_custom_target(muduo
+    COMMAND sh -c 'cd ${CMAKE_SOURCE_DIR}/libmicrohttpd && configure&&make'
+)
+
 
 enable_testing()
 
@@ -107,6 +120,7 @@ add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(src)
 add_subdirectory(src/go)
+add_subdirectory(libmicrohttpd/src)
 add_definitions(-DMUDUO_STD_STRING)
 
 configure_file(${PROJECT_SOURCE_DIR}/config.ini  ${PROJECT_BINARY_DIR}/bin/config.ini COPYONLY)

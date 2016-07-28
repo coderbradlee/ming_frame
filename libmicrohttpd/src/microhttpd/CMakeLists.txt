@@ -1,0 +1,53 @@
+
+
+#if(CURL_FOUND)
+#  add_subdirectory(curl)
+#else()
+#  add_subdirectory(curl EXCLUDE_FROM_ALL)
+#endif()
+add_library(microhttpd config.cpp)
+target_link_libraries(ming_config muduo_net)
+
+
+
+#set(SRC_LIST log.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc  config.cpp main.cpp)
+#set(SRC_LIST config.cpp log.cpp sudoku/sudoku.cc mysql_connect.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc test/test.cpp test/test1.cpp shorturl.cpp main.cpp)
+
+
+set(SRC_LIST config.cpp log.cpp test/test.cpp test/test1.cpp main.cpp)
+
+add_executable(ming ${SRC_LIST})
+
+#file(WRITE ${PROJECT_SOURCE_DIR}/config.ini "${PROJECT_BIN_DIR}/bin")
+
+
+
+#install(FILES ${PROJECT_SOURCE_DIR}/config.ini DESTINATION "/etc/ld.so.conf.d")
+#install(TARGETS ${TARGET} LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
+#install(DIRECTORY libgonet/ DESTINATION "include/libgonet" FILES_MATCHING PATTERN "*.h")
+
+#target_link_libraries(ming muduo_base)
+#target_link_libraries(ming muduo_net)
+target_link_libraries(ming muduo_net_cpp11)
+target_link_libraries(ming muduo_base_cpp11)
+target_link_libraries(ming muduo_http)
+target_link_libraries(ming boost_system)
+target_link_libraries(ming ssl)
+target_link_libraries(ming mysqlcppconn)
+target_link_libraries(ming boost_program_options) 
+target_link_libraries(ming boost_filesystem) 
+target_link_libraries(ming boost_coroutine) 
+target_link_libraries(ming boost_thread) 
+target_link_libraries(ming pthread) 
+target_link_libraries(ming boost_context) 
+target_link_libraries(ming boost_date_time) 
+target_link_libraries(ming crypto) 
+target_link_libraries(ming boost_regex) 
+target_link_libraries(ming boost_timer) 
+target_link_libraries(ming boost_signals) 
+target_link_libraries(ming boost_locale)
+#target_link_libraries(ming libgo)
+#target_link_libraries(ming libgo_main)
+#target_link_libraries(ming libgonet)
+set_target_properties(ming PROPERTIES COMPILE_FLAGS "-std=c++14")
+add_definitions(-DMING_DEBUG)
