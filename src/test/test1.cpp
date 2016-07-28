@@ -73,13 +73,13 @@ namespace test1
 				  if (entrys)
 				  {
 				    m_connection_buckets.back().insert(entrys);
-				    dumpConnectionBuckets();
+				    dump_connection_buckets();
 				  }
 			}
 			void echo_server::on_timer()
 			{
 			  m_connection_buckets.push_back(bucket());
-			  dumpConnectionBuckets();
+			  dump_connection_buckets();
 			}
 			void echo_server::dump_connection_buckets()const
 			{
