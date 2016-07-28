@@ -3,6 +3,9 @@ namespace test1
 {
 	using namespace boost::posix_time;
 	using std::string;
+	using std::cout;
+	using std::endl;
+	using std::thread;
 	namespace test_model_design_factory
 	{ 
 		
