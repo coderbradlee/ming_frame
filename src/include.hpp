@@ -11,6 +11,7 @@
 #include <boost/regex.hpp>
 #include <boost/bind.hpp>
 #include <list>
+#include <set>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/lexical_cast.hpp>

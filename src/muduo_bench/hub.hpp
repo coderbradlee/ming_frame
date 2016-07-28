@@ -39,8 +39,8 @@ private:
   void publish(const muduo::string& source,const muduo::string& topic,const muduo::string& content,muduo::Timestamp time);
   topic& get_topic(const muduo::string& topic);
 private:
-  EventLoop* m_loop;
-  TcpServer m_server;
+  muduo::net::EventLoop* m_loop;
+  muduo::net::TcpServer m_server;
   std::map<muduo::string,topic> m_topics;
 };
 #endif
