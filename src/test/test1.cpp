@@ -95,7 +95,7 @@ namespace test1
 			        it != bu.end();
 			        ++it)
 			    {
-			      bool connectionDead = (*it)->weakConn_.expired();
+			      bool connectionDead = (*it)->m_weak_conn.expired();
 			      printf("%p(%ld)%s, ", get_pointer(*it), it->use_count(),
 			          connectionDead ? " DEAD" : "");
 			    }
