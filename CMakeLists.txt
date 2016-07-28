@@ -7,10 +7,12 @@ cmake_minimum_required(VERSION 2.8)
 
 project(muduo C CXX)
 
-add_custom_target(muduo C CXX
-    COMMAND sh -c 'cd ${CMAKE_SOURCE_DIR}/libmicrohttpd && configure&&make'
-)
-
+#add_custom_target(muduo C CXX
+#    COMMAND sh -c 'cd ${CMAKE_SOURCE_DIR}/libmicrohttpd && configure&&make'
+#)
+add_custom_command(
+  COMMAND cd ${CMAKE_SOURCE_DIR}/libmicrohttpd && configure&&make
+ )
 
 enable_testing()
 
