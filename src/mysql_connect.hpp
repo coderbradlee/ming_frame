@@ -10,18 +10,18 @@
 #include "log.hpp"
 struct mysql_info
  {
- 	string ip;
- 	string port;
- 	string username;
- 	string password;
- 	string database;
+ 	std::string ip;
+ 	std::string port;
+ 	std::string username;
+ 	std::string password;
+ 	std::string database;
  }; 
 
 class mysql_connect
 {
 public:
 	mysql_connect(boost::shared_ptr<mysql_info> in);
-	void query(const string& sql);
+	void query(const std::string& sql);
 	boost::shared_ptr<sql::ResultSet> get_res()const;
 	void test();
 private:
