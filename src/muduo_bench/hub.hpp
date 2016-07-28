@@ -9,7 +9,7 @@ enum parse_result
 {
    k_error,k_success,k_continue
 };
-parse_result parse_message(muduo::net::Buffer* buf,muduo::string* cmd,muduo::string* topic,muduo::string* content);
+parse_result parse_message(muduo::net::Buffer* buf,muduo::string* cmd,muduo::string* topics,muduo::string* content);
 class topic:public muduo::copyable
 {
 public:
