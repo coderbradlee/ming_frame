@@ -15,13 +15,13 @@ public:
   topic(const muduo::string& topic);
   void add(const muduo::net::TcpConnectionPtr& conn);
   void remove(const muduo::net::TcpConnectionPtr& conn);
-  void publish(const muduo::string& content,muduo::net::Timestamp time);
+  void publish(const muduo::string& content,muduo::Timestamp time);
 private:
   muduo::string make_message();
 private:
   muduo::string m_topic;
   muduo::string m_content;
-  muduo::net::Timestamp m_last_pubtime;
+  muduo::Timestamp m_last_pubtime;
   std::set<muduo::net::TcpConnectionPtr> m_audiences;
 };
 class hub:boost::noncopyable
@@ -31,11 +31,11 @@ public:
   void start();
 private:
   void on_connection(const muduo::net::TcpConnectionPtr& conn);
-  void on_message(const muduo::net::TcpConnectionPtr&conn,muduo::net::Buffer* buf,muduo::net::Timestamp receive_time);
+  void on_message(const muduo::net::TcpConnectionPtr&conn,muduo::net::Buffer* buf,muduo::Timestamp receive_time);
   void time_publish();
   void subscribe(const muduo::net::TcpConnectionPtr& conn,const muduo::string& topic);
   void unsubscribe(const muduo::net::TcpConnectionPtr&conn,const muduo::string& topic);
-  void publish(const muduo::string& source,const muduo::string& topic,const muduo::string& content,muduo::net::Timestamp time);
+  void publish(const muduo::string& source,const muduo::string& topic,const muduo::string& content,muduo::Timestamp time);
   topic& get_topic(const muduo::string& topic);
 private:
   EventLoop* m_loop;
