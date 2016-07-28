@@ -19,7 +19,7 @@ using namespace muduo::net;
 using muduo::string;
 EventLoop* g_loop=NULL;
 string g_topic="mytopic";
-string g_content;
+string g_content("my content");
 void on_connection(pubsubclient* client)
 {
   if(client->connected())
