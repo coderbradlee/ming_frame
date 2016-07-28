@@ -6,6 +6,7 @@ namespace test1
 	using std::cout;
 	using std::endl;
 	using std::thread;
+	using std::make_pair;
 	namespace test_model_design_factory
 	{ 
 		
