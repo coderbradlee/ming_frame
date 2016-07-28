@@ -7,6 +7,7 @@
 #include <muduo/net/TcpClient.h>
 #include <set>
 #include <boost/any.hpp>
+#include <muduo/base/ProcessInfo.h>
 enum parse_result
 {
   k_error,
