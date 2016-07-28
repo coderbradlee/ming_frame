@@ -70,25 +70,25 @@ namespace test1
 		{
 		public:
 			virtual ~house(){}
-			void set_windows(const string& w)
+			void set_windows(const std::string& w)
 			{
 				windows=w;
 			}
-			void set_doors(const string& d)
+			void set_doors(const std::string& d)
 			{
 				doors=d;
 			}
-			string get_windows()const
+			std::string get_windows()const
 			{
 				return windows;
 			}
-			string get_doors()const
+			std::string get_doors()const
 			{
 				return doors;
 			}
 		protected:
-			string windows;
-			string doors;
+			std::string windows;
+			std::string doors;
 		};
 		class stone_house:public house
 		{
@@ -144,7 +144,7 @@ namespace test1
 	}
 	namespace test_json_parser
 	{
-		string convert_json(const string& source);
+		std::string convert_json(const std::string& source);
 	
 		void test();
 
@@ -154,17 +154,17 @@ namespace test1
 		class font
 		{
 		public:
-			font(const string& key);
-			string get_key()const;
+			font(const std::string& key);
+			std::string get_key()const;
 		private:
-			string m_key;
+			std::string m_key;
 		};
 		class font_factory
 		{
 		public:
-			boost::shared_ptr<font> get_font(const string& f);
+			boost::shared_ptr<font> get_font(const std::string& f);
 		private:
-			std::map<string,boost::shared_ptr<font>> m_font;
+			std::map<std::string,boost::shared_ptr<font>> m_font;
 		};
 		void test();
 	}
@@ -219,20 +219,20 @@ namespace test1
 		class component
 		{
 		public:
-			component(const string& m):m_name(m){}
+			component(const std::string& m):m_name(m){}
 			virtual void process()=0;
 			virtual ~component(){}
-			string get_name()
+			std::string get_name()
 			{
 				return m_name;
 			}
 		protected:
-			string m_name;
+			std::string m_name;
 		};
 		class composite:public component
 		{
 		public:
-			composite(const string& s):component(s){}
+			composite(const std::string& s):component(s){}
 			void add(boost::shared_ptr<component>);
 			void remove(boost::shared_ptr<component>);
 			void process();
@@ -242,7 +242,7 @@ namespace test1
 		class leaf:public component
 		{
 		public:
-			leaf(const string& s):component(s){}	
+			leaf(const std::string& s):component(s){}	
 			void process();		
 		};
 		void test();
@@ -382,7 +382,7 @@ namespace test1
 			sub_expression(shared_ptr<expression> left,shared_ptr<expression> right):symbol_expression(left,right){}
 			int interpreter(std::map<char,int>);
 		};
-		shared_ptr<expression> analyse(string& expr);
+		shared_ptr<expression> analyse(std::string& expr);
 		void test();
 	}
 	void test();

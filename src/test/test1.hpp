@@ -127,19 +127,19 @@ namespace test1
 		class calendar:boost::noncopyable
 		{
 		public:
-			virtual bool is_holiday(const string&)const=0;
+			virtual bool is_holiday(const std::string&)const=0;
 			virtual ~calendar(){}
 		};
 		class american_calendar:public calendar
 		{
 		public:
-			bool is_holiday(const string&)const;
+			bool is_holiday(const std::string&)const;
 
 		};
 		class british_calendar:public calendar
 		{
 		public:
-			bool is_holiday(const string&)const;
+			bool is_holiday(const std::string&)const;
 			
 		};
 		calendar& get_calendar();
@@ -203,7 +203,7 @@ namespace test1
 		class stock:boost::noncopyable
 		{
 		public:
-			stock(const string& name):m_name(name)
+			stock(const std::string& name):m_name(name)
 			{
 				LOG_INFO<<"constructor:"<<(intptr_t)this<<":"<<m_name;
 			}
@@ -211,17 +211,17 @@ namespace test1
 			{
 				LOG_INFO<<"destructor:"<<(intptr_t)this<<":"<<m_name;
 			}
-			const string get_key()const
+			const std::string get_key()const
 			{
 				return m_name;
 			}
 		private:
-			string m_name;
+			std::string m_name;
 		};
 		class stock_factory:public boost::enable_shared_from_this<stock_factory>,boost::noncopyable
 		{
 		public:
-			boost::shared_ptr<stock> get(const string& key);
+			boost::shared_ptr<stock> get(const std::string& key);
 		
 			static 
 			void weak_delete_stock(const boost::weak_ptr<stock_factory>& wk,stock* s);
@@ -229,7 +229,7 @@ namespace test1
 			void remove_stock(stock* s);
 		private:
 			mutable muduo::MutexLock m_mutex;
-			std::map<string,boost::weak_ptr<stock>> m_stocks;
+			std::map<std::string,boost::weak_ptr<stock>> m_stocks;
 		};
 		void testLongLifeFactory();
 		void testShortLifeFactory();
