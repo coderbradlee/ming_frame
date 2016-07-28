@@ -54,7 +54,7 @@
 #define BOOST_DATE_TIME_SOURCE  
 #define BOOST_SPIRIT_THREADSAFE 
 //using namespace boost::asio;
-using namespace std;
+//using namespace std;
 //using namespace boost::property_tree;
 //using namespace boost::posix_time;
 #include <boost/circular_buffer.hpp>
