@@ -5,7 +5,7 @@
 using namespace muduo;
 using namespace muduo::net;
 
-int start_inspector()
+void start_inspector()
 {
   EventLoop loop;
   EventLoopThread t;
