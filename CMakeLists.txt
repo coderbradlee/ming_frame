@@ -108,7 +108,7 @@ add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(src)
 add_subdirectory(src/go)
-#add_subdirectory(libmicrohttpd/src)
+add_subdirectory(libmicrohttpd)
 add_definitions(-DMUDUO_STD_STRING)
 
 configure_file(${PROJECT_SOURCE_DIR}/config.ini  ${PROJECT_BINARY_DIR}/bin/config.ini COPYONLY)
