@@ -26,7 +26,7 @@
 #define _HTTP_RESPONSE_BUILDER_HPP_
 #include <map>
 #include <string>
-#include "httpserver/http_response.hpp"
+#include "http_response.hpp"
 
 struct MHD_Connection;
 
