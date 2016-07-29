@@ -5,7 +5,8 @@ git submodule add https://github.com/lzxm160/libgo.git
 git submodule update --init --recursive
 
 5、无法集成libmicrohttpd的代码，现尝试集成libhttpserver的代码
-   libhttpserver太多错误，决定弃用，毕竟要用的是muduo的模型
+   libhttpserver太多错误，决定弃用，毕竟要用的是muduo的模型 
+   tag libhttpserverdeprecated
 
 1、fastcgi
 yum install spawn-fcgi
