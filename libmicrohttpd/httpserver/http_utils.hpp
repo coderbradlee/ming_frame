@@ -292,8 +292,8 @@ struct ip_representation
     unsigned short pieces[16];
     unsigned int mask:16;
 
-    ip_representation(http_utils::IP_version_T ip_version) :
-        ip_version(ip_version)
+    ip_representation(http_utils::IP_version_T ip_versions) :
+        ip_version(ip_versions)
     {
         mask = DEFAULT_MASK_VALUE;
         std::fill(pieces, pieces + 16, 0);
