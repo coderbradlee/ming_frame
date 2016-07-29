@@ -26,7 +26,7 @@
 #define _CREATE_WEBSERVER_HPP_
 
 #include <stdlib.h>
-#include "httpserver/http_utils.hpp"
+#include "http_utils.hpp"
 
 #define DEFAULT_WS_TIMEOUT 180
 #define DEFAULT_WS_PORT 9898

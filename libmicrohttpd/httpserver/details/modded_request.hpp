@@ -26,7 +26,7 @@
 #define _MODDED_REQUEST_HPP_
 
 #include "binders.hpp"
-#include "details/http_response_ptr.hpp"
+#include "http_response_ptr.hpp"
 
 namespace httpserver
 {

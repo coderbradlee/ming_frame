@@ -23,12 +23,12 @@
 
 #define _HTTPSERVER_HPP_INSIDE_
 
-#include "httpserver/http_utils.hpp"
-#include "httpserver/details/http_endpoint.hpp"
-#include "httpserver/http_resource.hpp"
-#include "httpserver/http_response.hpp"
-#include "httpserver/http_response_builder.hpp"
-#include "httpserver/http_request.hpp"
-#include "httpserver/webserver.hpp"
+#include "http_utils.hpp"
+#include "details/http_endpoint.hpp"
+#include "http_resource.hpp"
+#include "http_response.hpp"
+#include "http_response_builder.hpp"
+#include "http_request.hpp"
+#include "webserver.hpp"
 
 #endif

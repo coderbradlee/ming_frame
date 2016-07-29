@@ -31,7 +31,7 @@
 #include <stdint.h>
 #include <vector>
 
-#include "../binders.hpp"
+#include "binders.hpp"
 
 struct MHD_Connection;
 
