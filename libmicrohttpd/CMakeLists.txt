@@ -1,5 +1,6 @@
-include_directories(include)
-
+include_directories("include")
+include_directories("details")
+include_directories("httpserver")
 set(net_SRCS string_utilities.cpp webserver.cpp http_utils.cpp http_request.cpp http_response.cpp http_resource.cpp details/comet_manager.cpp details/http_endpoint.cpp)
 
 add_library(microhttpserver ${net_SRCS})
