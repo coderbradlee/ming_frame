@@ -25,7 +25,7 @@ namespace test1
 			//test_muduo_multithread_timer::test();
 			//test_muduo_multithread_timer_shortcritical_section::test();
 			//test_round_trip::test();
-			test_timing_wheel_idleconnection::test();
+			//test_timing_wheel_idleconnection::test();
 		}
 		namespace test_timing_wheel_idleconnection
 		{
