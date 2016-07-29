@@ -4,6 +4,8 @@ git submodule add https://github.com/lzxm160/libgo.git
 拉取
 git submodule update --init --recursive
 
+5、无法集成libmicrohttpd的代码，现尝试集成libhttpserver的代码
+
 
 1、fastcgi
 yum install spawn-fcgi
