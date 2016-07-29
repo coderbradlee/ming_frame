@@ -8,7 +8,7 @@ git submodule update --init --recursive
    libhttpserver太多错误，决定弃用，毕竟要用的是muduo的模型 
    tag libhttpserverdeprecated
 6、干脆libmicrohttpd也放弃吧，转而用熟悉的nginx fastcgi模块，
-尝试增加系统监控模块
+尝试增加系统监控模块，用netdata的c插件的方式监控程序（deprecate）
 
 
 1、fastcgi

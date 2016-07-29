@@ -1,5 +1,6 @@
 #include "log.hpp"
 #include "fastcgi/fastcgi_resource.h"
+int start_inspector();
 int main()
 {
   using std::string;
@@ -14,7 +15,7 @@ int main()
 
     test1::test1();
     //short_url::test();
-
+    start_inspector();
     muduo::Timestamp end = muduo::Timestamp::now();
     printf("%f\n", timeDifference(end, start));
     sleep(10);
