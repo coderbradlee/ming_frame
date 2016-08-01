@@ -1,3 +1,7 @@
+#ifndef PLOT_HPP
+#define PLOT_HPP
+
+
 #include <muduo/base/Types.h>
 #include <vector>
 #include <boost/noncopyable.hpp>
@@ -44,3 +48,4 @@ class Plot : boost::noncopyable
   const double ratioX_;
 };
 
+#endif
