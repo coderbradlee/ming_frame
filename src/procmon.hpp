@@ -127,26 +127,7 @@ class Procmon : boost::noncopyable
   // static member functions
   //
 
-  static const char* getState(char state)
-  {
-    // One character from the string "RSDZTW" where R is running, S is sleeping in
-    // an interruptible wait, D is waiting in uninterruptible disk sleep, Z is zombie,
-    // T is traced or stopped (on a signal), and W is paging.
-    switch (state)
-    {
-      case 'R':
-        return "Running";
-      case 'S':
-        return "Sleeping";
-      case 'D':
-        return "Disk sleep";
-      case 'Z':
-        return "Zombie";
-      default:
-        return "Unknown";
-    }
-  }
-
+  static const char* getState(char state);
   static long getLong(const muduo::string& status, const char* key);
 
   static long getBootTime();
