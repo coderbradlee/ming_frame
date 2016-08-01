@@ -69,7 +69,7 @@ class Procmon : boost::noncopyable
 
  private:
 
-  string getName() const;
+  muduo::string getName() const;
 
   void onRequest(const muduo::net::HttpRequest& req, muduo::net::HttpResponse* resp);
 
@@ -95,7 +95,7 @@ class Procmon : boost::noncopyable
     appendResponse("<tr><td>%s</td><td>%.2f</td></tr>\n", name, value);
   }
 
-  void appendTableRow(const char* name, StringArg value)
+  void appendTableRow(const char* name, muduo::StringArg value)
   {
     appendResponse("<tr><td>%s</td><td>%s</td></tr>\n", name, value.c_str());
   }
@@ -110,10 +110,10 @@ class Procmon : boost::noncopyable
     return boost::replace_all_copy(readProcFile("environ"), muduo::string(1, '\0'), "\n");
   }
 
-  Timestamp getStartTime(long starttime)
+  muduo::Timestamp getStartTime(long starttime)
   {
-    return Timestamp(Timestamp::kMicroSecondsPerSecond * kBootTime_
-                     + Timestamp::kMicroSecondsPerSecond * starttime / kClockTicksPerSecond_);
+    return muduo::Timestamp(muduo::Timestamp::kMicroSecondsPerSecond * kBootTime_
+                     + muduo::Timestamp::kMicroSecondsPerSecond * starttime / kClockTicksPerSecond_);
   }
 
   double getSeconds(long ticks)
@@ -165,7 +165,7 @@ class Procmon : boost::noncopyable
   const int kbPerPage_;
   const long kBootTime_;  // in Unix-time
   const pid_t pid_;
-  HttpServer server_;
+  muduo::net::HttpServer server_;
   const muduo::string procname_;
   const muduo::string hostname_;
   const muduo::string cmdline_;
@@ -175,7 +175,7 @@ class Procmon : boost::noncopyable
   Plot cpu_chart_;
   Plot ram_chart_;
   // scratch variables
-  Buffer response_;
+  muduo::net::Buffer response_;
 };
 
 // define outline for __attribute__
