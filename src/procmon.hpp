@@ -26,7 +26,7 @@
 // Represent parsed /proc/pid/stat
 struct StatData
 {
-  void StatData::parse(const char* startAtState, int kbPerPage);
+  void parse(const char* startAtState, int kbPerPage);
   
   // int pid;
   char state;
