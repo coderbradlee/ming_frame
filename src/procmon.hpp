@@ -63,7 +63,7 @@ BOOST_STATIC_ASSERT(boost::is_pod<StatData>::value);
 class Procmon : boost::noncopyable
 {
  public:
-  Procmon(EventLoop* loop, pid_t pid, uint16_t port, const char* procname);
+  Procmon(muduo::net::EventLoop* loop, pid_t pid, uint16_t port, const char* procname);
 
   void start();
 
@@ -71,17 +71,17 @@ class Procmon : boost::noncopyable
 
   string getName() const;
 
-  void onRequest(const HttpRequest& req, HttpResponse* resp);
+  void onRequest(const muduo::net::HttpRequest& req, muduo::net::HttpResponse* resp);
 
-  void fillOverview(const string& query);
+  void fillOverview(const muduo::string& query);
 
-  void fillRefresh(const string& query);
+  void fillRefresh(const muduo::string& query);
 
   void fillThreads();
 
-  string readProcFile(const char* basename);
+  muduo::string readProcFile(const char* basename);
 
-  string readLink(const char* basename);
+  muduo::string readLink(const char* basename);
 
   int appendResponse(const char* fmt, ...) __attribute__ ((format (printf, 2, 3)));
 
@@ -100,14 +100,14 @@ class Procmon : boost::noncopyable
     appendResponse("<tr><td>%s</td><td>%s</td></tr>\n", name, value.c_str());
   }
 
-  string getCmdLine()
+  muduo::string getCmdLine()
   {
-    return boost::replace_all_copy(readProcFile("cmdline"), string(1, '\0'), "\n\t");
+    return boost::replace_all_copy(readProcFile("cmdline"), muduo::string(1, '\0'), "\n\t");
   }
 
-  string getEnviron()
+  muduo::string getEnviron()
   {
-    return boost::replace_all_copy(readProcFile("environ"), string(1, '\0'), "\n");
+    return boost::replace_all_copy(readProcFile("environ"), muduo::string(1, '\0'), "\n");
   }
 
   Timestamp getStartTime(long starttime)
@@ -147,7 +147,7 @@ class Procmon : boost::noncopyable
     }
   }
 
-  static long getLong(const string& status, const char* key);
+  static long getLong(const muduo::string& status, const char* key);
 
   static long getBootTime();
   struct CpuTime
@@ -166,9 +166,9 @@ class Procmon : boost::noncopyable
   const long kBootTime_;  // in Unix-time
   const pid_t pid_;
   HttpServer server_;
-  const string procname_;
-  const string hostname_;
-  const string cmdline_;
+  const muduo::string procname_;
+  const muduo::string hostname_;
+  const muduo::string cmdline_;
   int ticks_;
   StatData lastStatData_;
   boost::circular_buffer<CpuTime> cpu_usage_;
