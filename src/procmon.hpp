@@ -179,7 +179,7 @@ class Procmon : boost::noncopyable
 };
 
 // define outline for __attribute__
-int Procmon::appendResponse(const char* fmt, ...);
+int appendResponse(const char* fmt, ...);
 
 bool processExists(pid_t pid);
 #endif
