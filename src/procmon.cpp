@@ -339,7 +339,7 @@ int Procmon::appendResponse(const char* fmt, ...)
   return ret;
 }
 
-bool Procmon::processExists(pid_t pid)
+bool processExists(pid_t pid)
 {
   char filename[256];
   snprintf(filename, sizeof filename, "/proc/%d/stat", pid);
