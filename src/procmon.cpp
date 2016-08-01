@@ -288,7 +288,7 @@ void Procmon::tick()
 // static member functions
 //
 
-static const char* Procmon::getState(char state)
+const char* Procmon::getState(char state)
 {
   // One character from the string "RSDZTW" where R is running, S is sleeping in
   // an interruptible wait, D is waiting in uninterruptible disk sleep, Z is zombie,
@@ -308,7 +308,7 @@ static const char* Procmon::getState(char state)
   }
 }
 
-static long Procmon::getLong(const string& status, const char* key)
+long Procmon::getLong(const string& status, const char* key)
 {
   long result = 0;
   size_t pos = status.find(key);
@@ -319,7 +319,7 @@ static long Procmon::getLong(const string& status, const char* key)
   return result;
 }
 
-static long Procmon::getBootTime()
+long Procmon::getBootTime()
 {
   string stat;
   FileUtil::readFile("/proc/stat", 65536, &stat);
