@@ -17,7 +17,7 @@ add_subdirectory(sudoku)
 #set(SRC_LIST config.cpp log.cpp sudoku/sudoku.cc mysql_connect.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc test/test.cpp test/test1.cpp shorturl.cpp main.cpp)
 
 
-set(SRC_LIST config.cpp log.cpp test/test.cpp test/test1.cpp inspector.cpp main.cpp)
+set(SRC_LIST config.cpp log.cpp test/test.cpp test/test1.cpp procmon.cpp plot.cpp inspector.cpp main.cpp)
 
 add_executable(ming ${SRC_LIST})
 
@@ -53,5 +53,6 @@ target_link_libraries(ming boost_locale)
 #target_link_libraries(ming libgo_main)
 #target_link_libraries(ming libgonet)
 target_link_libraries(ming muduo_inspect)
+target_link_libraries(ming gd)
 set_target_properties(ming PROPERTIES COMPILE_FLAGS "-std=c++14")
 add_definitions(-DMING_DEBUG)
