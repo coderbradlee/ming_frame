@@ -235,6 +235,32 @@ void Procmon::fillRefresh(const string& query)
 
 void Procmon::fillThreads()
 {
+  std::vector<pid_t> threads = ProcessInfo::threads();
+  string result = "  TID NAME             S    User Time  System Time\n";
+  result.reserve(threads.size() * 64);
+  string stat;
+  for (size_t i = 0; i < threads.size(); ++i)
+  {
+    char buf[256];
+    int tid = threads[i];
+    snprintf(buf, sizeof buf, "/proc/%d/task/%d/stat", ProcessInfo::pid(), tid);
+    if (FileUtil::readFile(buf, 65536, &stat) == 0)
+    {
+      StringPiece name = ProcessInfo::procname(stat);
+      const char* rp = name.end();
+      assert(*rp == ')');
+      const char* state = rp + 2;
+      *const_cast<char*>(rp) = '\0';  // don't do this at home
+      StringPiece data(stat);
+      data.remove_prefix(static_cast<int>(state - data.data() + 2));
+      ProcessInfo::CpuTime t = getCpuTime(data);
+      snprintf(buf, sizeof buf, "%5d %-16s %c %12.3f %12.3f\n",
+               tid, name.data(), *state, t.userSeconds, t.systemSeconds);
+      result += buf;
+    }
+  }
+  //return result;
+  response_.append(result);
   response_.retrieveAll();
   // FIXME: implement this
 }
