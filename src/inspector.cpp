@@ -1,6 +1,7 @@
 #include <muduo/net/inspect/Inspector.h>
 #include <muduo/net/EventLoop.h>
 #include <muduo/net/EventLoopThread.h>
+#include <boost/thread/thread.hpp> 
 #include "procmon.hpp"
 using namespace muduo;
 using namespace muduo::net;
