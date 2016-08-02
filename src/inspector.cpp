@@ -14,6 +14,6 @@ void start_inspector()
   EventLoop loop;
   EventLoopThread t;
   Procmon procmon(t.startLoop(), getpid(), 12345, "Inspector");
-  //procmon.start();
+  procmon.start();
   loop.loop();
 }
