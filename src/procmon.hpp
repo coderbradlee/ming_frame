@@ -131,6 +131,7 @@ class Procmon : boost::noncopyable
   static long getLong(const muduo::string& status, const char* key);
 
   static long getBootTime();
+  ProcessInfo::CpuTime getCpuTime(StringPiece data);
   struct CpuTime
   {
     int userTime_;
@@ -140,7 +141,13 @@ class Procmon : boost::noncopyable
       return (userTime_ + sysTime_) / (kClockTicksPerSecond * kPeriod);
     }
   };
+  struct CpuTime
+  {
+    double userSeconds;
+    double systemSeconds;
 
+    CpuTime() : userSeconds(0.0), systemSeconds(0.0) { }
+  };
   const static int kPeriod_ = 2.0;
   const int kClockTicksPerSecond_;
   const int kbPerPage_;

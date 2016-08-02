@@ -232,7 +232,22 @@ void Procmon::fillRefresh(const string& query)
     }
   }
 }
+ProcessInfo::CpuTime Procmon::getCpuTime(StringPiece data)
+{
+  ProcessInfo::CpuTime t;
 
+  for (int i = 0; i < 10; ++i)
+  {
+    data = next(data);
+  }
+  long utime = strtol(data.data(), NULL, 10);
+  data = next(data);
+  long stime = strtol(data.data(), NULL, 10);
+  const double hz = static_cast<double>(ProcessInfo::clockTicksPerSecond());
+  t.userSeconds = static_cast<double>(utime) / hz;
+  t.systemSeconds = static_cast<double>(stime) / hz;
+  return t;
+}
 void Procmon::fillThreads()
 {
   std::vector<pid_t> threads = ProcessInfo::threads();
