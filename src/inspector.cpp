@@ -12,7 +12,8 @@ void start_inspector()
   // Inspector ins(t.startLoop(), InetAddress(12345), "test");
   // loop.loop();
   EventLoop loop;
-  Procmon procmon(&loop, getpid(), 12345, "Inspector");
-  procmon.start();
+  EventLoopThread t;
+  Procmon procmon(t.startLoop(), getpid(), 12345, "Inspector");
+  //procmon.start();
   loop.loop();
 }
