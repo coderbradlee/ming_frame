@@ -164,4 +164,5 @@ class Procmon : boost::noncopyable
 int appendResponse(const char* fmt, ...);
 
 bool processExists(pid_t pid);
+muduo::StringPiece next(muduo::StringPiece data);
 #endif

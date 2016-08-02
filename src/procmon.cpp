@@ -232,16 +232,26 @@ void Procmon::fillRefresh(const string& query)
     }
   }
 }
+StringPiece next(StringPiece data)
+{
+  const char* sp = static_cast<const char*>(::memchr(data.data(), ' ', data.size()));
+  if (sp)
+  {
+    data.remove_prefix(static_cast<int>(sp+1-data.begin()));
+    return data;
+  }
+  return "";
+}
 ProcessInfo::CpuTime Procmon::getCpuTime(StringPiece data)
 {
   ProcessInfo::CpuTime t;
 
   for (int i = 0; i < 10; ++i)
   {
-    data = muduo::inspect::next(data);
+    data = next(data);
   }
   long utime = strtol(data.data(), NULL, 10);
-  data = muduo::inspect::next(data);
+  data = next(data);
   long stime = strtol(data.data(), NULL, 10);
   const double hz = static_cast<double>(ProcessInfo::clockTicksPerSecond());
   t.userSeconds = static_cast<double>(utime) / hz;
