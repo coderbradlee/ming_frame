@@ -64,7 +64,7 @@
 #include <sstream>
 #include <boost/assign/list_of.hpp>
 #include <boost/lexical_cast.hpp>
-
+#include <boost/thread/thread.hpp> 
 // #include "json_spirit/json_spirit_reader.h"
 // #include "json_spirit/json_spirit_value.h" 
 // #include "json_spirit/json_spirit_writer.h" 
