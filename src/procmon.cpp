@@ -238,10 +238,10 @@ ProcessInfo::CpuTime Procmon::getCpuTime(StringPiece data)
 
   for (int i = 0; i < 10; ++i)
   {
-    data = next(data);
+    data = muduo::inspect::next(data);
   }
   long utime = strtol(data.data(), NULL, 10);
-  data = next(data);
+  data = muduo::inspect::next(data);
   long stime = strtol(data.data(), NULL, 10);
   const double hz = static_cast<double>(ProcessInfo::clockTicksPerSecond());
   t.userSeconds = static_cast<double>(utime) / hz;
