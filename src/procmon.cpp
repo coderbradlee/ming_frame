@@ -147,7 +147,7 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
   else if (req.path() == "/threads")
   {
     fillThreads();
-    resp->setBody("xxx"+response_.retrieveAllAsString());
+    resp->setBody(response_.retrieveAllAsString());
   }
   else
   {
