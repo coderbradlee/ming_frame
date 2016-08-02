@@ -131,7 +131,7 @@ class Procmon : boost::noncopyable
   static long getLong(const muduo::string& status, const char* key);
 
   static long getBootTime();
-  muduo::ProcessInfo::CpuTime getCpuTime(StringPiece data);
+  muduo::ProcessInfo::CpuTime getCpuTime(muduo::StringPiece data);
   struct CpuTime
   {
     int userTime_;
