@@ -7,14 +7,14 @@ using namespace muduo::net;
 
 void start_inspector()
 {
-  EventLoop loop;
-  EventLoopThread t;
-  Inspector ins(t.startLoop(), InetAddress(12345), "test");
-  loop.loop();
   // EventLoop loop;
-  // Procmon procmon(&loop, getpid(), 12345, "Inspector");
-  // procmon.start();
+  // EventLoopThread t;
+  // Inspector ins(t.startLoop(), InetAddress(12345), "test");
   // loop.loop();
+  EventLoop loop;
+  Procmon procmon(&loop, getpid(), 12345, "Inspector");
+  procmon.start();
+  loop.loop();
 
 
 	// EventLoop loop;
@@ -22,4 +22,9 @@ void start_inspector()
  //    Procmon procmon(t.startLoop(),getpid(), 12345, "Inspector");
  //    procmon.start();
  //    loop.loop();
+}
+void start_inspector_thread()
+{
+	boost::thread thrd(&start_inspector);  
+    thrd.join();
 }

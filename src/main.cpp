@@ -15,7 +15,7 @@ int main()
 
     test1::test1();
     //short_url::test();
-    start_inspector();
+    start_inspector_thread();
     muduo::Timestamp end = muduo::Timestamp::now();
     printf("%f\n", timeDifference(end, start));
     sleep(10);
