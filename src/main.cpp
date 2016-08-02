@@ -1,6 +1,6 @@
 #include "log.hpp"
 #include "fastcgi/fastcgi_resource.h"
-int start_inspector();
+int start_inspector_thread();
 int main()
 {
   using std::string;
