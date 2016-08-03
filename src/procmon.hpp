@@ -2,7 +2,8 @@
 #define PROCMON_HPP
 
 #include "plot.h"
-
+#include <muduo/base/Mutex.h>
+#include <muduo/base/Thread.h>
 #include <muduo/base/FileUtil.h>
 #include <muduo/base/ProcessInfo.h>
 #include <muduo/net/EventLoop.h>
