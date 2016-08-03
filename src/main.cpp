@@ -44,6 +44,10 @@ void parseCommandLine(int argc, char* argv[])
         // global::separate_tokens(ss_config.str(), args, " \r\n");  
         // po::store(po::command_line_parser(args).options(all).run(), vm); 
     }  
+    else
+    {
+      get_config= iconfig::get_instance("config.ini");
+    }
 }
 int main(int argc, char* argv[])
 {
