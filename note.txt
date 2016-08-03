@@ -1,0 +1,13 @@
+1、本机测试带宽
+nc -l 5001 >/dev/null
+dd if=/dev/zero bs=1MB count=10000|nc 127.0.0.1 5001
+2、读磁盘文件
+先生成1gb的文件，dd if=/dev/zero bs=1MB count=1000>1gb
+nc -l 5001 >/dev/null
+time nc 127.0.0.1 5001<1gb
+3、
+nc -l 5001 |pv -W >/dev/null
+dd if=/dev/zero bs=1MB count=10000|nc 127.0.0.1 5001
+4、
+nc -l 5001 |pv -W >/dev/null (in 172.18.100.85)
+dd if=/dev/zero bs=1MB count=10000|nc 172.18.100.85 5001
