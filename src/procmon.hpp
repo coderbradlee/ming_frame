@@ -177,10 +177,10 @@ class test_procmon
     {
       //start();
     }
-    void operator()()
-    {
-      start();
-    }
+    // void operator()()
+    // {
+    //   start();
+    // }
     void start()
     {
       findCycles();
