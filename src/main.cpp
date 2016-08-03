@@ -24,7 +24,7 @@ bool parseCommandLine(int argc, char* argv[])
   
     po::variables_map vm;  
     po::store(po::parse_command_line(argc, argv,all), vm);   
-  
+    po::notify(vm); 
     if (vm.count("help"))  
     {  
         cout << general << endl;  
@@ -52,7 +52,7 @@ bool parseCommandLine(int argc, char* argv[])
         // global::separate_tokens(ss_config.str(), args, " \r\n");  
         // po::store(po::command_line_parser(args).options(all).run(), vm);  
     }  
-    po::notify(vm);  
+     
   
 }
 int main(int argc, char* argv[])
