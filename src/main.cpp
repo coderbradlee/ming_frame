@@ -4,7 +4,7 @@
 using std::string;
 using std::cout;
 using std::endl;
-boost::shared_ptr<iconfig> get_config=iconfig::get_instance("config.ini");
+//boost::shared_ptr<iconfig> get_config=iconfig::get_instance("config.ini");
 //extern boost::shared_ptr<iconfig> get_config;
 //get_config=iconfig::get_instance("config.ini");
 int start_inspector_thread();
@@ -47,16 +47,13 @@ void parseCommandLine(int argc, char* argv[])
         // global::separate_tokens(ss_config.str(), args, " \r\n");  
         // po::store(po::command_line_parser(args).options(all).run(), vm); 
     }  
-    else
-    {
-      get_config= iconfig::get_instance("config.ini");
-    }
+    
 }
 int main(int argc, char* argv[])
 {
   try
   {
-    //parseCommandLine(argc, argv);
+    parseCommandLine(argc, argv);
 
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
