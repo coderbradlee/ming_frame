@@ -22,7 +22,6 @@ bool parseCommandLine(int argc, char* argv[])
     if (vm.count("help"))  
     {  
         cout << general << endl;  
-        return false;  
     }  
   
     if (vm.count("config"))  
@@ -43,19 +42,15 @@ bool parseCommandLine(int argc, char* argv[])
   
         // global::strings_t args;  
         // global::separate_tokens(ss_config.str(), args, " \r\n");  
-        // po::store(po::command_line_parser(args).options(all).run(), vm);  
+        // po::store(po::command_line_parser(args).options(all).run(), vm); 
     }  
-     return true;
-  
 }
 int main(int argc, char* argv[])
 {
   try
   {
-    if (parseCommandLine(argc, argv))
-    {
+    parseCommandLine(argc, argv);
 
-    }
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
 
