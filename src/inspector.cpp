@@ -28,7 +28,7 @@ void start_inspector()
 }
 void start_inspector_thread()
 {
-  muduo::thread thrd(boost::bind(&start_inspector, "monitor")
+  muduo::Thread thrd(boost::bind(&start_inspector, "monitor")
 	//boost::thread thrd(&start_inspector);  
     thrd.join();
 }
