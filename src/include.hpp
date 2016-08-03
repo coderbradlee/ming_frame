@@ -65,6 +65,7 @@
 #include <boost/assign/list_of.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/thread/thread.hpp> 
+#include <boost/ptr_container/ptr_vector.hpp>
 // #include "json_spirit/json_spirit_reader.h"
 // #include "json_spirit/json_spirit_value.h" 
 // #include "json_spirit/json_spirit_writer.h" 
@@ -83,6 +84,8 @@
 #include <muduo/net/EventLoopThread.h>
 #include <muduo/net/TcpClient.h>
 #include <muduo/net/TcpServer.h>
+#include <muduo/base/Mutex.h>
+#include <muduo/base/Thread.h>
 #include "test/test.hpp"
 #include "test/test1.hpp"
 #include "shorturl.hpp"

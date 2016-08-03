@@ -177,7 +177,7 @@ class test_procmon
     void start()
     {
       findCycles();
-      boost::ptr_vector<Thread> threads;
+      boost::ptr_vector<muduo::Thread> threads;
       for (int i = 0; i < 2; ++i)
       {
         threads.push_back(new Thread(boost::bind(&test_procmon::threadFunc,this)));
@@ -191,7 +191,7 @@ class test_procmon
 
       g_done.getAndSet(1);
       {
-      MutexLockGuard guard(g_mutex);
+      muduo::MutexLockGuard guard(g_mutex);
       g_busy = true;
       g_cond.notifyAll();
       }
