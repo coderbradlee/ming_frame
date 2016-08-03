@@ -190,9 +190,9 @@ class test_procmon
         threads.push_back(new muduo::Thread(boost::bind(&test_procmon::threadFunc,this)));
         threads.back().start();
       }
-          fixed();
+          //fixed();
         
-          //cosine();
+          cosine();
         
           //sawtooth();
 
