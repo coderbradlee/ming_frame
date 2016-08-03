@@ -4,7 +4,7 @@
 using std::string;
 using std::cout;
 using std::endl;
-boost::shared_ptr<iconfig> get_config;
+extern boost::shared_ptr<iconfig> get_config;
 int start_inspector_thread();
 namespace po = boost::program_options; 
 bool parseCommandLine(int argc, char* argv[])
