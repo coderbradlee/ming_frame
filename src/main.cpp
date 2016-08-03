@@ -6,31 +6,32 @@ using std::cout;
 using std::endl;
 boost::shared_ptr<iconfig> get_config;
 int start_inspector_thread();
-namespace po = boost::program_options; 
 void parseCommandLine(int argc, char* argv[])
 {
-    cout << "12" << endl;
-    po::options_description general("general options"); 
-    general.add_options()  
+    using namespace boost::program_options;
+    //声明需要的选项
+    options_description desc("Allowed options");
+    desc.add_options()
         ("help,h", "produce help message")
-        ("config", po::value<string>()->default_value("config.ini"),  
-        "set config file");  
+        ("config,c", value<string>()->default_value("config.ini"), "set config")
+        ;
 
-    po::variables_map vm;  
-    po::store(po::parse_command_line(argc, argv,general), vm);   
-    po::notify(vm); 
-    if (vm.count("help"))  
-    {  
-        cout << general << endl;  
-    }  
-  
+    variables_map vm;        
+    store(parse_command_line(argc, argv, desc), vm);
+    notify(vm);    
+
+    if (vm.count("help")) 
+    {
+        cout << desc;
+    }
+   
     if (vm.count("config"))  
     {  
         string conf_name = vm["config"].as<string>();  
-        LOG_INFO<<conf_name;
+        //LOG_INFO<<conf_name;
         //ifstream ifs_config(conf_name.c_str());  
         //boost::shared_ptr<iconfig> get_config= iconfig::get_instance(conf_name);
-        get_config= iconfig::get_instance(conf_name);
+        //get_config= iconfig::get_instance(conf_name);
         // if (! ifs_config)  
         // {  
         //     cerr << "could not open the configure file" << endl;  
