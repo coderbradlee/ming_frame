@@ -192,9 +192,9 @@ class test_procmon
       }
           //fixed();
         
-          cosine();
+          //cosine();
         
-          //sawtooth();
+          sawtooth();
 
       g_done.getAndSet(1);
       {
