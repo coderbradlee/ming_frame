@@ -14,11 +14,11 @@
 #include <boost/bind.hpp>
 #include <boost/circular_buffer.hpp>
 #include <boost/type_traits/is_pod.hpp>
-
+#include <boost/ptr_container/ptr_vector.hpp>
 #include <sstream>
 #include <stdarg.h>
 #include <stdio.h>
-
+#include <math.h>
 // TODO:
 // - what if process exits?
 //
@@ -180,7 +180,7 @@ class test_procmon
       boost::ptr_vector<muduo::Thread> threads;
       for (int i = 0; i < 2; ++i)
       {
-        threads.push_back(new Thread(boost::bind(&test_procmon::threadFunc,this)));
+        threads.push_back(new muduo::Thread(boost::bind(&test_procmon::threadFunc,this)));
         threads.back().start();
       }
           fixed();
