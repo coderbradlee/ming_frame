@@ -4,11 +4,7 @@
 using std::string;
 using std::cout;
 using std::endl;
-//boost::shared_ptr<iconfig> get_config=iconfig::get_instance("config.ini");
-//extern boost::shared_ptr<iconfig> get_config;
-//get_config=iconfig::get_instance("config.ini");
-int start_inspector_thread();
-#include "procmon.hpp"
+void start_inspector_thread();
 void parseCommandLine(int argc, char* argv[])
 {
     using namespace boost::program_options;
@@ -35,20 +31,7 @@ void parseCommandLine(int argc, char* argv[])
         //ifstream ifs_config(conf_name.c_str());  
         //boost::shared_ptr<iconfig> get_config= iconfig::get_instance(conf_name);
         //get_config= iconfig::get_instance(conf_name);
-        // if (! ifs_config)  
-        // {  
-        //     cerr << "could not open the configure file" << endl;  
-        //     return false;  
-        // }  
-  
-        // stringstream ss_config;  
-        // ss_config << ifs_config.rdbuf();  
-  
-        // global::strings_t args;  
-        // global::separate_tokens(ss_config.str(), args, " \r\n");  
-        // po::store(po::command_line_parser(args).options(all).run(), vm); 
     }  
-    
 }
 int main(int argc, char* argv[])
 {
@@ -64,7 +47,7 @@ int main(int argc, char* argv[])
     test1::test1();
     //short_url::test();
     start_inspector_thread();
-    test_procmon t;
+    
     muduo::Timestamp end = muduo::Timestamp::now();
     printf("%f\n", timeDifference(end, start));
     sleep(10);

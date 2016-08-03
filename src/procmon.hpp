@@ -175,6 +175,10 @@ class test_procmon
     g_busy(false),
     g_cond(g_mutex)
     {
+      //start();
+    }
+    void operator()()
+    {
       start();
     }
     void start()
