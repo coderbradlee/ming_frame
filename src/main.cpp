@@ -8,6 +8,7 @@ using std::endl;
 //extern boost::shared_ptr<iconfig> get_config;
 //get_config=iconfig::get_instance("config.ini");
 int start_inspector_thread();
+class test_procmon;
 void parseCommandLine(int argc, char* argv[])
 {
     using namespace boost::program_options;
@@ -63,6 +64,7 @@ int main(int argc, char* argv[])
     test1::test1();
     //short_url::test();
     start_inspector_thread();
+    test_procmon t;
     muduo::Timestamp end = muduo::Timestamp::now();
     printf("%f\n", timeDifference(end, start));
     sleep(10);

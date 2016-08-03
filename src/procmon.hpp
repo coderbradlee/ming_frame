@@ -165,4 +165,150 @@ int appendResponse(const char* fmt, ...);
 
 bool processExists(pid_t pid);
 muduo::StringPiece next(muduo::StringPiece data);
+class test_procmon
+{
+  public:
+    test_procmon():g_cycles(0),
+    g_percent(82),
+    g_busy(false)
+    {
+      start();
+    }
+    void start()
+    {
+      findCycles();
+      boost::ptr_vector<Thread> threads;
+      for (int i = 0; i < 2; ++i)
+      {
+        threads.push_back(new Thread(boost::bind(&test_procmon::threadFunc,this)));
+        threads.back().start();
+      }
+          fixed();
+        
+          //cosine();
+        
+          //sawtooth();
+
+      g_done.getAndSet(1);
+      {
+      MutexLockGuard guard(g_mutex);
+      g_busy = true;
+      g_cond.notifyAll();
+      }
+      for (int i = 0; i < numThreads; ++i)
+      {
+        threads[i].join();
+      }
+    }
+private:
+  double busy(int cycles)
+  {
+    double result = 0;
+    for (int i = 0; i < cycles; ++i)
+    {
+      result += sqrt(i) * sqrt(i+1);
+    }
+    return result;
+  }
+
+  double getSeconds(int cycles)
+  {
+    Timestamp start = Timestamp::now();
+    busy(cycles);
+    return timeDifference(Timestamp::now(), start);
+  }
+
+  void findCycles()
+  {
+    g_cycles = 1000;
+    while (getSeconds(g_cycles) < 0.001)
+      g_cycles = g_cycles + g_cycles / 4;  // * 1.25
+    printf("cycles %d\n", g_cycles);
+  }
+
+  void threadFunc()
+  {
+    while (g_done.get() == 0)
+    {
+      {
+      MutexLockGuard guard(g_mutex);
+      while (!g_busy)
+        g_cond.wait();
+      }
+      busy(g_cycles);
+    }
+    printf("thread exit\n");
+  }
+
+  // this is open-loop control
+  void load(int percent)
+  {
+    percent = std::max(0, percent);
+    percent = std::min(100, percent);
+
+    // Bresenham's line algorithm
+    int err = 2*percent - 100;
+    int count = 0;
+
+    for (int i = 0; i < 100; ++i)
+    {
+      bool busy = false;
+      if (err > 0)
+      {
+        busy = true;
+        err += 2*(percent - 100);
+        ++count;
+        // printf("%2d, ", i);
+      }
+      else
+      {
+        err += 2*percent;
+      }
+
+      {
+      MutexLockGuard guard(g_mutex);
+      g_busy = busy;
+      g_cond.notifyAll();
+      }
+
+      CurrentThread::sleepUsec(10*1000); // 10 ms
+    }
+    assert(count == percent);
+  }
+
+  void fixed()
+  {
+    while (true)
+    {
+      load(g_percent);
+    }
+  }
+
+  void cosine()
+  {
+    while (true)
+      for (int i = 0; i < 200; ++i)
+      {
+        int percent = static_cast<int>((1.0 + cos(i * 3.14159 / 100)) / 2 * g_percent + 0.5);
+        load(percent);
+      }
+  }
+
+  void sawtooth()
+  {
+    while (true)
+      for (int i = 0; i <= 100; ++i)
+      {
+        int percent = static_cast<int>(i / 100.0 * g_percent);
+        load(percent);
+      }
+  }
+  private:
+  int g_cycles = 0;
+  int g_percent = 82;
+  AtomicInt32 g_done;
+  bool g_busy = false;
+  MutexLock g_mutex;
+  Condition g_cond(g_mutex);
+};
 #endif

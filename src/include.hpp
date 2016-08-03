@@ -86,6 +86,6 @@
 #include "test/test.hpp"
 #include "test/test1.hpp"
 #include "shorturl.hpp"
-
+#include <math.h>
 #endif
 
