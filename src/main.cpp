@@ -14,21 +14,16 @@ bool parseCommandLine(int argc, char* argv[])
         ("help,h", "produce help message");
   
     std::string config_file;  
-    po::options_description config("config options");  
-    config.add_options()  
+    general.add_options()  
         ("config", po::value<string>(&config_file)->default_value("config.ini"),  
         "set config file");  
-  
-    po::options_description all("All options");  
-    all.add(general).add(config);  
-  
+
     po::variables_map vm;  
-    po::store(po::parse_command_line(argc, argv,all), vm);   
+    po::store(po::parse_command_line(argc, argv,general), vm);   
     po::notify(vm); 
     if (vm.count("help"))  
     {  
         cout << general << endl;  
-        cout << config << endl;  
         return false;  
     }  
   
