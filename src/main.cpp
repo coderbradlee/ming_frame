@@ -9,6 +9,7 @@ int start_inspector_thread();
 namespace po = boost::program_options; 
 bool parseCommandLine(int argc, char* argv[])
 {
+    cout << "12" << endl;
     po::options_description general("general options"); 
     general.add_options()  
         ("help,h", "produce help message")
