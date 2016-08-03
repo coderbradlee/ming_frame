@@ -33,7 +33,8 @@ void start_inspector_thread()
   thrd.start();
   test_procmon obj;  
   //muduo::Thread thrd2(test_procmon(), "dummyload");
-  muduo::Thread thrd2(boost::bind(&test_procmon::start, &obj, "dummyload")); 
+  muduo::Thread thrd2(boost::bind(&test_procmon::start, &obj), "dummyload"); 
+                     
   thrd.join();
   thrd2.join();
 }
