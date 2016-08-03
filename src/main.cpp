@@ -4,7 +4,7 @@
 using std::string;
 using std::cout;
 using std::endl;
-boost::shared_ptr<iconfig> get_config;
+boost::shared_ptr<iconfig> get_config=iconfig::get_instance("config.ini");
 int start_inspector_thread();
 void parseCommandLine(int argc, char* argv[])
 {
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 {
   try
   {
-    parseCommandLine(argc, argv);
+    //parseCommandLine(argc, argv);
 
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
