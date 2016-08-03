@@ -7,7 +7,7 @@ using std::endl;
 extern boost::shared_ptr<iconfig> get_config;
 int start_inspector_thread();
 namespace po = boost::program_options; 
-bool parseCommandLine(int argc, char* argv[])
+void parseCommandLine(int argc, char* argv[])
 {
     cout << "12" << endl;
     po::options_description general("general options"); 
