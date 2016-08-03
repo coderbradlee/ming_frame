@@ -186,7 +186,14 @@ void Procmon::fillOverview(const string& query)
   response_.append("<p><a href=\"/cmdline\">Command line</a>\n");
   response_.append("<a href=\"/environ\">Environment variables</a>\n");
   response_.append("<a href=\"/threads\">Threads</a>\n");
-
+  response_.append("<a href=\"/cpu.png\">cpu.png</a>\n");
+  response_.append("<a href=\"/environ\">environ</a>\n");
+  response_.append("<a href=\"/io\">io</a>\n");
+  response_.append("<a href=\"/limits\">limits</a>\n");
+  response_.append("<a href=\"/maps\">maps</a>\n");
+  response_.append("<a href=\"/smaps\">smaps</a>\n");
+  response_.append("<a href=\"/status\">status</a>\n");
+  
   appendResponse("<p>Page generated at %s (UTC)", now.toFormattedString().c_str());
 
   response_.append("<p><table>");
