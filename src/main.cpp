@@ -4,7 +4,7 @@
 using std::string;
 using std::cout;
 using std::endl;
-extern boost::shared_ptr<iconfig> get_config;
+boost::shared_ptr<iconfig> get_config;
 int start_inspector_thread();
 namespace po = boost::program_options; 
 void parseCommandLine(int argc, char* argv[])
@@ -30,7 +30,7 @@ void parseCommandLine(int argc, char* argv[])
         LOG_INFO<<conf_name;
         //ifstream ifs_config(conf_name.c_str());  
         //boost::shared_ptr<iconfig> get_config= iconfig::get_instance(conf_name);
-        //get_config= iconfig::get_instance(conf_name);
+        get_config= iconfig::get_instance(conf_name);
         // if (! ifs_config)  
         // {  
         //     cerr << "could not open the configure file" << endl;  
