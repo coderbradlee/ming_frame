@@ -8,7 +8,7 @@ using std::endl;
 //extern boost::shared_ptr<iconfig> get_config;
 //get_config=iconfig::get_instance("config.ini");
 int start_inspector_thread();
-class test_procmon;
+#include "procmon.hpp"
 void parseCommandLine(int argc, char* argv[])
 {
     using namespace boost::program_options;
