@@ -171,7 +171,8 @@ class test_procmon
   public:
     test_procmon():g_cycles(0),
     g_percent(82),
-    g_busy(false)
+    g_busy(false),
+    g_cond(g_mutex)
     {
       start();
     }
@@ -196,7 +197,7 @@ class test_procmon
       g_busy = true;
       g_cond.notifyAll();
       }
-      for (int i = 0; i < numThreads; ++i)
+      for (int i = 0; i < 2; ++i)
       {
         threads[i].join();
       }
@@ -310,6 +311,6 @@ private:
   muduo::AtomicInt32 g_done;
   bool g_busy = false;
   muduo::MutexLock g_mutex;
-  muduo::Condition g_cond(g_mutex);
+  muduo::Condition g_cond;
 };
 #endif
