@@ -4,6 +4,7 @@
 using std::string;
 using std::cout;
 using std::endl;
+boost::shared_ptr<iconfig> get_config;
 int start_inspector_thread();
 namespace po = boost::program_options; 
 bool parseCommandLine(int argc, char* argv[])
@@ -22,7 +23,7 @@ bool parseCommandLine(int argc, char* argv[])
     all.add(general).add(config);  
   
     po::variables_map vm;  
-    po::store(po::command_line_parser(argc, argv).options(all).extra_parser(::at_option_parser).run(), vm);   
+    po::store(po::command_line_parser(argc, argv).options(all), vm);   
   
     if (vm.count("help"))  
     {  
@@ -36,7 +37,8 @@ bool parseCommandLine(int argc, char* argv[])
         string conf_name = vm["config"].as<string>();  
         LOG_INFO<<conf_name;
         //ifstream ifs_config(conf_name.c_str());  
-        boost::shared_ptr<iconfig> get_config= iconfig::get_instance(conf_name);
+        //boost::shared_ptr<iconfig> get_config= iconfig::get_instance(conf_name);
+        get_config= iconfig::get_instance(conf_name);
         // if (! ifs_config)  
         // {  
         //     cerr << "could not open the configure file" << endl;  
