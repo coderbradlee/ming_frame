@@ -30,7 +30,7 @@ bool parseCommandLine(int argc, char* argv[])
         LOG_INFO<<conf_name;
         //ifstream ifs_config(conf_name.c_str());  
         //boost::shared_ptr<iconfig> get_config= iconfig::get_instance(conf_name);
-        get_config= iconfig::get_instance(conf_name);
+        //get_config= iconfig::get_instance(conf_name);
         // if (! ifs_config)  
         // {  
         //     cerr << "could not open the configure file" << endl;  
