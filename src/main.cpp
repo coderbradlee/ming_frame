@@ -23,7 +23,7 @@ bool parseCommandLine(int argc, char* argv[])
     all.add(general).add(config);  
   
     po::variables_map vm;  
-    po::store(po::command_line_parser(argc, argv).options(all), vm);   
+    po::store(po::command_line_parser(argc, argv,all), vm);   
   
     if (vm.count("help"))  
     {  
