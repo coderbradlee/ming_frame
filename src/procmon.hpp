@@ -306,9 +306,9 @@ private:
   private:
   int g_cycles = 0;
   int g_percent = 82;
-  AtomicInt32 g_done;
+  muduo::AtomicInt32 g_done;
   bool g_busy = false;
-  MutexLock g_mutex;
-  Condition g_cond(g_mutex);
+  muduo::MutexLock g_mutex;
+  muduo::Condition g_cond(g_mutex);
 };
 #endif
