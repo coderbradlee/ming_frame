@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 int start_inspector_thread();
 namespace po = boost::program_options; 
-bool parseCommandLine(int argc, char* argv[], po::Options* opt)
+bool parseCommandLine(int argc, char* argv[])
 {
   po::options_description general("general options");  
     general.add_options()  
@@ -16,7 +16,7 @@ bool parseCommandLine(int argc, char* argv[], po::Options* opt)
     po::options_description config("config options");  
     config.add_options()  
         ("config", po::value<string>(&config_file)->default_value("config.ini"),  
-        "set config file, specified with '@name' too");  
+        "set config file");  
   
     po::options_description all("All options");  
     all.add(general).add(config);  
@@ -34,7 +34,8 @@ bool parseCommandLine(int argc, char* argv[], po::Options* opt)
     if (vm.count("config"))  
     {  
         string conf_name = vm["config"].as<string>();  
-        ifstream ifs_config(conf_name.c_str());  
+        LOG_INFO<<conf_name;
+        //ifstream ifs_config(conf_name.c_str());  
         boost::shared_ptr<iconfig> get_config= iconfig::get_instance(conf_name);
         // if (! ifs_config)  
         // {  
@@ -56,8 +57,7 @@ int main(int argc, char* argv[])
 {
   try
   {
-    po::Options options;
-    if (parseCommandLine(argc, argv, &options))
+    if (parseCommandLine(argc, argv))
     {
 
     }
