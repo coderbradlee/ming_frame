@@ -1,4 +1,4 @@
-#include <examples/ace/ttcp/common.h>
+#include "common.h"
 
 #include <boost/program_options.hpp>
 
