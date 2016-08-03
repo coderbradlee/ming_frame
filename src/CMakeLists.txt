@@ -10,7 +10,7 @@
 #target_link_libraries(ming_config muduo_net)
 
 add_subdirectory(fastcgi)
-add_subdirectory(muduo_bench)
+#add_subdirectory(muduo_bench)
 add_subdirectory(sudoku)
 
 #set(SRC_LIST log.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc  config.cpp main.cpp)

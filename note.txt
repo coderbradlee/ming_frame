@@ -11,3 +11,7 @@ dd if=/dev/zero bs=1MB count=10000|nc 127.0.0.1 5001
 4、
 nc -l 5001 |pv -W >/dev/null (in 172.18.100.85)
 dd if=/dev/zero bs=1MB count=10000|nc 172.18.100.85 5001
+
+5、
+./ttcp_blocking -t 127.0.0.1 -l512000 最大2gB/s
+while true;do ./ttcp_muduo -r;done
