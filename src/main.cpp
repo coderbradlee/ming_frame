@@ -1,15 +1,18 @@
 #include <boost/program_options.hpp>
 #include "log.hpp"
 #include "fastcgi/fastcgi_resource.h"
+using std::string;
+using std::cout;
+using std::endl;
 int start_inspector_thread();
 namespace po = boost::program_options; 
-bool parseCommandLine(int argc, char* argv[], Options* opt)
+bool parseCommandLine(int argc, char* argv[], po::Options* opt)
 {
   po::options_description general("general options");  
     general.add_options()  
         ("help,h", "produce help message");
   
-    string config_file;  
+    std::string config_file;  
     po::options_description config("config options");  
     config.add_options()  
         ("config", po::value<string>(&config_file)->default_value("config.ini"),  
@@ -51,12 +54,9 @@ bool parseCommandLine(int argc, char* argv[], Options* opt)
 }
 int main(int argc, char* argv[])
 {
-  using std::string;
-  using std::cout;
-  using std::endl;
   try
   {
-    Options options;
+    po::Options options;
     if (parseCommandLine(argc, argv, &options))
     {
 
