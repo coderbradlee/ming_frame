@@ -213,9 +213,9 @@ private:
 
   double getSeconds(int cycles)
   {
-    Timestamp start = Timestamp::now();
+    muduo::Timestamp start = muduo::Timestamp::now();
     busy(cycles);
-    return timeDifference(Timestamp::now(), start);
+    return timeDifference(muduo::Timestamp::now(), start);
   }
 
   void findCycles()
@@ -231,7 +231,7 @@ private:
     while (g_done.get() == 0)
     {
       {
-      MutexLockGuard guard(g_mutex);
+      muduo::MutexLockGuard guard(g_mutex);
       while (!g_busy)
         g_cond.wait();
       }
@@ -266,12 +266,12 @@ private:
       }
 
       {
-      MutexLockGuard guard(g_mutex);
+      muduo::MutexLockGuard guard(g_mutex);
       g_busy = busy;
       g_cond.notifyAll();
       }
 
-      CurrentThread::sleepUsec(10*1000); // 10 ms
+      muduo::CurrentThread::sleepUsec(10*1000); // 10 ms
     }
     assert(count == percent);
   }
