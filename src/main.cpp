@@ -9,13 +9,10 @@ int start_inspector_thread();
 namespace po = boost::program_options; 
 bool parseCommandLine(int argc, char* argv[])
 {
-  po::options_description general("general options");  
+    po::options_description general("general options"); 
     general.add_options()  
-        ("help,h", "produce help message");
-  
-    std::string config_file;  
-    general.add_options()  
-        ("config", po::value<string>(&config_file)->default_value("config.ini"),  
+        ("help,h", "produce help message")
+        ("config", po::value<string>()->default_value("config.ini"),  
         "set config file");  
 
     po::variables_map vm;  
@@ -47,7 +44,7 @@ bool parseCommandLine(int argc, char* argv[])
         // global::separate_tokens(ss_config.str(), args, " \r\n");  
         // po::store(po::command_line_parser(args).options(all).run(), vm);  
     }  
-     
+     return true;
   
 }
 int main(int argc, char* argv[])
