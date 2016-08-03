@@ -49,7 +49,7 @@ bool parseCommandLine(int argc, char* argv[], Options* opt)
     po::notify(vm);  
   
 }
-int main()
+int main(int argc, char* argv[])
 {
   using std::string;
   using std::cout;
