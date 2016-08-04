@@ -221,14 +221,28 @@ void Procmon::fillOverview(const string& query)
   response_.append("<a href=\"/limits\">limits</a>\n");
   response_.append("<a href=\"/maps\">maps</a>\n");
   response_.append("<a href=\"/smaps\">smaps</a>\n");
-  response_.append("<a href=\"/status\">status</a>\n");
+  response_.append("<a href=\"/status\">status</a><br>\n");
   response_.append("<a href=\"/sys/overview\">sys_overview</a>\n");
   response_.append("<a href=\"/sys/loadavg\">sys_loadavg</a>\n");
   response_.append("<a href=\"/sys/version\">sys_version</a>\n");
   response_.append("<a href=\"/sys/cpuinfo\">sys_cpuinfo</a>\n");
   response_.append("<a href=\"/sys/stat\">sys_stat</a>\n");
-  response_.append("<a href=\"/sys/meminfo\">sys_meminfo</a>\n");
-  
+  response_.append("<a href=\"/sys/meminfo\">sys_meminfo</a><br>\n");
+  response_.append("<a href=\"/proc/overview\">proc_overview</a>\n");
+  response_.append("<a href=\"/proc/pid\">proc_pid</a>\n");                  
+  response_.append("<a href=\"/proc/status\">proc_status</a>\n");               
+  response_.append("<a href=\"/proc/threads\">proc_threads</a><br>\n"); 
+#ifdef HAVE_TCMALLOC
+
+response_.append("<a href=\"/pprof/cmdline\">pprof_cmdline</a>\n");
+response_.append("<a href=\"/pprof/growth\">pprof_growth</a>\n");
+response_.append("<a href=\"/pprof/heap\">pprof_heap</a>\n");
+response_.append("<a href=\"/pprof/memhistogram\">pprof_memhistogram</a>\n"); 
+response_.append("<a href=\"/pprof/memstats\">pprof_memstats</a>\n");
+response_.append("<a href=\"/pprof/profile\">pprof_profile</a>\n");             
+response_.append("<a href=\"/pprof/releasefreememory\">pprof_releasefreememory</a>\n"); 
+
+#endif
   appendResponse("<p>Page generated at %s (UTC)", now.toFormattedString().c_str());
 
   response_.append("<p><table>");
