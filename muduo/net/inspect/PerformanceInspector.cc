@@ -74,9 +74,9 @@ string PerformanceInspector::cmdline(HttpRequest::Method, const Inspector::ArgLi
 string PerformanceInspector::memstats(HttpRequest::Method, const Inspector::ArgList&)
 {
   char buf[1024*64];
-  ProfilerStart();
+  //ProfilerStart();
   MallocExtension::instance()->GetStats(buf, sizeof buf);
-  ProfilerStop();
+  //ProfilerStop();
   return buf;
 }
 
