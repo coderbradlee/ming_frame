@@ -62,7 +62,7 @@ Procmon::Procmon(EventLoop* loop, pid_t pid, uint16_t port, const char* procname
     ticks_(0),
     cpu_usage_(600 / kPeriod_),  // 10 minutes
     cpu_chart_(640, 100, 600, kPeriod_),
-    ram_chart_(640, 100, 7200, 30),
+    ram_chart_(640, 100, 7200, 30)
     
 {
   bzero(&lastStatData_, sizeof lastStatData_);
