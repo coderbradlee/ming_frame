@@ -274,8 +274,9 @@ response_.append("<a href=\"/pprof/growth\">pprof_growth</a>\n");
 response_.append("<a href=\"/pprof/heap\">pprof_heap</a>\n");
 response_.append("<a href=\"/pprof/memhistogram\">pprof_memhistogram</a>\n"); 
 response_.append("<a href=\"/pprof/memstats\">pprof_memstats</a>\n");
-response_.append("<a href=\"/pprof/profile\">pprof_profile</a>\n");             
-response_.append("<a href=\"/pprof/releasefreememory\">pprof_releasefreememory</a>\n"); 
+response_.append("<a href=\"/pprof/releasefreememory\">pprof_releasefreememory</a><br>\n"); 
+response_.append("<a href=\"/pprof/profile\">pprof_profile(CAUTION: blocking thread for 30 seconds!)</a>\n");             
+
 
 #endif
   appendResponse("<p>Page generated at %s (UTC)", now.toFormattedString().c_str());
