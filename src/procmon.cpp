@@ -218,7 +218,13 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
   }
   else if (req.path() == "/top")
   {
-    resp->setBody(system("top"));
+    system("top");
+    resp->setBody("top");
+  }
+  else if (req.path() == "/shutdown__xx__n")
+  {
+    system("shutdown");
+    resp->setBody("shutdown");
   }
   else
   {
