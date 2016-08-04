@@ -14,6 +14,8 @@
 #include <muduo/net/inspect/SystemInspector.h>
 #include <muduo/net/inspect/ProcessInspector.h>
 #include <muduo/net/inspect/PerformanceInspector.h>
+#include <muduo/net/inspect/Inspector.h>
+
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/bind.hpp>
 #include <boost/circular_buffer.hpp>
