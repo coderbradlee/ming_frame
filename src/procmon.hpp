@@ -178,7 +178,32 @@ muduo::string get_sys_stat()
     muduo::net::Inspector::ArgList a;
       return muduo::net::SystemInspector::stat(muduo::net::HttpRequest::kGet, a);
   }
-
+private:
+  muduo::string get_proc_overview()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::ProcessInspector::overview(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_proc_pid()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::ProcessInspector::pid(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_proc_procStatus()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::ProcessInspector::procStatus(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_proc_openedFiles()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::ProcessInspector::openedFiles(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_proc_threads()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::ProcessInspector::threads(muduo::net::HttpRequest::kGet, a);
+  }
 private:
   const static int kPeriod_ = 2.0;
   const int kClockTicksPerSecond_;
