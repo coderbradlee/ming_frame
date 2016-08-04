@@ -205,6 +205,38 @@ private:
     return muduo::net::ProcessInspector::threads(muduo::net::HttpRequest::kGet, a);
   }
 private:
+  muduo::string get_pprof_heap()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::PerformanceInspector::heap(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_pprof_growth()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::PerformanceInspector::growth(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_pprof_profile()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::PerformanceInspector::profile(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_pprof_memstats()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::PerformanceInspector::memstats(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_pprof_memhistogram()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::PerformanceInspector::memhistogram(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_pprof_releaseFreeMemory()
+  {
+    muduo::net::Inspector::ArgList a;
+    return muduo::net::PerformanceInspector::releaseFreeMemory(muduo::net::HttpRequest::kGet, a);
+  }
+
+private:
   const static int kPeriod_ = 2.0;
   const int kClockTicksPerSecond_;
   const int kbPerPage_;

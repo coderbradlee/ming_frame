@@ -192,6 +192,31 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
   {
     resp->setBody(get_proc_openedFiles());
   }  
+  else if (req.path() == "/pprof/growth")
+  {
+    resp->setBody(get_pprof_growth());
+  }
+  else if (req.path() == "/pprof/heap")
+  {
+    resp->setBody(get_pprof_heap());
+  }
+  else if (req.path() == "/pprof/memhistogram")
+  {
+    resp->setBody(get_pprof_memhistogram());
+  }
+  else if (req.path() == "/pprof/memstats")
+  {
+    resp->setBody(get_pprof_memstats());
+  }
+  else if (req.path() == "/pprof/profile")
+  {
+    resp->setBody(get_pprof_profile());
+  }
+  else if (req.path() == "/pprof/releasefreememory")
+  {
+    resp->setBody(get_pprof_releasefreememory());
+  }
+  
   else
   {
     resp->setStatusCode(HttpResponse::k404NotFound);
@@ -241,12 +266,10 @@ void Procmon::fillOverview(const string& query)
   response_.append("<a href=\"/sys/stat\">sys_stat</a>\n");
   response_.append("<a href=\"/sys/meminfo\">sys_meminfo</a><br>\n");
   response_.append("<a href=\"/proc/overview\">proc_overview</a>\n");   
-  response_.append("<a href=\"/proc/openedFiles\">proc_files</a><br>\n");                 
+  response_.append("<a href=\"/proc/openedFiles\">proc_files</a>\n");                 
   response_.append("<a href=\"/proc/status\">proc_status</a><br>\n");     
 
 #ifdef HAVE_TCMALLOC
-
-response_.append("<a href=\"/pprof/cmdline\">pprof_cmdline</a>\n");
 response_.append("<a href=\"/pprof/growth\">pprof_growth</a>\n");
 response_.append("<a href=\"/pprof/heap\">pprof_heap</a>\n");
 response_.append("<a href=\"/pprof/memhistogram\">pprof_memhistogram</a>\n"); 
