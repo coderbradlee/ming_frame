@@ -214,7 +214,7 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
   }
   else if (req.path() == "/pprof/releasefreememory")
   {
-    resp->setBody(get_pprof_releasefreememory());
+    resp->setBody(get_pprof_releaseFreeMemory());
   }
   
   else
