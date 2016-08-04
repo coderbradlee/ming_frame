@@ -11,7 +11,9 @@
 #include <muduo/net/http/HttpRequest.h>
 #include <muduo/net/http/HttpResponse.h>
 #include <muduo/net/http/HttpServer.h>
-
+#include <muduo/net/inspect/SystemInspector.h>
+#include <muduo/net/inspect/ProcessInspector.h>
+#include <muduo/net/inspect/PerformanceInspector.h>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/bind.hpp>
 #include <boost/circular_buffer.hpp>
