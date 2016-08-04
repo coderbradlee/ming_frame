@@ -160,6 +160,7 @@ class Procmon : boost::noncopyable
   Plot ram_chart_;
   // scratch variables
   muduo::net::Buffer response_;
+
 };
 
 // define outline for __attribute__
@@ -310,6 +311,18 @@ private:
         load(percent);
       }
   }
+private:
+  muduo::string get_sys_overview()
+  {
+      return SystemInspector::overview(kGet, const Inspector::ArgList(""));
+  }
+  
+//   string SystemInspector::loadavg(HttpRequest::Method, const Inspector::ArgList&);
+//   string SystemInspector::version(HttpRequest::Method, const Inspector::ArgList&);
+//   string SystemInspector::cpuinfo(HttpRequest::Method, const Inspector::ArgList&);
+//   string SystemInspector::meminfo(HttpRequest::Method, const Inspector::ArgList&);
+//   string SystemInspector::stat(HttpRequest::Method, const Inspector::ArgList&);
+// };
   private:
   int g_cycles = 0;
   int g_percent = 82;

@@ -62,7 +62,8 @@ Procmon::Procmon(EventLoop* loop, pid_t pid, uint16_t port, const char* procname
     ticks_(0),
     cpu_usage_(600 / kPeriod_),  // 10 minutes
     cpu_chart_(640, 100, 600, kPeriod_),
-    ram_chart_(640, 100, 7200, 30)
+    ram_chart_(640, 100, 7200, 30),
+    
 {
   bzero(&lastStatData_, sizeof lastStatData_);
   server_.setHttpCallback(boost::bind(&Procmon::onRequest, this, _1, _2));
@@ -150,6 +151,10 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
     fillThreads();
     resp->setBody(response_.retrieveAllAsString());
   }
+   else if (req.path() == "/sys/overview")
+  {
+    resp->setBody(get_sys_overview());
+  }
   else
   {
     resp->setStatusCode(HttpResponse::k404NotFound);
@@ -184,7 +189,6 @@ void Procmon::fillOverview(const string& query)
   response_.append("<a href=\"?refresh=15\">15s</a> ");
   response_.append("<a href=\"?refresh=60\">60s</a>\n");
   response_.append("<p><a href=\"/cmdline\">Command line</a>\n");
-  response_.append("<a href=\"/environ\">Environment variables</a>\n");
   response_.append("<a href=\"/threads\">Threads</a>\n");
   response_.append("<a href=\"/cpu.png\">cpu.png</a>\n");
   response_.append("<a href=\"/environ\">environ</a>\n");
@@ -193,7 +197,7 @@ void Procmon::fillOverview(const string& query)
   response_.append("<a href=\"/maps\">maps</a>\n");
   response_.append("<a href=\"/smaps\">smaps</a>\n");
   response_.append("<a href=\"/status\">status</a>\n");
-  
+  response_.append("<a href=\"/sys/overview\">sys_overview</a>\n");
   appendResponse("<p>Page generated at %s (UTC)", now.toFormattedString().c_str());
 
   response_.append("<p><table>");

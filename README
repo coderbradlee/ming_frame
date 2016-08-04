@@ -21,8 +21,8 @@ nginx -s reload
 
 curl -u test:test -X GET http://192.168.3.132/exchange_rate/?source=USD\&target=CNY\&time=2016-07-04\&database=os
 
-2、mysql connect ok based on mysql-connector-cpp,tag 1.1.6
-
+2、mysql connect ok based on mysql-connector-cpp,tag 1.1.6,版本高的编译有问题，不支持MYSQL_TYPE_JSON
+git checkout -b branch_name 1.1.6
 3、extends QuotationService  exportPDF 
 
 4、test shorturl 
