@@ -318,7 +318,7 @@ private:
 private:
   muduo::string get_sys_overview()
   {
-      return muduo::net::SystemInspector::overview(muduo::net::HttpRequest::Method::kGet, const muduo::net::Inspector::ArgList(""));
+      return muduo::net::SystemInspector::overview(muduo::net::HttpRequest::kGet, const muduo::net::Inspector::ArgList(""));
   }
   
 //   string SystemInspector::loadavg(HttpRequest::Method, const Inspector::ArgList&);
