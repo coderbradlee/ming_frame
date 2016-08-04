@@ -153,13 +153,32 @@ class Procmon : boost::noncopyable
     muduo::net::Inspector::ArgList a;
       return muduo::net::SystemInspector::overview(muduo::net::HttpRequest::kGet, a);
   }
-  
-//   string SystemInspector::loadavg(HttpRequest::Method, const Inspector::ArgList&);
-//   string SystemInspector::version(HttpRequest::Method, const Inspector::ArgList&);
-//   string SystemInspector::cpuinfo(HttpRequest::Method, const Inspector::ArgList&);
-//   string SystemInspector::meminfo(HttpRequest::Method, const Inspector::ArgList&);
-//   string SystemInspector::stat(HttpRequest::Method, const Inspector::ArgList&);
-// };
+  muduo::string get_sys_loadavg()
+  {
+    muduo::net::Inspector::ArgList a;
+      return muduo::net::SystemInspector::loadavg(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_sys_version()
+  {
+    muduo::net::Inspector::ArgList a;
+      return muduo::net::SystemInspector::version(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_sys_cpuinfo()
+  {
+    muduo::net::Inspector::ArgList a;
+      return muduo::net::SystemInspector::cpuinfo(muduo::net::HttpRequest::kGet, a);
+  }
+  muduo::string get_sys_meminfo()
+  {
+    muduo::net::Inspector::ArgList a;
+      return muduo::net::SystemInspector::meminfo(muduo::net::HttpRequest::kGet, a);
+  }
+muduo::string get_sys_stat()
+  {
+    muduo::net::Inspector::ArgList a;
+      return muduo::net::SystemInspector::stat(muduo::net::HttpRequest::kGet, a);
+  }
+
 private:
   const static int kPeriod_ = 2.0;
   const int kClockTicksPerSecond_;

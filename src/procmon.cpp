@@ -151,9 +151,34 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
     fillThreads();
     resp->setBody(response_.retrieveAllAsString());
   }
-   else if (req.path() == "/sys/overview")
+  else if (req.path() == "/sys/overview")
   {
     resp->setBody(get_sys_overview());
+  }
+  else if (req.path() == "/sys/loadavg")
+  {
+    resp->setBody(get_sys_loadavg());
+  //   get_sys_loadavg()
+  // get_sys_version()
+  // get_sys_cpuinfo()
+  // get_sys_meminfo()
+  // get_sys_stat()
+  }
+  else if (req.path() == "/sys/version")
+  {
+    resp->setBody(get_sys_version());
+  }
+  else if (req.path() == "/sys/cpuinfo")
+  {
+    resp->setBody(get_sys_cpuinfo());
+  }
+  else if (req.path() == "/sys/stat")
+  {
+    resp->setBody(get_sys_stat());
+  }
+  else if (req.path() == "/sys/meminfo")
+  {
+    resp->setBody(get_sys_meminfo());
   }
   else
   {
@@ -198,6 +223,12 @@ void Procmon::fillOverview(const string& query)
   response_.append("<a href=\"/smaps\">smaps</a>\n");
   response_.append("<a href=\"/status\">status</a>\n");
   response_.append("<a href=\"/sys/overview\">sys_overview</a>\n");
+  response_.append("<a href=\"/sys/loadavg\">sys_loadavg</a>\n");
+  response_.append("<a href=\"/sys/version\">sys_version</a>\n");
+  response_.append("<a href=\"/sys/cpuinfo\">sys_cpuinfo</a>\n");
+  response_.append("<a href=\"/sys/stat\">sys_stat</a>\n");
+  response_.append("<a href=\"/sys/meminfo\">sys_meminfo</a>\n");
+  
   appendResponse("<p>Page generated at %s (UTC)", now.toFormattedString().c_str());
 
   response_.append("<p><table>");
