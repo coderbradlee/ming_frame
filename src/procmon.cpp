@@ -275,7 +275,7 @@ response_.append("<a href=\"/pprof/heap\">pprof_heap</a>\n");
 response_.append("<a href=\"/pprof/memhistogram\">pprof_memhistogram</a>\n"); 
 response_.append("<a href=\"/pprof/memstats\">pprof_memstats</a>\n");
 response_.append("<a href=\"/pprof/releasefreememory\">pprof_releasefreememory</a><br>\n"); 
-response_.append("<a href=\"/pprof/profile\">pprof_profile(CAUTION: blocking thread for 30 seconds!)</a>\n");             
+response_.append("<a href=\"/pprof/profile\">pprof_profile(CAUTION: it will blocking thread for 30 seconds!)</a>\n");             
 
 
 #endif

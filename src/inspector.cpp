@@ -16,7 +16,7 @@ void start_inspector()
   Procmon procmon(&loop, getpid(), 12345, "Inspector");
   procmon.start();
 
-  Inspector ins(&loop, InetAddress(54321), "Inspector");
+  //Inspector ins(&loop, InetAddress(54321), "Inspector");
   loop.loop();
 
 
@@ -34,7 +34,7 @@ void start_inspector_thread()
   test_procmon obj;  
   //muduo::Thread thrd2(test_procmon(), "dummyload");
   muduo::Thread thrd2(boost::bind(&test_procmon::start, &obj), "dummyload"); 
-  //thrd2.start();                   
+  thrd2.start();                   
   thrd.join();
   thrd2.join();
 }
