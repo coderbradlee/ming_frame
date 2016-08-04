@@ -184,11 +184,7 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
   {
     resp->setBody(get_proc_overview());
   }
-  else if (req.path() == "/proc/pid")
-  {
-    resp->setBody(get_proc_pid());
-  }
-  else if (req.path() == "/proc/procStatus")
+  else if (req.path() == "/proc/status")
   {
     resp->setBody(get_proc_procStatus());
   }
@@ -244,9 +240,10 @@ void Procmon::fillOverview(const string& query)
   response_.append("<a href=\"/sys/cpuinfo\">sys_cpuinfo</a>\n");
   response_.append("<a href=\"/sys/stat\">sys_stat</a>\n");
   response_.append("<a href=\"/sys/meminfo\">sys_meminfo</a><br>\n");
-  response_.append("<a href=\"/proc/overview\">proc_overview</a>\n");
-  response_.append("<a href=\"/proc/pid\">proc_pid</a>\n");                  
-  response_.append("<a href=\"/proc/status\">proc_status</a><br>\n");               
+  response_.append("<a href=\"/proc/overview\">proc_overview</a>\n");   
+  response_.append("<a href=\"/proc/openedFiles\">proc_files</a><br>\n");                 
+  response_.append("<a href=\"/proc/status\">proc_status</a><br>\n");     
+
 #ifdef HAVE_TCMALLOC
 
 response_.append("<a href=\"/pprof/cmdline\">pprof_cmdline</a>\n");
