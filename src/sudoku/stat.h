@@ -66,7 +66,20 @@ class SudokuStat : boost::noncopyable
     result << "15. latency_us_60s(14/12) " << latencyAvg60s << '\n';
     int64_t latencyAvg = totalResponses_ == 0 ? 0 : totalLatency_ / totalResponses_;
     result << "16. latency_us_avg(7/3) " << latencyAvg << '\n';
+    result << "17. now Timestamp " << muduo::Timestamp::now().toString() << '\n';
+    result << "18. now time " << muduo::Timestamp(muduo::Timestamp::now()*1000*1000).toFormattedString(false) << '\n';
+    result << "19. latency_per_request_60 ";
+    //过去60个请求，每个请求的延迟
+    int64_t latencies_of_60=0;
+    for (size_t i = 0; i < latencies_per_request_.size(); ++i)
+    {
+      latencies_of_60 += latencies_per_request_[i];
+      result << ' ' << latencies_per_request_[i];
     }
+    result << '\n';
+    result << "20. latency_per_request_60_avg " << latencies_of_60/60 << '\n';
+    }
+
     return result.buffer().toString();
   }
 
@@ -91,7 +104,9 @@ class SudokuStat : boost::noncopyable
   {
     const time_t second = now.secondsSinceEpoch();
     const int64_t elapsed_us = now.microSecondsSinceEpoch() - receive.microSecondsSinceEpoch();
+
     MutexLockGuard lock(mutex_);
+    latencies_per_request_.push_back(elapsed_us);
     assert(requests_.size() == latencies_.size());
     ++totalResponses_;
     if (solved)
@@ -192,6 +207,7 @@ class SudokuStat : boost::noncopyable
   time_t lastSecond_;
   boost::circular_buffer<int64_t> requests_;
   boost::circular_buffer<int64_t> latencies_;
+  boost::circular_buffer<int64_t> latencies_per_request_;
   int64_t totalRequests_, totalResponses_, totalSolved_, badRequests_, droppedRequests_, totalLatency_, badLatency_;
   // FIXME int128_t for totalLatency_;
 
