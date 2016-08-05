@@ -10,14 +10,14 @@ class SudokuStat : boost::noncopyable
     : pool_(pool),
       lastSecond_(0),
       requests_(kSeconds),
-      latencies_(kSeconds),
+      latencies_(kSeconds),latencies_per_request_(kSeconds),
       totalRequests_(0),
       totalResponses_(0),
       totalSolved_(0),
       badRequests_(0),
       droppedRequests_(0),
       totalLatency_(0),
-      badLatency_(0),latencies_per_request_(kSeconds)
+      badLatency_(0)
   {
   }
 
