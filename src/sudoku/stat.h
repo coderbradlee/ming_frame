@@ -25,46 +25,46 @@ class SudokuStat : boost::noncopyable
   {
     LogStream result;
     size_t queueSize = pool_.queueSize();
-    result << "1、task_queue_size " << queueSize << '\n';
+    result << "1. task_queue_size " << queueSize << '\n';
 
     {
     MutexLockGuard lock(mutex_);
-    result << "2、total_requests " << totalRequests_ << '\n';
-    result << "3、total_responses " << totalResponses_ << '\n';
-    result << "4、total_solved " << totalSolved_ << '\n';
-    result << "5、bad_requests " << badRequests_ << '\n';
-    result << "6、dropped_requests " << droppedRequests_ << '\n';
-    result << "7、latency_sum_us " << totalLatency_ << '\n';
+    result << "2. total_requests " << totalRequests_ << '\n';
+    result << "3. total_responses " << totalResponses_ << '\n';
+    result << "4. total_solved " << totalSolved_ << '\n';
+    result << "5. bad_requests " << badRequests_ << '\n';
+    result << "6. dropped_requests " << droppedRequests_ << '\n';
+    result << "7. latency_sum_us " << totalLatency_ << '\n';
     if (badLatency_ > 0)
     {
-      result << "8、bad_latency " << badLatency_ << '\n';
+      result << "8. bad_latency " << badLatency_ << '\n';
     }
 
-    result << "9、last_second Timestamp " << lastSecond_ << '\n';
-    result << "10、last_second " << muduo::Timestamp(lastSecond_*1000*1000).toFormattedString(false) << '\n';
+    result << "9. last_second Timestamp " << lastSecond_ << '\n';
+    result << "10. last_second " << muduo::Timestamp(lastSecond_*1000*1000).toFormattedString(false) << '\n';
     int64_t requests = 0;
-    result << "11、requests_per_second";
+    result << "11. requests_per_second";
     for (size_t i = 0; i < requests_.size(); ++i)
     {
       requests += requests_[i];
       result << ' ' << requests_[i];
     }
     result << '\n';
-    result << "12、requests_60s total " << requests << '\n';
+    result << "12. requests_60s total " << requests << '\n';
 
     int64_t latency = 0;
-    result << "13、latency_sum_us_per_second";
+    result << "13. latency_sum_us_per_second";
     for (size_t i = 0; i < latencies_.size(); ++i)
     {
       latency += latencies_[i];
       result << ' ' << latencies_[i];
     }
     result << '\n';
-    result << "14、latency_sum_us_60s total " << latency << '\n';
+    result << "14. latency_sum_us_60s total " << latency << '\n';
     int64_t latencyAvg60s = requests == 0 ? 0 : latency / requests;
-    result << "15、latency_us_60s(14/12) " << latencyAvg60s << '\n';
+    result << "15. latency_us_60s(14/12) " << latencyAvg60s << '\n';
     int64_t latencyAvg = totalResponses_ == 0 ? 0 : totalLatency_ / totalResponses_;
-    result << "16、latency_us_avg(7/3) " << latencyAvg << '\n';
+    result << "16. latency_us_avg(7/3) " << latencyAvg << '\n';
     }
     return result.buffer().toString();
   }
