@@ -1,5 +1,7 @@
 // This is not a standalone header
-
+#ifndef STAT_H
+#define STAT_H
+#include <muduo/base/Timestamp.h>
 class SudokuStat : boost::noncopyable
 {
  public:
@@ -34,10 +36,11 @@ class SudokuStat : boost::noncopyable
     result << "latency_sum_us " << totalLatency_ << '\n';
     if (badLatency_ > 0)
     {
-      result << "bad_latency" << badLatency_ << '\n';
+      result << "bad_latency " << badLatency_ << '\n';
     }
 
-    result << "last_second " << lastSecond_ << '\n';
+    result << "last_second Timestamp " << lastSecond_ << '\n';
+    result << "last_second " << muduo::base::Timestamp(lastSecond_).toString() << '\n';
     int64_t requests = 0;
     result << "requests_per_second";
     for (size_t i = 0; i < requests_.size(); ++i)
@@ -193,3 +196,4 @@ class SudokuStat : boost::noncopyable
   static const int kSeconds = 60;
 };
 
+#endif
