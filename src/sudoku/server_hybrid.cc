@@ -37,7 +37,7 @@ class SudokuServer : boost::noncopyable
       startTime_(Timestamp::now()),
       stat_(threadPool_),
       inspectThread_(),
-      inspector_(inspectThread_.startLoop(), InetAddress(9982), "sudoku-solver")
+      inspector_(inspectThread_.startLoop(), InetAddress(12345), "sudoku-solver")
   {
     LOG_INFO << "Use " << numEventLoops << " IO threads.";
     LOG_INFO << "TCP no delay " << nodelay;
