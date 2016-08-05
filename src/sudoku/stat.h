@@ -17,7 +17,7 @@ class SudokuStat : boost::noncopyable
       badRequests_(0),
       droppedRequests_(0),
       totalLatency_(0),
-      badLatency_(0)
+      badLatency_(0),latencies_per_request_(kSeconds)
   {
   }
 
@@ -42,33 +42,9 @@ class SudokuStat : boost::noncopyable
 
     result << "9. last_second Timestamp " << lastSecond_ << '\n';
     result << "10. last_second " << muduo::Timestamp(lastSecond_*1000*1000).toFormattedString(false) << '\n';
-    int64_t requests = 0;
-    result << "11. requests_per_second";
-    for (size_t i = 0; i < requests_.size(); ++i)
-    {
-      requests += requests_[i];
-      result << ' ' << requests_[i];
-    }
-    result << '\n';
-    result << "12. requests_60s total " << requests << '\n';
-
-    int64_t latency = 0;
-    result << "13. latency_sum_us_per_second";
-    //每秒钟的所有请求的延迟的累加
-    for (size_t i = 0; i < latencies_.size(); ++i)
-    {
-      latency += latencies_[i];
-      result << ' ' << latencies_[i];
-    }
-    result << '\n';
-    result << "14. latency_sum_us_60s total " << latency << '\n';
-    int64_t latencyAvg60s = requests == 0 ? 0 : latency / requests;
-    result << "15. latency_us_60s(14/12) " << latencyAvg60s << '\n';
-    int64_t latencyAvg = totalResponses_ == 0 ? 0 : totalLatency_ / totalResponses_;
-    result << "16. latency_us_avg(7/3) " << latencyAvg << '\n';
-    result << "17. now Timestamp " << muduo::Timestamp::now().toString() << '\n';
-    result << "18. now time " << muduo::Timestamp::now().toFormattedString(false) << '\n';
-    result << "19. latency_per_request_60 ";
+    result << "11. now Timestamp " << muduo::Timestamp::now().toString() << '\n';
+    result << "12. now time " << muduo::Timestamp::now().toFormattedString(false) << '\n';
+    result << "13. latency_per_request_60 ";
     //过去60个请求，每个请求的延迟
     int64_t latencies_of_60=0;
     for (size_t i = 0; i < latencies_per_request_.size(); ++i)
@@ -77,7 +53,34 @@ class SudokuStat : boost::noncopyable
       result << ' ' << latencies_per_request_[i];
     }
     result << '\n';
-    result << "20. latency_per_request_60_avg " << latencies_of_60/60 << '\n';
+    result << "14. latency_per_request_60_avg " << latencies_of_60/60 << '\n';
+
+
+    int64_t requests = 0;
+    result << "15. requests_per_second";
+    for (size_t i = 0; i < requests_.size(); ++i)
+    {
+      requests += requests_[i];
+      result << ' ' << requests_[i];
+    }
+    result << '\n';
+    result << "16. requests_60s total " << requests << '\n';
+
+    int64_t latency = 0;
+    result << "17. latency_sum_us_per_second";
+    //每秒钟的所有请求的延迟的累加
+    for (size_t i = 0; i < latencies_.size(); ++i)
+    {
+      latency += latencies_[i];
+      result << ' ' << latencies_[i];
+    }
+    result << '\n';
+    result << "18. latency_sum_us_60s total " << latency << '\n';
+    int64_t latencyAvg60s = requests == 0 ? 0 : latency / requests;
+    result << "19. latency_us_60s(18/16) " << latencyAvg60s << '\n';
+    int64_t latencyAvg = totalResponses_ == 0 ? 0 : totalLatency_ / totalResponses_;
+    result << "20. latency_us_avg(7/3) " << latencyAvg << '\n';
+    
     }
 
     return result.buffer().toString();
