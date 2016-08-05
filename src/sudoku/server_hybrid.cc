@@ -144,6 +144,7 @@ class SudokuServer : boost::noncopyable
   {
     LOG_DEBUG << conn->name();
     string result = solveSudoku(req.puzzle);
+    stat_.recordResponse(Timestamp::now(), req.receiveTime, result != kNoSolution);
     if (req.id.empty())
     {
       conn->send(result + "\r\n");
@@ -152,7 +153,7 @@ class SudokuServer : boost::noncopyable
     {
       conn->send(req.id + ":" + result + "\r\n");
     }
-    stat_.recordResponse(Timestamp::now(), req.receiveTime, result != kNoSolution);
+    
   }
 
   TcpServer server_;
