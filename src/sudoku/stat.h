@@ -67,7 +67,7 @@ class SudokuStat : boost::noncopyable
     int64_t latencyAvg = totalResponses_ == 0 ? 0 : totalLatency_ / totalResponses_;
     result << "16. latency_us_avg(7/3) " << latencyAvg << '\n';
     result << "17. now Timestamp " << muduo::Timestamp::now().toString() << '\n';
-    result << "18. now time " << muduo::Timestamp(muduo::Timestamp::now()*1000*1000).toFormattedString(false) << '\n';
+    result << "18. now time " << muduo::Timestamp::now().toFormattedString(false) << '\n';
     result << "19. latency_per_request_60 ";
     //过去60个请求，每个请求的延迟
     int64_t latencies_of_60=0;
