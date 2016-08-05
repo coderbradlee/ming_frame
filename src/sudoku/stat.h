@@ -70,7 +70,7 @@ class SudokuStat : boost::noncopyable
     //   latency_per_request_60_avg=(double)latencies_of_60/60/requests;
     
     //result << "15. latency_per_request_60_avg " << latencies_of_60/60 <<" ,(15/16)= "<<latency_per_request_60_avg<<" us per request"<< '\n';
-    result << "15. latency_per_request_60_avg(1*1000*1000*count_seconds_have_request/16) " << 1000*1000*count_seconds_have_request/requests <<" us per request"<< '\n';
+    result << "15. latency_per_request_60_avg(1*1000*1000*(count_seconds_have_request-1)/16) " << 1000*1000*(count_seconds_have_request-1)/requests <<" us per request"<< '\n';
 
     
     
