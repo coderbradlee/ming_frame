@@ -41,7 +41,7 @@ class SudokuStat : boost::noncopyable
     }
 
     result << "last_second Timestamp " << lastSecond_ << '\n';
-    result << "last_second " << muduo::Timestamp(lastSecond_).toFormattedString(true) << '\n';
+    result << "last_second " << muduo::Timestamp(lastSecond_*1000).toFormattedString(false) << '\n';
     int64_t requests = 0;
     result << "requests_per_second";
     for (size_t i = 0; i < requests_.size(); ++i)
