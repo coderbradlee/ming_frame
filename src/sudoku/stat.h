@@ -53,7 +53,7 @@ class SudokuStat : boost::noncopyable
       result << ' ' << latencies_per_request_[i];
     }
     result << '\n';
-    result << "14. latency_per_request_60_avg " << latencies_of_60/60 << '\n';
+    result << "14. latency_per_request_60_avg " << latencies_of_60/60 <<" (14/3) "<<latencies_of_60/60/totalResponses_<< '\n';
 
 
     int64_t requests = 0;
