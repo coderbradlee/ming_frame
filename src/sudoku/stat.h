@@ -50,7 +50,7 @@ class SudokuStat : boost::noncopyable
       result << ' ' << requests_[i];
     }
     result << '\n';
-    result << "requests_60s " << requests << '\n';
+    result << "requests_60s total " << requests << '\n';
 
     int64_t latency = 0;
     result << "latency_sum_us_per_second";
@@ -60,11 +60,11 @@ class SudokuStat : boost::noncopyable
       result << ' ' << latencies_[i];
     }
     result << '\n';
-    result << "latency_sum_us_60s " << latency << '\n';
+    result << "latency_sum_us_60s total " << latency << '\n';
     int64_t latencyAvg60s = requests == 0 ? 0 : latency / requests;
-    result << "latency_us_60s " << latencyAvg60s << '\n';
+    result << "latency_us_60s(total latency/total requests) " << latencyAvg60s << '\n';
     int64_t latencyAvg = totalResponses_ == 0 ? 0 : totalLatency_ / totalResponses_;
-    result << "latency_us_avg " << latencyAvg << '\n';
+    result << "latency_us_avg(latency_sum_us/total_responses) " << latencyAvg << '\n';
     }
     return result.buffer().toString();
   }
