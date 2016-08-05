@@ -43,7 +43,7 @@ class SudokuStat : boost::noncopyable
     result << "9. last_second Timestamp " << lastSecond_ << '\n';
     result << "10. last_second " << muduo::Timestamp(lastSecond_*1000*1000).toFormattedString(false) << '\n';
     result << "11. now Timestamp " << muduo::Timestamp::now().toString() << '\n';
-    result << "12. now time " << muduo::Timestamp::now().toFormattedString(false) << '\n';
+    result << "12. now time " << muduo::Timestamp::now().toFormattedString(false) << "\n\n";
     result << "13. latency_per_request_60 ";
     //过去60个请求，每个请求的延迟
     int64_t latencies_of_60=0;
@@ -52,7 +52,7 @@ class SudokuStat : boost::noncopyable
       latencies_of_60 += latencies_per_request_[i];
       result << ' ' << latencies_per_request_[i];
     }
-    result << '\n';
+    result << "\n\n";
 
     int64_t requests = 0;
     result << "14. requests_per_second";
