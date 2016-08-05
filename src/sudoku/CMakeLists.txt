@@ -8,10 +8,10 @@ add_executable(sudoku_solver_threadpool server_threadpool.cc sudoku.cc)
 target_link_libraries(sudoku_solver_threadpool muduo_net_cpp11)
 #
 add_executable(sudoku_solver_hybrid server_hybrid.cc sudoku.cc)
-target_link_libraries(sudoku_solver_hybrid muduo_inspect_cpp11)
+target_link_libraries(sudoku_solver_hybrid muduo_inspect)
 #
 add_executable(sudoku_solver_prod server_prod.cc sudoku.cc)
-target_link_libraries(sudoku_solver_prod muduo_inspect_cpp11)
+target_link_libraries(sudoku_solver_prod muduo_inspect)
 #
 #
 add_executable(sudoku_client_batch batch.cc sudoku.cc)
