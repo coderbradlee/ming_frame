@@ -54,6 +54,7 @@ class SudokuStat : boost::noncopyable
 
     int64_t latency = 0;
     result << "13. latency_sum_us_per_second";
+    //每秒钟的所有请求的延迟的累加
     for (size_t i = 0; i < latencies_.size(); ++i)
     {
       latency += latencies_[i];
