@@ -2,6 +2,7 @@
 #ifndef STAT_H
 #define STAT_H
 #include <muduo/base/Timestamp.h>
+
 class SudokuStat : boost::noncopyable
 {
  public:
@@ -40,7 +41,7 @@ class SudokuStat : boost::noncopyable
     }
 
     result << "last_second Timestamp " << lastSecond_ << '\n';
-    result << "last_second " << muduo::base::Timestamp(lastSecond_).toString() << '\n';
+    result << "last_second " << muduo::Timestamp(lastSecond_).toString() << '\n';
     int64_t requests = 0;
     result << "requests_per_second";
     for (size_t i = 0; i < requests_.size(); ++i)
