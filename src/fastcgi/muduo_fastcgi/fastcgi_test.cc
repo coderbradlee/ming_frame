@@ -1,5 +1,5 @@
-#include <examples/fastcgi/fastcgi.h>
-#include <examples/sudoku/sudoku.h>
+#include <fastcgi.h>
+#include <../../sudoku/sudoku.h>
 
 #include <muduo/base/Logging.h>
 #include <muduo/net/EventLoop.h>
