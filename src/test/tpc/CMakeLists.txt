@@ -1,4 +1,4 @@
-
+include_directories(${PROJECT_SOURCE_DIR}/base)
 set(SRC_LIST Acceptor.cc InetAddress.cc TcpStream.cc Socket.cc)
 
 add_executable(echo ${SRC_LIST} echo.cc)
