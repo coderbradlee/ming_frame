@@ -8,7 +8,7 @@
 #include <boost/bind.hpp>
 
 using namespace muduo::net;
-
+using muduo::string;
 const string kPath = "/sudoku/";
 
 void onRequest(const TcpConnectionPtr& conn,
