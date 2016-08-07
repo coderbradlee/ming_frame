@@ -1,4 +1,4 @@
-#include <fastcgi.h>
+#include "fastcgi.h"
 #include <muduo/base/Logging.h>
 #include <muduo/net/Endian.h>
 
@@ -81,7 +81,7 @@ bool FastCgiCodec::parseAllParams()
       return false;
     if (paramsStream_.readableBytes() >= nameLen+valueLen)
     {
-      string name = paramsStream_.retrieveAsString(nameLen);
+      muduo::string name = paramsStream_.retrieveAsString(nameLen);
       params_[name] = paramsStream_.retrieveAsString(valueLen);
     }
     else
