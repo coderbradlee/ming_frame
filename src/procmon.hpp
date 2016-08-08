@@ -31,7 +31,8 @@
 //
 
 // Represent parsed /proc/pid/stat
-#include "sudoku/sudoku.h"
+//#include "sudoku/sudoku.h"
+#include "sudoku/stat.h"
 struct StatData
 {
   void parse(const char* startAtState, int kbPerPage);
