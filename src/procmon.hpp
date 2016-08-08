@@ -72,7 +72,7 @@ BOOST_STATIC_ASSERT(boost::is_pod<StatData>::value);
 class Procmon : boost::noncopyable
 {
  public:
-  Procmon(muduo::net::EventLoop* loop, pid_t pid, uint16_t port, const char* procname);
+  Procmon(muduo::net::EventLoop* loop, pid_t pid, uint16_t port, const char* procname,SudokuStat& stat);
 
   void start();
 
