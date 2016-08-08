@@ -53,7 +53,7 @@ class SudokuServer : boost::noncopyable
     //                "statistics of sudoku solver");
     // inspector_.add("sudoku", "reset", boost::bind(&SudokuStat::reset, &stat_),
     //                "reset statistics of sudoku solver");
-    inspector_.start();
+    //inspector_.start();
   }
 
   void start()

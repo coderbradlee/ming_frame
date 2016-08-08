@@ -67,7 +67,9 @@ Procmon::Procmon(EventLoop* loop, pid_t pid, uint16_t port, const char* procname
 {
   bzero(&lastStatData_, sizeof lastStatData_);
   server_.setHttpCallback(boost::bind(&Procmon::onRequest, this, _1, _2));
-
+  tick();
+  server_.getLoop()->runEvery(kPeriod_, boost::bind(&Procmon::tick, this));
+  server_.start();
 }
 
 void Procmon::start()
