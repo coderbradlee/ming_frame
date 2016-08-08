@@ -113,6 +113,7 @@ class SudokuStat : boost::noncopyable
     lastSecond_ = 0;
     requests_.clear();
     latencies_.clear();
+    latencies_per_request_.clear();
     totalRequests_ = 0;
     totalResponses_ = 0;
     totalSolved_ = 0;
