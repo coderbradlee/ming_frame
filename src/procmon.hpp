@@ -72,7 +72,7 @@ BOOST_STATIC_ASSERT(boost::is_pod<StatData>::value);
 class Procmon : boost::noncopyable
 {
  public:
-  Procmon(muduo::net::EventLoop* loop, pid_t pid, uint16_t port, const char* procname,SudokuStat& stat);
+  Procmon(muduo::net::EventLoop* loop, pid_t pid, uint16_t port, const char* boost::shared_ptr<SudokuStat> stat);
 
   void start();
 
@@ -256,7 +256,7 @@ private:
   Plot ram_chart_;
   // scratch variables
   muduo::net::Buffer response_;
-  SudokuStat stat_;
+  boost::shared_ptr<SudokuStat> stat_;
 };
 
 // define outline for __attribute__

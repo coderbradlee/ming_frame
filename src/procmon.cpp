@@ -50,7 +50,7 @@ void StatData::parse(const char* startAtState, int kbPerPage)
 }
 
 
-Procmon::Procmon(EventLoop* loop, pid_t pid, uint16_t port, const char* procname,SudokuStat& stat)
+Procmon::Procmon(EventLoop* loop, pid_t pid, uint16_t port, const char* procname,boost::shared_ptr<SudokuStat> stat)
   : kClockTicksPerSecond_(muduo::ProcessInfo::clockTicksPerSecond()),
     kbPerPage_(muduo::ProcessInfo::pageSize() / 1024),
     kBootTime_(getBootTime()),
@@ -228,11 +228,11 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
   }
   else if(req.path() == "/sudoku/stat")
   {
-    resp->setBody(stat_.report());
+    resp->setBody(stat_->report());
   }
   else if(req.path() == "/sudoku/reset")
   {
-    resp->setBody(stat_.reset());
+    resp->setBody(stat_->reset());
   }
   else
   {
