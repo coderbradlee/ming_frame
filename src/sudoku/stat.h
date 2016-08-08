@@ -8,6 +8,7 @@ using muduo::string;
 using muduo::MutexLockGuard;
 using muduo::Timestamp;
 using muduo::MutexLock;
+using muduo::LogStream;
 class SudokuStat : boost::noncopyable
 {
  public:
