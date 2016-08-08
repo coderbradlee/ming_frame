@@ -2,9 +2,11 @@
 #ifndef STAT_H
 #define STAT_H
 #include <muduo/base/Timestamp.h>
+#include <muduo/base/ThreadPool.h>
 using muduo::ThreadPool;
 using muduo::string;
 using muduo::MutexLockGuard;
+using muduo::Timestamp;
 class SudokuStat : boost::noncopyable
 {
  public:
