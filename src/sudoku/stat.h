@@ -3,6 +3,7 @@
 #define STAT_H
 #include <muduo/base/Timestamp.h>
 #include <muduo/base/ThreadPool.h>
+#include <muduo/base/Logging.h>
 using muduo::ThreadPool;
 using muduo::string;
 using muduo::MutexLockGuard;
