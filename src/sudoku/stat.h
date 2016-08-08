@@ -7,6 +7,7 @@ using muduo::ThreadPool;
 using muduo::string;
 using muduo::MutexLockGuard;
 using muduo::Timestamp;
+using muduo::MutexLock;
 class SudokuStat : boost::noncopyable
 {
  public:
