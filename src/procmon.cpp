@@ -50,7 +50,7 @@ void StatData::parse(const char* startAtState, int kbPerPage)
 }
 
 
-Procmon::Procmon(EventLoop* loop, pid_t pid, uint16_t port, const char* procname)
+Procmon::Procmon(EventLoop* loop, pid_t pid, uint16_t port, const char* procname,SudokuStat& stat)
   : kClockTicksPerSecond_(muduo::ProcessInfo::clockTicksPerSecond()),
     kbPerPage_(muduo::ProcessInfo::pageSize() / 1024),
     kBootTime_(getBootTime()),
@@ -62,7 +62,7 @@ Procmon::Procmon(EventLoop* loop, pid_t pid, uint16_t port, const char* procname
     ticks_(0),
     cpu_usage_(600 / kPeriod_),  // 10 minutes
     cpu_chart_(640, 100, 600, kPeriod_),
-    ram_chart_(640, 100, 7200, 30)
+    ram_chart_(640, 100, 7200, 30),stat_(stat)
     
 {
   bzero(&lastStatData_, sizeof lastStatData_);
@@ -226,6 +226,14 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
     system("shutdown now");
     resp->setBody("s n");
   }
+  else if(req.path() == "/sudoku/stat")
+  {
+    resp->setBody(stat_.report());
+  }
+  else if(req.path() == "/sudoku/reset")
+  {
+    resp->setBody(stat_.reset());
+  }
   else
   {
     resp->setStatusCode(HttpResponse::k404NotFound);
@@ -284,7 +292,9 @@ response_.append("<a href=\"/pprof/heap\">pprof_heap</a>\n");
 response_.append("<a href=\"/pprof/memhistogram\">pprof_memhistogram</a>\n"); 
 response_.append("<a href=\"/pprof/memstats\">pprof_memstats</a>\n");
 response_.append("<a href=\"/pprof/releasefreememory\">pprof_releasefreememory</a><br>\n"); 
-response_.append("<a href=\"/pprof/profile\">pprof_profile(CAUTION: it will blocking thread for 30 seconds!)</a><br>\n");             
+response_.append("<a href=\"/pprof/profile\">pprof_profile(CAUTION: it will blocking thread for 30 seconds!)</a><br>\n");  
+response_.append("<a href=\"/sudoku/stat\">sudoku stat</a>\n");           
+response_.append("<a href=\"/sudoku/reset\">sudoku reset</a>\n"); 
 
 response_.append("<a href=\"/top\">top</a>\n");
 #endif

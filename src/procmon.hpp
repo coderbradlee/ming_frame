@@ -31,6 +31,7 @@
 //
 
 // Represent parsed /proc/pid/stat
+#include "sudoku/sudoku.h"
 struct StatData
 {
   void parse(const char* startAtState, int kbPerPage);
@@ -254,7 +255,7 @@ private:
   Plot ram_chart_;
   // scratch variables
   muduo::net::Buffer response_;
-
+  SudokuStat stat_;
 };
 
 // define outline for __attribute__
