@@ -56,8 +56,8 @@ namespace test1
 			    B b;                                                            
 			    
 			    B *ptr =(B *)&a;
-			    cout<<"ptr->foo()----";ptr->foo();
-			    cout<<"ptr->fuu()-----";ptr->fuu();
+			    LOG_INFO<<"ptr->foo()----";ptr->foo();
+			    LOG_INFO<<"ptr->fuu()-----";ptr->fuu();
 			    
 			}
 
