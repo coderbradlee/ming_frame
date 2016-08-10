@@ -64,11 +64,11 @@ namespace test1_namespace
 			    A a;
 			    B b;                                                            
 			    
-			    B *ptr =(B *)&a;
+			    //B *ptr =(B *)&a;
 			    
 			    //ptr->foo();
 			    
-			    ptr->fuu();
+			    //ptr->fuu();
 
 			    
 			}
