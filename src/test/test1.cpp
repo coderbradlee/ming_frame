@@ -56,8 +56,8 @@ namespace test1
 			    B b;                                                            
 			    
 			    B *ptr =(B *)&a;
-			    LOG_INFO<<"ptr->foo()----";ptr->foo();
-			    LOG_INFO<<"ptr->fuu()-----";ptr->fuu();
+			    printf("ptr->foo()----");ptr->foo();
+			    printf("ptr->fuu()-----");ptr->fuu();
 			    
 			}
 
