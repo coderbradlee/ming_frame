@@ -242,10 +242,11 @@ private:
   {
     muduo::string ret;
     FILE *pp = popen(cmd, "r"); //建立管道
-    if (!pp) {
+    if (!pp) 
+    {
         return "error";
     }
-    char tmp[1024]={0}; //设置一个合适的长度，以存储每一行输出
+    char tmp[2048]={0}; //设置一个合适的长度，以存储每一行输出
     while (fgets(tmp, sizeof(tmp), pp) != NULL) {
         // if (tmp[strlen(tmp) - 1] == '\n') {
         //     tmp[strlen(tmp) - 1] = '\0'; //去除换行符
