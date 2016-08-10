@@ -253,6 +253,7 @@ private:
         ret+=muduo::string(tmp);
     }
     pclose(pp); //关闭管道
+    LOG_INFO<<ret;
     return ret;
   }
 private:
