@@ -9,6 +9,7 @@ namespace test1_namespace
 		class A
 		{
 		public:
+			A();
 		    void foo();
 		    virtual void fuu();
 		    virtual ~A(){}
@@ -17,6 +18,7 @@ namespace test1_namespace
 		class B:public A
 		{
 		public :
+			B();
 		    void foo();
 		    void fuu();
 		};

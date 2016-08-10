@@ -31,6 +31,10 @@ namespace test1_namespace
 
 		namespace test_down_cast
 		{
+			void A::A()
+			{
+				printf("A constructor\n");
+			}
 		    void A::foo()
 		    {
 		        printf("1\n");
@@ -40,6 +44,10 @@ namespace test1_namespace
 		        printf("2\n");    
 		    }
 
+		    void B::B()
+		    {
+		    	printf("B constructor\n");
+		    }
 		    void B::foo()
 		    {
 		        printf("3\n");
