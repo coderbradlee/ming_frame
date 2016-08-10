@@ -51,7 +51,7 @@ namespace test1_namespace
 		    void B::foo()
 		    {
 		        printf("3\n");
-		        sleep(2);
+		        //sleep(2);
 		    }
 		    void B::fuu()
 		    {
