@@ -246,14 +246,14 @@ int main(int argc, char* argv[])
     }
 
  
-    test1::test1();
+    //test1::test1();
    
     EventLoop loop;
     InetAddress listenAddr(9981);
     SudokuServer server(&loop, listenAddr, numEventLoops, numThreads, nodelay);
 
-    // server.start();
+    server.start();
 
-    // loop.loop();
+    loop.loop();
 }
 
