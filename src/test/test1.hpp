@@ -11,6 +11,7 @@ namespace test1
 		public:
 		    void foo();
 		    virtual void fuu();
+		    virtual ~A(){}
 		};
 
 		class B:public A
