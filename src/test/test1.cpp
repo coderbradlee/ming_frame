@@ -31,7 +31,7 @@ namespace test1_namespace
 
 		namespace test_down_cast
 		{
-			void A::A()
+			A::A()
 			{
 				printf("A constructor\n");
 			}
@@ -44,7 +44,7 @@ namespace test1_namespace
 		        printf("2\n");    
 		    }
 
-		    void B::B()
+		    B::B()
 		    {
 		    	printf("B constructor\n");
 		    }
