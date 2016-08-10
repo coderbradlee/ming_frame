@@ -68,7 +68,7 @@ namespace test1_namespace
 			    
 			    ptr->foo();
 			    
-			    //ptr->fuu();
+			    ptr->fuu();
 
 			    
 			}
