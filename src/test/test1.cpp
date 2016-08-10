@@ -51,6 +51,7 @@ namespace test1
 			
 			void test()
 			{
+				printf("test()\n");
 			    A a;
 			    B b;                                                            
 			    
