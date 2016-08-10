@@ -56,8 +56,10 @@ namespace test1
 			    B b;                                                            
 			    
 			    B *ptr =(B *)&a;
-			    //printf("ptr->foo()----");ptr->foo();
-			    printf("ptr->fuu()-----");ptr->fuu();
+			    printf("ptr->foo()----");
+			    //ptr->foo();
+			    //printf("ptr->fuu()-----");
+			    //ptr->fuu();
 			    
 			}
 
