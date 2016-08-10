@@ -247,12 +247,26 @@ private:
         return "error";
     }
     char tmp[2048]={0}; //设置一个合适的长度，以存储每一行输出
-    while (fgets(tmp, sizeof(tmp), pp) != NULL) {
-        // if (tmp[strlen(tmp) - 1] == '\n') {
-        //     tmp[strlen(tmp) - 1] = '\0'; //去除换行符
-        // }
-        ret+=muduo::string(tmp);
+    int d = fileno(pp);
+    fcntl(d, F_SETFL, O_NONBLOCK);
+    
+    ssize_t r = read(d, tmp, sizeof(tmp));
+    if (r == -1 && errno == EAGAIN)
+    {
+        return "no data yet";
     }
+    else if (r > 0)
+    { 
+      ret+=muduo::string(tmp);
+    }
+    // else
+    //     pipe closed
+    // while (fgets(tmp, sizeof(tmp), pp) != NULL) {
+    //     // if (tmp[strlen(tmp) - 1] == '\n') {
+    //     //     tmp[strlen(tmp) - 1] = '\0'; //去除换行符
+    //     // }
+    //     ret+=muduo::string(tmp);
+    // }
     pclose(pp); //关闭管道
     LOG_INFO<<ret;
     return ret;
