@@ -243,7 +243,7 @@ private:
     string ret;
     FILE *pp = popen(cmd, "r"); //建立管道
     if (!pp) {
-        return -1;
+        return "error";
     }
     char tmp[1024]; //设置一个合适的长度，以存储每一行输出
     while (fgets(tmp, sizeof(tmp), pp) != NULL) {
