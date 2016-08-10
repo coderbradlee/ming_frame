@@ -297,7 +297,7 @@ namespace test1
 		void thread_func();
 		void test();
 	}
-	void test1();
+	void test11();
 }
 #endif
 
