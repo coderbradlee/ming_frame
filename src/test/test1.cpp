@@ -39,8 +39,7 @@ namespace test1
 		    {
 		        printf("2\n");    
 		    }
-		
-			
+
 		    void B::foo()
 		    {
 		        printf("3\n");

@@ -252,8 +252,8 @@ int main(int argc, char* argv[])
     InetAddress listenAddr(9981);
     SudokuServer server(&loop, listenAddr, numEventLoops, numThreads, nodelay);
 
-    server.start();
+    // server.start();
 
-    loop.loop();
+    // loop.loop();
 }
 
