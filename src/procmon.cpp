@@ -218,7 +218,8 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
   }
   else if (req.path() == "/top")
   {
-    resp->setBody(myexec("top"));
+    //resp->setBody(myexec("top"));
+    resp->setBody(myexec("ps -fe|grep ming"));
   }
   else if (req.path() == "/__xx__n")
   {
