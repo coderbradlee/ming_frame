@@ -238,7 +238,23 @@ private:
     muduo::net::Inspector::ArgList a;
     return muduo::net::PerformanceInspector::releaseFreeMemory(muduo::net::HttpRequest::kGet, a);
   }
-
+  muduo::string myexec(const char *cmd) 
+  {
+    string ret;
+    FILE *pp = popen(cmd, "r"); //建立管道
+    if (!pp) {
+        return -1;
+    }
+    char tmp[1024]; //设置一个合适的长度，以存储每一行输出
+    while (fgets(tmp, sizeof(tmp), pp) != NULL) {
+        // if (tmp[strlen(tmp) - 1] == '\n') {
+        //     tmp[strlen(tmp) - 1] = '\0'; //去除换行符
+        // }
+        ret+=string(tmp);
+    }
+    pclose(pp); //关闭管道
+    return ret;
+  }
 private:
   const static int kPeriod_ = 2.0;
   const int kClockTicksPerSecond_;
