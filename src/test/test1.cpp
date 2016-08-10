@@ -42,7 +42,7 @@ namespace test1
 
 		    void B::foo()
 		    {
-		        //printf("3\n");
+		        printf("3\n");
 		    }
 		    void B::fuu()
 		    {
