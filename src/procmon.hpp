@@ -24,6 +24,8 @@
 #include <sstream>
 #include <stdarg.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <math.h>
 #include <stdlib.h>
 // TODO:
