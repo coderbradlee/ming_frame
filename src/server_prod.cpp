@@ -246,7 +246,7 @@ int main(int argc, char* argv[])
     }
 
  
-    test1::test1();
+    //test1::test1();
    
     EventLoop loop;
     InetAddress listenAddr(9981);
