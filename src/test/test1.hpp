@@ -12,10 +12,10 @@ namespace test1_namespace
 			//A();
 		    void foo();
 		    virtual void fuu();
-		    // virtual ~A()
-		    // {
-		    // 	printf("~A\n");
-		    // }
+		    virtual ~A()
+		    {
+		    	//printf("~A\n");
+		    }
 		};
 
 		class B:public A
