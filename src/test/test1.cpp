@@ -42,7 +42,8 @@ namespace test1
 
 		    void B::foo()
 		    {
-		        printf("3\n");
+		        //printf("3\n");
+		        std::cout<<"3"<<std::endl;
 		    }
 		    void B::fuu()
 		    {
