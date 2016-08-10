@@ -59,7 +59,7 @@ namespace test1
 			    // printf("ptr->foo()----");
 			    
 			    //ptr->foo();
-			    printf("ptr->fuu()-----");
+			    printf("ptr->fuu()-----\n");
 			    //ptr->fuu();
 			    
 			}
