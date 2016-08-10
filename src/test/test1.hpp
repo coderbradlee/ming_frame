@@ -4,6 +4,23 @@
 #include "../include.hpp"
 namespace test1
 {
+	namespace test_down_cast
+	{
+		class A
+		{
+		public:
+		    void foo();
+		    virtual void fuu();
+		};
+
+		class B:public A
+		{
+		public :
+		    void foo();
+		    void fuu();
+		};
+		void test();
+	}
 	namespace test_timing_wheel_idleconnection
 	{
 		class echo_server

@@ -26,6 +26,41 @@ namespace test1
 			//test_muduo_multithread_timer_shortcritical_section::test();
 			//test_round_trip::test();
 			//test_timing_wheel_idleconnection::test();
+			test_down_cast::test();
+		}
+
+		namespace test_down_cast
+		{
+		    void A::foo()
+		    {
+		        printf("1\n");
+		    }
+		    void A::fuu()
+		    {
+		        printf("2\n");    
+		    }
+		
+			
+		    void B::foo()
+		    {
+		        printf("3\n");
+		    }
+		    void B::fuu()
+		    {
+		        printf("4\n");
+		    }
+			
+			void test()
+			{
+			    A a;
+			    B b;                                                            
+			    
+			    B *ptr =(B *)&a;
+			    cout<<"ptr->foo()----";ptr->foo();
+			    cout<<"ptr->fuu()-----";ptr->fuu();
+			    
+			}
+
 		}
 		namespace test_timing_wheel_idleconnection
 		{
