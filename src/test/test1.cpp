@@ -52,15 +52,14 @@ namespace test1
 			
 			void test()
 			{
-			    // A a;
-			    // B b;                                                            
+			    A a;
+			    B b;                                                            
 			    
-			    // B *ptr =(B *)&a;
-			    // printf("ptr->foo()----");
+			    B *ptr =(B *)&a;
 			    
-			    //ptr->foo();
-			    printf("ptr->fuu()-----\n");
-			    //ptr->fuu();
+			    ptr->foo();
+			    
+			    ptr->fuu();
 			    
 			}
 
