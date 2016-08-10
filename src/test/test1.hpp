@@ -24,10 +24,10 @@ namespace test1_namespace
 			B();
 		    void foo();
 		    void fuu();
-		    ~B()
-		    {
-		    	printf("~B\n");
-		    }
+		    // ~B()
+		    // {
+		    // 	printf("~B\n");
+		    // }
 		};
 		void test();
 	}
