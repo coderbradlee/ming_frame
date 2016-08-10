@@ -12,7 +12,8 @@
 add_subdirectory(fastcgi)
 add_subdirectory(test)
 add_subdirectory(sudoku)
-
+add_subdirectory(memcached/client)
+add_subdirectory(memcached/server)
 #set(SRC_LIST log.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc  config.cpp main.cpp)
 #set(SRC_LIST config.cpp log.cpp sudoku/sudoku.cc mysql_connect.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc test/test.cpp test/test1.cpp shorturl.cpp main.cpp)
 
