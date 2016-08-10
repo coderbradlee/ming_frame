@@ -1,5 +1,5 @@
 #include "test1.hpp"
-namespace test1
+namespace test1_namespace
 {
 	using namespace boost::posix_time;
 	using std::string;

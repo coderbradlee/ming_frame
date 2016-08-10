@@ -2,7 +2,7 @@
 #define	TEST1_HPP
 #include "../log.hpp"
 #include "../include.hpp"
-namespace test1
+namespace test1_namespace
 {
 	namespace test_down_cast
 	{
