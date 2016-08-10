@@ -240,7 +240,7 @@ private:
   }
   muduo::string myexec(const char *cmd) 
   {
-    string ret;
+    muduo::string ret;
     FILE *pp = popen(cmd, "r"); //建立管道
     if (!pp) {
         return "error";
@@ -250,7 +250,7 @@ private:
         // if (tmp[strlen(tmp) - 1] == '\n') {
         //     tmp[strlen(tmp) - 1] = '\0'; //去除换行符
         // }
-        ret+=string(tmp);
+        ret+=muduo::string(tmp);
     }
     pclose(pp); //关闭管道
     return ret;
