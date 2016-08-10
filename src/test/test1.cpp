@@ -58,7 +58,7 @@ namespace test1_namespace
 			    
 			    B *ptr =(B *)&a;
 			    
-			    ptr->foo();
+			    //ptr->foo();
 			    
 			    ptr->fuu();
 
