@@ -1,3 +1,6 @@
+#include <boost/program_options.hpp>
+#include "log.hpp"
+#include "fastcgi/fastcgi_resource.h"
 #include "sudoku/sudoku.h"
 
 #include <muduo/base/Atomic.h>
@@ -21,9 +24,7 @@ using namespace muduo;
 using namespace muduo::net;
 
 #include "sudoku/stat.h"
-#include <boost/program_options.hpp>
-#include "log.hpp"
-#include "fastcgi/fastcgi_resource.h"
+
 class SudokuServer : boost::noncopyable
 {
  public:
