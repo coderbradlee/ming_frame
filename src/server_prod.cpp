@@ -21,7 +21,9 @@ using namespace muduo;
 using namespace muduo::net;
 
 #include "sudoku/stat.h"
-
+#include <boost/program_options.hpp>
+#include "log.hpp"
+#include "fastcgi/fastcgi_resource.h"
 class SudokuServer : boost::noncopyable
 {
  public:
@@ -223,6 +225,7 @@ class SudokuServer : boost::noncopyable
 
 int main(int argc, char* argv[])
 {
+  init_log();
   LOG_INFO << argv[0] << " [number of IO threads] [number of worker threads] [-n]";
   LOG_INFO << "pid = " << getpid() << ", tid = " << CurrentThread::tid();
   int numEventLoops = 0;
@@ -241,12 +244,15 @@ int main(int argc, char* argv[])
     nodelay = true;
   }
 
-  EventLoop loop;
-  InetAddress listenAddr(9981);
-  SudokuServer server(&loop, listenAddr, numEventLoops, numThreads, nodelay);
+ 
+    test1::test1();
+   
+    EventLoop loop;
+    InetAddress listenAddr(9981);
+    SudokuServer server(&loop, listenAddr, numEventLoops, numThreads, nodelay);
 
-  server.start();
+    server.start();
 
-  loop.loop();
+    loop.loop();
 }
 
