@@ -6,7 +6,7 @@
 
 #include <muduo/base/Mutex.h>
 #include <muduo/net/TcpServer.h>
-#include <examples/wordcount/hash.h>
+#include "hash.h"
 
 #include <boost/array.hpp>
 #include <boost/noncopyable.hpp>
