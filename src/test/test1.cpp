@@ -62,7 +62,7 @@ namespace test1_namespace
 			{
 				printf("test()\n");
 			    A a;
-			    B b;               
+			    //B b;               
 			    B *ptr =(B *)&a;
 			    
 			    ptr->foo();
