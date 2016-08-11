@@ -48,7 +48,7 @@ namespace test1_namespace
 			{
 				std::cout<<"test_class constructor"<<std::endl;
 			}
-			test_class(const test_class&)//:reference_couter()
+			test_class(const test_class&):reference_couter()
 			{
 				std::cout<<"copy constructor"<<std::endl;
 			}
