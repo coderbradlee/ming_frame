@@ -10,8 +10,14 @@ namespace test1_namespace
 		{
 		public:
 			//A();
-		    void foo();
-		    virtual void fuu();
+		    void foo()
+		    {
+		    	std::cout<<"1"<<std::endl;
+		    }
+		    virtual void fuu()
+		    {
+		    	std::cout<<"2"<<std::endl;
+		    }
 		    virtual ~A()
 		    {
 		    	//printf("~A\n");
@@ -23,14 +29,28 @@ namespace test1_namespace
 		{
 		public :
 			//B();
-		    void foo();
-		    void fuu();
-		    // ~B()
-		    // {
-		    // 	printf("~B\n");
-		    // }
+		    void foo()
+		    {
+		    	std::cout<<"3"<<std::endl;
+		    }
+		    void fuu()
+		    {
+		    	std::cout<<"3"<<std::endl;
+		    }
 		};
-		void test();
+		void test()
+		{
+				//printf("test()\n");
+			std::cout<<"test()"<<std::endl;
+		    A a;
+		    //B b;               
+		    B *ptr =(B *)&a;
+		    
+		    ptr->foo();
+		    
+		    ptr->fuu();
+   
+		}
 	}
 	namespace test_timing_wheel_idleconnection
 	{
