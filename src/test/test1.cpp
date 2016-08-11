@@ -46,12 +46,12 @@ namespace test1_namespace
 		{
 			std::cout<<"do stuff"<<std::endl;
 		}
-		class A
+		class A:public boost::enable_shared_from_this<A>
 		{
 		public:
 			void call()
 			{
-				boost::shared_ptr<A> p(this);
+				boost::shared_ptr<A> p(boost::shared_from_this());
 				do_stuff(p);
 			}
 		};
