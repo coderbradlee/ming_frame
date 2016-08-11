@@ -44,15 +44,20 @@ namespace test1_namespace
 		class A;
 		void do_stuff(boost::shared_ptr<A> p)
 		{
-			std::cout<<"do stuff"<<std::endl;
+			std::cout<<"shared_ptr do stuff"<<std::endl;
+		}
+		void do_stuff(boost::intrusive_ptr<A> p)
+		{
+			std::cout<<"intrusive_ptr do stuff"<<std::endl;
 		}
 		class A:public boost::enable_shared_from_this<A>
 		{
 		public:
 			void call()
 			{
-				boost::shared_ptr<A> p(shared_from_this());
-				do_stuff(p);
+				// boost::shared_ptr<A> p(shared_from_this());
+				// do_stuff(p);
+				do_stuff(this);
 			}
 		};
 		void test()
