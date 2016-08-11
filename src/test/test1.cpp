@@ -49,7 +49,7 @@ namespace test1_namespace
 		class A
 		{
 		public:
-			call()
+			void call()
 			{
 				boost::shared_ptr<A> p(this);
 				do_stuff(p);
