@@ -14,7 +14,7 @@ namespace test1_namespace
 		    virtual void fuu();
 		    virtual ~A()
 		    {
-		    	printf("~A\n");
+		    	//printf("~A\n");
 		    }
 		};
 

@@ -37,11 +37,13 @@ namespace test1_namespace
 			// }
 		    void A::foo()
 		    {
-		        printf("1\n");
+		        //printf("1\n");
+		        std::cout<<"1"<<std::endl;
 		    }
 		    void A::fuu()
 		    {
-		        printf("2\n");    
+		        //printf("2\n"); 
+		        std::cout<<"2"<<std::endl;   
 		    }
 
 		    // B::B()
@@ -50,17 +52,20 @@ namespace test1_namespace
 		    // }
 		    void B::foo()
 		    {
-		        printf("3\n");
+		        //printf("3\n");
 		        //sleep(2);
+		        std::cout<<"3"<<std::endl;
 		    }
 		    void B::fuu()
 		    {
-		        printf("4\n");
+		        //printf("4\n");
+		        std::cout<<"4"<<std::endl;
 		    }
 			
 			void test()
 			{
-				printf("test()\n");
+				//printf("test()\n");
+				std::cout<<"test()"<<std::endl;
 			    A a;
 			    //B b;               
 			    B *ptr =(B *)&a;
