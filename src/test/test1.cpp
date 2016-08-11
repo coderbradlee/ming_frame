@@ -50,7 +50,8 @@ namespace test1_namespace
 		{
 			std::cout<<"intrusive_ptr do stuff"<<std::endl;
 		}
-		class A:public reference_counter//public boost::enable_shared_from_this<A>
+		class A:public reference_counter
+		//public boost::enable_shared_from_this<A>
 		{
 		public:
 			void call()
