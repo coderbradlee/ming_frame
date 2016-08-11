@@ -54,7 +54,7 @@ namespace test1_namespace
 				boost::shared_ptr<A> p(this);
 				do_stuff(p);
 			}
-		}
+		};
 		void test()
 		{
 			std::cout<<"before"<<std::endl;
