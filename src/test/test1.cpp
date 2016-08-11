@@ -31,52 +31,51 @@ namespace test1_namespace
 
 		namespace test_down_cast
 		{
-			// A::A()
-			// {
-			// 	printf("A constructor\n");
-			// }
-		    // void A::foo()
-		    // {
-		    //     //printf("1\n");
-		    //     std::cout<<"1"<<std::endl;
-		    // }
-		    // void A::fuu()
-		    // {
-		    //     //printf("2\n"); 
-		    //     std::cout<<"2"<<std::endl;   
-		    // }
+			class A
+			{
+			public:
+				//A();
+			    void foo()
+			    {
+			    	std::cout<<"1"<<std::endl;
+			    }
+			    virtual void fuu()
+			    {
+			    	std::cout<<"2"<<std::endl;
+			    }
+			    virtual ~A()
+			    {
+			    	//printf("~A\n");
+			    	std::cout<<"~A"<<std::endl;
+			    }
+			};
 
-		    // B::B()
-		    // {
-		    // 	printf("B constructor\n");
-		    // }
-		    // void B::foo()
-		    // {
-		    //     //printf("3\n");
-		    //     //sleep(2);
-		    //     std::cout<<"3"<<std::endl;
-		    // }
-		    // void B::fuu()
-		    // {
-		    //     //printf("4\n");
-		    //     std::cout<<"4"<<std::endl;
-		    // }
-			
-			// void test()
-			// {
-			// 	//printf("test()\n");
-			// 	std::cout<<"test()"<<std::endl;
-			//     A a;
-			//     //B b;               
-			//     B *ptr =(B *)&a;
+			class B:public A
+			{
+			public :
+				//B();
+			    void foo()
+			    {
+			    	std::cout<<"3"<<std::endl;
+			    }
+			    void fuu()
+			    {
+			    	std::cout<<"3"<<std::endl;
+			    }
+			};
+			void test()
+			{
+					//printf("test()\n");
+				std::cout<<"test()"<<std::endl;
+			    A a;
+			    //B b;               
+			    B *ptr =(B *)&a;
 			    
-			//     ptr->foo();
+			    ptr->foo();
 			    
-			//     ptr->fuu();
-
-			    
-			// }
-
+			    ptr->fuu();
+	   
+			}
 		}
 		namespace test_timing_wheel_idleconnection
 		{

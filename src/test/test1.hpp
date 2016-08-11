@@ -4,54 +4,54 @@
 #include "../include.hpp"
 namespace test1_namespace
 {
-	namespace test_down_cast
-	{
-		class A
-		{
-		public:
-			//A();
-		    void foo()
-		    {
-		    	std::cout<<"1"<<std::endl;
-		    }
-		    virtual void fuu()
-		    {
-		    	std::cout<<"2"<<std::endl;
-		    }
-		    virtual ~A()
-		    {
-		    	//printf("~A\n");
-		    	std::cout<<"~A"<<std::endl;
-		    }
-		};
+	// namespace test_down_cast
+	// {
+	// 	class A
+	// 	{
+	// 	public:
+	// 		//A();
+	// 	    void foo()
+	// 	    {
+	// 	    	std::cout<<"1"<<std::endl;
+	// 	    }
+	// 	    virtual void fuu()
+	// 	    {
+	// 	    	std::cout<<"2"<<std::endl;
+	// 	    }
+	// 	    virtual ~A()
+	// 	    {
+	// 	    	//printf("~A\n");
+	// 	    	std::cout<<"~A"<<std::endl;
+	// 	    }
+	// 	};
 
-		class B:public A
-		{
-		public :
-			//B();
-		    void foo()
-		    {
-		    	std::cout<<"3"<<std::endl;
-		    }
-		    void fuu()
-		    {
-		    	std::cout<<"3"<<std::endl;
-		    }
-		};
-		void test()
-		{
-				//printf("test()\n");
-			std::cout<<"test()"<<std::endl;
-		    A a;
-		    //B b;               
-		    B *ptr =(B *)&a;
+	// 	class B:public A
+	// 	{
+	// 	public :
+	// 		//B();
+	// 	    void foo()
+	// 	    {
+	// 	    	std::cout<<"3"<<std::endl;
+	// 	    }
+	// 	    void fuu()
+	// 	    {
+	// 	    	std::cout<<"3"<<std::endl;
+	// 	    }
+	// 	};
+	// 	void test()
+	// 	{
+	// 			//printf("test()\n");
+	// 		std::cout<<"test()"<<std::endl;
+	// 	    A a;
+	// 	    //B b;               
+	// 	    B *ptr =(B *)&a;
 		    
-		    ptr->foo();
+	// 	    ptr->foo();
 		    
-		    ptr->fuu();
+	// 	    ptr->fuu();
    
-		}
-	}
+	// 	}
+	// }
 	namespace test_timing_wheel_idleconnection
 	{
 		class echo_server
