@@ -3,31 +3,7 @@ namespace test1_namespace
 {
 	using namespace boost::posix_time;
 	using std::string;
-	void test11()
-		{
-			//test_model_design_factory::test();
-			//test_model_design_prototype::test();
-			//test_model_design_builder::test();
-			//test_deadline_timer::test();
-			//test_json_parser::test();
-			//test_design_model_flyweight::test();
-			//test_design_model_state::test();
-			//test_design_model_composite::test();
-			//test_design_model_chainofresponsibility::test();
-			//test_design_model_visitor::test();
-			//test_design_model_interpreter::test();
-			//test_observer_thread_safe::test();
-			//test_weak_ptr::test();
-			//test_using_nonrecursive_mutex::test();
-			//test_dead_lock::test();
-			//test_exit_thread::test();
-			//test_muduo_asio_timer::test();
-			//test_muduo_multithread_timer::test();
-			//test_muduo_multithread_timer_shortcritical_section::test();
-			//test_round_trip::test();
-			//test_timing_wheel_idleconnection::test();
-			test_down_cast::test();
-		}
+	
 
 		namespace test_down_cast
 		{
@@ -76,6 +52,31 @@ namespace test1_namespace
 			    ptr->fuu();
 	   
 			}
+		}
+		void test11()
+		{
+			//test_model_design_factory::test();
+			//test_model_design_prototype::test();
+			//test_model_design_builder::test();
+			//test_deadline_timer::test();
+			//test_json_parser::test();
+			//test_design_model_flyweight::test();
+			//test_design_model_state::test();
+			//test_design_model_composite::test();
+			//test_design_model_chainofresponsibility::test();
+			//test_design_model_visitor::test();
+			//test_design_model_interpreter::test();
+			//test_observer_thread_safe::test();
+			//test_weak_ptr::test();
+			//test_using_nonrecursive_mutex::test();
+			//test_dead_lock::test();
+			//test_exit_thread::test();
+			//test_muduo_asio_timer::test();
+			//test_muduo_multithread_timer::test();
+			//test_muduo_multithread_timer_shortcritical_section::test();
+			//test_round_trip::test();
+			//test_timing_wheel_idleconnection::test();
+			test_down_cast::test();
 		}
 		namespace test_timing_wheel_idleconnection
 		{
