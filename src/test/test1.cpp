@@ -3,7 +3,71 @@ namespace test1_namespace
 {
 	using namespace boost::posix_time;
 	using std::string;
-	
+	namespace test_intrusive_ptr
+	{
+		template<typename T>
+		void instrusive_ptr_add_ref(T* t)
+		{
+			t->add_ref();
+		}
+		template<typename T>
+		void instrusive_ptr_release(T* t)
+		{
+			if(t->release()<=0)
+			{
+				delete t;
+			}
+		}
+		class reference_couter
+		{
+		public:
+			reference_couter():m_ref_count(0){}
+			virtual ~reference_couter(){}
+			void add_ref()
+			{
+				++m_ref_count;
+			}
+			int release()
+			{
+				return --m_ref_count;
+			}
+		protected:
+			reference_couter& operator=(const reference_couter&)
+			{
+				return *this;
+			}
+		private:
+			reference_couter(const reference_couter&);
+		private:
+			int m_ref_count;
+		};
+		class test_class:public reference_couter
+		{
+		public:
+			test_class()
+			{
+				std::cout<<"test_class constructor"<<std::endl;
+			}
+			test_class(const test_class&)
+			{
+				std::cout<<"copy constructor"<<std::endl;
+			}
+			~test_class()
+			{
+				std::cout<<"~test_class"<<std::endl;
+			}
+		};
+		void test()
+		{
+			std::cout<<"before"<<std::endl;
+			{
+				boost::intrusive_ptr<test_class> p(new test_class());
+				boost::intrusive_ptr<test_class> p1(p);
+				std::cout<<sizeof(p)<<std::endl;
+			}
+			std::cout<<"after"<<std::endl;
+		}
+	}
 
 		namespace test_down_cast
 		{
@@ -76,7 +140,8 @@ namespace test1_namespace
 			//test_muduo_multithread_timer_shortcritical_section::test();
 			//test_round_trip::test();
 			//test_timing_wheel_idleconnection::test();
-			test_down_cast::test();
+			//test_down_cast::test();
+			test_intrusive_ptr::test();
 		}
 		namespace test_timing_wheel_idleconnection
 		{

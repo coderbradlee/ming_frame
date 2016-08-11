@@ -4,6 +4,7 @@
 #include "../include.hpp"
 namespace test1_namespace
 {
+	
 	// namespace test_down_cast
 	// {
 	// 	class A
