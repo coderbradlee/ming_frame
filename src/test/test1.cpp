@@ -3,6 +3,68 @@ namespace test1_namespace
 {
 	using namespace boost::posix_time;
 	using std::string;
+	namespace test_intrusive_ptr2
+	{
+		template<typename T>
+		void intrusive_ptr_add_ref(T* t)
+		{
+			t->add_ref();
+		}
+		template<typename T>
+		void intrusive_ptr_release(T* t)
+		{
+			if(t->release()<=0)
+			{
+				delete t;
+			}
+		}
+		class reference_couter
+		{
+		public:
+			reference_couter():m_ref_count(0){}
+			virtual ~reference_couter(){}
+			void add_ref()
+			{
+				++m_ref_count;
+			}
+			int release()
+			{
+				return --m_ref_count;
+			}
+		protected:
+			reference_couter& operator=(const reference_couter&)
+			{
+				return *this;
+			}
+		private:
+			reference_couter(const reference_couter&);
+		private:
+			int m_ref_count;
+		};
+		class A;
+		void do_stuff(boost::shared_ptr<A> p)
+		{
+			std::cout<<"do stuff"<<std::endl;
+		}
+		class A
+		{
+		public:
+			call()
+			{
+				boost::shared_ptr<A> p(this);
+				do_stuff(p);
+			}
+		}
+		void test()
+		{
+			std::cout<<"before"<<std::endl;
+			{
+				boost::shared_ptr<A> p(new A());
+				p->call();
+			}
+			std::cout<<"after"<<std::endl;
+		}
+	}
 	namespace test_intrusive_ptr
 	{
 		template<typename T>
@@ -117,6 +179,7 @@ namespace test1_namespace
 	   
 			}
 		}
+
 		void test11()
 		{
 			//test_model_design_factory::test();
@@ -141,7 +204,8 @@ namespace test1_namespace
 			//test_round_trip::test();
 			//test_timing_wheel_idleconnection::test();
 			//test_down_cast::test();
-			test_intrusive_ptr::test();
+			//test_intrusive_ptr::test();
+			test_intrusive_ptr2::test();
 		}
 		namespace test_timing_wheel_idleconnection
 		{
