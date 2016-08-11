@@ -15,6 +15,7 @@ namespace test1_namespace
 		    virtual ~A()
 		    {
 		    	//printf("~A\n");
+		    	std::cout<<"~A"<<std::endl;
 		    }
 		};
 
