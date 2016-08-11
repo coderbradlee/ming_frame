@@ -6,12 +6,12 @@ namespace test1_namespace
 	namespace test_intrusive_ptr
 	{
 		template<typename T>
-		void instrusive_ptr_add_ref(T* t)
+		void intrusive_ptr_add_ref(T* t)
 		{
 			t->add_ref();
 		}
 		template<typename T>
-		void instrusive_ptr_release(T* t)
+		void intrusive_ptr_release(T* t)
 		{
 			if(t->release()<=0)
 			{
@@ -48,7 +48,7 @@ namespace test1_namespace
 			{
 				std::cout<<"test_class constructor"<<std::endl;
 			}
-			test_class(const test_class&)
+			test_class(const test_class&)//:reference_couter()
 			{
 				std::cout<<"copy constructor"<<std::endl;
 			}
