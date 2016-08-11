@@ -51,7 +51,7 @@ namespace test1_namespace
 		public:
 			void call()
 			{
-				boost::shared_ptr<A> p(boost::shared_from_this());
+				boost::shared_ptr<A> p(shared_from_this());
 				do_stuff(p);
 			}
 		};
