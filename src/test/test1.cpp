@@ -36,7 +36,7 @@ namespace test1_namespace
 			    }
 			    void fuu()
 			    {
-			    	std::cout<<"3"<<std::endl;
+			    	std::cout<<"4"<<std::endl;
 			    }
 			};
 			void test()
