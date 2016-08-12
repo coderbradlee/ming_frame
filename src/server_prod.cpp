@@ -17,7 +17,7 @@
 #include <boost/circular_buffer.hpp>
 #include <boost/noncopyable.hpp>
 #include "procmon.hpp"
-//#include <stdio.h>
+#include "test/test2.hpp"
 //#include <unistd.h>
 
 using namespace muduo;

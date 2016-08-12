@@ -87,7 +87,6 @@
 #include <muduo/net/TcpServer.h>
 #include <muduo/base/Mutex.h>
 #include <muduo/base/Thread.h>
-#include "test/test2.hpp"
 #include "shorturl.hpp"
 #include <math.h>
 #endif
