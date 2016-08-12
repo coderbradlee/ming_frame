@@ -42,17 +42,20 @@ namespace test2_namespace
 			s->register_(shared_from_this());
 			m_observable=s;
 		}
-	
+		void test()
+		{
+			observable able;
+			{
+				boost::shared_ptr<observer> p(new observer());
+				p->observe(&able);
+				able->notify();
+			}
+			able.notify();
+		}
 	}
 	void test_out()
 	{
-		observable able;
-		{
-			boost::shared_ptr<observer> p(new observer());
-			p->observe(&able);
-			able->notify();
-		}
-		able.notify();
+		thread_safe_observable::test();
 	}
 	
 }
