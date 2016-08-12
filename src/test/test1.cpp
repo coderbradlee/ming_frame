@@ -65,6 +65,8 @@ namespace test1_namespace
 			{
 				std::cout<<"~B"<<std::endl;
 			}
+		private:
+			int x;
 		};
 		/////////////////////////////////////
 		class A:public reference_couter
