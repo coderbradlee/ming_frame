@@ -7,11 +7,11 @@ namespace test2_namespace
 	
 		stock::stock(const string& name):m_name(name)
 		{
-			std::cout<<"constructor:"<<this<<":"<<name<<std::endl;
+			std::cout<<"constructor:"<<this<<":"<<m_name<<std::endl;
 		}
 		stock::~stock()
 		{
-			std::cout<<"destructor:"<<this<<":"<<name<<std::endl;
+			std::cout<<"destructor:"<<this<<":"<<m_name<<std::endl;
 		}
 		const string& stock::key()const
 		{
