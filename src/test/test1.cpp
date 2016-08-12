@@ -57,7 +57,8 @@ namespace test1_namespace
 		public:
 			void call()
 			{
-				boost::shared_ptr<B> p(this);
+				//boost::shared_ptr<B> p(this);
+				boost::shared_ptr<B> p(shared_from_this());
 				do_stuff(p);
 				std::cout<<__LINE__<<":"<<p.use_count() <<std::endl;
 			}
