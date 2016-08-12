@@ -27,11 +27,11 @@ namespace test1_namespace
 			void add_ref()
 			{
 				++m_ref_count;
-				std::cout<<m_ref_count<<std::endl;
+				std::cout<<"add:"<<m_ref_count<<std::endl;
 			}
 			int release()
 			{
-				std::cout<<m_ref_count<<std::endl;
+				std::cout<<"release:"<<m_ref_count<<std::endl;
 				return --m_ref_count;
 			}
 		protected:
@@ -44,7 +44,28 @@ namespace test1_namespace
 		private:
 			int m_ref_count;
 		};
+		///////class B////////////////
+		class B;
+		void do_stuff(boost::shared_ptr<B> p)
+		{
+			std::cout<<"shared_ptr do stuff"<<std::endl;
+		}
 		
+		class B
+		{
+		public:
+			void call
+			{
+				boost::shared_ptr<B> p(this);
+				do_stuff(p);
+				std::cout<<__LINE__<<std::endl;
+			}
+			~B()
+			{
+				std::cout<<"~B"<<std::endl;
+			}
+		};
+		/////////////////////////////////////
 		class A:public reference_couter
 		//public boost::enable_shared_from_this<A>
 		{
@@ -56,8 +77,8 @@ namespace test1_namespace
 		void A::call()
 		{
 			// boost::shared_ptr<A> p(shared_from_this());
-			boost::shared_ptr<A> p(this);
-			do_stuff(p);
+			// boost::shared_ptr<A> p(this);
+			// do_stuff(p);
 			//do_stuff(this);
 			// intrusive_ptr_add_ref(this);
 			// boost::shared_ptr<A> p(this,&intrusive_ptr_release<A>);
@@ -75,6 +96,12 @@ namespace test1_namespace
 		void test()
 		{
 			std::cout<<"before"<<std::endl;
+			{
+				boost::shared_ptr<B> p(new B());
+				p->call();
+			}
+			std::cout<<"middle"<<std::endl;
+			std::cout<<sizeof(int)<<std::endl;
 			{
 				boost::shared_ptr<A> p(new A());
 				p->call();
