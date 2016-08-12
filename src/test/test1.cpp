@@ -102,14 +102,15 @@ namespace test1_namespace
 		{
 			std::cout<<"before"<<std::endl;
 			{
-				boost::shared_ptr<B> p(new B());
-				p->call();
-				std::cout<<__LINE__<<":"<<p.use_count() <<std::endl;
+			// 	boost::shared_ptr<B> p(new B());
+			// 	p->call();
+			// 	std::cout<<__LINE__<<":"<<p.use_count() <<std::endl;
 			}
-			std::cout<<"middle"<<std::endl;
-			std::cout<<sizeof(int)<<std::endl;
+			//std::cout<<"middle"<<std::endl;
+			//std::cout<<sizeof(int)<<std::endl;
 			{
-				boost::shared_ptr<A> p(new A());
+				//boost::shared_ptr<A> p(new A());
+				boost::intrusive_ptr<A> p(new A());
 				p->call();
 			}
 			std::cout<<"after"<<std::endl;
