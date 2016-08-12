@@ -25,7 +25,10 @@ namespace test2_namespace
 			}),m_observers.end());
 		}
 		
-		
+		observable::~observable()
+		{
+			std::cout<<"~observable"<<std::endl;
+		}
 		observer::~observer()
 		{
 			std::cout<<"~observer"<<std::endl;

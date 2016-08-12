@@ -12,6 +12,7 @@ namespace test2_namespace
 		public:
 			void register(boost::weak_ptr<observer> x);
 			void notify();
+			~observable();
 		private:
 			mutable muduo::MutexLock m_mutex;
 			std::vector<boost::weak_ptr<observer>> m_observers;
