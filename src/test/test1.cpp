@@ -18,6 +18,7 @@ namespace test1_namespace
 				delete t;
 			}
 		}
+
 		class reference_couter
 		{
 		public:
@@ -26,9 +27,11 @@ namespace test1_namespace
 			void add_ref()
 			{
 				++m_ref_count;
+				std::cout<<m_ref_count<<std::endl;
 			}
 			int release()
 			{
+				std::cout<<m_ref_count<<std::endl;
 				return --m_ref_count;
 			}
 		protected:
@@ -41,7 +44,7 @@ namespace test1_namespace
 		private:
 			int m_ref_count;
 		};
-
+		
 		class A:public reference_couter
 		//public boost::enable_shared_from_this<A>
 		{
@@ -53,11 +56,12 @@ namespace test1_namespace
 		void A::call()
 		{
 			// boost::shared_ptr<A> p(shared_from_this());
-			// do_stuff(p);
-			//do_stuff(this);
-			intrusive_ptr_add_ref(this);
-			boost::shared_ptr<A> p(this,&intrusive_ptr_release<A>);
+			boost::shared_ptr<A> p(this);
 			do_stuff(p);
+			//do_stuff(this);
+			// intrusive_ptr_add_ref(this);
+			// boost::shared_ptr<A> p(this,&intrusive_ptr_release<A>);
+			// do_stuff(p);
 		}
 		
 		void do_stuff(boost::shared_ptr<A> p)
