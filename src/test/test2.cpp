@@ -32,7 +32,7 @@ namespace test2_namespace
 			return p;
 		}
 	
-		static void stock_factory::weak_call_back(const boost::weak_ptr<stock_factory>& w,stock* s)
+		void stock_factory::weak_call_back(const boost::weak_ptr<stock_factory>& w,stock* s)
 		{
 			boost::shared_ptr<stock_factory> f(w.lock());
 			if(f)
