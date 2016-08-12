@@ -42,7 +42,7 @@ namespace test1_namespace
 			int m_ref_count;
 		};
 
-		class A:public reference_counter
+		class A:public reference_couter
 		//public boost::enable_shared_from_this<A>
 		{
 		public:
