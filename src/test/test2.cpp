@@ -6,7 +6,7 @@ namespace test2_namespace
 	namespace thread_safe_observable
 	{
 		
-		void observable::register(boost::weak_ptr<observer> x)
+		void observable::register_(boost::weak_ptr<observer> x)
 		{
 			m_observers.push_back(x);
 		}
@@ -39,7 +39,7 @@ namespace test2_namespace
 		}
 		void observer::observe(observable* s)
 		{
-			s->register(shared_from_this());
+			s->register_(shared_from_this());
 			m_observable=s;
 		}
 	

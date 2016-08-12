@@ -19,7 +19,7 @@ namespace test2_namespace
 		class observable
 		{
 		public:
-			void register(boost::weak_ptr<observer> x);
+			void register_(boost::weak_ptr<observer> x);
 			void notify();
 			~observable();
 		private:
