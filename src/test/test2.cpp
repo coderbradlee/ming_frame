@@ -2,9 +2,9 @@
 namespace test2_namespace
 {
 	using namespace boost::posix_time;
-	using std::string;
+	using muduo::string;
 	
-	
+
 	void test_out()
 	{
 
