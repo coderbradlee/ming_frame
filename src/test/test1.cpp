@@ -52,7 +52,7 @@ namespace test1_namespace
 			std::cout<<__LINE__<<":"<<p.use_count() <<std::endl;
 		}
 		
-		class B
+		class B:public boost::enable_shared_from_this<B>
 		{
 		public:
 			void call()
@@ -63,6 +63,7 @@ namespace test1_namespace
 			}
 			~B()
 			{
+
 				std::cout<<"~B"<<std::endl;
 			}
 		private:
