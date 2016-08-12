@@ -48,7 +48,7 @@ namespace test2_namespace
 			{
 				boost::shared_ptr<observer> p(new observer());
 				p->observe(&able);
-				able->notify();
+				able.notify();
 			}
 			able.notify();
 		}
