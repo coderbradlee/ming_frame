@@ -29,6 +29,7 @@ namespace test2_namespace
 	}
 	namespace test_weak_call_back
 	{
+		using muduo::string;
 		class stock
 		{
 		public:
