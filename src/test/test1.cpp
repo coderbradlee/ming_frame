@@ -41,15 +41,8 @@ namespace test1_namespace
 		private:
 			int m_ref_count;
 		};
-		class A;
-		void do_stuff(boost::shared_ptr<A> p)
-		{
-			std::cout<<"shared_ptr do stuff"<<std::endl;
-		}
-		void do_stuff(boost::intrusive_ptr<A> p)
-		{
-			std::cout<<"intrusive_ptr do stuff"<<std::endl;
-		}
+		//class A;
+		
 		class A:public reference_counter
 		//public boost::enable_shared_from_this<A>
 		{
@@ -61,6 +54,14 @@ namespace test1_namespace
 				do_stuff(this);
 			}
 		};
+		void do_stuff(boost::shared_ptr<A> p)
+		{
+			std::cout<<"shared_ptr do stuff"<<std::endl;
+		}
+		void do_stuff(boost::intrusive_ptr<A> p)
+		{
+			std::cout<<"intrusive_ptr do stuff"<<std::endl;
+		}
 		void test()
 		{
 			std::cout<<"before"<<std::endl;
