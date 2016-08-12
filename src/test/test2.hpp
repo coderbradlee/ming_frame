@@ -13,7 +13,7 @@ namespace test2_namespace
 			void register(boost::weak_ptr<observer> x);
 			void notify();
 		private:
-			mutable MutexLock m_mutex;
+			mutable muduo::MutexLock m_mutex;
 			std::vector<boost::weak_ptr<observer>> m_observers;
 		};
 		class observer:public boost::enable_shared_from_this<observer>
