@@ -115,6 +115,9 @@ namespace test1_namespace
 				boost::intrusive_ptr<A> p(new A());
 				p->call();
 			}
+			std::cout<<sizeof(int*)<<std::endl;
+			std::cout<<sizeof(boost::shared_ptr<B>)<<std::endl;
+			std::cout<<sizeof(boost::intrusive_ptr<A>)<<std::endl;
 			std::cout<<"after"<<std::endl;
 		}
 	}
