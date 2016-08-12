@@ -42,7 +42,8 @@ namespace test1_namespace
 			int m_ref_count;
 		};
 		//class A;
-		
+		void do_stuff(boost::shared_ptr<A> p);
+		void do_stuff(boost::intrusive_ptr<A> p);
 		class A:public reference_counter
 		//public boost::enable_shared_from_this<A>
 		{
