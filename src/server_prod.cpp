@@ -246,7 +246,7 @@ int main(int argc, char* argv[])
     // }
 
  
-    test1_namespace::test11();
+    test2_namespace::test_out();
     sleep(10);
     // EventLoop loop;
     // InetAddress listenAddr(9981);
