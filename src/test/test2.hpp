@@ -6,7 +6,16 @@ namespace test2_namespace
 {
 	namespace thread_safe_observable
 	{
-		class observer;
+		class observable;
+		class observer:public boost::enable_shared_from_this<observer>
+		{
+		public:
+			virtual ~observer();
+			virtual void update();
+			void observe(observable* s);
+		private:
+			observable* m_observable;
+		};
 		class observable
 		{
 		public:
@@ -16,15 +25,6 @@ namespace test2_namespace
 		private:
 			mutable muduo::MutexLock m_mutex;
 			std::vector<boost::weak_ptr<observer>> m_observers;
-		};
-		class observer:public boost::enable_shared_from_this<observer>
-		{
-		public:
-			virtual ~observer();
-			virtual void update();
-			void observe(observable* s);
-		private:
-			observable* m_observable;
 		};
 	}
 	void test_out();
