@@ -122,7 +122,8 @@ namespace test2_namespace
 	}
 	void test_out()
 	{
-		thread_safe_observable::test();
+		//thread_safe_observable::test();
+		test_weak_call_back::test();
 	}
 	
 }
