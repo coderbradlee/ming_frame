@@ -18,10 +18,10 @@ add_subdirectory(memcached/server)
 #set(SRC_LIST config.cpp log.cpp sudoku/sudoku.cc mysql_connect.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc test/test.cpp test/test1.cpp shorturl.cpp main.cpp)
 
 
-#set(SRC_LIST config.cpp log.cpp test/test.cpp test/test1.cpp procmon.cpp plot.cpp inspector.cpp main.cpp)
+#set(SRC_LIST config.cpp log.cpp test/test2.cpp procmon.cpp plot.cpp inspector.cpp main.cpp)
 #add_executable(ming ${SRC_LIST})
 
-set(PRODUCT_SRC_LIST config.cpp log.cpp test/test.cpp test/test1.cpp procmon.cpp plot.cpp sudoku/sudoku.cc server_prod.cpp)
+set(PRODUCT_SRC_LIST config.cpp log.cpp test/test2.cpp procmon.cpp plot.cpp sudoku/sudoku.cc server_prod.cpp)
 add_executable(ming ${PRODUCT_SRC_LIST})
 
 #file(WRITE ${PROJECT_SOURCE_DIR}/config.ini "${PROJECT_BIN_DIR}/bin")
