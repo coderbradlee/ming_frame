@@ -49,6 +49,7 @@ namespace test1_namespace
 		void do_stuff(boost::shared_ptr<B> p)
 		{
 			std::cout<<"shared_ptr do stuff"<<std::endl;
+			std::cout<<__LINE__<<":"<<p.use_count() <<std::endl;
 		}
 		
 		class B
@@ -58,7 +59,7 @@ namespace test1_namespace
 			{
 				boost::shared_ptr<B> p(this);
 				do_stuff(p);
-				std::cout<<__LINE__<<std::endl;
+				std::cout<<__LINE__<<":"<<p.use_count() <<std::endl;
 			}
 			~B()
 			{
@@ -99,6 +100,7 @@ namespace test1_namespace
 			{
 				boost::shared_ptr<B> p(new B());
 				p->call();
+				std::cout<<__LINE__<<":"<<p.use_count() <<std::endl;
 			}
 			std::cout<<"middle"<<std::endl;
 			std::cout<<sizeof(int)<<std::endl;
