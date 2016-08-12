@@ -26,7 +26,7 @@ namespace test2_namespace
 			p=w.lock();
 			if(!p)
 			{
-				p.reset(new stock(key),boost::bind(&stock_factory::weak_call_back,boost::weak_ptr(shared_from_this()),_1));
+				p.reset(new stock(key),boost::bind(&stock_factory::weak_call_back,boost::weak_ptr<stock_factory>(shared_from_this()),_1));
 				w=p;
 			}
 			return p;
