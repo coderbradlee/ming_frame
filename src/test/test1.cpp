@@ -84,15 +84,17 @@ namespace test1_namespace
 			// boost::shared_ptr<A> p(shared_from_this());
 			// boost::shared_ptr<A> p(this);
 			// do_stuff(p);
-			do_stuff(this);
-			// intrusive_ptr_add_ref(this);
-			// boost::shared_ptr<A> p(this,&intrusive_ptr_release<A>);
-			// do_stuff(p);
+			//do_stuff(this);
+			intrusive_ptr_add_ref(this);
+			boost::shared_ptr<A> p(this,&intrusive_ptr_release<A>);
+			do_stuff(p);
+			std::cout<<__LINE__<<":"<<p.use_count() <<std::endl;
 		}
 		
 		void do_stuff(boost::shared_ptr<A> p)
 		{
 			std::cout<<"shared_ptr do stuff"<<std::endl;
+			std::cout<<__LINE__<<":"<<p.use_count() <<std::endl;
 		}
 		void do_stuff(boost::intrusive_ptr<A> p)
 		{
