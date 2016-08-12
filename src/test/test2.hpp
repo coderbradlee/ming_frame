@@ -44,7 +44,7 @@ namespace test2_namespace
 		public:
 			boost::shared_ptr<stock> get(const string& key);
 		private:
-			static void weak_call_back(const boost::weak_ptr<stock_factory>,stock* s);
+			static void weak_call_back(const boost::weak_ptr<stock_factory>&,stock* s);
 			void remove_stock(stock* s);
 		private:
 			mutable muduo::MutexLock m_mutex;
