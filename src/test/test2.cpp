@@ -161,7 +161,7 @@ namespace test2_namespace
 			sleep(1);
 			for(auto& i:m_requests)
 			{
-				i.print();
+				i->print();
 			}
 			std::cout<<"print all"<<std::endl;
 		}
