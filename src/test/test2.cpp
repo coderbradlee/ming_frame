@@ -171,16 +171,16 @@ namespace test2_namespace
 			muduo::MutexLockGuard lock(m_mutex);
 			g_inventory.add(this);
 		}
-		request::~request()__attribute__((noinline))
+		request::~request()
 		{
 			muduo::MutexLockGuard lock(m_mutex);
 			sleep(1);
 			g_inventory.remove(this);
 		}
-		void request::print()__attribute__((noinline))
+		void request::print()
 		{
 			muduo::MutexLockGuard lock(m_mutex);
-
+			std::cout<<"print"<<std::endl;
 		}
 		void thread_func()
 		{

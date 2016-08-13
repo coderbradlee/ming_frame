@@ -20,8 +20,8 @@ namespace test2_namespace
 		{
 		public:
 			void process();
-			void print();
-			~request();
+			void print()__attribute__((noinline));
+			~request()__attribute__((noinline));
 		};
 		void thread_func();
 		void test();
