@@ -193,7 +193,8 @@ namespace test2_namespace
 		{
 			muduo::Thread t(thread_func);
 			t.start();
-			usleep(500*1000);
+			//usleep(500*1000);
+			sleep(5);
 			g_inventorys.print_all();
 			t.join();
 		}
