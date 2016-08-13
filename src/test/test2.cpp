@@ -165,7 +165,7 @@ namespace test2_namespace
 			}
 			std::cout<<"print all"<<std::endl;
 		}
- 		inventory g_inventory;
+ 		
 		void request::process()
 		{
 			muduo::MutexLockGuard lock(m_mutex);

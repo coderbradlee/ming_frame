@@ -6,6 +6,7 @@ namespace test2_namespace
 {
 	namespace test_mutex_between_threads
 	{
+		class request;
 		class inventory
 		{
 		public:
@@ -16,6 +17,7 @@ namespace test2_namespace
 			mutable muduo::MutexLock m_mutex;
 			std::set<request*> m_requests;
 		};
+		inventory g_inventory;
 		class request
 		{
 		public:
