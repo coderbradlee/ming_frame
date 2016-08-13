@@ -13,7 +13,7 @@ namespace test2_namespace
 			void remove(request* r);
 			void print_all()const;
 		private:
-			muduo::MutexLock m_mutex;
+			mutable muduo::MutexLock m_mutex;
 			std::set<request*> m_requests;
 		};
 		class request
@@ -22,6 +22,8 @@ namespace test2_namespace
 			void process();
 			void print()__attribute__((noinline));
 			~request()__attribute__((noinline));
+		private:
+			mutable muduo::MutexLock m_mutex;
 		};
 		void thread_func();
 		void test();
