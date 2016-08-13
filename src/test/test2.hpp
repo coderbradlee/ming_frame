@@ -4,6 +4,18 @@
 #include "../include.hpp"
 namespace test2_namespace
 {
+	namespace test_mutex
+	{
+		class request
+		{
+		public:
+			void process();
+			void print();
+		private:
+			mutable muduo::MutexLock m_mutex;
+		};
+		void test();
+	}
 	namespace thread_safe_observable
 	{
 		class observable;

@@ -120,10 +120,33 @@ namespace test2_namespace
 			able.notify();
 		}
 	}
+	namespace test_mutex
+	{
+
+		void request::process()
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+			std::cout<<"print before"<<std::endl;
+			print();
+			std::cout<<"print after"<<std::endl;
+		}
+		void request::print()
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+			std::cout<<"print"<<std::endl;
+		}
+	
+		void test()
+		{
+			request r;
+			r.process();
+		}
+	}
 	void test_out()
 	{
 		//thread_safe_observable::test();
-		test_weak_call_back::test();
+		//test_weak_call_back::test();
+		test_mutex::test();
 	}
 	
 }
