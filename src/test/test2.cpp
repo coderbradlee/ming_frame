@@ -169,13 +169,13 @@ namespace test2_namespace
 		void request::process()
 		{
 			muduo::MutexLockGuard lock(m_mutex);
-			g_inventory.add(this);
+			g_inventorys.add(this);
 		}
 		request::~request()
 		{
 			muduo::MutexLockGuard lock(m_mutex);
 			sleep(1);
-			g_inventory.remove(this);
+			g_inventorys.remove(this);
 		}
 		void request::print()
 		{
@@ -194,7 +194,7 @@ namespace test2_namespace
 			muduo::Thread t(thread_func);
 			t.start();
 			usleep(500*1000);
-			g_inventory.print_all();
+			g_inventorys.print_all();
 			t.join();
 		}
 	}
