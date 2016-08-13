@@ -4,6 +4,28 @@
 #include "../include.hpp"
 namespace test2_namespace
 {
+	namespace test_mutex_between_threads
+	{
+		class inventory
+		{
+		public:
+			void add(request* r);
+			void remove(request* r);
+			void print_all()const;
+		private:
+			muduo::MutexLock m_mutex;
+			std::set<request*> m_requests;
+		};
+		class request
+		{
+		public:
+			void process();
+			void print()__attribute__((noinline));
+			~request()__attribute__((noinline));
+		};
+		void thread_func();
+		void test();
+	}
 	namespace test_mutex
 	{
 		class request

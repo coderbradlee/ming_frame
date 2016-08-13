@@ -142,11 +142,68 @@ namespace test2_namespace
 			r.process();
 		}
 	}
+	namespace test_mutex_between_threads
+	{
+	
+		void inventory::add(request* r)
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+			m_requests.insert(r);
+		}
+		void inventory::remove(request* r)
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+			m_requests.erase(r);
+		}
+		void inventory::print_all()const
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+			sleep(1);
+			for(auto& i:m_requests)
+			{
+				i.print();
+			}
+			std::cout<<"print all"<<std::endl;
+		}
+ 		inventory g_inventory;
+		void request::process()
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+			g_inventory.add(this);
+		}
+		request::~request()__attribute__((noinline))
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+			sleep(1);
+			g_inventory.remove(this);
+		}
+		void request::print()__attribute__((noinline))
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+
+		}
+		void thread_func()
+		{
+			request* r=new request();
+			r->process();
+			delete r;
+		}
+
+		void test()
+		{
+			muduo::Thread t(thread_func);
+			t.start();
+			usleep(500*1000);
+			g_inventory.print_all();
+			t.join();
+		}
+	}
 	void test_out()
 	{
 		//thread_safe_observable::test();
 		//test_weak_call_back::test();
-		test_mutex::test();
+		//test_mutex::test();
+		test_mutex_between_threads::test();
 	}
 	
 }
