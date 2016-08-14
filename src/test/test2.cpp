@@ -175,9 +175,10 @@ namespace test2_namespace
 				new_one=m_requests;
 			}
 			
-			for(auto& i:*new_one)
+			//for(auto& i:*new_one)
+			for(auto it=new_one->begin();it!=new_one->end();++it)
 			{
-				i->print();
+				(*it)->print();
 			}
 			std::cout<<"print all"<<std::endl;
 		}
