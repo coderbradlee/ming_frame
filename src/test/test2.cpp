@@ -207,10 +207,10 @@ namespace test2_namespace
 		}
 		void thread_func()
 		{
-			request* r=new request();
+			boost::shared_ptr<request> r(new request());
 			r->process();
 			r->cancel();
-			delete r;
+			//delete r;
 		}
 
 		void test()
