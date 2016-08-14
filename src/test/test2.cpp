@@ -150,7 +150,7 @@ namespace test2_namespace
 			muduo::MutexLockGuard lock(m_mutex);
 			if(!m_requests.unique())
 			{
-				m_requests.reset(new std::set<request*>(*m_requests));
+				m_requests.reset(new std::set<boost::shared_ptr<request>>(*m_requests));
 				std::cout<<__LINE__<<":add"<<std::endl;
 			}
 			std::cout<<__LINE__<<":"<<m_requests.unique()<<std::endl;
@@ -161,7 +161,7 @@ namespace test2_namespace
 			muduo::MutexLockGuard lock(m_mutex);
 			if(!m_requests.unique())
 			{
-				m_requests.reset(new std::set<request*>(*m_requests));
+				m_requests.reset(new std::set<boost::shared_ptr<request>>(*m_requests));
 				std::cout<<__LINE__<<":erase"<<std::endl;
 			}
 			std::cout<<__LINE__<<":"<<m_requests.unique()<<std::endl;
@@ -169,7 +169,7 @@ namespace test2_namespace
 		}
 		void inventory::print_all()const
 		{
-			boost::shared_ptr<std::set<request*>> new_one;
+			boost::shared_ptr<std::set<boost::shared_ptr<request>>> new_one;
 			{
 				muduo::MutexLockGuard lock(m_mutex);
 				new_one=m_requests;
