@@ -175,7 +175,7 @@ namespace test2_namespace
 				new_one=m_requests;
 			}
 			
-			for(auto& i:new_one)
+			for(auto& i:*new_one)
 			{
 				i->print();
 			}
