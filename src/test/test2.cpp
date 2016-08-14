@@ -148,18 +148,34 @@ namespace test2_namespace
 		void inventory::add(request* r)
 		{
 			muduo::MutexLockGuard lock(m_mutex);
-			m_requests.insert(r);
+			if(!m_requests.unique())
+			{
+				m_requests.reset(new std::set<request*>(*m_requests));
+				std::cout<<__LINE__<<":add"<<std::endl;
+			}
+			std::cout<<__LINE__<<":"<<m_requests.unique()<<std::endl;
+			m_requests->insert(r);
 		}
 		void inventory::remove(request* r)
 		{
 			muduo::MutexLockGuard lock(m_mutex);
-			m_requests.erase(r);
+			if(!m_requests.unique())
+			{
+				m_requests.reset(new std::set<request*>(*m_requests));
+				std::cout<<__LINE__<<":erase"<<std::endl;
+			}
+			std::cout<<__LINE__<<":"<<m_requests.unique()<<std::endl;
+			m_requests->erase(r);
 		}
 		void inventory::print_all()const
 		{
-			muduo::MutexLockGuard lock(m_mutex);
-			sleep(1);
-			for(auto& i:m_requests)
+			boost::shared_ptr<std::set<request*>> new_one;
+			{
+				muduo::MutexLockGuard lock(m_mutex);
+				new_one=m_requests;
+			}
+			
+			for(auto& i:new_one)
 			{
 				i->print();
 			}
@@ -169,24 +185,31 @@ namespace test2_namespace
 		void request::process()
 		{
 			muduo::MutexLockGuard lock(m_mutex);
-			g_inventorys.add(this);
+			g_inventorys.add(shared_from_this());
+		}
+		void request::cancel()
+		{
+			muduo::MutexLockGuard lock(m_mutex);
+			std::cout<<"request cancel"<<std::endl;
+			g_inventorys.remove(shared_from_this());
 		}
 		request::~request()
 		{
-			muduo::MutexLockGuard lock(m_mutex);
-			sleep(1);
-			g_inventorys.remove(this);
+			//muduo::MutexLockGuard lock(m_mutex);
+			//sleep(1);
+			//g_inventorys.remove(this);
+			std::cout<<"~request"<<std::endl;
 		}
 		void request::print()
 		{
 			muduo::MutexLockGuard lock(m_mutex);
-			std::cout<<"print"<<std::endl;
+			std::cout<<"request print"<<std::endl;
 		}
 		void thread_func()
 		{
 			request* r=new request();
 			r->process();
-			delete r;
+			r->cancel();
 		}
 
 		void test()
@@ -194,7 +217,7 @@ namespace test2_namespace
 			muduo::Thread t(thread_func);
 			t.start();
 			//usleep(500*1000);
-			sleep(5);
+			//sleep(5);
 			g_inventorys.print_all();
 			t.join();
 		}

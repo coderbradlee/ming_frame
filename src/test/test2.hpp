@@ -15,15 +15,16 @@ namespace test2_namespace
 			void print_all()const;
 		private:
 			mutable muduo::MutexLock m_mutex;
-			std::set<request*> m_requests;
+			boost::shared_ptr<std::set<request*>> m_requests;
 		};
-		
-		class request
+
+		class request:public boost::enable_shared_from_this<request>
 		{
 		public:
 			void process();
 			void print()__attribute__((noinline));
 			~request()__attribute__((noinline));
+			void cancel()__attribute__((noinline));
 		private:
 			mutable muduo::MutexLock m_mutex;
 		};
