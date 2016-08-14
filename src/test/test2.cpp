@@ -145,7 +145,7 @@ namespace test2_namespace
 	namespace test_mutex_between_threads
 	{
 	
-		void inventory::add(request* r)
+		void inventory::add(boost::shared_ptr<request> r)
 		{
 			muduo::MutexLockGuard lock(m_mutex);
 			if(!m_requests.unique())
@@ -156,7 +156,7 @@ namespace test2_namespace
 			std::cout<<__LINE__<<":"<<m_requests.unique()<<std::endl;
 			m_requests->insert(r);
 		}
-		void inventory::remove(request* r)
+		void inventory::remove(boost::shared_ptr<request> r)
 		{
 			muduo::MutexLockGuard lock(m_mutex);
 			if(!m_requests.unique())

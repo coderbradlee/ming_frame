@@ -10,12 +10,12 @@ namespace test2_namespace
 		class inventory
 		{
 		public:
-			void add(request* r);
-			void remove(request* r);
+			void add(boost::shared_ptr<request> r);
+			void remove(boost::shared_ptr<request> r);
 			void print_all()const;
 		private:
 			mutable muduo::MutexLock m_mutex;
-			boost::shared_ptr<std::set<request*>> m_requests;
+			boost::shared_ptr<std::set<boost::shared_ptr<request>>> m_requests;
 		};
 
 		class request:public boost::enable_shared_from_this<request>
