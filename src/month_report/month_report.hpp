@@ -10,6 +10,8 @@
 #include "../log.hpp"
 struct report_data
  {
+ 	muduo::string quotation_id;
+ 	muduo::string quotation_detail_id;
  	muduo::string quotation_no;
  	muduo::string sales_full_name;
  	muduo::string sales_type;
@@ -19,17 +21,40 @@ struct report_data
  	muduo::string receiving_countries;
  	muduo::string product_classification;
  	muduo::string product_name;
- 	muduo::string product_qty_pc;
- 	muduo::string product_qty_w;
+ 	double product_qty_pc;
+ 	double product_qty_w;
  	muduo::string price_condition;
  	muduo::string currency;
- 	muduo::string unit_price;
+ 	double unit_price;
  	muduo::string price_total_currency;
  	muduo::string price_total;
  	muduo::string guided_currency;
  	muduo::string price_total_guided;
  	muduo::string payment_term_desc;
  	muduo::string creat_at;
+ 	void print()
+ 	{
+ 		std::cout<<quotation_id<<":"quotation_detail_id<<":"<<quotation_no<<":"<<sales_full_name<<":"
+			<<":"<<sales_type<<":"
+ 			<<":"<<account_name<<":"
+			<<":"<<country_region<<":"
+			<<":"<<customer_countries<<":"
+ 			<<":"<<receiving_countries<<":"
+ 			<<":"<<product_classification<<":"
+			<<":"<<product_name<<":"
+ 			<<":"<<product_qty_pc<<":"
+			<<":"<<product_qty_w<<":"
+			<<":"<<price_condition<<":"
+ 			<<":"<<currency<<":"
+ 			<<":"<<unit_price<<":"
+			<<":"<<price_total_currency<<":"
+ 			<<":"<<price_total<<":"
+			<<":"<<guided_currency<<":"
+			<<":"<<price_total_guided<<":"
+ 			<<":"<<payment_term_desc<<":"
+ 			<<":"<<creat_at<<":"
+ 			<<std::endl;
+ 	}
  }; 
 struct mysql_info_
  {
