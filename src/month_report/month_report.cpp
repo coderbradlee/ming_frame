@@ -28,6 +28,7 @@ void month_report::start()
 	and t_quotation.i\
 	ORDER BY t_quotation.createAt";
 	query(query_string);
+	std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
 	while (m_res->next()) 
     {
 		std::cout<< m_res->getString(0)<<":" << m_res->getString("quotation_no")<<std::endl;
@@ -67,6 +68,7 @@ void start_report()
 	info->database=get_config->m_mysql_js_database;
 
 	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_js_port);
-	month_report report(info,r);
-	report.start();
+	boost::shared_ptr<month_report> report(new month_report(info,r));
+	std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
+	report->start();
 }
