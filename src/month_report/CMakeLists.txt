@@ -1,6 +1,6 @@
 
 
-set(PRODUCT_SRC_LIST ../config.cpp ../log.cpp ../procmon.cpp month_report.cpp month_report_main.cpp)
+set(PRODUCT_SRC_LIST ../config.cpp ../log.cpp month_report.cpp month_report_main.cpp)
 add_executable(month_report ${PRODUCT_SRC_LIST})
 
 set(main_name month_report)

@@ -14,8 +14,6 @@ int main(int argc, char* argv[])
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
 
-    
-    start_inspector_thread();
     start_report();
     muduo::Timestamp end = muduo::Timestamp::now();
     printf("%f\n", timeDifference(end, start));
