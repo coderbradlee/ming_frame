@@ -32,7 +32,7 @@ void month_report::start()
 	std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
 	while (m_res->next()) 
     {
-		std::cout<< m_res->getString(0)<<":" << m_res->getString("quotation_no")<<std::endl;
+		std::cout<< m_res->getString(1)<<":" << m_res->getString("quantity")<<std::endl;
 	 
     }
    } 
