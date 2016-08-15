@@ -2,7 +2,6 @@
 #define	MONTH_REPORT_HPP
 #include "mysql_connection.h"
 #include "../config.hpp"
-#include "../mysql_connect.hpp"
 #include <cppconn/driver.h>
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
