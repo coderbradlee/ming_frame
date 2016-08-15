@@ -9,9 +9,10 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 }
 void month_report::deal_with_sales_info()
 {
-	for(auto i=m_report_datas.begin();i!=m_report_datas.end();++i)
+	//for(auto i=m_report_datas.begin();i!=m_report_datas.end();++i)
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& i)
 	{
-		std::string query_string="select sales_id from t_quotation where quotation_id='"+(*i)->quotation_id+"'";
+		std::string query_string="select sales_id from t_quotation where quotation_id='"+(i)->quotation_id+"'";
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 
 		{
@@ -25,19 +26,19 @@ void month_report::deal_with_sales_info()
 		
 		{
 			boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
-			(*i)->sales_full_name=m_res->getString("full_name");
+			(i)->sales_full_name=m_res->getString("full_name");
 			query_string="select full_name,company_id from t_position where position_id='"+res->getString("position_id")+"'";
 		}
 		{
 			boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
-			(*i)->sales_type=res->getString("full_name");
+			(i)->sales_type=res->getString("full_name");
 			query_string="select full_name from t_company where company_id='"+m_res->getString("company_id")+"'";
 		}
 		{
 			boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
-			(*i)->account_name=m_res->getString("full_name");
+			(i)->account_name=m_res->getString("full_name");
 		}
-	}
+	});
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 }
 void month_report::insert_data()
