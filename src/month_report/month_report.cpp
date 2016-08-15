@@ -9,6 +9,8 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in,boost::shared_ptr<r
 }
 void month_report::start()
 {
+	try
+	{
 	std::string query_string=
 	"SELECT\
 	t_quotation.quotation_no,\
@@ -25,7 +27,6 @@ void month_report::start()
 	on\
 	t_quotation_detail.quotation_id = t_quotation.quotation_id\
 	and t_quotation_detail.dr=0 and t_quotation.createAt like \"2016-07%\"\
-	and t_quotation.i\
 	ORDER BY t_quotation.createAt";
 	query(query_string);
 	std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
@@ -33,7 +34,22 @@ void month_report::start()
     {
 		std::cout<< m_res->getString(0)<<":" << m_res->getString("quotation_no")<<std::endl;
 	 
-   }
+    }
+   } 
+	catch (sql::SQLException &e) 
+	{
+	  //ming_log->get_log_console()->info()<< "# ERR: " << e.what();
+	  //ming_log->get_log_console()->info()<< " (MySQL error code: " << e.getErrorCode();
+	  //ming_log->get_log_console()->info()<< ", SQLState: " << e.getSQLState();
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+	catch(Exception& e)
+	{
+		LOG_ERROR<<"# ERR: " << e.what();
+	}
 }
 void month_report::query(const std::string& query_sql)
 {
