@@ -24,8 +24,18 @@ public:
 	month_report(boost::shared_ptr<mysql_connect> in,boost::shared_ptr<report_data> rd);
 	void start();
 private:
+	void query(const std::string& sql);
+	boost::shared_ptr<sql::ResultSet> get_res()const;
+private:
 	boost::shared_ptr<mysql_connect> m_mysql_connect;
 	boost::shared_ptr<report_data> m_report_data;
+	boost::shared_ptr<sql::ResultSet> m_res;
+	boost::shared_ptr<sql::Statement> m_stmt;
+	boost::shared_ptr<sql::PreparedStatement> m_pstmt;
+	boost::shared_ptr<sql::Driver> m_drivers;
+	boost::shared_ptr<sql::Connection> m_con;
+
+	sql::Driver* m_driver;
 };
 
 void start_report();

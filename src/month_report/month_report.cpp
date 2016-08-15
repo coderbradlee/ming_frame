@@ -1,6 +1,12 @@
 #include "month_report.hpp"
 
-month_report::month_report(boost::shared_ptr<mysql_connect> in,boost::shared_ptr<report_data> rd):m_mysql_connect(in),m_report_data(rd){}
+month_report::month_report(boost::shared_ptr<mysql_connect> in,boost::shared_ptr<report_data> rd):m_mysql_connect(in),m_report_data(rd)
+{
+	m_driver = get_driver_instance();
+	m_con = boost::shared_ptr<sql::Connection>(m_driver->connect("tcp://"+m_mysql_info->ip+":"+m_mysql_info->port, m_mysql_info->username, m_mysql_info->password));
+	
+	m_con->setSchema(m_mysql_info->database);
+}
 void month_report::start()
 {
 	muduo::string query_string=
@@ -22,12 +28,34 @@ void month_report::start()
 	and t_quotation.i\
 	ORDER BY t_quotation.createAt";
 	m_mysql_connect->query(query_string);
-	boost::shared_ptr<sql::ResultSet> rs=m_mysql_connect->get_res();
-	while (rs->next()) 
+	while (m_res->next()) 
     {
-		std::cout<< res->getString(0)<<":" << res->getString("quotation_no")<<std::endl;
+		std::cout<< m_res->getString(0)<<":" << m_res->getString("quotation_no")<<std::endl;
 	 
    }
+}
+void month_report::query(const string& query)
+{
+	try 
+	{
+	  m_pstmt = boost::shared_ptr<sql::PreparedStatement>(m_con->prepareStatement(query));
+	  m_res = boost::shared_ptr<sql::ResultSet>(m_pstmt->executeQuery());
+
+	} 
+	catch (sql::SQLException &e) 
+	{
+	  //ming_log->get_log_console()->info()<< "# ERR: " << e.what();
+	  //ming_log->get_log_console()->info()<< " (MySQL error code: " << e.getErrorCode();
+	  //ming_log->get_log_console()->info()<< ", SQLState: " << e.getSQLState();
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+}
+boost::shared_ptr<sql::ResultSet> month_report::get_res()const
+{
+	return m_res;
 }
 void start_report()
 {
