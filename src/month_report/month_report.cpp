@@ -19,7 +19,7 @@ void month_report::deal_with_sales_info()
 			boost::scoped_ptr< sql::PreparedStatement > prep_stmt(m_con->prepareStatement(query_string));
 			boost::scoped_ptr< sql::ResultSet > res(prep_stmt->executeQuery());
 
-			//query_string="select employee_no from t_system_account where system_account_id='"+res->getString("sales_id")+"'";
+			query_string="select employee_no from t_system_account where system_account_id='"+res->getString(1)+"'";
 		}
 		// {
 		// 	boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
