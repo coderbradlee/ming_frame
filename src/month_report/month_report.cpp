@@ -34,7 +34,7 @@ void month_report::insert_data()
 {
 	try
 	{
-		std::cout<<m_res->rowsCount()<<std::endl;
+		std::cout<<__FILE__<<":"<<__LINE__<<":"<<m_res->rowsCount()<<std::endl;
 	while(m_res->next())
 	{
 		//std::cout<< m_res->getString(1)<<":" << m_res->getString("product_qty_pc")<<std::endl;
