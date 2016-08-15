@@ -27,14 +27,14 @@ void month_report::start()
 	and t_quotation_detail.dr=0 and t_quotation.createAt like \"2016-07%\"\
 	and t_quotation.i\
 	ORDER BY t_quotation.createAt";
-	m_mysql_connect->query(query_string);
+	query(query_string);
 	while (m_res->next()) 
     {
 		std::cout<< m_res->getString(0)<<":" << m_res->getString("quotation_no")<<std::endl;
 	 
    }
 }
-void month_report::query(const string& query)
+void month_report::query(const muduo::string& query)
 {
 	try 
 	{
