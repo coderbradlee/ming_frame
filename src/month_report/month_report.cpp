@@ -20,7 +20,7 @@ void month_report::start()
 	t_quotation_detail.applied_unit_price,\
 	t_quotation.createAt\
 	FROM\
-	t_quotation LEFT JOIN\
+	t_quotation inner JOIN\
 	t_quotation_detail\
 	on\
 	t_quotation_detail.quotation_id = t_quotation.quotation_id\
