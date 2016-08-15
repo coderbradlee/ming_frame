@@ -1,6 +1,6 @@
 #include "month_report.hpp"
 
-month_report::month_report(boost::shared_ptr<mysql_info> in,boost::shared_ptr<report_data> rd):m_report_data(rd)
+month_report::month_report(boost::shared_ptr<mysql_info_> in,boost::shared_ptr<report_data> rd):m_report_data(rd)
 {
 	m_driver = get_driver_instance();
 	m_con = boost::shared_ptr<sql::Connection>(m_driver->connect("tcp://"+in->ip+":"+in->port, in->username, in->password));
