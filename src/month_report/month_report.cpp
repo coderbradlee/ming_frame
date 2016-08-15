@@ -10,7 +10,7 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 void month_report::deal_with_sales_info()
 {
 	//for(auto i=m_report_datas.begin();i!=m_report_datas.end();++i)
-	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& i)
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& i)
 	{
 		std::string query_string="select sales_id from t_quotation where quotation_id='"+(i)->quotation_id+"'";
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
