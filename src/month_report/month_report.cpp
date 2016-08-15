@@ -15,10 +15,10 @@ void month_report::deal_with_sales_info()
 		std::string query_string="select sales_id from t_quotation where quotation_id='"+(i)->quotation_id+"'";
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 
-		// {
-		// 	boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
-		// 	query_string="select employee_no from t_system_account where system_account_id='"+res->getString("sales_id")+"'";
-		// }
+		{
+			boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
+			query_string="select employee_no from t_system_account where system_account_id='"+res->getString("sales_id")+"'";
+		}
 		// {
 		// 	boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
 		// 	query_string="select  full_name,position_id  from t_employee where employee_id='"+res->getString("employee_no")+"'";
