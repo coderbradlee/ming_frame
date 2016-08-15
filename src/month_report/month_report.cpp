@@ -9,7 +9,7 @@ month_report::month_report(boost::shared_ptr<mysql_info> in,boost::shared_ptr<re
 }
 void month_report::start()
 {
-	muduo::string query_string=
+	std::string query_string=
 	"SELECT\
 	t_quotation.quotation_no,\
 	t_quotation_detail.ss_item_category_id,\
@@ -34,7 +34,7 @@ void month_report::start()
 	 
    }
 }
-void month_report::query(const muduo::string& query_sql)
+void month_report::query(const std::string& query_sql)
 {
 	try 
 	{
