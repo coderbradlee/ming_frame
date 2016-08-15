@@ -31,7 +31,7 @@ void month_report::insert_data()
 	 	temp->unit_price=m_res->getDouble("unit_price");
 	 	temp->creat_at=m_res->getString("creat_at");
 	 	m_report_datas.push_back(temp);
-	 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x.print();});
+	 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
 	}
 	catch (sql::SQLException &e) 
