@@ -17,7 +17,7 @@ void month_report::deal_with_sales_info()
 
 		{
 			boost::scoped_ptr< sql::Statement > stmt(m_con->createStatement());
-			boost::scoped_ptr< sql::ResultSet > res(stmt->executeQuery(query_strings);
+			boost::scoped_ptr< sql::ResultSet > res(stmt->executeQuery(query_strings));
 			// boost::scoped_ptr< sql::PreparedStatement > prep_stmt(m_con->prepareStatement(query_string));
 			// boost::scoped_ptr< sql::ResultSet > res(prep_stmt->executeQuery());
 			std::string c_string = res->getString(1);//.asStdString();
