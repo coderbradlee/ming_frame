@@ -34,11 +34,11 @@ void month_report::start()
 	 
    }
 }
-void month_report::query(const muduo::string& query)
+void month_report::query(const muduo::string& query_sql)
 {
 	try 
 	{
-	  m_pstmt = boost::shared_ptr<sql::PreparedStatement>(m_con->prepareStatement(query));
+	  m_pstmt = boost::shared_ptr<sql::PreparedStatement>(m_con->prepareStatement(query_sql));
 	  m_res = boost::shared_ptr<sql::ResultSet>(m_pstmt->executeQuery());
 
 	} 
