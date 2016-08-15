@@ -28,7 +28,16 @@ void month_report::insert_data()
 	 	{
 	 		temp->product_qty_w=m_res->getDouble("product_qty_pc")*m_res->getDouble("module_extend_prop");
 	 	}
-	 	temp->unit_price=m_res->getDouble("unit_price");
+	 	else
+	 	{
+	 		temp->product_qty_w=0;
+	 	}
+	 	if(!m_res->isNull("unit_price"))
+	 	{
+	 		temp->unit_price=m_res->getDouble("unit_price");
+	 		temp->price_total=temp->unit_price*temp->product_qty_w;
+	 	}
+	 	
 	 	temp->creat_at=m_res->getString("creat_at");
 	 	m_report_datas.push_back(temp);
 	 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});

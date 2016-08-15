@@ -27,7 +27,7 @@ struct report_data
  	std::string currency;
  	double unit_price;
  	std::string price_total_currency;
- 	std::string price_total;
+ 	double price_total;
  	std::string guided_currency;
  	double price_total_guided;
  	std::string payment_term_desc;
