@@ -72,6 +72,7 @@ public:
 private:
 	void query(const std::string& sql);
 	boost::shared_ptr<sql::ResultSet> get_res()const;
+	void insert_data();
 private:
 	std::vector<boost::shared_ptr<report_data>> m_report_datas;
 	boost::shared_ptr<sql::ResultSet> m_res;
