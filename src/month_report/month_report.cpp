@@ -1,6 +1,6 @@
 #include "month_report.hpp"
 
-month_report::month_report(boost::shared_ptr<mysql_info_> in,boost::shared_ptr<report_data> rd):m_report_data(rd)
+month_report::month_report(boost::shared_ptr<mysql_info_> in)
 {
 	m_driver = get_driver_instance();
 	m_con = boost::shared_ptr<sql::Connection>(m_driver->connect("tcp://"+in->ip+":"+in->port, in->username, in->password));
@@ -80,7 +80,6 @@ boost::shared_ptr<sql::ResultSet> month_report::get_res()const
 }
 void start_report()
 {
-	boost::shared_ptr<report_data> r(new report_data());
 	boost::shared_ptr<mysql_info_> info(new mysql_info_());
 	info->ip=get_config->m_mysql_js_ip;
 	info->username=get_config->m_mysql_js_username;
@@ -88,7 +87,6 @@ void start_report()
 	info->database=get_config->m_mysql_js_database;
 
 	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_js_port);
-	boost::shared_ptr<month_report> report(new month_report(info,r));
-	std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
+	boost::shared_ptr<month_report> report(new month_report(info));
 	report->start();
 }

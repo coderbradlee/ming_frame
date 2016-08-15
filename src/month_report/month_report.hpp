@@ -10,11 +10,26 @@
 #include "../log.hpp"
 struct report_data
  {
- 	muduo::string ip;
- 	muduo::string port;
- 	muduo::string username;
- 	muduo::string password;
- 	muduo::string database;
+ 	muduo::string quotation_no;
+ 	muduo::string sales_full_name;
+ 	muduo::string sales_type;
+ 	muduo::string account_name;
+ 	muduo::string country_region;
+ 	muduo::string customer_countries;
+ 	muduo::string receiving_countries;
+ 	muduo::string product_classification;
+ 	muduo::string product_name;
+ 	muduo::string product_qty_pc;
+ 	muduo::string product_qty_w;
+ 	muduo::string price_condition;
+ 	muduo::string currency;
+ 	muduo::string unit_price;
+ 	muduo::string price_total_currency;
+ 	muduo::string price_total;
+ 	muduo::string guided_currency;
+ 	muduo::string price_total_guided;
+ 	muduo::string payment_term_desc;
+ 	muduo::string creat_at;
  }; 
 struct mysql_info_
  {
@@ -27,13 +42,13 @@ struct mysql_info_
 class month_report
 {
 public:
-	month_report(boost::shared_ptr<mysql_info_> in,boost::shared_ptr<report_data> rd);
+	month_report(boost::shared_ptr<mysql_info_> in);
 	void start();
 private:
 	void query(const std::string& sql);
 	boost::shared_ptr<sql::ResultSet> get_res()const;
 private:
-	boost::shared_ptr<report_data> m_report_data;
+	std::vector<boost::shared_ptr<report_data>> m_report_datas;
 	boost::shared_ptr<sql::ResultSet> m_res;
 	boost::shared_ptr<sql::Statement> m_stmt;
 	boost::shared_ptr<sql::PreparedStatement> m_pstmt;
