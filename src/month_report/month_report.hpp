@@ -55,7 +55,7 @@ struct report_data
 			<<":"<<guided_currency<<":"
 			<<":"<<price_total_guided<<":"
  			<<":"<<payment_term_desc<<":"
- 			<<":"<<creat_at<<
+ 			<<":"<<creat_at
  			<<std::endl;
  	}
  }; 
