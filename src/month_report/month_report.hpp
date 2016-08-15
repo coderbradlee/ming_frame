@@ -29,7 +29,7 @@ struct report_data
  	std::string price_total_currency;
  	std::string price_total;
  	std::string guided_currency;
- 	std::string price_total_guided;
+ 	double price_total_guided;
  	std::string payment_term_desc;
  	std::string creat_at;
  	void print()
@@ -55,7 +55,7 @@ struct report_data
 			<<":"<<guided_currency<<":"
 			<<":"<<price_total_guided<<":"
  			<<":"<<payment_term_desc<<":"
- 			<<":"<<creat_at<<":"
+ 			<<":"<<creat_at<<
  			<<std::endl;
  	}
  }; 
