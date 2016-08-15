@@ -7,13 +7,37 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 	
 	m_con->setSchema(in->database);
 }
+void month_report::deal_with_sales_info()
+{
+	for(auto& i:m_report_datas)
+	{
+		str::string query_string="select sales_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		query(query_string);
+		query_string="select employee_no from t_system_account where system_account_id='"+m_res->getString("sales_id")+"'";
+		query(query_string);
+
+		query_string="select  full_name,position_id  from t_employee where employee_id='"+m_res->getString("employee_no")+"'";
+		query(query_string);
+		i->sales_full_name=m_res->getString("full_name");
+
+		query_string="select full_name,company_id from t_position where position_id='"+m_res->getString("position_id")+"'";
+		query(query_string);
+		i->sales_type=m_res->getString("full_name");
+
+		query_string="select full_name from t_company where company_id='"+m_res->getString("company_id")+"'";
+		query(query_string);
+		i->account_name=m_res->getString("full_name");
+	}
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+}
 void month_report::insert_data()
 {
 	try
 	{
+		std::cout<<m_res->rowsCount()<<std::endl;
 	while(m_res->next())
 	{
-		std::cout<< m_res->getString(1)<<":" << m_res->getString("product_qty_pc")<<std::endl;
+		//std::cout<< m_res->getString(1)<<":" << m_res->getString("product_qty_pc")<<std::endl;
 	 	boost::shared_ptr<report_data> temp(new report_data());
 	 	temp->quotation_id=m_res->getString("quotation_id");
 	 	temp->quotation_detail_id=m_res->getString("quotation_detail_id");
@@ -40,7 +64,7 @@ void month_report::insert_data()
 	 	
 	 	temp->creat_at=m_res->getString("creat_at");
 	 	m_report_datas.push_back(temp);
-	 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
 	}
 	catch (sql::SQLException &e) 
@@ -86,6 +110,7 @@ void month_report::start()
 	query(query_string);
 	std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
 	insert_data();
+	deal_with_sales_info();
    } 
 	catch (sql::SQLException &e) 
 	{
