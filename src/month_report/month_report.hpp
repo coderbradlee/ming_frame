@@ -16,14 +16,14 @@ struct report_data
  	muduo::string password;
  	muduo::string database;
  }; 
-struct mysql_info
- {
- 	std::string ip;
- 	std::string port;
- 	std::string username;
- 	std::string password;
- 	std::string database;
- }; 
+// struct mysql_info
+//  {
+//  	std::string ip;
+//  	std::string port;
+//  	std::string username;
+//  	std::string password;
+//  	std::string database;
+//  }; 
 class month_report
 {
 public:
