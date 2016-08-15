@@ -12,6 +12,7 @@ void month_report::deal_with_sales_info()
 	for(auto& i:m_report_datas)
 	{
 		std::string query_string="select sales_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		query_string="select employee_no from t_system_account where system_account_id='"+m_res->getString("sales_id")+"'";
 		query(query_string);
