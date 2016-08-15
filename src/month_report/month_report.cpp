@@ -16,11 +16,14 @@ void month_report::deal_with_sales_info()
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 
 		{
-			boost::scoped_ptr< sql::PreparedStatement > prep_stmt(m_con->prepareStatement(query_string));
-			boost::scoped_ptr< sql::ResultSet > res(prep_stmt->executeQuery());
+			boost::scoped_ptr< sql::Statement > stmt(con->createStatement());
+			boost::scoped_ptr< sql::ResultSet > res(stmt->executeQuery(query_string.c_str()));
+			// boost::scoped_ptr< sql::PreparedStatement > prep_stmt(m_con->prepareStatement(query_string));
+			// boost::scoped_ptr< sql::ResultSet > res(prep_stmt->executeQuery());
 			std::string c_string = res->getString(1);//.asStdString();
-			//query_string="select employee_no from t_system_account where system_account_id='"+c_string+"'";
-			query_string="select employee_no from t_system_account where system_account_id='"+res->getString(1).asStdString()+"'";
+			query_string="select employee_no from t_system_account where system_account_id='"+c_string+"'";
+			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			//query_string="select employee_no from t_system_account where system_account_id='"+res->getString(1).asStdString()+"'";
 		}
 		// {
 		// 	boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
