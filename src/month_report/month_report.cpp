@@ -60,7 +60,7 @@ boost::shared_ptr<sql::ResultSet> month_report::get_res()const
 void start_report()
 {
 	boost::shared_ptr<report_data> r(new report_data());
-	boost::shared_ptr<mysql_info> info(new mysql_info());
+	boost::shared_ptr<mysql_info_> info(new mysql_info_());
 	info->ip=get_config->m_mysql_js_ip;
 	info->username=get_config->m_mysql_js_username;
 	info->password=get_config->m_mysql_js_password;
