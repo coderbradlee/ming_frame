@@ -10,28 +10,28 @@
 #include "../log.hpp"
 struct report_data
  {
- 	muduo::string quotation_id;
- 	muduo::string quotation_detail_id;
- 	muduo::string quotation_no;
- 	muduo::string sales_full_name;
- 	muduo::string sales_type;
- 	muduo::string account_name;
- 	muduo::string country_region;
- 	muduo::string customer_countries;
- 	muduo::string receiving_countries;
- 	muduo::string product_classification;
- 	muduo::string product_name;
+ 	std::string quotation_id;
+ 	std::string quotation_detail_id;
+ 	std::string quotation_no;
+ 	std::string sales_full_name;
+ 	std::string sales_type;
+ 	std::string account_name;
+ 	std::string country_region;
+ 	std::string customer_countries;
+ 	std::string receiving_countries;
+ 	std::string product_classification;
+ 	std::string product_name;
  	double product_qty_pc;
  	double product_qty_w;
- 	muduo::string price_condition;
- 	muduo::string currency;
+ 	std::string price_condition;
+ 	std::string currency;
  	double unit_price;
- 	muduo::string price_total_currency;
- 	muduo::string price_total;
- 	muduo::string guided_currency;
- 	muduo::string price_total_guided;
- 	muduo::string payment_term_desc;
- 	muduo::string creat_at;
+ 	std::string price_total_currency;
+ 	std::string price_total;
+ 	std::string guided_currency;
+ 	std::string price_total_guided;
+ 	std::string payment_term_desc;
+ 	std::string creat_at;
  	void print()
  	{
  		std::cout<<quotation_id
