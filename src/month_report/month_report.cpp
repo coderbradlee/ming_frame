@@ -3,7 +3,7 @@
 month_report::month_report(boost::shared_ptr<mysql_connect> in,boost::shared_ptr<report_data> rd):m_mysql_connect(in),m_report_data(rd){}
 void month_report::start()
 {
-	string query_string=
+	muduo::string query_string=
 	"SELECT\
 	t_quotation.quotation_no,\
 	t_quotation_detail.ss_item_category_id,\

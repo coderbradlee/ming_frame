@@ -11,11 +11,11 @@
 #include "../log.hpp"
 struct report_data
  {
- 	std::string ip;
- 	std::string port;
- 	std::string username;
- 	std::string password;
- 	std::string database;
+ 	muduo::string ip;
+ 	muduo::string port;
+ 	muduo::string username;
+ 	muduo::string password;
+ 	muduo::string database;
  }; 
 
 class month_report
