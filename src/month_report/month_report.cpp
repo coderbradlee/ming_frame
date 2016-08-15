@@ -46,10 +46,14 @@ void month_report::start()
 	  LOG_ERROR<<", SQLState: " << e.getSQLState();
 
 	}
-	catch(Exception& e)
-	{
-		LOG_ERROR<<"# ERR: " << e.what();
-	}
+	catch (std::exception& e)
+  	{
+    	LOG_ERROR<<"# ERR: " << e.what();
+  	}
+  	catch (...)
+  	{
+    	LOG_ERROR<<"unknown error ";
+  	}
 }
 void month_report::query(const std::string& query_sql)
 {
