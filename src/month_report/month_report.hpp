@@ -34,7 +34,10 @@ struct report_data
  	muduo::string creat_at;
  	void print()
  	{
- 		std::cout<<quotation_id<<":"quotation_detail_id<<":"<<quotation_no<<":"<<sales_full_name<<":"
+ 		std::cout<<quotation_id
+ 			<<":"<<quotation_detail_id
+ 			<<":"<<quotation_no
+ 			<<":"<<sales_full_name<<":"
 			<<":"<<sales_type<<":"
  			<<":"<<account_name<<":"
 			<<":"<<country_region<<":"
