@@ -11,7 +11,8 @@ void month_report::deal_with_customer_info()
 {
 	try
 	{
-	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& i)
+	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& i)
+	for(auto& i:m_report_datas)
 	{
 		std::string query_string="select delivery_country_id from t_quotation where quotation_id='"+i->quotation_id+"'";
 		
@@ -41,7 +42,7 @@ void month_report::deal_with_customer_info()
 		// m_res->next();
 		// i->country_region=m_res->getString(1);
 
-	});
+	};//);
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 }
 	catch (sql::SQLException &e) 
