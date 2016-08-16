@@ -31,3 +31,34 @@ ab -k -n 100000 http://127.0.0.1:12345/
 ab -k -n 500000 -c 5 http://127.0.0.1:12345/
 ab -k -n 500000 -c 5 http://www.renesola.com/
 ab -n 10000 -c 100 http://127.0.0.1:12345/
+
+
+线上配置：
+[mysql]
+ip=172.30.1.1
+port=3306
+username=renesola
+password=renes0la.xx
+database=apollo_os
+table=t_customer_credit_flow_20160317bk
+table2=t_customer_master_20160317bk
+
+[mysql_eu]
+ip=172.30.1.1
+port=3306
+username=renesola
+password=renes0la.xx
+database=apollo_eu
+
+[mysql_js]
+ip=172.30.1.16
+port=3306
+username=renesola
+password=renes0la.xx
+database=apollo_js
+[mysql_as]
+ip=172.30.1.16
+port=3306
+username=renesola
+password=renes0la.xx
+database=apollo_as
