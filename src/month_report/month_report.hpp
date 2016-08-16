@@ -127,29 +127,29 @@ public:
 	write_csv(std::string filename)
 	{
 		setFilename(filename);
-		fp = std::ofstream(filename);
+		m_fp = std::ofstream(filename);
 	}
 	void close()
 	{
-		this->fp.close();
+		m_fp.close();
 	}
 	~write_csv()
 	{
-		this->fp.close();
+		m_fp.close();
 	}
 	void addData(std::string data)
 	{
-		this->fp.write(data.c_str(), data.length());
+		m_fp.write(data.c_str(), data.length());
 	}
 private:
 	void setFilename(std::string filename)
 	{
-		this->filename = filename;
+		m_filename = filename;
 	}
 	
 private:
-		std::string filename;
-		std::ofstream fp;
+		std::string m_filename;
+		std::ofstream m_fp;
 };
 void start_report();
 
