@@ -318,10 +318,7 @@ void month_report::insert_data()
 
 	 	temp->quotation_no=m_res->getString("quotation_no");
 	 	temp->product_qty_pc=m_res->getDouble("product_qty_pc");
-	 	if(!m_res->isNull("guidance_price"))
-	 	{
-	 		temp->price_total_guided=m_res->getDouble("product_qty_pc")*m_res->getDouble("guidance_price");
-	 	}
+	 	
 	 	if(!m_res->isNull("module_extend_prop"))
 	 	{
 	 		temp->product_qty_w=m_res->getDouble("product_qty_pc")*m_res->getDouble("module_extend_prop");
@@ -329,6 +326,10 @@ void month_report::insert_data()
 	 	else
 	 	{
 	 		temp->product_qty_w=0;
+	 	}
+	 	if(!m_res->isNull("guidance_price"))
+	 	{
+	 		temp->price_total_guided=temp->product_qty_w*m_res->getDouble("guidance_price");
 	 	}
 	 	if(!m_res->isNull("unit_price"))
 	 	{
