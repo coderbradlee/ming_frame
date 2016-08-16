@@ -61,9 +61,7 @@ struct report_data
  	std::string csv_line()
  	{
  		std::ostringstream stream;
-			stream<<quotation_id
-			<<","<<quotation_detail_id
-			<<","<<quotation_no
+			stream<<quotation_no
 			<<","<<sales_full_name
 			<<","<<sales_type
 			<<","<<account_name
