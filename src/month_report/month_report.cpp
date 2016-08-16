@@ -281,7 +281,7 @@ void month_report::start()
 	deal_with_sales_info();
 	deal_with_customer_info();
 	deal_with_currency_info();
-	deal_with_payment_method_info
+	deal_with_payment_method_info();
    } 
 	catch (sql::SQLException &e) 
 	{
