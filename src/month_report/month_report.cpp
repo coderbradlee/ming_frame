@@ -17,11 +17,12 @@ void month_report::deal_with_currency_info()
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
+		if(m_res->isNull("currency_id")||m_res->getString(1)=="") continue;
 		query_string="select code from t_currency where currency_id='"+m_res->getString(1)+"'";
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
-		
+		if(m_res->isNull("code")||m_res->getString(1)=="") continue;
 		i->currency=m_res->getString("code");
 		i->price_total_currency=m_res->getString("code");
 		i->guided_currency=m_res->getString("code");
