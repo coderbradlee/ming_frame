@@ -35,7 +35,7 @@ struct report_data
  	std::string creat_at;
  	void print()
  	{
- 		std::cout<<setprecision(8)<<quotation_id
+ 		std::cout<<std::setprecision(8)<<quotation_id
  			<<","<<quotation_detail_id
  			<<","<<quotation_no
  			<<","<<sales_full_name
@@ -62,7 +62,7 @@ struct report_data
  	std::string csv_line()
  	{
  		std::ostringstream stream;
-			stream<<setprecision(8)<<quotation_no
+			stream<<std::setprecision(8)<<quotation_no
 			<<","<<sales_full_name
 			<<","<<sales_type
 			<<","<<account_name
