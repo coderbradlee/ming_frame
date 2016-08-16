@@ -37,24 +37,24 @@ struct report_data
  		std::cout<<quotation_id
  			<<":"<<quotation_detail_id
  			<<":"<<quotation_no
- 			<<":"<<sales_full_name<<":"
-			<<":"<<sales_type<<":"
- 			<<":"<<account_name<<":"
-			<<":"<<country_region<<":"
-			<<":"<<customer_countries<<":"
- 			<<":"<<receiving_countries<<":"
- 			<<":"<<product_classification<<":"
-			<<":"<<product_name<<":"
- 			<<":"<<product_qty_pc<<":"
-			<<":"<<product_qty_w<<":"
-			<<":"<<price_condition<<":"
- 			<<":"<<currency<<":"
- 			<<":"<<unit_price<<":"
-			<<":"<<price_total_currency<<":"
- 			<<":"<<price_total<<":"
-			<<":"<<guided_currency<<":"
-			<<":"<<price_total_guided<<":"
- 			<<":"<<payment_term_desc<<":"
+ 			<<":"<<sales_full_name
+			<<":"<<sales_type
+ 			<<":"<<account_name
+			<<":"<<country_region
+			<<":"<<customer_countries
+ 			<<":"<<receiving_countries
+ 			<<":"<<product_classification
+			<<":"<<product_name
+ 			<<":"<<product_qty_pc
+			<<":"<<product_qty_w
+			<<":"<<price_condition
+ 			<<":"<<currency
+ 			<<":"<<unit_price
+			<<":"<<price_total_currency
+ 			<<":"<<price_total
+			<<":"<<guided_currency
+			<<":"<<price_total_guided
+ 			<<":"<<payment_term_desc
  			<<":"<<creat_at
  			<<std::endl;
  	}
