@@ -78,6 +78,7 @@ private:
 	void insert_data();
 	void deal_with_sales_info();
 	void deal_with_customer_info();
+	void deal_with_currency_info();
 private:
 	std::vector<boost::shared_ptr<report_data>> m_report_datas;
 	boost::shared_ptr<sql::ResultSet> m_res;
