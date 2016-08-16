@@ -210,6 +210,7 @@ private:
     return muduo::net::ProcessInspector::threads(muduo::net::HttpRequest::kGet, a);
   }
 private:
+  #ifdef HAVE_TCMALLOC
   muduo::string get_pprof_heap()
   {
     muduo::net::Inspector::ArgList a;
@@ -240,6 +241,7 @@ private:
     muduo::net::Inspector::ArgList a;
     return muduo::net::PerformanceInspector::releaseFreeMemory(muduo::net::HttpRequest::kGet, a);
   }
+  #endif
   muduo::string myexec(const char *cmd) 
   {
     muduo::string ret;

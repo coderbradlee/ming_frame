@@ -192,6 +192,7 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
   {
     resp->setBody(get_proc_openedFiles());
   }  
+  #ifdef HAVE_TCMALLOC
   else if (req.path() == "/pprof/growth")
   {
     resp->setBody(get_pprof_growth());
@@ -216,6 +217,7 @@ void Procmon::onRequest(const HttpRequest& req, HttpResponse* resp)
   {
     resp->setBody(get_pprof_releaseFreeMemory());
   }
+  #endif
   else if (req.path() == "/top")
   {
     //resp->setBody(myexec("top"));
