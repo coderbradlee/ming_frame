@@ -25,7 +25,7 @@ void month_report::deal_with_sales_info()
 			
 			// query_strings="select employee_no from t_system_account where system_account_id='"+c_string+"'";
 			sql::ResultSetMetaData * meta = res->getMetaData();
-			std::cout << "#\t\t COLUMN_SIZE = " << meta->getColumnDisplaySize(3) << std::endl;
+			std::cout << "#\t\t COLUMN_SIZE = " << meta->getColumnDisplaySize(1) << std::endl;
 			std::cout<<__FILE__<<":"<<__LINE__<<":"<<res->rowsCount()<<std::endl;
 			std::cout<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 			std::string c_string = res->getString(1).asStdString();
