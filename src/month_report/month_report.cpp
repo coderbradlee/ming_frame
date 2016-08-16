@@ -75,7 +75,7 @@ void month_report::deal_with_payment_method_info()
 	for(auto& i:m_report_datas)
 	{
 		std::string query_string="select payment_method_id from t_payment_term where quotation_id='"+i->quotation_id+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("payment_method_id")||m_res->getString(1)=="") 
@@ -85,7 +85,7 @@ void month_report::deal_with_payment_method_info()
 		}
 		
 		query_string="select name from t_payment_method where payment_method_id='"+m_res->getString(1)+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("name")||m_res->getString(1)=="") continue;
@@ -348,6 +348,7 @@ void month_report::start()
 	deal_with_customer_info();
 	deal_with_currency_info();
 	deal_with_payment_method_info();
+	deal_with_product_info();
    } 
 	catch (sql::SQLException &e) 
 	{
