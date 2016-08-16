@@ -9,6 +9,8 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 }
 void month_report::deal_with_sales_info()
 {
+	try
+	{
 	//for(auto i=m_report_datas.begin();i!=m_report_datas.end();++i)
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& i)
 	{
@@ -16,13 +18,13 @@ void month_report::deal_with_sales_info()
 		std::cout<<query_strings<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 
 		{
-			boost::scoped_ptr< sql::Statement > stmt(m_con->createStatement());
-			boost::scoped_ptr< sql::ResultSet > res(stmt->executeQuery(query_strings));
+			// boost::scoped_ptr< sql::Statement > stmt(m_con->createStatement());
+			// boost::scoped_ptr< sql::ResultSet > res(stmt->executeQuery(query_strings));
 			// boost::scoped_ptr< sql::PreparedStatement > prep_stmt(m_con->prepareStatement(query_string));
 			// boost::scoped_ptr< sql::ResultSet > res(prep_stmt->executeQuery());
 			// std::string c_string = res->getString(1);//.asStdString();
 			// query_strings="select employee_no from t_system_account where system_account_id='"+c_string+"'";
-			//query(query_strings);
+			query(query_strings);
 			//query_strings="select employee_no from t_system_account where system_account_id='"+m_res->getString(1).asStdString()+"'";
 			std::cout<<query_strings<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 			
@@ -48,6 +50,24 @@ void month_report::deal_with_sales_info()
 		// }
 	});
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	catch (sql::SQLException &e) 
+	{
+	  //ming_log->get_log_console()->info()<< "# ERR: " << e.what();
+	  //ming_log->get_log_console()->info()<< " (MySQL error code: " << e.getErrorCode();
+	  //ming_log->get_log_console()->info()<< ", SQLState: " << e.getSQLState();
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+	catch (std::exception& e)
+  	{
+    	LOG_ERROR<<"# ERR: " << e.what();
+  	}
+  	catch (...)
+  	{
+    	LOG_ERROR<<"unknown error ";
+  	}
 }
 void month_report::insert_data()
 {
