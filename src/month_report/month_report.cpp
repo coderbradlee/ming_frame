@@ -22,12 +22,12 @@ void month_report::deal_with_product_info()
 			continue;
 		}
 		
-		query_string="select item_basic_id,full_name from t_item_master where item_master_id='"+m_res->getString(1)+"'";
+		query_string="select item_basic_id,product_code from t_item_master where item_master_id='"+m_res->getString(1)+"'";
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("item_basic_id")||m_res->getString(1)=="") continue;
-		i->product_name=m_res->getString("full_name");
+		i->product_name=m_res->getString("product_code");
 ///////////////////////////////////////////////////////////////////
 		query_string="select item_category_id from t_item_basic where item_basic_id='"+m_res->getString(1)+"'";
 		query(query_string);
