@@ -28,7 +28,7 @@ void month_report::deal_with_sales_info()
 			std::cout << "#\t\t COLUMN_SIZE = " << meta->getColumnDisplaySize(1) << std::endl;
 			std::cout<<__FILE__<<":"<<__LINE__<<":"<<res->rowsCount()<<std::endl;
 			std::cout<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-			std::string c_string = res->getString(1).asStdString();
+			std::string c_string = res->getString("sales_id").asStdString();
 			std::cout<<c_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 			//query_strings="select employee_no from t_system_account where system_account_id='"+m_res->getString(1).asStdString()+"'";
 			//std::cout<<query_strings<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
