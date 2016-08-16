@@ -135,27 +135,30 @@ void month_report::start()
 {
 	try
 	{
-	std::string query_string=
-	"SELECT\
-	t_quotation.quotation_id as quotation_id,\
-	t_quotation_detail.quotation_detail_id as quotation_detail_id,\
-	t_quotation.quotation_no as quotation_no,\
-	t_quotation_detail.quantity as product_qty_pc,\
-	t_quotation_detail.ss_guidance_price as guidance_price,\
-	t_quotation_detail.module_extend_prop as module_extend_prop,\
-	t_quotation_detail.applied_unit_price as unit_price,\
-	t_quotation.createAt as creat_at\
-	FROM\
-	t_quotation INNER JOIN\
-	t_quotation_detail\
-	on\
-	t_quotation_detail.quotation_id = t_quotation.quotation_id\
-	and t_quotation_detail.dr=0 and t_quotation.createAt like \"2016-07%\"\
-	ORDER BY t_quotation.createAt";
+	// std::string query_string=
+	// "SELECT\
+	// t_quotation.quotation_id as quotation_id,\
+	// t_quotation_detail.quotation_detail_id as quotation_detail_id,\
+	// t_quotation.quotation_no as quotation_no,\
+	// t_quotation_detail.quantity as product_qty_pc,\
+	// t_quotation_detail.ss_guidance_price as guidance_price,\
+	// t_quotation_detail.module_extend_prop as module_extend_prop,\
+	// t_quotation_detail.applied_unit_price as unit_price,\
+	// t_quotation.createAt as creat_at\
+	// FROM\
+	// t_quotation INNER JOIN\
+	// t_quotation_detail\
+	// on\
+	// t_quotation_detail.quotation_id = t_quotation.quotation_id\
+	// and t_quotation_detail.dr=0 and t_quotation.createAt like \"2016-07%\"\
+	// ORDER BY t_quotation.createAt";
+	std::string query_string="select sales_id from t_quotation where quotation_id='JD9JY8Z3GNH1H09U4XSD'";
 	query(query_string);
+	std::string c_string = res->getString("sales_id").asStdString();
+	std::cout<<c_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 	std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
-	insert_data();
-	deal_with_sales_info();
+	//insert_data();
+	//deal_with_sales_info();
    } 
 	catch (sql::SQLException &e) 
 	{
