@@ -7,6 +7,46 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 	
 	m_con->setSchema(in->database);
 }
+void month_report::deal_with_customer_info()
+{
+	try
+	{
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& i)
+	{
+		std::string query_string="select delivery_country_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		
+		query(query_string);
+		m_res->next();
+		query_string="select full_name from t_country where country_id='"+m_res->getString(1)+"'";
+	
+		query(query_string);
+		m_res->next();
+		
+		i->receiving_countries=m_res->getString("full_name");
+		
+		
+	});
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+}
+	catch (sql::SQLException &e) 
+	{
+	  //ming_log->get_log_console()->info()<< "# ERR: " << e.what();
+	  //ming_log->get_log_console()->info()<< " (MySQL error code: " << e.getErrorCode();
+	  //ming_log->get_log_console()->info()<< ", SQLState: " << e.getSQLState();
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+	catch (std::exception& e)
+  	{
+    	LOG_ERROR<<"# ERR: " << e.what();
+  	}
+  	catch (...)
+  	{
+    	LOG_ERROR<<"unknown error ";
+  	}
+}
 void month_report::deal_with_sales_info()
 {
 	try
@@ -42,7 +82,7 @@ void month_report::deal_with_sales_info()
 		i->account_name=m_res->getString("full_name");
 		
 	});
-	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 }
 	catch (sql::SQLException &e) 
 	{
