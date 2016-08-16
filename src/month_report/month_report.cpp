@@ -212,11 +212,19 @@ void month_report::deal_with_customer_info()
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("customer_basic_id")) continue;
-		query_string="select country_id from t_customer_basic where customer_basic_id='"+m_res->getString(1)+"'";
+		query_string="select country_id,trade_name from t_customer_basic where customer_basic_id='"+m_res->getString(1)+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("country_id")||m_res->getString(1)=="") continue;
+		if(m_res->isNull("trade_name")||m_res->getString(2)=="") 
+		{
+
+		}
+		else
+		{
+			i->account_name=m_res->getString(2);
+		}
 		query_string="select full_name,area_id from t_country where country_id='"+m_res->getString(1)+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
@@ -278,11 +286,11 @@ void month_report::deal_with_sales_info()
 		m_res->next();
 
 		i->sales_type=m_res->getString("full_name");
-		query_string="select full_name from t_company where company_id='"+m_res->getString("company_id")+"'";
+		// query_string="select full_name from t_company where company_id='"+m_res->getString("company_id")+"'";
 
-		query(query_string);
-		m_res->next();
-		i->account_name=m_res->getString("full_name");
+		// query(query_string);
+		// m_res->next();
+		// i->account_name=m_res->getString("full_name");
 		
 	});
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
