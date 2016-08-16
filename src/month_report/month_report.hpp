@@ -8,6 +8,7 @@
 #include <cppconn/statement.h>
 #include <cppconn/prepared_statement.h>
 #include "../log.hpp"
+#include <iomanip.h>
 struct report_data
  {
  	std::string quotation_id;
