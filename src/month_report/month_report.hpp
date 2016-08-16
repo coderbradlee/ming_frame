@@ -58,7 +58,7 @@ struct report_data
  			<<","<<creat_at
  			<<std::endl;
  	}
- 	string csv_line()
+ 	std::string csv_line()
  	{
  		std::ostringstream stream;
 			stream<<quotation_id
