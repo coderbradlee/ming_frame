@@ -15,47 +15,32 @@ void month_report::deal_with_sales_info()
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& i)
 	{
 		std::string query_string="select sales_id from t_quotation where quotation_id='"+(i)->quotation_id+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 
-		{
-			// boost::scoped_ptr< sql::Statement > stmt(m_con->createStatement());
-			// boost::scoped_ptr< sql::ResultSet > res(stmt->executeQuery(query_strings));
-			// boost::scoped_ptr< sql::PreparedStatement > prep_stmt(m_con->prepareStatement(query_string));
-			// boost::scoped_ptr< sql::ResultSet > res(prep_stmt->executeQuery());
-			
-			// query_strings="select employee_no from t_system_account where system_account_id='"+c_string+"'";
-			// sql::ResultSetMetaData * meta = res->getMetaData();
-			// std::cout << "#\t\t COLUMN_SIZE = " << meta->getColumnDisplaySize(1) << std::endl;
-			// std::cout<<__FILE__<<":"<<__LINE__<<":"<<res->rowsCount()<<std::endl;
-			// std::cout<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-			// std::string c_string = res->getString("sales_id").asStdString();
-			// std::cout<<c_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-			//query_strings="select employee_no from t_system_account where system_account_id='"+m_res->getString(1).asStdString()+"'";
-			//std::cout<<query_strings<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-			query(query_string);
-			m_res->next();
-			query_string="select employee_no from t_system_account where system_account_id='"+m_res->getString(1)+"'";
-			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-		}
-		// {
-		// 	boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
-		// 	query_string="select  full_name,position_id  from t_employee where employee_id='"+res->getString("employee_no")+"'";
-		// }
+		query(query_string);
+		m_res->next();
+		query_string="select employee_no from t_system_account where system_account_id='"+m_res->getString(1)+"'";
+	
+		query(query_string);
+		m_res->next();
+		query_string="select full_name,position_id  from t_employee where employee_id='"+m_res->getString("employee_no")+"'";
 		
-		// {
-		// 	boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
-		// 	(i)->sales_full_name=m_res->getString("full_name");
-		// 	query_string="select full_name,company_id from t_position where position_id='"+res->getString("position_id")+"'";
-		// }
-		// {
-		// 	boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
-		// 	(i)->sales_type=res->getString("full_name");
-		// 	query_string="select full_name from t_company where company_id='"+m_res->getString("company_id")+"'";
-		// }
-		// {
-		// 	boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
-		// 	(i)->account_name=m_res->getString("full_name");
-		// }
+		query(query_string);
+		m_res->next();
+		
+		i->sales_full_name=m_res->getString("full_name");
+		query_string="select full_name,company_id from t_position where position_id='"+m_res->getString("position_id")+"'";
+
+		query(query_string);
+		m_res->next();
+
+		i->sales_type=m_res->getString("full_name");
+		query_string="select full_name from t_company where company_id='"+m_res->getString("company_id")+"'";
+
+		query(query_string);
+		m_res->next();
+		i->account_name=m_res->getString("full_name");
+		
 	});
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 }
