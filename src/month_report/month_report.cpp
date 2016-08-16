@@ -34,7 +34,7 @@ void month_report::deal_with_customer_info()
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
-		if(m_res->isNull("country_id")) continue;
+		if(m_res->isNull("country_id")||m_res->getString(1)=="") continue;
 		query_string="select full_name,area_id from t_country where country_id='"+m_res->getString(1)+"'";
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
