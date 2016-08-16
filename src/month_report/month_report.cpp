@@ -7,6 +7,43 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 	
 	m_con->setSchema(in->database);
 }
+void month_report::deal_with_payment_method_info()
+{
+	try
+	{
+	for(auto& i:m_report_datas)
+	{
+		std::string query_string="select payment_method_id from t_payment_term where quotation_id='"+i->quotation_id+"'";
+		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->isNull("payment_method_id")||m_res->getString(1)=="") continue;
+		query_string="select name from t_payment_method where payment_method_id='"+m_res->getString(1)+"'";
+		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->isNull("name")||m_res->getString(1)=="") continue;
+		i->payment_term_desc=m_res->getString("name");
+		
+	};
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	}
+	catch (sql::SQLException &e) 
+	{
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+	catch (std::exception& e)
+  	{
+    	LOG_ERROR<<"# ERR: " << e.what();
+  	}
+  	catch (...)
+  	{
+    	LOG_ERROR<<"unknown error ";
+  	}
+}
 void month_report::deal_with_currency_info()
 {
 	try
@@ -14,12 +51,12 @@ void month_report::deal_with_currency_info()
 	for(auto& i:m_report_datas)
 	{
 		std::string query_string="select currency_id from t_quotation where quotation_id='"+i->quotation_id+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("currency_id")||m_res->getString(1)=="") continue;
 		query_string="select code from t_currency where currency_id='"+m_res->getString(1)+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("code")||m_res->getString(1)=="") continue;
@@ -27,7 +64,7 @@ void month_report::deal_with_currency_info()
 		i->price_total_currency=m_res->getString("code");
 		i->guided_currency=m_res->getString("code");
 	};
-	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
 	catch (sql::SQLException &e) 
 	{
