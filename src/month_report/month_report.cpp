@@ -14,11 +14,11 @@ void month_report::deal_with_currency_info()
 	for(auto& i:m_report_datas)
 	{
 		std::string query_string="select currency_id from t_quotation where quotation_id='"+i->quotation_id+"'";
-		
+		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		query_string="select code from t_currency where currency_id='"+m_res->getString(1)+"'";
-	
+		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		
@@ -63,24 +63,24 @@ void month_report::deal_with_customer_info()
 		i->receiving_countries=m_res->getString("full_name");
 		////////////////////////////////////////////////
 		query_string="select customer_basic_id from t_quotation where quotation_id='"+i->quotation_id+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("customer_basic_id")) continue;
 		query_string="select country_id from t_customer_basic where customer_basic_id='"+m_res->getString(1)+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("country_id")||m_res->getString(1)=="") continue;
 		query_string="select full_name,area_id from t_country where country_id='"+m_res->getString(1)+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("full_name")) continue;
 		i->customer_countries=m_res->getString(1);
 		if(m_res->isNull("area_id")) continue;
 		query_string="select full_name from t_area where area_id='"+m_res->getString(2)+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("full_name")) continue;
@@ -144,9 +144,7 @@ void month_report::deal_with_sales_info()
 }
 	catch (sql::SQLException &e) 
 	{
-	  //ming_log->get_log_console()->info()<< "# ERR: " << e.what();
-	  //ming_log->get_log_console()->info()<< " (MySQL error code: " << e.getErrorCode();
-	  //ming_log->get_log_console()->info()<< ", SQLState: " << e.getSQLState();
+	  
 	  LOG_ERROR<<"# ERR: " << e.what();
 	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
 	  LOG_ERROR<<", SQLState: " << e.getSQLState();
