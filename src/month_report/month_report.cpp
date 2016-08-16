@@ -360,6 +360,14 @@ void month_report::insert_data()
     	LOG_ERROR<<"unknown error ";
   	}
 }
+void write_to_csv()
+{
+	write_csv w("month_report.csv");
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
+		{
+			w.addData(x->csv_line());
+		});
+}
 void month_report::start()
 {
 	try
@@ -391,6 +399,7 @@ void month_report::start()
 	deal_with_payment_method_info();
 	deal_with_product_info();
 	deal_with_trade_term_info();
+	write_to_csv();
    } 
 	catch (sql::SQLException &e) 
 	{

@@ -35,28 +35,56 @@ struct report_data
  	void print()
  	{
  		std::cout<<quotation_id
- 			<<":"<<quotation_detail_id
- 			<<":"<<quotation_no
- 			<<":"<<sales_full_name
-			<<":"<<sales_type
- 			<<":"<<account_name
-			<<":"<<country_region
-			<<":"<<customer_countries
- 			<<":"<<receiving_countries
- 			<<":"<<product_classification
-			<<":"<<product_name
- 			<<":"<<product_qty_pc
-			<<":"<<product_qty_w
-			<<":"<<price_condition
- 			<<":"<<currency
- 			<<":"<<unit_price
-			<<":"<<price_total_currency
- 			<<":"<<price_total
-			<<":"<<guided_currency
-			<<":"<<price_total_guided
- 			<<":"<<payment_term_desc
- 			<<":"<<creat_at
+ 			<<","<<quotation_detail_id
+ 			<<","<<quotation_no
+ 			<<","<<sales_full_name
+			<<","<<sales_type
+ 			<<","<<account_name
+			<<","<<country_region
+			<<","<<customer_countries
+ 			<<","<<receiving_countries
+ 			<<","<<product_classification
+			<<","<<product_name
+ 			<<","<<product_qty_pc
+			<<","<<product_qty_w
+			<<","<<price_condition
+ 			<<","<<currency
+ 			<<","<<unit_price
+			<<","<<price_total_currency
+ 			<<","<<price_total
+			<<","<<guided_currency
+			<<","<<price_total_guided
+ 			<<","<<payment_term_desc
+ 			<<","<<creat_at
  			<<std::endl;
+ 	}
+ 	string csv_line()
+ 	{
+ 		std::ostringstream stream;
+			stream<<quotation_id
+			<<","<<quotation_detail_id
+			<<","<<quotation_no
+			<<","<<sales_full_name
+			<<","<<sales_type
+			<<","<<account_name
+			<<","<<country_region
+			<<","<<customer_countries
+			<<","<<receiving_countries
+			<<","<<product_classification
+			<<","<<product_name
+			<<","<<product_qty_pc
+			<<","<<product_qty_w
+			<<","<<price_condition
+			<<","<<currency
+			<<","<<unit_price
+			<<","<<price_total_currency
+			<<","<<price_total
+			<<","<<guided_currency
+			<<","<<price_total_guided
+			<<","<<payment_term_desc
+			<<","<<creat_at
+			<<"\r\n";
+ 		return stream.str();
  	}
  }; 
 struct mysql_info_
@@ -82,6 +110,7 @@ private:
 	void deal_with_payment_method_info();
 	void deal_with_product_info();
 	void deal_with_trade_term_info();
+	void write_to_csv();
 private:
 	std::vector<boost::shared_ptr<report_data>> m_report_datas;
 	boost::shared_ptr<sql::ResultSet> m_res;
@@ -92,7 +121,36 @@ private:
 
 	sql::Driver* m_driver;
 };
-
+class write_csv
+{
+public:
+	write_csv(std::string filename)
+	{
+		setFilename(filename);
+		fp = std::ofstream(filename);
+	}
+	void close()
+	{
+		this->fp.close();
+	}
+	~write_csv()
+	{
+		this->fp.close();
+	}
+	void addData(std::string data)
+	{
+		this->fp.write(data.c_str(), data.length());
+	}
+private:
+	void setFilename(std::string filename)
+	{
+		this->filename = filename;
+	}
+	
+private:
+		std::string filename;
+		std::ofstream fp;
+};
 void start_report();
 
 #endif
