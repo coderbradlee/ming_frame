@@ -185,6 +185,7 @@ void month_report::start()
 
 	insert_data();
 	deal_with_sales_info();
+	deal_with_customer_info();
    } 
 	catch (sql::SQLException &e) 
 	{
