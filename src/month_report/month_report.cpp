@@ -14,7 +14,7 @@ void month_report::deal_with_trade_term_info()
 	for(auto& i:m_report_datas)
 	{
 		std::string query_string="select trade_term_id from t_quotation where quotation_id='"+i->quotation_id+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("trade_term_id")||m_res->getString(1)=="") 
@@ -23,7 +23,7 @@ void month_report::deal_with_trade_term_info()
 		}
 		
 		query_string="select short_name from t_trade_term where trade_term_id='"+m_res->getString(1)+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("short_name")||m_res->getString(1)=="") continue;
@@ -121,7 +121,7 @@ void month_report::deal_with_payment_method_info()
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("payment_method_id")||m_res->getString(1)=="") 
 		{
-			std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
+			//std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
 			continue;
 		}
 		
