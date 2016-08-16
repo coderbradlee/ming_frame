@@ -25,7 +25,8 @@ void month_report::deal_with_sales_info()
 			
 			// query_strings="select employee_no from t_system_account where system_account_id='"+c_string+"'";
 			query(query_strings);
-			std::string c_string = m_res->getString(1);//.asStdString();
+			std::cout<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			std::string c_string = m_res->getString(1).asStdString();
 			std::cout<<c_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 			//query_strings="select employee_no from t_system_account where system_account_id='"+m_res->getString(1).asStdString()+"'";
 			//std::cout<<query_strings<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
