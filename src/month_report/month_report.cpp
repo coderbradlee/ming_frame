@@ -209,7 +209,7 @@ void month_report::query(const std::string& query_sql)
 {
 	try 
 	{
-	  std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
+	  //std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
 	  m_pstmt = boost::shared_ptr<sql::PreparedStatement>(m_con->prepareStatement(query_sql));
 	  m_res = boost::shared_ptr<sql::ResultSet>(m_pstmt->executeQuery());
 
