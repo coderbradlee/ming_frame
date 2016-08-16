@@ -23,8 +23,23 @@ void month_report::deal_with_customer_info()
 		m_res->next();
 		
 		i->receiving_countries=m_res->getString("full_name");
+		////////////////////////////////////////////////
+		query_string="select customer_basic_id from t_quotation where quotation_id='"+i->quotation_id+"'";
 		
-		
+		query(query_string);
+		m_res->next();
+		query_string="select country_id from t_customer_basic where customer_basic_id='"+m_res->getString(1)+"'";
+		query(query_string);
+		m_res->next();
+		query_string="select full_name,area_id from t_country where country_id='"+m_res->getString(1)+"'";
+		query(query_string);
+		m_res->next();
+		i->customer_countries=m_res->getString(1);
+		query_string="select full_name from t_area where area_id='"+m_res->getString(1)+"'";
+		query(query_string);
+		m_res->next();
+		i->country_region=m_res->getString(1);
+
 	});
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 }
