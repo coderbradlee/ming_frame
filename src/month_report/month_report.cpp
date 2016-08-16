@@ -14,25 +14,28 @@ void month_report::deal_with_sales_info()
 	//for(auto i=m_report_datas.begin();i!=m_report_datas.end();++i)
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& i)
 	{
-		std::string query_strings="select sales_id from t_quotation where quotation_id='"+(i)->quotation_id+"'";
-		std::cout<<query_strings<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		std::string query_string="select sales_id from t_quotation where quotation_id='"+(i)->quotation_id+"'";
+		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 
 		{
-			boost::scoped_ptr< sql::Statement > stmt(m_con->createStatement());
-			boost::scoped_ptr< sql::ResultSet > res(stmt->executeQuery(query_strings));
+			// boost::scoped_ptr< sql::Statement > stmt(m_con->createStatement());
+			// boost::scoped_ptr< sql::ResultSet > res(stmt->executeQuery(query_strings));
 			// boost::scoped_ptr< sql::PreparedStatement > prep_stmt(m_con->prepareStatement(query_string));
 			// boost::scoped_ptr< sql::ResultSet > res(prep_stmt->executeQuery());
 			
 			// query_strings="select employee_no from t_system_account where system_account_id='"+c_string+"'";
-			sql::ResultSetMetaData * meta = res->getMetaData();
-			std::cout << "#\t\t COLUMN_SIZE = " << meta->getColumnDisplaySize(1) << std::endl;
-			std::cout<<__FILE__<<":"<<__LINE__<<":"<<res->rowsCount()<<std::endl;
-			std::cout<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-			std::string c_string = res->getString("sales_id").asStdString();
-			std::cout<<c_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			// sql::ResultSetMetaData * meta = res->getMetaData();
+			// std::cout << "#\t\t COLUMN_SIZE = " << meta->getColumnDisplaySize(1) << std::endl;
+			// std::cout<<__FILE__<<":"<<__LINE__<<":"<<res->rowsCount()<<std::endl;
+			// std::cout<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			// std::string c_string = res->getString("sales_id").asStdString();
+			// std::cout<<c_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 			//query_strings="select employee_no from t_system_account where system_account_id='"+m_res->getString(1).asStdString()+"'";
 			//std::cout<<query_strings<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-			
+			query(query_string);
+			m_res->next();
+			query_string="select employee_no from t_system_account where system_account_id='"+m_res->getString(1)+"'";
+			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		}
 		// {
 		// 	boost::scoped_ptr< sql::ResultSet > res(m_pstmt->executeQuery(query_string));
@@ -135,15 +138,28 @@ void month_report::start()
 {
 	try
 	{
+	std::string query_string=
+	"SELECT\
+	t_quotation.quotation_id as quotation_id,\
+	t_quotation_detail.quotation_detail_id as quotation_detail_id,\
+	t_quotation.quotation_no as quotation_no,\
+	t_quotation_detail.quantity as product_qty_pc,\
+	t_quotation_detail.ss_guidance_price as guidance_price,\
+	t_quotation_detail.module_extend_prop as module_extend_prop,\
+	t_quotation_detail.applied_unit_price as unit_price,\
+	t_quotation.createAt as creat_at\
+	FROM\
+	t_quotation INNER JOIN\
+	t_quotation_detail\
+	on\
+	t_quotation_detail.quotation_id = t_quotation.quotation_id\
+	and t_quotation_detail.dr=0 and t_quotation.createAt like \"2016-07%\"\
+	ORDER BY t_quotation.createAt";
 	
-	std::string query_string="select sales_id from t_quotation where quotation_id='JD9JY8Z3GNH1H09U4XSD'";
 	query(query_string);
-	m_res->next();
-	std::string c_string = m_res->getString("sales_id").asStdString();
-	std::cout<<c_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-	std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
-	//insert_data();
-	//deal_with_sales_info();
+
+	insert_data();
+	deal_with_sales_info();
    } 
 	catch (sql::SQLException &e) 
 	{
