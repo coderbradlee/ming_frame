@@ -138,7 +138,8 @@ void month_report::start()
 	
 	std::string query_string="select sales_id from t_quotation where quotation_id='JD9JY8Z3GNH1H09U4XSD'";
 	query(query_string);
-	std::string c_string = m_res->next()->getString("sales_id").asStdString();
+	m_res->next();
+	std::string c_string = m_res->getString("sales_id").asStdString();
 	std::cout<<c_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 	std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
 	//insert_data();
