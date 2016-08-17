@@ -23,7 +23,7 @@ void month_report::deal_with_approved_status()
 		}
 		std::string status=m_res->getString(1);
 		/*审批状态, 0:Pending; 1:Draft; 2:Submitted; 3:Approved; 4:Accepted; 5:Canceled; 6:Expired; 7:Rejected; 8:QU_Generated; 9:Refused; 10:PI_Generated; 11:Paying; 12:AR_Confirmed; 13:SO_Generated*/
-		std::map<string,string> m={{"0","Pending"}, {"1","Draft"}, {"2","Submitted"}, {"3","Approved"}, {"4","Accepted"}, {"5","Canceled"}, {"6","Expired"}, {"7","Rejected"}, {"8","QU_Generated"}, {"9","Refused"}, {"10","PI_Generated"}, {"11","Paying"}, {"12","AR_Confirmed"}, {"13","SO_Generated"}};
+		std::map<std::string,std::string> m={{"0","Pending"}, {"1","Draft"}, {"2","Submitted"}, {"3","Approved"}, {"4","Accepted"}, {"5","Canceled"}, {"6","Expired"}, {"7","Rejected"}, {"8","QU_Generated"}, {"9","Refused"}, {"10","PI_Generated"}, {"11","Paying"}, {"12","AR_Confirmed"}, {"13","SO_Generated"}};
 		i->approval_status=m[status];
    		
 	};
@@ -123,11 +123,11 @@ void month_report::deal_with_product_info()
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("parent_product_category_id")||m_res->getString(1)=="") continue;
 		
-		query_string="select name from t_product_category where product_category_id='"+m_res->getString(1)+"'";
-		query(query_string);
-		m_res->next();
-		if(m_res->rowsCount()<1||m_res->isNull("name")||m_res->getString(1)=="") continue;
-		i->product_classification=m_res->getString(1);
+		// query_string="select name from t_product_category where product_category_id='"+m_res->getString(1)+"'";
+		// query(query_string);
+		// m_res->next();
+		// if(m_res->rowsCount()<1||m_res->isNull("name")||m_res->getString(1)=="") continue;
+		// i->product_classification=m_res->getString(1);
 	};
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
@@ -318,12 +318,12 @@ void month_report::deal_with_sales_info()
 		m_res->next();
 		
 		i->sales_full_name=m_res->getString("full_name");
-		query_string="select full_name,company_id from t_position where position_id='"+m_res->getString("position_id")+"'";
+		// query_string="select full_name,company_id from t_position where position_id='"+m_res->getString("position_id")+"'";
 
-		query(query_string);
-		m_res->next();
+		// query(query_string);
+		// m_res->next();
 
-		i->sales_type=m_res->getString("full_name");
+		// i->sales_type=m_res->getString("full_name");
 		// query_string="select full_name from t_company where company_id='"+m_res->getString("company_id")+"'";
 
 		// query(query_string);
@@ -373,10 +373,10 @@ void month_report::insert_data()
 	 	{
 	 		temp->product_qty_w=0;
 	 	}
-	 	if(!m_res->isNull("guidance_price"))
-	 	{
-	 		temp->price_total_guided=temp->product_qty_w*m_res->getDouble("guidance_price");
-	 	}
+	 	// if(!m_res->isNull("guidance_price"))
+	 	// {
+	 	// 	temp->price_total_guided=temp->product_qty_w*m_res->getDouble("guidance_price");
+	 	// }
 	 	if(!m_res->isNull("unit_price"))
 	 	{
 	 		temp->unit_price=m_res->getDouble("unit_price");
