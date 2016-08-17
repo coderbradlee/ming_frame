@@ -150,12 +150,12 @@ boost::shared_ptr<sql::ResultSet> month_report::get_res()const
 void start_report()
 {
 	boost::shared_ptr<mysql_info_> info(new mysql_info_());
-	info->ip=get_config->m_mysql_os_ip;
-	info->username=get_config->m_mysql_os_username;
-	info->password=get_config->m_mysql_os_password;
-	info->database=get_config->m_mysql_os_database;
+	info->ip=get_config->m_mysql_ip;
+	info->username=get_config->m_mysql_username;
+	info->password=get_config->m_mysql_password;
+	info->database=get_config->m_mysql_database;
 
-	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_os_port);
+	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_port);
 	boost::shared_ptr<month_report> report(new month_report(info));
 	report->start();
 }
