@@ -85,11 +85,11 @@ void month_report::deal_with_product_info()
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("parent_product_category_id")||m_res->getString(1)=="") continue;
 		
-		query_string="select name from t_product_category where product_category_id='"+m_res->getString(1)+"'";
-		query(query_string);
-		m_res->next();
-		if(m_res->rowsCount()<1||m_res->isNull("name")||m_res->getString(1)=="") continue;
-		i->product_classification=m_res->getString(1);
+		// query_string="select name from t_product_category where product_category_id='"+m_res->getString(1)+"'";
+		// query(query_string);
+		// m_res->next();
+		// if(m_res->rowsCount()<1||m_res->isNull("name")||m_res->getString(1)=="") continue;
+		// i->product_classification=m_res->getString(1);
 	};
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
@@ -125,12 +125,12 @@ void month_report::deal_with_payment_method_info()
 			continue;
 		}
 		
-		query_string="select name from t_payment_method where payment_method_id='"+m_res->getString(1)+"'";
-		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-		query(query_string);
-		m_res->next();
-		if(m_res->isNull("name")||m_res->getString(1)=="") continue;
-		i->payment_term_desc=m_res->getString("name");
+		// query_string="select name from t_payment_method where payment_method_id='"+m_res->getString(1)+"'";
+		// //std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		// query(query_string);
+		// m_res->next();
+		// if(m_res->isNull("name")||m_res->getString(1)=="") continue;
+		// i->payment_term_desc=m_res->getString("name");
 		
 	};
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
@@ -169,7 +169,7 @@ void month_report::deal_with_currency_info()
 		if(m_res->isNull("code")||m_res->getString(1)=="") continue;
 		i->currency=m_res->getString("code");
 		i->price_total_currency=m_res->getString("code");
-		i->guided_currency=m_res->getString("code");
+		//i->guided_currency=m_res->getString("code");
 	};
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
@@ -196,16 +196,16 @@ void month_report::deal_with_customer_info()
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& i)
 	for(auto& i:m_report_datas)
 	{
-		std::string query_string="select delivery_country_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		// std::string query_string="select delivery_country_id from t_quotation where quotation_id='"+i->quotation_id+"'";
 		
-		query(query_string);
-		m_res->next();
-		query_string="select full_name from t_country where country_id='"+m_res->getString(1)+"'";
+		// query(query_string);
+		// m_res->next();
+		// query_string="select full_name from t_country where country_id='"+m_res->getString(1)+"'";
 	
-		query(query_string);
-		m_res->next();
+		// query(query_string);
+		// m_res->next();
 		
-		i->receiving_countries=m_res->getString("full_name");
+		// i->receiving_countries=m_res->getString("full_name");
 		////////////////////////////////////////////////
 		query_string="select customer_basic_id from t_quotation where quotation_id='"+i->quotation_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
@@ -225,19 +225,19 @@ void month_report::deal_with_customer_info()
 		{
 			i->account_name=m_res->getString(2);
 		}
-		query_string="select full_name,area_id from t_country where country_id='"+m_res->getString(1)+"'";
-		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-		query(query_string);
-		m_res->next();
-		if(m_res->isNull("full_name")) continue;
-		i->customer_countries=m_res->getString(1);
-		if(m_res->isNull("area_id")) continue;
-		query_string="select full_name from t_area where area_id='"+m_res->getString(2)+"'";
-		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-		query(query_string);
-		m_res->next();
-		if(m_res->isNull("full_name")) continue;
-		i->country_region=m_res->getString(1);
+		// query_string="select full_name,area_id from t_country where country_id='"+m_res->getString(1)+"'";
+		// //std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		// query(query_string);
+		// m_res->next();
+		//if(m_res->isNull("full_name")) continue;
+		//i->customer_countries=m_res->getString(1);
+		//if(m_res->isNull("area_id")) continue;
+		// query_string="select full_name from t_area where area_id='"+m_res->getString(2)+"'";
+		// //std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		// query(query_string);
+		// m_res->next();
+		// if(m_res->isNull("full_name")) continue;
+		// i->country_region=m_res->getString(1);
 
 	};//);
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
@@ -335,10 +335,10 @@ void month_report::insert_data()
 	 	{
 	 		temp->product_qty_w=0;
 	 	}
-	 	if(!m_res->isNull("guidance_price"))
-	 	{
-	 		temp->price_total_guided=temp->product_qty_w*m_res->getDouble("guidance_price");
-	 	}
+	 	// if(!m_res->isNull("guidance_price"))
+	 	// {
+	 	// 	temp->price_total_guided=temp->product_qty_w*m_res->getDouble("guidance_price");
+	 	// }
 	 	if(!m_res->isNull("unit_price"))
 	 	{
 	 		temp->unit_price=m_res->getDouble("unit_price");
