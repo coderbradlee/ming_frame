@@ -386,13 +386,8 @@ void month_report::write_to_csv()
 		{
 			if(x->country=="USA")
 			{
-
-			}
-			else
-			{
 				w.addData(x->csv_line());
 			}
-			
 		});
 }
 void month_report::start()
