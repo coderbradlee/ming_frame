@@ -27,11 +27,9 @@ struct report_data
  		std::cout<<customer_basic_id
  			<<","<<account_owner
  			<<","<<account_name
- 			<<","<<quotation_no
  			<<","<<country
 			<<","<<state
  			<<","<<city
-			<<","<<country_region
 			<<","<<allocated_time
  			<<std::endl;
  	}
@@ -40,11 +38,9 @@ struct report_data
  		std::ostringstream stream;
 			stream<<account_owner
  			<<","<<account_name
- 			<<","<<quotation_no
  			<<","<<country
 			<<","<<state
  			<<","<<city
-			<<","<<country_region
 			<<","<<allocated_time
 			<<"\r\n";
  		return stream.str();
