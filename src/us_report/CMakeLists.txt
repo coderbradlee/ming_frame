@@ -1,9 +1,9 @@
 
 
-set(PRODUCT_SRC_LIST ../config.cpp ../log.cpp month_report.cpp month_report_main.cpp)
-add_executable(month_report_js ${PRODUCT_SRC_LIST})
+set(PRODUCT_SRC_LIST ../config.cpp ../log.cpp us_account_report.cpp us_account_report_main.cpp)
+add_executable(us_account_report ${PRODUCT_SRC_LIST})
 
-set(main_name month_report_js)
+set(main_name us_account_report)
 
 target_link_libraries(${main_name} muduo_net_cpp11)
 target_link_libraries(${main_name} muduo_base_cpp11)
