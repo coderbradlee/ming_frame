@@ -396,8 +396,8 @@ void month_report::start()
 	t_quotation_detail\
 	on\
 	t_quotation_detail.quotation_id = t_quotation.quotation_id\
-	and t_quotation_detail.dr=0 and t_quotation.createAt like \"2016-07%\" and approval_status>=3 and t_quotation.approval_status<>5 
-  and t_quotation.approval_status<>7
+	and t_quotation_detail.dr=0 and t_quotation.createAt like \"2016-07%\" and approval_status>=3 and t_quotation.approval_status<>5 \
+  and t_quotation.approval_status<>7 \
 	ORDER BY t_quotation.createAt";
 	
 	query(query_string);
