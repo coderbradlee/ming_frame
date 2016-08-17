@@ -1,4 +1,14 @@
+set(QUOTATION_SRC_LIST ../config.cpp ../log.cpp us_quotation_report.cpp us_quotation_report_main.cpp)
+set(QUOTATION_LIB_LIST muduo_net_cpp11 muduo_base_cpp11 muduo_http boost_system ssl mysqlcppconn boost_program_options boost_filesystem boost_coroutine boost_thread pthread boost_context boost_date_time crypto boost_regex boost_timer boost_signals boost_locale muduo_inspect gd)
 
+add_executable(us_quotation_report ${QUOTATION_SRC_LIST})
+
+target_link_libraries(us_quotation_report ${QUOTATION_LIB_LIST})
+
+if(TCMALLOC_INCLUDE_DIR AND TCMALLOC_LIBRARY)
+  set_target_properties(us_quotation_report PROPERTIES COMPILE_FLAGS "-DHAVE_TCMALLOC")
+  target_link_libraries(us_quotation_report tcmalloc_and_profiler)
+endif()
 
 set(LEAD_SRC_LIST ../config.cpp ../log.cpp us_lead_report.cpp us_lead_report_main.cpp)
 set(LEAD_LIB_LIST muduo_net_cpp11 muduo_base_cpp11 muduo_http boost_system ssl mysqlcppconn boost_program_options boost_filesystem boost_coroutine boost_thread pthread boost_context boost_date_time crypto boost_regex boost_timer boost_signals boost_locale muduo_inspect gd)
