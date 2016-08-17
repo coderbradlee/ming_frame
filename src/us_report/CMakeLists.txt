@@ -1,5 +1,20 @@
 
 
+set(LEAD_SRC_LIST ../config.cpp ../log.cpp us_lead_report.cpp us_lead_report_main.cpp)
+set(LEAD_LIB_LIST muduo_net_cpp11 muduo_base_cpp11 muduo_http boost_system ssl mysqlcppconn boost_program_options boost_filesystem boost_coroutine boost_thread pthread boost_context boost_date_time crypto boost_regex boost_timer boost_signals boost_locale muduo_inspect gd)
+
+add_executable(us_lead_report ${LEAD_SRC_LIST})
+
+target_link_libraries(us_lead_report ${LEAD_LIB_LIST})
+
+if(TCMALLOC_INCLUDE_DIR AND TCMALLOC_LIBRARY)
+  set_target_properties(us_lead_report PROPERTIES COMPILE_FLAGS "-DHAVE_TCMALLOC")
+  target_link_libraries(us_lead_report tcmalloc_and_profiler)
+endif()
+
+
+
+
 set(PRODUCT_SRC_LIST ../config.cpp ../log.cpp us_account_report.cpp us_account_report_main.cpp)
 add_executable(us_account_report ${PRODUCT_SRC_LIST})
 
@@ -8,7 +23,7 @@ set(main_name us_account_report)
 target_link_libraries(${main_name} muduo_net_cpp11)
 target_link_libraries(${main_name} muduo_base_cpp11)
 target_link_libraries(${main_name} muduo_http)
-target_link_libraries(${main_name} boost_system)
+target_link_libraries(${main_name}  boost_system )
 target_link_libraries(${main_name} ssl)
 target_link_libraries(${main_name} mysqlcppconn)
 target_link_libraries(${main_name} boost_program_options) 
