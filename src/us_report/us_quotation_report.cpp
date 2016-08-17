@@ -384,7 +384,7 @@ void month_report::write_to_csv()
 	write_csv w("us_quotation_report.csv");
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 		{
-			if(x->country=="USA")
+			if(x->country=="US")
 			{
 				w.addData(x->csv_line());
 			}
