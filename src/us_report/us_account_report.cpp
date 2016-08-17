@@ -23,6 +23,24 @@ void month_report::deal_with()
 		}
 		i->country=m_res->getString(1);
 
+		std::string query_string="select owner_sales_sys_account_id from t_customer_master where customer_basic_id='"+i->customer_basic_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("owner_sales_sys_account_id")||m_res->getString(1)=="") 
+		{
+			continue;
+		}
+		std::string query_string="select account_name from t_system_account where system_account_id='"+m_res->getString(1)+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("account_name")||m_res->getString(1)=="") 
+		{
+			continue;
+		}
+		i->account_owner=m_res->getString(1);
+
 		query_string="select full_name from t_state where state_id='"+i->state_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
