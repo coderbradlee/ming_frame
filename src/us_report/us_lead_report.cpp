@@ -107,7 +107,15 @@ void month_report::write_to_csv()
 	write_csv w("us_lead_report.csv");
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 		{
-			w.addData(x->csv_line());
+			
+			if(x->country=="USA")
+			{
+
+			}
+			else
+			{
+				w.addData(x->csv_line());
+			}
 		});
 }
 void month_report::start()
@@ -162,12 +170,12 @@ boost::shared_ptr<sql::ResultSet> month_report::get_res()const
 void start_report()
 {
 	boost::shared_ptr<mysql_info_> info(new mysql_info_());
-	info->ip=get_config->m_mysql_ip;
-	info->username=get_config->m_mysql_username;
-	info->password=get_config->m_mysql_password;
-	info->database=get_config->m_mysql_database;
+	info->ip=get_config->m_mysql_js_ip;
+	info->username=get_config->m_mysql_js_username;
+	info->password=get_config->m_mysql_js_password;
+	info->database=get_config->m_mysql_js_database;
 
-	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_port);
+	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_js_port);
 	boost::shared_ptr<month_report> report(new month_report(info));
 	report->start();
 }

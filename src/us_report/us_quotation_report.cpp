@@ -217,6 +217,7 @@ void month_report::deal_with_customer_info()
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("country_id")||m_res->getString(1)=="") continue;
+		i->country_id=m_res->getString(1);
 		if(m_res->isNull("trade_name")||m_res->getString(2)=="") 
 		{
 
@@ -225,6 +226,15 @@ void month_report::deal_with_customer_info()
 		{
 			i->account_name=m_res->getString(2);
 		}
+		query_string="select alphabet_shortname from t_country where country_id='"+i->country_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("alphabet_shortname")||m_res->getString(1)=="") 
+		{
+			continue;
+		}
+		i->country=m_res->getString(1);
 		// query_string="select full_name,area_id from t_country where country_id='"+m_res->getString(1)+"'";
 		// //std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		// query(query_string);
@@ -374,7 +384,15 @@ void month_report::write_to_csv()
 	write_csv w("us_quotation_report.csv");
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 		{
-			w.addData(x->csv_line());
+			if(x->country=="USA")
+			{
+
+			}
+			else
+			{
+				w.addData(x->csv_line());
+			}
+			
 		});
 }
 void month_report::start()
@@ -456,12 +474,12 @@ boost::shared_ptr<sql::ResultSet> month_report::get_res()const
 void start_report()
 {
 	boost::shared_ptr<mysql_info_> info(new mysql_info_());
-	info->ip=get_config->m_mysql_ip;
-	info->username=get_config->m_mysql_username;
-	info->password=get_config->m_mysql_password;
-	info->database=get_config->m_mysql_database;
+	info->ip=get_config->m_mysql_js_ip;
+	info->username=get_config->m_mysql_js_username;
+	info->password=get_config->m_mysql_js_password;
+	info->database=get_config->m_mysql_js_database;
 
-	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_port);
+	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_js_port);
 	boost::shared_ptr<month_report> report(new month_report(info));
 	report->start();
 }

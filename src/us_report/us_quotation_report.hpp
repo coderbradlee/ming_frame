@@ -13,7 +13,8 @@ struct report_data
  {
  	std::string quotation_id;
  	std::string quotation_detail_id;
-
+ 	std::string country_id;
+ 	std::string country;
 	std::string sales_full_name;
 	std::string account_name;
  	std::string quotation_no;
