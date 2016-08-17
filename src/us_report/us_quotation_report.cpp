@@ -207,7 +207,7 @@ void month_report::deal_with_customer_info()
 		
 		// i->receiving_countries=m_res->getString("full_name");
 		////////////////////////////////////////////////
-		query_string="select customer_basic_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		std::string query_string="select customer_basic_id from t_quotation where quotation_id='"+i->quotation_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
@@ -280,12 +280,12 @@ void month_report::deal_with_sales_info()
 		m_res->next();
 		
 		i->sales_full_name=m_res->getString("full_name");
-		query_string="select full_name,company_id from t_position where position_id='"+m_res->getString("position_id")+"'";
+		// query_string="select full_name,company_id from t_position where position_id='"+m_res->getString("position_id")+"'";
 
-		query(query_string);
-		m_res->next();
+		// query(query_string);
+		// m_res->next();
 
-		i->sales_type=m_res->getString("full_name");
+		// i->sales_type=m_res->getString("full_name");
 		// query_string="select full_name from t_company where company_id='"+m_res->getString("company_id")+"'";
 
 		// query(query_string);
