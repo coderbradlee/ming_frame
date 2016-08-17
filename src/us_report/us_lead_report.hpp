@@ -25,7 +25,7 @@ struct report_data
  	
  	void print()
  	{
- 		std::cout<<customer_basic_id
+ 		std::cout<<lead_id
  			<<","<<lead_owner
  			<<","<<account_name
  			<<","<<country
