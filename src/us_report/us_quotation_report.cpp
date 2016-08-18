@@ -13,8 +13,7 @@ void month_report::deal_with_sales_country()
 	{
 	for(auto& i:m_report_datas)
 	{
-		
-		query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
+		std::string query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
