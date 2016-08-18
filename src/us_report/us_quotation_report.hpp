@@ -18,6 +18,8 @@ struct report_data
  	std::string owner_sales_sys_account_id;
  	std::string sales_employee_id;
  	std::string sales_company_name;
+ 	std::string sales_employee_id;
+ 	std::string sales_company_name;
 	std::string sales_full_name;
 	std::string account_name;
  	std::string quotation_no;
@@ -35,7 +37,7 @@ struct report_data
  	void print()
  	{
  		std::cout<<std::setprecision(8)<<quotation_id
- 		<<","<<quotation_detail_id<<","<<sales_full_name<<","<<account_name<<","<<quotation_no<<","<<approval_status<<","<<product_name<<","<<product_qty_pc<<","<<product_qty_w<<","<<price_condition<<","<<currency<<","<<unit_price<<","<<price_total_currency<<","<<price_total<<","<<creat_at
+ 		<<","<<quotation_detail_id<<","<<sales_full_name<<","<<sales_company_name<<","<<account_name<<","<<quotation_no<<","<<approval_status<<","<<product_name<<","<<product_qty_pc<<","<<product_qty_w<<","<<price_condition<<","<<currency<<","<<unit_price<<","<<price_total_currency<<","<<price_total<<","<<creat_at
  			<<std::endl;
  	}
  	std::string csv_line()
@@ -69,6 +71,7 @@ private:
 	void deal_with_payment_method_info();
 	void deal_with_product_info();
 	void deal_with_trade_term_info();
+	void deal_with_sales_country();
 	void write_to_csv();
 private:
 	std::vector<boost::shared_ptr<report_data>> m_report_datas;

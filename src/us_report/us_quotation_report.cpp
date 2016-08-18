@@ -7,6 +7,73 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 	
 	m_con->setSchema(in->database);
 }
+void month_report::deal_with_sales_country()
+{
+	try
+	{
+	for(auto& i:m_report_datas)
+	{
+		
+		query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("employee_no")||m_res->getString(1)=="") 
+		{
+			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		}
+		else
+		{
+			i->sales_employee_id=m_res->getString("employee_no");
+		}
+		
+		query_string="\
+		select master_file_obj_id \
+		from t_wf_role_resolve \
+		where master_file_type='COMPANY' \
+		and employee_id='"+i->sales_employee_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("master_file_obj_id")||m_res->getString(1)=="") 
+		{
+			
+		}
+		else
+		{
+			query_string="select short_name from t_company where company_id='"+m_res->getString(1)+"'";
+			//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			query(query_string);
+			m_res->next();
+			if(m_res->rowsCount()<1||m_res->isNull("short_name")||m_res->getString(1)=="") 
+			{
+				
+			}
+			else
+			{
+				i->sales_company_name=m_res->getString("short_name");
+			}	
+		}
+   
+	};
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	}
+	catch (sql::SQLException &e) 
+	{
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+	catch (std::exception& e)
+  	{
+    	LOG_ERROR<<"# ERR: " << e.what();
+  	}
+  	catch (...)
+  	{
+    	LOG_ERROR<<"unknown error ";
+  	}
+}
 void month_report::deal_with_trade_term_info()
 {
 	try
@@ -384,7 +451,8 @@ void month_report::write_to_csv()
 	write_csv w("us_quotation_report.csv");
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 		{
-			if(x->country=="US")
+			//if(x->country=="US")
+			if(x->sales_company_name=="ReneSola America")
 			{
 				w.addData(x->csv_line());
 			}
@@ -421,6 +489,7 @@ void month_report::start()
 	deal_with_payment_method_info();
 	deal_with_product_info();
 	deal_with_trade_term_info();
+	deal_with_sales_country();
 	write_to_csv();
    } 
 	catch (sql::SQLException &e) 
