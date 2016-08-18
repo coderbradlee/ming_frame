@@ -13,7 +13,18 @@ void month_report::deal_with_sales_country()
 	{
 	for(auto& i:m_report_datas)
 	{
-		std::string query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
+		std::string query_string="select sales_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("sales_id")||m_res->getString(1)=="") 
+		{
+			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		}
+		else
+		{
+			i->owner_sales_sys_account_id=m_res->getString("sales_id");
+		}
+		query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
@@ -55,7 +66,7 @@ void month_report::deal_with_sales_country()
 		}
    
 	};
-	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
 	catch (sql::SQLException &e) 
 	{
