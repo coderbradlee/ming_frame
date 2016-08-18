@@ -64,7 +64,7 @@ void month_report::deal_with()
 		}
 		
 		query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("employee_no")||m_res->getString(1)=="") 
@@ -91,7 +91,7 @@ void month_report::deal_with()
 		else
 		{
 			query_string="select short_name from t_company where company_id='"+m_res->getString(1)+"'";
-			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 			query(query_string);
 			m_res->next();
 			if(m_res->rowsCount()<1||m_res->isNull("short_name")||m_res->getString(1)=="") 
@@ -106,7 +106,7 @@ void month_report::deal_with()
 
 
 	};
-	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
 	catch (sql::SQLException &e) 
 	{
