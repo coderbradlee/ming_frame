@@ -72,6 +72,7 @@ private:
 	void deal_with_trade_term_info();
 	void deal_with_sales_country();
 	void deal_with_approved_status();
+	void deal_with_pi();
 	void write_to_csv();
 private:
 	std::vector<boost::shared_ptr<report_data>> m_report_datas;

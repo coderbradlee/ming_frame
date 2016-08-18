@@ -7,6 +7,40 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 	
 	m_con->setSchema(in->database);
 }
+void month_report::deal_with_pi()
+{
+	try
+	{
+	for(auto& i:m_report_datas)
+	{
+		std::string query_string="select pi_no from t_proforma_invoice where quotation_id='"+i->quotation_id+"'";
+		
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("pi_no")||m_res->getString(1)=="") {}
+		else
+		{	
+			i->pi_no=m_res->getString("pi_no");
+		}
+	};
+	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	}
+	catch (sql::SQLException &e) 
+	{
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+	catch (std::exception& e)
+  	{
+    	LOG_ERROR<<"# ERR: " << e.what();
+  	}
+  	catch (...)
+  	{
+    	LOG_ERROR<<"unknown error ";
+  	}
+}
 void month_report::deal_with_sales_country()
 {
 	try
@@ -563,7 +597,7 @@ void month_report::start()
 	deal_with_trade_term_info();
 	deal_with_sales_country();
 	deal_with_approved_status();
-
+	deal_with_pi();
 	write_to_csv();
    } 
 	catch (sql::SQLException &e) 
