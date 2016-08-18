@@ -15,6 +15,7 @@ struct report_data
  	std::string quotation_detail_id;
  	std::string country_id;
  	std::string country;
+ 	std::string receiving_countries;
  	std::string owner_sales_sys_account_id;
  	std::string sales_employee_id;
  	std::string sales_company_name;
@@ -31,17 +32,18 @@ struct report_data
 	std::string price_total_currency;
 	double price_total;
 	std::string creat_at;
- 	
+ 	std::string pi_no;
+ 	std::string payment_term_desc;
  	void print()
  	{
  		std::cout<<std::setprecision(8)<<quotation_id
- 		<<","<<quotation_detail_id<<","<<sales_full_name<<","<<sales_company_name<<","<<account_name<<","<<quotation_no<<","<<approval_status<<","<<product_name<<","<<product_qty_pc<<","<<product_qty_w<<","<<price_condition<<","<<currency<<","<<unit_price<<","<<price_total_currency<<","<<price_total<<","<<creat_at
+ 		<<","<<quotation_detail_id<<","<<sales_full_name<<","<<sales_company_name<<","<<account_name<<","<<quotation_no<<","<<approval_status<<","<<product_name<<","<<product_qty_pc<<","<<product_qty_w<<","<<price_condition<<","<<currency<<","<<unit_price<<","<<price_total_currency<<","<<price_total<<","<<payment_term_desc<<","<<creat_at
  			<<std::endl;
  	}
  	std::string csv_line()
  	{
  		std::ostringstream stream;
-			stream<<std::setprecision(8)<<sales_full_name<<","<<account_name<<","<<quotation_no<<","<<approval_status<<","<<product_name<<","<<product_qty_pc<<","<<product_qty_w<<","<<price_condition<<","<<currency<<","<<unit_price<<","<<price_total_currency<<","<<price_total<<","<<creat_at
+			stream<<std::setprecision(8)<<quotation_no<<","<<sales_full_name<<","<<account_name<<","<<country<<","<<receiving_countries<<","<<receiving_countries<<","<<pi_no<<","<<product_qty_pc<<","<<product_qty_w<<","<<price_condition<<","<<currency<<","<<unit_price<<","<<price_total_currency<<","<<price_total<<","payment_term_desc<<","<<creat_at
 			<<"\r\n";
  		return stream.str();
  	}
@@ -71,6 +73,7 @@ private:
 	void deal_with_trade_term_info();
 	void deal_with_sales_country();
 	void deal_with_approved_status();
+	void deal_with_payment_method_info();
 	void write_to_csv();
 private:
 	std::vector<boost::shared_ptr<report_data>> m_report_datas;

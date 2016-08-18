@@ -13,7 +13,30 @@ void month_report::deal_with_sales_country()
 	{
 	for(auto& i:m_report_datas)
 	{
-		std::string query_string="select sales_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		std::string query_string="select delivery_country_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("delivery_country_id")||m_res->getString(1)=="") {}
+		else
+		{
+			query_string="select full_name from t_country where country_id='"+m_res->getString(1)+"'";
+	
+			query(query_string);
+			m_res->next();
+			if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") 
+			{
+				std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			}
+		else
+		{
+			i->receiving_countries=m_res->getString("full_name");
+		}
+		}
+		
+		
+		////////////////////////////////////////////////
+		query_string="select sales_id from t_quotation where quotation_id='"+i->quotation_id+"'";
 		query(query_string);
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("sales_id")||m_res->getString(1)=="") 
@@ -246,6 +269,48 @@ void month_report::deal_with_payment_method_info()
 		// m_res->next();
 		// if(m_res->isNull("name")||m_res->getString(1)=="") continue;
 		// i->payment_term_desc=m_res->getString("name");
+		
+	};
+	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	}
+	catch (sql::SQLException &e) 
+	{
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+	catch (std::exception& e)
+  	{
+    	LOG_ERROR<<"# ERR: " << e.what();
+  	}
+  	catch (...)
+  	{
+    	LOG_ERROR<<"unknown error ";
+  	}
+}
+void month_report::deal_with_payment_method_info()
+{
+	try
+	{
+	for(auto& i:m_report_datas)
+	{
+		std::string query_string="select payment_method_id from t_payment_term where quotation_id='"+i->quotation_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("payment_method_id")||m_res->getString(1)=="") 
+		{
+			//std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
+			continue;
+		}
+		
+		query_string="select name from t_payment_method where payment_method_id='"+m_res->getString(1)+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->isNull("name")||m_res->getString(1)=="") continue;
+		i->payment_term_desc=m_res->getString("name");
 		
 	};
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
@@ -539,6 +604,7 @@ void month_report::start()
 	deal_with_trade_term_info();
 	deal_with_sales_country();
 	deal_with_approved_status();
+	deal_with_payment_method_info();
 	write_to_csv();
    } 
 	catch (sql::SQLException &e) 
