@@ -19,9 +19,13 @@ void month_report::deal_with()
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("alphabet_shortname")||m_res->getString(1)=="") 
 		{
-			continue;
+			
 		}
-		i->country=m_res->getString(1);
+		else
+		{
+			i->country=m_res->getString(1);
+		}
+		
 
 		
 		query_string="select account_name from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
@@ -30,25 +34,35 @@ void month_report::deal_with()
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("account_name")||m_res->getString(1)=="") 
 		{
-			continue;
+			
 		}
-		i->lead_owner=m_res->getString(1);
+		else
+		{
+			i->lead_owner=m_res->getString(1);
+		}
+		
 
 		query_string="select full_name from t_state where state_id='"+i->state_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
-		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") continue;
-		i->state=m_res->getString("full_name");
+		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") {}
+		else
+		{
+			i->state=m_res->getString("full_name");
+		}
+		
    
    		query_string="select full_name from t_city where city_id='"+i->city_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
-		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") continue;
-		i->city=m_res->getString("full_name");
-
-
+		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") {}
+		else
+		{
+			i->city=m_res->getString("full_name");
+		}
+		
 		query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
@@ -85,7 +99,9 @@ void month_report::deal_with()
 				
 			}
 			else
+			{
 				i->sales_company_name=m_res->getString("short_name");
+			}	
 		}
 
 
