@@ -43,8 +43,7 @@ struct report_data
 			stream<<lead_owner
  			<<","<<account_name
  			<<","<<country
-			<<","<<state
- 			<<","<<city
+			<<","<<allocated_time
 			<<","<<allocated_time
 			<<"\r\n";
  		return stream.str();
