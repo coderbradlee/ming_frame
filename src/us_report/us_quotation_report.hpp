@@ -15,6 +15,9 @@ struct report_data
  	std::string quotation_detail_id;
  	std::string country_id;
  	std::string country;
+ 	std::string owner_sales_sys_account_id;
+ 	std::string sales_employee_id;
+ 	std::string sales_company_name;
 	std::string sales_full_name;
 	std::string account_name;
  	std::string quotation_no;

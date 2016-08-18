@@ -47,6 +47,42 @@ void month_report::deal_with()
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") continue;
 		i->city=m_res->getString("full_name");
+
+
+		query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		
+		i->sales_employee_id=m_res->getString(1);
+		
+		query_string="\
+		select master_file_obj_id \
+		from t_wf_role_resolve \
+		where master_file_type='COMPANY' \
+		and employee_id='"+i->sales_employee_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("master_file_obj_id")||m_res->getString(1)=="") 
+		{
+			
+		}
+		else
+		{
+			query_string="select short_name from t_company where company_id='"+m_res->getString(1)+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			query(query_string);
+			m_res->next();
+			if(m_res->rowsCount()<1||m_res->isNull("short_name")||m_res->getString(1)=="") 
+			{
+				
+			}
+			else
+				i->sales_company_name=m_res->getString(1);
+		}
+
+
 	};
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}

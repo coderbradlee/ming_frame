@@ -13,6 +13,8 @@ struct report_data
  {
  	std::string lead_id;
  	std::string owner_sales_sys_account_id;
+ 	std::string sales_employee_id;
+ 	std::string sales_company_name;
  	std::string lead_owner;
  	std::string account_name;
  	std::string country;
@@ -27,6 +29,7 @@ struct report_data
  	{
  		std::cout<<lead_id
  			<<","<<lead_owner
+ 			<<","<<sales_company_name
  			<<","<<account_name
  			<<","<<country
 			<<","<<state
