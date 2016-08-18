@@ -59,7 +59,7 @@ void month_report::deal_with()
 		}
 		else
 		{
-			i->sales_employee_id=m_res->getString(1);
+			i->sales_employee_id=m_res->getString("employee_no");
 		}
 		
 		query_string="\
@@ -85,12 +85,12 @@ void month_report::deal_with()
 				
 			}
 			else
-				i->sales_company_name=m_res->getString(1);
+				i->sales_company_name=m_res->getString("short_name");
 		}
 
 
 	};
-	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
 	catch (sql::SQLException &e) 
 	{
