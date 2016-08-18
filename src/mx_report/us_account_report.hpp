@@ -12,8 +12,6 @@
 struct report_data
  {
  	std::string customer_basic_id;
- 	std::string sales_employee_id;
- 	std::string sales_company_name;//us company id J51US8EXRCTNK74HVDU3
  	std::string account_owner;
  	std::string account_name;
  	std::string country;
@@ -28,7 +26,6 @@ struct report_data
  	{
  		std::cout<<customer_basic_id
  			<<","<<account_owner
- 			<<","<<sales_company_name
  			<<","<<account_name
  			<<","<<country
 			<<","<<state

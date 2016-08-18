@@ -1,4 +1,4 @@
-#include "us_account_report.hpp"
+#include "us_lead_report.hpp"
 
 month_report::month_report(boost::shared_ptr<mysql_info_> in)
 {
@@ -23,15 +23,8 @@ void month_report::deal_with()
 		}
 		i->country=m_res->getString(1);
 
-		query_string="select owner_sales_sys_account_id from t_customer_master where customer_basic_id='"+i->customer_basic_id+"'";
-		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-		query(query_string);
-		m_res->next();
-		if(m_res->rowsCount()<1||m_res->isNull("owner_sales_sys_account_id")||m_res->getString(1)=="") 
-		{
-			continue;
-		}
-		query_string="select account_name,employee_no from t_system_account where system_account_id='"+m_res->getString(1)+"'";
+		
+		query_string="select account_name from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
@@ -39,32 +32,8 @@ void month_report::deal_with()
 		{
 			continue;
 		}
-		i->account_owner=m_res->getString(1);
-		i->sales_employee_id=m_res->getString(2);
-		
-		query_string="select master_file_obj_id from t_wf_role_resolve 
-where master_file_type='COMPANY' and employee_id='"+i->sales_employee_id+"'";
-		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-		query(query_string);
-		m_res->next();
-		if(m_res->rowsCount()<1||m_res->isNull("master_file_obj_id")||m_res->getString(1)=="") 
-		{
-			
-		}
-		else
-		{
-			query_string="select short_name from t_company where company_id='"+m_res->getString(1)+"'";
-		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-			query(query_string);
-			m_res->next();
-			if(m_res->rowsCount()<1||m_res->isNull("short_name")||m_res->getString(1)=="") 
-			{
-				
-			}
-			else
-				i->sales_company_name=m_res->getString(1);
-		}
-		
+		i->lead_owner=m_res->getString(1);
+
 		query_string="select full_name from t_state where state_id='"+i->state_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
@@ -107,7 +76,8 @@ void month_report::insert_data()
 	{
 		//std::cout<< m_res->getString(1)<<":" << m_res->getString("product_qty_pc")<<std::endl;
 	 	boost::shared_ptr<report_data> temp(new report_data());
-	 	temp->customer_basic_id=m_res->getString("customer_basic_id");
+	 	temp->lead_id=m_res->getString("lead_id");
+	 	temp->owner_sales_sys_account_id=m_res->getString("owner_sales_sys_account_id");
 	 	temp->account_name=m_res->getString("trade_name");
 	 	temp->country_id=m_res->getString("country_id");
 	 	temp->state_id=m_res->getString("state_id");
@@ -134,10 +104,10 @@ void month_report::insert_data()
 }
 void month_report::write_to_csv()
 {
-	write_csv w("us_account_report.csv");
+	write_csv w("us_lead_report.csv");
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
-		{	
-			if(x->sales_company_name=="ReneSola America")
+		{
+			if(x->country=="US")
 			{
 				w.addData(x->csv_line());
 			}
@@ -148,7 +118,7 @@ void month_report::start()
 	try
 	{
 	std::string query_string=
-	"select customer_basic_id,trade_name, country_id,state_id,city_id ,createAt from t_customer_basic";
+	"select lead_id,trade_name,owner_sales_sys_account_id,country_id,state_id,city_id,createAt from t_lead";
 	
 	query(query_string);
 

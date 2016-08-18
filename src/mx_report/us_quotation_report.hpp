@@ -1,5 +1,5 @@
-#ifndef US_ACCOUNT_REPORT_HPP
-#define	US_ACCOUNT_REPORT_HPP
+#ifndef US_QUOTATION_REPORT_HPP
+#define	US_QUOTATION_REPORT_HPP
 #include "mysql_connection.h"
 #include "../config.hpp"
 #include <cppconn/driver.h>
@@ -11,40 +11,34 @@
 #include <iomanip>
 struct report_data
  {
- 	std::string customer_basic_id;
- 	std::string sales_employee_id;
- 	std::string sales_company_name;//us company id J51US8EXRCTNK74HVDU3
- 	std::string account_owner;
- 	std::string account_name;
- 	std::string country;
+ 	std::string quotation_id;
+ 	std::string quotation_detail_id;
  	std::string country_id;
- 	std::string state_id;
- 	std::string city_id;
- 	std::string state;
- 	std::string city;
- 	std::string allocated_time;
+ 	std::string country;
+	std::string sales_full_name;
+	std::string account_name;
+ 	std::string quotation_no;
+ 	std::string approval_status;
+ 	std::string product_name;
+ 	double product_qty_pc;
+ 	double product_qty_w;
+ 	std::string price_condition;
+	std::string currency;
+	double unit_price;
+	std::string price_total_currency;
+	double price_total;
+	std::string creat_at;
  	
  	void print()
  	{
- 		std::cout<<customer_basic_id
- 			<<","<<account_owner
- 			<<","<<sales_company_name
- 			<<","<<account_name
- 			<<","<<country
-			<<","<<state
- 			<<","<<city
-			<<","<<allocated_time
+ 		std::cout<<std::setprecision(8)<<quotation_id
+ 		<<","<<quotation_detail_id<<","<<sales_full_name<<","<<account_name<<","<<quotation_no<<","<<approval_status<<","<<product_name<<","<<product_qty_pc<<","<<product_qty_w<<","<<price_condition<<","<<currency<<","<<unit_price<<","<<price_total_currency<<","<<price_total<<","<<creat_at
  			<<std::endl;
  	}
  	std::string csv_line()
  	{
  		std::ostringstream stream;
-			stream<<account_owner
- 			<<","<<account_name
- 			<<","<<country
-			<<","<<state
- 			<<","<<city
-			<<","<<allocated_time
+			stream<<std::setprecision(8)<<sales_full_name<<","<<account_name<<","<<quotation_no<<","<<approval_status<<","<<product_name<<","<<product_qty_pc<<","<<product_qty_w<<","<<price_condition<<","<<currency<<","<<unit_price<<","<<price_total_currency<<","<<price_total<<","<<creat_at
 			<<"\r\n";
  		return stream.str();
  	}
@@ -66,7 +60,12 @@ private:
 	void query(const std::string& sql);
 	boost::shared_ptr<sql::ResultSet> get_res()const;
 	void insert_data();
-	void deal_with();
+	void deal_with_sales_info();
+	void deal_with_customer_info();
+	void deal_with_currency_info();
+	void deal_with_payment_method_info();
+	void deal_with_product_info();
+	void deal_with_trade_term_info();
 	void write_to_csv();
 private:
 	std::vector<boost::shared_ptr<report_data>> m_report_datas;

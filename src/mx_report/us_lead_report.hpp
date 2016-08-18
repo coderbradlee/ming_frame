@@ -11,10 +11,9 @@
 #include <iomanip>
 struct report_data
  {
- 	std::string customer_basic_id;
- 	std::string sales_employee_id;
- 	std::string sales_company_name;//us company id J51US8EXRCTNK74HVDU3
- 	std::string account_owner;
+ 	std::string lead_id;
+ 	std::string owner_sales_sys_account_id;
+ 	std::string lead_owner;
  	std::string account_name;
  	std::string country;
  	std::string country_id;
@@ -26,9 +25,8 @@ struct report_data
  	
  	void print()
  	{
- 		std::cout<<customer_basic_id
- 			<<","<<account_owner
- 			<<","<<sales_company_name
+ 		std::cout<<lead_id
+ 			<<","<<lead_owner
  			<<","<<account_name
  			<<","<<country
 			<<","<<state
@@ -39,7 +37,7 @@ struct report_data
  	std::string csv_line()
  	{
  		std::ostringstream stream;
-			stream<<account_owner
+			stream<<lead_owner
  			<<","<<account_name
  			<<","<<country
 			<<","<<state
