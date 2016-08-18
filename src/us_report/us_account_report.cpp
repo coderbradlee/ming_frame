@@ -42,8 +42,11 @@ void month_report::deal_with()
 		i->account_owner=m_res->getString(1);
 		i->sales_employee_id=m_res->getString(2);
 		
-		query_string="select master_file_obj_id from t_wf_role_resolve 
-where master_file_type='COMPANY' and employee_id='"+i->sales_employee_id+"'";
+		query_string="\
+		select master_file_obj_id \
+		from t_wf_role_resolve \
+		where master_file_type='COMPANY' \
+		and employee_id='"+i->sales_employee_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
