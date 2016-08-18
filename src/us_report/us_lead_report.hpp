@@ -29,6 +29,7 @@ struct report_data
  	{
  		std::cout<<lead_id
  			<<","<<lead_owner
+ 			<<","<<sales_employee_id
  			<<","<<sales_company_name
  			<<","<<account_name
  			<<","<<country
