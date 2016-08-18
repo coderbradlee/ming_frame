@@ -53,8 +53,14 @@ void month_report::deal_with()
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
-		
-		i->sales_employee_id=m_res->getString(1);
+		if(m_res->rowsCount()<1||m_res->isNull("employee_no")||m_res->getString(1)=="") 
+		{
+			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		}
+		else
+		{
+			i->sales_employee_id=m_res->getString(1);
+		}
 		
 		query_string="\
 		select master_file_obj_id \
