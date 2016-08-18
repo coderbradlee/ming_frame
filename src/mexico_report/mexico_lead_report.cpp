@@ -1,4 +1,4 @@
-#include "us_lead_report.hpp"
+#include "mexico_lead_report.hpp"
 
 month_report::month_report(boost::shared_ptr<mysql_info_> in)
 {
@@ -19,9 +19,13 @@ void month_report::deal_with()
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("alphabet_shortname")||m_res->getString(1)=="") 
 		{
-			continue;
+			
 		}
-		i->country=m_res->getString(1);
+		else
+		{
+			i->country=m_res->getString(1);
+		}
+		
 
 		
 		query_string="select account_name from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
@@ -30,23 +34,77 @@ void month_report::deal_with()
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("account_name")||m_res->getString(1)=="") 
 		{
-			continue;
+			
 		}
-		i->lead_owner=m_res->getString(1);
+		else
+		{
+			i->lead_owner=m_res->getString(1);
+		}
+		
 
 		query_string="select full_name from t_state where state_id='"+i->state_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
-		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") continue;
-		i->state=m_res->getString("full_name");
+		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") {}
+		else
+		{
+			i->state=m_res->getString("full_name");
+		}
+		
    
    		query_string="select full_name from t_city where city_id='"+i->city_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
-		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") continue;
-		i->city=m_res->getString("full_name");
+		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") {}
+		else
+		{
+			i->city=m_res->getString("full_name");
+		}
+		
+		query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("employee_no")||m_res->getString(1)=="") 
+		{
+			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		}
+		else
+		{
+			i->sales_employee_id=m_res->getString("employee_no");
+		}
+		
+		query_string="\
+		select master_file_obj_id \
+		from t_wf_role_resolve \
+		where master_file_type='COMPANY' \
+		and employee_id='"+i->sales_employee_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("master_file_obj_id")||m_res->getString(1)=="") 
+		{
+			
+		}
+		else
+		{
+			query_string="select short_name from t_company where company_id='"+m_res->getString(1)+"'";
+			//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			query(query_string);
+			m_res->next();
+			if(m_res->rowsCount()<1||m_res->isNull("short_name")||m_res->getString(1)=="") 
+			{
+				
+			}
+			else
+			{
+				i->sales_company_name=m_res->getString("short_name");
+			}	
+		}
+
+
 	};
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
@@ -107,7 +165,8 @@ void month_report::write_to_csv()
 	write_csv w("us_lead_report.csv");
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 		{
-			if(x->country=="US")
+			//if(x->country=="US")
+			if(x->sales_company_name=="ReneSola Mexico")
 			{
 				w.addData(x->csv_line());
 			}

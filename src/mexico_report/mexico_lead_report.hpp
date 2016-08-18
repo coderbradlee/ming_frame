@@ -1,5 +1,5 @@
-#ifndef US_ACCOUNT_REPORT_HPP
-#define	US_ACCOUNT_REPORT_HPP
+#ifndef MEXICO_ACCOUNT_REPORT_HPP
+#define	MEXICO_ACCOUNT_REPORT_HPP
 #include "mysql_connection.h"
 #include "../config.hpp"
 #include <cppconn/driver.h>
@@ -11,8 +11,11 @@
 #include <iomanip>
 struct report_data
  {
- 	std::string customer_basic_id;
- 	std::string account_owner;
+ 	std::string lead_id;
+ 	std::string owner_sales_sys_account_id;
+ 	std::string sales_employee_id;
+ 	std::string sales_company_name;
+ 	std::string lead_owner;
  	std::string account_name;
  	std::string country;
  	std::string country_id;
@@ -24,8 +27,11 @@ struct report_data
  	
  	void print()
  	{
- 		std::cout<<customer_basic_id
- 			<<","<<account_owner
+ 		std::cout<<lead_id
+ 			<<","<<owner_sales_sys_account_id
+ 			<<","<<lead_owner
+ 			<<","<<sales_employee_id
+ 			<<","<<sales_company_name
  			<<","<<account_name
  			<<","<<country
 			<<","<<state
@@ -36,7 +42,7 @@ struct report_data
  	std::string csv_line()
  	{
  		std::ostringstream stream;
-			stream<<account_owner
+			stream<<lead_owner
  			<<","<<account_name
  			<<","<<country
 			<<","<<state

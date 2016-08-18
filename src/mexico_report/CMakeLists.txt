@@ -1,34 +1,34 @@
-set(QUOTATION_SRC_LIST ../config.cpp ../log.cpp us_quotation_report.cpp us_quotation_report_main.cpp)
+set(QUOTATION_SRC_LIST ../config.cpp ../log.cpp mexico_quotation_report.cpp mexico_quotation_report_main.cpp)
 set(QUOTATION_LIB_LIST muduo_net_cpp11 muduo_base_cpp11 muduo_http boost_system ssl mysqlcppconn boost_program_options boost_filesystem boost_coroutine boost_thread pthread boost_context boost_date_time crypto boost_regex boost_timer boost_signals boost_locale muduo_inspect gd)
 
-add_executable(us_quotation_report ${QUOTATION_SRC_LIST})
+add_executable(mexico_quotation_report ${QUOTATION_SRC_LIST})
 
-target_link_libraries(us_quotation_report ${QUOTATION_LIB_LIST})
+target_link_libraries(mexico_quotation_report ${QUOTATION_LIB_LIST})
 
 if(TCMALLOC_INCLUDE_DIR AND TCMALLOC_LIBRARY)
-  set_target_properties(us_quotation_report PROPERTIES COMPILE_FLAGS "-DHAVE_TCMALLOC")
-  target_link_libraries(us_quotation_report tcmalloc_and_profiler)
+  set_target_properties(mexico_quotation_report PROPERTIES COMPILE_FLAGS "-DHAVE_TCMALLOC")
+  target_link_libraries(mexico_quotation_report tcmalloc_and_profiler)
 endif()
 
-set(LEAD_SRC_LIST ../config.cpp ../log.cpp us_lead_report.cpp us_lead_report_main.cpp)
+set(LEAD_SRC_LIST ../config.cpp ../log.cpp mexico_lead_report.cpp mexico_lead_report_main.cpp)
 set(LEAD_LIB_LIST muduo_net_cpp11 muduo_base_cpp11 muduo_http boost_system ssl mysqlcppconn boost_program_options boost_filesystem boost_coroutine boost_thread pthread boost_context boost_date_time crypto boost_regex boost_timer boost_signals boost_locale muduo_inspect gd)
 
-add_executable(us_lead_report ${LEAD_SRC_LIST})
+add_executable(mexico_lead_report ${LEAD_SRC_LIST})
 
-target_link_libraries(us_lead_report ${LEAD_LIB_LIST})
+target_link_libraries(mexico_lead_report ${LEAD_LIB_LIST})
 
 if(TCMALLOC_INCLUDE_DIR AND TCMALLOC_LIBRARY)
-  set_target_properties(us_lead_report PROPERTIES COMPILE_FLAGS "-DHAVE_TCMALLOC")
-  target_link_libraries(us_lead_report tcmalloc_and_profiler)
+  set_target_properties(mexico_lead_report PROPERTIES COMPILE_FLAGS "-DHAVE_TCMALLOC")
+  target_link_libraries(mexico_lead_report tcmalloc_and_profiler)
 endif()
 
 
 
 
-set(PRODUCT_SRC_LIST ../config.cpp ../log.cpp us_account_report.cpp us_account_report_main.cpp)
-add_executable(us_account_report ${PRODUCT_SRC_LIST})
+set(PRODUCT_SRC_LIST ../config.cpp ../log.cpp mexico_account_report.cpp mexico_account_report_main.cpp)
+add_executable(mexico_account_report ${PRODUCT_SRC_LIST})
 
-set(main_name us_account_report)
+set(main_name mexico_account_report)
 
 target_link_libraries(${main_name} muduo_net_cpp11)
 target_link_libraries(${main_name} muduo_base_cpp11)
