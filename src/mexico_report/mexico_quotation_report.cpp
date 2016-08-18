@@ -247,48 +247,7 @@ void month_report::deal_with_product_info()
     	LOG_ERROR<<"unknown error ";
   	}
 }
-void month_report::deal_with_payment_method_info()
-{
-	try
-	{
-	for(auto& i:m_report_datas)
-	{
-		std::string query_string="select payment_method_id from t_payment_term where quotation_id='"+i->quotation_id+"'";
-		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-		query(query_string);
-		m_res->next();
-		if(m_res->rowsCount()<1||m_res->isNull("payment_method_id")||m_res->getString(1)=="") 
-		{
-			//std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
-			continue;
-		}
-		
-		// query_string="select name from t_payment_method where payment_method_id='"+m_res->getString(1)+"'";
-		// //std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
-		// query(query_string);
-		// m_res->next();
-		// if(m_res->isNull("name")||m_res->getString(1)=="") continue;
-		// i->payment_term_desc=m_res->getString("name");
-		
-	};
-	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
-	}
-	catch (sql::SQLException &e) 
-	{
-	  LOG_ERROR<<"# ERR: " << e.what();
-	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
-	  LOG_ERROR<<", SQLState: " << e.getSQLState();
 
-	}
-	catch (std::exception& e)
-  	{
-    	LOG_ERROR<<"# ERR: " << e.what();
-  	}
-  	catch (...)
-  	{
-    	LOG_ERROR<<"unknown error ";
-  	}
-}
 void month_report::deal_with_payment_method_info()
 {
 	try
@@ -604,7 +563,7 @@ void month_report::start()
 	deal_with_trade_term_info();
 	deal_with_sales_country();
 	deal_with_approved_status();
-	deal_with_payment_method_info();
+
 	write_to_csv();
    } 
 	catch (sql::SQLException &e) 
