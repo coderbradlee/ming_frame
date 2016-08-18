@@ -34,8 +34,6 @@ struct report_data
  			<<","<<sales_company_name
  			<<","<<account_name
  			<<","<<country
-			<<","<<state
- 			<<","<<city
 			<<","<<allocated_time
  			<<std::endl;
  	}
