@@ -6,6 +6,139 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 	m_con = boost::shared_ptr<sql::Connection>(m_driver->connect("tcp://"+in->ip+":"+in->port, in->username, in->password));
 	
 	m_con->setSchema(in->database);
+void month_report::deal_with_pi()
+{
+	try
+	{
+	for(auto& i:m_report_datas)
+	{
+		std::string query_string="select pi_no from t_proforma_invoice where quotation_id='"+i->quotation_id+"'";
+		
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("pi_no")||m_res->getString(1)=="") {}
+		else
+		{	
+			i->pi_no=m_res->getString("pi_no");
+		}
+	};
+	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	}
+	catch (sql::SQLException &e) 
+	{
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+	catch (std::exception& e)
+  	{
+    	LOG_ERROR<<"# ERR: " << e.what();
+  	}
+  	catch (...)
+  	{
+    	LOG_ERROR<<"unknown error ";
+  	}
+}
+void month_report::deal_with_sales_country()
+{
+	try
+	{
+	for(auto& i:m_report_datas)
+	{
+		std::string query_string="select delivery_country_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("delivery_country_id")||m_res->getString(1)=="") {}
+		else
+		{
+			query_string="select full_name from t_country where country_id='"+m_res->getString(1)+"'";
+	
+			query(query_string);
+			m_res->next();
+			if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") 
+			{
+				std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			}
+		else
+		{
+			i->receiving_countries=m_res->getString("full_name");
+		}
+		}
+		
+		
+		////////////////////////////////////////////////
+		query_string="select sales_id from t_quotation where quotation_id='"+i->quotation_id+"'";
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("sales_id")||m_res->getString(1)=="") 
+		{
+			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		}
+		else
+		{
+			i->owner_sales_sys_account_id=m_res->getString("sales_id");
+		}
+		query_string="select employee_no from t_system_account where system_account_id='"+i->owner_sales_sys_account_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("employee_no")||m_res->getString(1)=="") 
+		{
+			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		}
+		else
+		{
+			i->sales_employee_id=m_res->getString("employee_no");
+		}
+		
+		query_string="\
+		select master_file_obj_id \
+		from t_wf_role_resolve \
+		where master_file_type='COMPANY' \
+		and employee_id='"+i->sales_employee_id+"'";
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		query(query_string);
+		m_res->next();
+		if(m_res->rowsCount()<1||m_res->isNull("master_file_obj_id")||m_res->getString(1)=="") 
+		{
+			std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		}
+		else
+		{
+			query_string="select short_name from t_company where company_id='"+m_res->getString(1)+"'";
+			//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			query(query_string);
+			m_res->next();
+			if(m_res->rowsCount()<1||m_res->isNull("short_name")||m_res->getString(1)=="") 
+			{
+				std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			}
+			else
+			{
+				i->sales_company_name=m_res->getString("short_name");
+			}	
+		}
+   
+	};
+	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	}
+	catch (sql::SQLException &e) 
+	{
+	  LOG_ERROR<<"# ERR: " << e.what();
+	  LOG_ERROR<<" (MySQL error code: " << e.getErrorCode();
+	  LOG_ERROR<<", SQLState: " << e.getSQLState();
+
+	}
+	catch (std::exception& e)
+  	{
+    	LOG_ERROR<<"# ERR: " << e.what();
+  	}
+  	catch (...)
+  	{
+    	LOG_ERROR<<"unknown error ";
+  	}
 }
 void month_report::deal_with_approved_status()
 {
@@ -255,6 +388,7 @@ void month_report::deal_with_customer_info()
 		query(query_string);
 		m_res->next();
 		if(m_res->isNull("country_id")||m_res->getString(1)=="") continue;
+		i->country_id=m_res->getString(1);
 		if(m_res->isNull("trade_name")||m_res->getString(2)=="") 
 		{
 
@@ -412,7 +546,10 @@ void month_report::write_to_csv()
 	write_csv w("month_report.csv");
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 		{
-			w.addData(x->csv_line());
+			if(x->sales_company_name=="ReneSola Mexico")
+			{
+				w.addData(x->csv_line());
+			}
 		});
 }
 void month_report::start()
@@ -446,7 +583,9 @@ void month_report::start()
 	deal_with_payment_method_info();
 	deal_with_product_info();
 	deal_with_trade_term_info();
+	deal_with_sales_country();
 	deal_with_approved_status();
+	deal_with_pi();
 	write_to_csv();
    } 
 	catch (sql::SQLException &e) 
@@ -495,12 +634,12 @@ boost::shared_ptr<sql::ResultSet> month_report::get_res()const
 void start_report()
 {
 	boost::shared_ptr<mysql_info_> info(new mysql_info_());
-	info->ip=get_config->m_mysql_as_ip;
-	info->username=get_config->m_mysql_as_username;
-	info->password=get_config->m_mysql_as_password;
-	info->database=get_config->m_mysql_as_database;
+	info->ip=get_config->m_mysql_js_ip;
+	info->username=get_config->m_mysql_js_username;
+	info->password=get_config->m_mysql_js_password;
+	info->database=get_config->m_mysql_js_database;
 
-	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_as_port);
+	info->port=boost::lexical_cast<std::string>(get_config->m_mysql_js_port);
 	boost::shared_ptr<month_report> report(new month_report(info));
 	report->start();
 }

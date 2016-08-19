@@ -71,7 +71,7 @@ struct report_data
 		 	<<","<<approval_status
 		 	<<","<<sales_full_name
 		 	<<","<<receiving_countries
-		 	<<","<<customer_countries
+		 	//<<","<<customer_countries
 		 	<<","<<country_region
 			<<","<<product_name_id//export as product_name_id
 			<<","<<product_name
@@ -80,7 +80,7 @@ struct report_data
 			<<","<<price_condition
 			<<","<<currency
 			<<","<<unit_price
-			<<","<<guided_currency
+			<<","<<currency
 			<<","<<price_total_currency
 			<<","<<price_total
 			<<","<<pi_no
