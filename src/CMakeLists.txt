@@ -18,6 +18,7 @@ add_subdirectory(month_report)
 add_subdirectory(us_report)
 add_subdirectory(jp_report)
 add_subdirectory(mexico_report)
+add_subdirectory(italy_report)
 #set(SRC_LIST log.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc  config.cpp main.cpp)
 #set(SRC_LIST config.cpp log.cpp sudoku/sudoku.cc mysql_connect.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc test/test.cpp test/test1.cpp shorturl.cpp main.cpp)
 
