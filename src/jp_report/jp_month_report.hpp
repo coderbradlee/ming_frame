@@ -36,7 +36,7 @@ struct report_data
 	double price_total;
 	std::string pi_no;
 	std::string buyers_po;
-	std::string contact_no;
+	std::string contract_no;
  	std::string payment_term_desc;
  	std::string creat_at;
  	void print()
@@ -62,7 +62,7 @@ struct report_data
 			<<","<<price_total
 			<<","<<pi_no
 			<<","<<buyers_po
-			<<","<<contact_no
+			<<","<<contract_no
 		 	<<","<<payment_term_desc
 		 	<<","<<creat_at
  			<<std::endl;
@@ -89,7 +89,7 @@ struct report_data
 			<<","<<price_total
 			<<","<<pi_no
 			<<","<<buyers_po
-			<<","<<contact_no
+			<<","<<contract_no
 		 	<<","<<payment_term_desc
 		 	<<","<<creat_at
 			<<"\r\n";

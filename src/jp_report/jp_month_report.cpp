@@ -13,7 +13,7 @@ void month_report::deal_with_pi()
 	{
 	for(auto& i:m_report_datas)
 	{
-		std::string query_string="select pi_no from t_proforma_invoice where quotation_id='"+i->quotation_id+"'";
+		std::string query_string="select pi_no,buyer_po,contract_no from t_proforma_invoice where quotation_id='"+i->quotation_id+"'";
 		
 		query(query_string);
 		m_res->next();
@@ -21,6 +21,14 @@ void month_report::deal_with_pi()
 		else
 		{	
 			i->pi_no=m_res->getString("pi_no");
+		}
+		if(!m_res->isNull("buyer_po"))
+		{
+			i->buyers_po=m_res->getString("buyer_po");
+		}
+		if(!m_res->isNull("contract_no"))
+		{
+			i->contract_no=m_res->getString("contract_no");
 		}
 	};
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
@@ -235,12 +243,13 @@ void month_report::deal_with_product_info()
 			continue;
 		}
 		
-		query_string="select item_basic_id,product_code from t_item_master where item_master_id='"+m_res->getString(1)+"'";
+		query_string="select item_basic_id,product_code,product_name from t_item_master where item_master_id='"+m_res->getString(1)+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(m_res->rowsCount()<1||m_res->isNull("item_basic_id")||m_res->getString(1)=="") continue;
 		i->product_name_id=m_res->getString("product_code");
+		i->product_name=m_res->getString("product_name");
    ///////////////////////////////////////////////////////////////////
 		query_string="select item_category_id from t_item_basic where item_basic_id='"+m_res->getString(1)+"'";
 		query(query_string);
