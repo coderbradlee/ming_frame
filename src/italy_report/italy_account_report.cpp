@@ -94,6 +94,14 @@ void month_report::deal_with()
 			{
 				i->last_modified_by=m_res->getString("full_name");
 			}
+			else
+			{
+				i->last_modified_by="";
+			}
+		}
+		else
+		{
+			i->last_modified_by="";
 		}
 
 	};
