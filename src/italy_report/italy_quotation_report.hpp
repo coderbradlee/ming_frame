@@ -29,9 +29,14 @@ struct report_data
 	std::string currency;
 	double unit_price;
 	std::string price_total_currency;
+	std::string guided_price_total_currency;
 	double price_total;
+ 	std::string guided_currency;
+ 	double price_total_guided;
 	std::string creat_at;
- 	
+ 	///////////////
+ 	std::string creat_by_id;
+ 	std::string creat_by;
  	void print()
  	{
  		std::cout<<std::setprecision(8)<<quotation_id
@@ -41,7 +46,7 @@ struct report_data
  	std::string csv_line()
  	{
  		std::ostringstream stream;
-			stream<<std::setprecision(8)<<sales_full_name<<","<<account_name<<","<<quotation_no<<","<<approval_status<<","<<product_name<<","<<product_qty_pc<<","<<product_qty_w<<","<<price_condition<<","<<currency<<","<<unit_price<<","<<price_total_currency<<","<<price_total<<","<<creat_at
+			stream<<std::setprecision(8)<<creat_by<<","<<sales_full_name<<","<<account_name<<","<<country<<","<<approval_status<<","<<contract_status<<","<<price_condition<<","<<quotation_no<<","<<product_qty_w<<","<<price_total_currency<<","<<price_total<<","<<guided_currency<<","<<price_total_guided<<","<<<<","<<creat_at
 			<<"\r\n";
  		return stream.str();
  	}

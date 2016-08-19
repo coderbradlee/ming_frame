@@ -284,7 +284,7 @@ void month_report::deal_with_currency_info()
 		if(m_res->isNull("code")||m_res->getString(1)=="") continue;
 		i->currency=m_res->getString("code");
 		i->price_total_currency=m_res->getString("code");
-		//i->guided_currency=m_res->getString("code");
+		i->guided_currency=m_res->getString("code");
 	};
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
@@ -448,7 +448,7 @@ void month_report::insert_data()
 	 	boost::shared_ptr<report_data> temp(new report_data());
 	 	temp->quotation_id=m_res->getString("quotation_id");
 	 	temp->quotation_detail_id=m_res->getString("quotation_detail_id");
-
+	 	temp->creat_by_id=m_res->getString("createBy");
 	 	temp->quotation_no=m_res->getString("quotation_no");
 	 	temp->product_qty_pc=m_res->getDouble("product_qty_pc");
 	 	
@@ -460,10 +460,10 @@ void month_report::insert_data()
 	 	{
 	 		temp->product_qty_w=0;
 	 	}
-	 	// if(!m_res->isNull("guidance_price"))
-	 	// {
-	 	// 	temp->price_total_guided=temp->product_qty_w*m_res->getDouble("guidance_price");
-	 	// }
+	 	if(!m_res->isNull("guidance_price"))
+	 	{
+	 		temp->price_total_guided=temp->product_qty_w*m_res->getDouble("guidance_price");
+	 	}
 	 	if(!m_res->isNull("unit_price"))
 	 	{
 	 		temp->unit_price=m_res->getDouble("unit_price");
@@ -515,6 +515,7 @@ void month_report::start()
 	t_quotation.quotation_id as quotation_id,\
 	t_quotation_detail.quotation_detail_id as quotation_detail_id,\
 	t_quotation.quotation_no as quotation_no,\
+	t_quotation.createBy as createBy,\
 	t_quotation_detail.quantity as product_qty_pc,\
 	t_quotation_detail.ss_guidance_price as guidance_price,\
 	t_quotation_detail.module_extend_prop as module_extend_prop,\
