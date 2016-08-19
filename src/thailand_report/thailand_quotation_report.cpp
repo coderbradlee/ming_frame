@@ -1,4 +1,4 @@
-#include "thailand_month_report.hpp"
+#include "thailand_quotation_report.hpp"
 
 month_report::month_report(boost::shared_ptr<mysql_info_> in)
 {
