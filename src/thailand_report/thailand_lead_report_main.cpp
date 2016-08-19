@@ -1,7 +1,7 @@
 #include <boost/program_options.hpp>
 #include "../log.hpp"
 #include "../fastcgi/fastcgi_resource.h"
-#include "italy_lead_report.hpp"
+#include "thailand_lead_report.hpp"
 using std::string;
 using std::cout;
 using std::endl;
