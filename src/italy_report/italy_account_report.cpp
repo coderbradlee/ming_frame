@@ -83,7 +83,7 @@ void month_report::deal_with()
 		i->city=m_res->getString("full_name");
 ///////////////////////////////////////////////////////////
 		query_string="select employee_no from t_system_account where system_account_id='"+i->last_modified_by+"'";
-		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		
@@ -97,7 +97,7 @@ void month_report::deal_with()
 		}
 
 	};
-	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
+	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
 	catch (sql::SQLException &e) 
 	{
