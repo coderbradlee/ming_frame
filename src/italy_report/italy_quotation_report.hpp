@@ -47,7 +47,7 @@ struct report_data
  	std::string csv_line()
  	{
  		std::ostringstream stream;
-			stream<<std::setprecision(8)<<creat_by<<","<<sales_full_name<<","<<account_name<<","<<country<<","<<approval_status<<","<<contract_status<<","<<price_condition<<","<<quotation_no<<","<<product_qty_w<<","<<price_total_currency<<","<<price_total<<","<<guided_currency<<","<<price_total_guided<<","<<<<","<<creat_at
+			stream<<std::setprecision(8)<<creat_by<<","<<sales_full_name<<","<<account_name<<","<<country<<","<<approval_status<<","<<contract_status<<","<<price_condition<<","<<quotation_no<<","<<product_qty_w<<","<<price_total_currency<<","<<price_total<<","<<guided_currency<<","<<price_total_guided<<","<<creat_at
 			<<"\r\n";
  		return stream.str();
  	}
