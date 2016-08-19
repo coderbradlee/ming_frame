@@ -6,6 +6,7 @@ month_report::month_report(boost::shared_ptr<mysql_info_> in)
 	m_con = boost::shared_ptr<sql::Connection>(m_driver->connect("tcp://"+in->ip+":"+in->port, in->username, in->password));
 	
 	m_con->setSchema(in->database);
+}
 void month_report::deal_with_pi()
 {
 	try
