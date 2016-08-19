@@ -24,6 +24,7 @@ struct report_data
  	std::string city;//4
  	std::string allocated_time;//5//6
  	std::string last_modified;//7
+ 	std::string last_modified_by_id;
  	std::string last_modified_by;//8
  	void print()
  	{

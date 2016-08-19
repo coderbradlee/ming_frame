@@ -82,7 +82,7 @@ void month_report::deal_with()
 		if(m_res->rowsCount()<1||m_res->isNull("full_name")||m_res->getString(1)=="") continue;
 		i->city=m_res->getString("full_name");
 ///////////////////////////////////////////////////////////
-		query_string="select employee_no from t_system_account where system_account_id='"+i->last_modified_by+"'";
+		query_string="select employee_no from t_system_account where system_account_id='"+i->last_modified_by_id+"'";
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
@@ -95,17 +95,8 @@ void month_report::deal_with()
 			if(!m_res->isNull("full_name"))
 			{
 				i->last_modified_by=m_res->getString("full_name");
-			}
-			else
-			{
-				i->last_modified_by="";
-			}
+			}			
 		}
-		else
-		{
-			i->last_modified_by="";
-		}
-
 	};
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
@@ -144,7 +135,7 @@ void month_report::insert_data()
 	 	temp->last_modified=m_res->getString("updateAt");
 	 	if(!m_res->isNull("updateBy")) 
 		{
-			temp->last_modified_by=m_res->getString("updateBy");
+			temp->last_modified_by_id=m_res->getString("updateBy");
 		}
 		
 	 	m_report_datas.push_back(temp);
