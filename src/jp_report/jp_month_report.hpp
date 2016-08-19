@@ -14,6 +14,8 @@ struct report_data
  	std::string quotation_id;
  	std::string quotation_detail_id;
  	std::string quotation_no;
+ 	std::string country_id;
+ 	std::string sales_company_name;
  	std::string account_name;
  	std::string approval_status;
  	std::string sales_full_name;
@@ -115,6 +117,7 @@ private:
 	void deal_with_payment_method_info();
 	void deal_with_product_info();
 	void deal_with_trade_term_info();
+	void deal_with_sales_country();
 	void deal_with_approved_status();
 	void deal_with_pi();
 	void write_to_csv();
