@@ -14,16 +14,17 @@ struct report_data
  	std::string customer_basic_id;
  	std::string sales_employee_id;
  	std::string sales_company_name;//us company id J51US8EXRCTNK74HVDU3
- 	std::string account_owner;
- 	std::string account_name;
- 	std::string country;
+ 	std::string account_owner;//1
+ 	std::string account_name;//2
+ 	std::string country;//3
  	std::string country_id;
  	std::string state_id;
  	std::string city_id;
  	std::string state;
- 	std::string city;
- 	std::string allocated_time;
- 	
+ 	std::string city;//4
+ 	std::string allocated_time;//5//6
+ 	std::string last_modified;//7
+ 	std::string last_modified_by;//8
  	void print()
  	{
  		std::cout<<customer_basic_id
@@ -42,9 +43,11 @@ struct report_data
 			stream<<account_owner
  			<<","<<account_name
  			<<","<<country
-			<<","<<state
  			<<","<<city
 			<<","<<allocated_time
+			<<","<<allocated_time
+			<<","<<last_modified
+			<<","<<last_modified_by
 			<<"\r\n";
  		return stream.str();
  	}
