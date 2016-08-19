@@ -90,6 +90,8 @@ void month_report::deal_with()
 		if(m_res->rowsCount()>1&&!m_res->isNull("employee_no"))
 		{
 			query_string="select full_name from t_employee where employee_id='"+m_res->getString("employee_no")+"'";
+			query(query_string);
+			m_res->next();
 			if(!m_res->isNull("full_name"))
 			{
 				i->last_modified_by=m_res->getString("full_name");
