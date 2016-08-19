@@ -37,6 +37,7 @@ struct report_data
  	///////////////
  	std::string creat_by_id;
  	std::string creat_by;
+ 	std::string contract_status;
  	void print()
  	{
  		std::cout<<std::setprecision(8)<<quotation_id
