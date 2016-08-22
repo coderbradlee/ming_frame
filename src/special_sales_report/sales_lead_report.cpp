@@ -212,7 +212,7 @@ void month_report::write_to_csv()
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 		{
 			//if(x->country=="US")
-			if(x->sales_company_name=="ReneSola America")
+			if(x->sales_company_name=="ReneSola America"&&x->lead_owner=="Sabre Mathew")
 			{
 				w.addData(x->csv_line());
 			}
