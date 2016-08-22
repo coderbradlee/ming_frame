@@ -117,6 +117,19 @@ void month_report::deal_with()
 				i->last_modified_by=m_res->getString("full_name");
 			}
 		}	
+
+		query_string="select tel_1,email from t_lead_contact where lead_id'"+i->lead_id+"'";
+		
+		query(query_string);
+		m_res->next();
+		if(!m_res->isNull("tel_1"))
+		{
+			i->contact=m_res->getString("tel_1");
+		}
+		if(!m_res->isNull("email"))
+		{
+			i->email=m_res->getString("email");
+		}
 	};
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
@@ -162,7 +175,14 @@ void month_report::insert_data()
 		{
 			temp->last_modified_by=m_res->getString("updateBy");
 		}
-	 	
+	 	if(!m_res->isNull("lead_no")) 
+		{
+			temp->customer_no=m_res->getString("lead_no");
+		}
+		if(!m_res->isNull("address")) 
+		{
+			temp->address=m_res->getString("address");
+		}
 	 	m_report_datas.push_back(temp);
 	}
 	//std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
@@ -199,7 +219,7 @@ void month_report::start()
 	try
 	{
 	std::string query_string=
-	"select lead_id,trade_name,owner_sales_sys_account_id,country_id,state_id,city_id,createAt,updateAt,updateBy from t_lead";
+	"select lead_id,trade_name,owner_sales_sys_account_id,country_id,state_id,city_id,createAt,updateAt,updateBy,address,lead_no from t_lead";
 	
 	query(query_string);
 
