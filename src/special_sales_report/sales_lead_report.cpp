@@ -118,7 +118,7 @@ void month_report::deal_with()
 			}
 		}	
 
-		query_string="select tel_1,email from t_lead_contact where lead_id'"+i->lead_id+"'";
+		query_string="select tel_1,email from t_lead_contact where lead_id='"+i->lead_id+"'";
 		
 		query(query_string);
 		m_res->next();
