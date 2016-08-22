@@ -122,14 +122,18 @@ void month_report::deal_with()
 		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
-		if(!m_res->isNull("tel_1"))
+		if(m_res->rowsCount()>1)
 		{
-			i->contact=m_res->getString("tel_1");
+			if(!m_res->isNull("tel_1"))
+			{
+				i->contact=m_res->getString("tel_1");
+			}
+			if(!m_res->isNull("email"))
+			{
+				i->email=m_res->getString("email");
+			}
 		}
-		if(!m_res->isNull("email"))
-		{
-			i->email=m_res->getString("email");
-		}
+		
 	};
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[](boost::shared_ptr<report_data>& x){x->print();});
 	}
