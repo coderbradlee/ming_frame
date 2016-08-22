@@ -105,7 +105,7 @@ void month_report::deal_with()
 		}
 
 		query_string="select employee_no from t_system_account where system_account_id='"+i->last_modified_by+"'";
-		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		
@@ -119,7 +119,7 @@ void month_report::deal_with()
 		}	
 
 		query_string="select tel_1,email from t_lead_contact where lead_id='"+i->lead_id+"'";
-		
+		std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		query(query_string);
 		m_res->next();
 		if(!m_res->isNull("tel_1"))
