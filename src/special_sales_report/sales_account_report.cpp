@@ -184,7 +184,7 @@ void month_report::write_to_csv()
 	write_csv w("sales_account_report.csv");
 	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 		{	
-			if(x->sales_company_name=="ReneSola America"&&x->account_owner=="Saber Mathew")
+			if(x->sales_company_name=="ReneSola America"&&x->account_owner=="Sabre Mathew")
 			{
 				w.addData(x->csv_line());
 			}
