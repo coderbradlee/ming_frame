@@ -7,11 +7,13 @@ option java_package = "echo";
 option java_outer_classname = "EchoProto";
 
 message EchoRequest {
-  required string payload = 1;
+  //required 
+  string payload = 1;
 }
 
 message EchoResponse {
-  required string payload = 2;
+  //required 
+  string payload = 2;
 }
 
 service EchoService {
