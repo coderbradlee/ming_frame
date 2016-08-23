@@ -1,6 +1,6 @@
 #include "dispatcher.h"
 #include "codec.h"
-#include "query.pb.h"
+#include <src/protobuf/rpcbench/echo.pb.h>
 
 #include <muduo/base/Logging.h>
 #include <muduo/base/Mutex.h>
