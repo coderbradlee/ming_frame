@@ -1,4 +1,4 @@
-#include <examples/protobuf/rpcbench/echo.pb.h>
+#include <src/protobuf/rpcbench/echo.pb.h>
 
 #include <muduo/base/Logging.h>
 #include <muduo/net/EventLoop.h>
