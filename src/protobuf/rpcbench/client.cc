@@ -1,5 +1,6 @@
 #include <src/protobuf/rpcbench/echo.pb.h>
 
+#include <google/protobuf/stubs/once.h>
 #include <muduo/base/CountDownLatch.h>
 #include <muduo/base/Logging.h>
 #include <muduo/net/EventLoop.h>
