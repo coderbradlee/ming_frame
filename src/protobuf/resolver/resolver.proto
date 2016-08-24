@@ -5,11 +5,13 @@ option java_generic_services = true;
 option py_generic_services = true;
 
 message ResolveRequest {
-  required string address = 1;
+  //required 
+  string address = 1;
 }
 
 message ResolveResponse {
-  optional bool resolved = 1 [default=false];
+  //optional 
+  bool resolved = 1 [default=false];
   repeated fixed32 ip = 2;
   repeated int32 port = 3;
 }
