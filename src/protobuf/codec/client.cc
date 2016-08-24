@@ -101,7 +101,7 @@ int main(int argc, char* argv[])
     muduo::Query query;
     query.set_id(1);
     query.set_questioner("Chen Shuo");
-    query.add_question("Running?");
+    query.set_question("Running?");
     muduo::Empty empty;
     messageToSend = &query;
 
