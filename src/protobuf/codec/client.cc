@@ -1,7 +1,7 @@
 #include "dispatcher.h"
 #include "codec.h"
 #include "src/protobuf/rpcbench/echo.pb.h"
-
+#include <src/protobuf/codec/query.pb.h>
 #include <muduo/base/Logging.h>
 #include <muduo/base/Mutex.h>
 #include <muduo/net/EventLoop.h>
