@@ -52,7 +52,7 @@ class RpcClient : boost::noncopyable
     echo::EchoRequest request;
     request.set_payload("001010");
     echo::EchoResponse* response = new echo::EchoResponse;
-    stub_.Echo(NULL, &request, response, google::protobuf::inertnal::NewCallback(this, &RpcClient::replied, response));
+    stub_.Echo(NULL, &request, response, google::protobuf::NewCallback(this, &RpcClient::replied, response));
   }
 
  private:
