@@ -24,7 +24,7 @@ void testQuery()
   muduo::Query query;
   query.set_id(1);
   query.set_questioner("Chen Shuo");
-  query.add_question("Running?");
+  query.set_question("Running?");
 
   Buffer buf;
   ProtobufCodec::fillEmptyBuffer(&buf, query);
@@ -204,7 +204,7 @@ void testOnMessage()
   muduo::Query query;
   query.set_id(1);
   query.set_questioner("Chen Shuo");
-  query.add_question("Running?");
+  query.set_question("Running?");
 
   Buffer buf1;
   ProtobufCodec::fillEmptyBuffer(&buf1, query);
