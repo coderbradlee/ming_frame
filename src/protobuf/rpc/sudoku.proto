@@ -11,7 +11,7 @@ message SudokuRequest {
 
 message SudokuResponse {
   //optional 
-  bool solved = 1 [default=false];
+  bool solved = 0;
   //optional 
   string checkerboard = 2;
 }
