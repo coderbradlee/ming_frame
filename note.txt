@@ -1,5 +1,5 @@
 /*div, td, a, p, span,tr{page-break-inside: avoid;}*/
-
+.quotation .table td { border-right: 1px solid #000; border-bottom: 1px solid #000; text-align: center; height: 20px;padding-top: 1px;padding-bottom: 1px;}
 
 yum install -y xorg-x11-fonts-75dpi
 yum install -y xorg-x11-fonts-Type1
