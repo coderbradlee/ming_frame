@@ -4,6 +4,7 @@ namespace test2_namespace
 	using muduo::string;
 	namespace test_multithreadloop_multiconnect
 	{
+		typedef boost::shared_ptr<muduo::Connector> ConnectorPtr;
 		muduo::net::EventLoop* g_loop;
 
 		void connectCallback(int sockfd)
@@ -15,10 +16,10 @@ namespace test2_namespace
 		{
 			muduo::net::EventLoop loop;
 		  g_loop = &loop;
-		  muduo::InetAddress addr("115.239.211.112", 80);
+		  muduo::net::InetAddress addr("115.239.211.112", 80);
 		  for(int i=0;i<10000;++i)
 		  {
-		  	muduo::ConnectorPtr connector(new muduo::Connector(&loop, addr));
+		  	ConnectorPtr connector(new muduo::Connector(&loop, addr));
 		    connector->setNewConnectionCallback(connectCallback);
 		    connector->start();
 		  }
