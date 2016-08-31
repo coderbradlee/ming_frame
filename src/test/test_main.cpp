@@ -1,16 +1,6 @@
 #include <boost/program_options.hpp>
 #include "../log.hpp"
 
-#include <muduo/base/Atomic.h>
-#include <muduo/base/Logging.h>
-#include <muduo/base/Thread.h>
-#include <muduo/base/ThreadPool.h>
-#include <muduo/net/EventLoop.h>
-#include <muduo/net/EventLoopThread.h>
-#include <muduo/net/InetAddress.h>
-#include <muduo/net/TcpServer.h>
-#include <muduo/net/inspect/Inspector.h>
-
 #include <boost/bind.hpp>
 #include <boost/circular_buffer.hpp>
 #include <boost/noncopyable.hpp>

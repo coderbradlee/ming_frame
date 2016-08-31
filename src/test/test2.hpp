@@ -2,6 +2,15 @@
 #define	TEST2_HPP
 #include "../log.hpp"
 #include "../include.hpp"
+#include <muduo/base/Atomic.h>
+#include <muduo/base/Logging.h>
+#include <muduo/base/Thread.h>
+#include <muduo/base/ThreadPool.h>
+#include <muduo/net/EventLoop.h>
+#include <muduo/net/EventLoopThread.h>
+#include <muduo/net/InetAddress.h>
+#include <muduo/net/TcpServer.h>
+#include <muduo/net/inspect/Inspector.h>
 namespace test2_namespace
 {
 	namespace test_multithreadloop_multiconnect
