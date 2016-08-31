@@ -18,11 +18,11 @@ namespace test2_namespace
 		  g_loop = &loop;
 		  muduo::net::InetAddress addr("115.239.211.112", 80);
 		  //for(int i=0;i<10000;++i)
-		  {
+		  //{
 		  	ConnectorPtr connector(new muduo::net::Connector(&loop, addr));
 		    connector->setNewConnectionCallback(connectCallback);
 		    connector->start();
-		  }
+		  //}
 		  loop.loop();
 		}
 	}
