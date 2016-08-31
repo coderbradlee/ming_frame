@@ -11,6 +11,7 @@
 #include <muduo/net/InetAddress.h>
 #include <muduo/net/TcpServer.h>
 #include <muduo/net/inspect/Inspector.h>
+#include <muduo/net/Connector.h>
 namespace test2_namespace
 {
 	namespace test_multithreadloop_multiconnect
