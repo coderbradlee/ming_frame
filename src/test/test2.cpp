@@ -4,7 +4,7 @@ namespace test2_namespace
 	using muduo::string;
 	namespace test_multithreadloop_multiconnect
 	{
-		muduo::EventLoop* g_loop;
+		muduo::net::EventLoop* g_loop;
 
 		void connectCallback(int sockfd)
 		{
@@ -13,7 +13,7 @@ namespace test2_namespace
 		}
 		void test()
 		{
-			muduo::EventLoop loop;
+			muduo::net::EventLoop loop;
 		  g_loop = &loop;
 		  muduo::InetAddress addr("115.239.211.112", 80);
 		  for(int i=0;i<10000;++i)
