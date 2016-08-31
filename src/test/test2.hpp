@@ -4,6 +4,11 @@
 #include "../include.hpp"
 namespace test2_namespace
 {
+	namespace test_multithreadloop_multiconnect
+	{
+		void connectCallback(int sockfd);
+		void test();
+	}
 	namespace test_mutex_between_threads
 	{
 		class request;

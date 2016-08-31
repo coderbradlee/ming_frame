@@ -2,6 +2,29 @@
 namespace test2_namespace
 {
 	using muduo::string;
+	namespace test_multithreadloop_multiconnect
+	{
+		muduo::EventLoop* g_loop;
+
+		void connectCallback(int sockfd)
+		{
+		  printf("connected.\n");
+		  g_loop->quit();
+		}
+		void test()
+		{
+			muduo::EventLoop loop;
+		  g_loop = &loop;
+		  muduo::InetAddress addr("115.239.211.112", 80);
+		  for(int i=0;i<10000;++i)
+		  {
+		  	muduo::ConnectorPtr connector(new muduo::Connector(&loop, addr));
+		    connector->setNewConnectionCallback(connectCallback);
+		    connector->start();
+		  }
+		  loop.loop();
+		}
+	}
 	namespace test_weak_call_back
 	{
 	
@@ -229,7 +252,8 @@ namespace test2_namespace
 		//thread_safe_observable::test();
 		//test_weak_call_back::test();
 		//test_mutex::test();
-		test_mutex_between_threads::test();
+		//test_mutex_between_threads::test();
+		test_multithreadloop_multiconnect::test();
 	}
 	
 }
