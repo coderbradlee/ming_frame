@@ -20,7 +20,7 @@ namespace test2_namespace
 		  ConnectorPtr connector;
 		  for(int i=0;i<10000;++i)
 		  {
-		  	connector(new muduo::net::Connector(&loop, addr));
+		  	connector=ConnectorPtr(new muduo::net::Connector(&loop, addr));
 		    connector->setNewConnectionCallback(connectCallback);
 		    connector->start();
 		  }
