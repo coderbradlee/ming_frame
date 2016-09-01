@@ -7,7 +7,7 @@ namespace test2_namespace
 		class printer::impl
 		{
 
-		}
+		};
 		printer::printer():m_impl(new impl)
 		{
 
@@ -19,7 +19,7 @@ namespace test2_namespace
 		
 		void test()
 		{
-			
+
 		}
 	}
 	namespace test_multithreadloop_multiconnect
