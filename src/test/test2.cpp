@@ -2,6 +2,26 @@
 namespace test2_namespace
 {
 	using muduo::string;
+	namespace test_inline
+	{
+		class printer::impl
+		{
+
+		}
+		printer::printer():m_impl(new impl)
+		{
+
+		}
+		printer::~printer()
+		{
+
+		}
+		
+		void test()
+		{
+			
+		}
+	}
 	namespace test_multithreadloop_multiconnect
 	{
 		typedef boost::shared_ptr<muduo::net::Connector> ConnectorPtr;

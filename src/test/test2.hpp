@@ -14,6 +14,19 @@
 #include <muduo/net/Connector.h>
 namespace test2_namespace
 {
+	namespace test_inline
+	{
+		class printer
+		{
+		public:
+			printer();
+			~printer();
+		private:
+			class impl;
+			boost::scoped_ptr<impl> m_impl;
+		};
+		void test();
+	}
 	namespace test_multithreadloop_multiconnect
 	{
 		void connectCallback(int sockfd);

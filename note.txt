@@ -5,10 +5,21 @@ yum install -y xorg-x11-fonts-75dpi
 yum install -y xorg-x11-fonts-Type1
 yum install icu libicu*
 
+
+wkhtmltopdf --margin-bottom 0 --margin-left 0 --margin-right 0 --margin-top 0 Newshop_International/WEB-INF/quotation_pdf.html test.pdf
+
+wkhtmltopdf --margin-bottom 0 --margin-left 0 --margin-right 0 --margin-top 0 --disable-smart-shrinking --print-media-type Newshop_International/WEB-INF/quotation_pdf.html test.pdf
+
+
+wkhtmltopdf --margin-bottom 0 --margin-left 0 --margin-right 0 --margin-top 0 --disable-smart-shrinking --print-media-type=\"screen\" Newshop_International/WEB-INF/quotation_pdf.html test.pdf
+
+
+wkhtmltopdf --margin-bottom 0 --margin-left 0 --margin-right 0 --margin-top 0 --disable-smart-shrinking --page-width 210mm Newshop_International/WEB-INF/quotation_pdf.html test.pdf
+
 wkhtmltopdf --margin-bottom 0 --margin-left 0 --margin-right 0 --margin-top 0 --enable-javascript --no-stop-slow-scripts Newshop_International/WEB-INF/quotation_pdf.html test.pdf
 
 
-wkhtmltopdf --margin-bottom 0 --margin-left 0 --margin-right 0 --margin-top 0 Newshop_International/WEB-INF/quotation_pdf.html test.pdf
+
 
 wkhtmltopdf --margin-bottom 0 --margin-left 0 --margin-right 0 --margin-top 0 --zoom 0.8 Newshop_International/WEB-INF/quotation_pdf.html test.pdf
 
