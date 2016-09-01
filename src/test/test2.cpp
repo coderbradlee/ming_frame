@@ -12,10 +12,10 @@ namespace test2_namespace
 		{
 
 		}
-		printer::~printer()
-		{
+		// printer::~printer()
+		// {
 
-		}
+		// }
 		
 		void test()
 		{
