@@ -20,7 +20,7 @@ namespace test2_namespace
 		{
 		public:
 			printer();
-			~printer();
+			//~printer();
 		private:
 			class impl;
 			boost::scoped_ptr<impl> m_impl;
