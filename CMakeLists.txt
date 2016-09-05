@@ -102,6 +102,7 @@ set(ENABLE_SSL 1)
 include_directories("${PROJECT_SOURCE_DIR}/libgo")
 include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo")
 include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo/linux")
+include_directories("${PROJECT_SOURCE_DIR}/libgo/test")
 ###################################################################
 
 add_subdirectory(muduo/base)
