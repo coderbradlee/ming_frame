@@ -55,7 +55,7 @@ void choice()
     do
     {
         std::cout<<++i<<":";
-        for(int j=0;j<v.size();++j)
+        for(size_t j=0;j<v.size();++j)
         {
             if(c_choice[j]!=0)
             std::cout<<v[j]<<",";
