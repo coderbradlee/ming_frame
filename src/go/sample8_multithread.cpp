@@ -63,6 +63,20 @@ void choice()
         std::cout<<std::endl;
     }while(prev_permutation(c_choice.begin(),c_choice.end()));
 }
+class both_space
+{
+public:
+    bool operator()(char x,char y)const
+    {
+        return x==' '&&y==' ';
+    }
+};
+void test_unique()
+{
+    std:string x{"test  test1      test2"};
+    std::erase(std::unique(x.begin(),x.end(),both_space),x.end());
+    std::cout<<x<<endl;
+}
 void foo()
 {
     // int v = 1;
@@ -73,7 +87,8 @@ void foo()
     // for (int i = 1; i < 20000000; ++i)
     //     convert(buf,i);
     //test_next_permutation();
-    choice();
+    //choice();
+    test_unique();
 }
 int main()
 {
