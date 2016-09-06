@@ -50,18 +50,18 @@ void test_next_permutation()
 void choice()
 {
     std::vector<int> v{1,2,3,4,5,6,7};
-    std::vector<int> c{1,1,1,0,0,0,0};
+    std::vector<int> c_choice{1,1,1,0,0,0,0};
     int i=0;
     do
     {
         std::cout<<++i<<":";
         for(int j=0;j<v.size();++j)
         {
-            if(c[j]!=0)
+            if(c_choice[j]!=0)
             std::cout<<v[j]<<",";
         }
         std::cout<<std::endl;
-    }while(next_permutation(c.begin(),c.end()));
+    }while(next_permutation(c_choice.begin(),c_choice.end()));
 }
 void foo()
 {
