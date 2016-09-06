@@ -13,14 +13,39 @@ using namespace std::chrono;
 
 // 大计算量的函数
 int c = 0;
+
+const char* convert(char buf[],int value)
+{
+    static char digits[19]={'9','8','7','6','5','4','3','2','1','0','1','2','3','4','5','6','7','8','9',};
+    static const char* zero=digits+9;//alway point to 0
+    //works for -2147483648 2147483647
+    int i=value;
+    char*p=buf;
+    do
+    {
+        int lsd=i%10;
+        i/=10;
+        *p++=zero[lsd];
+    } while (i!=0);
+    if(value<0)
+    {
+        *p++='-';
+    } 
+    *p='\0';
+    std::reverse(buf,p);
+    return p;
+
+}
 void foo()
 {
-    int v = 1;
+    // int v = 1;
+    // for (int i = 1; i < 20000000; ++i)
+    //     v *= i;
+    // c += v;
+    static char buf[9]={0};
     for (int i = 1; i < 20000000; ++i)
-        v *= i;
-	c += v;
+        convert(buf,i);
 }
-
 int main()
 {
     // 普通的for循环做法
