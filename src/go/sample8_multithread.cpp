@@ -78,7 +78,7 @@ void foo()
 int main()
 {
     // 普通的for循环做法
-    // auto start = system_clock::now();
+    auto start = system_clock::now();
     // for (int i = 0; i < 100; ++i)
     //     foo();
     // auto end = system_clock::now();
