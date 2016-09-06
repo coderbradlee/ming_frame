@@ -42,7 +42,7 @@ void foo()
     // for (int i = 1; i < 20000000; ++i)
     //     v *= i;
     // c += v;
-    static char buf[9]={0};
+    char buf[9]={0};
     for (int i = 1; i < 20000000; ++i)
         convert(buf,i);
 }
