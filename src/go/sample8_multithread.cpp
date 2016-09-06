@@ -73,6 +73,7 @@ int main()
     cout << "go with coroutine, cost ";
     cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
 	cout << "result zero:" << c * 0 << endl;
+    cout << sizeof(std::string)<< endl;
     return 0;
 }
 
