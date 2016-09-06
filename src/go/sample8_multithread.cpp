@@ -50,7 +50,7 @@ void test_next_permutation()
 void choice()
 {
     std::vector<int> v{1,2,3,4,5,6,7};
-    std::vector<int> c_choice{1,1,1,0,0,0,0};
+    std::vector<int> c_choice{0,0,0,0,1,1,1};
     int i=0;
     do
     {
@@ -72,7 +72,7 @@ void foo()
     // char buf[9]={0};
     // for (int i = 1; i < 20000000; ++i)
     //     convert(buf,i);
-    test_next_permutation();
+    //test_next_permutation();
     choice();
 }
 int main()
