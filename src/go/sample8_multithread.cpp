@@ -38,13 +38,13 @@ const char* convert(char buf[],int value)
 }
 void foo()
 {
-    // int v = 1;
-    // for (int i = 1; i < 20000000; ++i)
-    //     v *= i;
-    // c += v;
-    char buf[9]={0};
+    int v = 1;
     for (int i = 1; i < 20000000; ++i)
-        convert(buf,i);
+        v *= i;
+    c += v;
+    // char buf[9]={0};
+    // for (int i = 1; i < 20000000; ++i)
+    //     convert(buf,i);
 }
 int main()
 {
