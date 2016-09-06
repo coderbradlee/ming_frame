@@ -75,7 +75,7 @@ int main()
 
     // 创建8个线程去并行执行所有协程
     boost::thread_group tg;
-    for (int i = 0; i < 8; ++i)
+    for (int i = 0; i < 1; ++i)
         tg.create_thread([] {
                 co_sched.RunUntilNoTask();
                 });
