@@ -73,7 +73,7 @@ public:
 };
 void test_unique()
 {
-    std:string x{"test  test1      test2"};
+    std::string x{"test  test1      test2"};
     std::erase(std::unique(x.begin(),x.end(),both_space),x.end());
     std::cout<<x<<endl;
 }
