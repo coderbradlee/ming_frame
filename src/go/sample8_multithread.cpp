@@ -43,7 +43,7 @@ void test_next_permutation()
     do
     {
         std::cout<<++i;
-        std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,','));
+        std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
         std::cout<<std::endl;
     }while(next_permutation(v.begin(),v.end()));
 }
