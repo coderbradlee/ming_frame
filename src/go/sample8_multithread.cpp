@@ -47,6 +47,22 @@ void test_next_permutation()
         std::cout<<std::endl;
     }while(next_permutation(v.begin(),v.end()));
 }
+void choice()
+{
+    std::vector<int> v{1,2,3,4,5,6,7};
+    std::vector<int> c{1,1,1,0,0,0,0};
+    int i=0;
+    do
+    {
+        std::cout<<++i<<":";
+        for(int j=0;j<v.size();++j)
+        {
+            if(c[j]!=0)
+            std::cout<<v[j]<<",";
+        }
+        std::cout<<std::endl;
+    }while(next_permutation(c.begin(),c.end()));
+}
 void foo()
 {
     // int v = 1;
@@ -57,16 +73,17 @@ void foo()
     // for (int i = 1; i < 20000000; ++i)
     //     convert(buf,i);
     test_next_permutation();
+    choice();
 }
 int main()
 {
     // 普通的for循环做法
-    auto start = system_clock::now();
-    for (int i = 0; i < 100; ++i)
-        foo();
-    auto end = system_clock::now();
-    cout << "for-loop, cost ";
-    cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
+    // auto start = system_clock::now();
+    // for (int i = 0; i < 100; ++i)
+    //     foo();
+    // auto end = system_clock::now();
+    // cout << "for-loop, cost ";
+    // cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
 
     // 使用libgo做并行计算
     start = system_clock::now();
