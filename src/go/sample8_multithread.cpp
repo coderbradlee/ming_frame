@@ -42,7 +42,7 @@ void test_next_permutation()
     int i=0;
     do
     {
-        std::cout<<++i;
+        std::cout<<++i<<":";
         std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
         std::cout<<std::endl;
     }while(next_permutation(v.begin(),v.end()));
@@ -70,12 +70,12 @@ int main()
 
     // 使用libgo做并行计算
     start = system_clock::now();
-    for (int i = 0; i < 100; ++i)
+    for (int i = 0; i < 1; ++i)
         go foo;
 
     // 创建8个线程去并行执行所有协程
     boost::thread_group tg;
-    for (int i = 0; i < 1; ++i)
+    for (int i = 0; i < 8; ++i)
         tg.create_thread([] {
                 co_sched.RunUntilNoTask();
                 });
