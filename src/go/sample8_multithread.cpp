@@ -81,7 +81,7 @@ int main()
     auto start = system_clock::now();
     // for (int i = 0; i < 100; ++i)
     //     foo();
-    // auto end = system_clock::now();
+    auto end = system_clock::now();
     // cout << "for-loop, cost ";
     // cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
 
