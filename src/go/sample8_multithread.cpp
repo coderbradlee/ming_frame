@@ -36,15 +36,27 @@ const char* convert(char buf[],int value)
     return p;
 
 }
+void test_next_permutation()
+{
+    std::vector<int> v{1,2,3};
+    int i=0;
+    do
+    {
+        std::cout<<++i;
+        std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,','));
+        std::cout<<std::endl;
+    }while(next_permutation(v.begin(),v.end()));
+}
 void foo()
 {
-    int v = 1;
-    for (int i = 1; i < 20000000; ++i)
-        v *= i;
-    c += v;
+    // int v = 1;
+    // for (int i = 1; i < 20000000; ++i)
+    //     v *= i;
+    // c += v;
     // char buf[9]={0};
     // for (int i = 1; i < 20000000; ++i)
     //     convert(buf,i);
+    test_next_permutation();
 }
 int main()
 {
