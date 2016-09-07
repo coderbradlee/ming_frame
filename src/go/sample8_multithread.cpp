@@ -86,7 +86,7 @@ struct is_odd
 };
 void test_odd()
 {
-    std::vector<int> v{1,2,3,4,5,6};
+    std::vector<int> v{-1,-2,-3,4,5,6};
     std::stable_partition(v.begin(),v.end(),is_odd());
     std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
     std::cout<<std::endl;
