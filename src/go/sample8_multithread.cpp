@@ -77,6 +77,20 @@ void test_unique()
     x.erase(std::unique(x.begin(),x.end(),both_space()),x.end());
     std::cout<<x<<endl;
 }
+struct is_odd
+{
+    bool operator ()(int x)
+    {
+        return x%2!=0;
+    }
+};
+void test_odd()
+{
+    std::vector<int> v{1,2,3,4,5,6};
+    std::patition(v.begin(),v.end(),is_odd());
+    std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
+    std::cout<<std::endl;
+}
 void foo()
 {
     // int v = 1;
@@ -88,7 +102,8 @@ void foo()
     //     convert(buf,i);
     //test_next_permutation();
     //choice();
-    test_unique();
+    //test_unique();
+    test_odd();
 }
 int main()
 {
