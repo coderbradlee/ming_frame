@@ -107,7 +107,7 @@ int find_ip_value(const std::vector<IPrange>& ranges,uint32_t ip)
     if(!ranges.empty())
     {
         IPrange needle={ip,0,0};
-        auto it=std::lower_bound(ranges.begin,ranges.end(),needle);
+        auto it=std::lower_bound(ranges.begin(),ranges.end(),needle);
         if(it->start>ip&&it!=ranges.begin())
             --it;
         if(it==ranges.end())
