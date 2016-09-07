@@ -96,7 +96,7 @@ struct IPrange
     uint32_t start;
     uint32_t end;
     int value;
-    bool operator()(const IPrange& r)const
+    bool operator<(const IPrange& r)const
     {
         return start<r.start;
     }
