@@ -91,6 +91,44 @@ void test_odd()
     std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
     std::cout<<std::endl;
 }
+struct IPrange
+{
+    uint32_t start;
+    uint32_t end;
+    int value;
+    bool operator()(const IPrange& r)const
+    {
+        return start<r.start;
+    }
+};
+int find_ip_value(const std::vector<IPrange>& ranges,uint32_t ip)
+{
+    int ret=-1;
+    if(!ranges.empty())
+    {
+        IPrange needle{ip,0,0};
+        auto it=std::lower_bound(ranges.begin,ranges.end(),needle);
+        if(it->start>ip&&it!=ranges.begin())
+            --it;
+        if(it==ranges.end())
+            --it;
+        if(ip>=it->start&&ip<=it->end)
+            ret=it->value;
+
+    }
+    return ret;
+}
+void test_ip_range()
+{
+    std::vector<IPrange> v{{300,500,1},{600,750,2}};
+    std::cout<<find_ip_value(v,299)<<std::endl;
+    std::cout<<find_ip_value(v,300)<<std::endl;
+    std::cout<<find_ip_value(v,301)<<std::endl;
+    std::cout<<find_ip_value(v,499)<<std::endl;
+    std::cout<<find_ip_value(v,500)<<std::endl;
+    std::cout<<find_ip_value(v,599)<<std::endl;
+    std::cout<<find_ip_value(v,600)<<std::endl;
+}
 void foo()
 {
     // int v = 1;
@@ -103,7 +141,8 @@ void foo()
     //test_next_permutation();
     //choice();
     //test_unique();
-    test_odd();
+    //test_odd();
+    test_ip_range();
 }
 int main()
 {
