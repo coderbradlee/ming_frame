@@ -143,6 +143,8 @@ void foo()
     //test_unique();
     //test_odd();
     test_ip_range();
+    std::cout<<sizeof(string)<<std::endl;
+    std::cout<<sizeof(__gnu_cxx::__sso_string)<<std::endl;
 }
 int main()
 {
