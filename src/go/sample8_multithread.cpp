@@ -8,6 +8,7 @@
 #include <boost/thread.hpp>
 #include "coroutine.h"
 #include "win_exit.h"
+ #include <ext/vstring.h>
 using namespace std;
 using namespace std::chrono;
 
