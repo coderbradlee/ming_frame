@@ -133,7 +133,11 @@ void test_ip_range()
 class bar
 {
 public:
-    bar(std::initializer_list<int>){}
+    bar(std::initializer_list<int> x)
+    {
+        for(auto& m:x)
+        std::cout<<m<<std::endl;
+    }
     void test(){}
 };
 void foo()
@@ -152,7 +156,7 @@ void foo()
     //test_ip_range();
     bar bbbb{1,2,3,4,5};
     bbbb.test();
-    bar cccc={1,2,3,4,5};
+    bar cccc={2,3,4,6,7};
     cccc.test();
 }
 int main()
