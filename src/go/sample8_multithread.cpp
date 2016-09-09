@@ -151,10 +151,10 @@ void test_for_range()
     // for(auto& x:get_range())
     //     std::cout<<x<<std::endl;
     std::vector<int> v1{0,9,8,7,6,5};
-    auto && range=(v1);
-    for(auto begin=range.begin(),end=range.end();begin!=end;++begin)
+    auto && __range=(v1);
+    for(auto __begin=__range.begin(),__end=__range.end();__begin!=__end;++__begin)
     {
-        auto val=*begin;
+        auto val=*__begin;
         std::cout<<val<<std::endl;
         v1.push_back(1);
         sleep(1);
