@@ -149,8 +149,8 @@ void foo()
     //test_unique();
     //test_odd();
     //test_ip_range();
-    bar b{1,2,3,4,5};
-    bar c={1,2,3,4,5};
+    bar bbbb{1,2,3,4,5};
+    bar cccc={1,2,3,4,5};
 }
 int main()
 {
