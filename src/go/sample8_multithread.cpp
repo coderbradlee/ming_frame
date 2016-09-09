@@ -150,6 +150,15 @@ void test_for_range()
 {
     for(auto& x:get_range())
         std::cout<<x<<std::endl;
+    std::vector<int> v1{0,9,8,7,6,5};
+    auto && range=(v1);
+    for(auto begin=range.begin(),end=range.end();begin!=end;++begin)
+    {
+        auto val=*begin;
+        std::cout<<val<<std::endl;
+        arr.push_back(1);
+        sleep(1);
+    }
 
 }
 void foo()
