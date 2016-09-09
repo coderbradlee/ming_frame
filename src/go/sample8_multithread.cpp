@@ -130,6 +130,11 @@ void test_ip_range()
     std::cout<<find_ip_value(v,599)<<std::endl;
     std::cout<<find_ip_value(v,600)<<std::endl;
 }
+class bar
+{
+public:
+    bar(std::initializer_list<int>){}
+};
 void foo()
 {
     // int v = 1;
@@ -143,9 +148,9 @@ void foo()
     //choice();
     //test_unique();
     //test_odd();
-    test_ip_range();
-    std::cout<<sizeof(string)<<std::endl;
-    std::cout<<sizeof(__gnu_cxx::__sso_string)<<std::endl;
+    //test_ip_range();
+    bar b{1,2,3,4,5};
+    bar c={1,2,3,4,5};
 }
 int main()
 {
@@ -174,7 +179,8 @@ int main()
     cout << "go with coroutine, cost ";
     cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
 	cout << "result zero:" << c * 0 << endl;
-    cout << sizeof(std::string)<< endl;
+    std::cout<<sizeof(string)<<std::endl;
+    std::cout<<sizeof(__gnu_cxx::__sso_string)<<std::endl;
     return 0;
 }
 
