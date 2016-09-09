@@ -161,6 +161,13 @@ void test_for_range()
     }
 
 }
+void test_lambda()
+{
+    int a=0;
+    auto f=[=]{return a;};
+    a+=1;
+    std::cout<<f()<<std::endl;
+}
 void foo()
 {
     // int v = 1;
@@ -179,7 +186,8 @@ void foo()
     // bbbb.test();
     // bar cccc={2,3,4,6,7};
     // cccc.test();
-    test_for_range();
+    //test_for_range();
+    test_lambda();
 }
 int main()
 {
