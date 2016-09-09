@@ -164,7 +164,7 @@ void test_for_range()
 void test_lambda()
 {
     int a=0;
-    auto f=[=]{return ++a;};
+    auto f=[=]()mutable{return ++a;};
     //a+=1;
     std::cout<<f()<<std::endl;
 }
