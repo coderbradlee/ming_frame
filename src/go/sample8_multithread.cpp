@@ -134,6 +134,7 @@ class bar
 {
 public:
     bar(std::initializer_list<int>){}
+    void test(){}
 };
 void foo()
 {
@@ -150,7 +151,9 @@ void foo()
     //test_odd();
     //test_ip_range();
     bar bbbb{1,2,3,4,5};
+    bbbb.test();
     bar cccc={1,2,3,4,5};
+    cccc.test();
 }
 int main()
 {
