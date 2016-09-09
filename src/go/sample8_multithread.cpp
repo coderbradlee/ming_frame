@@ -163,10 +163,18 @@ void test_for_range()
 }
 void test_lambda()
 {
-    int a=0;
-    auto f=[&a](){return ++a;};
-    //a+=1;
-    std::cout<<f()<<std::endl;
+    // int a=0;
+    // auto f=[&a](){return ++a;};
+    // //a+=1;
+    // std::cout<<f()<<std::endl;
+    std::vector<int> v{1,2,3,4,5};
+    int even_count=0;
+    for_each(v.begin(),v.end(),[&even_count](int val)
+        {
+            if(!(val%2))
+                ++even_count;
+        });
+    std::cout<<even_count<<std::endl;
 }
 void foo()
 {
