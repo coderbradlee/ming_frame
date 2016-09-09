@@ -140,6 +140,18 @@ public:
     }
     void test(){}
 };
+std::vector<int> v{1,2,3,4,5};
+std::vector<int> get_range()
+{
+    std::cout<<"get_range"<<std::endl;
+    return v;
+}
+void test_for_range()
+{
+    for(auto& x:get_range())
+        std::cout<<x<<std::endl;
+
+}
 void foo()
 {
     // int v = 1;
@@ -154,10 +166,11 @@ void foo()
     //test_unique();
     //test_odd();
     //test_ip_range();
-    bar bbbb{1,2,3,4,5};
-    bbbb.test();
-    bar cccc={2,3,4,6,7};
-    cccc.test();
+    // bar bbbb{1,2,3,4,5};
+    // bbbb.test();
+    // bar cccc={2,3,4,6,7};
+    // cccc.test();
+    test_for_range();
 }
 int main()
 {
