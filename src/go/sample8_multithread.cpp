@@ -176,7 +176,7 @@ void test_lambda()
         });
     std::cout<<even_count<<std::endl;
 }
-class test_static
+struct test_static
 {
     const static int b=0;
     //static const double c=1.2;
@@ -203,12 +203,14 @@ void foo()
     // cccc.test();
     //test_for_range();
     //test_lambda();
-    int y=0;
-    int& x=y;
-    int&& var1=std::move(x);
-    //decltype(x)&& var2=std::move(y);
-    static_assert(sizeof(int)==4,"this 64-bit machine should follow this");
-    std::cout<<x<<y<<var1<<std::endl;
+    // int y=0;
+    // int& x=y;
+    // int&& var1=std::move(x);
+    // //decltype(x)&& var2=std::move(y);
+    // static_assert(sizeof(int)==4,"this 64-bit machine should follow this");
+    // std::cout<<x<<y<<var1<<std::endl;
+    std::cout<<sizeof(*((test_static*)0)->d)<<std::endl;
+    std::cout<<sizeof(test_static::c)<<std::endl;
 }
 int main()
 {
