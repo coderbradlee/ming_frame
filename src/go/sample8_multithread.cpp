@@ -195,7 +195,10 @@ void foo()
     // bar cccc={2,3,4,6,7};
     // cccc.test();
     //test_for_range();
-    test_lambda();
+    //test_lambda();
+    int x;
+    int&& var1=x;
+    decltype(x)&& var2=x;
 }
 int main()
 {
