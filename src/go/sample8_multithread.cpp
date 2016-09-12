@@ -198,8 +198,8 @@ void foo()
     //test_lambda();
     int y=0;
     int& x=y;
-    int&& var1=x;
-    decltype(x)&& var2=x;
+    int&& var1=std::move(x);
+    decltype(x)&& var2=std::move(x);
 }
 int main()
 {
