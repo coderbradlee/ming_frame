@@ -209,7 +209,7 @@ void foo()
     // //decltype(x)&& var2=std::move(y);
     // static_assert(sizeof(int)==4,"this 64-bit machine should follow this");
     // std::cout<<x<<y<<var1<<std::endl;
-    std::cout<<sizeof(*((test_static*)0)->d)<<std::endl;
+    std::cout<<sizeof(((test_static*)0)->d)<<std::endl;
     std::cout<<sizeof(test_static::c)<<std::endl;
 }
 int main()
