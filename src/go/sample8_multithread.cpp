@@ -176,6 +176,12 @@ void test_lambda()
         });
     std::cout<<even_count<<std::endl;
 }
+class test_static
+{
+    const static int b=0;
+    const static double c=1.2;
+    
+};
 void foo()
 {
     // int v = 1;
