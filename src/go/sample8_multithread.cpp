@@ -179,7 +179,7 @@ void test_lambda()
 class test_static
 {
     const static int b=0;
-    const static double c=1.2;
+    static const double c=1.2;
     
 };
 void foo()
