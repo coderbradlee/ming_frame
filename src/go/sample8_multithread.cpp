@@ -183,13 +183,13 @@ struct test_static
     int d=0;
     char x{'?'};
 };
-struct A
+struct A_base
 {
-    A(int){}
+    A_base(int){}
 };
-struct B:A
+struct B_base:A_base
 {
-    using A::A;
+    using A_base::A_base;
 };
 void foo()
 {
@@ -219,7 +219,7 @@ void foo()
     // std::cout<<x<<y<<var1<<std::endl;
     // std::cout<<sizeof(((test_static*)0)->d)<<std::endl;
     // std::cout<<sizeof(test_static::x)<<std::endl;
-    B b;
+    B_base b;
 }
 int main()
 {
