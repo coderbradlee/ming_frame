@@ -179,8 +179,9 @@ void test_lambda()
 class test_static
 {
     const static int b=0;
-    static const double c=1.2;
-    
+    //static const double c=1.2;
+    int d=0;
+    char x{'?'};
 };
 void foo()
 {
