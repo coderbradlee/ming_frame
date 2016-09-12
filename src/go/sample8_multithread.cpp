@@ -197,7 +197,7 @@ void foo()
     //test_for_range();
     //test_lambda();
     int y=0;
-    int x=&y;
+    int& x=y;
     int&& var1=x;
     decltype(x)&& var2=x;
 }
