@@ -219,7 +219,8 @@ void foo()
     // std::cout<<x<<y<<var1<<std::endl;
     // std::cout<<sizeof(((test_static*)0)->d)<<std::endl;
     // std::cout<<sizeof(test_static::x)<<std::endl;
-    B_base b(1);
+    //B_base b(1);
+    std::cout<<is_rvalue_reference<string&&>::value<<std::endl;
 }
 int main()
 {
