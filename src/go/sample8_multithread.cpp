@@ -196,7 +196,8 @@ void foo()
     // cccc.test();
     //test_for_range();
     //test_lambda();
-    int x;
+    int y=0;
+    int x=&y;
     int&& var1=x;
     decltype(x)&& var2=x;
 }
