@@ -200,7 +200,8 @@ void foo()
     int& x=y;
     int&& var1=std::move(x);
     decltype(x)&& var2=std::move(x);
-    static_assert(sizeof(int)==8,"this 64-bit machine should follow this");
+    static_assert(sizeof(int)==4,"this 64-bit machine should follow this");
+    std::cout<<x<<y<<var1<<var2<<std::endl;
 }
 int main()
 {
