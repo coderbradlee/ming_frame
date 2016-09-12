@@ -183,6 +183,14 @@ struct test_static
     int d=0;
     char x{'?'};
 };
+struct A
+{
+    A(int){}
+};
+struct B:A
+{
+    using A::A;
+};
 void foo()
 {
     // int v = 1;
@@ -209,8 +217,9 @@ void foo()
     // //decltype(x)&& var2=std::move(y);
     // static_assert(sizeof(int)==4,"this 64-bit machine should follow this");
     // std::cout<<x<<y<<var1<<std::endl;
-    std::cout<<sizeof(((test_static*)0)->d)<<std::endl;
-    std::cout<<sizeof(test_static::x)<<std::endl;
+    // std::cout<<sizeof(((test_static*)0)->d)<<std::endl;
+    // std::cout<<sizeof(test_static::x)<<std::endl;
+    B b;
 }
 int main()
 {
