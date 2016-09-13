@@ -191,6 +191,64 @@ struct B_base:A_base
 {
     using A_base::A_base;
 };
+class huge_mem
+{
+public:
+    huge_mem(int size):sz(size>0?size:1)
+    {
+        c=new int[sz];
+    }
+    ~huge_mem()
+    {
+        delete[] c;
+    }
+    huge_mem(const huge_mem& hm):sz(hm.sz),c(hm.c)
+    {
+        std::cout<<"huge_mem copy constructor"<<std::endl;
+    }
+    huge_mem(huge_mem&& hm):sz(hm.sz),c(hm.c)
+    {
+        std::cout<<"huge_mem rvalue constructor"<<std::endl;
+    }
+    huge_mem& operator=(const huge_mem& hm)
+    {
+        if(this==&hm)
+            return *this;
+        sz=hm.sz;
+        delete[] c;
+        c=new int[sz];
+        for(int i=0;i<sz;++i)
+            c[i]=hm.c[i];
+        std::cout<<"huge_mem operator="<<std::endl;
+        return *this;
+    }
+public:
+    int *c;
+    int sz;
+};
+class moveable
+{
+public:
+    moveable():i(new int(3)),h(1024){}
+    ~moveable(){delete i;}
+    moveable(const moveable& m):i(m.i),h(m.h)
+    {
+        std::cout<<"moveable copy constructor"<<std::endl;
+    }
+    moveable(moveable&& m):i(m.i),h(std::move(m.h))
+    {
+        m.i=nullptr;
+    }
+public:
+    int* i;
+    huge_mem h;
+};
+moveable get_temp()
+{
+    moveable tmp=moveable();
+    std::cout<<"huge_mem from "<<__func__<<" @"<<tmp.h.c<<std::endl;
+    return tmp;
+}
 void foo()
 {
     // int v = 1;
@@ -220,7 +278,9 @@ void foo()
     // std::cout<<sizeof(((test_static*)0)->d)<<std::endl;
     // std::cout<<sizeof(test_static::x)<<std::endl;
     //B_base b(1);
-    std::cout<<is_rvalue_reference<string&&>::value<<std::endl;
+    //std::cout<<is_rvalue_reference<string&&>::value<<std::endl;
+    moveable a(get_temp());
+    std::cout<<"huge_mem from "<<__func__<<" @"<<a.h.c<<std::endl;
 }
 int main()
 {
