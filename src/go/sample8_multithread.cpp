@@ -346,8 +346,8 @@ void func2(int n)
 void foo()
 {
     lo.test_and_set();
-    std::thread t1(func1,1);
-    std::thread t2(func2,2);
+    boost::thread t1(func1,1);
+    boost::thread t2(func2,2);
     t1.join();
     usleep(100);
     t2.join();
