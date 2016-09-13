@@ -290,6 +290,37 @@ union test_union
         s.~string();
     }
 };
+using uint8=unsigned char;
+struct RGBA
+{
+    uint8 r;
+    uint8 g;
+    uint8 b;
+    uint8 a;
+    RGBA(uint8 R,uint8 G,uint8 B,uint8 A=0):r(R),g(G),b(B),a(A){}
+};
+RGBA operator ""_C(const char* col,size_t n)
+{
+    const char* p=col;
+    const char* end=col+n;
+    const char* r,*g,*b,*a;
+    r=g=b=a=nullptr;
+    for(;p!=end;++p)
+    {
+        if(*p=='r') r=p;
+        else if(*p=='g') g=p;
+        else if(*p=='b') b=p;
+        else if(*p=='a') a=p;
+    }
+    if(a==nullptr)
+        return RGBA(atoi(r+1),atoi(g+1),atoi(b+1));
+    else
+        return  RGBA(atoi(r+1),atoi(g+1),atoi(b+1),atoi(a+1));
+}
+void blend(RGBA&& col1,RGBA&& col2)
+{
+
+}
 void foo()
 {
     // int v = 1;
@@ -323,7 +354,8 @@ void foo()
     // moveable a(get_temp());
     // std::cout<<"huge_mem from "<<__func__<<" @"<<a.h.c<<std::endl;
     //std::cout<<is_trivial<non_trivial>::value<<std::endl;
-    test_union t;
+    //test_union t;
+    blend("r255,g230,b123"_C,"r255,g230,b123"_C);
 }
 int main()
 {
