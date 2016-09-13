@@ -321,8 +321,14 @@ void blend(RGBA&& col1,RGBA&& col2)
 {
 
 }
+struct constexpr_type
+{
+    constexpr constexpr_type(int x):i(x){}
+    int i;
+};
 void foo()
 {
+    constexpr constexpr_type mt={0};
     // int v = 1;
     // for (int i = 1; i < 20000000; ++i)
     //     v *= i;
@@ -356,10 +362,10 @@ void foo()
     //std::cout<<is_trivial<non_trivial>::value<<std::endl;
     //test_union t;
     //blend("r255,g230,b123"_C,"r255,g230,b123"_C);
-    int i;
-    decltype(i) a;
-    decltype((i)) b=a;
-    b=1;
+    // int i;
+    // decltype(i) a;
+    // decltype((i)) b=a;
+    // b=1;
 }
 int main()
 {
