@@ -277,6 +277,11 @@ struct  non_trivial
     int w;
 };
 non_trivial::non_trivial()=default;
+union test_union
+{
+    string s;
+    int n;
+};
 void foo()
 {
     // int v = 1;
@@ -309,7 +314,8 @@ void foo()
     //std::cout<<is_rvalue_reference<string&&>::value<<std::endl;
     // moveable a(get_temp());
     // std::cout<<"huge_mem from "<<__func__<<" @"<<a.h.c<<std::endl;
-    std::cout<<is_trivial<non_trivial>::value<<std::endl;
+    //std::cout<<is_trivial<non_trivial>::value<<std::endl;
+    test_union t;
 }
 int main()
 {
