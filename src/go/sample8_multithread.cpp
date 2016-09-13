@@ -300,7 +300,7 @@ void foo()
     // std::cout<<sizeof(test_static::x)<<std::endl;
     //B_base b(1);
     //std::cout<<is_rvalue_reference<string&&>::value<<std::endl;
-    moveable a(get_temp());
+    moveable a=get_temp();
     std::cout<<"huge_mem from "<<__func__<<" @"<<a.h.c<<std::endl;
 }
 int main()
