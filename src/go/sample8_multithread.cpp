@@ -247,7 +247,7 @@ public:
     }
     moveable(moveable&& m):i(m.i),h(std::move(m.h))
     {
-        std::cout<<"moveable move copy constructor"<<std::endl;
+        std::cout<<"moveable rvalue constructor"<<std::endl;
         m.i=nullptr;
     }
     moveable& operator=(const moveable& m)
