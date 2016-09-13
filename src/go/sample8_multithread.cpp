@@ -223,8 +223,9 @@ public:
         return *this;
     }
 public:
-    int *c;
     int sz;
+    int *c;
+    
 };
 class moveable
 {
