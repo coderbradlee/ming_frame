@@ -273,9 +273,10 @@ moveable get_temp()
 }
 struct  non_trivial
 {
-    non_trivial()=default;
+    non_trivial();
     int w;
 };
+non_trivial::non_trivial()=default;
 void foo()
 {
     // int v = 1;
