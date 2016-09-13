@@ -255,7 +255,7 @@ public:
         if(this==&m)
             return *this;
         delete i;
-        i=new int(m.i);
+        i=new int(*m.i);
         h=m.h;
         std::cout<<"moveable operator="<<std::endl;
         return *this;
