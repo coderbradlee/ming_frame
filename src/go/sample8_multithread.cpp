@@ -330,9 +330,28 @@ constexpr int fibonacci(int n)
 {
     return (n==1)?1:((n==2)?1:fibonacci(n-1)+fibonacci(n-2));
 }
+std::atomic_flag lo=ATOMIC_FLAG_INIT;
+void func1(int n)
+{
+    while(lo.test_and_set(std::memory_order_acquire))
+        std::cout<<"waiting.."<<std::endl;
+    std::cout<<"thread "<<n<<" starts working"<<std::endl;
+}
+void func2(int n)
+{
+    std::cout<<"thread "<<n<<" is going to start"<<std::endl;
+    lo.clear();
+    std::cout<<"thread "<<n<<" starts working"<<std::endl;
+}
 void foo()
 {
-    std::cout<<fibonacci(11)<<std::endl;
+    lo.test_and_set();
+    std::thread t1(func1,1);
+    std::thread t2(func2,2);
+    t1.join();
+    usleep(100);
+    t2.join();
+    //std::cout<<fibonacci(11)<<std::endl;
     //constexpr constexpr_type mt={0};
     // int v = 1;
     // for (int i = 1; i < 20000000; ++i)
