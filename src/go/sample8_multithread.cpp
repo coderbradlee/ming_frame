@@ -197,10 +197,12 @@ public:
     huge_mem(int size):sz(size>0?size:1)
     {
         c=new int[sz];
+        std::cout<<"huge_mem constructor"<<std::endl;
     }
     ~huge_mem()
     {
         delete[] c;
+        std::cout<<"huge_mem destructor"<<std::endl;
     }
     huge_mem(const huge_mem& hm):sz(hm.sz),c(hm.c)
     {
@@ -230,15 +232,33 @@ public:
 class moveable
 {
 public:
-    moveable():i(new int(3)),h(1024){}
-    ~moveable(){delete i;}
+    moveable():i(new int(3)),h(1024)
+    {
+        std::cout<<"moveable constructor"<<std::endl;
+    }
+    ~moveable()
+    {
+        delete i;
+        std::cout<<"moveable destructor"<<std::endl;
+    }
     moveable(const moveable& m):i(m.i),h(m.h)
     {
         std::cout<<"moveable copy constructor"<<std::endl;
     }
     moveable(moveable&& m):i(m.i),h(std::move(m.h))
     {
+        std::cout<<"moveable move copy constructor"<<std::endl;
         m.i=nullptr;
+    }
+    moveable& operator=(const moveable& m)
+    {
+        if(this==&m)
+            return *this;
+        delete i;
+        i=new int(m.i);
+        h=m.h;
+        std::cout<<"moveable operator="<<std::endl;
+        return *this;
     }
 public:
     int* i;
