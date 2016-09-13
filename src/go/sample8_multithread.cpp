@@ -204,7 +204,7 @@ public:
         delete[] c;
         std::cout<<"huge_mem destructor"<<std::endl;
     }
-    huge_mem(const huge_mem& hm):sz(hm.sz),c(hm.c)
+    huge_mem(const huge_mem& hm):sz(hm.sz),c(new int(*hm.c))
     {
         std::cout<<"huge_mem copy constructor"<<std::endl;
     }
@@ -241,7 +241,7 @@ public:
         delete i;
         std::cout<<"moveable destructor"<<std::endl;
     }
-    moveable(const moveable& m):i(m.i),h(m.h)
+    moveable(const moveable& m):i(new int(*m.i)),h(m.h)
     {
         std::cout<<"moveable copy constructor"<<std::endl;
     }
