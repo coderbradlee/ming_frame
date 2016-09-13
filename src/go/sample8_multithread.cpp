@@ -326,9 +326,14 @@ struct constexpr_type
     constexpr constexpr_type(int x):i(x){}
     int i;
 };
+constexpr int fibonacci(int n)
+{
+    return (n==1)?1:((n==2)?1:fibonacci(n-1)+fibonacci(n-2));
+}
 void foo()
 {
-    constexpr constexpr_type mt={0};
+    std::cout<<fibonacci(11)<<std::endl;
+    //constexpr constexpr_type mt={0};
     // int v = 1;
     // for (int i = 1; i < 20000000; ++i)
     //     v *= i;
