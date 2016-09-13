@@ -355,7 +355,10 @@ void foo()
     // std::cout<<"huge_mem from "<<__func__<<" @"<<a.h.c<<std::endl;
     //std::cout<<is_trivial<non_trivial>::value<<std::endl;
     //test_union t;
-    blend("r255,g230,b123"_C,"r255,g230,b123"_C);
+    //blend("r255,g230,b123"_C,"r255,g230,b123"_C);
+    int i;
+    decltype(i) a;
+    decltype((i)) b=a;
 }
 int main()
 {
