@@ -281,6 +281,14 @@ union test_union
 {
     string s;
     int n;
+    test_union()
+    {
+        new(&s)string;
+    }
+    ~test_union()
+    {
+        s.~string();
+    }
 };
 void foo()
 {
