@@ -359,6 +359,7 @@ void foo()
     int i;
     decltype(i) a;
     decltype((i)) b=a;
+    b=1;
 }
 int main()
 {
