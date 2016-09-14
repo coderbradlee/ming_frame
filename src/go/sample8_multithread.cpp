@@ -355,16 +355,31 @@ public:
 
 void foo()
 {
-    test_thread t;
-
-    std::string ss="foo";
-    t(ss);
-    boost::thread t1(t,std::ref(ss));
-    //boost::thread t2((test_thread()),ss);
+    boost::mutex mu;
+    boost::thread t1([&]()
+    {
+        boost::scoped_lock lo(mu);
+        for(int i=0;i<3;++i)
+            std::cout<<"1:"<<i<<std::endl;
+    });
+    boost::thread t2([&]()
+    {
+        boost::scoped_lock lo(mu);
+        for(int i=0;i<3;++i)
+            std::cout<<"2:"<<i<<std::endl;
+    });
     t1.join();
-    //t2.join();
-    std::cout<<boost::thread::hardware_concurrency()<<std::endl;
-    std::cout<<ss<<std::endl;
+    t2.join();
+    // test_thread t;
+
+    // std::string ss="foo";
+    // t(ss);
+    // boost::thread t1(t,std::ref(ss));
+    // //boost::thread t2((test_thread()),ss);
+    // t1.join();
+    // //t2.join();
+    // std::cout<<boost::thread::hardware_concurrency()<<std::endl;
+    // std::cout<<ss<<std::endl;
     // lo.test_and_set();
     // boost::thread t1(func1,1);
     // boost::thread t2(func2,2);
