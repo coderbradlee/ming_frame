@@ -356,7 +356,9 @@ public:
 void foo()
 {
     test_thread t;
+
     std::string ss="foo";
+    t(ss);
     boost::thread t1(t,std::move(ss));
     //boost::thread t2((test_thread()),ss);
     t1.join();
