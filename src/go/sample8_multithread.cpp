@@ -343,14 +343,26 @@ void func2(int n)
     lo.clear();
     std::cout<<"thread "<<n<<" starts working"<<std::endl;
 }
+class test_thread
+{
+public:
+    void operator()(std::string& s)
+    {
+        s="operator";
+        std::cout<<s<<std::endl;
+    }
+};
+
 void foo()
 {
-    lo.test_and_set();
-    boost::thread t1(func1,1);
-    boost::thread t2(func2,2);
+    boost::thread t1((test_thread()),"foo");
     t1.join();
-    usleep(100);
-    t2.join();
+    // lo.test_and_set();
+    // boost::thread t1(func1,1);
+    // boost::thread t2(func2,2);
+    // t1.join();
+    // usleep(100);
+    // t2.join();
     //std::cout<<fibonacci(11)<<std::endl;
     //constexpr constexpr_type mt={0};
     // int v = 1;
