@@ -355,8 +355,13 @@ public:
 
 void foo()
 {
-    boost::thread t1((test_thread()),"foo");
+    test_thread t;
+    std::string ss="foo";
+    boost::thread t1(t,ss);
+    boost::thread t2((test_thread()),ss);
     t1.join();
+    t2.join();
+    std::cout<<std::thread::hardware_concurrency<<std::endl;
     // lo.test_and_set();
     // boost::thread t1(func1,1);
     // boost::thread t2(func2,2);
