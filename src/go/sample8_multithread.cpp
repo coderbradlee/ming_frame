@@ -362,6 +362,7 @@ void foo()
     t1.join();
     t2.join();
     std::cout<<boost::thread::hardware_concurrency()<<std::endl;
+    std::cout<<ss<<std::endl;
     // lo.test_and_set();
     // boost::thread t1(func1,1);
     // boost::thread t2(func2,2);
