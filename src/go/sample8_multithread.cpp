@@ -358,9 +358,9 @@ void foo()
     test_thread t;
     std::string ss="foo";
     boost::thread t1(t,std::move(ss));
-    boost::thread t2((test_thread()),ss);
+    //boost::thread t2((test_thread()),ss);
     t1.join();
-    t2.join();
+    //t2.join();
     std::cout<<boost::thread::hardware_concurrency()<<std::endl;
     std::cout<<ss<<std::endl;
     // lo.test_and_set();
