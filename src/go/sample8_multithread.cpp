@@ -358,13 +358,13 @@ void foo()
     boost::mutex mu;
     boost::thread t1([&]()
     {
-        boost::mutex_t::scoped_lock lo(mu);
+        boost::mutex::scoped_lock lo(mu);
         for(int i=0;i<3;++i)
             std::cout<<"1:"<<i<<std::endl;
     });
     boost::thread t2([&]()
     {
-        boost::mutex_t::scoped_lock lo(mu);
+        boost::mutex::scoped_lock lo(mu);
         for(int i=0;i<3;++i)
             std::cout<<"2:"<<i<<std::endl;
     });
