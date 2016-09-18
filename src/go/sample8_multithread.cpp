@@ -366,6 +366,7 @@ void close_quick_exit()
 void foo()
 {
     test_quick_exit a;
+    at_exit(close_quick_exit);
     at_quick_exit(close_quick_exit);
     quick_exit(0);
 
