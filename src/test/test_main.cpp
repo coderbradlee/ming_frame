@@ -58,7 +58,7 @@ int solution(std::vector<int>& nums)
 }
 int solution2(std::vector<int>& nums)
 {
-	std::unordered<int,bound> table;
+	std::unordered_map<int,bound> table;
 	int local;
 	int max=0;
 	for(const auto& num:nums)
