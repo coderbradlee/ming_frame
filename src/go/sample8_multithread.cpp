@@ -369,7 +369,7 @@ struct bound
     int low;
     bound(int h=0,int l=0):high(h),low(l){}
 };
-int solution(std::vector<int>& nums)
+int solution(const std::vector<int>& nums)
 {
     std::cout<<__LINE__<<std::endl;
     std::vector<bound> ret;
@@ -407,6 +407,8 @@ int solution(std::vector<int>& nums)
 void foo()
 {
     std::vector<int> nums{6,4,8,1,3,2,7};
+    
+    std::cout<<__LINE__<<std::endl;
     std::cout<<solution(nums)<<std::endl;
     // test_quick_exit a;
     // atexit(close_quick_exit);
