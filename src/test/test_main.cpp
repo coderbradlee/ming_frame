@@ -78,15 +78,40 @@ int solution2(std::vector<int>& nums)
 	}
 	return max;
 }
+void string_reverse()
+{
+	string temp="i have 36 books,40 pens";
+	int begin=0,end=0;
+	std::vector<char> nums{'0','1','2','3','4','5','6','7','8','9'};
+	while(end<temp.size())
+	{
+		begin=end;
+		++end;
+		while(temp[begin]!=' ')
+		{
+			++begin;
+		}	
+		while(temp[end]!=' ')
+		{
+			++end;
+		}
+
+		if(!nums.find(temp[begin+1]))
+		std::reverse(&temp[begin+1], &temp[end+1]);
+
+	}
+	std::cout<<temp<<std::endl;
+}
 void foo()
 {
     //std::cout<<__LINE__<<std::endl;
-    std::vector<int> nums{6,4,8,1,3,2,7};
+    // std::vector<int> nums{6,4,8,1,3,2,7};
 
-    //std::cout<<__LINE__<<std::endl;
+    // //std::cout<<__LINE__<<std::endl;
 
-    std::cout<<solution(nums)<<std::endl;
-    std::cout<<solution2(nums)<<std::endl;
+    // std::cout<<solution(nums)<<std::endl;
+    // std::cout<<solution2(nums)<<std::endl;
+    string_reverse();
 }
 int main(int argc, char* argv[])
 {
