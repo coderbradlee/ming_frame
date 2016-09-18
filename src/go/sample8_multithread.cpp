@@ -371,7 +371,8 @@ struct bound
 };
 int solution(const std::vector<int>& nums)
 {
-    std::vector<bound> ret{bound(nums[0],nums[0])};
+    std::vector<bound> ret;
+    ret.push_back(bound(nums[0],nums[0]));
     int max=0;
     for(const auto& num:nums)
     {
