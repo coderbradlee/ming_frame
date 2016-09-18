@@ -80,7 +80,8 @@ int solution2(std::vector<int>& nums)
 }
 void string_reverse()
 {
-	std::string temp="i have 36 books,40 pens";
+	//std::string temp="i have 36 books,40 pens";
+    std::string temp="what the fuck r you 20 doing";
     // std::reverse(temp.begin(), temp.end());
     // std::cout<<temp<<std::endl;
 	size_t begin=0,end=0;
