@@ -85,21 +85,27 @@ void string_reverse()
 	string nums="0123456789";
 	while(end<temp.size())
 	{
-		begin=end;
-		++end;
 		if(temp[begin]!=' ')
 		{
 			++begin;
 		}	
-		if(temp[end]!=' ')
-		{
-			++end;
+		else
+		{	
+			if(end==begin)
+			{
+				end=begin+1;
+			}
+			if(temp[end]!=' ')
+			{
+				++end;
+			}
+			else if(std::string::npos==nums.find(temp[begin+1]))
+			{
+				std::reverse(&temp[begin+1], &temp[end-1]);
+				begin=end;
+			}
 		}
-		if(temp[begin]==' '&&temp[end]==' '&&std::string::npos==nums.find(temp[begin+1]))
-		{
-			std::reverse(&temp[begin+1], &temp[end-1]);
-		}
-
+		
 	}
 	std::cout<<temp<<std::endl;
 }
