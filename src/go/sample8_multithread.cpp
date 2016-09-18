@@ -394,8 +394,8 @@ int solution(const std::vector<int>& nums)
 }
 void foo()
 {
-    std::vector<int> v{6,4,8,1,3,2,7};
-    std::cout<<solution(v)<<std::endl;
+    std::vector<int> nums{6,4,8,1,3,2,7};
+    std::cout<<solution(nums)<<std::endl;
     // test_quick_exit a;
     // atexit(close_quick_exit);
     //exit(0);
