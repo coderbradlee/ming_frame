@@ -19,7 +19,7 @@ struct bound
 int solution(std::vector<int>& nums)
 {
     //std::cout<<__LINE__<<std::endl;
-    std::sort(nums);
+    std::sort(nums.begin(),nums.end());
     std::vector<bound> ret;
     ret.push_back(bound(nums[0],nums[0]));
     //std::cout<<__LINE__<<std::endl;
