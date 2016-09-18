@@ -377,10 +377,14 @@ int solution(const std::vector<int>& nums)
     {
         for(auto it=ret.begin();it!=ret.end();++it)
         {
-            if(num<=it->high&&num>=it->low)
+            if(num==it->high+1)
             {
-                break;
-            }  
+                it->high=num;
+            }
+            else if(num==it->low-1)
+            {
+                it->low=num;
+            } 
             else
             {
                 ret.push_back(bound(num,num));
