@@ -82,7 +82,7 @@ void string_reverse()
 {
 	string temp="i have 36 books,40 pens";
 	size_t begin=0,end=0;
-	std::vector<char> nums{'0','1','2','3','4','5','6','7','8','9'};
+	string nums="0123456789";
 	while(end<temp.size())
 	{
 		begin=end;
@@ -96,7 +96,7 @@ void string_reverse()
 			++end;
 		}
 
-		if(!nums.find(temp[begin+1]))
+		if(std::string::npos==nums.find(temp[begin+1]))
 		std::reverse(&temp[begin+1], &temp[end+1]);
 
 	}
