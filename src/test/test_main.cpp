@@ -56,6 +56,28 @@ int solution(std::vector<int>& nums)
     }
     return max;
 }
+int solution2(std::vector<int>& nums)
+{
+	std::unordered<int,bound> table;
+	int local;
+	int max=0;
+	for(const auto& num:nums)
+	{
+		if(table.count(num)) continue;
+		local=num;
+		int low=local;
+		int high=local;
+		if(table.count(local-1))
+			low=table[local-1].low;
+		if(table.count(local+1))
+			high=table[local+1].high;
+		table[low].high=table[local].high=high;
+		table[high].low=table[local].low=low;
+		if(high-low+1>max)
+			max=high-low+1;
+	}
+	return max;
+}
 void foo()
 {
     //std::cout<<__LINE__<<std::endl;
@@ -64,6 +86,7 @@ void foo()
     //std::cout<<__LINE__<<std::endl;
 
     std::cout<<solution(nums)<<std::endl;
+    std::cout<<solution2(nums)<<std::endl;
 }
 int main(int argc, char* argv[])
 {
