@@ -18,33 +18,33 @@ struct bound
 };
 int solution(const std::vector<int>& nums)
 {
-    std::cout<<__LINE__<<std::endl;
-    std::vector<bound> ret;
-    ret.push_back(bound(nums[0],nums[0]));
-    std::cout<<__LINE__<<std::endl;
+    // std::cout<<__LINE__<<std::endl;
+    // std::vector<bound> ret;
+    // ret.push_back(bound(nums[0],nums[0]));
+    // std::cout<<__LINE__<<std::endl;
     int max=0;
-    for(const auto& num:nums)
-    {
-        for(auto it=ret.begin();it!=ret.end();++it)
-        {
-            if(num==(it->high+1))
-            {
-                it->high=num;
-            }
-            else if(num==(it->low-1))
-            {
-                it->low=num;
-            } 
-            else
-            {
-                ret.push_back(bound(num,num));
-            }    
-            if(it->high-it->low+1>max)
-                max=it->high-it->low+1;
+    // for(const auto& num:nums)
+    // {
+    //     for(auto it=ret.begin();it!=ret.end();++it)
+    //     {
+    //         if(num==(it->high+1))
+    //         {
+    //             it->high=num;
+    //         }
+    //         else if(num==(it->low-1))
+    //         {
+    //             it->low=num;
+    //         } 
+    //         else
+    //         {
+    //             ret.push_back(bound(num,num));
+    //         }    
+    //         if(it->high-it->low+1>max)
+    //             max=it->high-it->low+1;
 
-        }
-    }
-    std::cout<<__LINE__<<std::endl;
+    //     }
+    // }
+    // std::cout<<__LINE__<<std::endl;
     // for(const auto& n:ret)
     // {
     //     std::cout<<n.high<<":"<<n.low<<std::endl;
@@ -57,6 +57,7 @@ void foo()
     std::vector<int> nums{6,4,8,1,3,2,7};
 
     std::cout<<__LINE__<<std::endl;
+
     std::cout<<solution(nums)<<std::endl;
 }
 int main(int argc, char* argv[])
