@@ -89,19 +89,19 @@ void string_reverse()
         {   
             ++end;
         }
-		while(temp[begin]!=' ')
+		while(temp[begin]!=' '||temp[begin]!=',')
 		{
 			++begin;
             ++end;
 		}	
-		while(temp[end]!=' ')
+		while(temp[end]!=' '||temp[end]!=',')
 		{
 			++end;
 		}
 		if(std::string::npos==nums.find(temp[begin+1]))
 		{
 			std::reverse(&temp[begin+1], &temp[end-1]);
-			begin=++end;
+			begin=end;
 		}
 	}
 	std::cout<<temp<<std::endl;
