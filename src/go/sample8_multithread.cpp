@@ -366,9 +366,10 @@ void close_quick_exit()
 void foo()
 {
     test_quick_exit a;
-    at_exit(close_quick_exit);
-    at_quick_exit(close_quick_exit);
-    quick_exit(0);
+    atexit(close_quick_exit);
+    exit(0);
+    //at_quick_exit(close_quick_exit);
+    //quick_exit(0);
 
     // boost::mutex mu;
     // boost::thread t1([&]()
