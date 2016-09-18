@@ -363,10 +363,41 @@ void close_quick_exit()
 {
     std::cout<<"close_quick_exit"<<std::endl;
 }
+struct bound
+{
+    int high;
+    int low;
+    bound(int h=0,int l=0):high(h),low(l){}
+};
+int solution(const std::vector<int>& nums)
+{
+    std::vector<bound> v;
+    int max=0;
+    for(const auto& num:nums)
+    {
+        for(auto it=v.begin();it!=v.end;++it)
+        {
+            if(num<=it->high&&num>=it->end)
+            {
+                break;
+            }  
+            else
+            {
+                v.push_back(bound(num,num));
+            }    
+            if(it->high-it->low+1>max)
+                max=it->high-it->low+1;
+
+        }
+    }
+    return max;
+}
 void foo()
 {
-    test_quick_exit a;
-    atexit(close_quick_exit);
+    std::vector<int> v{6,4,8,1,3,2,7};
+    std::cout<<solution(v)<<std::endl;
+    // test_quick_exit a;
+    // atexit(close_quick_exit);
     //exit(0);
     //at_quick_exit(close_quick_exit);
     //quick_exit(0);
@@ -471,7 +502,7 @@ int main()
 	cout << "result zero:" << c * 0 << endl;
     std::cout<<sizeof(string)<<std::endl;
     std::cout<<sizeof(__gnu_cxx::__sso_string)<<std::endl;
-    exit(0);
+   //exit(0);
     return 0;
 }
 
