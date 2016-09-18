@@ -395,10 +395,10 @@ int solution(const std::vector<int>& nums)
 
         }
     }
-    for(const auto& n:ret)
-    {
-        std::cout<<n.high<<":"<<n.low<<std::endl;
-    }
+    // for(const auto& n:ret)
+    // {
+    //     std::cout<<n.high<<":"<<n.low<<std::endl;
+    // }
     return max;
 }
 void foo()
