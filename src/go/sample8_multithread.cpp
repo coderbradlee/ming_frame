@@ -514,7 +514,7 @@ int main()
     end = system_clock::now();
     cout << "go with coroutine, cost ";
     cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
-	cout << "result zero:" << c * 0 << endl;
+	//cout << "result zero:" << c * 0 << endl;
     // std::cout<<sizeof(string)<<std::endl;
     // std::cout<<sizeof(__gnu_cxx::__sso_string)<<std::endl;
    //exit(0);
