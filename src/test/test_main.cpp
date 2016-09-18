@@ -81,7 +81,7 @@ int solution2(std::vector<int>& nums)
 void string_reverse()
 {
 	string temp="i have 36 books,40 pens";
-	int begin=0,end=0;
+	size_t begin=0,end=0;
 	std::vector<char> nums{'0','1','2','3','4','5','6','7','8','9'};
 	while(end<temp.size())
 	{
