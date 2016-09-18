@@ -275,7 +275,7 @@ namespace test2_namespace
 		//test_weak_call_back::test();
 		//test_mutex::test();
 		//test_mutex_between_threads::test();
-		test_multithreadloop_multiconnect::test();
+		//test_multithreadloop_multiconnect::test();
 	}
 	
 }
