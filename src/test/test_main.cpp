@@ -90,6 +90,11 @@ void string_reverse()
             ++end;
             std::cout<<__LINE__<<":"<<begin<<":"<<end<<std::endl;
         }
+        else if(std::string::npos!=nums.find(temp[begin]))
+        {
+            begin=++end;
+            std::cout<<__LINE__<<":"<<begin<<":"<<end<<std::endl;
+        }
         else if(std::string::npos==nums.find(temp[begin]))
         {
             std::reverse(&temp[begin], &temp[end-1]);
