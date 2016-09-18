@@ -491,10 +491,10 @@ void foo()
 int main()
 {
     // 普通的for循环做法
-    auto start = system_clock::now();
+    //auto start = system_clock::now();
     // for (int i = 0; i < 100; ++i)
     //     foo();
-    auto end = system_clock::now();
+    //auto end = system_clock::now();
     // cout << "for-loop, cost ";
     // cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
 
@@ -511,9 +511,9 @@ int main()
     //             });
     // tg.join_all();
     foo();
-    end = system_clock::now();
-    cout << "go with coroutine, cost ";
-    cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
+    // end = system_clock::now();
+    // cout << "go with coroutine, cost ";
+    // cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
 	//cout << "result zero:" << c * 0 << endl;
     // std::cout<<sizeof(string)<<std::endl;
     // std::cout<<sizeof(__gnu_cxx::__sso_string)<<std::endl;
