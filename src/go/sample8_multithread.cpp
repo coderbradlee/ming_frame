@@ -377,7 +377,7 @@ int solution(const std::vector<int>& nums)
     {
         for(auto it=ret.begin();it!=ret.end();++it)
         {
-            if(num<=it->high&&num>=it->end)
+            if(num<=it->high&&num>=it->low)
             {
                 break;
             }  
