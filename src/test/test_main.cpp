@@ -25,25 +25,28 @@ int solution(const std::vector<int>& nums)
     int max=0;
     for(const auto& num:nums)
     {
+    	bool have_bound=false;
         for(auto it=ret.begin();it!=ret.end();++it)
         {
             if(num==(it->high+1))
             {
                 it->high=num;
+                have_bound=true;
             }
             else if(num==(it->low-1))
             {
                 it->low=num;
-            } 
-            else
-            {
-            	std::cout<<__LINE__<<std::endl;
-                ret.push_back(bound(num,num));
-            }    
+                have_bound=true;
+            }               
             if(it->high-it->low+1>max)
                 max=it->high-it->low+1;
-
         }
+        if(!have_bound)
+        {
+			std::cout<<__LINE__<<std::endl;
+        	ret.push_back(bound(num,num));
+        }
+        
     }
     std::cout<<__LINE__<<std::endl;
     for(const auto& n:ret)
