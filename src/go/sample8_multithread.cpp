@@ -367,7 +367,7 @@ void foo()
 {
     test_quick_exit a;
     atexit(close_quick_exit);
-    exit(0);
+    //exit(0);
     //at_quick_exit(close_quick_exit);
     //quick_exit(0);
 
@@ -471,6 +471,7 @@ int main()
 	cout << "result zero:" << c * 0 << endl;
     std::cout<<sizeof(string)<<std::endl;
     std::cout<<sizeof(__gnu_cxx::__sso_string)<<std::endl;
+    exit(0);
     return 0;
 }
 
