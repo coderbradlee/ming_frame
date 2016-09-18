@@ -89,23 +89,19 @@ void string_reverse()
 		{
 			++begin;
 		}	
-		else
+		else if(end==begin)
 		{	
-			if(end==begin)
-			{
-				end=begin+1;
-			}
-			if(temp[end]!=' ')
-			{
-				++end;
-			}
-			else if(std::string::npos==nums.find(temp[begin+1]))
-			{
-				std::reverse(&temp[begin+1], &temp[end-1]);
-				begin=end;
-			}
+			end=begin+1;
 		}
-		
+		else if(temp[end]!=' ')
+		{
+			++end;
+		}
+		else if(std::string::npos==nums.find(temp[begin+1]))
+		{
+			std::reverse(&temp[begin+1], &temp[end-1]);
+			begin=end;
+		}
 	}
 	std::cout<<temp<<std::endl;
 }
