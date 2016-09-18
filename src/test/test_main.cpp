@@ -80,15 +80,17 @@ int solution2(std::vector<int>& nums)
 }
 void string_reverse()
 {
-	string temp="i have 36 books,40 pens";
+	std::string temp="i have 36 books,40 pens";
 	size_t begin=0,end=0;
-	string nums="0123456789";
+	std::string nums="0123456789";
 	while(end<temp.size())
 	{
         if(temp[end]!=' '||temp[end]!=',')
         {
             ++end;
             std::cout<<__LINE__<<":"<<begin<<":"<<end<<std::endl;
+            bool tee=(std::string::npos==nums.find(temp[begin]));
+            std::cout<<tee<<std::endl;
         }
         else if(std::string::npos!=nums.find(temp[begin]))
         {
