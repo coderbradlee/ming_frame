@@ -493,18 +493,18 @@ int main()
     // cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
 
     // 使用libgo做并行计算
-    start = system_clock::now();
-    for (int i = 0; i < 1; ++i)
-        go foo;
+    // start = system_clock::now();
+    // for (int i = 0; i < 1; ++i)
+    //     go foo;
 
-    // 创建8个线程去并行执行所有协程
-    boost::thread_group tg;
-    for (int i = 0; i < 8; ++i)
-        tg.create_thread([] {
-                co_sched.RunUntilNoTask();
-                });
-    tg.join_all();
-
+    // // 创建8个线程去并行执行所有协程
+    // boost::thread_group tg;
+    // for (int i = 0; i < 8; ++i)
+    //     tg.create_thread([] {
+    //             co_sched.RunUntilNoTask();
+    //             });
+    // tg.join_all();
+    foo();
     end = system_clock::now();
     cout << "go with coroutine, cost ";
     cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
