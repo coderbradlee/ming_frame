@@ -16,9 +16,10 @@ struct bound
     int low;
     bound(int h=0,int l=0):high(h),low(l){}
 };
-int solution(const std::vector<int>& nums)
+int solution(std::vector<int>& nums)
 {
     //std::cout<<__LINE__<<std::endl;
+    std::sort(nums);
     std::vector<bound> ret;
     ret.push_back(bound(nums[0],nums[0]));
     //std::cout<<__LINE__<<std::endl;
