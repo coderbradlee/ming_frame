@@ -87,7 +87,7 @@ void string_reverse()
 	{
         if(end==begin)
         {   
-            end=begin+1;
+            ++end;
         }
 		while(temp[begin]!=' ')
 		{
@@ -101,7 +101,7 @@ void string_reverse()
 		if(std::string::npos==nums.find(temp[begin+1]))
 		{
 			std::reverse(&temp[begin+1], &temp[end-1]);
-			begin=end;
+			begin=++end;
 		}
 	}
 	std::cout<<temp<<std::endl;
