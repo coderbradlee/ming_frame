@@ -375,7 +375,7 @@ int solution(const std::vector<int>& nums)
     int max=0;
     for(const auto& num:nums)
     {
-        for(auto it=v.begin();it!=v.end;++it)
+        for(auto it=v.begin();it!=v.end();++it)
         {
             if(num<=it->high&&num>=it->end)
             {
