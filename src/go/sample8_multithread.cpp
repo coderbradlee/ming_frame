@@ -371,8 +371,10 @@ struct bound
 };
 int solution(const std::vector<int>& nums)
 {
+    std::cout<<__LINE__<<std::endl;
     std::vector<bound> ret;
     ret.push_back(bound(nums[0],nums[0]));
+    std::cout<<__LINE__<<std::endl;
     int max=0;
     for(const auto& num:nums)
     {
@@ -395,6 +397,7 @@ int solution(const std::vector<int>& nums)
 
         }
     }
+    std::cout<<__LINE__<<std::endl;
     // for(const auto& n:ret)
     // {
     //     std::cout<<n.high<<":"<<n.low<<std::endl;
