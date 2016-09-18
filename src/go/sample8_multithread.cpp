@@ -406,8 +406,9 @@ int solution(const std::vector<int>& nums)
 }
 void foo()
 {
+    std::cout<<__LINE__<<std::endl;
     std::vector<int> nums{6,4,8,1,3,2,7};
-    
+
     std::cout<<__LINE__<<std::endl;
     std::cout<<solution(nums)<<std::endl;
     // test_quick_exit a;
@@ -514,8 +515,8 @@ int main()
     cout << "go with coroutine, cost ";
     cout << duration_cast<milliseconds>(end - start).count() << "ms" << endl;
 	cout << "result zero:" << c * 0 << endl;
-    std::cout<<sizeof(string)<<std::endl;
-    std::cout<<sizeof(__gnu_cxx::__sso_string)<<std::endl;
+    // std::cout<<sizeof(string)<<std::endl;
+    // std::cout<<sizeof(__gnu_cxx::__sso_string)<<std::endl;
    //exit(0);
     return 0;
 }
