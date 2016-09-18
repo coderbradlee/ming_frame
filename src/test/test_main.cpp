@@ -89,21 +89,21 @@ void string_reverse()
         {
             ++end;
             std::cout<<__LINE__<<":"<<begin<<":"<<end<<std::endl;
-            bool tee=(std::string::npos==nums.find(temp[begin]));
-            std::cout<<tee<<std::endl;
+            // bool tee=(std::string::npos==nums.find(temp[begin]));
+            // std::cout<<tee<<std::endl;
         }
-        else if(std::string::npos!=nums.find(temp[begin]))
-        {
-            begin=++end;
-            std::cout<<__LINE__<<":"<<begin<<":"<<end<<std::endl;
-        }
+        // else if(std::string::npos!=nums.find(temp[begin]))
+        // {
+        //     begin=++end;
+        //     std::cout<<__LINE__<<":"<<begin<<":"<<end<<std::endl;
+        // }
         else if(std::string::npos==nums.find(temp[begin]))
         {
             std::reverse(&temp[begin], &temp[end-1]);
             begin=++end;
             std::cout<<__LINE__<<":"<<begin<<":"<<end<<std::endl;
         }
-        std::cout<<__LINE__<<":"<<begin<<":"<<end<<std::endl;	
+        //std::cout<<__LINE__<<":"<<begin<<":"<<end<<std::endl;	
 	}
 	std::cout<<temp<<std::endl;
 }
