@@ -85,7 +85,7 @@ void string_reverse()
     // std::cout<<temp<<std::endl;
 	size_t begin=0,end=0;
 	std::string nums="0123456789";
-	while(end<temp.size())
+	while(end<temp.size()+1)
 	{
         if(temp[end]!=' '&&temp[end]!=',')
         {
