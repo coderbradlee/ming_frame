@@ -371,17 +371,17 @@ struct bound
 };
 int solution(const std::vector<int>& nums)
 {
-    std::vector<bound> ret;
+    std::vector<bound> ret{bound(nums[0]};
     int max=0;
     for(const auto& num:nums)
     {
         for(auto it=ret.begin();it!=ret.end();++it)
         {
-            if(num==it->high+1)
+            if(num==(it->high+1))
             {
                 it->high=num;
             }
-            else if(num==it->low-1)
+            else if(num==(it->low-1))
             {
                 it->low=num;
             } 
