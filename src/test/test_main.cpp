@@ -18,10 +18,10 @@ struct bound
 };
 int solution(const std::vector<int>& nums)
 {
-    // std::cout<<__LINE__<<std::endl;
-    // std::vector<bound> ret;
-    // ret.push_back(bound(nums[0],nums[0]));
-    // std::cout<<__LINE__<<std::endl;
+    std::cout<<__LINE__<<std::endl;
+    std::vector<bound> ret;
+    ret.push_back(bound(nums[0],nums[0]));
+    std::cout<<__LINE__<<std::endl;
     int max=0;
     // for(const auto& num:nums)
     // {
@@ -53,12 +53,12 @@ int solution(const std::vector<int>& nums)
 }
 void foo()
 {
-    // std::cout<<__LINE__<<std::endl;
-    // std::vector<int> nums{6,4,8,1,3,2,7};
+    std::cout<<__LINE__<<std::endl;
+    std::vector<int> nums{6,4,8,1,3,2,7};
 
-    // std::cout<<__LINE__<<std::endl;
+    std::cout<<__LINE__<<std::endl;
 
-    // std::cout<<solution(nums)<<std::endl;
+    std::cout<<solution(nums)<<std::endl;
 }
 int main(int argc, char* argv[])
 {
@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
     LOG_INFO << "pid = " << getpid() << ", tid = " << CurrentThread::tid();
   
     test2_namespace::test_out();
-    //foo();
+    foo();
     sleep(10);
    
 }
