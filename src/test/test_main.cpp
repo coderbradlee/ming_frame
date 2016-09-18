@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
     LOG_INFO << "pid = " << getpid() << ", tid = " << CurrentThread::tid();
   
     test2_namespace::test_out();
-    foo();
+    //foo();
     sleep(10);
    
 }
