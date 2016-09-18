@@ -97,7 +97,7 @@ void string_reverse()
 		}
 
 		if(std::string::npos==nums.find(temp[begin+1]))
-		std::reverse(&temp[begin+1], &temp[end]);
+			std::reverse(&temp[begin+1], &temp[end-1]);
 
 	}
 	std::cout<<temp<<std::endl;
