@@ -218,7 +218,8 @@ std::string min_window(std::string paper,std::string message)
 class test_pod
 {
 public:
-    test_pod()=default;
+    //test_pod()=default;
+    test_pod(){}
     test_pod(int i):data(i){}
 private:
     int data;
