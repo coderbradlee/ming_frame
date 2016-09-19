@@ -159,7 +159,7 @@ bool one_loop_for_min_window(std::string paper,std::unordered_map<char,int> tabl
                 ++min_window_low;
                 --min_window_length;
             }
-            else if(std::count(shrink_string.begin(), shrink_string.end(), shrink_string[i])>1)
+            else if(std::count(shrink_string.begin(), shrink_string.end(), shrink_string[0])>1)
             {
                 shrink_string=shrink_string.substr(1,min_window_length-1);
                 ++min_window_low;
