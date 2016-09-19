@@ -151,15 +151,23 @@ bool one_loop_for_min_window(std::string paper,std::unordered_map<char,int> tabl
         std::string shrink_string=paper.substr(0,min_window_length);
         int length=shrink_string.length()-count;
 
-        for(int i=0;i<length;++i)
+        for(;;)
         {
-            if(table.find(shrink_string[i])==table.end())
+            if(table.find(shrink_string[0])==table.end())
             {
-                min_window_low=i+1;
+                shrink_string=shrink_string.substr(1,min_window_length-1);
+                ++min_window_low;
+                --min_window_length;
             }
-            else if(std::count(table.begin(), table.end(), shrink_string[i])>1)
+            else if(std::count(shrink_string.begin(), shrink_string.end(), shrink_string[i])>1)
             {
-                min_window_low=i+1;
+                shrink_string=shrink_string.substr(1,min_window_length-1);
+                ++min_window_low;
+                --min_window_length;
+            }
+            else
+            {
+                break;
             }
         }
     }
