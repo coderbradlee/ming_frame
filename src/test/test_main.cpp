@@ -113,6 +113,7 @@ void string_reverse()
 void one_loop_for_min_window(std::string paper,std::unordered_map<char,int> table,int count,int& low,int& length)
 {
     int min_window_high=0,min_window_length=0,min_window_low=0;
+    int paper_length=paper.length();
     for(int i=0;i<paper_length;++i)
     {
         if(count>0)
@@ -159,8 +160,8 @@ std::string min_window(std::string paper,std::string message)
             table[alphabet]=1;
     }
     int count=message.length();
-    //int paper_length=paper.length();
-    int min_window_high=0,min_window_low=0,min_window_length=0;
+    
+    int min_window_low=0,min_window_length=0;
     // for(const auto& c:table)
     // {
     //     //std::cout<<c.first<<":"<<c.second<<std::endl;
