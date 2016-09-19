@@ -217,7 +217,7 @@ std::string min_window(std::string paper,std::string message)
 } 
 void foo()
 {
-    if(!nullptr)
+    if(nullptr)
     {
         std::cout<<__LINE__<<std::endl;
     }
