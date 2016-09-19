@@ -110,10 +110,11 @@ void string_reverse()
 	}
 	std::cout<<temp<<std::endl;
 }
-void one_loop_for_min_window(std::string paper,std::unordered_map<char,int> table,int count,int& low,int& length)
+bool one_loop_for_min_window(std::string paper,std::unordered_map<char,int> table,int count,int& low,int& length)
 {
     int min_window_high=0,min_window_length=0,min_window_low=0;
     int paper_length=paper.length();
+    bool found=false;
     for(int i=0;i<paper_length;++i)
     {
         if(count>0)
@@ -130,10 +131,12 @@ void one_loop_for_min_window(std::string paper,std::unordered_map<char,int> tabl
             std::cout<<__LINE__<<":"<<count<<":"<<i<<std::endl;
             min_window_high=i;
             min_window_length=i;
+            found=true;
             break;
         }
     }
     //shrink begin when found
+    
     if(min_window_high!=0)
     {
         for(int i=0;i<min_window_high-count;++i)
@@ -148,6 +151,7 @@ void one_loop_for_min_window(std::string paper,std::unordered_map<char,int> tabl
     }
     length=min_window_length;
     low=min_window_low;
+    return found;
 }
 std::string min_window(std::string paper,std::string message)
 {
@@ -166,13 +170,15 @@ std::string min_window(std::string paper,std::string message)
     // {
     //     //std::cout<<c.first<<":"<<c.second<<std::endl;
     // }
+    min_window_length=paper.length();
+    bool found=false;
     for(int i=0;i<paper.length()-count;++i)
     {
         int temp_min_window_length=0,temp_min_window_low;
-        one_loop_for_min_window(paper.substr(i,min_window_length),table,count,temp_min_window_low,temp_min_window_length);
-        if(temp_min_window_length>0)
+        found=one_loop_for_min_window(paper.substr(i,min_window_length),table,count,temp_min_window_low,temp_min_window_length);
+        if(found)
         {
-            if(min_window_length>temp_min_window_length||min_window_length==0)
+            if(min_window_length>temp_min_window_length)
             {
                 min_window_low=temp_min_window_low;
                 min_window_length=temp_min_window_length;
@@ -182,7 +188,7 @@ std::string min_window(std::string paper,std::string message)
     
     
     ////////////////////////////////////
-    if(min_window_length==0)
+    if(!found)
     {
         return "not found";
     }
