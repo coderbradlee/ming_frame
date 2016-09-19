@@ -256,9 +256,9 @@ void foo()
     mutable_ref_lambda();
     std::cout<<val<<std::endl;
     /////////////////////////////
-    // auto const_param_lambda=[&](int v){v=3;};
-    // const_param_lambda(val);
-    // std::cout<<val<<std::endl;
+    auto const_param_lambda=[&](int v){v=3;};
+    const_param_lambda(val);
+    std::cout<<val<<std::endl;
     // int j=12;
     // auto by_value_lambda=[=]{return j+1;};
     // auto by_ref_lambda=[&]{return j+1;};
