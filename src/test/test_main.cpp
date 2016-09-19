@@ -121,6 +121,7 @@ std::string min_window(std::string paper,std::string message)
             table[alphabet]=1;
     }
     int count=message.length();
+    int paper_length=paper.length();
     int min_window_length=0;
     // for(const auto& c:table)
     // {
@@ -128,7 +129,7 @@ std::string min_window(std::string paper,std::string message)
     // }
     {
         //first only write one loop
-        for(int i=0;;++i)
+        for(int i=0;i<paper_length;++i)
         {
             if(count>0)
             {
