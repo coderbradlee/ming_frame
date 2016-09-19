@@ -165,7 +165,7 @@ std::string min_window(std::string paper,std::string message)
     }
     if(min_window_length!=0)
     {
-        return paper.substr(min_window_low,min_window_high);
+        return paper.substr(min_window_low,min_window_length);
     }
     else
     {
