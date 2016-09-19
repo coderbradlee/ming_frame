@@ -172,8 +172,8 @@ std::string min_window(std::string paper,std::string message)
     // }
     min_window_length=paper.length();
     bool found=false;
-    int i=0;
-    //for(int i=0;i<min_window_length-count;++i)
+    //int i=0;
+    for(int i=0;i<min_window_length-count;++i)
     {
         int temp_min_window_length=0,temp_min_window_low;
         found=one_loop_for_min_window(paper.substr(i,min_window_length),table,count,temp_min_window_low,temp_min_window_length);
@@ -197,9 +197,8 @@ std::string min_window(std::string paper,std::string message)
 } 
 void foo()
 {
-    std::string paper="Polling stations have closed in Russia's parliamentary, regional and municipal elections. With 40 percent of votes counted, early results suggest that the ruling United Russia party heads the polls with 53 percent.\
-    With almost half of the votes counted, early results suggest that the ruling United Russia party heads the polls, followed by right-wing party LDPR with 14.3 percent and the Russian Communist Party with 14.2 percent. Fair Russia comes fourth with 6.2 percent, the Russian Central Elections Committee said.";
-    std::string message="what the hell";
+    std::string paper="what the fuck r u doing,tee he waa";
+    std::string message="what ";
     std::cout<<min_window(paper,message)<<std::endl;
     //std::cout<<__LINE__<<std::endl;
     // std::vector<int> nums{6,4,8,1,3,2,7};
