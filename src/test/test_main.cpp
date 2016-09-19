@@ -225,7 +225,7 @@ private:
 };
 void foo()
 {
-    std::cout<<is_pod<test_pod>::value<<std::endl;
+    std::cout<<std::is_pod<test_pod>::value<<std::endl;
     // nullptr_t my_null;
     // printf("%x\n",&my_null);
     // const nullptr_t&& def=nullptr;
