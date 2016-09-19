@@ -217,10 +217,11 @@ std::string min_window(std::string paper,std::string message)
 } 
 void foo()
 {
-    if(nullptr)
-    {
-        std::cout<<__LINE__<<std::endl;
-    }
+    std::cout<<sizeof(void*)<<":"<<sizeof(nullptr_t)<<std::endl;
+    // if(nullptr)
+    // {
+    //     std::cout<<__LINE__<<std::endl;
+    // }
     // std::string paper=" what the fuck r u doing,tee he waa";
     // std::string message="what ";
     // std::cout<<min_window(paper,message)<<std::endl;
