@@ -239,9 +239,17 @@ void func(conv_type ct)
 }
 void foo()
 {
-    func(3);
-    func('a');
-    conv_type ci(3);
+    int j=12;
+    auto by_value_lambda=[=]{return j+1};
+    auto by_ref_lambda=[&]{return j+1};
+    std::cout<<by_value_lambda()<<std::endl;
+    std::cout<<by_ref_lambda()<<std::endl;
+    ++j;
+    std::cout<<by_value_lambda()<<std::endl;
+    std::cout<<by_ref_lambda()<<std::endl;
+    // func(3);
+    // func('a');
+    // conv_type ci(3);
     //conv_type cc('a');
     //std::cout<<std::is_pod<test_pod>::value<<std::endl;
     // nullptr_t my_null;
