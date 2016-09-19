@@ -217,7 +217,12 @@ std::string min_window(std::string paper,std::string message)
 } 
 void foo()
 {
-    std::cout<<sizeof(void*)<<":"<<sizeof(nullptr_t)<<std::endl;
+    nullptr_t my_null;
+    printf("%x\n",&my_null);
+    const nullptr_t&& def=nullptr;
+    printf("%x\n",&def );
+    
+    //std::cout<<sizeof(void*)<<":"<<sizeof(nullptr_t)<<std::endl;
     // if(nullptr)
     // {
     //     std::cout<<__LINE__<<std::endl;
