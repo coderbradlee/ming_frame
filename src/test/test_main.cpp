@@ -166,16 +166,20 @@ std::string min_window(std::string paper,std::string message)
     // {
     //     //std::cout<<c.first<<":"<<c.second<<std::endl;
     // }
-    int temp_min_window_length=0,temp_min_window_low;
-    one_loop_for_min_window(paper,table,count,temp_min_window_low,temp_min_window_length);
-    if(temp_min_window_length>0)
+    for(int i=0;i<paper.length()-count;++i)
     {
-        if(min_window_length>temp_min_window_length||min_window_length==0)
+        int temp_min_window_length=0,temp_min_window_low;
+        one_loop_for_min_window(paper.substr(i,min_window_length),table,count,temp_min_window_low,temp_min_window_length);
+        if(temp_min_window_length>0)
         {
-            min_window_low=temp_min_window_low;
-            min_window_length=temp_min_window_length;
+            if(min_window_length>temp_min_window_length||min_window_length==0)
+            {
+                min_window_low=temp_min_window_low;
+                min_window_length=temp_min_window_length;
+            }
         }
     }
+    
     
     ////////////////////////////////////
     if(min_window_length==0)
