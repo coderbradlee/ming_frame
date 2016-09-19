@@ -127,28 +127,22 @@ std::string min_window(std::string paper,std::string message)
     // {
     //     //std::cout<<c.first<<":"<<c.second<<std::endl;
     // }
-    int begin=0,end=0;
-    while(end<paper_length)
     {
-        std::unordered_map<char,int> temp_table=table;
-        int temp_count=count;
-        //first only write one loop
-        for(int i=begin;i<paper_length;++i)
+        for(int i=0;i<paper_length;++i)
         {
-            if(temp_count>0)
+            if(count>0)
             {
-                std::cout<<__LINE__<<":"<<temp_count<<":"<<i<<std::endl;
-                if(temp_table.find(paper[i])!=temp_table.end()&&temp_table[paper[i]]>0)
+                std::cout<<__LINE__<<":"<<count<<":"<<i<<std::endl;
+                if(table.find(paper[i])!=table.end()&&table[paper[i]]>0)
                 {
-                    --temp_table[paper[i]];
-                    --temp_count;
+                    --table[paper[i]];
+                    --count;
                 }
             }
             else
             {
-                std::cout<<__LINE__<<":"<<temp_count<<":"<<i<<std::endl;
+                std::cout<<__LINE__<<":"<<count<<":"<<i<<std::endl;
                 min_window_high=i;
-                end=min_window_high;
                 min_window_length=i;
                 break;
             }
@@ -158,18 +152,15 @@ std::string min_window(std::string paper,std::string message)
         {
             for(int i=0;i<min_window_high-count;++i)
             {
-                if(temp_table.find(paper[i])!=temp_table.end())
+                if(table.find(paper[i])!=table.end())
                 {
                     min_window_low=i;
-                    begin=min_window_low;
                     min_window_length=min_window_high-min_window_low;
                     break;
                 }
             }
         }
-        ++begin;
-        ++end;
-        
+
     }
     if(min_window_length!=0)
     {
