@@ -128,7 +128,7 @@ std::string min_window(std::string paper,std::string message)
     // }
     {
         //first only write one loop
-        for(int =0;;++i)
+        for(int i=0;;++i)
         {
             if(count>0)
             {
