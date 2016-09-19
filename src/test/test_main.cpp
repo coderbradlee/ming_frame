@@ -110,8 +110,29 @@ void string_reverse()
 	}
 	std::cout<<temp<<std::endl;
 }
+std::string min_window(std::string paper,std::string message)
+{
+    std::unordered_map<char,int> table;
+    for(const auto& alphabet:message)
+    {
+        if(table.find(alphabet)!=table.end())
+            table[alphabet]++;
+        else
+            table[alphabet]=1;
+    }
+    for(const auto& c:table)
+    {
+        std::cout<<c.first<<":"<<c.second<<std::endl;
+    }
+
+    return "";
+} 
 void foo()
 {
+    std::string paper="Polling stations have closed in Russia's parliamentary, regional and municipal elections. With 40 percent of votes counted, early results suggest that the ruling United Russia party heads the polls with 53 percent.
+With almost half of the votes counted, early results suggest that the ruling United Russia party heads the polls, followed by right-wing party LDPR with 14.3 percent and the Russian Communist Party with 14.2 percent. Fair Russia comes fourth with 6.2 percent, the Russian Central Elections Committee said.";
+    std::string message="what the fuck";
+    min_window(paper,message);
     //std::cout<<__LINE__<<std::endl;
     // std::vector<int> nums{6,4,8,1,3,2,7};
 
@@ -119,7 +140,7 @@ void foo()
 
     // std::cout<<solution(nums)<<std::endl;
     // std::cout<<solution2(nums)<<std::endl;
-    string_reverse();
+    //string_reverse();
 }
 int main(int argc, char* argv[])
 {
