@@ -112,9 +112,10 @@ void string_reverse()
 }
 bool one_loop_for_min_window(std::string paper,std::unordered_map<char,int> table,int count,int& low,int& lengths)
 {
-    int min_window_high=0,min_window_length=0,min_window_low=0;
+    int min_window_high,min_window_length=0,min_window_low=0;
     int paper_length=paper.length();
     bool found=false;
+    min_window_high=0;
     for(int i=0;i<paper_length;++i)
     {
         if(count>0)
