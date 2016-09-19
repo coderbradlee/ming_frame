@@ -110,9 +110,9 @@ void string_reverse()
 	}
 	std::cout<<temp<<std::endl;
 }
-bool one_loop_for_min_window(std::string paper,std::unordered_map<char,int> table,int count,int& low,int& length)
+bool one_loop_for_min_window(std::string paper,std::unordered_map<char,int> table,int count,int& low,int& lengths)
 {
-    int min_window_high=0,min_window_length=0,min_window_low=0;
+    int min_window_length=0,min_window_low=0;
     int paper_length=paper.length();
     bool found=false;
     for(int i=0;i<paper_length;++i)
@@ -149,8 +149,6 @@ bool one_loop_for_min_window(std::string paper,std::unordered_map<char,int> tabl
         //     }
         // }
         std::string shrink_string=paper.substr(0,min_window_length);
-        int length=shrink_string.length()-count;
-
         for(;;)
         {
             if(table.find(shrink_string[0])==table.end())
@@ -171,7 +169,7 @@ bool one_loop_for_min_window(std::string paper,std::unordered_map<char,int> tabl
             }
         }
     }
-    length=min_window_length;
+    lengths=min_window_length;
     low=min_window_low;
     return found;
 }
