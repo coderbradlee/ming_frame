@@ -113,7 +113,7 @@ void string_reverse()
 std::string min_window(std::string paper,std::string message)
 {
     std::unordered_map<char,int> table;
-    for(const auto& alphabet:message)
+    for(const auto& alphabet:paper)
     {
         if(table.find(alphabet)!=table.end())
             table[alphabet]++;
