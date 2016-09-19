@@ -240,8 +240,8 @@ void func(conv_type ct)
 void foo()
 {
     int j=12;
-    auto by_value_lambda=[=]{return j+1};
-    auto by_ref_lambda=[&]{return j+1};
+    auto by_value_lambda=[=]{return j+1;};
+    auto by_ref_lambda=[&]{return j+1;};
     std::cout<<by_value_lambda()<<std::endl;
     std::cout<<by_ref_lambda()<<std::endl;
     ++j;
