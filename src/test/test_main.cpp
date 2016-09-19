@@ -129,8 +129,8 @@ std::string min_window(std::string paper,std::string message)
 } 
 void foo()
 {
-    std::string paper="Polling stations have closed in Russia's parliamentary, regional and municipal elections. With 40 percent of votes counted, early results suggest that the ruling United Russia party heads the polls with 53 percent.
-With almost half of the votes counted, early results suggest that the ruling United Russia party heads the polls, followed by right-wing party LDPR with 14.3 percent and the Russian Communist Party with 14.2 percent. Fair Russia comes fourth with 6.2 percent, the Russian Central Elections Committee said.";
+    std::string paper="Polling stations have closed in Russia's \parliamentary, regional and municipal elections. With 40 percent\ of votes counted, early results suggest that the ruling United\ Russia party heads the polls with 53 percent.\
+With almost half of the votes counted, early results suggest that the \ruling United Russia party heads the polls, followed by right-wing \party LDPR with 14.3 percent and the Russian Communist Party with \14.2 percent. Fair Russia comes fourth with 6.2 percent, the Russian\ Central Elections Committee said.";
     std::string message="what the fuck";
     min_window(paper,message);
     //std::cout<<__LINE__<<std::endl;
