@@ -122,7 +122,7 @@ std::string min_window(std::string paper,std::string message)
     }
     int count=message.length();
     int paper_length=paper.length();
-    int min_window_length=0;
+    int min_window_high=0,min_window_low=0,min_window_length=0;
     // for(const auto& c:table)
     // {
     //     //std::cout<<c.first<<":"<<c.second<<std::endl;
@@ -143,14 +143,29 @@ std::string min_window(std::string paper,std::string message)
             else
             {
                 std::cout<<__LINE__<<":"<<count<<":"<<i<<std::endl;
+                min_window_high=i;
                 min_window_length=i;
                 break;
             }
         }
+        //shrink begin when found
+        if(min_window_high!=0)
+        {
+            for(int i=0;i<min_window_high-count;++i)
+            {
+                if(table.find(paper[i])!=table.end())
+                {
+                    min_window_low=i;
+                    min_window_length=min_window_high-min_window_low;
+                    break;
+                }
+            }
+        }
+        
     }
     if(min_window_length!=0)
     {
-        return paper.substr(0,min_window_length);
+        return paper.substr(min_window_low,min_window_high);
     }
     else
     {
