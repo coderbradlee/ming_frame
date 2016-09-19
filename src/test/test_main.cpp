@@ -132,6 +132,7 @@ std::string min_window(std::string paper,std::string message)
         {
             if(count>0)
             {
+                std::cout<<__LINE__<<":"<<count<<":"<<i<<std::endl;
                 if(table.find(paper[i])!=table.end()&&table[paper[i]]>0)
                 {
                     --table[paper[i]];
@@ -140,6 +141,7 @@ std::string min_window(std::string paper,std::string message)
             }
             else
             {
+                std::cout<<__LINE__<<":"<<count<<":"<<i<<std::endl;
                 min_window_length=i;
                 break;
             }
