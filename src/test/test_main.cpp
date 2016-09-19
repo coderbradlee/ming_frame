@@ -215,13 +215,22 @@ std::string min_window(std::string paper,std::string message)
     }
     return paper.substr(min_window_low,min_window_length);
 } 
+class test_pod
+{
+public:
+    test_pod()=default;
+    test_pod(int i):data(i){}
+private:
+    int data;
+};
 void foo()
 {
-    nullptr_t my_null;
-    printf("%x\n",&my_null);
-    const nullptr_t&& def=nullptr;
-    printf("%x\n",&def );
-    
+    std::cout<<is_pod<test_pod>::value<<std::endl;
+    // nullptr_t my_null;
+    // printf("%x\n",&my_null);
+    // const nullptr_t&& def=nullptr;
+    // printf("%x\n",&def );
+
     //std::cout<<sizeof(void*)<<":"<<sizeof(nullptr_t)<<std::endl;
     // if(nullptr)
     // {
