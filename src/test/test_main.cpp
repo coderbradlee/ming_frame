@@ -113,19 +113,47 @@ void string_reverse()
 std::string min_window(std::string paper,std::string message)
 {
     std::unordered_map<char,int> table;
-    for(const auto& alphabet:paper)
+    for(const auto& alphabet:message)
     {
         if(table.find(alphabet)!=table.end())
-            table[alphabet]++;
+            ++table[alphabet];
         else
             table[alphabet]=1;
     }
-    for(const auto& c:table)
+    int count=message.length();
+    int min_window_length=0;
+    // for(const auto& c:table)
+    // {
+    //     //std::cout<<c.first<<":"<<c.second<<std::endl;
+    // }
     {
-        std::cout<<c.first<<":"<<c.second<<std::endl;
+        //first only write one loop
+        for(int =0;;++i)
+        {
+            if(count>0)
+            {
+                if(table.find(paper[i])!=table.end()&&table[paper[i]]>0)
+                {
+                    --table[paper[i]];
+                    --count;
+                }
+            }
+            else
+            {
+                min_window_length=i;
+                break;
+            }
+        }
     }
-
-    return "";
+    if(min_window_length!=0)
+    {
+        return paper.substr(0,min_window_length);
+    }
+    else
+    {
+        return "";
+    }
+    
 } 
 void foo()
 {
