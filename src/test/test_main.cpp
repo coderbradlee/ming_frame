@@ -239,14 +239,34 @@ void func(conv_type ct)
 }
 void foo()
 {
-    int j=12;
-    auto by_value_lambda=[=]{return j+1;};
-    auto by_ref_lambda=[&]{return j+1;};
-    std::cout<<by_value_lambda()<<std::endl;
-    std::cout<<by_ref_lambda()<<std::endl;
-    ++j;
-    std::cout<<by_value_lambda()<<std::endl;
-    std::cout<<by_ref_lambda()<<std::endl;
+    int val=0;
+    auto const_val_lambda=[=](){val=3;};
+    const_val_lambda();
+    std::cout<<val<<std::endl;
+    ////////////////////////////
+    auto mutable_val_lambda=[=]()mutable{val=3;};
+    mutable_val_lambda();
+    std::cout<<val<<std::endl;
+    ///////////////////////////////
+    auto const_ref_lambda=[&](){val=3;};
+    const_ref_lambda();
+    std::cout<<val<<std::endl;
+    ////////////////////////////
+    auto mutable_ref_lambda=[&]()mutable{val=3;};
+    mutable_ref_lambda();
+    std::cout<<val<<std::endl;
+    /////////////////////////////
+    auto const_param_lambda=[&](int v){v=3;};
+    const_param_lambda(val);
+    std::cout<<val<<std::endl;
+    // int j=12;
+    // auto by_value_lambda=[=]{return j+1;};
+    // auto by_ref_lambda=[&]{return j+1;};
+    // std::cout<<by_value_lambda()<<std::endl;
+    // std::cout<<by_ref_lambda()<<std::endl;
+    // ++j;
+    // std::cout<<by_value_lambda()<<std::endl;
+    // std::cout<<by_ref_lambda()<<std::endl;
     // func(3);
     // func('a');
     // conv_type ci(3);
