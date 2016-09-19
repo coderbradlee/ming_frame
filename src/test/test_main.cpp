@@ -242,7 +242,7 @@ void foo()
     func(3);
     func('a');
     conv_type ci(3);
-    conv_type cc('a');
+    //conv_type cc('a');
     //std::cout<<std::is_pod<test_pod>::value<<std::endl;
     // nullptr_t my_null;
     // printf("%x\n",&my_null);
