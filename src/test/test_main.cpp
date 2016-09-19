@@ -217,9 +217,13 @@ std::string min_window(std::string paper,std::string message)
 } 
 void foo()
 {
-    std::string paper=" what the fuck r u doing,tee he waa";
-    std::string message="what ";
-    std::cout<<min_window(paper,message)<<std::endl;
+    if(nullptr)
+    {
+        std::cout<<__LINE__<<std::endl;
+    }
+    // std::string paper=" what the fuck r u doing,tee he waa";
+    // std::string message="what ";
+    // std::cout<<min_window(paper,message)<<std::endl;
     //std::cout<<__LINE__<<std::endl;
     // std::vector<int> nums{6,4,8,1,3,2,7};
 
