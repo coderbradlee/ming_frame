@@ -110,7 +110,7 @@ void string_reverse()
 	}
 	std::cout<<temp<<std::endl;
 }
-void one_loop_for_min_window(std::string paper,std::unordered_map<char,int> table,int& low,int& length)
+void one_loop_for_min_window(std::string paper,std::unordered_map<char,int> table,int count,int& low,int& length)
 {
     int min_window_high=0,min_window_length=0,min_window_low=0;
     for(int i=0;i<paper_length;++i)
@@ -159,14 +159,14 @@ std::string min_window(std::string paper,std::string message)
             table[alphabet]=1;
     }
     int count=message.length();
-    int paper_length=paper.length();
+    //int paper_length=paper.length();
     int min_window_high=0,min_window_low=0,min_window_length=0;
     // for(const auto& c:table)
     // {
     //     //std::cout<<c.first<<":"<<c.second<<std::endl;
     // }
     int temp_min_window_length=0,temp_min_window_low;
-    one_loop_for_min_window(paper,table,temp_min_window_low,temp_min_window_length);
+    one_loop_for_min_window(paper,table,count,temp_min_window_low,temp_min_window_length);
     if(min_window_length>temp_min_window_length)
     {
         min_window_low=temp_min_window_low;
