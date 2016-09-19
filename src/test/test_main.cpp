@@ -224,9 +224,26 @@ public:
 private:
     int data;
 };
+class conv_type
+{
+public:
+    conv_type(int i)
+    {
+        std::cout<<"int i"<<std::endl;
+    }
+    explicit conv_type(char c)=delete;
+};
+void func(conv_type ct)
+{
+
+}
 void foo()
 {
-    std::cout<<std::is_pod<test_pod>::value<<std::endl;
+    func(3);
+    func('a');
+    conv_type ci(3);
+    conv_type cc('a');
+    //std::cout<<std::is_pod<test_pod>::value<<std::endl;
     // nullptr_t my_null;
     // printf("%x\n",&my_null);
     // const nullptr_t&& def=nullptr;
