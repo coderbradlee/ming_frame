@@ -240,9 +240,9 @@ void func(conv_type ct)
 void foo()
 {
     int val=0;
-    auto const_val_lambda=[=](){val=3;};
-    const_val_lambda();
-    std::cout<<val<<std::endl;
+    // auto const_val_lambda=[=](){val=3;};
+    // const_val_lambda();
+    // std::cout<<val<<std::endl;
     ////////////////////////////
     auto mutable_val_lambda=[=]()mutable{val=3;};
     mutable_val_lambda();
