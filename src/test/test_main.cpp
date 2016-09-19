@@ -217,7 +217,7 @@ std::string min_window(std::string paper,std::string message)
 } 
 void foo()
 {
-    std::string paper="  the fuck r u doing,tee he waa";
+    std::string paper=" what the fuck r u doing,tee he waa";
     std::string message="what ";
     std::cout<<min_window(paper,message)<<std::endl;
     //std::cout<<__LINE__<<std::endl;
