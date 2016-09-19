@@ -240,7 +240,7 @@ void func(conv_type ct)
 void foo()
 {
     int a=0;
-    printf("%x\n",(a=4*6,a*2),a+5);
+    printf("%d\n",(a=4*6,a*2),a+5);
     // int val=0;
     // // auto const_val_lambda=[=](){val=3;};
     // // const_val_lambda();
