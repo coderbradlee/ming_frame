@@ -172,7 +172,7 @@ std::string min_window(std::string paper,std::string message)
     // }
     min_window_length=paper.length();
     bool found=false;
-    for(int i=0;i<paper.length()-count;++i)
+    for(int i=0;i<min_window_length-count;++i)
     {
         int temp_min_window_length=0,temp_min_window_low;
         found=one_loop_for_min_window(paper.substr(i,min_window_length),table,count,temp_min_window_low,temp_min_window_length);
