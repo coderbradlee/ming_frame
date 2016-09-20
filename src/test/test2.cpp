@@ -283,8 +283,9 @@ namespace test2_namespace
 	};
 	void test_out()
 	{
-		char d[1024];
-		std::cout<<alignof(d)<<std::endl;
+		std::cout<<alignof(std::max_align_t)<<std::endl;
+		// char d[1024];
+		// std::cout<<alignof(d)<<std::endl;
 		//std::cout<<alignof(color_vector)<<std::endl;
 		// std::cout<<sizeof(char)<<std::endl;
 		// std::cout<<sizeof(int)<<std::endl;
