@@ -12,4 +12,4 @@ add_executable(test_main ${TEST_MAIN_SRC_LIST})
 
 target_link_libraries(test_main ${TEST_MAIN_LIB_LIST})
 
-set_target_properties (test_main PROPERTIES CMAKE_CXX_FLAGS "-Wno-unused-variable ${CMAKE_CXX_FLAGS}")
+set_target_properties (test_main PROPERTIES COMPILE_FLAGS "-Wno-unused-variable ${CMAKE_CXX_FLAGS}")
