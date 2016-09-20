@@ -274,13 +274,21 @@ namespace test2_namespace
 		char a;
 		int b;
 	};
+	struct color_vector
+	{
+		double a;
+		double b;
+		double c;
+		double d;
+	};
 	void test_out()
 	{
-		std::cout<<sizeof(char)<<std::endl;
-		std::cout<<sizeof(int)<<std::endl;
-		std::cout<<sizeof(how_many_bytes)<<std::endl;
-		std::cout<<offsetof(how_many_bytes,a)<<std::endl;
-		std::cout<<offsetof(how_many_bytes,b)<<std::endl;
+		std::cout<<alignof(color_vector)<<std::endl;
+		// std::cout<<sizeof(char)<<std::endl;
+		// std::cout<<sizeof(int)<<std::endl;
+		// std::cout<<sizeof(how_many_bytes)<<std::endl;
+		// std::cout<<offsetof(how_many_bytes,a)<<std::endl;
+		// std::cout<<offsetof(how_many_bytes,b)<<std::endl;
 		//thread_safe_observable::test();
 		//test_weak_call_back::test();
 		//test_mutex::test();
