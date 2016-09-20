@@ -98,17 +98,17 @@ if (NOT NO_SUB)
 endif()
 
 #########################add libgo submodule
-set(ENABLE_SSL 1)
-include_directories("${PROJECT_SOURCE_DIR}/libgo")
-include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo")
-include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo/linux")
-include_directories("${PROJECT_SOURCE_DIR}/libgo/test")
+#set(ENABLE_SSL 1)
+#include_directories("${PROJECT_SOURCE_DIR}/libgo")
+#include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo")
+#include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo/linux")
+#include_directories("${PROJECT_SOURCE_DIR}/libgo/test")
 ###################################################################
 
 add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(src)
-add_subdirectory(src/go)
+#add_subdirectory(src/go)
 #add_subdirectory(libmicrohttpd)
 add_definitions(-DMUDUO_STD_STRING)
 

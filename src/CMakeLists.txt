@@ -10,7 +10,7 @@
 #target_link_libraries(ming_config muduo_net)
 
 #add_subdirectory(fastcgi)
-add_subdirectory(test)
+#add_subdirectory(test)
 #add_subdirectory(sudoku)
 #add_subdirectory(memcached/client)
 #add_subdirectory(memcached/server)
@@ -23,10 +23,10 @@ add_subdirectory(test)
 #add_subdirectory(special_sales_report)
 if(PROTOBUF_FOUND)
   #add_subdirectory(ace/logging)
-  add_subdirectory(protobuf)
+  #add_subdirectory(protobuf)
 else()
   #add_subdirectory(ace/logging EXCLUDE_FROM_ALL)
-  add_subdirectory(protobuf EXCLUDE_FROM_ALL)
+  #add_subdirectory(protobuf EXCLUDE_FROM_ALL)
 endif()
 
 #set(SRC_LIST log.cpp fastcgi/fastcgi.cc fastcgi/fastcgi_resource.cc  config.cpp main.cpp)
@@ -37,7 +37,7 @@ endif()
 #add_executable(ming ${SRC_LIST})
 
 set(PRODUCT_SRC_LIST config.cpp log.cpp procmon.cpp plot.cpp sudoku/sudoku.cc server_prod.cpp)
-add_executable(ming ${PRODUCT_SRC_LIST})
+add_executable(websocket ${PRODUCT_SRC_LIST})
 
 #file(WRITE ${PROJECT_SOURCE_DIR}/config.ini "${PROJECT_BIN_DIR}/bin")
 
@@ -49,11 +49,11 @@ add_executable(ming ${PRODUCT_SRC_LIST})
 
 set(MAIN_LIB_LIST muduo_net_cpp11 muduo_base_cpp11 muduo_http boost_system ssl mysqlcppconn boost_program_options boost_filesystem boost_coroutine boost_thread pthread boost_context boost_date_time crypto boost_regex boost_timer boost_signals boost_locale libgo libgo_main muduo_inspect gd)
 
-target_link_libraries(ming ${MAIN_LIB_LIST})
+target_link_libraries(websocket ${MAIN_LIB_LIST})
 
-set_target_properties(ming PROPERTIES COMPILE_FLAGS "-std=c++14")
+set_target_properties(websocket PROPERTIES COMPILE_FLAGS "-std=c++14")
 add_definitions(-DMING_DEBUG)
 if(TCMALLOC_INCLUDE_DIR AND TCMALLOC_LIBRARY)
-  set_target_properties(ming PROPERTIES COMPILE_FLAGS "-DHAVE_TCMALLOC")
-  target_link_libraries(ming tcmalloc_and_profiler)
+  set_target_properties(websocket PROPERTIES COMPILE_FLAGS "-DHAVE_TCMALLOC")
+  target_link_libraries(websocket tcmalloc_and_profiler)
 endif()
