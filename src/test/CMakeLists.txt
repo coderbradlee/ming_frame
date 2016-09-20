@@ -1,5 +1,6 @@
 #add_definitions(-Wno-error=unused-variable)
-set(CXX_FLAGS -Wno-unused-variable)
+
+set(CMAKE_CXX_FLAGS "-Wno-unused-variable ${CMAKE_CXX_FLAGS}")
 add_subdirectory(muduo_bench)
 add_subdirectory(tpc)
 add_subdirectory(socks4a)
