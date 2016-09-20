@@ -17,7 +17,7 @@
 #include <boost/circular_buffer.hpp>
 #include <boost/noncopyable.hpp>
 #include "procmon.hpp"
-#include "test/test2.hpp"
+//#include "test/test2.hpp"
 //#include <unistd.h>
 
 using namespace muduo;
@@ -246,7 +246,7 @@ int main(int argc, char* argv[])
     // }
 
  
-    test2_namespace::test_out();
+    //test2_namespace::test_out();
     sleep(10);
     // EventLoop loop;
     // InetAddress listenAddr(9981);
