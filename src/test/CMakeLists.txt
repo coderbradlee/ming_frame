@@ -9,4 +9,4 @@ add_executable(test_main ${TEST_MAIN_SRC_LIST})
 
 target_link_libraries(test_main ${TEST_MAIN_LIB_LIST})
 
-add_definitions(-wno-error)
+add_definitions(-Wno-error)
