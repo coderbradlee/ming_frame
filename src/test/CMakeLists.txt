@@ -1,5 +1,5 @@
-add_definitions(-Wno-error=unused-variable)
-
+#add_definitions(-Wno-error=unused-variable)
+set(CXX_FLAGS -Wno-unused-variable)
 add_subdirectory(muduo_bench)
 add_subdirectory(tpc)
 add_subdirectory(socks4a)
