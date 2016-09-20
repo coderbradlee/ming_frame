@@ -291,13 +291,14 @@ namespace test2_namespace
 			throw "positive";
 	}
 	void test_out()
-	{
-		char utf8[]=u8"\u4F60\u597D\u554A";
-		char16_t utf16[]=u"hello";
-		char32_t utf32[]=U"hello equals \u4F60\u597D\u554A";
-		std::cout<<utf8<<std::endl;
-		std::cout<<utf16<<std::endl;
-		std::cout<<utf32<<std::endl;
+	{ 
+		std::cout<<R"(hello,\n world)"<<std::endl;
+		// char utf8[]=u8"\u4F60\u597D\u554A";
+		// char16_t utf16[]=u"hello";
+		// char32_t utf32[]=U"hello equals \u4F60\u597D\u554A";
+		// std::cout<<utf8<<std::endl;
+		// std::cout<<utf16<<std::endl;
+		// std::cout<<utf32<<std::endl;
 		// test_no_return(0);
 		// std::cout<<"return"<<std::endl;
 		//alignas(float) extern unsigned char c[sizeof(double)];
