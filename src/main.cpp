@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 
     //start_fastcgi();
 
-    test1::test1();
+    //test1::test1();
     //short_url::test();
     start_inspector_thread();
     
