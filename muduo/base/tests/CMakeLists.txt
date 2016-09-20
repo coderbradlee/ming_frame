@@ -42,8 +42,8 @@
 #add_executable(logfile_test LogFile_test.cc)
 #target_link_libraries(logfile_test muduo_base)
 #
-add_executable(logging_test Logging_test.cc)
-target_link_libraries(logging_test muduo_base_cpp11)
+#add_executable(logging_test Logging_test.cc)
+#target_link_libraries(logging_test muduo_base_cpp11)
 #
 #add_executable(logstream_bench LogStream_bench.cc)
 #target_link_libraries(logstream_bench muduo_base)
