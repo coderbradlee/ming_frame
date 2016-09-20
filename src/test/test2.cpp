@@ -269,8 +269,18 @@ namespace test2_namespace
 			t.join();
 		}
 	}
+	struct how_many_bytes
+	{
+		char a;
+		int b;
+	};
 	void test_out()
 	{
+		std::cout<<sizeof(char)<<std::endl;
+		std::cout<<sizeof(int)<<std::endl;
+		std::cout<<sizeof(how_many_bytes)<<std::endl;
+		std::cout<<offsetof(how_many_bytes,a)<<std::endl;
+		std::cout<<offsetof(how_many_bytes,b)<<std::endl;
 		//thread_safe_observable::test();
 		//test_weak_call_back::test();
 		//test_mutex::test();
