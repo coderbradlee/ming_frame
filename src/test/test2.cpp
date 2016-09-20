@@ -281,8 +281,9 @@ namespace test2_namespace
 		double c;
 		double d;
 	};
-	[[ noreturn ]] void test_no_return(int i)
+	//[[ noreturn ]] void test_no_return(int i)
 	//void test_no_return(int i) __attribute__ ((noreturn))
+	__attribute__((noreturn)) void test_no_return(int i)
 	{
 		if(i<0)
 			throw "negative";
