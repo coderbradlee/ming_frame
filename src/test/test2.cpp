@@ -281,9 +281,18 @@ namespace test2_namespace
 		double c;
 		double d;
 	};
+	[[noreturn]] void test_no_return(int i)
+	{
+		if(i<0)
+			throw "negative";
+		else if(i>0)
+			throw "positive";
+	}
 	void test_out()
 	{
-		alignas(float) extern unsigned char c[sizeof(double)];
+		test_no_return(0);
+		std::cout<<"return"<<std::endl;
+		//alignas(float) extern unsigned char c[sizeof(double)];
 		//std::cout<<alignof(std::max_align_t)<<std::endl;
 		// char d[1024];
 		// std::cout<<alignof(d)<<std::endl;
