@@ -13,5 +13,5 @@ add_executable(test_main ${TEST_MAIN_SRC_LIST})
 target_link_libraries(test_main ${TEST_MAIN_LIB_LIST})
 
 set_target_properties (test_main PROPERTIES COMPILE_FLAGS "-DCHECK_PTHREAD_RETURN_VALUE -D_FILE_OFFSET_BITS=64 -Wall
- -Wextra -Wno-unused-parameter -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings -march=native
+ -Wextra -Woverloaded-virtual -Wpointer-arith -Wshadow -Wwrite-strings -march=native
  -std=c++11 -rdynamic -O2 -finline-limit=1000 -DNDEBUG")
