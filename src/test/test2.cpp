@@ -274,7 +274,7 @@ namespace test2_namespace
 		char a;
 		int b;
 	};
-	struct alignof(32) color_vector
+	struct alignas(32) color_vector
 	{
 		double a;
 		double b;
