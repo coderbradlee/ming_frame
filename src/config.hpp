@@ -30,7 +30,7 @@ class iconfig:boost::noncopyable
 		static boost::shared_ptr<iconfig> m_ps;
 		std::string m_log_name;
 		std::string m_log_level;
-		
+		int m_log_size;
 };
 // boost::shared_ptr<iconfig> iconfig::m_ps = nullptr;
 // boost::mutex iconfig::m_mu;

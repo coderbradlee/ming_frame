@@ -43,6 +43,7 @@ iconfig::iconfig(const std::string& filename)
 	m_nfs_path=boost::lexical_cast<std::string>(m_pt.get<std::string>("nfs.path"));
 	m_log_name = m_pt.get<std::string>("log.name");
 	m_log_level = m_pt.get<std::string>("log.level");
+	m_log_size = boost::lexical_cast<int>(m_pt.get<std::string>("log.size"));
 }
 	
 boost::shared_ptr<iconfig> iconfig::m_ps = nullptr;
