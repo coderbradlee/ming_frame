@@ -31,6 +31,10 @@ yum install -y xorg-x11-fonts-75dpi
 yum install -y xorg-x11-fonts-Type1
 yum install icu libicu*
 
+
+
+wkhtmltopdf --margin-bottom 0 --margin-left 0 --margin-right 0 --margin-top 0 Newshop/WEB-INF/pi_pdf_French_view.html test.pdf
+
 wkhtmltoimage --quality 100 testpdf/test.html test.png 
 wkhtmltoimage --width 0 --enable-smart-width --format pdf testpdf/test.html test.pdf
 
