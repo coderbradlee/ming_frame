@@ -1,3 +1,5 @@
+add_definitions(-Wno-error)
+
 add_subdirectory(muduo_bench)
 add_subdirectory(tpc)
 add_subdirectory(socks4a)
@@ -9,4 +11,3 @@ add_executable(test_main ${TEST_MAIN_SRC_LIST})
 
 target_link_libraries(test_main ${TEST_MAIN_LIB_LIST})
 
-add_definitions(-Wno-error)
