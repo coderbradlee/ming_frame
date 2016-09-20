@@ -283,7 +283,8 @@ namespace test2_namespace
 	};
 	void test_out()
 	{
-		std::cout<<alignof(std::max_align_t)<<std::endl;
+		alignas(float) extern unsigned char c[sizeof(double)];
+		//std::cout<<alignof(std::max_align_t)<<std::endl;
 		// char d[1024];
 		// std::cout<<alignof(d)<<std::endl;
 		//std::cout<<alignof(color_vector)<<std::endl;
