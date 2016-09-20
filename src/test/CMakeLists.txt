@@ -1,4 +1,4 @@
-add_definitions(-Wno-error)
+add_definitions(-Wno-error=unused-variable)
 
 add_subdirectory(muduo_bench)
 add_subdirectory(tpc)
