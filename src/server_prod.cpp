@@ -229,9 +229,9 @@ int main(int argc, char* argv[])
     init_log();
     LOG_INFO << argv[0] << " [number of IO threads] [number of worker threads] [-n]";
     LOG_INFO << "pid = " << getpid() << ", tid = " << CurrentThread::tid();
-    int numEventLoops = 0;
-    int numThreads = 0;
-    bool nodelay = false;
+    int numEventLoops = get_config->m_threads;
+    int numThreads = get_config->m_threads;
+    bool nodelay = true;
     if (argc > 1)
     {
       numEventLoops = atoi(argv[1]);
@@ -248,7 +248,7 @@ int main(int argc, char* argv[])
  
     sleep(10);
     EventLoop loop;
-    InetAddress listenAddr(9981);
+    InetAddress listenAddr(get_config->m_port);
     SudokuServer server(&loop, listenAddr, numEventLoops, numThreads, nodelay);
 
     server.start();
