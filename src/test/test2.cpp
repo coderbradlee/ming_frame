@@ -281,7 +281,7 @@ namespace test2_namespace
 		double c;
 		double d;
 	};
-	[[noreturn]] test_no_return(int i)
+	[[noreturn]] void test_no_return(int i)
 	{
 		if(i<0)
 			throw "negative";
