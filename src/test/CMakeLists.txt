@@ -8,3 +8,5 @@ set(TEST_MAIN_LIB_LIST muduo_net_cpp11 muduo_base_cpp11 muduo_http boost_system 
 add_executable(test_main ${TEST_MAIN_SRC_LIST})
 
 target_link_libraries(test_main ${TEST_MAIN_LIB_LIST})
+
+add_definitions(-wno-error)
