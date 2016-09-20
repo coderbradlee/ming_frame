@@ -292,7 +292,10 @@ namespace test2_namespace
 	}
 	void test_out()
 	{ 
-		std::cout<<R"(hello,\n world)"<<std::endl;
+		char u8string[]=u8R"(你好)"" = hello";
+		std::cout<<u8string<<std::endl;
+		std::cout<<sizeof(u8string)<<std::endl;
+		//std::cout<<R"(hello,\n world)"<<std::endl;
 		// char utf8[]=u8"\u4F60\u597D\u554A";
 		// char16_t utf16[]=u"hello";
 		// char32_t utf32[]=U"hello equals \u4F60\u597D\u554A";
