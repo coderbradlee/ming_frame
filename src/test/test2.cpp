@@ -405,10 +405,12 @@ namespace test2_namespace
 		if(head->next!=nullptr)
 		{
 			traverse(head->next);
+			std::cout<<head->val<<std::endl;
 		}
 		else
 		{
 			std::cout<<head->val<<std::endl;
+			return;
 		}
 	}
 	void test_out()
