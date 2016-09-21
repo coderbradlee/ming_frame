@@ -385,17 +385,18 @@ namespace test2_namespace
 		link_list* dummy=new link_list(0);
 		dummy->next=head;
 
-		link_list* prev=head;
-		link_list* next_node=head->next;
-		prev->next=nullptr;
-		while(prev!=nullptr&&next_node!=nullptr)
+		link_list* prev=dummy;
+		link_list* next_node=head;
+		
+		while(prev->next!=nullptr&&next_node->next!=nullptr)
 		{
-			link_list* temp=next_node->next;
-			next_node->next=prev;
+			link_list* temp=next_node->next->next;
+			prev->next=next_node->next;
+			prev->next->next=next_node;
 
-			prev->next=temp;
-			prev=prev->next;
-			next_node=prev->next;
+			next_node->next=temp;
+			prev=next_node;
+			next_node=next_node->next;
 		}
 		return dummy->next;
 	}
