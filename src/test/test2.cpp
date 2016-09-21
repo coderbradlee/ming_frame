@@ -314,7 +314,7 @@ namespace test2_namespace
 		dummy->next=head;
 		link_list *p=dummy;
 		link_list *p_dummy=dummy;
-		link_list *great_head=p;
+		link_list *great_head=p->next;
 		while(p->next->next!=nullptr)
 		{
 			if(p->next->val>ref)
@@ -333,7 +333,7 @@ namespace test2_namespace
 				std::cout<<__LINE__<<":"<<p_dummy->val<<std::endl;
 			}	
 		}
-		p_dummy->next=great_head->next;
+		p_dummy->next=great_head;
 		std::cout<<__LINE__<<":"<<p_dummy->next->val<<std::endl;
 		std::cout<<__LINE__<<":"<<dummy->next->val<<std::endl;
 		return dummy->next;
