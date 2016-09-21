@@ -376,7 +376,7 @@ namespace test2_namespace
 		l2.next=&l3;
 		l3.next=&l4;
 		l4.next=&l5;
-		std::cout<<find_middle(l1)->val<<std::endl;
+		std::cout<<find_middle(&l1)->val<<std::endl;
 		//print_list(&l1);
 		// link_list* p=less_list(&l1,5);
 		// print_list(p);
