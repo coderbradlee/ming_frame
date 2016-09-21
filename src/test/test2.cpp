@@ -334,7 +334,7 @@ namespace test2_namespace
 			}	
 		}
 		p_dummy->next=great_head->next;
-		std::cout<<__LINE__<<":"<<p_dummy->val<<std::endl;
+		std::cout<<__LINE__<<":"<<p_dummy->next->val<<std::endl;
 		std::cout<<__LINE__<<":"<<dummy->next->val<<std::endl;
 		return dummy->next;
 	}
@@ -360,8 +360,8 @@ namespace test2_namespace
 		l3.next=&l4;
 		l4.next=&l5;
 		print_list(&l1);
-		
-		print_list(less_list(&l1,5));
+		link_list* p=less_list(&l1,5)
+		//print_list(p);
 		// Person p("joe");
 		// p.greet("kate");
 		// char u8string[]=u8R"(你好)"" = hello";
