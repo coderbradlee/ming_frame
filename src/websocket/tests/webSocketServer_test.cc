@@ -62,7 +62,7 @@ void onRequest(const webSocketRequest& req, webSocketResponse* resp)
     // resp->addHeader("Server", "Muduo");
     // resp->setBody("hello, world!\n");
     ////////////////////////////////////////
-    auto sha1=Crypto::SHA1(req.getHeader["Sec-WebSocket-Key"]+req.get_magic_string);
+    auto sha1=Crypto::SHA1(req.getHeader("Sec-WebSocket-Key")+req.get_magic_string());
     resp->setStatusCode(webSocketResponse::k200Ok);
     resp->setStatusMessage("HTTP/1.1 101 Web Socket Protocol Handshake\r\n");
     resp->addHeader("Upgrade", "websocket");
