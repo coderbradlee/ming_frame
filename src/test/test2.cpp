@@ -350,10 +350,10 @@ namespace test2_namespace
 		link_list l3(3);
 		link_list l4(5);
 		link_list l5(10);
-		l1->next=&l2;
-		l2->next=&l3;
-		l3->next=&l4;
-		l4->next=&l5;
+		l1.next=&l2;
+		l2.next=&l3;
+		l3.next=&l4;
+		l4.next=&l5;
 		print_list(&l1);
 		less_list(&l1,5);
 		print_list(&l1);
