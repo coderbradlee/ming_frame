@@ -324,7 +324,7 @@ namespace test2_namespace
 			{
 				p->next=runner->next;
 				runner=runner->next;
-				p->next->next=nullptr;
+				//p->next->next=nullptr;
 				p=p->next;
 				std::cout<<__LINE__<<":"<<p->next->val<<std::endl;
 			}	
@@ -332,11 +332,13 @@ namespace test2_namespace
 			{
 				p_dummy->next=runner->next;
 				runner=runner->next;
-				p_dummy->next->next=nullptr;
+				//p_dummy->next->next=nullptr;
 				p_dummy=p_dummy->next;
 				std::cout<<__LINE__<<":"<<p_dummy->val<<std::endl;
 			}	
 		}
+		p->next->next=nullptr;
+		p_dummy->next->next=nullptr;
 		p_dummy->next=great_head->next;
 		std::cout<<__LINE__<<":"<<p_dummy->next->val<<std::endl;
 		std::cout<<__LINE__<<":"<<dummy->next->val<<std::endl;
