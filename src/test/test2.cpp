@@ -296,7 +296,7 @@ namespace test2_namespace
 	  
 	  std::string greet(std::string other_name) 
 	  {
-	    return "Hi " + other_name + ", my name is " + name;
+	    return "Hi " + other_name + ", my name is " + m_name;
 	  }
 	  
 	  std::string m_name;
