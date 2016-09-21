@@ -59,7 +59,7 @@ bool webSocketContext::processRequestLine(const char* begin, const char* end)
 // return false if any error
 bool webSocketContext::parseRequest(Buffer* buf, Timestamp receiveTime)
 {
-  std::cout<<Buffer<<std::endl;
+  LOG_WARN<<Buffer;
   bool ok = true;
   bool hasMore = true;
   while (hasMore)
