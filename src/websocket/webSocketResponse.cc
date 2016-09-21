@@ -7,7 +7,7 @@
 // Author: Shuo Chen (chenshuo at chenshuo dot com)
 //
 
-#include <muduo/net/http/HttpResponse.h>
+#include "webSocketResponse.h"
 #include <muduo/net/Buffer.h>
 
 #include <stdio.h>
@@ -15,7 +15,7 @@
 using namespace muduo;
 using namespace muduo::net;
 
-void HttpResponse::appendToBuffer(Buffer* output) const
+void webSocketResponse::appendToBuffer(Buffer* output) const
 {
   char buf[32];
   snprintf(buf, sizeof buf, "HTTP/1.1 %d ", statusCode_);

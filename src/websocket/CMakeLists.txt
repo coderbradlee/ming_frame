@@ -1,27 +1,27 @@
-set(http_SRCS
-  HttpServer.cc
-  HttpResponse.cc
-  HttpContext.cc
+set(webSocket_SRCS
+  webSocketServer.cc
+  webSocketResponse.cc
+  webSocketContext.cc
   )
 
-add_library(muduo_http ${http_SRCS})
-#target_link_libraries(muduo_http muduo_net)
-target_link_libraries(muduo_http muduo_net_cpp11)
-install(TARGETS muduo_http DESTINATION lib)
+add_library(webSocket ${webSocket_SRCS})
+#target_link_libraries(webSocket muduo_net)
+target_link_libraries(webSocket muduo_net_cpp11)
+install(TARGETS webSocket DESTINATION lib)
 set(HEADERS
-  HttpRequest.h
-  HttpResponse.h
-  HttpServer.h
+  webSocketRequest.h
+  webSocketResponse.h
+  webSocketServer.h
   )
-install(FILES ${HEADERS} DESTINATION include/muduo/net/http)
+#install(FILES ${HEADERS} DESTINATION include/muduo/net/http)
 
 #if(NOT CMAKE_BUILD_NO_EXAMPLES)
 #add_executable(httpserver_test tests/HttpServer_test.cc)
-#target_link_libraries(httpserver_test muduo_http)
+#target_link_libraries(httpserver_test webSocket)
 
 #if(BOOSTTEST_LIBRARY)
 #add_executable(httprequest_unittest tests/HttpRequest_unittest.cc)
-#target_link_libraries(httprequest_unittest muduo_http #boost_unit_test_framework)
+#target_link_libraries(httprequest_unittest webSocket #boost_unit_test_framework)
 #endif()
 
 #endif()

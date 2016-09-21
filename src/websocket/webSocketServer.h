@@ -8,8 +8,8 @@
 //
 // This is a public header file, it must only include public header files.
 
-#ifndef MUDUO_NET_HTTP_HTTPSERVER_H
-#define MUDUO_NET_HTTP_HTTPSERVER_H
+#ifndef WEBSOCKET_SERVER_H
+#define WEBSOCKET_SERVER_H
 
 #include <muduo/net/TcpServer.h>
 #include <boost/noncopyable.hpp>
@@ -19,32 +19,32 @@ namespace muduo
 namespace net
 {
 
-class HttpRequest;
-class HttpResponse;
+class webSocketRequest;
+class webSocketResponse;
 
 /// A simple embeddable HTTP server designed for report status of a program.
 /// It is not a fully HTTP 1.1 compliant server, but provides minimum features
 /// that can communicate with HttpClient and Web browser.
 /// It is synchronous, just like Java Servlet.
-class HttpServer : boost::noncopyable
+class webSocketServer : boost::noncopyable
 {
  public:
-  typedef boost::function<void (const HttpRequest&,
-                                HttpResponse*)> HttpCallback;
+  typedef boost::function<void (const webSocketRequest&,
+                                webSocketResponse*)> webSocketCallback;
 
-  HttpServer(EventLoop* loop,
+  webSocketServer(EventLoop* loop,
              const InetAddress& listenAddr,
              const string& name,
              TcpServer::Option option = TcpServer::kNoReusePort);
 
-  ~HttpServer();  // force out-line dtor, for scoped_ptr members.
+  ~webSocketServer();  // force out-line dtor, for scoped_ptr members.
 
   EventLoop* getLoop() const { return server_.getLoop(); }
 
   /// Not thread safe, callback be registered before calling start().
-  void setHttpCallback(const HttpCallback& cb)
+  void setwebSocketCallback(const webSocketCallback& cb)
   {
-    httpCallback_ = cb;
+    webSocketCallback_ = cb;
   }
 
   void setThreadNum(int numThreads)
@@ -59,10 +59,10 @@ class HttpServer : boost::noncopyable
   void onMessage(const TcpConnectionPtr& conn,
                  Buffer* buf,
                  Timestamp receiveTime);
-  void onRequest(const TcpConnectionPtr&, const HttpRequest&);
+  void onRequest(const TcpConnectionPtr&, const webSocketRequest&);
 
   TcpServer server_;
-  HttpCallback httpCallback_;
+  webSocketCallback webSocketCallback_;
 };
 
 }

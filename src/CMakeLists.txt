@@ -21,6 +21,7 @@
 #add_subdirectory(italy_report)
 #add_subdirectory(thailand_report)
 #add_subdirectory(special_sales_report)
+add_subdirectory(websocket)
 if(PROTOBUF_FOUND)
   #add_subdirectory(ace/logging)
   #add_subdirectory(protobuf)

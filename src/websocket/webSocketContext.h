@@ -8,12 +8,12 @@
 //
 // This is an internal header file, you should not include this.
 
-#ifndef MUDUO_NET_HTTP_HTTPCONTEXT_H
-#define MUDUO_NET_HTTP_HTTPCONTEXT_H
+#ifndef WEBSOCKET_CONTEXT_H
+#define WEBSOCKET_CONTEXT_H
 
 #include <muduo/base/copyable.h>
 
-#include <muduo/net/http/HttpRequest.h>
+#include "webSocketRequest.h"
 
 namespace muduo
 {
@@ -22,10 +22,10 @@ namespace net
 
 class Buffer;
 
-class HttpContext : public muduo::copyable
+class webSocketContext : public muduo::copyable
 {
  public:
-  enum HttpRequestParseState
+  enum webSocketRequestParseState
   {
     kExpectRequestLine,
     kExpectHeaders,
@@ -33,7 +33,7 @@ class HttpContext : public muduo::copyable
     kGotAll,
   };
 
-  HttpContext()
+  webSocketContext()
     : state_(kExpectRequestLine)
   {
   }
@@ -49,21 +49,21 @@ class HttpContext : public muduo::copyable
   void reset()
   {
     state_ = kExpectRequestLine;
-    HttpRequest dummy;
+    webSocketRequest dummy;
     request_.swap(dummy);
   }
 
-  const HttpRequest& request() const
+  const webSocketRequest& request() const
   { return request_; }
 
-  HttpRequest& request()
+  webSocketRequest& request()
   { return request_; }
 
  private:
   bool processRequestLine(const char* begin, const char* end);
 
-  HttpRequestParseState state_;
-  HttpRequest request_;
+  webSocketRequestParseState state_;
+  webSocketRequest request_;
 };
 
 }

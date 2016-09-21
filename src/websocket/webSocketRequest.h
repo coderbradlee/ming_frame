@@ -8,8 +8,8 @@
 //
 // This is a public header file, it must only include public header files.
 
-#ifndef MUDUO_NET_HTTP_HTTPREQUEST_H
-#define MUDUO_NET_HTTP_HTTPREQUEST_H
+#ifndef WEBSOCKET_REQUEST_H
+#define WEBSOCKET_REQUEST_H
 
 #include <muduo/base/copyable.h>
 #include <muduo/base/Timestamp.h>
@@ -24,7 +24,7 @@ namespace muduo
 namespace net
 {
 
-class HttpRequest : public muduo::copyable
+class webSocketRequest : public muduo::copyable
 {
  public:
   enum Method
@@ -36,7 +36,7 @@ class HttpRequest : public muduo::copyable
     kUnknown, kHttp10, kHttp11
   };
 
-  HttpRequest()
+  webSocketRequest()
     : method_(kInvalid),
       version_(kUnknown)
   {
@@ -162,7 +162,7 @@ class HttpRequest : public muduo::copyable
   const std::map<string, string>& headers() const
   { return headers_; }
 
-  void swap(HttpRequest& that)
+  void swap(webSocketRequest& that)
   {
     std::swap(method_, that.method_);
     std::swap(version_, that.version_);

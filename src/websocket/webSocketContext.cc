@@ -8,12 +8,12 @@
 //
 
 #include <muduo/net/Buffer.h>
-#include <muduo/net/http/HttpContext.h>
+#include "webSocketContext.h"
 
 using namespace muduo;
 using namespace muduo::net;
 
-bool HttpContext::processRequestLine(const char* begin, const char* end)
+bool webSocketContext::processRequestLine(const char* begin, const char* end)
 {
   bool succeed = false;
   const char* start = begin;
@@ -40,11 +40,11 @@ bool HttpContext::processRequestLine(const char* begin, const char* end)
       {
         if (*(end-1) == '1')
         {
-          request_.setVersion(HttpRequest::kHttp11);
+          request_.setVersion(webSocketRequest::kHttp11);
         }
         else if (*(end-1) == '0')
         {
-          request_.setVersion(HttpRequest::kHttp10);
+          request_.setVersion(webSocketRequest::kHttp10);
         }
         else
         {
@@ -57,7 +57,7 @@ bool HttpContext::processRequestLine(const char* begin, const char* end)
 }
 
 // return false if any error
-bool HttpContext::parseRequest(Buffer* buf, Timestamp receiveTime)
+bool webSocketContext::parseRequest(Buffer* buf, Timestamp receiveTime)
 {
   bool ok = true;
   bool hasMore = true;

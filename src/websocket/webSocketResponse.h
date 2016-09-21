@@ -8,8 +8,8 @@
 //
 // This is a public header file, it must only include public header files.
 
-#ifndef MUDUO_NET_HTTP_HTTPRESPONSE_H
-#define MUDUO_NET_HTTP_HTTPRESPONSE_H
+#ifndef WEBSOCKET_RESPONSE_H
+#define WEBSOCKET_RESPONSE_H
 
 #include <muduo/base/copyable.h>
 #include <muduo/base/Types.h>
@@ -22,10 +22,10 @@ namespace net
 {
 
 class Buffer;
-class HttpResponse : public muduo::copyable
+class webSocketResponse : public muduo::copyable
 {
  public:
-  enum HttpStatusCode
+  enum webSocketStatusCode
   {
     kUnknown,
     k200Ok = 200,
@@ -34,13 +34,13 @@ class HttpResponse : public muduo::copyable
     k404NotFound = 404,
   };
 
-  explicit HttpResponse(bool close)
+  explicit webSocketResponse(bool close)
     : statusCode_(kUnknown),
       closeConnection_(close)
   {
   }
 
-  void setStatusCode(HttpStatusCode code)
+  void setStatusCode(webSocketStatusCode code)
   { statusCode_ = code; }
 
   void setStatusMessage(const string& message)
@@ -66,7 +66,7 @@ class HttpResponse : public muduo::copyable
 
  private:
   std::map<string, string> headers_;
-  HttpStatusCode statusCode_;
+  webSocketStatusCode statusCode_;
   // FIXME: add http version
   string statusMessage_;
   bool closeConnection_;

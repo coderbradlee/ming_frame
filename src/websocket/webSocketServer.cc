@@ -7,12 +7,12 @@
 // Author: Shuo Chen (chenshuo at chenshuo dot com)
 //
 
-#include <muduo/net/http/HttpServer.h>
+#include "webSocketServer.h"
 
 #include <muduo/base/Logging.h>
-#include <muduo/net/http/HttpContext.h>
-#include <muduo/net/http/HttpRequest.h>
-#include <muduo/net/http/HttpResponse.h>
+#include "webSocketContext.h"
+#include "webSocketRequest.h"
+#include "webSocketResponse.h"
 
 #include <boost/bind.hpp>
 
@@ -26,9 +26,9 @@ namespace net
 namespace detail
 {
 
-void defaultHttpCallback(const HttpRequest&, HttpResponse* resp)
+void defaultwebSocketCallback(const webSocketRequest&, webSocketResponse* resp)
 {
-  resp->setStatusCode(HttpResponse::k404NotFound);
+  resp->setStatusCode(webSocketResponse::k404NotFound);
   resp->setStatusMessage("Not Found");
   resp->setCloseConnection(true);
 }
@@ -37,43 +37,43 @@ void defaultHttpCallback(const HttpRequest&, HttpResponse* resp)
 }
 }
 
-HttpServer::HttpServer(EventLoop* loop,
+webSocketServer::webSocketServer(EventLoop* loop,
                        const InetAddress& listenAddr,
                        const string& name,
                        TcpServer::Option option)
   : server_(loop, listenAddr, name, option),
-    httpCallback_(detail::defaultHttpCallback)
+    webSocketCallback_(detail::defaultwebSocketCallback)
 {
   server_.setConnectionCallback(
-      boost::bind(&HttpServer::onConnection, this, _1));
+      boost::bind(&webSocketServer::onConnection, this, _1));
   server_.setMessageCallback(
-      boost::bind(&HttpServer::onMessage, this, _1, _2, _3));
+      boost::bind(&webSocketServer::onMessage, this, _1, _2, _3));
 }
 
-HttpServer::~HttpServer()
+webSocketServer::~webSocketServer()
 {
 }
 
-void HttpServer::start()
+void webSocketServer::start()
 {
-  LOG_WARN << "HttpServer[" << server_.name()
+  LOG_WARN << "webSocketServer[" << server_.name()
     << "] starts listenning on " << server_.ipPort();
   server_.start();
 }
 
-void HttpServer::onConnection(const TcpConnectionPtr& conn)
+void webSocketServer::onConnection(const TcpConnectionPtr& conn)
 {
   if (conn->connected())
   {
-    conn->setContext(HttpContext());
+    conn->setContext(webSocketContext());
   }
 }
 
-void HttpServer::onMessage(const TcpConnectionPtr& conn,
+void webSocketServer::onMessage(const TcpConnectionPtr& conn,
                            Buffer* buf,
                            Timestamp receiveTime)
 {
-  HttpContext* context = boost::any_cast<HttpContext>(conn->getMutableContext());
+  webSocketContext* context = boost::any_cast<webSocketContext>(conn->getMutableContext());
 
   if (!context->parseRequest(buf, receiveTime))
   {
@@ -88,13 +88,13 @@ void HttpServer::onMessage(const TcpConnectionPtr& conn,
   }
 }
 
-void HttpServer::onRequest(const TcpConnectionPtr& conn, const HttpRequest& req)
+void webSocketServer::onRequest(const TcpConnectionPtr& conn, const webSocketRequest& req)
 {
   const string& connection = req.getHeader("Connection");
   bool close = connection == "close" ||
-    (req.getVersion() == HttpRequest::kHttp10 && connection != "Keep-Alive");
-  HttpResponse response(close);
-  httpCallback_(req, &response);
+    (req.getVersion() == webSocketRequest::kHttp10 && connection != "Keep-Alive");
+  webSocketResponse response(close);
+  webSocketCallback_(req, &response);
   Buffer buf;
   response.appendToBuffer(&buf);
   conn->send(&buf);
