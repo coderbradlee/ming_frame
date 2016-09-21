@@ -16,8 +16,8 @@ set(HEADERS
 #install(FILES ${HEADERS} DESTINATION include/muduo/net/http)
 
 #if(NOT CMAKE_BUILD_NO_EXAMPLES)
-add_executable(webSocket tests/webSocketServer_test.cc)
-target_link_libraries(webSocket webSocket)
+add_executable(webSockets tests/webSocketServer_test.cc)
+target_link_libraries(webSockets webSocket)
 
 #if(BOOSTTEST_LIBRARY)
 #add_executable(httprequest_unittest tests/HttpRequest_unittest.cc)
