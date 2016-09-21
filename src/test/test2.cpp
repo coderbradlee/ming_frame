@@ -361,7 +361,7 @@ namespace test2_namespace
 		l4.next=&l5;
 		print_list(&l1);
 		link_list* p=less_list(&l1,5);
-		//print_list(p);
+		print_list(p);
 		// Person p("joe");
 		// p.greet("kate");
 		// char u8string[]=u8R"(你好)"" = hello";
