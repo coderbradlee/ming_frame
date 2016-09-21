@@ -290,8 +290,22 @@ namespace test2_namespace
 		else if(i>0)
 			throw "positive";
 	}
+	struct Person 
+	{
+	  Person(std::string name) {}
+	  
+	  std::string greet(std::string other_name) 
+	  {
+	    return "Hi " + other_name + ", my name is " + name;
+	  }
+	  
+	  std::string name;
+	};
+
 	void test_out()
 	{ 
+		Person p("joe");
+		p.greet("kate");
 		// char u8string[]=u8R"(你好)"" = hello";
 		// std::cout<<u8string<<std::endl;
 		// std::cout<<sizeof(u8string)<<std::endl;
