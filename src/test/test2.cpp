@@ -330,7 +330,7 @@ namespace test2_namespace
 				//p=p->next;
 				p_dummy=p_dummy->next;
 				std::cout<<__LINE__<<":"<<p->next->val<<std::endl;
-				std::cout<<__LINE__<<":"<<p_dummy->next->val<<std::endl;
+				std::cout<<__LINE__<<":"<<p_dummy->val<<std::endl;
 			}	
 		}
 		p_dummy->next->next=dummy->next;
