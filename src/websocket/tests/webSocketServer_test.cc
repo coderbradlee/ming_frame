@@ -53,6 +53,14 @@ void onRequest(const webSocketRequest& req, webSocketResponse* resp)
     resp->addHeader("Server", "Muduo");
     resp->setBody("hello, world!\n");
   }
+  else if (req.path() == "/upload")
+  {
+    resp->setStatusCode(webSocketResponse::k200Ok);
+    resp->setStatusMessage("OK");
+    resp->setContentType("text/plain");
+    resp->addHeader("Server", "Muduo");
+    resp->setBody("hello, world!\n");
+  }
   else
   {
     resp->setStatusCode(webSocketResponse::k404NotFound);
