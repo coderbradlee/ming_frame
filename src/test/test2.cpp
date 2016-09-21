@@ -310,28 +310,28 @@ namespace test2_namespace
 	};
 	void less_list(link_list* head,int ref)
 	{
-		link_list *dummy=new link_list(0);
-		dummy->next=head;
-		link_list *p=dummy;
-		link_list *p_dummy=dummy;
-		link_list *great_head=p;
-		while(p->next!=nullptr)
-		{
-			if(p->next->val>ref)
-			{
-				p=p->next;
-			}	
-			else
-			{
-				p_dummy->next=p->next;
-				p->next=p->next->next;
-				p_dummy->next->next=nullptr;
-				p=p->next;
-				p_dummy=p_dummy->next;
-			}	
-		}
-		p_dummy->next->next=great_head->next;
-		head=p_dummy->next;
+		// link_list *dummy=new link_list(0);
+		// dummy->next=head;
+		// link_list *p=dummy;
+		// link_list *p_dummy=dummy;
+		// link_list *great_head=p;
+		// while(p->next!=nullptr)
+		// {
+		// 	if(p->next->val>ref)
+		// 	{
+		// 		p=p->next;
+		// 	}	
+		// 	else
+		// 	{
+		// 		p_dummy->next=p->next;
+		// 		p->next=p->next->next;
+		// 		p_dummy->next->next=nullptr;
+		// 		p=p->next;
+		// 		p_dummy=p_dummy->next;
+		// 	}	
+		// }
+		// p_dummy->next->next=great_head->next;
+		// head=p_dummy->next;
 	}
 	void print_list(link_list* head)
 	{
