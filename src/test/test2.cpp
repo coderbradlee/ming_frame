@@ -355,6 +355,16 @@ namespace test2_namespace
 		}
 		
 	}
+	link_list* find_middle(link_list* head)
+	{
+		link_list* chaser=head,*runner=head;
+		while(runner->next!=nullptr&&runner->next->next!=nullptr)
+		{
+			chaser=chaser->next;
+			runner=runner->next->next;
+		}
+		return chaser;
+	}
 	void test_out()
 	{ 
 		link_list l1(8);
@@ -366,9 +376,10 @@ namespace test2_namespace
 		l2.next=&l3;
 		l3.next=&l4;
 		l4.next=&l5;
-		print_list(&l1);
-		link_list* p=less_list(&l1,5);
-		print_list(p);
+		std::cout<<find_middle(l1)->val<<std::endl;
+		//print_list(&l1);
+		// link_list* p=less_list(&l1,5);
+		// print_list(p);
 		// Person p("joe");
 		// p.greet("kate");
 		// char u8string[]=u8R"(你好)"" = hello";
