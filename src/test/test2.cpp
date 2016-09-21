@@ -402,14 +402,14 @@ namespace test2_namespace
 	}
 	void traverse(link_list* head)
 	{
-		if(head->next!=nullptr)
+		if(head!=nullptr)
 		{
 			traverse(head->next);
 			std::cout<<head->val<<std::endl;
 		}
 		else
 		{
-			std::cout<<head->val<<std::endl;
+			//std::cout<<head->val<<std::endl;
 			return;
 		}
 	}
