@@ -338,8 +338,8 @@ namespace test2_namespace
 			}	
 		}
 
-		p->next->next=nullptr;
-		p_dummy->next->next=nullptr;
+		p->next=nullptr;
+		//p_dummy->next=nullptr;
 		p_dummy->next=great_head->next;
 		std::cout<<__LINE__<<":"<<p_dummy->next->val<<std::endl;
 		std::cout<<__LINE__<<":"<<dummy->next->val<<std::endl;
