@@ -171,7 +171,10 @@ class webSocketRequest : public muduo::copyable
     receiveTime_.swap(that.receiveTime_);
     headers_.swap(that.headers_);
   }
-
+ string get_magic_string()
+ {
+    return ws_magic_string;
+ }
  private:
   Method method_;
   Version version_;
@@ -179,6 +182,7 @@ class webSocketRequest : public muduo::copyable
   string query_;
   Timestamp receiveTime_;
   std::map<string, string> headers_;
+  const std::string ws_magic_string="258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
 };
 
 }

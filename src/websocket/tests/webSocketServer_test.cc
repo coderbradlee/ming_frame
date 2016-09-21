@@ -1,6 +1,7 @@
 #include "../webSocketServer.h"
 #include "../webSocketRequest.h"
 #include "../webSocketResponse.h"
+#include "../crypto.hpp"
 #include <muduo/net/EventLoop.h>
 #include <muduo/base/Logging.h>
 
@@ -55,11 +56,19 @@ void onRequest(const webSocketRequest& req, webSocketResponse* resp)
   }
   else if (req.path() == "/upload")
   {
+    // resp->setStatusCode(webSocketResponse::k200Ok);
+    // resp->setStatusMessage("OK");
+    // resp->setContentType("text/plain");
+    // resp->addHeader("Server", "Muduo");
+    // resp->setBody("hello, world!\n");
+    ////////////////////////////////////////
+    auto sha1=Crypto::SHA1(req.getHeader["Sec-WebSocket-Key"]+req.get_magic_string);
     resp->setStatusCode(webSocketResponse::k200Ok);
-    resp->setStatusMessage("OK");
-    resp->setContentType("text/plain");
-    resp->addHeader("Server", "Muduo");
-    resp->setBody("hello, world!\n");
+    resp->setStatusMessage("HTTP/1.1 101 Web Socket Protocol Handshake\r\n");
+    resp->addHeader("Upgrade", "websocket");
+    resp->addHeader("Connection", "Upgrade");
+    resp->addHeader("Sec-WebSocket-Accept", Crypto::Base64::encode(sha1));
+    
   }
   else
   {
