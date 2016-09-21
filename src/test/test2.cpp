@@ -311,10 +311,13 @@ namespace test2_namespace
 	link_list* less_list(link_list* head,int ref)
 	{
 		link_list *dummy=new link_list(0);
-		dummy->next=head;
-		link_list *p=dummy;
+		link_list *great_head=new link_list(0);
+
+		link_list *p=great_head;
 		link_list *p_dummy=dummy;
-		link_list *great_head=p->next;
+		dummy->next=head;
+		great_head->next=head;
+		
 		while(p->next->next!=nullptr)
 		{
 			if(p->next->val>ref)
