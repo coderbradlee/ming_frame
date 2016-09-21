@@ -369,10 +369,12 @@ namespace test2_namespace
 	{
 		link_list* prev=head;
 		link_list* next_node=head->next;
+		prev->next=nullptr;
 		while(next_node!=nullptr)
 		{
 			link_list* temp=next_node->next;
 			next_node->next=prev;
+
 			prev=next_node;
 			next_node=temp;
 		}
