@@ -334,6 +334,8 @@ namespace test2_namespace
 			}	
 		}
 		p_dummy->next=great_head->next;
+		std::cout<<__LINE__<<":"<<p_dummy->val<<std::endl;
+		std::cout<<__LINE__<<":"<<dummy->next->val<<std::endl;
 		head=dummy->next;
 	}
 	void print_list(link_list* head)
