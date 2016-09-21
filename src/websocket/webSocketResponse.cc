@@ -20,7 +20,7 @@ void webSocketResponse::appendToBuffer(Buffer* output) const
   char buf[32];
   snprintf(buf, sizeof buf, "HTTP/1.1 %d ", statusCode_);
   //output->append(buf);
-  output->append("HTTP/1.1 101 Web Socket Protocol Handshake\r\n")
+  output->append("HTTP/1.1 101 Web Socket Protocol Handshake\r\n");
   output->append(statusMessage_);
   output->append("\r\n");
 
