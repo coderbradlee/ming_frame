@@ -380,6 +380,25 @@ namespace test2_namespace
 		}
 		return prev;
 	}
+	link_list* swap_list(link_list* head)
+	{
+		link_list* dummy=new link_list(0);
+		dummy->next=head;
+
+		link_list* prev=head;
+		link_list* next_node=head->next;
+		prev->next=nullptr;
+		while(prev!=nullptr&&next_node!=nullptr)
+		{
+			link_list* temp=next_node->next;
+			next_node->next=prev;
+
+			prev->next=temp;
+			prev=prev->next;
+			next_node=prev->next;
+		}
+		return dummy->next;
+	}
 	void test_out()
 	{ 
 		link_list l1(8);
@@ -390,9 +409,10 @@ namespace test2_namespace
 		l1.next=&l2;
 		l2.next=&l3;
 		l3.next=&l4;
-		l4.next=&l5;
+		print_list(swap_list(&l1));
+		//l4.next=&l5;
 		//std::cout<<find_middle(&l1)->val<<std::endl;
-		print_list(reverse_list(&l1));
+		//print_list(reverse_list(&l1));
 		//print_list(&l1);
 		// link_list* p=less_list(&l1,5);
 		// print_list(p);
