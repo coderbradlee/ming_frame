@@ -317,7 +317,7 @@ namespace test2_namespace
 		link_list *p_dummy=dummy;
 		dummy->next=head;
 		great_head->next=head;
-		link_list *runner=dummy;
+		link_list *runner=dummy->next;
 		while(runner->next!=nullptr)
 		{
 			if(runner->val>ref)
