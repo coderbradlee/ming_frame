@@ -333,7 +333,7 @@ namespace test2_namespace
 				std::cout<<__LINE__<<":"<<p_dummy->val<<std::endl;
 			}	
 		}
-		p_dummy->next->next=dummy->next;
+		p_dummy->next=great_head->next;
 		head=dummy->next;
 	}
 	void print_list(link_list* head)
