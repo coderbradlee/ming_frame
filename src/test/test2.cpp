@@ -292,20 +292,73 @@ namespace test2_namespace
 	}
 	struct Person 
 	{
-	  Person(std::string name) {}
+	  Person(std::string name):m_name(name) {}
 	  
 	  std::string greet(std::string other_name) 
 	  {
 	    return "Hi " + other_name + ", my name is " + name;
 	  }
 	  
-	  std::string name;
+	  std::string m_name;
 	};
 
+	struct link_list
+	{
+		int val;
+		link_list* next;
+		link_list(int x):val(x),next(nullptr){}
+	};
+	void less_list(link_list* head,int ref)
+	{
+		link_list *dummy=new link_list(0);
+		dummy->next=head;
+		link_list *p=dummy;
+		link_list *p_dummy=dummy;
+		link_list *great_head=p;
+		while(p->next!=nullptr)
+		{
+			if(p->next->val>ref)
+			{
+				p=p->next;
+			}	
+			else
+			{
+				p_dummy->next=p->next;
+				p->next=p->next->next;
+				p_dummy->next->next=nullptr;
+				p=p->next;
+				p_dummy=p_dummy->next;
+			}	
+		}
+		p_dummy->next->next=great_head->next;
+		head=p_dummy->next;
+	}
+	void print_list(link_list* head)
+	{
+		link_list* p=head;
+		while(p!=nullptr)
+		{
+			std::cout<<p->val<<std::endl;
+			p=p->next;
+		}
+		
+	}
 	void test_out()
 	{ 
-		Person p("joe");
-		p.greet("kate");
+		link_list l1(8);
+		link_list l2(9);
+		link_list l3(3);
+		link_list l4(5);
+		link_list l5(10);
+		l1->next=l2;
+		l2->next=l3;
+		l3->next=l4;
+		l4->next=l5;
+		print_list(l1);
+		less_list(l1,5);
+		print_list(l1);
+		// Person p("joe");
+		// p.greet("kate");
 		// char u8string[]=u8R"(你好)"" = hello";
 		// std::cout<<u8string<<std::endl;
 		// std::cout<<sizeof(u8string)<<std::endl;
