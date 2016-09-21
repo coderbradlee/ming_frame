@@ -334,7 +334,7 @@ namespace test2_namespace
 			}	
 		}
 		p_dummy->next->next=dummy->next;
-		head=p_dummy->next;
+		head=dummy->next;
 	}
 	void print_list(link_list* head)
 	{
