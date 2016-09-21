@@ -60,7 +60,7 @@ bool webSocketContext::processRequestLine(const char* begin, const char* end)
 bool webSocketContext::parseRequest(Buffer* buf, Timestamp receiveTime)
 {
   //std::cout<<buf->retrieveAllAsString()<<std::endl;
-  std::cout<<buf->peek()<<std::endl;
+  //std::cout<<buf->peek()<<std::endl;
   bool ok = true;
   bool hasMore = true;
   while (hasMore)
