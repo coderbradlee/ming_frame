@@ -308,7 +308,7 @@ namespace test2_namespace
 		link_list* next;
 		link_list(int x):val(x),next(nullptr){}
 	};
-	void less_list(link_list* head,int ref)
+	link_list* less_list(link_list* head,int ref)
 	{
 		link_list *dummy=new link_list(0);
 		dummy->next=head;
@@ -336,7 +336,7 @@ namespace test2_namespace
 		p_dummy->next=great_head->next;
 		std::cout<<__LINE__<<":"<<p_dummy->val<<std::endl;
 		std::cout<<__LINE__<<":"<<dummy->next->val<<std::endl;
-		head=dummy->next;
+		return dummy->next;
 	}
 	void print_list(link_list* head)
 	{
@@ -360,8 +360,8 @@ namespace test2_namespace
 		l3.next=&l4;
 		l4.next=&l5;
 		print_list(&l1);
-		less_list(&l1,5);
-		print_list(&l1);
+		
+		print_list(less_list(&l1,5));
 		// Person p("joe");
 		// p.greet("kate");
 		// char u8string[]=u8R"(你好)"" = hello";
