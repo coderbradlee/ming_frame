@@ -365,6 +365,18 @@ namespace test2_namespace
 		}
 		return chaser;
 	}
+	link_list* reverse_list(link_list* head)
+	{
+		link_list* prev=head;
+		link_list* next_node=head->next;
+		while(next_node!=nullptr)
+		{
+			next_node->next=prev;
+			prev=next_node;
+			next_node=next_node->next;
+		}
+		return prev;
+	}
 	void test_out()
 	{ 
 		link_list l1(8);
@@ -375,8 +387,9 @@ namespace test2_namespace
 		l1.next=&l2;
 		l2.next=&l3;
 		l3.next=&l4;
-		//l4.next=&l5;
-		std::cout<<find_middle(&l1)->val<<std::endl;
+		l4.next=&l5;
+		//std::cout<<find_middle(&l1)->val<<std::endl;
+		print_list(reverse_list(&l1));
 		//print_list(&l1);
 		// link_list* p=less_list(&l1,5);
 		// print_list(p);
