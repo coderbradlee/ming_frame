@@ -171,7 +171,7 @@ class webSocketRequest : public muduo::copyable
     receiveTime_.swap(that.receiveTime_);
     headers_.swap(that.headers_);
   }
- string get_magic_string()
+ string get_magic_string()const
  {
     return ws_magic_string;
  }
