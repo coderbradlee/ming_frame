@@ -318,25 +318,26 @@ namespace test2_namespace
 		dummy->next=head;
 		great_head->next=head;
 		link_list *runner=dummy;
-		while(runner->next->next!=nullptr)
+		while(runner->next!=nullptr)
 		{
-			if(runner->next->val>ref)
+			if(runner->val>ref)
 			{
-				p->next=runner->next;
+				p->next=runner;
 				runner=runner->next;
 				//p->next->next=nullptr;
 				p=p->next;
-				std::cout<<__LINE__<<":"<<p->next->val<<std::endl;
+				std::cout<<__LINE__<<":"<<p->val<<std::endl;
 			}	
 			else
 			{
-				p_dummy->next=runner->next;
+				p_dummy->next=runner;
 				runner=runner->next;
 				//p_dummy->next->next=nullptr;
 				p_dummy=p_dummy->next;
 				std::cout<<__LINE__<<":"<<p_dummy->val<<std::endl;
 			}	
 		}
+
 		p->next->next=nullptr;
 		p_dummy->next->next=nullptr;
 		p_dummy->next=great_head->next;
