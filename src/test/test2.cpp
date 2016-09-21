@@ -320,7 +320,7 @@ namespace test2_namespace
 			if(p->next->val>ref)
 			{
 				p=p->next;
-				std::cout<<p->next->val<<std::endl;
+				std::cout<<__LINE__<<":"<<p->next->val<<std::endl;
 			}	
 			else
 			{
@@ -329,8 +329,8 @@ namespace test2_namespace
 				p_dummy->next->next=nullptr;
 				//p=p->next;
 				p_dummy=p_dummy->next;
-				std::cout<<p->next->val<<std::endl;
-				std::cout<<p_dummy->next->val<<std::endl;
+				std::cout<<__LINE__<<":"<<p->next->val<<std::endl;
+				std::cout<<__LINE__<<":"<<p_dummy->next->val<<std::endl;
 			}	
 		}
 		p_dummy->next->next=dummy->next;
