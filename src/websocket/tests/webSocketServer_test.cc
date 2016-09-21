@@ -1,6 +1,6 @@
-#include <muduo/net/http/HttpServer.h>
-#include <muduo/net/http/HttpRequest.h>
-#include <muduo/net/http/HttpResponse.h>
+#include "webSocketServer.h"
+#include "webSocketRequest.h"
+#include "webSocketResponse.h"
 #include <muduo/net/EventLoop.h>
 #include <muduo/base/Logging.h>
 
@@ -13,7 +13,7 @@ using namespace muduo::net;
 extern char favicon[555];
 bool benchmark = false;
 
-void onRequest(const HttpRequest& req, HttpResponse* resp)
+void onRequest(const webSocketRequest& req, webSocketResponse* resp)
 {
   std::cout << "Headers " << req.methodString() << " " << req.path() << std::endl;
   if (!benchmark)
@@ -29,7 +29,7 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
 
   if (req.path() == "/")
   {
-    resp->setStatusCode(HttpResponse::k200Ok);
+    resp->setStatusCode(webSocketResponse::k200Ok);
     resp->setStatusMessage("OK");
     resp->setContentType("text/html");
     resp->addHeader("Server", "Muduo");
@@ -40,14 +40,14 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
   }
   else if (req.path() == "/favicon.ico")
   {
-    resp->setStatusCode(HttpResponse::k200Ok);
+    resp->setStatusCode(webSocketResponse::k200Ok);
     resp->setStatusMessage("OK");
     resp->setContentType("image/png");
     resp->setBody(string(favicon, sizeof favicon));
   }
   else if (req.path() == "/hello")
   {
-    resp->setStatusCode(HttpResponse::k200Ok);
+    resp->setStatusCode(webSocketResponse::k200Ok);
     resp->setStatusMessage("OK");
     resp->setContentType("text/plain");
     resp->addHeader("Server", "Muduo");
@@ -55,7 +55,7 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
   }
   else
   {
-    resp->setStatusCode(HttpResponse::k404NotFound);
+    resp->setStatusCode(webSocketResponse::k404NotFound);
     resp->setStatusMessage("Not Found");
     resp->setCloseConnection(true);
   }
@@ -71,8 +71,8 @@ int main(int argc, char* argv[])
     numThreads = atoi(argv[1]);
   }
   EventLoop loop;
-  HttpServer server(&loop, InetAddress(8000), "dummy");
-  server.setHttpCallback(onRequest);
+  webSocketServer server(&loop, InetAddress(8000), "dummy");
+  server.setwebSocketCallback(onRequest);
   server.setThreadNum(numThreads);
   server.start();
   loop.loop();
