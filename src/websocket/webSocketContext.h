@@ -12,7 +12,7 @@
 #define WEBSOCKET_CONTEXT_H
 
 #include <muduo/base/copyable.h>
-
+#include <iostream>
 #include "webSocketRequest.h"
 
 namespace muduo
