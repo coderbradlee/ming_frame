@@ -400,6 +400,17 @@ namespace test2_namespace
 		}
 		return dummy->next;
 	}
+	void traverse(link_list* head)
+	{
+		if(head->next!=nullptr)
+		{
+			traverse(head->next);
+		}
+		else
+		{
+			std::cout<<head->val<<std::endl;
+		}
+	}
 	void test_out()
 	{ 
 		link_list l1(8);
@@ -410,7 +421,8 @@ namespace test2_namespace
 		l1.next=&l2;
 		l2.next=&l3;
 		l3.next=&l4;l4.next=&l5;
-		print_list(swap_list(&l1));
+		traverse(&l1);
+		//print_list(swap_list(&l1));
 		//
 		//std::cout<<find_middle(&l1)->val<<std::endl;
 		//print_list(reverse_list(&l1));
