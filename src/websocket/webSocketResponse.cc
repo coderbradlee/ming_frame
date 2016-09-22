@@ -43,7 +43,8 @@ void webSocketResponse::appendToBuffer(Buffer* output) const
     output->append(": ");
     output->append(it->second);
     output->append("\r\n");
-    printf("%s:%s\n", it->first,it->second);
+    //printf("%s:%s\n", it->first,it->second);
+    std::cout<<it->first<<":"<<it->second<<std::endl;
   }
 
   output->append("\r\n");
