@@ -469,12 +469,12 @@ namespace test2_namespace
 			std::cout<<"my_string_test(my_string_test&& str)"<<std::endl;
 			str.m_data=nullptr;
 		}
-		my_string_test& operator=(my_string_test&& str)
-		{
-			std::cout<<"my_string_test& operator=(my_string_test&& str)"<<std::endl;
-			m_data=str.m_data;
-			str.m_data=nullptr;
-		}
+		// my_string_test& operator=(my_string_test&& str)
+		// {
+		// 	std::cout<<"my_string_test& operator=(my_string_test&& str)"<<std::endl;
+		// 	m_data=str.m_data;
+		// 	str.m_data=nullptr;
+		// }
 		bool operator==(const my_string_test& rhs)
 		{
 			return strcmp(m_data,rhs.m_data)==0;
