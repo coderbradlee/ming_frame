@@ -461,7 +461,7 @@ namespace test2_namespace
 		//my_string_test& operator=(my_string_test str)
 		my_string_test& operator=(const my_string_test& str)
 		{
-			std::cout<<"my_string_test& operator=(my_string_test str)"<<std::endl;
+			std::cout<<"my_string_test& operator=(const my_string_test& str)"<<std::endl;
 			my_string_test tmp(str);
 			std::swap(m_data,tmp.m_data);
 			return *this;
@@ -487,14 +487,17 @@ namespace test2_namespace
 		}
 		char operator[](int x)
 		{
+			std::cout<<"char operator[](int x)"<<std::endl;
 			return m_data[x];
 		}
 		const char operator[](int x)const
 		{
+			std::cout<<"const char operator[](int x)const"<<std::endl;
 			return m_data[x];
 		}
 		~my_string_test()noexcept
 		{
+			std::cout<<"~my_string_test()noexcept"<<std::endl;
 			delete[] m_data;
 		}
 	private:
