@@ -443,13 +443,24 @@ namespace test2_namespace
 	}
 	void test_out()
 	{ 
-		g.reset(new int(32));
-		muduo::Thread t1(read_g);
-		muduo::Thread t2(write_g);
-		t1.start();
-		t2.start();
-		t1.join();
-		t2.join();
+		boost::shared_ptr<int> p(new int(10));
+		boost::shared_ptr<int> p2(new int(10));
+		boost::unordered_map<boost::shared_ptr<int>,int> s;
+		s[p]=30;
+		s[p2]=40;
+		std::cout<<s[p]<<std::endl;
+		std::cout<<*p<<std::endl;
+		*p=20;
+		std::cout<<s[p]<<std::endl;
+		std::cout<<*p<<std::endl;
+		std::cout<<s.size()<<std::endl;
+		// g.reset(new int(32));
+		// muduo::Thread t1(read_g);
+		// muduo::Thread t2(write_g);
+		// t1.start();
+		// t2.start();
+		// t1.join();
+		// t2.join();
 		// link_list l1(8);
 		// link_list l2(9);
 		// link_list l3(3);
