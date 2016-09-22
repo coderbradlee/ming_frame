@@ -12,6 +12,7 @@
 #include <muduo/net/TcpServer.h>
 #include <muduo/net/inspect/Inspector.h>
 #include <muduo/net/Connector.h>
+#include <boost/unordered_map.hpp>
 namespace test2_namespace
 {
 	namespace test_inline
