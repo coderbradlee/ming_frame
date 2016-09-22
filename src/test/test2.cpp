@@ -428,7 +428,7 @@ namespace test2_namespace
 			}
 			sum+=*x;
 		}
-		
+		std::cout<<sum<<std::endl;
 	}
 	void write_g()
 	{
