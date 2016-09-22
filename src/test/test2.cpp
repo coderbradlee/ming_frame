@@ -507,8 +507,11 @@ namespace test2_namespace
 	{ 
 		my_string_test x="first";
 		my_string_test y=x;
+		std::cout<<x[0]<<std::endl;
 		x="second";
 		y=x;
+		
+		std::cout<<y[0]<<std::endl;
 		// std::cout<<sizeof(std::set<int>)<<std::endl;
 		// std::cout<<sizeof(std::map<int,int>)<<std::endl;
 		// boost::shared_ptr<int> p(new int(10));
