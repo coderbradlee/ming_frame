@@ -446,6 +446,8 @@ namespace test2_namespace
 		g.reset(new int(32));
 		muduo::Thread t1(read_g);
 		muduo::Thread t2(write_g);
+		t1.start();
+		t2.start();
 		t1.join();
 		t2.join();
 		// link_list l1(8);
