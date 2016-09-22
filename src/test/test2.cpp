@@ -443,8 +443,8 @@ namespace test2_namespace
 	}
 	void test_out()
 	{ 
-		std::cout<<sizeof(boost::set<int>)<<std::endl;
-		std::cout<<sizeof(boost::map<int,int>)<<std::endl;
+		std::cout<<sizeof(std::set<int>)<<std::endl;
+		std::cout<<sizeof(std::map<int,int>)<<std::endl;
 		// boost::shared_ptr<int> p(new int(10));
 		// boost::shared_ptr<int> p2(new int(10));
 		// boost::unordered_map<boost::shared_ptr<int>,int> s;
