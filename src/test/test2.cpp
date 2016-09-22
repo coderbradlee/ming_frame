@@ -459,7 +459,7 @@ namespace test2_namespace
 			strcpy(m_data,str.m_data);
 		}
 		//my_string_test& operator=(my_string_test str)
-		my_string_test& operator=(cosnt my_string_test& str)
+		my_string_test& operator=(const my_string_test& str)
 		{
 			std::cout<<"my_string_test& operator=(my_string_test str)"<<std::endl;
 			my_string_test tmp(str);
