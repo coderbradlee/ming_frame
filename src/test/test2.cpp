@@ -443,17 +443,19 @@ namespace test2_namespace
 	}
 	void test_out()
 	{ 
-		boost::shared_ptr<int> p(new int(10));
-		boost::shared_ptr<int> p2(new int(10));
-		boost::unordered_map<boost::shared_ptr<int>,int> s;
-		s[p]=30;
-		s[p2]=40;
-		std::cout<<s[p]<<std::endl;
-		std::cout<<*p<<std::endl;
-		*p=20;
-		std::cout<<s[p]<<std::endl;
-		std::cout<<*p<<std::endl;
-		std::cout<<s.size()<<std::endl;
+		std::cout<<sizeof(boost::set)<<std::endl;
+		std::cout<<sizeof(boost::map)<<std::endl;
+		// boost::shared_ptr<int> p(new int(10));
+		// boost::shared_ptr<int> p2(new int(10));
+		// boost::unordered_map<boost::shared_ptr<int>,int> s;
+		// s[p]=30;
+		// s[p2]=40;
+		// std::cout<<s[p]<<std::endl;
+		// std::cout<<*p<<std::endl;
+		// *p=20;
+		// std::cout<<s[p]<<std::endl;
+		// std::cout<<*p<<std::endl;
+		// std::cout<<s.size()<<std::endl;
 		// g.reset(new int(32));
 		// muduo::Thread t1(read_g);
 		// muduo::Thread t2(write_g);
