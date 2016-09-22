@@ -66,7 +66,7 @@ void onRequest(const webSocketRequest& req, webSocketResponse* resp)
     auto sha1=Crypto::SHA1(req.getHeader("Sec-WebSocket-Key")+req.get_magic_string());
     resp->setStatusCode(webSocketResponse::k200Ok);
     resp->setStatusMessage("HTTP/1.1 101 Web Socket Protocol Handshake\r\n");
-    resp->addHeader("Upgrade", "websocket");
+    resp->addHeader("Upgrade", "WebSocket");
     resp->addHeader("Connection", "Upgrade");
     resp->addHeader("Sec-WebSocket-Accept", Crypto::Base64::encode(sha1));
     
