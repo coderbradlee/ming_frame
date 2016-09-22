@@ -453,7 +453,7 @@ namespace test2_namespace
 			std::cout<<"my_string_test(const char* str)"<<std::endl;
 			strcpy(m_data,str);
 		}
-		my_string_test(const my_string_test& str):m_data(new char[strlen(str.m_data)+1]);
+		my_string_test(const my_string_test& str):m_data(new char[strlen(str.m_data)+1])
 		{
 			std::cout<<"my_string_test(const my_string_test& str)"<<std::endl;
 			strcpy(m_data,str.m_data);
@@ -483,11 +483,11 @@ namespace test2_namespace
 		{
 			return strcmp(m_data,rhs.m_data)<0;
 		}
-		char* operator[](int x)
+		char operator[](int x)
 		{
 			return m_data[x];
 		}
-		const char* operator[](int x)const
+		const char operator[](int x)const
 		{
 			return m_data[x];
 		}
