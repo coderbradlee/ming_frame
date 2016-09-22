@@ -413,17 +413,50 @@ namespace test2_namespace
 			return;
 		}
 	}
+	boost::shared_ptr<int> g;
+	muduo::MutexLock mutex;
+	void read_g()
+	{
+		boost::shared_ptr<int> x;
+		long sum=0;
+		for(int i=0;i<1000*1000;++i)
+		{
+			x.reset();
+			{
+				//muduo::MutexLockGuard lock(mutex);
+				x=g;
+			}
+			sum+=*x;
+		}
+		
+	}
+	void write_g()
+	{
+		for(int i=0;i<1000*1000;++i)
+		{
+			boost::shared_ptr<int> n(new int(42));
+			{
+				//muduo::MutexLockGuard lock(mutex);
+				g=n;
+			}
+		}
+	}
 	void test_out()
 	{ 
-		link_list l1(8);
-		link_list l2(9);
-		link_list l3(3);
-		link_list l4(5);
-		link_list l5(10);
-		l1.next=&l2;
-		l2.next=&l3;
-		l3.next=&l4;l4.next=&l5;
-		traverse(&l1);
+		g.reset(new int(32));
+		muduo::Thread t1(read_g);
+		muduo::Thread t2(write_g);
+		t1.join();
+		t2.join();
+		// link_list l1(8);
+		// link_list l2(9);
+		// link_list l3(3);
+		// link_list l4(5);
+		// link_list l5(10);
+		// l1.next=&l2;
+		// l2.next=&l3;
+		// l3.next=&l4;l4.next=&l5;
+		// traverse(&l1);
 		//print_list(swap_list(&l1));
 		//
 		//std::cout<<find_middle(&l1)->val<<std::endl;
