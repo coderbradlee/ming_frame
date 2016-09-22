@@ -21,8 +21,8 @@ void webSocketResponse::appendToBuffer(Buffer* output) const
   snprintf(buf, sizeof buf, "HTTP/1.1 %d ", statusCode_);
   //output->append(buf);
   output->append("HTTP/1.1 101 Web Socket Protocol Handshake\r\n");
-  output->append(statusMessage_);
-  output->append("\r\n");
+  //output->append(statusMessage_);
+  //output->append("\r\n");
 
   if (closeConnection_)
   {
@@ -30,9 +30,9 @@ void webSocketResponse::appendToBuffer(Buffer* output) const
   }
   else
   {
-    snprintf(buf, sizeof buf, "Content-Length: %zd\r\n", body_.size());
-    output->append(buf);
-    output->append("Connection: Keep-Alive\r\n");
+    // snprintf(buf, sizeof buf, "Content-Length: %zd\r\n", body_.size());
+    // output->append(buf);
+    // output->append("Connection: Keep-Alive\r\n");
   }
 
   for (std::map<string, string>::const_iterator it = headers_.begin();
