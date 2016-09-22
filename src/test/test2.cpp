@@ -441,45 +441,45 @@ namespace test2_namespace
 			}
 		}
 	}
-	class my_string
+	class my_string_test
 	{
 	public:
-		my_string():m_data(new char[1])
+		my_string_test():m_data(new char[1])
 		{
 			m_data[0]='\0';
 		}
-		my_string(const char* str):m_data(new char[strlen(str)+1])
+		my_string_test(const char* str):m_data(new char[strlen(str)+1])
 		{
-			std::cout<<"my_string(const char* str)"<<std::endl;
+			std::cout<<"my_string_test(const char* str)"<<std::endl;
 			strcpy(m_data,str);
 		}
-		my_string(const my_string& str):m_data(new char[strlen(str.m_data)+1]);
+		my_string_test(const my_string_test& str):m_data(new char[strlen(str.m_data)+1]);
 		{
-			std::cout<<"my_string(const my_string& str)"<<std::endl;
+			std::cout<<"my_string_test(const my_string_test& str)"<<std::endl;
 			strcpy(m_data,str.m_data);
 		}
-		my_string& operator=(my_string str)
+		my_string_test& operator=(my_string_test str)
 		{
-			std::cout<<"my_string& operator=(my_string str)"<<std::endl;
-			swap(m_data,str.m_data);
+			std::cout<<"my_string_test& operator=(my_string_test str)"<<std::endl;
+			std::swap(m_data,str.m_data);
 			return *this;
 		}
-		my_string(my_string&& str)noexcept:m_data(str.m_data)
+		my_string_test(my_string_test&& str)noexcept:m_data(str.m_data)
 		{
-			std::cout<<"my_string(my_string&& str)"<<std::endl;
+			std::cout<<"my_string_test(my_string_test&& str)"<<std::endl;
 			str.m_data=nullptr;
 		}
-		my_string& operator=(my_string&& str)
+		my_string_test& operator=(my_string_test&& str)
 		{
-			std::cout<<"my_string& operator=(my_string&& str)"<<std::endl;
+			std::cout<<"my_string_test& operator=(my_string_test&& str)"<<std::endl;
 			m_data=str.m_data;
 			str.m_data=nullptr;
 		}
-		bool operator==(const my_string& rhs)
+		bool operator==(const my_string_test& rhs)
 		{
 			return strcmp(m_data,rhs.m_data)==0;
 		}
-		bool operator<(const my_string& rhs)
+		bool operator<(const my_string_test& rhs)
 		{
 			return strcmp(m_data,rhs.m_data)<0;
 		}
@@ -491,7 +491,7 @@ namespace test2_namespace
 		{
 			return m_data[x];
 		}
-		~my_string()noexcept
+		~my_string_test()noexcept
 		{
 			delete[] m_data;
 		}
@@ -500,8 +500,8 @@ namespace test2_namespace
 	};
 	void test_out()
 	{ 
-		my_string x="first";
-		my_string y=x;
+		my_string_test x="first";
+		my_string_test y=x;
 		x="second";
 		y=x;
 		// std::cout<<sizeof(std::set<int>)<<std::endl;
