@@ -485,12 +485,12 @@ namespace test2_namespace
 		{
 			return strcmp(m_data,rhs.m_data)<0;
 		}
-		char operator[](int x)
+		char& operator[](int x)
 		{
 			std::cout<<"char operator[](int x)"<<std::endl;
 			return m_data[x];
 		}
-		const char operator[](int x)const
+		const char& operator[](int x)const
 		{
 			std::cout<<"const char operator[](int x)const"<<std::endl;
 			return m_data[x];
@@ -509,6 +509,7 @@ namespace test2_namespace
 		my_string_test y=x;
 		std::cout<<x[0]<<std::endl;
 		x="second";
+		x[0]='t';
 		y=x;
 		
 		std::cout<<y[0]<<std::endl;
