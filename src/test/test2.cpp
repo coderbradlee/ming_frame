@@ -423,7 +423,7 @@ namespace test2_namespace
 		{
 			x.reset();
 			{
-				//muduo::MutexLockGuard lock(mutex);
+				muduo::MutexLockGuard lock(mutex);
 				x=g;
 			}
 			sum+=*x;
@@ -436,7 +436,7 @@ namespace test2_namespace
 		{
 			boost::shared_ptr<int> n(new int(42));
 			{
-				muduo::MutexLockGuard lock(mutex);
+				//muduo::MutexLockGuard lock(mutex);
 				g=n;
 			}
 		}
