@@ -129,7 +129,7 @@ void transmit(const Options& opt)
 		int ack=0;
 		int nr=read_n(sockfd,&ack,sizeof(ack));
 		assert(nr==sizeof(ack));
-		ack=ntonl(ack);
+		ack=ntohl(ack);
 		assert(ack==opt.length);
 
 	}
