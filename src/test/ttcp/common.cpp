@@ -56,6 +56,6 @@ struct sockaddr_in resolveOrDie(const char* host,uint16_t port)
 	bzero(&addr,sizeof(addr));
 	addr.sin_family=AF_INET;
 	addr.sin_port=htons(port);
-	addr.sin_addr=*reinterpret_cast<string in_addr*>(he->h_addr);
+	addr.sin_addr=*reinterpret_cast<struct in_addr*>(he->h_addr);
 	return addr;
 }
