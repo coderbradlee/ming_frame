@@ -1,3 +1,7 @@
+
+merge conflict
+
+
 9、proactor 主动调用，等待回调，用于比较耗时的网络
    reactor 被动调用，靠epoll触发
 
