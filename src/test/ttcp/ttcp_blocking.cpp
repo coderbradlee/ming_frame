@@ -71,7 +71,7 @@ static int read_n(int sockfd,void* buf,int length)
 	int nread=0;
 	while(nread<length)
 	{
-		ssize_t nf=::read(sockfd,static_cast<char*>(buf)+nread,length-nread);
+		ssize_t nr=::read(sockfd,static_cast<char*>(buf)+nread,length-nread);
 		if(nr>0)
 		{
 			nread+=static_cast<int>(nr);
@@ -116,7 +116,7 @@ void transmit(const Options& opt)
 	PayloadMessage* payload=static_cast<PayloadMessage*>(::malloc(total_len));
 	assert(payload);
 	payload->length=htonl(opt.length);
-	for(int i=0i<opt.length;++i)
+	for(int i=0;i<opt.length;++i)
 	{
 		payload->data[i]="0123456789abcdef"[i%16];
 	}
@@ -155,7 +155,7 @@ void receive(const Options& opt)
 	for(int i=0;i<sm.number;++i)
 	{
 		payload->length=0;
-		if(read_n(sockfd,&payload->number,sizeof(payload->length))!=sizeof(payload->length))
+		if(read_n(sockfd,&payload->length,sizeof(payload->length))!=sizeof(payload->length))
 		{
 			perror("read length");
 			exit(1);
