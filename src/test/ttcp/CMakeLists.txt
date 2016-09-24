@@ -1,10 +1,10 @@
 
 #if(BOOSTPO_LIBRARY)
   add_executable(ttcp_blocking ttcp_blocking.cpp common.cpp main.cpp)
-  target_link_libraries(ttcp_blocking muduo_base boost_program_options)
+  target_link_libraries(ttcp_blocking muduo_base_cpp11 boost_program_options)
   set_target_properties(ttcp_blocking PROPERTIES COMPILE_FLAGS "-Wno-error=old-style-cast -Wno-error=conversion")
 
   #add_executable(ttcp_muduo ttcp.cpp common.cpp main.cpp)
-  #target_link_libraries(ttcp_muduo muduo_net boost_program_options)
+  #target_link_libraries(ttcp_muduo muduo_net_cpp11 boost_program_options)
   #set_target_properties(ttcp_muduo PROPERTIES COMPILE_FLAGS "-Wno-error=conversion")
 #endif()
