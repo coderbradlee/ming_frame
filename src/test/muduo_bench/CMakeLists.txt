@@ -32,4 +32,4 @@ target_link_libraries(pub muduo_pubsub)
 add_executable(sub sub.cpp)
 target_link_libraries(sub muduo_pubsub)
 
-add_subdirectory(ttcp)
+#add_subdirectory(ttcp)
