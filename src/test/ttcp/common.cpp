@@ -45,7 +45,7 @@ bool parseCommandLine(int argc,char* argv[],Options* opt)
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 struct sockaddr_in resolveOrDie(char* host,uint16_t port)
 {
-	struct hostent* he=::gethostname(host);
+	struct hostent* he=::gethostname(host,strlen(host));
 	if(!he)
 	{
 		perror("gethostname");
