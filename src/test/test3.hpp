@@ -24,11 +24,11 @@ namespace test3_namespace
 		}
 		void unregister_observer(observer* s)
 		{
-			for(auto &i:m_observers)
+			for(auto i=m_observers.begin();i!=m_observers.end();++i)
 			{
-				if(i==s)
+				if(*i==s)
 				{
-					m_observers.erase(m_observers.find(s);
+					m_observers.erase(i);
 					break;
 				}
 				
