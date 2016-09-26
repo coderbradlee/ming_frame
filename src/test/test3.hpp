@@ -68,7 +68,7 @@ namespace test3_namespace
 	void test_out()
 	{
 		foo *f=new foo();
-		observer o=new observer(f);
+		observer* o=new observer(f);
 		delete f;
 		o->test();
 		
