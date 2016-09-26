@@ -15,62 +15,77 @@ namespace test3_namespace
 {
 	using muduo::string;
 	class foo;
-	class observer
+	class observer:public boost::enable_shared_from_this<observer>
 	{
 	public:
-		observer(foo* s);
+		observer(boost::shared_ptr<foo> s);
 		~observer();
 		void update()
 		{
 			std::cout<<"observer update"<<std::endl;
 		}
 	private:
-		foo* m_foo;
+		boost::shared_ptr<foo> m_foo;
 	};
 	class foo
 	{
 	public:
-		void register_observer(observer* s)
+		void register_observer(boost::shared_ptr<observer> s)
 		{
+			std::cout<<"foo::register_observer"<<std::endl;
 			m_observers.push_back(s);
 		}
-		void unregister_observer(observer* s)
-		{
-			for(auto i=m_observers.begin();i!=m_observers.end();++i)
-			{
-				if(*i==s)
-				{
-					m_observers.erase(i);
-					break;
-				}
+		// void unregister_observer(boost::shared_ptr<observer> s)
+		// {
+		// 	for(auto i=m_observers.begin();i!=m_observers.end();++i)
+		// 	{
+		// 		boost::shared_ptr<observer> temp(i->lock());
+		// 		if(temp)
+		// 		{
+		// 			m_observers.erase(i);
+		// 			break;
+		// 		}
 				
-			}
+		// 	}
 			
-		}
+		// }
 		void test()
 		{
-			for(auto& i:m_observers)
+			std::cout<<"foo::test"<<std::endl;
+			for(auto i=m_observers.begin();i!=m_observers.end();++i)
 			{
-				i->update();
+				boost::shared_ptr<observer> temp(i->lock());
+				if(temp)
+				{
+					temp->update();
+				}
+				else
+				{
+					m_observers.erase(i);
+				}
 			}
 		}
 	private:
-		std::vector<observer*> m_observers;
+		std::vector<std::weak_ptr<observer>> m_observers;
 	};
-	observer::observer(foo* s):m_foo(s)
+	observer::observer(boost::shared_ptr<observer> s):m_foo(s)
 	{
-		m_foo->register_observer(this);
+		std::cout<<"observer::observer"<<std::endl;
+		m_foo->register_observer(shared_from_this());
 	}
 	observer::~observer()
 	{
-		m_foo->unregister_observer(this);
+		std::cout<<"observer::~observer"<<std::endl;
+		m_foo->unregister_observer(shared_from_this());
 	}
 	void test_out()
 	{
-		foo *f=new foo();
-		observer* o=new observer(f);
-		//delete o;
-		f->test();
+		boost::shared_ptr<foo> f=make_shared<foo>();
+		{
+			boost::shared_ptr<observer> o=make_shared<observer>(f);
+			f->test();
+		}
+		
 		
 	}
 }
