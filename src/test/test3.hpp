@@ -31,12 +31,12 @@ namespace test3_namespace
 	class foo
 	{
 	public:
-		void register_observer(boost::shared_ptr<observer> s)
+		void register_observer(boost::weak_ptr<observer> s)
 		{
 			std::cout<<"foo::register_observer"<<std::endl;
 			m_observers.push_back(s);
 		}
-		// void unregister_observer(boost::shared_ptr<observer> s)
+		// void unregister_observer(boost::weak_ptr<observer> s)
 		// {
 		// 	for(auto i=m_observers.begin();i!=m_observers.end();++i)
 		// 	{
@@ -77,7 +77,7 @@ namespace test3_namespace
 	observer::~observer()
 	{
 		std::cout<<"observer::~observer"<<std::endl;
-		m_foo->unregister_observer(shared_from_this());
+		// m_foo->unregister_observer(shared_from_this());
 	}
 	void test_out()
 	{
