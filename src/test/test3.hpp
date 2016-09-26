@@ -53,12 +53,14 @@ namespace test3_namespace
 		void test()
 		{
 			std::cout<<"foo::test"<<std::endl;
-			for(auto i=m_observers.begin();i!=m_observers.end();++i)
+			auto i=m_observers.begin();
+			 while (i != m_observers.end())
 			{
 				boost::shared_ptr<observer> temp(i->lock());
 				if(temp)
 				{
 					temp->update();
+					++i;
 				}
 				else
 				{
