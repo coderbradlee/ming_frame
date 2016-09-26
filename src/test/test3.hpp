@@ -64,6 +64,7 @@ namespace test3_namespace
 				}
 				else
 				{
+					std::cout<<"foo::test::erase"<<std::endl;
 					i = m_observers.erase(i);
 				}
 			}
@@ -74,6 +75,11 @@ namespace test3_namespace
 	observer::observer(boost::shared_ptr<foo> s):m_foo(s)
 	{
 		std::cout<<"observer::observer"<<std::endl;
+		//m_foo->register_observer(shared_from_this());
+	}
+	observer::observe()
+	{
+		std::cout<<"observer::observe"<<std::endl;
 		m_foo->register_observer(shared_from_this());
 	}
 	observer::~observer()
@@ -86,9 +92,9 @@ namespace test3_namespace
 		boost::shared_ptr<foo> f=boost::make_shared<foo>();
 		{
 			boost::shared_ptr<observer> o=boost::make_shared<observer>(f);
+			o->observe();
+			f->test();
 		}
 		f->test();
-		
-		
 	}
 }
