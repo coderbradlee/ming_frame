@@ -19,7 +19,7 @@ namespace test3_namespace
 	{
 	public:
 		observer(foo* s);
-		observer::~observer();
+		~observer();
 		void update()
 		{
 			std::cout<<"observer update"<<std::endl;
