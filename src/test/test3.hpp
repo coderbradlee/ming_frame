@@ -11,6 +11,7 @@
 #include <muduo/net/inspect/Inspector.h>
 #include <muduo/net/Connector.h>
 #include <boost/unordered_map.hpp>
+#include <boost/make_shared.hpp>
 namespace test3_namespace
 {
 	using muduo::string;
