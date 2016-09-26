@@ -5,7 +5,7 @@
 SRCS="Acceptor.cc InetAddress.cc TcpStream.cc Socket.cc"
 
 set -x
-CC=${CC:-g++}
+CC=${CC:-g++ -I.}
 
 #$CC -std=c++11 -Wall -Wextra -g -O2 $SRCS chargen.cc ../datetime/Timestamp.cc -o chargen -lpthread
 
