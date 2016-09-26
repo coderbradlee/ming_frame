@@ -63,6 +63,7 @@ namespace test3_namespace
 				else
 				{
 					m_observers.erase(i);
+					break;
 				}
 			}
 		}
