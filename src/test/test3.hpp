@@ -67,7 +67,7 @@ namespace test3_namespace
 			}
 		}
 	private:
-		std::vector<std::weak_ptr<observer>> m_observers;
+		std::vector<boost::weak_ptr<observer>> m_observers;
 	};
 	observer::observer(boost::shared_ptr<foo> s):m_foo(s)
 	{
