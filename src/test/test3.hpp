@@ -86,8 +86,8 @@ namespace test3_namespace
 		boost::shared_ptr<foo> f=boost::make_shared<foo>();
 		{
 			boost::shared_ptr<observer> o=boost::make_shared<observer>(f);
-			f->test();
 		}
+		f->test();
 		
 		
 	}
