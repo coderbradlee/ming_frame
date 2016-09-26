@@ -69,8 +69,8 @@ namespace test3_namespace
 	{
 		foo *f=new foo();
 		observer* o=new observer(f);
-		delete f;
-		o->test();
+		delete o;
+		f->test();
 		
 	}
 }
