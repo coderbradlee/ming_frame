@@ -20,6 +20,7 @@ namespace test3_namespace
 	{
 	public:
 		observer(boost::shared_ptr<foo> s);
+		void observe();
 		~observer();
 		void update()
 		{
@@ -77,7 +78,7 @@ namespace test3_namespace
 		std::cout<<"observer::observer"<<std::endl;
 		//m_foo->register_observer(shared_from_this());
 	}
-	observer::observe()
+	void observer::observe()
 	{
 		std::cout<<"observer::observe"<<std::endl;
 		m_foo->register_observer(shared_from_this());
