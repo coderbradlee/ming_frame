@@ -24,7 +24,16 @@ namespace test3_namespace
 		}
 		void unregister_observer(observer* s)
 		{
-			m_observers.erase(m_observers.find(s);
+			for(auto &i:m_observers)
+			{
+				if(i==s)
+				{
+					m_observers.erase(m_observers.find(s);
+					break;
+				}
+				
+			}
+			
 		}
 		void test()
 		{
