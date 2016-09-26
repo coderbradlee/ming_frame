@@ -62,8 +62,7 @@ namespace test3_namespace
 				}
 				else
 				{
-					m_observers.erase(i);
-					break;
+					i = m_observers.erase(i);
 				}
 			}
 		}
