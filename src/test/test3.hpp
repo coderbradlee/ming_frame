@@ -80,9 +80,9 @@ namespace test3_namespace
 	}
 	void test_out()
 	{
-		boost::shared_ptr<foo> f=make_shared<foo>();
+		boost::shared_ptr<foo> f=boost::make_shared<foo>();
 		{
-			boost::shared_ptr<observer> o=make_shared<observer>(f);
+			boost::shared_ptr<observer> o=boost::make_shared<observer>(f);
 			f->test();
 		}
 		
