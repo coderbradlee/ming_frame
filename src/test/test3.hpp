@@ -14,7 +14,19 @@
 namespace test3_namespace
 {
 	using muduo::string;
-	class observer;
+	class foo;
+	class observer
+	{
+	public:
+		observer(foo* s);
+		observer::~observer();
+		void update()
+		{
+			std::cout<<"observer update"<<std::endl;
+		}
+	private:
+		foo* m_foo;
+	};
 	class foo
 	{
 	public:
@@ -45,25 +57,14 @@ namespace test3_namespace
 	private:
 		std::vector<observer*> m_observers;
 	};
-	class observer
+	observer::observer(foo* s):m_foo(s)
 	{
-	public:
-		observer(foo* s):m_foo(s)
-		{
-			m_foo->register_observer(this);
-		}
-		~observer()
-		{
-			m_foo->unregister_observer(this);
-		}
-		void update()
-		{
-			std::cout<<"observer update"<<std::endl;
-		}
-	private:
-		foo* m_foo;
-	};
-	
+		m_foo->register_observer(this);
+	}
+	observer::~observer()
+	{
+		m_foo->unregister_observer(this);
+	}
 	void test_out()
 	{
 		foo *f=new foo();
