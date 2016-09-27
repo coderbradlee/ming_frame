@@ -276,6 +276,8 @@ namespace test3_namespace
 		my_mutex():m_owner_thread_id(0)
 		{
 			pthread_mutex_init(&m_mutex,NULL);
+			pthread_mutexattr_t mattr;
+			pthread_mutexattr_settype(&mattr,PTHREAD_MUTEX_NORMAL);
 		}
 		~my_mutex()
 		{
