@@ -167,8 +167,10 @@ namespace test3_namespace
 	class test_self_lock
 	{
 	public:
-		test_self_lock();
-		~test_self_lock();
+		test_self_lock()
+		{}
+		~test_self_lock()
+		{}
 		void process()
 		{
 			muduo::MutexLockGuard lo(m_mutex);
