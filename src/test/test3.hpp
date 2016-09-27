@@ -164,23 +164,44 @@ namespace test3_namespace
 		mutable muduo::MutexLock m_mutex;
 
 	};
+	class test_self_lock
+	{
+	public:
+		test_self_lock();
+		~test_self_lock();
+		void process()
+		{
+			muduo::MutexLockGuard lo(m_mutex);
+			std::cout<<"process"<<std::endl;
+			print();
+		}
+		void print()
+		{
+			muduo::MutexLockGuard lo(m_mutex);
+			std::cout<<"print"<<std::endl;
+		}
+	private:
+		mutable muduo::MutexLock m_mutex;
+	};
 	void test_out()
 	{
-		{
-			boost::shared_ptr<stock_factory> sf(new stock_factory());
-			{
-				boost::shared_ptr<stock> s1=sf->get_stock("us");
-				boost::shared_ptr<stock> s2=sf->get_stock("uk");
-			}
-		}
-		std::cout<<"------------------------------"<<std::endl;
-		{
-			boost::shared_ptr<stock> s;
-			{
-				boost::shared_ptr<stock_factory> sf(new stock_factory());
-				s=sf->get_stock("ll");
-			}
-			std::cout<<s->get_name()<<std::endl;
-		}
+		test_self_lock t();
+		t.process();
+		// {
+		// 	boost::shared_ptr<stock_factory> sf(new stock_factory());
+		// 	{
+		// 		boost::shared_ptr<stock> s1=sf->get_stock("us");
+		// 		boost::shared_ptr<stock> s2=sf->get_stock("uk");
+		// 	}
+		// }
+		// std::cout<<"------------------------------"<<std::endl;
+		// {
+		// 	boost::shared_ptr<stock> s;
+		// 	{
+		// 		boost::shared_ptr<stock_factory> sf(new stock_factory());
+		// 		s=sf->get_stock("ll");
+		// 	}
+		// 	std::cout<<s->get_name()<<std::endl;
+		// }
 	}
 }
