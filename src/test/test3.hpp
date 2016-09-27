@@ -283,7 +283,7 @@ namespace test3_namespace
 		}
 		void lock()
 		{
-			pthread_mutex_lock(&&m_mutex);
+			pthread_mutex_lock(&m_mutex);
 			m_owner_thread_id=1;
 		}
 		void unlock()
