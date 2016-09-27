@@ -229,7 +229,7 @@ namespace test3_namespace
 	{
 		muduo::MutexLockGuard lo(m_mutex);
 		//sleep(1);
-		usleep(500*1000);
+		//usleep(500*1000);
 		g_inventory.remove(this);
 	}
 	void request::process()
