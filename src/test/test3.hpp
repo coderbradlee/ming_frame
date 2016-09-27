@@ -328,12 +328,36 @@ namespace test3_namespace
 		my_mutex& m_mutex;
 		pthread_cond_t m_cond;
 	};
+	template<typename T>
+	class my_singleton
+	{
+	public:
+		static T get_instance()
+		{
+			pthread_once(&m_once,&my_singleton::init);
+			return *m_instatnce;
+		}
+		void init()
+		{
+			m_instatnce=new T();
+		}
+	private:
+		my_singleton();
+		~my_singleton();
+	private:
+		static pthread_once_t m_once;
+		static T* m_instatnce;
+	};
+	template<typename T>
+	pthread_once_t my_singleton::m_once=PTHREAD_ONCE_INIT;
+	template<typename T>
+	T* my_singleton::m_instatnce=NULL;
 	void test_out()
 	{
-		my_mutex test_mutex;
-		test_mutex.lock();
-		test_mutex.unlock();
-		my_condition m(test_mutex);
+		// my_mutex test_mutex;
+		// test_mutex.lock();
+		// test_mutex.unlock();
+		// my_condition m(test_mutex);
 		// muduo::Thread t1([]()
 		// 	{
 		// 		std::cout<<dequeue()<<std::endl;
