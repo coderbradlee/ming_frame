@@ -248,20 +248,50 @@ namespace test3_namespace
 		muduo::MutexLockGuard lo(m_mutex);
 		std::cout<<"print"<<std::endl;
 	}
-
+	muduo::MutexLock mutex;
+	muduo::Condition cond(mutex);
+	std::deque<int> test_queue;
+	int dequeue()
+	{
+		muduo::MutexLockGuard lo(mutex);
+		while(test_queue.empty())
+		{
+			std::cout<<"before wait"<<std::endl;
+			cond.wait();
+			std::cout<<"after wait"<<std::endl;
+		}
+		int top=test_queue.front();
+		test_queue.pop_front();
+		return top;
+	}
+	void enqueue(int x)
+	{
+		muduo::MutexLockGuard lo(mutex);
+		test_queue.push_back(x);
+		cond.notify();
+	}
 	void test_out()
 	{
+		dequeue();
 		muduo::Thread t([]()
 			{
-				request* r=new request();
-				r->process();
-				delete r;
+				enqueue(3);
 			});
 		t.start();
-		//usleep(500*1000);
-		sleep(1);
-		g_inventory.print_all();
 		t.join();
+		
+		std::cout<<dequeue()<<std::endl;
+		// muduo::Thread t([]()
+		// 	{
+		// 		request* r=new request();
+		// 		r->process();
+		// 		delete r;
+		// 	});
+		// t.start();
+		// //usleep(500*1000);
+		// sleep(1);
+		// g_inventory.print_all();
+		// t.join();
 		
 		// test_self_lock t;
 		// t.process();
