@@ -368,8 +368,7 @@ namespace test3_namespace
 	{
 		std::cout<<"post"<<std::endl;
 		muduo::MutexLockGuard lo(mutex_copy_on_write);
-		g_foo_copy_on_write.push_back(f);
-
+		g_foo_copy_on_write->push_back(f);
 	}
 	void traverse()
 	{
