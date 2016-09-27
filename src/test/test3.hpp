@@ -169,8 +169,8 @@ namespace test3_namespace
 		{
 			boost::shared_ptr<stock_factory> sf(new stock_factory());
 			{
-				boost::shared_ptr<stock>=sf->get_stock("us");
-				boost::shared_ptr<stock>=sf->get_stock("uk");
+				boost::shared_ptr<stock> s1=sf->get_stock("us");
+				boost::shared_ptr<stock> s2=sf->get_stock("uk");
 			}
 		}
 		std::cout<<"------------------------------"<<std::endl;
