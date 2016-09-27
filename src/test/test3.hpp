@@ -352,6 +352,8 @@ namespace test3_namespace
 	pthread_once_t my_singleton<T>::m_once=PTHREAD_ONCE_INIT;
 	template<typename T>
 	T* my_singleton<T>::m_instatnce=NULL;
+	class foo_copy_on_write;
+	void post(foo_copy_on_write f);
 	class foo_copy_on_write
 	{
 	public:
