@@ -297,9 +297,9 @@ namespace test3_namespace
 	};
 	void test_out()
 	{
-		my_mutex mutex;
-		mutex.lock();
-		mutex.unlock();
+		my_mutex test_mutex;
+		test_mutex.lock();
+		test_mutex.unlock();
 		// muduo::Thread t1([]()
 		// 	{
 		// 		std::cout<<dequeue()<<std::endl;
