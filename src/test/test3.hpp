@@ -212,6 +212,7 @@ namespace test3_namespace
 		}
 	private:
 		std::set<request*> m_requests;
+		mutable muduo::MutexLock m_mutex;
 	};
 	inventory g_inventory;
 	class request
@@ -243,7 +244,7 @@ namespace test3_namespace
 		muduo::Thread t([]()
 			{
 				request* r=new request();
-				r.process();
+				r->process();
 				delete r;
 			});
 		t.start();
