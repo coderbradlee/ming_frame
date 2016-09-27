@@ -412,7 +412,7 @@ namespace test3_namespace
 				++it;
 			}
 		}
-		void update_one(const string& customer,const& string& stock,int num)
+		void update_one(const string& customer,const string& stock,int num)
 		{
 			auto it=*m_data_ptr[customer].begin();
 			auto end=*m_data_ptr[customer].end();
