@@ -429,7 +429,7 @@ namespace test3_namespace
 				}
 				if(it==end)
 				{
-					(*m_data_ptr)[customer]=std::make_pair(stock, num);
+					(*m_data_ptr)[customer].push_back(std::make_pair(stock, num));
 				}
 			}
 			else
