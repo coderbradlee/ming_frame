@@ -401,8 +401,13 @@ namespace test3_namespace
 		}
 		int query(const string& customer,const string& stock)
 		{
-			auto it=(*m_data_ptr)[customer].begin();
-			auto end=(*m_data_ptr)[customer].end();
+			boost::shared_ptr<std::map<string,std::vector<std::pair<string,int>>>> temp_data_ptr;
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				temp_data_ptr=m_data_ptr;
+			}
+			auto it=(*temp_data_ptr)[customer].begin();
+			auto end=(*temp_data_ptr)[customer].end();
 			while(it!=end)
 			{
 				if(it->first==stock)
@@ -414,6 +419,15 @@ namespace test3_namespace
 		}
 		void update_one(const string& customer,const string& stock,int num)
 		{
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				if(!m_data_ptr.unique())
+				{
+					boost::shared_ptr<std::map<string,std::vector<std::pair<string,int>>>> p_temp(new boost::shared_ptr<std::map<string,std::vector<std::pair<string,int>>>>(*m_data_ptr));
+					m_data_ptr.swap(p_temp);
+				}
+			}
+			
 			if((*m_data_ptr).count(customer)>0)
 			{
 				auto it=(*m_data_ptr)[customer].begin();
