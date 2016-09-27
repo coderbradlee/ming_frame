@@ -88,14 +88,99 @@ namespace test3_namespace
 		std::cout<<"observer::~observer"<<std::endl;
 		// m_foo->unregister_observer(shared_from_this());
 	}
+	class stock
+	{
+	public:
+		stock(const string& name):m_name(name)
+		{
+			std::cout<<"stock constructor"<<std::endl;
+		}
+		~stock()
+		{
+			std::cout<<"stock destructor"<<std::endl;
+		}
+		string get_name()const
+		{
+			return m_name;
+		}
+	private:
+		string m_name;
+	};
+	class stock_factory:public boost::enable_shared_from_this<stock_factory>,boost::noncopyable
+	{
+	public:
+		stock_factory()
+		{
+			std::cout<<"stock_factory constructor"<<std::endl;
+		}
+		~stock_factory()
+		{
+			std::cout<<"stock_factory destructor"<<std::endl;
+		}
+		boost::shared_ptr<stock> get_stock(const string& key)
+		{
+			boost::shared_ptr<stock> temp;
+			//boost::weak_ptr<stock> temp_weak;
+			
+			muduo::MutexLockGuard lo(m_mutex);
+			boost::weak_ptr<stock>& temp_weak=m_stocks[key];
+			temp=temp_weak.lock();
+			
+			if(temp)
+			{
+				return temp;
+			}
+			else
+			{
+				temp.reset(new stock(key),boost::bind(&stock_factory::weak_delete_callback,boost::weak_ptr<stock_factory>(shared_from_this()),_1));
+				temp_weak=temp;
+			}
+			return temp;
+		}
+	private:
+		static void weak_delete_callback(const boost::weak_ptr<stock_factory>& ptr_self,stock* s)
+		{
+			if(ptr_self.lock())
+			{
+				std::cout<<"weak_delete_callback::remove"<<std::endl;
+				ptr_self->remove_stock(s);
+			}
+			else
+			{
+				std::cout<<"weak_delete_callback::stock_factory die"<<std::endl;
+			}
+			delete s;
+		}
+		void remove_stock(stock* s)
+		{
+			if(s)
+			{
+				muduo::MutexLockGuard lo(m_mutex);
+				m_stocks.erase(s->get_name());
+			}
+		}
+	private:
+		std::map<string,boost::weak_ptr<stock>> m_stocks;
+		mutable muduo::MutexLock m_mutex;
+
+	};
 	void test_out()
 	{
-		boost::shared_ptr<foo> f=boost::make_shared<foo>();
 		{
-			boost::shared_ptr<observer> o=boost::make_shared<observer>(f);
-			o->observe();
-			f->test();
+			boost::shared_ptr<stock_factory> sf(new stock_factory());
+			{
+				boost::shared_ptr<stock>=sf->get_stock("us");
+				boost::shared_ptr<stock>=sf->get_stock("uk");
+			}
 		}
-		f->test();
+		std::cout<<"------------------------------"<<std::endl;
+		{
+			boost::shared_ptr<stock> s;
+			{
+				boost::shared_ptr<stock_factory> sf(new stock_factory());
+				s=sf->get_stock("ll");
+			}
+			std::cout<<s->get_name()<<std::endl;
+		}
 	}
 }
