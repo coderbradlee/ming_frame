@@ -401,8 +401,8 @@ namespace test3_namespace
 		}
 		int query(const string& customer,const string& stock)
 		{
-			auto it=*m_data_ptr[customer].begin();
-			auto end=*m_data_ptr[customer].end();
+			auto it=(*m_data_ptr)[customer].begin();
+			auto end=(*m_data_ptr)[customer].end();
 			while(it!=end)
 			{
 				if(it->first==stock)
