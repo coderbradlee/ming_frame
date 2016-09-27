@@ -213,6 +213,7 @@ namespace test3_namespace
 		void print_all()const
 		{
 			muduo::MutexLockGuard lo(m_mutex);
+			std::cout<<"void print_all()const"<<std::endl;
 			for(auto i=m_requests.begin();i!=m_requests.end();++i)
 			{
 				//std::cout<<(int)*i<<std::endl;
@@ -229,12 +230,13 @@ namespace test3_namespace
 	{
 		muduo::MutexLockGuard lo(m_mutex);
 		//sleep(1);
-		//usleep(500*1000);
+		usleep(500*1000);
 		g_inventory.remove(this);
 	}
 	void request::process()
 	{
 		muduo::MutexLockGuard lo(m_mutex);
+		std::cout<<"request::process()"<<std::endl;
 		g_inventory.add(this);
 	}
 	void request::print()
@@ -253,9 +255,10 @@ namespace test3_namespace
 			});
 		t.start();
 		//usleep(500*1000);
-		t.join();
 		sleep(1);
 		g_inventory.print_all();
+		t.join();
+		
 		// test_self_lock t;
 		// t.process();
 		// {
