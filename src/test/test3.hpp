@@ -423,7 +423,7 @@ namespace test3_namespace
 				muduo::MutexLockGuard lo(m_mutex);
 				if(!m_data_ptr.unique())
 				{
-					boost::shared_ptr<std::map<string,std::vector<std::pair<string,int>>>> p_temp(new boost::shared_ptr<std::map<string,std::vector<std::pair<string,int>>>>(*m_data_ptr));
+					boost::shared_ptr<std::map<string,std::vector<std::pair<string,int>>>> p_temp(new std::map<string,std::vector<std::pair<string,int>>>(*m_data_ptr));
 					m_data_ptr.swap(p_temp);
 				}
 			}
