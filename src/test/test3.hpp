@@ -253,9 +253,9 @@ namespace test3_namespace
 			});
 		t.start();
 		//usleep(500*1000);
+		t.join();
 		sleep(1);
 		g_inventory.print_all();
-		t.join();
 		// test_self_lock t;
 		// t.process();
 		// {
