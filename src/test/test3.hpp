@@ -414,10 +414,11 @@ namespace test3_namespace
 		}
 		void update_one(const string& customer,const string& stock,int num)
 		{
-			auto it=(*m_data_ptr)[customer].begin();
-			auto end=(*m_data_ptr)[customer].end();
-			if(it)
+			if((*m_data_ptr).count(customer)>0)
 			{
+				auto it=(*m_data_ptr)[customer].begin();
+			
+				auto end=(*m_data_ptr)[customer].end();
 				while(it!=end)
 				{
 					if(it->first==stock)
