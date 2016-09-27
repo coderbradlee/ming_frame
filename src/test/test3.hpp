@@ -185,10 +185,73 @@ namespace test3_namespace
 	private:
 		mutable muduo::MutexLock m_mutex;
 	};
+	class request;
+	class inventory
+	{
+	public:
+		inventory(){}
+		~inventory(){}
+		void add(request* r)
+		{
+			muduo::MutexLockGuard lo(m_mutex);
+			m_requests.insert(r);
+		}
+		void remove(request* r)
+		{
+			muduo::MutexLockGuard lo(m_mutex);
+			m_requests.erase(r);
+		}
+		void print_all()const
+		{
+			muduo::MutexLockGuard lo(m_mutex);
+			for(auto i=m_requests.begin();i!=m_requests.end();++i)
+			{
+				//std::cout<<(int)*i<<std::endl;
+				(*i)->print();
+			}
+		}
+	private:
+		std::set<request*> m_requests;
+	};
+	inventory g_inventory;
+	class request
+	{
+	public:
+		//request();
+		~request()
+		{
+			muduo::MutexLockGuard lo(m_mutex);
+			sleep(1);
+			g_inventory.remove(this);
+		}
+		void process()
+		{
+			muduo::MutexLockGuard lo(m_mutex);
+			g_inventory.add(this);
+		}
+		void print()
+		{
+			muduo::MutexLockGuard lo(m_mutex);
+			std::cout<<"print"<<std::endl;
+		}
+	private:
+		mutable muduo::MutexLock m_mutex;
+	};
+
 	void test_out()
 	{
-		test_self_lock t;
-		t.process();
+		muduo::Thread t([]()
+			{
+				request* r=new request();
+				r.process();
+				delete r;
+			});
+		t.start();
+		usleep(500*1000);
+		g_inventory.print_all();
+		t.join();
+		// test_self_lock t;
+		// t.process();
 		// {
 		// 	boost::shared_ptr<stock_factory> sf(new stock_factory());
 		// 	{
