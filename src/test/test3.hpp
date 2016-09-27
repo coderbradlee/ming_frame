@@ -232,6 +232,7 @@ namespace test3_namespace
 	request::~request()
 	{
 		muduo::MutexLockGuard lo(m_mutex);
+		std::cout<<"request::~request()"<<std::endl;
 		sleep(3);
 		//usleep(500*1000);
 		g_inventory.remove(this);
