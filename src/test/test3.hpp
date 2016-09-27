@@ -297,11 +297,39 @@ namespace test3_namespace
 		pthread_mutex_t m_mutex;
 		pid_t m_owner_thread_id;
 	};
+	class my_condition
+	{
+	public:
+		my_condition(my_mutex& mu):m_mutex(mu)
+		{
+			pthread_cond_init(&m_cond,NULL);
+		}
+		~my_condition()
+		{
+			pthread_cond_destroy(&m_cond);
+		}
+		void wait()
+		{
+			pthread_cond_wait(&m_cond,m_mutex.getPhreadMutex());
+		}
+		void notify()
+		{
+			pthread_cond_signal(&m_cond);
+		}
+		void notifyall()
+		{
+			pthread_cond_broadcast(&m_cond);
+		}
+	private:
+		my_mutex& m_mutex;
+		pthread_cond_t m_cond;
+	};
 	void test_out()
 	{
 		my_mutex test_mutex;
 		test_mutex.lock();
 		test_mutex.unlock();
+		my_condition m(test_mutex);
 		// muduo::Thread t1([]()
 		// 	{
 		// 		std::cout<<dequeue()<<std::endl;
