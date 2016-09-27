@@ -217,7 +217,7 @@ namespace test3_namespace
 			for(auto i=m_requests.begin();i!=m_requests.end();++i)
 			{
 				//std::cout<<(int)*i<<std::endl;
-				sleep(2);
+				sleep(4);
 				(*i)->print();
 			}
 			std::cout<<"void print_all()const::finish"<<std::endl;
