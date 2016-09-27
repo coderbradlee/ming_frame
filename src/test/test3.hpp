@@ -274,7 +274,7 @@ namespace test3_namespace
 	{
 		muduo::Thread t1([]()
 			{
-				dequeue();
+				std::cout<<dequeue()<<std::endl;
 			});
 		t1.start();
 
@@ -285,7 +285,7 @@ namespace test3_namespace
 		t2.start();
 		t2.join();
 		t1.join();
-		std::cout<<dequeue()<<std::endl;
+		
 		// muduo::Thread t([]()
 		// 	{
 		// 		request* r=new request();
