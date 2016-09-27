@@ -185,7 +185,16 @@ namespace test3_namespace
 	private:
 		mutable muduo::MutexLock m_mutex;
 	};
-	class request;
+	class request
+	{
+	public:
+		//request();
+		request::~request();
+		void request::process();
+		void request::print();
+	private:
+		mutable muduo::MutexLock m_mutex;
+	};
 	class inventory
 	{
 	public:
@@ -215,29 +224,23 @@ namespace test3_namespace
 		mutable muduo::MutexLock m_mutex;
 	};
 	inventory g_inventory;
-	class request
+	
+	request::~request()
 	{
-	public:
-		//request();
-		~request()
-		{
-			muduo::MutexLockGuard lo(m_mutex);
-			sleep(1);
-			g_inventory.remove(this);
-		}
-		void process()
-		{
-			muduo::MutexLockGuard lo(m_mutex);
-			g_inventory.add(this);
-		}
-		void print()
-		{
-			muduo::MutexLockGuard lo(m_mutex);
-			std::cout<<"print"<<std::endl;
-		}
-	private:
-		mutable muduo::MutexLock m_mutex;
-	};
+		muduo::MutexLockGuard lo(m_mutex);
+		sleep(1);
+		g_inventory.remove(this);
+	}
+	void request::process()
+	{
+		muduo::MutexLockGuard lo(m_mutex);
+		g_inventory.add(this);
+	}
+	void request::print()
+	{
+		muduo::MutexLockGuard lo(m_mutex);
+		std::cout<<"print"<<std::endl;
+	}
 
 	void test_out()
 	{
