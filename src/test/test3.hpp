@@ -189,9 +189,9 @@ namespace test3_namespace
 	{
 	public:
 		//request();
-		request::~request();
-		void request::process();
-		void request::print();
+		~request();
+		void process();
+		void print();
 	private:
 		mutable muduo::MutexLock m_mutex;
 	};
