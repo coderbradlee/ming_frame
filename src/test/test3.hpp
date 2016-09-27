@@ -352,8 +352,40 @@ namespace test3_namespace
 	pthread_once_t my_singleton<T>::m_once=PTHREAD_ONCE_INIT;
 	template<typename T>
 	T* my_singleton<T>::m_instatnce=NULL;
+	class foo_copy_on_write
+	{
+	public:
+		void doit()const
+		{
+			foo_copy_on_write f;
+			post(f);
+		}
+		
+	};
+	boost::shared_ptr<std::vector<foo_copy_on_write>> g_foo_copy_on_write;
+	muduo::MutexLock mutex_copy_on_write;
+	void post(foo_copy_on_write f)
+	{
+		std::cout<<"post"<<std::endl;
+		muduo::MutexLockGuard lo(mutex_copy_on_write);
+		g_foo_copy_on_write.push_back(f);
+
+	}
+	void traverse()
+	{
+		std::cout<<"traverse"<<std::endl;
+		muduo::MutexLockGuard lo(mutex_copy_on_write);
+		for(auto i=g_foo_copy_on_write->begin();i!=g_foo_copy_on_write->end();++i)
+		{
+			(*i).doit();
+		}
+	}
 	void test_out()
 	{
+		g_foo_copy_on_write.reset(new std::vector<foo_copy_on_write>());
+		foo_copy_on_write f;
+		post(f);
+		traverse();
 		// my_mutex test_mutex;
 		// test_mutex.lock();
 		// test_mutex.unlock();
