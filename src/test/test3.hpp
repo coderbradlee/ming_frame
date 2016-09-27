@@ -293,7 +293,7 @@ namespace test3_namespace
 			m_owner_thread_id=0;
 			pthread_mutex_unlock(&m_mutex);
 		}
-		pthread_mutex_t* getPhreadMutex()const
+		pthread_mutex_t* getPhreadMutex()
 		{
 			return &m_mutex;
 		}
