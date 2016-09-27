@@ -414,8 +414,8 @@ namespace test3_namespace
 		}
 		void update_one(const string& customer,const string& stock,int num)
 		{
-			auto it=*m_data_ptr[customer].begin();
-			auto end=*m_data_ptr[customer].end();
+			auto it=(*m_data_ptr)[customer].begin();
+			auto end=(*m_data_ptr)[customer].end();
 			if(it)
 			{
 				while(it!=end)
@@ -428,14 +428,14 @@ namespace test3_namespace
 				}
 				if(it==end)
 				{
-					*m_data_ptr[customer]=std::make_pair(stock, num);
+					(*m_data_ptr)[customer]=std::make_pair(stock, num);
 				}
 			}
 			else
 			{
 				std::vector<std::pair<string,int>> v;
 				v.push_back(std::make_pair(stock, num));
-				*m_data_ptr[customer]=v;
+				(*m_data_ptr)[customer]=v;
 			}
 			
 		}
