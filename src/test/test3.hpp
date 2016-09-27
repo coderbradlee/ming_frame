@@ -370,13 +370,23 @@ namespace test3_namespace
 	{
 		std::cout<<"post"<<std::endl;
 		muduo::MutexLockGuard lo(mutex_copy_on_write);
+		if(!g_foo_copy_on_write.unique())
+		{
+			g_foo_copy_on_write.reset(new std::vector<foo_copy_on_write>(*g_foo_copy_on_write));
+			std::cout<<"copy the whole vector"<<std::endl;
+		}
 		g_foo_copy_on_write->push_back(f);
 	}
 	void traverse()
 	{
 		std::cout<<"traverse"<<std::endl;
-		muduo::MutexLockGuard lo(mutex_copy_on_write);
-		for(auto i=g_foo_copy_on_write->begin();i!=g_foo_copy_on_write->end();++i)
+		boost::shared_ptr<std::vector<foo_copy_on_write>> local_ptr;
+		{
+			muduo::MutexLockGuard lo(mutex_copy_on_write);
+			local_ptr=g_foo_copy_on_write;
+		}
+		
+		for(auto i=local_ptr->begin();i!=local_ptr->end();++i)
 		{
 			(*i).doit();
 		}
