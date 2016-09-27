@@ -392,12 +392,69 @@ namespace test3_namespace
 		}
 		std::cout<<g_foo_copy_on_write->size()<<std::endl;
 	}
+	class customer_data
+	{
+	public:
+		customer_data():m_data_ptr(new std::map<string,std::vector<std::pair<string,int>>>())
+		{
+
+		}
+		int query(const string& customer,const string& stock)
+		{
+			auto it=*m_data_ptr[customer].begin();
+			auto end=*m_data_ptr[customer].end();
+			while(it!=end)
+			{
+				if(it->first==stock)
+				{
+					return it->second;
+				}
+				++it;
+			}
+		}
+		void update_one(const string& customer,const& string& stock,int num)
+		{
+			auto it=*m_data_ptr[customer].begin();
+			auto end=*m_data_ptr[customer].end();
+			if(it)
+			{
+				while(it!=end)
+				{
+					if(it->first==stock)
+					{
+						it->second=num;
+					}
+					++it;
+				}
+				if(it==end)
+				{
+					*m_data_ptr[customer]=std::make_pair(stock, num);
+				}
+			}
+			else
+			{
+				std::vector<std::pair<string,int>> v;
+				v.push_back(std::make_pair(stock, num));
+				*m_data_ptr[customer]=v;
+			}
+			
+		}
+	private:
+		mutable muduo::MutexLock m_mutex;
+		//std::map<string,std::vector<std::pair<string,int>>> m_data;
+		boost::shared_ptr<std::map<string,std::vector<std::pair<string,int>>>> m_data_ptr;
+	};
 	void test_out()
 	{
-		g_foo_copy_on_write.reset(new std::vector<foo_copy_on_write>());
-		foo_copy_on_write f;
-		post(f);
-		traverse();
+		customer_data data;
+		data.update_one("test_customer1","stock1",1);
+		data.update_one("test_customer1","stock2",2);
+		data.update_one("test_customer2","stock3",3);
+		std::cout<<data.query("test_customer1","stock2")<<std::endl;
+		// g_foo_copy_on_write.reset(new std::vector<foo_copy_on_write>());
+		// foo_copy_on_write f;
+		// post(f);
+		// traverse();
 		// my_mutex test_mutex;
 		// test_mutex.lock();
 		// test_mutex.unlock();
