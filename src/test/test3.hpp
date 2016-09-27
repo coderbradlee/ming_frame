@@ -171,13 +171,13 @@ namespace test3_namespace
 		{}
 		~test_self_lock()
 		{}
-		void process()
+		void process()__attribute__((noinline))
 		{
 			muduo::MutexLockGuard lo(m_mutex);
 			std::cout<<"process"<<std::endl;
 			print();
 		}
-		void print()
+		void print()__attribute__((noinline))
 		{
 			muduo::MutexLockGuard lo(m_mutex);
 			std::cout<<"print"<<std::endl;
