@@ -390,7 +390,7 @@ namespace test3_namespace
 		{
 			(*i).doit();
 		}
-		std::cout<<g_foo_copy_on_write.size()<<std::endl;
+		std::cout<<g_foo_copy_on_write->size()<<std::endl;
 	}
 	void test_out()
 	{
