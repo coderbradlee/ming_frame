@@ -14,7 +14,7 @@
 #include <boost/make_shared.hpp>
 namespace test3_namespace
 {
-	using muduo::string;
+	using std::string;
 	class foo;
 	class observer:public boost::enable_shared_from_this<observer>
 	{
@@ -143,7 +143,7 @@ namespace test3_namespace
 			if(ptr_self.lock())
 			{
 				std::cout<<"weak_delete_callback::remove"<<std::endl;
-				ptr_self->remove_stock(s);
+				ptr_self.lock()->remove_stock(s);
 			}
 			else
 			{
