@@ -270,21 +270,49 @@ namespace test3_namespace
 		test_queue.push_back(x);
 		cond.notify();
 	}
+	class my_mutex
+	{
+	public:
+		my_mutex():m_owner_thread_id(0)
+		{
+			pthread_mutex_init(&m_mutex,NULL);
+		}
+		~my_mutex()
+		{
+			pthread_mutex_destroy(&m_mutex);
+		}
+		void lock()
+		{
+			pthread_mutex_lock(&&m_mutex);
+			m_owner_thread_id=1;
+		}
+		void unlock()
+		{
+			m_owner_thread_id=0;
+			pthread_mutex_unlock(&m_mutex);
+		}
+	private:
+		pthread_mutex_t m_mutex;
+		pid_t m_owner_thread_id;
+	};
 	void test_out()
 	{
-		muduo::Thread t1([]()
-			{
-				std::cout<<dequeue()<<std::endl;
-			});
-		t1.start();
+		my_mutex mutex;
+		mutex.lock();
+		mutex.unlock();
+		// muduo::Thread t1([]()
+		// 	{
+		// 		std::cout<<dequeue()<<std::endl;
+		// 	});
+		// t1.start();
 
-		muduo::Thread t2([]()
-			{
-				enqueue(3);
-			});
-		t2.start();
-		t2.join();
-		t1.join();
+		// muduo::Thread t2([]()
+		// 	{
+		// 		enqueue(3);
+		// 	});
+		// t2.start();
+		// t2.join();
+		// t1.join();
 		
 		// muduo::Thread t([]()
 		// 	{
