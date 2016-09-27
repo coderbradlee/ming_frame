@@ -185,7 +185,7 @@ namespace test3_namespace
 	};
 	void test_out()
 	{
-		test_self_lock t();
+		test_self_lock t;
 		t.process();
 		// {
 		// 	boost::shared_ptr<stock_factory> sf(new stock_factory());
