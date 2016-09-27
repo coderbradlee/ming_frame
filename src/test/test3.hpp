@@ -228,7 +228,8 @@ namespace test3_namespace
 	request::~request()
 	{
 		muduo::MutexLockGuard lo(m_mutex);
-		sleep(1);
+		//sleep(1);
+		usleep(500*1000);
 		g_inventory.remove(this);
 	}
 	void request::process()
@@ -251,7 +252,8 @@ namespace test3_namespace
 				delete r;
 			});
 		t.start();
-		usleep(500*1000);
+		//usleep(500*1000);
+		sleep(1);
 		g_inventory.print_all();
 		t.join();
 		// test_self_lock t;
