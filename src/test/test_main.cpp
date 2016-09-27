@@ -239,8 +239,8 @@ void func(conv_type ct)
 }
 void foo()
 {
-    int a=0;
-    printf("%d,%d\n",(a=4*6,a*2),a++);
+    //int a=0;
+    //printf("%d,%d\n",(a=4*6,a*2),a++);
     // int val=0;
     // // auto const_val_lambda=[=](){val=3;};
     // // const_val_lambda();
