@@ -272,14 +272,19 @@ namespace test3_namespace
 	}
 	void test_out()
 	{
-		dequeue();
-		muduo::Thread t([]()
+		muduo::Thread t1([]()
+			{
+				dequeue();
+			});
+		t1.start();
+
+		muduo::Thread t2([]()
 			{
 				enqueue(3);
 			});
-		t.start();
-		t.join();
-		
+		t2.start();
+		t2.join();
+		t1.join();
 		std::cout<<dequeue()<<std::endl;
 		// muduo::Thread t([]()
 		// 	{
