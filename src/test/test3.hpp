@@ -516,7 +516,7 @@ namespace test3_namespace
 	void test_out()
 	{
 		printf("%d: main\n",muduo::CurrentThread::tid);
-		test_blocking_queue t(5);
+		test_blocking_queue t(3);
 		t.run(10);
 		t.joinAll();
 		printf("nums of created threads:%d\n",muduo::Thread::numCreated() );
