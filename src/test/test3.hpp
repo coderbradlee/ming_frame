@@ -540,6 +540,7 @@ namespace test3_namespace
 	}
 	void test_out()
 	{
+		test_get_pid_benchmark();
 		// printf("%d: main\n",muduo::CurrentThread::tid);
 		// test_blocking_queue t(3);
 		// t.run(10);
