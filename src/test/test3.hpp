@@ -520,7 +520,7 @@ namespace test3_namespace
 			muduo::Timestamp start = muduo::Timestamp::now();
 			for(int i=0;i<1000*1000;++i)
 			{
-				CurrentThread::tid();
+				muduo::CurrentThread::tid();
 			}
 			printf("%d\n", muduo::CurrentThread::tid());
 	    	muduo::Timestamp end = muduo::Timestamp::now();
