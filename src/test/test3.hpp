@@ -460,25 +460,35 @@ namespace test3_namespace
 		//std::map<string,std::vector<std::pair<string,int>>> m_data;
 		boost::shared_ptr<std::map<string,std::vector<std::pair<string,int>>>> m_data_ptr;
 	};
+
 	void test_out()
 	{
-		customer_data data;
-		muduo::Thread t1([&]()
-			{
-				data.update_one("test_customer1","stock1",1);
-				data.update_one("test_customer1","stock2",2);
-				data.update_one("test_customer2","stock3",3);
-			});
-		t1.start();
+		muduo::BlockingQueue<std::unique_ptr<int>> test_queue;
+		test_queue.put(std::unique_ptr<int>(new int(3)));
+		std::unique_ptr<int> x=test_queue.take();
+		printf("%d\n",*x);
+		*x=2;
+		test_queue.put(std::move(x));
+		std::unique_ptr<int> x2=test_queue.take();
+		printf("%d\n", x2);
 		
-		muduo::Thread t2([&]()
-			{
-				std::cout<<data.query("test_customer1","stock2")<<std::endl;
-			});
-		t2.start();
+		// customer_data data;
+		// muduo::Thread t1([&]()
+		// 	{
+		// 		data.update_one("test_customer1","stock1",1);
+		// 		data.update_one("test_customer1","stock2",2);
+		// 		data.update_one("test_customer2","stock3",3);
+		// 	});
+		// t1.start();
 		
-		t1.join();
-		t2.join();
+		// muduo::Thread t2([&]()
+		// 	{
+		// 		std::cout<<data.query("test_customer1","stock2")<<std::endl;
+		// 	});
+		// t2.start();
+		
+		// t1.join();
+		// t2.join();
 		// g_foo_copy_on_write.reset(new std::vector<foo_copy_on_write>());
 		// foo_copy_on_write f;
 		// post(f);
