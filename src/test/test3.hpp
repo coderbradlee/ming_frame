@@ -522,7 +522,7 @@ namespace test3_namespace
 			{
 				CurrentThread::tid();
 			}
-			printf("%d\n", CurrentThread::tid());
+			printf("%d\n", muduo::CurrentThread::tid());
 	    	muduo::Timestamp end = muduo::Timestamp::now();
 
 	    	printf("%f\n", timeDifference(end, start));
