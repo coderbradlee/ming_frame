@@ -462,19 +462,19 @@ namespace test3_namespace
 	void test_out()
 	{
 		customer_data data;
-		muduo::Thread t1();
-		t1.start([&]()
+		muduo::Thread t1([&]()
 			{
 				data.update_one("test_customer1","stock1",1);
 				data.update_one("test_customer1","stock2",2);
 				data.update_one("test_customer2","stock3",3);
 			});
+		t1.start();
 		
-		muduo::Thread t2();
-		t2.start([&]()
+		muduo::Thread t2([&]()
 			{
 				std::cout<<data.query("test_customer1","stock2")<<std::endl;
 			});
+		t2.start();
 		
 		t1.join();
 		t2.join();
