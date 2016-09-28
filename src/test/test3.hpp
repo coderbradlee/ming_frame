@@ -542,13 +542,13 @@ namespace test3_namespace
 	{
 		muduo::Timestamp start = muduo::Timestamp::now();
 		std::string line="1234567890 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ " ;
-		for(int i=0;i<1000*1000;++i)
+		for(int i=0;i<1000*10000;++i)
 		{
 			LOG_INFO << line<< i;
 		}
     	muduo::Timestamp end = muduo::Timestamp::now();
     	printf("%f\n", timeDifference(end, start));
-	    printf("%fMB/s\n",line.length()/timeDifference(end, start) );
+	    printf("%fMB/s\n",line.length()*10.0/timeDifference(end, start) );
 	}
 	void test_out()
 	{
