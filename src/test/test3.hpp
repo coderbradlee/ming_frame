@@ -416,6 +416,7 @@ namespace test3_namespace
 				}
 				++it;
 			}
+			return -1;
 		}
 		void update_one(const string& customer,const string& stock,int num)
 		{
