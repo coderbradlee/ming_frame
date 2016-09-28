@@ -462,10 +462,22 @@ namespace test3_namespace
 	void test_out()
 	{
 		customer_data data;
-		data.update_one("test_customer1","stock1",1);
-		data.update_one("test_customer1","stock2",2);
-		data.update_one("test_customer2","stock3",3);
-		std::cout<<data.query("test_customer1","stock2")<<std::endl;
+		muduo::Thread t1();
+		t1.start([&]()
+			{
+				data.update_one("test_customer1","stock1",1);
+				data.update_one("test_customer1","stock2",2);
+				data.update_one("test_customer2","stock3",3);
+			});
+		
+		muduo::Thread t2();
+		t2.start([&]()
+			{
+				std::cout<<data.query("test_customer1","stock2")<<std::endl;
+			});
+		
+		t1.join();
+		t2.join();
 		// g_foo_copy_on_write.reset(new std::vector<foo_copy_on_write>());
 		// foo_copy_on_write f;
 		// post(f);
