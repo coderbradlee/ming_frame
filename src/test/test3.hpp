@@ -503,6 +503,7 @@ namespace test3_namespace
 		{
 			for(size_t i=0;i<m_threads.size();++i)
 			{
+				printf("%d:%s put %s:%d\n", muduo::CurrentThread::tid(),muduo::CurrentThread::name(),"stop",m_queue.size());
 				m_queue.put("stop");
 			}
 			for_each(m_threads.begin(),m_threads.end(),boost::bind(&muduo::Thread::join,_1));
