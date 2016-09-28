@@ -460,17 +460,74 @@ namespace test3_namespace
 		//std::map<string,std::vector<std::pair<string,int>>> m_data;
 		boost::shared_ptr<std::map<string,std::vector<std::pair<string,int>>>> m_data_ptr;
 	};
-
+	class test_blocking_queue
+	{
+	public:
+		test_blocking_queue(int threads_num):m_latch(threads_num),m_threads(threads_num)
+		{
+			for(int i=0;i<threads_num;++i)
+			{
+				char name[32];
+				snprintf(name,sizeof name,"thread:%d",i);
+				m_threads.push_back(new muduo::Thread(boost::bind(&test_blocking_queue::thread_func,this),name));
+			}
+			for_each(m_threads.begin(),m_threads.end(),boost::bind(&muduo::Thread::start,_1));
+		}
+		void thread_func()
+		{
+			printf("%d:%s start\n",muduo::CurrentThread::tid(),muduo::CurrentThread::name());
+			m_latch.countDown();
+			bool running=true;
+			while(running)
+			{
+				std::string temp(m_queue.take());
+				printf("%d:%s get %s:%d\n",muduo::CurrentThread::tid(),muduo::CurrentThread::name(),temp.c_str(),m_queue.size());
+				running=(temp!="stop");
+			}
+			printf("%d:%s stop\n",muduo::CurrentThread::tid(),muduo::CurrentThread::name());
+		}
+		void run(int times)
+		{
+			printf("wait for countDown\n");
+			m_latch.wait();
+			printf("all threads started\n");
+			for(int i=0;i<times;++i)
+			{
+				char data[32];
+				snprintf(data,sizeof data,"hello %d",i);
+				m_queue.put(data);
+				printf("%d:%s put %s:%d\n", muduo::CurrentThread::tid(),muduo::CurrentThread::name(),data,m_queue.size());
+			}
+		}
+		void joinAll()
+		{
+			for(size_t i=0;i<m_threads.size();++i)
+			{
+				m_queue.put("stop");
+			}
+			for_each(m_threads.begin(),m_threads.end(),boost::bind(&muduo::Thread::join,_1));
+		}
+		~test_blocking_queue();
+	private:
+		muduo::BlockingQueue<std::string> m_queue;
+		muduo::CountDownLatch m_latch;
+		boost::ptr_vector<muduo::Thread> m_threads;
+	};
 	void test_out()
 	{
-		muduo::BlockingQueue<std::unique_ptr<int>> test_queue;
-		test_queue.put(std::unique_ptr<int>(new int(3)));
-		std::unique_ptr<int> x=test_queue.take();
-		printf("%d\n",*x);
-		*x=2;
-		test_queue.put(std::move(x));
-		std::unique_ptr<int> x2=test_queue.take();
-		printf("%d\n", *x2);
+		printf("%d:%s main\n",muduo::CurrentThread::tid,muduo::CurrentThread::name);
+		test_blocking_queue t;
+		t.run(100);
+		t.joinAll();
+		printf("nums of created threads:%d\n",muduo::Thread::numCreated() );
+		// muduo::BlockingQueue<std::unique_ptr<int>> test_queue;
+		// test_queue.put(std::unique_ptr<int>(new int(3)));
+		// std::unique_ptr<int> x=test_queue.take();
+		// printf("%d\n",*x);
+		// *x=2;
+		// test_queue.put(std::move(x));
+		// std::unique_ptr<int> x2=test_queue.take();
+		// printf("%d\n", *x2);
 
 		// customer_data data;
 		// muduo::Thread t1([&]()
