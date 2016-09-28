@@ -507,7 +507,7 @@ namespace test3_namespace
 			}
 			for_each(m_threads.begin(),m_threads.end(),boost::bind(&muduo::Thread::join,_1));
 		}
-		~test_blocking_queue();
+		
 	private:
 		muduo::BlockingQueue<std::string> m_queue;
 		muduo::CountDownLatch m_latch;
