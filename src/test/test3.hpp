@@ -538,9 +538,22 @@ namespace test3_namespace
 	    	printf("%f\n", timeDifference(end, start));
 		}
 	}
+	void test_log()
+	{
+		muduo::Timestamp start = muduo::Timestamp::now();
+		std::string line="1234567890 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ " ;
+		for(int i=0;i<1000*1000;++i)
+		{
+			LOG_INFO << line<< i;
+		}
+    	muduo::Timestamp end = muduo::Timestamp::now();
+    	printf("%f\n", timeDifference(end, start));
+	    printf("%fMB/s\n",line.length()/timeDifference(end, start) );
+	}
 	void test_out()
 	{
-		test_get_pid_benchmark();
+		test_log();
+		//test_get_pid_benchmark();
 		// printf("%d: main\n",muduo::CurrentThread::tid);
 		// test_blocking_queue t(3);
 		// t.run(10);
