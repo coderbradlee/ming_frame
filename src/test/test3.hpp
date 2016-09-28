@@ -470,8 +470,8 @@ namespace test3_namespace
 		*x=2;
 		test_queue.put(std::move(x));
 		std::unique_ptr<int> x2=test_queue.take();
-		printf("%d\n", x2);
-		
+		printf("%d\n", *x2);
+
 		// customer_data data;
 		// muduo::Thread t1([&]()
 		// 	{
