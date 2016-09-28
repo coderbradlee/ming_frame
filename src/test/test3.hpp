@@ -515,7 +515,7 @@ namespace test3_namespace
 	};
 	void test_out()
 	{
-		printf("%d:%s main\n",muduo::CurrentThread::tid,muduo::CurrentThread::name);
+		printf("%d: main\n",muduo::CurrentThread::tid);
 		test_blocking_queue t(5);
 		t.run(10);
 		t.joinAll();
