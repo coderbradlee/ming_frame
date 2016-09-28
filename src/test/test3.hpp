@@ -514,13 +514,37 @@ namespace test3_namespace
 		muduo::CountDownLatch m_latch;
 		boost::ptr_vector<muduo::Thread> m_threads;
 	};
+	void test_get_pid_benchmark()
+	{
+		{
+			muduo::Timestamp start = muduo::Timestamp::now();
+			for(int i=0;i<1000*1000;++i)
+			{
+				CurrentThread::tid();
+			}
+			printf("%d\n", CurrentThread::tid());
+	    	muduo::Timestamp end = muduo::Timestamp::now();
+
+	    	printf("%f\n", timeDifference(end, start));
+		}
+		{
+			muduo::Timestamp start = muduo::Timestamp::now();
+			for(int i=0;i<1000*1000;++i)
+			{
+				boost::this_thread::get_id();
+			}
+			printf("%d\n", boost::this_thread::get_id());
+	    	muduo::Timestamp end = muduo::Timestamp::now();
+	    	printf("%f\n", timeDifference(end, start));
+		}
+	}
 	void test_out()
 	{
-		printf("%d: main\n",muduo::CurrentThread::tid);
-		test_blocking_queue t(3);
-		t.run(10);
-		t.joinAll();
-		printf("nums of created threads:%d\n",muduo::Thread::numCreated() );
+		// printf("%d: main\n",muduo::CurrentThread::tid);
+		// test_blocking_queue t(3);
+		// t.run(10);
+		// t.joinAll();
+		// printf("nums of created threads:%d\n",muduo::Thread::numCreated() );
 		// muduo::BlockingQueue<std::unique_ptr<int>> test_queue;
 		// test_queue.put(std::unique_ptr<int>(new int(3)));
 		// std::unique_ptr<int> x=test_queue.take();
