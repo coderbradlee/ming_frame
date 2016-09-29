@@ -17,8 +17,13 @@ class webSocketServer : boost::noncopyable
 {
  public:
   typedef boost::function<void (const webSocketRequest&,
-                                webSocketResponse*)> webSocketCallback;
-
+                                webSocketResponse*)> webSocketOpenCallback;
+  typedef boost::function<void (const webSocketRequest&,
+                                webSocketResponse*)> webSocketMessageCallback;
+  typedef boost::function<void (const webSocketRequest&,
+                                webSocketResponse*)> webSocketErrorCallback;
+  typedef boost::function<void (const webSocketRequest&,
+                                webSocketResponse*)> webSocketCloseCallback;
   webSocketServer(EventLoop* loop,
              const InetAddress& listenAddr,
              const string& name,
