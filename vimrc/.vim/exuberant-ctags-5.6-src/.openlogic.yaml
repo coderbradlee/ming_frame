@@ -1,0 +1,18 @@
+--- 
+name: Exuberant-ctags 5.6 Source
+platform_id: all
+platform_version: all
+distribution_file_uuid_string: openlogic-exuberant-ctags-5.6-all-src-1
+platform_vendor: all
+version_visibility: public
+description: Exuberant-ctags 5.6 Source
+platform_arch: all
+distribution_file_uuid: 05dac0dd4f16f6c5b0434ae96bfd90f51de511b6f2fe8639ba20a0524fbd69c2
+distribution_version: 1
+distribution_flavor: ""
+distribution_raw_file: ctags-5.6.tar.gz
+package_version: "5.6"
+package_id: exuberant-ctags
+release_date: "2008-04-25"
+distribution_notes: ""
+distribution_type: src

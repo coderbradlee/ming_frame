@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/data/home/litang/svn/group_notify_center_proj/trunk/Comm_Components'
+let g:netrw_dirhist_2='/data/home/litang/workspace'
+let g:netrw_dirhist_3='/home/litang/workspace/testthrift/gen-cpp_my'
+let g:netrw_dirhist_4='/home/litang/svn/invenoserver2.0/trunk/server/ImageTransport'
+let g:netrw_dirhist_5='/home/litang/svn/invenoserver2.0/trunk/server/HWFoodMap/FoodMap'
+let g:netrw_dirhist_6='/home/litang/svn/invenoserver2.0/branches/branch_0.9_XiaozhiTrunk/server/ImageServer'
+let g:netrw_dirhist_7='/home/litang/svn/invenoserver2.0/branches/branch_0.9_XiaozhiTrunk/server/GateLogic/src'
+let g:netrw_dirhist_8='/home/litang/svn/invenoserver2.0/branches/branch_0.9_XiaozhiTrunk/server/Activity/src'
+let g:netrw_dirhist_9='/home/litang/workspace/workspace/test'
