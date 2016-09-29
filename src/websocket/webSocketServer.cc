@@ -68,7 +68,7 @@ void webSocketServer::onMessage(const TcpConnectionPtr& conn,
   //增加状态机，open message error close
   webSocketContext* context = boost::any_cast<webSocketContext>(conn->getMutableContext());
 
-  if (!context->parseRequest(buf, receiveTime))
+  if (!context->parseOpen(buf, receiveTime))
   {
     conn->send("HTTP/1.1 400 Bad Request\r\n\r\n");
     conn->shutdown();
