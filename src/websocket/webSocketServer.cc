@@ -67,18 +67,35 @@ void webSocketServer::onMessage(const TcpConnectionPtr& conn,
 {
   //增加状态机，open message error close
   webSocketContext* context = boost::any_cast<webSocketContext>(conn->getMutableContext());
-
-  if (!context->parseOpen(buf, receiveTime))
+  if(context->getMessageState()==webSocketContext::kOpen)
   {
-    conn->send("HTTP/1.1 400 Bad Request\r\n\r\n");
-    conn->shutdown();
-  }
+    if (!context->parseOpen(buf, receiveTime))
+    {
+      conn->send("HTTP/1.1 400 Bad Request\r\n\r\n");
+      conn->shutdown();
+    }
 
-  if (context->gotAll())
-  {
-    onOpen(conn, context->request());
-    context->reset();
+    if (context->gotAll())
+    {
+      onOpen(conn, context->request());
+      context->reset();
+    }
   }
+  else if(context->getMessageState()==webSocketContext::kMessage)
+  {
+    std::cout <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+    if (!context->parseOpen(buf, receiveTime))
+    {
+      conn->send("HTTP/1.1 400 Bad Request\r\n\r\n");
+      conn->shutdown();
+    }
+    if (context->gotAll())
+    {
+      onMessage(conn, context->request());
+      context->reset();
+    }
+  }
+  
 }
 
 void webSocketServer::onOpen(const TcpConnectionPtr& conn, const webSocketRequest& req)
@@ -95,5 +112,27 @@ void webSocketServer::onOpen(const TcpConnectionPtr& conn, const webSocketReques
   {
     conn->shutdown();
   }
+  else
+  {
+    webSocketContext* context = boost::any_cast<webSocketContext>(conn->getMutableContext());
+    context->setMessageState(webSocketContext::kMessage);
+  }
 }
+void webSocketServer::onMessage(const TcpConnectionPtr& conn, const webSocketRequest& req)
+{
 
+  webSocketResponse response(close);
+  webSocketMessageCallback_(req, &response);
+  Buffer buf;
+  response.appendToBuffer(&buf);
+  conn->send(&buf);
+  if (response.closeConnection())
+  {
+    conn->shutdown();
+  }
+  else
+  {
+    webSocketContext* context = boost::any_cast<webSocketContext>(conn->getMutableContext());
+    context->setMessageState(webSocketContext::kMessage);
+  }
+}

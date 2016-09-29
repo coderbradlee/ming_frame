@@ -175,6 +175,10 @@ class webSocketRequest : public muduo::copyable
  {
     return ws_magic_string;
  }
+ string getContent()
+ {
+    
+ }
  private:
   Method method_;
   Version version_;

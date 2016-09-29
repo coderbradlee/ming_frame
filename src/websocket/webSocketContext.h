@@ -34,7 +34,7 @@ class webSocketContext : public muduo::copyable
   };
 
   webSocketContext()
-    : state_(kExpectRequestLine)
+    : state_(kExpectRequestLine),messageState_(kOpen)
   {
   }
 
@@ -58,13 +58,27 @@ class webSocketContext : public muduo::copyable
 
   webSocketRequest& request()
   { return request_; }
-
+  void setMessageState(messageState ms)
+  {
+    messageState_=ms;
+  }
+  messageState getMessageState()const
+  {
+    return messageState_;
+  }
  private:
   bool processOpenLine(const char* begin, const char* end);
   //bool processRequestLine(const char* begin, const char* end);
 
   webSocketRequestParseState state_;
   webSocketRequest request_;
+  enum messageState
+  {
+    kOpen,
+    kMessage,
+    kError,
+    kClose,
+  } messageState_;
 };
 
 }

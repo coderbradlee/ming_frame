@@ -71,6 +71,7 @@ class webSocketServer : boost::noncopyable
   webSocketMessageCallback webSocketMessageCallback_;
   webSocketErrorCallback webSocketErrorCallback_;
   webSocketCloseCallback webSocketCloseCallback_;
+  
 };
 
 }

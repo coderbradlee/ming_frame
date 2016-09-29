@@ -53,7 +53,29 @@ void onOpen(const webSocketRequest& req, webSocketResponse* resp)
 }
 void onMessage(const webSocketRequest& req, webSocketResponse* resp)
 {
-    
+    string clientmessage = req.getContent();
+    std::cout << "clientmessage:" << clientmessage <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+    // ptree pt;
+    // string retString = "";
+    // if (clientmessage.compare(0, 9, "#PREPARE#") == 0)
+    // {
+    //   //************************************************
+    //   BOOST_LOG_SEV(server.slg, notification) << "upload client(" << (size_t)connection.get() << "):" << clientmessage;
+    //   server.initsink->flush();
+    //   //************************************************
+
+    //   clientmessage.erase(0,9);
+    //   cout << __LINE__ << ":" << clientmessage << endl;
+    //   stringstream stream;
+    //   stream << clientmessage;
+    //   read_json(stream, pt);
+      
+    //   string action = pt.get<string>("action");
+    //   string transfer = pt.get<string>("transfer");
+    //   ptree pdata = pt.get_child("data");
+    //   string file = pdata.get<string>("file");
+    //   size_t size = pdata.get<size_t>("size");
+    //   bool overwrite = pdata.get<bool>("overwrite");
 }
 void onError(const webSocketRequest& req, webSocketResponse* resp)
 {
