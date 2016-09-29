@@ -14,47 +14,20 @@ using namespace muduo::net;
 extern char favicon[555];
 bool benchmark = false;
 
-void onRequest(const webSocketRequest& req, webSocketResponse* resp)
+void onOpen(const webSocketRequest& req, webSocketResponse* resp)
 {
-  std::cout << "Headers " << req.methodString() << " " << req.path() << std::endl;
-  if (!benchmark)
-  {
-    const std::map<string, string>& headers = req.headers();
-    for (std::map<string, string>::const_iterator it = headers.begin();
-         it != headers.end();
-         ++it)
-    {
-      std::cout << it->first << ": " << it->second << std::endl;
-    }
-  }
-
-  if (req.path() == "/")
-  {
-    resp->setStatusCode(webSocketResponse::k200Ok);
-    resp->setStatusMessage("OK");
-    resp->setContentType("text/html");
-    resp->addHeader("Server", "Muduo");
-    string now = Timestamp::now().toFormattedString();
-    resp->setBody("<html><head><title>This is title</title></head>"
-        "<body><h1>Hello</h1>Now is " + now +
-        "</body></html>");
-  }
-  else if (req.path() == "/favicon.ico")
-  {
-    resp->setStatusCode(webSocketResponse::k200Ok);
-    resp->setStatusMessage("OK");
-    resp->setContentType("image/png");
-    resp->setBody(string(favicon, sizeof favicon));
-  }
-  else if (req.path() == "/hello")
-  {
-    resp->setStatusCode(webSocketResponse::k200Ok);
-    resp->setStatusMessage("OK");
-    resp->setContentType("text/plain");
-    resp->addHeader("Server", "Muduo");
-    resp->setBody("hello, world!\n");
-  }
-  else if (req.path() == "/upload")
+  // std::cout << "Headers " << req.methodString() << " " << req.path() << std::endl;
+  // if (!benchmark)
+  // {
+  //   const std::map<string, string>& headers = req.headers();
+  //   for (std::map<string, string>::const_iterator it = headers.begin();
+  //        it != headers.end();
+  //        ++it)
+  //   {
+  //     std::cout << it->first << ": " << it->second << std::endl;
+  //   }
+  // }
+  if (req.path() == "/upload")
   {
     // resp->setStatusCode(webSocketResponse::k200Ok);
     // resp->setStatusMessage("OK");
@@ -78,7 +51,18 @@ void onRequest(const webSocketRequest& req, webSocketResponse* resp)
     resp->setCloseConnection(true);
   }
 }
-
+void onMessage(const webSocketRequest& req, webSocketResponse* resp)
+{
+    
+}
+void onError(const webSocketRequest& req, webSocketResponse* resp)
+{
+    
+}
+void onClose(const webSocketRequest& req, webSocketResponse* resp)
+{
+  resp->setCloseConnection(true);
+}
 int main(int argc, char* argv[])
 {
   int numThreads = 0;
@@ -89,8 +73,11 @@ int main(int argc, char* argv[])
     numThreads = atoi(argv[1]);
   }
   EventLoop loop;
-  webSocketServer server(&loop, InetAddress(8000), "dummy");
-  server.setwebSocketCallback(onRequest);
+  webSocketServer server(&loop, InetAddress(8000), "websocket");
+  server.setwebSocketOpenCallback(onOpen);
+  server.setwebSocketMessageCallback(onMessage);
+  server.setwebSocketErrorCallback(onError);
+  server.setwebSocketCloseCallback(onClose);
   server.setThreadNum(numThreads);
   server.start();
   loop.loop();

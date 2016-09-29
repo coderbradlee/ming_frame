@@ -41,8 +41,8 @@ class webSocketContext : public muduo::copyable
   // default copy-ctor, dtor and assignment are fine
 
   // return false if any error
-  bool parseRequest(Buffer* buf, Timestamp receiveTime);
-
+  bool parseOpen(Buffer* buf, Timestamp receiveTime);
+  //bool parseOpen(Timestamp receiveTime);
   bool gotAll() const
   { return state_ == kGotAll; }
 
@@ -60,7 +60,8 @@ class webSocketContext : public muduo::copyable
   { return request_; }
 
  private:
-  bool processRequestLine(const char* begin, const char* end);
+  bool processOpenLine(const char* begin, const char* end);
+  //bool processRequestLine(const char* begin, const char* end);
 
   webSocketRequestParseState state_;
   webSocketRequest request_;

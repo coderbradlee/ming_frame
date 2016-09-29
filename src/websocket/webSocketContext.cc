@@ -1,19 +1,10 @@
-// Copyright 2010, Shuo Chen.  All rights reserved.
-// http://code.google.com/p/muduo/
-//
-// Use of this source code is governed by a BSD-style license
-// that can be found in the License file.
-
-// Author: Shuo Chen (chenshuo at chenshuo dot com)
-//
-
 #include <muduo/net/Buffer.h>
 #include "webSocketContext.h"
 
 using namespace muduo;
 using namespace muduo::net;
 
-bool webSocketContext::processRequestLine(const char* begin, const char* end)
+bool webSocketContext::processOpenLine(const char* begin, const char* end)
 {
   bool succeed = false;
   const char* start = begin;
@@ -57,10 +48,8 @@ bool webSocketContext::processRequestLine(const char* begin, const char* end)
 }
 
 // return false if any error
-bool webSocketContext::parseRequest(Buffer* buf, Timestamp receiveTime)
+bool webSocketContext::parseOpen(Timestamp receiveTime)
 {
-  //std::cout<<buf->retrieveAllAsString()<<std::endl;
-  //std::cout<<buf->peek()<<std::endl;
   bool ok = true;
   bool hasMore = true;
   while (hasMore)
@@ -70,7 +59,7 @@ bool webSocketContext::parseRequest(Buffer* buf, Timestamp receiveTime)
       const char* crlf = buf->findCRLF();
       if (crlf)
       {
-        ok = processRequestLine(buf->peek(), crlf);
+        ok = processOpenLine(buf->peek(), crlf);
         if (ok)
         {
           request_.setReceiveTime(receiveTime);

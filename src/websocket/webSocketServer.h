@@ -1,12 +1,3 @@
-// Copyright 2010, Shuo Chen.  All rights reserved.
-// http://code.google.com/p/muduo/
-//
-// Use of this source code is governed by a BSD-style license
-// that can be found in the License file.
-
-// Author: Shuo Chen (chenshuo at chenshuo dot com)
-//
-// This is a public header file, it must only include public header files.
 
 #ifndef WEBSOCKET_SERVER_H
 #define WEBSOCKET_SERVER_H
@@ -22,10 +13,6 @@ namespace net
 class webSocketRequest;
 class webSocketResponse;
 
-/// A simple embeddable HTTP server designed for report status of a program.
-/// It is not a fully HTTP 1.1 compliant server, but provides minimum features
-/// that can communicate with HttpClient and Web browser.
-/// It is synchronous, just like Java Servlet.
 class webSocketServer : boost::noncopyable
 {
  public:
@@ -42,11 +29,22 @@ class webSocketServer : boost::noncopyable
   EventLoop* getLoop() const { return server_.getLoop(); }
 
   /// Not thread safe, callback be registered before calling start().
-  void setwebSocketCallback(const webSocketCallback& cb)
+  void setwebSocketOpenCallback(const webSocketOpenCallback& cb)
   {
-    webSocketCallback_ = cb;
+    webSocketOpenCallback_ = cb;
   }
-
+  void setwebSocketMessageCallback(const webSocketMessageCallback& cb)
+  {
+    webSocketMessageCallback_ = cb;
+  }
+  void setwebSocketErrorCallback(const webSocketErrorCallback& cb)
+  {
+    webSocketErrorCallback_ = cb;
+  }
+  void setwebSocketCloseCallback(const webSocketCloseCallback& cb)
+  {
+    webSocketCloseCallback_ = cb;
+  }
   void setThreadNum(int numThreads)
   {
     server_.setThreadNum(numThreads);
@@ -59,10 +57,15 @@ class webSocketServer : boost::noncopyable
   void onMessage(const TcpConnectionPtr& conn,
                  Buffer* buf,
                  Timestamp receiveTime);
-  void onRequest(const TcpConnectionPtr&, const webSocketRequest&);
-
+  void onOpen(const TcpConnectionPtr&, const webSocketRequest&);
+  void onMessage(const TcpConnectionPtr&, const webSocketRequest&);
+  void onError(const TcpConnectionPtr&, const webSocketRequest&);
+  void onClose(const TcpConnectionPtr&, const webSocketRequest&);
   TcpServer server_;
-  webSocketCallback webSocketCallback_;
+  webSocketOpenCallback webSocketOpenCallback_;
+  webSocketMessageCallback webSocketMessageCallback_;
+  webSocketErrorCallback webSocketErrorCallback_;
+  webSocketCloseCallback webSocketCloseCallback_;
 };
 
 }

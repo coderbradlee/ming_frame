@@ -1,12 +1,3 @@
-// Copyright 2010, Shuo Chen.  All rights reserved.
-// http://code.google.com/p/muduo/
-//
-// Use of this source code is governed by a BSD-style license
-// that can be found in the License file.
-
-// Author: Shuo Chen (chenshuo at chenshuo dot com)
-//
-
 #include "webSocketServer.h"
 
 #include <muduo/base/Logging.h>
@@ -42,7 +33,7 @@ webSocketServer::webSocketServer(EventLoop* loop,
                        const string& name,
                        TcpServer::Option option)
   : server_(loop, listenAddr, name, option),
-    webSocketCallback_(detail::defaultwebSocketCallback)
+    webSocketOpenCallback_(detail::defaultwebSocketCallback)
 {
   server_.setConnectionCallback(
       boost::bind(&webSocketServer::onConnection, this, _1));
@@ -67,12 +58,14 @@ void webSocketServer::onConnection(const TcpConnectionPtr& conn)
   {
     conn->setContext(webSocketContext());
   }
+  
 }
 
 void webSocketServer::onMessage(const TcpConnectionPtr& conn,
                            Buffer* buf,
                            Timestamp receiveTime)
 {
+  //增加状态机，open message error close
   webSocketContext* context = boost::any_cast<webSocketContext>(conn->getMutableContext());
 
   if (!context->parseRequest(buf, receiveTime))
@@ -83,18 +76,18 @@ void webSocketServer::onMessage(const TcpConnectionPtr& conn,
 
   if (context->gotAll())
   {
-    onRequest(conn, context->request());
+    onOpen(conn, context->request());
     context->reset();
   }
 }
 
-void webSocketServer::onRequest(const TcpConnectionPtr& conn, const webSocketRequest& req)
+void webSocketServer::onOpen(const TcpConnectionPtr& conn, const webSocketRequest& req)
 {
   const string& connection = req.getHeader("Connection");
   bool close = connection == "close" ||
     (req.getVersion() == webSocketRequest::kHttp10 && connection != "Keep-Alive");
   webSocketResponse response(close);
-  webSocketCallback_(req, &response);
+  webSocketOpenCallback_(req, &response);
   Buffer buf;
   response.appendToBuffer(&buf);
   conn->send(&buf);
