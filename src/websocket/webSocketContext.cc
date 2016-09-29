@@ -48,7 +48,7 @@ bool webSocketContext::processOpenLine(const char* begin, const char* end)
 }
 
 // return false if any error
-bool webSocketContext::parseOpen(Timestamp receiveTime)
+bool webSocketContext::parseOpen(Buffer* buf, Timestamp receiveTime)
 {
   bool ok = true;
   bool hasMore = true;
