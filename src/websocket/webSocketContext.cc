@@ -165,5 +165,6 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
   }
   //std::cout <<buf->peek()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   readContent(buf,content_length);
+  state_ = kGotAll;
   return true;
 }
