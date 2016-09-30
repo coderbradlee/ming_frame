@@ -109,6 +109,22 @@ bool webSocketContext::parseOpen(Buffer* buf, Timestamp receiveTime)
   std::cout <<buf->retrieveAllAsString()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   return ok;
 }
+string webSocketContext::readContent(Buffer* buf,size_t length)
+{
+  std::vector<unsigned char> mask;
+    mask.resize(4);
+    for(int i=0;i<4;++i)
+      mask[i]=buf->readInt8();
+    std::vector<unsigned char> content;
+    for(size_t c=0;c<length;c++) 
+    {
+      content.push_back(buf->readInt8()^mask[c%4]);
+    }
+    string string_content;
+    string_content.assign(content.begin(),content.end());
+    std::cout <<string_content<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+    return string_content;
+}
 bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
 {
   unsigned char fin_rsv_opcode=buf->readInt8();
@@ -126,6 +142,7 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
   {
     size_t content_length=buf->readInt16();
     std::cout <<content_length<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+    std::cout <<readContent(buf,content_length)<<":"<< __LINE__<<":" <<__FILE__ << std::endl;;
     //read content
   }
   else if(length==127)
@@ -136,18 +153,7 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
   {
     // string content(buf->retrieveAsString(length));
     
-    std::vector<unsigned char> mask;
-    mask.resize(4);
-    for(int i=0;i<4;++i)
-      mask[i]=buf->readInt8();
-    std::vector<unsigned char> content;
-    for(size_t c=0;c<length;c++) 
-    {
-      content.push_back(buf->readInt8()^mask[c%4]);
-    }
-    string string_content;
-    string_content.assign(content.begin(),content.end());
-    std::cout <<string_content<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+    std::cout <<readContent(buf,length)<<":"<< __LINE__<<":" <<__FILE__ << std::endl;;
   }
   std::cout <<buf->peek()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   return true;
