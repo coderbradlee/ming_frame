@@ -122,7 +122,7 @@ void webSocketContext::readContent(Buffer* buf,size_t length)
     }
     string string_content;
     string_content.assign(content.begin(),content.end());
-    //std::cout <<string_content<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+    std::cout <<string_content<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     //return string_content;
     request_.setContent(string_content);
 }
@@ -165,6 +165,7 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
   }
   //std::cout <<buf->peek()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   readContent(buf,content_length);
+  std::cout <<buf->retrieveAllAsString()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   state_ = kGotAll;
   return true;
 }
