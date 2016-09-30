@@ -18,7 +18,7 @@ void appendWebsocketHeaderToBuffer(Buffer* output) const
 {
   size_t length=body_.length();
   //response.put(129);
-  output->append(129);
+  output->appendInt8(129);
   //unmasked (first length byte<128)
   if(length>=126) 
   {
@@ -27,21 +27,21 @@ void appendWebsocketHeaderToBuffer(Buffer* output) const
       {
           num_bytes=8;
           //response.put(127);
-          output->append(127);
+          output->appendInt8(127);
       }
       else 
       {
           num_bytes=2;
-          output->append(126);
+          output->appendInt8(126);
       }
       
       for(int c=num_bytes-1;c>=0;c--) 
       {
-          output->append((length>>(8*c))%256);
+          output->appendInt8((length>>(8*c))%256);
       }
   }
   else
-      output->append(length);
+      output->appendInt8(length);
   output->append(body_);
   //response << stream.rdbuf();
 }
