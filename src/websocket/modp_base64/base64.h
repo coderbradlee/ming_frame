@@ -1,4 +1,4 @@
-#include "./modp_base64/modp_b64.h"
+#include "modp_b64.h"
 
 // Encodes the input string in base64.  Returns true if successful and false
 // otherwise.  The output string is only modified if successful.

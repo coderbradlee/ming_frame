@@ -1,7 +1,7 @@
 #include "../webSocketServer.h"
 #include "../webSocketRequest.h"
 #include "../webSocketResponse.h"
-#include "../base64.h"
+#include "../modp_base64/base64.h"
 #include <muduo/net/EventLoop.h>
 #include <muduo/base/Logging.h>
 #include <boost/lexical_cast.hpp>
