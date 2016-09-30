@@ -32,7 +32,13 @@ class webSocketContext : public muduo::copyable
     kExpectBody,
     kGotAll,
   };
-
+  enum messageState
+  {
+    kOpen,
+    kMessage,
+    kError,
+    kClose,
+  };
   webSocketContext()
     : state_(kExpectRequestLine),messageState_(kOpen)
   {
@@ -72,13 +78,7 @@ class webSocketContext : public muduo::copyable
 
   webSocketRequestParseState state_;
   webSocketRequest request_;
-  enum messageState
-  {
-    kOpen,
-    kMessage,
-    kError,
-    kClose,
-  } messageState_;
+  messageState messageState_;
 };
 
 }
