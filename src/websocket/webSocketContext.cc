@@ -121,6 +121,7 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
     return false;
   }
   size_t length=(first_bytes&127);
+  std::cout <<length<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   if(length==126) 
   {
     size_t content_length=buf->readInt16();
