@@ -14,7 +14,7 @@
 #include <iostream>
 using namespace muduo;
 using namespace muduo::net;
-void appendWebsocketHeaderToBuffer(Buffer* output) const
+void webSocketResponse::appendWebsocketHeaderToBuffer(Buffer* output) const
 {
   size_t length=body_.length();
   //response.put(129);
