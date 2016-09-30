@@ -75,7 +75,7 @@ class webSocketContext : public muduo::copyable
  private:
   bool processOpenLine(const char* begin, const char* end);
   //bool processRequestLine(const char* begin, const char* end);
-
+  string readContent(Buffer* buf,size_t length);
   webSocketRequestParseState state_;
   webSocketRequest request_;
   messageState messageState_;
