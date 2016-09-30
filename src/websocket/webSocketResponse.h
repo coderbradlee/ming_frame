@@ -63,7 +63,7 @@ class webSocketResponse : public muduo::copyable
   { body_ = body; }
 
   void appendToBuffer(Buffer* output) const;
-
+  void appendWebsocketHeaderToBuffer(Buffer* output) const;
  private:
   std::map<string, string> headers_;
   webSocketStatusCode statusCode_;

@@ -124,7 +124,7 @@ void webSocketServer::onMessage(const TcpConnectionPtr& conn, const webSocketReq
   webSocketResponse response(close);
   webSocketMessageCallback_(req, &response);
   Buffer buf;
-  response.appendToBuffer(&buf);
+  response.appendWebsocketHeaderToBuffer(&buf);
   conn->send(&buf);
   if (response.closeConnection())
   {

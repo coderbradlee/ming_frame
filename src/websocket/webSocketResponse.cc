@@ -14,7 +14,37 @@
 #include <iostream>
 using namespace muduo;
 using namespace muduo::net;
-
+void appendWebsocketHeaderToBuffer(Buffer* output) const
+{
+  size_t length=body_.length();
+  //response.put(129);
+  output->append(129);
+  //unmasked (first length byte<128)
+  if(length>=126) 
+  {
+      int num_bytes;
+      if(length>0xffff) 
+      {
+          num_bytes=8;
+          //response.put(127);
+          output->append(127);
+      }
+      else 
+      {
+          num_bytes=2;
+          output->append(126);
+      }
+      
+      for(int c=num_bytes-1;c>=0;c--) 
+      {
+          output->append((length>>(8*c))%256);
+      }
+  }
+  else
+      output->append(length);
+  output->append(body_);
+  //response << stream.rdbuf();
+}
 void webSocketResponse::appendToBuffer(Buffer* output) const
 {
   char buf[32];

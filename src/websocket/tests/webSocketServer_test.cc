@@ -61,10 +61,7 @@ void onMessage(const webSocketRequest& req, webSocketResponse* resp)
     string clientmessage = req.getContent();
     std::cout << "clientmessage:" << clientmessage <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     string test_ret="{\"action\":\"UPLOAD_FILE\",\"errorCode\": 200,\"message\":\"Upload initialized. Wait for data\",\"phase\":\"PREPARE\",\"ts\":\"2016-09-29 17:55:53\"}";
-    resp->setStatusCode(webSocketResponse::k200Ok);
-    resp->setStatusMessage("OK");
-    resp->setContentType("text/plain");
-    resp->addHeader("Server", "Muduo");
+    
     resp->setBody(test_ret);
     // ptree pt;
     // string retString = "";
