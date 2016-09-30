@@ -177,7 +177,7 @@ class webSocketRequest : public muduo::copyable
  }
  string getContent()
  {
-    
+    return "get content";
  }
  private:
   Method method_;
