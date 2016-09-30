@@ -68,9 +68,13 @@ void onMessage(const webSocketRequest& req, webSocketResponse* resp)
     }
     else
     {
-      string decode_string;
+      std::string decode_string;
       bool x=Base64Decode(output_str, &decode_string);
-      std::cout << "clientmessage:" << decode_string <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+      if(x)
+      {
+        std::cout << "clientmessage:" << decode_string <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+      }
+      
       ///////////////////////////////////////
       int received_size=output_str.length();
       if(received_size<=0)
