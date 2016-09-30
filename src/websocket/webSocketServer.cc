@@ -120,7 +120,7 @@ void webSocketServer::onOpen(const TcpConnectionPtr& conn, const webSocketReques
 }
 void webSocketServer::onMessage(const TcpConnectionPtr& conn, const webSocketRequest& req)
 {
-
+  bool close=false;
   webSocketResponse response(close);
   webSocketMessageCallback_(req, &response);
   Buffer buf;
