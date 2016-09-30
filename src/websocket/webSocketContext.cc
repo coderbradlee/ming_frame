@@ -124,6 +124,7 @@ void webSocketContext::readContent(Buffer* buf,size_t length)
     string_content.assign(content.begin(),content.end());
     //std::cout <<string_content<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     //return string_content;
+    //decode base64code in here
     request_.setContent(string_content);
 }
 bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
