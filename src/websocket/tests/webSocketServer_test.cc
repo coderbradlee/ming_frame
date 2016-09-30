@@ -7,7 +7,7 @@
 #include <boost/lexical_cast.hpp>
 #include <iostream>
 #include <map>
-
+#include "../base64.h"
 using namespace muduo;
 using namespace muduo::net;
 
@@ -59,19 +59,24 @@ void onMessage(const webSocketRequest& req, webSocketResponse* resp)
   //{"action":"UPLOAD_FILE","errorCode": 200,"message":"Upload initialized. Wait for data","phase":"PREPARE","ts":"2016-09-29 17:55:53"}
   //{"action":"UPLOAD_FILE","errorCode":200,"message":"write slice ok","phase":"TRANSFER","bytesRead":2591,"ts":"2016-09-29 17:55:54"}
     string output_str=req.getContent();
-    std::cout << "clientmessage:" << output_str <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     string test_ret;
     if (output_str.compare(0, 9, "#PREPARE#") == 0)
     {
       test_ret="{\"action\":\"UPLOAD_FILE\",\"errorCode\": 200,\"message\":\"Upload initialized. Wait for data\",\"phase\":\"PREPARE\",\"ts\":\"2016-09-29 17:55:53\"}";
+      std::cout << "clientmessage:" << output_str <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     }
     else
     {
+      string decode_string;
+      bool x=Base64Decode(output_str, &decode_string);
+      std::cout << "clientmessage:" << decode_string <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+      ///////////////////////////////////////
       int received_size=output_str.length();
       if(received_size<=0)
       {
         resp->setCloseConnection(true);
       }
+
       test_ret="{\"action\":\"UPLOAD_FILE\",\"errorCode\":200,\"message\":\"write slice ok\",\"phase\":\"TRANSFER\",\"bytesRead\":"+boost::lexical_cast<string>(received_size)+",\"ts\":\"2016-09-29 17:55:54\"}";
     }
     resp->setBody(test_ret);
