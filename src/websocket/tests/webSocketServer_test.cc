@@ -59,8 +59,7 @@ void onMessage(const webSocketRequest& req, webSocketResponse* resp)
   //{"action":"UPLOAD_FILE","errorCode": 200,"message":"Upload initialized. Wait for data","phase":"PREPARE","ts":"2016-09-29 17:55:53"}
   //{"action":"UPLOAD_FILE","errorCode":200,"message":"write slice ok","phase":"TRANSFER","bytesRead":2591,"ts":"2016-09-29 17:55:54"}
     string clientmessage = req.getContent();
-    string output_str;
-    bool x=Base64Decode(clientmessage, &output_str);
+    string output_str=Crypto::Base64::decode(clientmessage);
     
     std::cout << "clientmessage:" << output_str <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     string test_ret;
