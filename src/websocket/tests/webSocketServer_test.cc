@@ -61,7 +61,7 @@ void onMessage(const webSocketRequest& req, webSocketResponse* resp)
     string clientmessage = req.getContent();
     std::cout << "clientmessage:" << clientmessage <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     string test_ret;
-    if (clientmessage.compare(0, 9, "#PREPARE#") == 0))
+    if (clientmessage.compare(0, 9, "#PREPARE#") == 0)
     {
       test_ret="{\"action\":\"UPLOAD_FILE\",\"errorCode\": 200,\"message\":\"Upload initialized. Wait for data\",\"phase\":\"PREPARE\",\"ts\":\"2016-09-29 17:55:53\"}";
     }
