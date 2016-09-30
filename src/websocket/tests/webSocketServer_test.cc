@@ -4,7 +4,7 @@
 #include "../crypto.hpp"
 #include <muduo/net/EventLoop.h>
 #include <muduo/base/Logging.h>
-
+#include <boost/lexical_cast.hpp>
 #include <iostream>
 #include <map>
 
