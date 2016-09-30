@@ -53,6 +53,11 @@ void onOpen(const webSocketRequest& req, webSocketResponse* resp)
 }
 void onMessage(const webSocketRequest& req, webSocketResponse* resp)
 {
+  //init
+  //#PREPARE#{"action":"UPLOAD_FILE","transfer":"base64","data":{"file":"/SalesOrder/AYYED20160929/Koala.jpg","size":780831,"overwrite":true},"phase":"PREPARE","ts":"2016-8-29 17:53:43"}
+  //return
+  //{"action":"UPLOAD_FILE","errorCode": 200,"message":"Upload initialized. Wait for data","phase":"PREPARE","ts":"2016-09-29 17:55:53"}
+  //{"action":"UPLOAD_FILE","errorCode":200,"message":"write slice ok","phase":"TRANSFER","bytesRead":2591,"ts":"2016-09-29 17:55:54"}
     string clientmessage = req.getContent();
     std::cout << "clientmessage:" << clientmessage <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     // ptree pt;
