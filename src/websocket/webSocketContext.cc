@@ -105,6 +105,8 @@ bool webSocketContext::parseOpen(Buffer* buf, Timestamp receiveTime)
       // FIXME:
     }
   }
+  //buf->retrieveAllAsString();
+  std::cout <<buf->retrieveAllAsString()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   return ok;
 }
 bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
