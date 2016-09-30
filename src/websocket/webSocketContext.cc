@@ -113,8 +113,8 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
 {
   unsigned char fin_rsv_opcode=buf->readInt8();
   unsigned char first_bytes=buf->readInt8();
-  std::cout <<fin_rsv_opcode<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
-  std::cout <<first_bytes<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+  printf("%d:%s:%s\n", fin_rsv_opcode);
+  printf("%d:%s:%s\n", first_bytes);
   if(first_bytes<128) 
   {
     const std::string reason="message from client not masked";
@@ -123,7 +123,7 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
   size_t length=(first_bytes&127);
   if(length==126) 
   {
-    size_t content_length=buf->readInt8()<<8+buf->readInt8();
+    size_t content_length=buf->readInt16();
     std::cout <<content_length<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     //read content
   }
