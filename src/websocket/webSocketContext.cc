@@ -110,4 +110,5 @@ bool webSocketContext::parseOpen(Buffer* buf, Timestamp receiveTime)
 bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
 {
   std::cout <<buf<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+  return true;
 }
