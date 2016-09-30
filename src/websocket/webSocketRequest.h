@@ -175,7 +175,7 @@ class webSocketRequest : public muduo::copyable
  {
     return ws_magic_string;
  }
- string getContent()
+ string getContent()const
  {
     return "get content";
  }
