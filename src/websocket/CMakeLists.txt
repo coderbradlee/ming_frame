@@ -2,8 +2,8 @@ set(webSocket_SRCS
   webSocketServer.cc
   webSocketResponse.cc
   webSocketContext.cc
-  ../modp_base64/base64.cc
-  ../modp_base64/modp_b64.cc
+  modp_base64/base64.cc
+  modp_base64/modp_b64.cc
   )
 
 add_library(webSocket ${webSocket_SRCS})
