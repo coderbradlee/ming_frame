@@ -70,7 +70,7 @@ void onMessage(const webSocketRequest& req, webSocketResponse* resp)
       int received_size=clientmessage.length();
       if(received_size<1024)
       {
-        resp->setCloseConnection(true);
+        //resp->setCloseConnection(true);
       }
       test_ret="{\"action\":\"UPLOAD_FILE\",\"errorCode\":200,\"message\":\"write slice ok\",\"phase\":\"TRANSFER\",\"bytesRead\":"+boost::lexical_cast<string>(received_size)+",\"ts\":\"2016-09-29 17:55:54\"}";
     }
