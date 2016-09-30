@@ -24,8 +24,8 @@ bool Base64Decode(const std::string& input, std::string* output) {
   // does not null terminate result since result is binary data!
   int input_size = static_cast<int>(input.size());
   int output_size = modp_b64_decode(&(temp[0]), input.data(), input_size);
-  std::cout << "input_size:" << input_size << std::endl;
-  std::cout << "output_size:" << output_size << std::endl;
+  //std::cout << "input_size:" << input_size << std::endl;
+  //std::cout << "output_size:" << output_size << std::endl;
   if (output_size < 0)
     return false;
 

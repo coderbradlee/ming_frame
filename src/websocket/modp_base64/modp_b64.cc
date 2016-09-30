@@ -119,7 +119,7 @@ int modp_b64_encode(char* dest, const char* str, int len)
 int modp_b64_decode(char* dest, const char* src, int len)
 {
     if (len == 0) return 0;
-	std::cout << "len:" << len << std::endl;
+	//std::cout << "len:" << len << std::endl;
 #ifdef DOPAD
     /* if padding is used, then the message must be at least
        4 chars and be a multiple of 4.
@@ -136,7 +136,7 @@ int modp_b64_decode(char* dest, const char* src, int len)
     int i;
     int leftover = len % 4;
     int chunks = (leftover == 0) ? len / 4 - 1 : len /4;
-	std::cout << "chunks:" << chunks << std::endl;
+	//std::cout << "chunks:" << chunks << std::endl;
     uint8_t* p = (uint8_t*) dest;
     uint32_t x = 0;
     uint32_t* destInt = (uint32_t*) p;
@@ -189,7 +189,7 @@ int modp_b64_decode(char* dest, const char* src, int len)
 int modp_b64_decode(char* dest, const char* src, int len)
 {
     if (len == 0) return 0;
-	std::cout << "len:" << len << std::endl;
+	//std::cout << "len:" << len << std::endl;
 #ifdef DOPAD
     /*
      * if padding is used, then the message must be at least
@@ -208,9 +208,9 @@ int modp_b64_decode(char* dest, const char* src, int len)
 
     int i;
     int leftover = len % 4;
-	std::cout << "leftover:" << leftover << std::endl;
+	//std::cout << "leftover:" << leftover << std::endl;
     int chunks = (leftover == 0) ? len / 4 - 1 : len /4;
-	std::cout << "chunks:" << chunks << std::endl;
+	//std::cout << "chunks:" << chunks << std::endl;
     uint8_t* p = (uint8_t*)dest;
     uint32_t x = 0;
     uint32_t* destInt = (uint32_t*) p;
