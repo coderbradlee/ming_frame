@@ -139,7 +139,7 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
     std::vector<unsigned char> mask;
     mask.resize(4);
     for(int i=0;i<4;++i)
-      mask[i]=buf.readInt8();
+      mask[i]=buf->readInt8();
     std::vector<unsigned char> content;
     for(size_t c=0;c<length;c++) 
     {
