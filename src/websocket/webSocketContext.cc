@@ -113,8 +113,8 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
 {
   unsigned char fin_rsv_opcode=buf->readInt8();
   unsigned char first_bytes=buf->readInt8();
-  printf("%d:%s:%s\n", fin_rsv_opcode);
-  printf("%d:%s:%s\n", first_bytes);
+  printf("%d:116\n", fin_rsv_opcode);
+  printf("%d:117\n", first_bytes);
   if(first_bytes<128) 
   {
     const std::string reason="message from client not masked";
