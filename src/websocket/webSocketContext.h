@@ -48,7 +48,7 @@ class webSocketContext : public muduo::copyable
 
   // return false if any error
   bool parseOpen(Buffer* buf, Timestamp receiveTime);
-  //bool parseOpen(Timestamp receiveTime);
+  bool parseMessage(Buffer* buf, Timestamp receiveTime);
   bool gotAll() const
   { return state_ == kGotAll; }
 

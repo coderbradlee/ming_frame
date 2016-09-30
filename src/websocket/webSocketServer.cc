@@ -84,7 +84,7 @@ void webSocketServer::onMessage(const TcpConnectionPtr& conn,
   else if(context->getMessageState()==webSocketContext::kMessage)
   {
     std::cout <<":"<< __LINE__<<":" <<__FILE__ << std::endl;
-    if (!context->parseOpen(buf, receiveTime))
+    if (!context->parseMessage(buf, receiveTime))
     {
       conn->send("HTTP/1.1 400 Bad Request\r\n\r\n");
       conn->shutdown();
