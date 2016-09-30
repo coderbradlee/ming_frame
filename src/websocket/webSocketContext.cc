@@ -132,6 +132,11 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
   {
 
   }
+  else
+  {
+    string content(buf->retrieveAsString(length));
+    std::cout <<content<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+  }
   std::cout <<buf->peek()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   return true;
 }
