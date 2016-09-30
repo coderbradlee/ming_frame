@@ -2,6 +2,7 @@ set(webSocket_SRCS
   webSocketServer.cc
   webSocketResponse.cc
   webSocketContext.cc
+  base64.cc
   )
 
 add_library(webSocket ${webSocket_SRCS})
