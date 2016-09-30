@@ -177,7 +177,11 @@ class webSocketRequest : public muduo::copyable
  }
  string getContent()const
  {
-    return "get content";
+    return content_;
+ }
+ void setContent(string content)
+ {
+    content_=content;
  }
  private:
   Method method_;
@@ -187,6 +191,7 @@ class webSocketRequest : public muduo::copyable
   Timestamp receiveTime_;
   std::map<string, string> headers_;
   const string ws_magic_string="258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+  string content_;
 };
 
 }

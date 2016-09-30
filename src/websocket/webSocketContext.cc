@@ -109,7 +109,7 @@ bool webSocketContext::parseOpen(Buffer* buf, Timestamp receiveTime)
   std::cout <<buf->retrieveAllAsString()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   return ok;
 }
-string webSocketContext::readContent(Buffer* buf,size_t length)
+void webSocketContext::readContent(Buffer* buf,size_t length)
 {
   std::vector<unsigned char> mask;
     mask.resize(4);
@@ -122,8 +122,9 @@ string webSocketContext::readContent(Buffer* buf,size_t length)
     }
     string string_content;
     string_content.assign(content.begin(),content.end());
-    std::cout <<string_content<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
-    return string_content;
+    //std::cout <<string_content<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+    //return string_content;
+    request_.setContent(string_content);
 }
 bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
 {
@@ -138,23 +139,31 @@ bool webSocketContext::parseMessage(Buffer* buf, Timestamp receiveTime)
   }
   size_t length=(first_bytes&127);
   std::cout <<length<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+  size_t content_length=0;
   if(length==126) 
   {
-    size_t content_length=buf->readInt16();
-    std::cout <<content_length<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
-    std::cout <<readContent(buf,content_length)<<":"<< __LINE__<<":" <<__FILE__ << std::endl;;
+    content_length=buf->readInt16();
+    //size_t content_length=buf->readInt16();
+    //std::cout <<content_length<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+    //std::cout <<readContent(buf,content_length)<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
     //read content
+    //readContent(buf,content_length);
   }
   else if(length==127)
   {
-
+    content_length=buf->readInt64();
+    // size_t content_length=buf->readInt64();
+    // std::cout <<content_length<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+    // std::cout <<readContent(buf,content_length)<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
   }
   else
   {
     // string content(buf->retrieveAsString(length));
     
-    std::cout <<readContent(buf,length)<<":"<< __LINE__<<":" <<__FILE__ << std::endl;;
+    //std::cout <<readContent(buf,length)<<":"<< __LINE__<<":" <<__FILE__ << std::endl;;
+    content_length=length;
   }
-  std::cout <<buf->peek()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+  //std::cout <<buf->peek()<<":"<< __LINE__<<":" <<__FILE__ << std::endl;
+  readContent(buf,content_length);
   return true;
 }
