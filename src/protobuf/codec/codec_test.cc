@@ -246,9 +246,9 @@ int main()
 {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  testQuery();
+  //testQuery();
   puts("");
-  //testAnswer();
+  testAnswer();
   puts("");
   //testEmpty();
   puts("");
