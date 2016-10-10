@@ -102,4 +102,5 @@ for server_ip in ip_list:
             print "%s script exec: %s TIMEOUT ERROR %s" %('#'*10, server_ip, '#'*10)
         #send_email_succeed(recipientas_list,addresser,itheme,email_server_IP,log_file_name,server_ip,local_file_md5,target_file_md5)
     else:
+        print "end"
         #send_email_fail(recipientas_list,addresser,itheme,email_server_IP,log_file_name,server_ip,local_file_md5,target_file_md5)
