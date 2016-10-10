@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#coding=utf-8
+#coding=utf-8 tag have email function
 '''
 Created on 2014-6-19
 @author: huangyishan
