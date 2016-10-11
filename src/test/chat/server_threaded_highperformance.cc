@@ -112,8 +112,9 @@ int main(int argc, char* argv[])
   if (argc > 1)
   {
     EventLoop loop;
-    LOG_DEBUG<<&loop;
     LOG_DEBUG;
+    LOG_DEBUG<<&loop;
+
     uint16_t port = static_cast<uint16_t>(atoi(argv[1]));
     InetAddress serverAddr(port);
     ChatServer server(&loop, serverAddr);
