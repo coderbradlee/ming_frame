@@ -3,7 +3,7 @@ package com.chenshuo.muduo.example.multiplexer.testcase;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
-import io.netty.buffer.ChannelBuffer;
+import org.jboss.netty.buffer.ChannelBuffer;
 
 import com.chenshuo.muduo.example.multiplexer.DataEvent;
 import com.chenshuo.muduo.example.multiplexer.Event;

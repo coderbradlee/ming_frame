@@ -7,8 +7,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
-import io.netty.buffer.ChannelBufferFactory;
-import io.netty.buffer.HeapChannelBufferFactory;
+import org.jboss.netty.buffer.ChannelBufferFactory;
+import org.jboss.netty.buffer.HeapChannelBufferFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
