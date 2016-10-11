@@ -94,7 +94,7 @@ class ChatServer : boost::noncopyable
     LocalConnections::instance();
     assert(LocalConnections::pointer() != NULL);
     MutexLockGuard lock(mutex_);
-    LOG_DEBUG<<loop;
+    LOG_INFO<<loop;
     loops_.insert(loop);
   }
 
@@ -112,8 +112,8 @@ int main(int argc, char* argv[])
   if (argc > 1)
   {
     EventLoop loop;
-    LOG_DEBUG;
-    LOG_DEBUG<<&loop;
+    
+    LOG_INFO<<&loop;
 
     uint16_t port = static_cast<uint16_t>(atoi(argv[1]));
     InetAddress serverAddr(port);
