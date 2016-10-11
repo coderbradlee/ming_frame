@@ -1,6 +1,6 @@
 package com.chenshuo.muduo.example.multiplexer;
 
-import org.jboss.netty.buffer.ChannelBufferFactory;
+import io.netty.buffer.ChannelBufferFactory;
 
 public abstract class TestCase {
     protected static final ChannelBufferFactory bufferFactory = MultiplexerTest.bufferFactory;

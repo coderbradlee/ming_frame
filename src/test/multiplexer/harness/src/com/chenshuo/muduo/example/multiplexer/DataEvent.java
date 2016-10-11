@@ -2,7 +2,7 @@ package com.chenshuo.muduo.example.multiplexer;
 
 import java.nio.charset.Charset;
 
-import org.jboss.netty.buffer.ChannelBuffer;
+import io.netty.buffer.ChannelBuffer;
 
 public class DataEvent extends Event {
 
