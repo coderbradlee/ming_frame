@@ -255,15 +255,15 @@ int dns_add_serv(struct dns_ctx *ctx, const char *serv) {
     return errno = ENFILE, -1;
   sns = &ctx->dnsc_serv[ctx->dnsc_nserv];
   memset(sns, 0, sizeof(*sns));
-  if (dns_pton(AF_INET, serv, &sns->sin.sin_addr) > 0) {
+  if (dns_pton((int)AF_INET, serv, (void*)&sns->sin.sin_addr) > 0) {
     sns->sin.sin_family = AF_INET;
     return ++ctx->dnsc_nserv;
   }
 #ifdef HAVE_IPv6
-  // if (dns_pton(AF_INET6, serv, &sns->sin6.sin6_addr) > 0) {
-  //   sns->sin6.sin6_family = AF_INET6;
-  //   return ++ctx->dnsc_nserv;
-  // }
+  if (dns_pton((int)AF_INET6, serv, (void*)&sns->sin6.sin6_addr) > 0) {
+    sns->sin6.sin6_family = AF_INET6;
+    return ++ctx->dnsc_nserv;
+  }
 #endif
   errno = EINVAL;
   return -1;
