@@ -4,7 +4,7 @@
 #include <muduo/net/EventLoop.h>
 #include <boost/bind.hpp>
 
-#include "udns.h"
+#include "udns-0.2/udns.h"
 #include <assert.h>
 #include <stdio.h>
 
