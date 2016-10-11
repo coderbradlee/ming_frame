@@ -13,5 +13,10 @@ add_executable(test_main ${TEST_MAIN_SRC_LIST})
 
 target_link_libraries(test_main ${TEST_MAIN_LIB_LIST})
 
+add_executable(bounded_cmp bounded_buffer_comparison.cpp)
+
+target_link_libraries(bounded_cmp ${TEST_MAIN_LIB_LIST})
+
+
 #set_target_properties (test_main PROPERTIES COMPILE_FLAGS "
 # -std=c++11 -O2 -finline-limit=1000 -DNDEBUG")
