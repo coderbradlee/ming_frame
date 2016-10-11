@@ -260,10 +260,10 @@ int dns_add_serv(struct dns_ctx *ctx, const char *serv) {
     return ++ctx->dnsc_nserv;
   }
 #ifdef HAVE_IPv6
-  if (dns_pton(AF_INET6, serv, &sns->sin6.sin6_addr) > 0) {
-    sns->sin6.sin6_family = AF_INET6;
-    return ++ctx->dnsc_nserv;
-  }
+  // if (dns_pton(AF_INET6, serv, &sns->sin6.sin6_addr) > 0) {
+  //   sns->sin6.sin6_family = AF_INET6;
+  //   return ++ctx->dnsc_nserv;
+  // }
 #endif
   errno = EINVAL;
   return -1;
