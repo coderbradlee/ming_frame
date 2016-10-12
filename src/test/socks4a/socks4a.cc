@@ -39,10 +39,13 @@ void onServerMessage(const TcpConnectionPtr& conn, Buffer* buf, Timestamp)
     }
     else if (buf->readableBytes() > 8)
     {
-      LOG_DEBUG << buf->peek();
+      //LOG_DEBUG << buf->peek();
       const char* begin = buf->peek() + 8;
+      LOG_DEBUG << begin;
       const char* end = buf->peek() + buf->readableBytes();
+      LOG_DEBUG << end;
       const char* where = std::find(begin, end, '\0');
+      LOG_DEBUG << where;
       if (where != end)
       {
         char ver = buf->peek()[0];
