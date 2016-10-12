@@ -1,6 +1,6 @@
 // Concurrent downloading one file from HTTP
 
-#include <examples/curl/Curl.h>
+#include "Curl.h"
 #include <muduo/base/Logging.h>
 #include <muduo/net/EventLoop.h>
 #include <boost/bind.hpp>
