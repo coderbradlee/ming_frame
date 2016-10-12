@@ -52,7 +52,10 @@ void onServerMessage(const TcpConnectionPtr& conn, Buffer* buf, Timestamp)
         char cmd = buf->peek()[1];
         const void* port = buf->peek() + 2;
         const void* ip = buf->peek() + 4;
-
+        LOG_DEBUG << ver;
+        LOG_DEBUG << cmd;
+        LOG_DEBUG << port;
+        LOG_DEBUG << ip;
         sockaddr_in addr;
         bzero(&addr, sizeof addr);
         addr.sin_family = AF_INET;
