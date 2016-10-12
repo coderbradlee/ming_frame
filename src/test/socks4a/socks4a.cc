@@ -114,6 +114,7 @@ void onServerMessage(const TcpConnectionPtr& conn, Buffer* buf, Timestamp)
 
 int main(int argc, char* argv[])
 {
+  muduo::Logger::setLogLevel(muduo::Logger::LogLevel::DEBUG);
   if (argc < 2)
   {
     fprintf(stderr, "Usage: %s <listen_port>\n", argv[0]);
