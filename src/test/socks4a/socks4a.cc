@@ -46,16 +46,24 @@ void onServerMessage(const TcpConnectionPtr& conn, Buffer* buf, Timestamp)
       LOG_DEBUG << end;
       const char* where = std::find(begin, end, '\0');
       LOG_DEBUG << where;
+
+      char ver = buf->peek()[0];
+      char cmd = buf->peek()[1];
+      const void* port = buf->peek() + 2;
+      const void* ip = buf->peek() + 4;
+
+      LOG_DEBUG << ver;
+      LOG_DEBUG << cmd;
+      LOG_DEBUG << port;
+      LOG_DEBUG << ip;
+
       if (where != end)
       {
         char ver = buf->peek()[0];
         char cmd = buf->peek()[1];
         const void* port = buf->peek() + 2;
         const void* ip = buf->peek() + 4;
-        LOG_DEBUG << ver;
-        LOG_DEBUG << cmd;
-        LOG_DEBUG << port;
-        LOG_DEBUG << ip;
+
         sockaddr_in addr;
         bzero(&addr, sizeof addr);
         addr.sin_family = AF_INET;
