@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <muduo/base/Logging.h>
+#include <muduo/base/Thread.h>
 #include <muduo/net/EventLoop.h>
 #include <boost/bind.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
