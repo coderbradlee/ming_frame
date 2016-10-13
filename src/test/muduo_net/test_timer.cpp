@@ -14,7 +14,7 @@
 using namespace muduo::net;
 
 EventLoop* g_loop = NULL;
-void timeout()
+void timeout_func()
 {
 	g_loop->quit();
 }
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
   g_loop = &loop;
   int timerfd=timerfd_create(CLOCK_MONOTONIC,TFD_NONBLOCK|TFD_CLOEXEC);
   muduo::net::Channel channel(&loop,timerfd);
-  channel.setReadCallback(timeout);
+  channel.setReadCallback(timeout_func);
   channel.enableReading();
   struct itimerspec howlong;
   bzero(&howlong,sizeof howlong);
