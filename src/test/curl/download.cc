@@ -83,6 +83,7 @@ class Downloader : boost::noncopyable
   void onHeader(const char* data, int len)
   {
     string line(data, len);
+    LOG_INFO << line;
     if (startWith(line, "HTTP/1.1 200") || startWith(line, "HTTP/1.0 200"))
     {
       found_ = true;
