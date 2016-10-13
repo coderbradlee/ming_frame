@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
   muduo::Logger::setLogLevel(muduo::Logger::LogLevel::TRACE);
   EventLoop loop;
   g_loop = &loop;
-  muduo::Thread t([&](){g_loop.loop();});
+  muduo::Thread t([&](){g_loop->loop();});
   t.start();
   t.join();
   
