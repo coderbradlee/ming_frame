@@ -14,7 +14,7 @@
 using namespace muduo::net;
 
 EventLoop* g_loop = NULL;
-void timeout_func(Timestamp)
+void timeout_func(muduo::Timestamp)
 {
 	g_loop->quit();
 }
