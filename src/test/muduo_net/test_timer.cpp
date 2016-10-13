@@ -9,6 +9,7 @@
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <stdio.h>
 #include <sstream>
+#include <sys/timerfd.h>
 using namespace muduo::net;
 
 EventLoop* g_loop = NULL;
