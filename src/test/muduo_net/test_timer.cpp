@@ -14,7 +14,10 @@
 using namespace muduo::net;
 
 EventLoop* g_loop = NULL;
-
+void timeout()
+{
+	g_loop->quit();
+}
 int main(int argc, char* argv[])
 {
   muduo::Logger::setLogLevel(muduo::Logger::LogLevel::TRACE);
@@ -22,7 +25,7 @@ int main(int argc, char* argv[])
   g_loop = &loop;
   int timerfd=timerfd_create(CLOCK_MONOTONIC,TFD_NONBLOCK|TFD_CLOEXEC);
   muduo::net::Channel channel(&loop,timerfd);
-  channel.setReadCallback([&](){g_loop->quit();});
+  channel.setReadCallback(timeout);
   channel.enableReading();
   struct itimerspec howlong;
   bzero(&howlong,sizeof howlong);
