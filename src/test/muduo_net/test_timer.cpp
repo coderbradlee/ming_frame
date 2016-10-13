@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
   EventLoop loop;
   g_loop = &loop;
   int timerfd=timerfd_create(CLOCK_MONOTONIC,TFD_NONBLOCK|TFD_CLOEXEC);
-  muduo::Channel channel(&loop,timerfd);
+  muduo::net::Channel channel(&loop,timerfd);
   channel.setReadCallback([&](){g_loop->quit();});
   channel.enableReading();
   struct itimerspec howlong;
