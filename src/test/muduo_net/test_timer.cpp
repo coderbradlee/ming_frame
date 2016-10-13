@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <sstream>
 #include <sys/timerfd.h>
+#include <muduo/net/Channel.h>
 using namespace muduo::net;
 
 EventLoop* g_loop = NULL;
