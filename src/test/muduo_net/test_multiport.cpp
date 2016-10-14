@@ -31,11 +31,11 @@ int main(int argc, char* argv[])
   //muduo::Logger::setLogLevel(muduo::Logger::LogLevel::TRACE);
   muduo::Logger::setLogLevel(muduo::Logger::LogLevel::DEBUG);
   printf("main pid=%d\n",getpid() );
-  muduo::InetAddress lis1(9981);
-  muduo::InetAddress lis2(9982);
+  muduo::net::InetAddress lis1(9981);
+  muduo::net::InetAddress lis2(9982);
   EventLoop loop;
-  muduo::Acceptor acc1(&loop,lis1);
-  muduo::Acceptor acc2(&loop,lis2);
+  muduo::net::Acceptor acc1(&loop,lis1);
+  muduo::net::Acceptor acc2(&loop,lis2);
   acc1.setNewConnectionCallback(on_new_connnection1);
   acc2.setNewConnectionCallback(on_new_connnection2);
   acc1.listen();
