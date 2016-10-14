@@ -36,8 +36,8 @@ int main(int argc, char* argv[])
   muduo::net::InetAddress lis1(9981);
   muduo::net::InetAddress lis2(9982);
   EventLoop loop;
-  muduo::net::Acceptor acc1(&loop,lis1);
-  muduo::net::Acceptor acc2(&loop,lis2);
+  muduo::net::Acceptor acc1(&loop,lis1,true);
+  muduo::net::Acceptor acc2(&loop,lis2,true);
   acc1.setNewConnectionCallback(on_new_connnection1);
   acc2.setNewConnectionCallback(on_new_connnection2);
   acc1.listen();
