@@ -16,13 +16,13 @@ using namespace muduo::net;
 
 void on_new_connnection1(int sockfd,const muduo::net::InetAddress& peerAddr)
 {
-	 printf("conn1:%s\n", peerAddr.toHostPort().c_str());
+	 printf("conn1:%s\n", peerAddr.toIpPort().c_str());
    write(sockfd,"to conn1\n",9);
    muduo::sockets::close(sockfd);
 }
 void on_new_connnection2(int sockfd,const muduo::net::InetAddress& peerAddr)
 {
-   printf("conn2:%s\n", peerAddr.toHostPort().c_str());
+   printf("conn2:%s\n", peerAddr.toIpPort().c_str());
    write(sockfd,"to conn2\n",9);
    muduo::sockets::close(sockfd);
 }
