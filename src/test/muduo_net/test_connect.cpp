@@ -24,14 +24,14 @@ int main(int argc, char* argv[])
   EventLoop loop;
   g_loop = &loop;
   muduo::net::InetAddress addr("127.0.0.1",32769);
-  for(int i=0;i<10000;++i)
-  {
+  // for(int i=0;i<10000;++i)
+  // {
   	  muduo::net::Connector* conn(new muduo::net::Connector(&loop,addr));
 	  conn->setNewConnectionCallback(onConnect);
 	  conn->start();
   
   
   loop.loop();
-  }
+  //}
   
 }
