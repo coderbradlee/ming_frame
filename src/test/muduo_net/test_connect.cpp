@@ -23,15 +23,16 @@ int main(int argc, char* argv[])
   muduo::Logger::setLogLevel(muduo::Logger::LogLevel::DEBUG);
   EventLoop loop;
   g_loop = &loop;
-  muduo::net::InetAddress addr("127.0.0.1",32769);
-  // for(int i=0;i<10000;++i)
-  // {
-  	  muduo::net::Connector* conn(new muduo::net::Connector(&loop,addr));
-	  conn->setNewConnectionCallback(onConnect);
-	  conn->start();
+  
+  for(int i=32768;i<61000;++i)
+  {
+  	muduo::net::InetAddress addr("127.0.0.1",i);
+	muduo::net::Connector* conn(new muduo::net::Connector(&loop,addr));
+    conn->setNewConnectionCallback(onConnect);
+    conn->start();
   
   
   loop.loop();
-  //}
+  }
   
 }
