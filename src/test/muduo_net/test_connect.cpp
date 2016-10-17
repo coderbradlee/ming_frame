@@ -11,7 +11,12 @@
 #include <stdio.h>
 #include <sstream>
 using namespace muduo::net;
-
+class foo
+{};
+foo func()
+{
+	
+}
 EventLoop* g_loop = NULL;
 void onConnect(int sockfd)
 {
