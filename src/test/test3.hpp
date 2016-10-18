@@ -768,8 +768,8 @@ namespace test3_namespace
 	    printf("backtrace returned: %dn", c);
 	    for(i = 0; i < c; i++) 
 	    {
-	        printf("%d: %ld ", i, (long)addresses[i]);
-	        printf("%sn", strings[i]); 
+	        printf("%d: %ld \n", i, (long)addresses[i]);
+	        printf("%sn\n", strings[i]); 
 	    }
     }
 	void test_out()
