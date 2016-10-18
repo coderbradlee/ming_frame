@@ -789,7 +789,7 @@ namespace test3_namespace
     	*p='\0';
     	std::reverse(buf,p);
     	bt();
-    	return buf;
+    	return p;
     }
 	void test_out()
 	{
