@@ -695,6 +695,67 @@ namespace test3_namespace
 	   		std::cout<<"logstream void*:"<<total<<std::endl;
 		}
 	}
+	void reverse1(char* str,int n)
+	{
+		char* begin=str;
+		char* end= str+n-1;
+		while(begin<end)
+		{
+			char tmp=*begin;
+			*begin=*end;
+			*end=tmp;
+			++begin;
+			--end;
+		}
+	}
+	void reverse2(char* str,int n)
+	{
+		char* begin=str;
+		char* end=str+n-1;
+		while(begin<end)
+		{
+			*begin^=*end;
+			*end^=*begin;
+			*begin^=*end;
+			++begin;
+			--end;
+		}
+	}
+	void reverse3(char* str,int n)
+	{
+		std::reverse(str,str+n);
+	}
+	void test_reverse()
+	{
+		char* test="abcdefghijklmnopqrstuvwxyz";
+		{
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			for(int i=0;i<1000000;++i)
+			{
+				reverse1(test,strlen(test));
+			}
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"reverse1:"<<total<<std::endl;
+		}
+		{
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			for(int i=0;i<1000000;++i)
+			{
+				reverse2(test,strlen(test));
+			}
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"reverse2:"<<total<<std::endl;
+		}
+		{
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			for(int i=0;i<1000000;++i)
+			{
+				reverse3(test,strlen(test));
+			}
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"reverse3:"<<total<<std::endl;
+		}
+	}
 	void test_out()
 	{
 		test_snprintf();
