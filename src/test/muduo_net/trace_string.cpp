@@ -1,8 +1,8 @@
 #include <iostream>
-#include <inttypes.h>
+
 #include <stdio.h>
 #define __STDC_FORMAT_MACROS
-
+#include <inttypes.h>
 int main(int argc, char* argv[])
 {
   std::string s("xx");
