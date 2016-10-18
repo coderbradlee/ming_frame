@@ -795,7 +795,7 @@ namespace test3_namespace
 	{
 		int value=-567890;
 		char buf[]="-567890";
-		char * p=convert(buf,value);
+		const char * p=convert(buf,value);
 		printf("%s\n",p);
 		//test_reverse();
 		// test_snprintf();
