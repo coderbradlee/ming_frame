@@ -730,7 +730,7 @@ namespace test3_namespace
 		char test[]="abcdefghijklmnopqrstuvwxyz";
 		{
 			muduo::Timestamp g_start=muduo::Timestamp::now();
-			for(int i=0;i<1000000;++i)
+			for(int i=0;i<100000000;++i)
 			{
 				reverse1(test,strlen(test));
 			}
@@ -739,7 +739,7 @@ namespace test3_namespace
 		}
 		{
 			muduo::Timestamp g_start=muduo::Timestamp::now();
-			for(int i=0;i<1000000;++i)
+			for(int i=0;i<100000000;++i)
 			{
 				reverse2(test,strlen(test));
 			}
@@ -748,7 +748,7 @@ namespace test3_namespace
 		}
 		{
 			muduo::Timestamp g_start=muduo::Timestamp::now();
-			for(int i=0;i<1000000;++i)
+			for(int i=0;i<100000000;++i)
 			{
 				reverse3(test,strlen(test));
 			}
