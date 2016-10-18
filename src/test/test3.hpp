@@ -756,9 +756,23 @@ namespace test3_namespace
 	   		std::cout<<"reverse3:"<<total<<std::endl;
 		}
 	}
+	void bt(void) 
+	{
+	    int c, i;
+	    void *addresses[10];
+	    char **strings; 
+
+	    c = backtrace(addresses, 10);
+	    strings = backtrace_symbols(addresses,c);
+	    printf("backtrace returned: %dn", c);
+	    for(i = 0; i < c; i++) {
+	        printf("%d: %X ", i, (int)addresses[i]);
+	        printf("%sn", strings[i]); }
+    }
 	void test_out()
 	{
-		test_reverse();
+		bt();
+		//test_reverse();
 		// test_snprintf();
 		// test_ostringstream();
 		// test_logstream();
