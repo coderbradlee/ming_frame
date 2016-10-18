@@ -727,7 +727,7 @@ namespace test3_namespace
 	}
 	void test_reverse()
 	{
-		char* test="abcdefghijklmnopqrstuvwxyz";
+		char test[]="abcdefghijklmnopqrstuvwxyz";
 		{
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			for(int i=0;i<1000000;++i)
