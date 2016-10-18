@@ -637,7 +637,7 @@ namespace test3_namespace
 	   		std::cout<<"ostringstream int64_t:"<<total<<std::endl;
 		}
 		{
-			void* value="buf";
+			void* value=nullptr;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			std::ostringstream os;
 			for(int i=0;i<1000000;++i)
@@ -684,7 +684,7 @@ namespace test3_namespace
 	   		std::cout<<"logstream int64_t:"<<total<<std::endl;
 		}
 		{
-			void* value="buf";
+			void* value=nullptr;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			muduo::LogStream os;
 			for(int i=0;i<1000000;++i)
