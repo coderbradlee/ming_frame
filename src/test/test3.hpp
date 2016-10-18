@@ -766,9 +766,11 @@ namespace test3_namespace
 	    c = backtrace(addresses, 10);
 	    strings = backtrace_symbols(addresses,c);
 	    printf("backtrace returned: %dn", c);
-	    for(i = 0; i < c; i++) {
-	        printf("%d: %X ", i, (int)addresses[i]);
-	        printf("%sn", strings[i]); }
+	    for(i = 0; i < c; i++) 
+	    {
+	        printf("%l: %X ", i, (int)addresses[i]);
+	        printf("%sn", strings[i]); 
+	    }
     }
 	void test_out()
 	{
