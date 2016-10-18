@@ -519,46 +519,46 @@ namespace test3_namespace
 	};
 	void test_get_pid_benchmark()
 	{
-		{
-			muduo::Timestamp start = muduo::Timestamp::now();
-			for(int i=0;i<1000*1000;++i)
-			{
-				muduo::CurrentThread::tid();
-			}
-			printf("%d\n", muduo::CurrentThread::tid());
-	    	muduo::Timestamp end = muduo::Timestamp::now();
+		// {
+		// 	muduo::Timestamp start = muduo::Timestamp::now();
+		// 	for(int i=0;i<1000*1000;++i)
+		// 	{
+		// 		muduo::CurrentThread::tid();
+		// 	}
+		// 	printf("%d\n", muduo::CurrentThread::tid());
+	 //    	muduo::Timestamp end = muduo::Timestamp::now();
 
-	    	printf("%f\n", timeDifference(end, start));
-		}
-		{
-			muduo::Timestamp start = muduo::Timestamp::now();
-			for(int i=0;i<1000*1000;++i)
-			{
-				boost::this_thread::get_id();
-			}
-			printf("%d\n", boost::this_thread::get_id());
-	    	muduo::Timestamp end = muduo::Timestamp::now();
-	    	printf("%f\n", timeDifference(end, start));
-		}
+	 //    	printf("%f\n", timeDifference(end, start));
+		// }
+		// {
+		// 	muduo::Timestamp start = muduo::Timestamp::now();
+		// 	for(int i=0;i<1000*1000;++i)
+		// 	{
+		// 		boost::this_thread::get_id();
+		// 	}
+		// 	printf("%d\n", boost::this_thread::get_id());
+	 //    	muduo::Timestamp end = muduo::Timestamp::now();
+	 //    	printf("%f\n", timeDifference(end, start));
+		// }
 	}
 	void test_log()
 	{
-		muduo::Timestamp start = muduo::Timestamp::now();
-		std::string line="1234567890 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ " ;
-		for(int i=0;i<1000*10000;++i)
-		{
-			LOG_INFO << line<< i;
-		}
-    	muduo::Timestamp end = muduo::Timestamp::now();
-    	printf("%f\n", timeDifference(end, start));
-	    printf("%fMB/s\n",line.length()*10.0/timeDifference(end, start) );
+		// muduo::Timestamp start = muduo::Timestamp::now();
+		// std::string line="1234567890 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ " ;
+		// for(int i=0;i<1000*10000;++i)
+		// {
+		// 	LOG_INFO << line<< i;
+		// }
+  //   	muduo::Timestamp end = muduo::Timestamp::now();
+  //   	printf("%f\n", timeDifference(end, start));
+	 //    printf("%fMB/s\n",line.length()*10.0/timeDifference(end, start) );
 	}
 	void test_snprintf()
 	{
 		{
 			char buf[32];
 			int value=10;
-			muduo::Timestamp g_start=Timestamp::now();
+			muduo::Timestamp g_start=muduo::Timestamp::now();
 			for(int i=0;i<1000000;++i)
 			{
 				snprintf(buf, sizeof buf, "%d", value);
@@ -569,7 +569,7 @@ namespace test3_namespace
 		{
 			char buf[32];
 			double value=10.0;
-			muduo::Timestamp g_start=Timestamp::now();
+			muduo::Timestamp g_start=muduo::Timestamp::now();
 			for(int i=0;i<1000000;++i)
 			{
 				snprintf(buf, sizeof buf, "%f", value);
@@ -580,7 +580,7 @@ namespace test3_namespace
 		{
 			char buf[32];
 			int64_t value=10.0;
-			muduo::Timestamp g_start=Timestamp::now();
+			muduo::Timestamp g_start=muduo::Timestamp::now();
 			for(int i=0;i<1000000;++i)
 			{
 				snprintf(buf, sizeof buf, "%" PRId64 "\n", value);
@@ -591,7 +591,7 @@ namespace test3_namespace
 		{
 			char buf[32];
 			void* value=buf;
-			muduo::Timestamp g_start=Timestamp::now();
+			muduo::Timestamp g_start=muduo::Timestamp::now();
 			for(int i=0;i<1000000;++i)
 			{
 				snprintf(buf, sizeof buf, "%d", value);
