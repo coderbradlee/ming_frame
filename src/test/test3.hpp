@@ -604,7 +604,6 @@ namespace test3_namespace
 	void test_ostringstream()
 	{
 		{
-			char buf[32];
 			int value=10;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			std::ostringstream os;
@@ -616,7 +615,6 @@ namespace test3_namespace
 	   		std::cout<<"ostringstream int:"<<total<<std::endl;
 		}
 		{
-			char buf[32];
 			double value=10.0;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			std::ostringstream os;
@@ -628,7 +626,6 @@ namespace test3_namespace
 	   		std::cout<<"ostringstream double:"<<total<<std::endl;
 		}
 		{
-			char buf[32];
 			int64_t value=10.0;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			std::ostringstream os;
@@ -640,8 +637,7 @@ namespace test3_namespace
 	   		std::cout<<"ostringstream int64_t:"<<total<<std::endl;
 		}
 		{
-			char buf[32];
-			void* value=buf;
+			void* value="buf";
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			std::ostringstream os;
 			for(int i=0;i<1000000;++i)
@@ -655,7 +651,6 @@ namespace test3_namespace
 	void test_logstream()
 	{
 		{
-			char buf[32];
 			int value=10;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			muduo::LogStream os;
@@ -667,7 +662,6 @@ namespace test3_namespace
 	   		std::cout<<"logstream int:"<<total<<std::endl;
 		}
 		{
-			char buf[32];
 			double value=10.0;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			muduo::LogStream os;
@@ -679,7 +673,6 @@ namespace test3_namespace
 	   		std::cout<<"logstream double:"<<total<<std::endl;
 		}
 		{
-			char buf[32];
 			int64_t value=10.0;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			muduo::LogStream os;
@@ -691,8 +684,7 @@ namespace test3_namespace
 	   		std::cout<<"logstream int64_t:"<<total<<std::endl;
 		}
 		{
-			char buf[32];
-			void* value=buf;
+			void* value="buf";
 			muduo::Timestamp g_start=muduo::Timestamp::now();
 			muduo::LogStream os;
 			for(int i=0;i<1000000;++i)
