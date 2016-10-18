@@ -16,6 +16,7 @@
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
 #include <muduo/base/LogStream.h>
+#include <execinfo.h>
 namespace test3_namespace
 {
 	using std::string;
