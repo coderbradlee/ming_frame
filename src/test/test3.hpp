@@ -484,7 +484,7 @@ namespace test3_namespace
 			while(running)
 			{
 				std::string temp(m_queue.take());
-				printf("%d:%s get %s:%d\n",muduo::CurrentThread::tid(),muduo::CurrentThread::name(),temp.c_str(),m_queue.size());
+				//printf("%d:%s get %s:%d\n",muduo::CurrentThread::tid(),muduo::CurrentThread::name(),temp.c_str(),m_queue.size());
 				running=(temp!="stop");
 			}
 			printf("%d:%s stop\n",muduo::CurrentThread::tid(),muduo::CurrentThread::name());
