@@ -791,12 +791,18 @@ namespace test3_namespace
     	bt();
     	return p;
     }
+    namespace 
+    {
+    	void foo()
+    	{}
+    }
 	void test_out()
 	{
 		int value=-567890;
 		char buf[]="-567890";
 		const char * p=convert(buf,value);
 		printf("%s\n",p);
+		foo();
 		//test_reverse();
 		// test_snprintf();
 		// test_ostringstream();
