@@ -658,7 +658,7 @@ namespace test3_namespace
 			char buf[32];
 			int value=10;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
-			muduo::base::LogStream os;
+			muduo::LogStream os;
 			for(int i=0;i<1000000;++i)
 			{
 				os<<value;
@@ -670,7 +670,7 @@ namespace test3_namespace
 			char buf[32];
 			double value=10.0;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
-			muduo::base::LogStream os;
+			muduo::LogStream os;
 			for(int i=0;i<1000000;++i)
 			{
 				os<<value;
@@ -682,7 +682,7 @@ namespace test3_namespace
 			char buf[32];
 			int64_t value=10.0;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
-			muduo::base::LogStream os;
+			muduo::LogStream os;
 			for(int i=0;i<1000000;++i)
 			{
 				os<<value;
@@ -694,7 +694,7 @@ namespace test3_namespace
 			char buf[32];
 			void* value=buf;
 			muduo::Timestamp g_start=muduo::Timestamp::now();
-			muduo::base::LogStream os;
+			muduo::LogStream os;
 			for(int i=0;i<1000000;++i)
 			{
 				os<<value;
@@ -706,6 +706,8 @@ namespace test3_namespace
 	void test_out()
 	{
 		test_snprintf();
+		test_ostringstream();
+		test_logstream();
 		//test_log();
 		//test_get_pid_benchmark();
 		// printf("%d: main\n",muduo::CurrentThread::tid);
