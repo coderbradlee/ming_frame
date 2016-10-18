@@ -12,6 +12,9 @@
 #include <muduo/net/Connector.h>
 #include <boost/unordered_map.hpp>
 #include <boost/make_shared.hpp>
+#include <stdio.h>
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
 namespace test3_namespace
 {
 	using std::string;
@@ -580,7 +583,7 @@ namespace test3_namespace
 			muduo::Timestamp g_start=Timestamp::now();
 			for(int i=0;i<1000000;++i)
 			{
-				snprintf(buf, sizeof buf, "%lld", value);
+				snprintf(buf, sizeof buf, "%" PRId64 "\n", value);
 			}		
 			double total = timeDifference(Timestamp::now(), g_start);
 	   		std::cout<<"snprintf int64_t:"<<total<<std::endl;
