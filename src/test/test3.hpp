@@ -793,7 +793,7 @@ namespace test3_namespace
     }
     namespace 
     {
-    	void foo(int,int)
+    	void foo_namespace(int,int)
     	{}
     }
 	void test_out()
@@ -802,7 +802,7 @@ namespace test3_namespace
 		char buf[]="-567890";
 		const char * p=convert(buf,value);
 		printf("%s\n",p);
-		foo(3,2);
+		foo_namespace(3,2);
 		//test_reverse();
 		// test_snprintf();
 		// test_ostringstream();
