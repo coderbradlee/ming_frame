@@ -10,5 +10,8 @@ set(LIB_LIST muduo_net_cpp11 muduo_base_cpp11 muduo_http boost_system ssl mysqlc
 #add_executable(test_multiport test_multiport.cpp)
 #target_link_libraries(test_multiport ${LIB_LIST})
 
-add_executable(test_connect test_connect.cpp)
-target_link_libraries(test_connect ${LIB_LIST})
+#add_executable(test_connect test_connect.cpp)
+#target_link_libraries(test_connect ${LIB_LIST})
+
+add_executable(trace_string trace_string.cpp)
+target_link_libraries(trace_string ${LIB_LIST})
