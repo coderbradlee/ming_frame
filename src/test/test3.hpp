@@ -550,9 +550,57 @@ namespace test3_namespace
     	printf("%f\n", timeDifference(end, start));
 	    printf("%fMB/s\n",line.length()*10.0/timeDifference(end, start) );
 	}
+	void test_snprintf()
+	{
+		{
+			char buf[32];
+			int value=10;
+			muduo::Timestamp g_start=Timestamp::now();
+			for(int i=0;i<1000000;++i)
+			{
+				snprintf(buf, sizeof buf, "%d", value);
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"snprintf int:"<<total<<std::endl;
+		}
+		{
+			char buf[32];
+			double value=10.0;
+			muduo::Timestamp g_start=Timestamp::now();
+			for(int i=0;i<1000000;++i)
+			{
+				snprintf(buf, sizeof buf, "%f", value);
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"snprintf double:"<<total<<std::endl;
+		}
+		{
+			char buf[32];
+			int64_t value=10.0;
+			muduo::Timestamp g_start=Timestamp::now();
+			for(int i=0;i<1000000;++i)
+			{
+				snprintf(buf, sizeof buf, "%lld", value);
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"snprintf int64_t:"<<total<<std::endl;
+		}
+		{
+			char buf[32];
+			void* value=buf;
+			muduo::Timestamp g_start=Timestamp::now();
+			for(int i=0;i<1000000;++i)
+			{
+				snprintf(buf, sizeof buf, "%d", value);
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"snprintf void*:"<<total<<std::endl;
+		}
+	}
 	void test_out()
 	{
-		test_log();
+		test_snprintf();
+		//test_log();
 		//test_get_pid_benchmark();
 		// printf("%d: main\n",muduo::CurrentThread::tid);
 		// test_blocking_queue t(3);
