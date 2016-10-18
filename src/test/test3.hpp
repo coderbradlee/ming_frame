@@ -787,7 +787,7 @@ namespace test3_namespace
     	if(value<0)
     		*p++='-';
     	*p='\0';
-    	std::reverse(buf,strlen(buf));
+    	std::reverse(buf,p);
     	bt();
     	return buf;
     }
