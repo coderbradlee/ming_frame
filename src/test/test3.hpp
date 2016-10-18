@@ -758,9 +758,10 @@ namespace test3_namespace
 	}
 	void test_out()
 	{
-		test_snprintf();
-		test_ostringstream();
-		test_logstream();
+		test_reverse();
+		// test_snprintf();
+		// test_ostringstream();
+		// test_logstream();
 		//test_log();
 		//test_get_pid_benchmark();
 		// printf("%d: main\n",muduo::CurrentThread::tid);
