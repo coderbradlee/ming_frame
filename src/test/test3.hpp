@@ -15,6 +15,7 @@
 #include <stdio.h>
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
+#include <muduo/base/LogStream.h>
 namespace test3_namespace
 {
 	using std::string;
@@ -598,6 +599,108 @@ namespace test3_namespace
 			}		
 			double total = timeDifference(Timestamp::now(), g_start);
 	   		std::cout<<"snprintf void*:"<<total<<std::endl;
+		}
+	}
+	void test_ostringstream()
+	{
+		{
+			char buf[32];
+			int value=10;
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			std::ostringstream os;
+			for(int i=0;i<1000000;++i)
+			{
+				os<<value;
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"ostringstream int:"<<total<<std::endl;
+		}
+		{
+			char buf[32];
+			double value=10.0;
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			std::ostringstream os;
+			for(int i=0;i<1000000;++i)
+			{
+				os<<value;
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"ostringstream double:"<<total<<std::endl;
+		}
+		{
+			char buf[32];
+			int64_t value=10.0;
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			std::ostringstream os;
+			for(int i=0;i<1000000;++i)
+			{
+				os<<value;
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"ostringstream int64_t:"<<total<<std::endl;
+		}
+		{
+			char buf[32];
+			void* value=buf;
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			std::ostringstream os;
+			for(int i=0;i<1000000;++i)
+			{
+				os<<value;
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"ostringstream void*:"<<total<<std::endl;
+		}
+	}
+	void test_logstream()
+	{
+		{
+			char buf[32];
+			int value=10;
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			muduo::base::LogStream os;
+			for(int i=0;i<1000000;++i)
+			{
+				os<<value;
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"logstream int:"<<total<<std::endl;
+		}
+		{
+			char buf[32];
+			double value=10.0;
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			muduo::base::LogStream os;
+			for(int i=0;i<1000000;++i)
+			{
+				os<<value;
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"logstream double:"<<total<<std::endl;
+		}
+		{
+			char buf[32];
+			int64_t value=10.0;
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			muduo::base::LogStream os;
+			for(int i=0;i<1000000;++i)
+			{
+				os<<value;
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"logstream int64_t:"<<total<<std::endl;
+		}
+		{
+			char buf[32];
+			void* value=buf;
+			muduo::Timestamp g_start=muduo::Timestamp::now();
+			muduo::base::LogStream os;
+			for(int i=0;i<1000000;++i)
+			{
+				os<<value;
+			}		
+			double total = timeDifference(Timestamp::now(), g_start);
+	   		std::cout<<"logstream void*:"<<total<<std::endl;
 		}
 	}
 	void test_out()
