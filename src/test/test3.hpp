@@ -491,25 +491,25 @@ namespace test3_namespace
 		}
 		void run(int times)
 		{
-			printf("wait for countDown\n");
-			m_latch.wait();
-			printf("all threads started\n");
-			for(int i=0;i<times;++i)
-			{
-				char data[32];
-				snprintf(data,sizeof data,"hello %d",i);
-				m_queue.put(data);
-				printf("%d:%s put %s:%d\n", muduo::CurrentThread::tid(),muduo::CurrentThread::name(),data,m_queue.size());
-			}
+			// printf("wait for countDown\n");
+			// m_latch.wait();
+			// printf("all threads started\n");
+			// for(int i=0;i<times;++i)
+			// {
+			// 	char data[32];
+			// 	snprintf(data,sizeof data,"hello %d",i);
+			// 	m_queue.put(data);
+			// 	printf("%d:%s put %s:%d\n", muduo::CurrentThread::tid(),muduo::CurrentThread::name(),data,m_queue.size());
+			// }
 		}
 		void joinAll()
 		{
-			for(size_t i=0;i<m_threads.size();++i)
-			{
-				printf("%d:%s put %s:%d\n", muduo::CurrentThread::tid(),muduo::CurrentThread::name(),"stop",m_queue.size());
-				m_queue.put("stop");
-			}
-			for_each(m_threads.begin(),m_threads.end(),boost::bind(&muduo::Thread::join,_1));
+			// for(size_t i=0;i<m_threads.size();++i)
+			// {
+			// 	printf("%d:%s put %s:%d\n", muduo::CurrentThread::tid(),muduo::CurrentThread::name(),"stop",m_queue.size());
+			// 	m_queue.put("stop");
+			// }
+			// for_each(m_threads.begin(),m_threads.end(),boost::bind(&muduo::Thread::join,_1));
 		}
 		
 	private:
