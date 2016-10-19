@@ -796,12 +796,34 @@ namespace test3_namespace
     	void foo_namespace(int,int)
     	{}
     }
+    void test_permutation()
+    {
+    	std::vector<int> v{1,2,3,4};
+    	int count=0;
+    	do
+    	{
+    		std::cout<<count<<":";
+    		std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
+    		++count;
+    		std::cout<<endl;
+    	}while(next_permutation(v.begin(),v.end()));
+    	std::cout<<"------------------"<<endl;
+    	count=0;
+    	do
+    	{
+    		std::cout<<count<<":";
+    		std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
+    		++count;
+    		std::cout<<endl;
+    	}while(prev_permutation(v.begin(),v.end()));
+    }
 	void test_out()
 	{
-		printf("%d\n", sizeof(std::string));
-		printf("%d\n", sizeof(__gnu_cxx::__sso_string));
-		printf("%d\n", sizeof(__gnu_cxx::__rc_string));
-		printf("%d\n", sizeof(void*));
+		test_permutation();
+		// printf("%d\n", sizeof(std::string));
+		// printf("%d\n", sizeof(__gnu_cxx::__sso_string));
+		// printf("%d\n", sizeof(__gnu_cxx::__rc_string));
+		// printf("%d\n", sizeof(void*));
 		// int value=-567890;
 		// char buf[]="-567890";
 		// const char * p=convert(buf,value);
