@@ -798,11 +798,12 @@ namespace test3_namespace
     }
 	void test_out()
 	{
-		int value=-567890;
-		char buf[]="-567890";
-		const char * p=convert(buf,value);
-		printf("%s\n",p);
-		foo_namespace(3,2);
+		printf("%d\n", sizeof(std::string));
+		// int value=-567890;
+		// char buf[]="-567890";
+		// const char * p=convert(buf,value);
+		// printf("%s\n",p);
+		// foo_namespace(3,2);
 		//test_reverse();
 		// test_snprintf();
 		// test_ostringstream();
