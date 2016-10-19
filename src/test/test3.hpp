@@ -847,7 +847,7 @@ namespace test3_namespace
     		{
     			return a==' '&&b==' ';
     		});
-    	std::erase(it,s.end());
+    	s.erase(it,s.end());
     	std::cout<<s<<std::endl;
     }
 	void test_out()
