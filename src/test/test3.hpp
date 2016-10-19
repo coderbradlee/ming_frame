@@ -801,6 +801,7 @@ namespace test3_namespace
 		printf("%d\n", sizeof(std::string));
 		printf("%d\n", sizeof(__gnu_cxx::__sso_string));
 		printf("%d\n", sizeof(__gnu_cxx::__rc_string));
+		printf("%d\n", sizeof(void*));
 		// int value=-567890;
 		// char buf[]="-567890";
 		// const char * p=convert(buf,value);
