@@ -1,3 +1,5 @@
+grep -nHr timeDifference src/*
+
 strace -f -e open cpp src/main.cpp -o /dev/null 2>&1|grep -v ENOENT|awk '{print $3}'
 输出包含的头文件
 
