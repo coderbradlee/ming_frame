@@ -799,6 +799,8 @@ namespace test3_namespace
 	void test_out()
 	{
 		printf("%d\n", sizeof(std::string));
+		printf("%d\n", sizeof(__gnu_cxx::__sso_string));
+		printf("%d\n", sizeof(__gnu_cxx::__rc_string));
 		// int value=-567890;
 		// char buf[]="-567890";
 		// const char * p=convert(buf,value);
