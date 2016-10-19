@@ -820,7 +820,7 @@ namespace test3_namespace
     }
     void test_permutation2()
     {
-    	std::vector<int> v{1,2,3,4,4,4};
+    	std::vector<int> v{1,2,3,3};
     	int count=0;
     	do
     	{
