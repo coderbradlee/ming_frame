@@ -809,6 +809,7 @@ namespace test3_namespace
     	}while(next_permutation(v.begin(),v.end()));
     	std::cout<<"------------------"<<std::endl;
     	count=0;
+    	std::sort(v.begin(), v.end(), std::greater<int>());
     	do
     	{
     		std::cout<<count<<":";
