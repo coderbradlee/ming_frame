@@ -791,11 +791,11 @@ namespace test3_namespace
     	bt();
     	return p;
     }
-    namespace 
-    {
-    	void foo_namespace(int,int)
-    	{}
-    }
+    // namespace 
+    // {
+    // 	void foo_namespace(int,int)
+    // 	{}
+    // }
     void test_permutation()
     {
     	std::vector<int> v{1,2,3,4};
@@ -805,21 +805,44 @@ namespace test3_namespace
     		std::cout<<count<<":";
     		std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
     		++count;
-    		std::cout<<endl;
+    		std::cout<<std::endl;
     	}while(next_permutation(v.begin(),v.end()));
-    	std::cout<<"------------------"<<endl;
+    	std::cout<<"------------------"<<std::endl;
     	count=0;
     	do
     	{
     		std::cout<<count<<":";
     		std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
     		++count;
-    		std::cout<<endl;
+    		std::cout<<std::endl;
+    	}while(prev_permutation(v.begin(),v.end()));
+    	std::cout<<"------------------"<<std::endl;
+    }
+    void test_permutation2()
+    {
+    	std::vector<int> v{1,2,3,4,4,4};
+    	int count=0;
+    	do
+    	{
+    		std::cout<<count<<":";
+    		std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
+    		++count;
+    		std::cout<<std::endl;
+    	}while(next_permutation(v.begin(),v.end()));
+    	std::cout<<"------------------"<<std::endl;
+    	count=0;
+    	do
+    	{
+    		std::cout<<count<<":";
+    		std::copy(v.begin(),v.end(),std::ostream_iterator<int>(std::cout,","));
+    		++count;
+    		std::cout<<std::endl;
     	}while(prev_permutation(v.begin(),v.end()));
     }
 	void test_out()
 	{
 		test_permutation();
+		test_permutation2();
 		// printf("%d\n", sizeof(std::string));
 		// printf("%d\n", sizeof(__gnu_cxx::__sso_string));
 		// printf("%d\n", sizeof(__gnu_cxx::__rc_string));
