@@ -840,10 +840,21 @@ namespace test3_namespace
     		std::cout<<std::endl;
     	}while(prev_permutation(v.begin(),v.end()));
     }
+    void test_unique()
+    {
+    	std::string s("aaa   bbb        c d");
+    	auto it=std::unique(s.begin(),s.end(),[](char a,char b)
+    		{
+    			return a==' '&&b==' ';
+    		});
+    	std::erase(it,s.end());
+    	std::cout<<s<<std::endl;
+    }
 	void test_out()
 	{
-		test_permutation();
-		test_permutation2();
+		test_unique();
+		// test_permutation();
+		// test_permutation2();
 		// printf("%d\n", sizeof(std::string));
 		// printf("%d\n", sizeof(__gnu_cxx::__sso_string));
 		// printf("%d\n", sizeof(__gnu_cxx::__rc_string));
