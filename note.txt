@@ -1,3 +1,9 @@
+openssl x509 -in mycert.crt -out mycert.pem -outform PEM
+openssl x509 -in cert.crt -outform der -out cert.der
+
+curl -u test:test --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbalance", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:18332/
+
+
 grep -nHr timeDifference src/*
 
 strace -f -e open cpp src/main.cpp -o /dev/null 2>&1|grep -v ENOENT|awk '{print $3}'
