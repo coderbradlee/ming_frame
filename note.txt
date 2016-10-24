@@ -1,5 +1,18 @@
-openssl x509 -in mycert.crt -out mycert.pem -outform PEM
-openssl x509 -in cert.crt -outform der -out cert.der
+openssl genrsa -des3 -out root.key 2048
+
+openssl req -new -x509 -key root.key -out root.crt -days 365
+
+openssl genrsa -out server.key 2048
+
+openssl req -new -key server.key -out server.csr
+
+openssl ca -in server.csr -out server.crt -keyfile root.key -cert root.crt -days 365
+
+openssl x509 -inform pem -in server.crt -outform der -out server_public.cer
+
+openssl pkcs12 -export -in server.crt -inkey server.key -out server.p12
+
+openssl pkcs12 -in server.p12 -nodes -out server.pem
 
 curl -u test:test --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbalance", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:18332/
 
