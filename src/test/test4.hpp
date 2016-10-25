@@ -219,7 +219,7 @@ namespace test4_namespace
 		 {0,0,0,0,0,0,0,0,0,0,0,0,0}
 		};
 		std::vector<int> output;
-		topologic(&output,v);
+		topologic(output,v);
 	}
 	void test_out()
 	{
