@@ -175,6 +175,7 @@ namespace test4_namespace
   				indegree[i]+=graph[i][j];
   			}
   		}
+  		std::copy(indegree.begin(), indegree.end(), std::ostream_iterator<int>(std::cout, "->"));
   		while(output.size()<cnt)
   		{
   			std::queue<int> temp;
