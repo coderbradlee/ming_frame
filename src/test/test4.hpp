@@ -172,7 +172,7 @@ namespace test4_namespace
   		{
   			for(int j=0;j<cnt;++j)
   			{
-  				indegree[i]+=graph[i][j];
+  				indegree[i]+=graph[j][i];
   			}
   		}
   		std::copy(indegree.begin(), indegree.end(), std::ostream_iterator<int>(std::cout, "->"));
