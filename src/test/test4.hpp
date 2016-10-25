@@ -84,9 +84,10 @@ namespace test4_namespace
 	}
 	void deleteDuplicate2(node* phead)
 	{
+		node* prev=phead;
 		node* p=phead->next->next;
 		phead=phead->next;
-		node* prev=phead;
+		
 		while(p)
 		{
 			if(p->value==phead->value)
