@@ -20,8 +20,39 @@
 namespace test4_namespace
 {
 	using std::string;
+	typedef linknode
+	{
+		int value;
+		linknode* next;
+		linknode(int val):value(val),next(nullptr){}
+	}node;
+	void print(node* phead)
+	{
+		node* p=phead->next;
+		while(p!=nullptr)
+		{
+			std::cout<<phead->next->value<<"-->";
+			p=p->next;
+		}	
+		std::cout<<"end"<<std::endl;
+	}
+	void test()
+	{
+		node* phead=new node(0);
+		node* pindex=phead;
+		for(int i=0;i<10;++i)
+		{
+			node* p=new node(rand()%100);
+			pindex->next=p;
+			pindex=pindex->next;
+		}
+		print(phead);
+		// reverse(phead,3,5);
+		// print(phead);
+		// destroy(phead);
+	}
 	test_out()
 	{
-		
+		test();
 	}
 }
