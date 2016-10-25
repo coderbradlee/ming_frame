@@ -100,7 +100,7 @@ namespace test4_namespace
 				}
 				prev->next=p;
 				delete phead;
-				phead=prev->next;
+				phead=p;
 				p=p->next;
 			}
 			else
