@@ -50,7 +50,7 @@ namespace test4_namespace
 	void reverse(node* phead,int start,int end)
 	{
 		node* prev;
-		for(int i=0;i<start;++i)
+		for(int i=0;i<start-1;++i)
 		{	
 			prev=phead->next;
 			phead=prev;
@@ -62,7 +62,7 @@ namespace test4_namespace
 		{	
 			pstart->next=pcur;
 			prev->next=pcur->next;
-			pcur->next=prev;
+			pcur->next=pstart->next;
 			pcur=prev->next;
 		}
 	}
@@ -77,7 +77,7 @@ namespace test4_namespace
 			pindex=pindex->next;
 		}
 		print(phead);
-		//reverse(phead,3,5);
+		reverse(phead,3,5);
 		print(phead);
 		destroy(phead);
 	}
