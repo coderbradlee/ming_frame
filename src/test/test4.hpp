@@ -103,6 +103,8 @@ namespace test4_namespace
 				delete phead;
 				phead=p;
 				p=p->next;
+				std::cout<<"::"<<prev->value<<std::endl;
+				std::cout<<"::"<<phead->value<<std::endl;
 				std::cout<<"::"<<p->value<<std::endl;
 			}
 			else
