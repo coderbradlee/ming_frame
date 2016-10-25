@@ -162,8 +162,64 @@ namespace test4_namespace
 		print(phead);
 		destroy(phead);
 	}
+	void topologic(std::vector<int>& output,std::vector<std::vector<int>> graph)
+	{
+		const int cnt=13;
+  		std::vector<int> indegree(cnt);
+  		for(int i=0;i<cnt;++i)
+  		{
+  			for(int j=0;j<cnt;++j)
+  			{
+  				v[i]+=v[i][j];
+  			}
+  		}
+  		while(output.size()<cnt)
+  		{
+  			std::queue<int> temp;
+	  		for(int i=0;i<cnt;++i)
+	  		{
+	  			if(indegree[i]==0)
+	  				temp.push_back(i);
+	  		}
+	  		while(!temp.empty())
+	  		{
+	  			int value=temp.front();
+	  			output.push_back(value);
+	  			indegree[value]=-1;
+	  			for(int i=0;i<cnt;++i)
+	  			{
+	  				if(graph[value][i]==1)
+	  				{
+	  					indegree[i]-=1;
+	  				}
+	  			}
+	  		}
+  		}
+  				
+	}
+	void testtopologic()
+	{
+		std::vector<std::vector<int>> v
+		{{0,1,0,0,0,1,1,0,0,0,0,0,0},
+		 {0,0,0,0,0,0,0,0,0,0,0,0,0},
+		 {1,0,0,1,0,0,0,0,0,0,0,0,0},
+		 {0,0,0,0,0,1,0,0,0,0,0,0,0},
+		 {0,0,0,0,0,0,0,0,0,0,0,0,0},
+		 {0,0,0,0,1,0,0,0,0,0,0,0,0},
+		 {0,0,0,0,1,0,0,0,0,1,0,0,0},
+		 {0,0,0,0,0,1,0,0,0,0,0,0,0},
+		 {0,0,0,0,0,0,1,0,0,0,0,0,0},
+		 {0,0,0,0,0,0,0,1,0,0,0,0,0},
+		 {0,0,0,0,0,0,0,0,0,0,1,1,1},
+		 {0,0,0,0,0,0,0,0,0,0,0,0,0},
+		 {0,0,0,0,0,0,0,0,0,0,0,0,1},
+		 {0,0,0,0,0,0,0,0,0,0,0,0,0}
+		};
+		std::vector<int> output;
+		topologic(&output,v);
+	}
 	void test_out()
 	{
-		test2();
+		testtopologic();
 	}
 }
