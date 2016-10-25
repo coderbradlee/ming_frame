@@ -31,7 +31,7 @@ namespace test4_namespace
 		node* p=phead->next;
 		while(p!=nullptr)
 		{
-			std::cout<<phead->next->value<<"-->";
+			std::cout<<p->value<<"-->";
 			p=p->next;
 		}	
 		std::cout<<"end"<<std::endl;
