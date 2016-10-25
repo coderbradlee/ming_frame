@@ -20,7 +20,7 @@
 namespace test4_namespace
 {
 	using std::string;
-	typedef linknode
+	typedef struct linknode
 	{
 		int value;
 		linknode* next;
