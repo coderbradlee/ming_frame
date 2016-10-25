@@ -77,7 +77,7 @@ namespace test4_namespace
 			pindex=pindex->next;
 		}
 		print(phead);
-		reverse(phead,3,5);
+		//reverse(phead,3,5);
 		print(phead);
 		destroy(phead);
 	}
