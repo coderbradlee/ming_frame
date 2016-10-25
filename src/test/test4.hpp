@@ -190,6 +190,7 @@ namespace test4_namespace
 	  			int value=temp.front();
 	  			temp.pop();
 	  			output.push_back(value);
+	  			std::cout<<output.size()<<std::endl;
 	  			indegree[value]=-1;
 	  			for(int i=0;i<cnt;++i)
 	  			{
