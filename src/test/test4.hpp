@@ -82,8 +82,42 @@ namespace test4_namespace
 		print(phead);
 		destroy(phead);
 	}
+	void deleteDuplicate(node* phead)
+	{
+		node* p=phead->next;
+		while(p)
+		{
+			if(p->value==phead->value)
+			{
+				phead->next=p->next;
+				delete p;
+				p=phead->next;
+			}
+			else
+			{
+				p=p->next;
+				phead=phead->next;
+			}
+		}
+	}
+	void test2()
+	{
+		node* phead=new node(0);
+		int digit[]={1,2,3,4,4,4,5,6};
+		node* pindex=phead;
+		for(int i=0;i<8;++i)
+		{
+			node* p=new node(digit[i]);
+			pindex->next=p;
+			pindex=pindex->next;
+		}
+		print(phead);
+		deleteDuplicate(phead);
+		print(phead);
+		destroy(phead);
+	}
 	void test_out()
 	{
-		test();
+		test2();
 	}
 }
