@@ -129,6 +129,7 @@ namespace test4_namespace
 				leftindex->next=phead->next;
 				phead=phead->next;
 				leftindex=leftindex->next;
+				leftindex->next=nullptr;
 				std::cout<<":"<<leftindex->value<<std::endl;
 			}
 			else
@@ -136,6 +137,7 @@ namespace test4_namespace
 				rightindex->next=phead->next;
 				phead=phead->next;
 				rightindex=rightindex->next;
+				rightindex->next=nullptr;
 				std::cout<<"::"<<rightindex->value<<std::endl;
 			}
 		}
