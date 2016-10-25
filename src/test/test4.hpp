@@ -18,6 +18,7 @@
 #include <muduo/base/LogStream.h>
 #include <execinfo.h>
 #include <queue>
+#include <vector>
 namespace test4_namespace
 {
 	using std::string;
@@ -180,11 +181,12 @@ namespace test4_namespace
 	  		for(int i=0;i<cnt;++i)
 	  		{
 	  			if(indegree[i]==0)
-	  				temp.push_back(i);
+	  				temp.push(i);
 	  		}
 	  		while(!temp.empty())
 	  		{
 	  			int value=temp.front();
+	  			temp.pop();
 	  			output.push_back(value);
 	  			indegree[value]=-1;
 	  			for(int i=0;i<cnt;++i)
