@@ -82,7 +82,7 @@ namespace test4_namespace
 		print(phead);
 		destroy(phead);
 	}
-	void deleteDuplicate(node* phead)
+	void deleteDuplicate2(node* phead)
 	{
 		node* p=phead->next;
 		node* prev=phead;
