@@ -85,18 +85,23 @@ namespace test4_namespace
 	void deleteDuplicate(node* phead)
 	{
 		node* p=phead->next;
+		node* prev=phead;
 		while(p)
 		{
 			if(p->value==phead->value)
 			{
-				phead->next=p->next;
+				prev->next=p->next;
+				delete phead;
 				delete p;
-				p=phead->next;
+				prev=prev->next;
+				phead=prev->next;
+				p=prev->next->next;
 			}
 			else
 			{
 				p=p->next;
 				phead=phead->next;
+				prev=prev->next;
 			}
 		}
 	}
@@ -112,7 +117,8 @@ namespace test4_namespace
 			pindex=pindex->next;
 		}
 		print(phead);
-		deleteDuplicate(phead);
+		//deleteDuplicate(phead);
+		deleteDuplicate2(phead);
 		print(phead);
 		destroy(phead);
 	}
