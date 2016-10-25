@@ -60,9 +60,10 @@ namespace test4_namespace
 		node* pcur=prev->next;
 		for(int i=start;i<end;++i)
 		{	
+			node* temp=pstart->next;
 			pstart->next=pcur;
 			prev->next=pcur->next;
-			pcur->next=pstart->next;
+			pcur->next=temp;
 			pcur=prev->next;
 		}
 	}
