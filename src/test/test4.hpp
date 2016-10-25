@@ -220,6 +220,7 @@ namespace test4_namespace
 		};
 		std::vector<int> output;
 		topologic(output,v);
+		std::copy(output.begin(), output.end(), std::ostream_iterator<int>(std::cout, "->"));
 	}
 	void test_out()
 	{
