@@ -176,6 +176,7 @@ namespace test4_namespace
   			}
   		}
   		std::copy(indegree.begin(), indegree.end(), std::ostream_iterator<int>(std::cout, "->"));
+  		std::cout<<std::endl;
   		while(output.size()<cnt)
   		{
   			std::queue<int> temp;
