@@ -17,6 +17,7 @@
 #include <inttypes.h>
 #include <muduo/base/LogStream.h>
 #include <execinfo.h>
+#include <queue>
 namespace test4_namespace
 {
 	using std::string;
@@ -170,7 +171,7 @@ namespace test4_namespace
   		{
   			for(int j=0;j<cnt;++j)
   			{
-  				v[i]+=v[i][j];
+  				indegree[i]+=graph[i][j];
   			}
   		}
   		while(output.size()<cnt)
