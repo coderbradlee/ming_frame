@@ -95,6 +95,7 @@ namespace test4_namespace
 				while(p->value==temp)
 				{
 					phead->next=p->next;
+					std::cout<<"delete:"<<p->value<<std::endl;
 					delete p;
 					p=phead->next;
 				}
