@@ -41,7 +41,7 @@ namespace test4_namespace
 		node* p;
 		while(phead!=nullptr)
 		{
-			std::cout<<"destroy:"<<p->value<<std::endl;
+			std::cout<<"destroy:"<<phead->value<<std::endl;
 			p=phead->next;
 			delete phead;
 			phead=p;
