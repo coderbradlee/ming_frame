@@ -39,7 +39,7 @@ namespace test4_namespace
 	void destroy(node* phead)
 	{
 		node* p;
-		while(phead)
+		while(phead!=nullptr)
 		{
 			std::cout<<"destroy:"<<p->value<<std::endl;
 			p=phead->next;
