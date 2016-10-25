@@ -147,7 +147,7 @@ namespace test4_namespace
 	void test2()
 	{
 		node* phead=new node(0);
-		int digit[]={1,2,3,4,4,4,5,6};
+		int digit[]={1,2,8,3,4,4,4,5,6};
 		node* pindex=phead;
 		for(int i=0;i<8;++i)
 		{
@@ -158,8 +158,8 @@ namespace test4_namespace
 		print(phead);
 		//deleteDuplicate(phead);
 		//deleteDuplicate2(phead);
-		//partition(phead,4);
-		print(partition(phead,4));
+		partition(phead,4);
+		print(phead);
 		destroy(phead);
 	}
 	void test_out()
