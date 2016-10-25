@@ -51,7 +51,7 @@ namespace test4_namespace
 		// print(phead);
 		// destroy(phead);
 	}
-	test_out()
+	void test_out()
 	{
 		test();
 	}
