@@ -116,6 +116,30 @@ namespace test4_namespace
 			}
 		}
 	}
+	void partition(node* phead,int value)
+	{
+		node* left=phead;
+		node* right=new node(0);
+		node* leftindex=phead;
+		node* rightindex=right;
+		while(phead)
+		{
+			if(phead->next->value<value)
+			{
+				leftindex->next=phead->next;
+				phead=phead->next;
+				leftindex=leftindex->next;
+			}
+			else
+			{
+				rightindex->next=phead->next;
+				phead=phead->next;
+				rightindex=rightindex->next;
+			}
+		}
+		leftindex->next=right->next;
+		
+	}
 	void test2()
 	{
 		node* phead=new node(0);
@@ -129,7 +153,8 @@ namespace test4_namespace
 		}
 		print(phead);
 		//deleteDuplicate(phead);
-		deleteDuplicate2(phead);
+		//deleteDuplicate2(phead);
+		partition(phead,4);
 		print(phead);
 		destroy(phead);
 	}
