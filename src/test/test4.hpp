@@ -122,23 +122,25 @@ namespace test4_namespace
 		node* right=new node(0);
 		node* leftindex=phead;
 		node* rightindex=right;
-		while(phead)
+		while(phead&&phead->next)
 		{
 			if(phead->next->value<value)
 			{
 				leftindex->next=phead->next;
 				phead=phead->next;
 				leftindex=leftindex->next;
+				std::cout<<":"<<leftindex->value<<std::endl;
 			}
 			else
 			{
 				rightindex->next=phead->next;
 				phead=phead->next;
 				rightindex=rightindex->next;
+				std::cout<<"::"<<rightindex->value<<std::endl;
 			}
 		}
 		leftindex->next=right->next;
-		
+
 	}
 	void test2()
 	{
