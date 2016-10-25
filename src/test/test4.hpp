@@ -36,6 +36,36 @@ namespace test4_namespace
 		}	
 		std::cout<<"end"<<std::endl;
 	}
+	void destroy(node* phead)
+	{
+		node* p;
+		while(phead)
+		{
+			std::cout<<"destroy:"<<p->value<<std::endl;
+			p=phead->next;
+			delete phead;
+			phead=p;
+		}
+	}
+	void reverse(node* phead,int start,int end)
+	{
+		node* prev;
+		for(int i=0;i<start;++i)
+		{	
+			prev=phead->next;
+			phead=prev;
+		}
+		node* pstart=prev;
+		prev=prev->next;
+		node* pcur=prev->next;
+		for(int i=start;i<end;++i)
+		{	
+			pstart->next=pcur;
+			prev->next=pcur->next;
+			pcur->next=prev;
+			pcur=prev->next;
+		}
+	}
 	void test()
 	{
 		node* phead=new node(0);
@@ -47,9 +77,9 @@ namespace test4_namespace
 			pindex=pindex->next;
 		}
 		print(phead);
-		// reverse(phead,3,5);
-		// print(phead);
-		// destroy(phead);
+		reverse(phead,3,5);
+		print(phead);
+		destroy(phead);
 	}
 	void test_out()
 	{
