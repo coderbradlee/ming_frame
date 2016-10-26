@@ -321,6 +321,59 @@ namespace test4_namespace
 		int maxlength=get_ml(parenthesis);
 		std::cout<<maxlength<<std::endl;
 	}
+	bool is_operator(char c)
+	{
+		return c=='+'||c=='-'||c=='*'||c=='/';
+	}
+	int reversepolishnotation(const string& s)
+	{
+		int len=s.length();
+		int ret=0;
+		std::stack<int> stack_num;
+		for(int i=0;i<len;++i)
+		{
+			if(is_operator(s[i]))
+			{
+				int second=stack_num.top();
+				stack_num.pop();
+				int first=stack_num.top();
+				stack_num.pop();
+				if(s[i]=='+')
+				{
+					stack_num.push(first+second);
+				}
+				else if(s[i]=='-')
+				{
+					stack_num.push(first-second;
+				}
+				else if(s[i]=='*')
+				{
+					stack_num.push(first*second);
+				}
+				else if(s[i]=='/')
+				{
+					stack_num.push(first/second);
+				}
+			}
+			else
+			{
+				stack_num.push(s[i]);
+			}
+		}
+		ret=stack_num.top();
+		stack_num.pop();
+		if(!stack_num.empty())
+		{
+			ret=0;
+		}
+		return ret;
+	}
+	void test_reversepolishnotation()
+	{
+		string s="21+3*";
+		int ret=reversepolishnotation(s);
+		std::cout<<ret<<std::endl;
+	}
 	void test_out()
 	{
 		test_parenthesis();
