@@ -429,7 +429,7 @@ namespace test4_namespace
 					--row;
 			}
 		}
-		if(row==0&&col==0)
+		if(row==0||col==0)
 		{
 			solution.push_back(answer);
 			std::cout<<answer<<std::endl;
