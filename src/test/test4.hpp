@@ -360,8 +360,9 @@ namespace test4_namespace
 			}
 			else
 			{
-				const char* num=&s[i];
-				std::cout<<"push:"<<num<<std::endl;
+				char c=s[i];
+				const char* num=&c;
+				std::cout<<"push:"<<atoi(num)<<std::endl;
 				stack_num.push(atoi(num));
 			}
 		}
