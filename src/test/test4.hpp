@@ -432,6 +432,7 @@ namespace test4_namespace
 		if(row==0&&col==0)
 		{
 			solution.push_back(answer);
+			std::cout<<answer<<std::endl;
 			std::reverse(solution.back().begin(), solution.back().end());
 			return;
 		}
