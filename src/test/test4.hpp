@@ -254,7 +254,8 @@ namespace test4_namespace
 	}
 	void testshortpath()
 	{
-		std::vector<std::vector<int>> graph;
+		const int N=16;
+		std::vector<std::vector<int>> graph(N ,std::vector<int>(N,0));
 		graph[0][1]=graph[0][4]=1;
 		graph[1][5]=graph[1][0]=graph[1][2]=1;
 		graph[2][1]=graph[2][6]=graph[2][3]=1;
