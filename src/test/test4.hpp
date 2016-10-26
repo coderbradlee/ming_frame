@@ -465,7 +465,7 @@ namespace test4_namespace
 			}
 		}	
 		string answer;
-		FindAnswer(str1, str2, graph,solution,answer,len1,len2);
+		FindAnswer(str1-1, str2-1, graph,solution,answer,len1,len2);
 	}
 	void test_lcs()
 	{
