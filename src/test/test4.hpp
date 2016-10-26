@@ -236,7 +236,7 @@ namespace test4_namespace
 		{
 			int from=q.front();
 			q.pop();
-			for(int i=0;i<N;++i)
+			for(int i=1;i<N;++i)
 			{
 				if(graph[from][i]==0||step[i]>step[from]+1)
 				{
