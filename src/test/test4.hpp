@@ -482,9 +482,53 @@ namespace test4_namespace
 		std::copy(v.begin(),v.end(),std::ostream_iterator<string>(std::cout,"\n"));
 		std::cout<<std::endl;
 	}
+	void insert2(int* a,int* b,int* v,int index)
+	{
+		if(index==0)
+		{
+			b[0]=1;
+			v[0]=a[0];
+			return;
+		}
+		else
+		{
+			insert2(a,b,v,index-1);
+			if(a[i]>v[i-1])
+			{
+				b[i]+=b[i-1];
+				v[i]=a[i];
+			}
+		}
+	}
+	int LIS(int* a,int len)
+	{
+		int* b=new int[len];
+		int* v=new int[len];;
+		//for(int i=0;i<len;++i)
+		{
+			insert2(a,b,v,len-1);
+		}
+		for(auto i:v)
+		{
+			for(auto j:i)
+			{
+				std::cout<<j<<"->";
+			}
+			std::cout<<"end"<<std::endl;
+		}
+		return b[len-1];
+	}
+	void test_lis()
+	{
+		int a[] = {1,4,6,2,8,9,7};
+		int size = sizeof(a) / sizeof(int);
+		int len = LIS(a, size);
+		cout << len << endl;
+	}
 	void test_out()
 	{
-		test_lcs();
+		test_lis();
+		//test_lcs();
 		//shift();
 		//test_reversepolishnotation();
 		//test_parenthesis();
