@@ -338,6 +338,7 @@ namespace test4_namespace
 				stack_num.pop();
 				int first=stack_num.top();
 				stack_num.pop();
+				std::cout<<first<<":"<<second<<std::endl;
 				if(s[i]=='+')
 				{
 					stack_num.push(first+second);
