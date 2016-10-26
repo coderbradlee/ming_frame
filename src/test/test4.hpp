@@ -433,7 +433,7 @@ namespace test4_namespace
 			return;
 		}
 	}
-	string LCS2(const char* str1, const char* str2, vector<string>& solution)
+	string LCS2(const char* str1, const char* str2, std::vector<string>& solution)
 	{
 		int len1=strlen(str1);
 		int len2=strlen(str2);
