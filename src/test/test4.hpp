@@ -433,7 +433,7 @@ namespace test4_namespace
 			return;
 		}
 	}
-	string LCS2(const char* str1, const char* str2, std::vector<string>& solution)
+	void LCS2(const char* str1, const char* str2, std::vector<string>& solution)
 	{
 		int len1=strlen(str1);
 		int len2=strlen(str2);
@@ -465,7 +465,7 @@ namespace test4_namespace
 			}
 		}	
 		string answer;
-		FindAnswer(str1-1, str2-1, graph,solution,answer,len1,len2);
+		//FindAnswer(str1-1, str2-1, graph,solution,answer,len1,len2);
 	}
 	void test_lcs()
 	{
