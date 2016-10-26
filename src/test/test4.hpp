@@ -228,8 +228,8 @@ namespace test4_namespace
 	int calcpath(std::vector<std::vector<int>> graph)
 	{
 		const int N=16;
-		int step[N];//how many step to i
-		int path[N];//how many path to i
+		int step[N]={0};//how many step to i
+		int path[N]={0};//how many path to i
 		std::queue<int> q;
 		q.push(0);
 		while(!q.empty())
