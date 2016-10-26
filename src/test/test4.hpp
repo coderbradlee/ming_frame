@@ -225,10 +225,11 @@ namespace test4_namespace
 		std::copy(output.begin(), output.end(), std::ostream_iterator<int>(std::cout, "->"));
 		std::cout<<std::endl;
 	}
-	int calcpath(std::vector<std::vector<int>> graph)
+	int calcpath(const std::vector<std::vector<int>>& graph)
 	{
 		const int N=16;
 		int step[N]={0};//how many step to i
+		step[0]=1;
 		int path[N]={0};//how many path to i
 		std::queue<int> q;
 		q.push(0);
