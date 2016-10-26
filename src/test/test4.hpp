@@ -520,7 +520,7 @@ namespace test4_namespace
 		int a[] = {1,4,6,2,8,9,7};
 		int size = sizeof(a) / sizeof(int);
 		int len = LIS(a, size);
-		cout << len << endl;
+		std::cout << len << std::endl;
 	}
 	void test_out()
 	{
