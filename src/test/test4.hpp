@@ -322,7 +322,8 @@ namespace test4_namespace
 	}
 	void test_out()
 	{
-		testshortpath();
+		test_parenthesis();
+		//testshortpath();
 		//testtopologic();
 	}
 }
