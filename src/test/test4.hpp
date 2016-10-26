@@ -360,7 +360,7 @@ namespace test4_namespace
 			}
 			else
 			{
-				const char* num=s[i];
+				const char* num=&s[i];
 				stack_num.push(atoi(num));
 			}
 		}
