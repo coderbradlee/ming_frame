@@ -493,29 +493,26 @@ namespace test4_namespace
 		else
 		{
 			insert2(a,b,v,index-1);
-			if(a[i]>v[i-1])
+			if(a[index]>v[index-1])
 			{
-				b[i]+=b[i-1];
-				v[i]=a[i];
+				b[index]+=b[index-1];
+				v[index]=a[index];
 			}
 		}
 	}
 	int LIS(int* a,int len)
 	{
 		int* b=new int[len];
-		int* v=new int[len];;
+		int* v=new int[len];
 		//for(int i=0;i<len;++i)
 		{
 			insert2(a,b,v,len-1);
 		}
-		for(auto i:v)
+		for(int i=0;i<len;++i)
 		{
-			for(auto j:i)
-			{
-				std::cout<<j<<"->";
-			}
-			std::cout<<"end"<<std::endl;
+			std::cout<<v[i]<<"->";
 		}
+		std::cout<<"end"<<std::endl;
 		return b[len-1];
 	}
 	void test_lis()
