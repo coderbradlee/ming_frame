@@ -450,7 +450,8 @@ namespace test4_namespace
 					--row;
 			}
 		}
-		return std::reverse(ret.begin(),ret.end());
+		std::reverse(ret.begin(),ret.end());
+		return ret;
 	}
 	void test_lcs()
 	{
