@@ -484,7 +484,7 @@ namespace test4_namespace
 	}
 	void insert2(int* a,int* b,int* v,int index)
 	{
-		if(index==0)
+		if(index<=0)
 		{
 			b[0]=1;
 			v[0]=a[0];
