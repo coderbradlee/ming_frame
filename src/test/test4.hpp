@@ -19,6 +19,7 @@
 #include <execinfo.h>
 #include <queue>
 #include <vector>
+#include <stdlib.h>
 namespace test4_namespace
 {
 	using std::string;
