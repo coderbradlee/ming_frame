@@ -20,6 +20,7 @@
 #include <queue>
 #include <vector>
 #include <stdlib.h>
+#include <algorithm>
 namespace test4_namespace
 {
 	using std::string;
