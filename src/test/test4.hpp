@@ -394,9 +394,10 @@ namespace test4_namespace
 	void shift()
 	{
 		char s[]="abcdef";
-		reversestring(s[0],s[1]);
-		reversestring(s[2],s[5]);
-		reversestring(s[0],s[5]);
+		char* p=s;
+		reversestring(p,p+1);
+		reversestring(p+2,p+5);
+		reversestring(p,p+5);
 		std::cout<<s<<std::endl;
 	}
 	void test_out()
