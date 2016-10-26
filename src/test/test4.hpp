@@ -279,6 +279,47 @@ namespace test4_namespace
 		graph[15][11]=graph[15][14]=1;
 		std::cout<<calcpath(graph)<<std::endl;
 	}
+	int get_ml(const string& p)
+	{
+		int len=p.length();
+		std::queue<int> q;
+		int ml=0;
+		int start=0;
+		for(int i=0;i<len;++i)
+		{
+			if(p[i]=='(')
+			{
+				q.push(i);
+			}
+			else
+			{
+				if(q.empty())
+				{
+					start=i;
+				}
+				else
+				{
+					q.pop();
+					if(q.empty())
+					{
+						if(ml<i-start)
+							ml=i-start;
+					}
+					else
+					{
+						if(ml<i-q.front())
+							ml=i-q.front();
+					}
+				}
+			}
+		}
+	}
+	void test_parenthesis()
+	{
+		string parenthesis="(())()";
+		int maxlength=get_ml(parenthesis);
+		std::cout<<maxlength<<std::endl;
+	}
 	void test_out()
 	{
 		testshortpath();
