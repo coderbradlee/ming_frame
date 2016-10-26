@@ -229,8 +229,8 @@ namespace test4_namespace
 	{
 		const int N=16;
 		int step[N]={0};//how many step to i
-		step[0]=1;
 		int path[N]={0};//how many path to i
+		path[0]=1;
 		std::queue<int> q;
 		q.push(0);
 		while(!q.empty())
