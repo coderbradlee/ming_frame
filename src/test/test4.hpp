@@ -401,7 +401,39 @@ namespace test4_namespace
 		reversestring(p,p+5);
 		std::cout<<s<<std::endl;
 	}
-	string LCS(const char* str1,const char* str2)
+	void FindAnswer(const char* str1,const char* str2,vector<vector<int>>& graph, vector<string>& solution,string& answer,int row,int col)
+	{
+		while(row>0&&col>0)
+		{
+			if(str1[row]==str2[col])
+			{
+				answer.push_back(str1[row]);
+				--row;--col;
+			}
+			else
+			{
+				if(graph[row][col-1]==graph[row-1][col])
+				{
+					FindAnswer(str1,str2, graph,solution,answer,row-1,col);
+					FindAnswer(str1,str2, graph,solution,answer,row,col-1);
+					break;
+				}
+				else if(graph[row][col-1]>graph[row-1][col])
+				{
+					--col;
+				}
+				else
+					--row;
+			}
+		}
+		if(row==0&&col==0)
+		{
+			solution.push_back(answer);
+			std::reverse(solution.back().begin(), solution.back().end());
+			return;
+		}
+	}
+	string LCS2(const char* str1, const char* str2, vector<string>& solution)
 	{
 		int len1=strlen(str1);
 		int len2=strlen(str2);
@@ -432,34 +464,19 @@ namespace test4_namespace
 				}
 			}
 		}	
-		int row=len1;
-		int col=len2;
-		string ret;
-		while(row>0&&col>0)
-		{
-			if(str1[row]==str2[col])
-			{
-				ret.push_back(str1[row]);
-				--row;--col;
-			}
-			else
-			{
-				if(graph[row][col-1]>graph[row-1][col])
-				{
-					--col;
-				}
-				else
-					--row;
-			}
-		}
-		std::reverse(ret.begin(),ret.end());
-		return ret;
+		string answer;
+		FindAnswer(graph, solution, answer, str1, str2, len1, len2);
+		
 	}
 	void test_lcs()
 	{
-		const char* str1 = "TCGGATCGACTT";//BDCABA
-		const char* str2 = "AGCCTACGTA";//ABCBDAB
-		std::cout<<LCS(str1,str2)<<std::endl;
+		const char* str1 = "BDCABA";//BDCABA
+		const char* str2 = "ABCBDAB";//ABCBDAB
+		//std::cout<<LCS(str1,str2)<<std::endl;
+		std::vector<string> v;
+		LCS2(str1,str2,v);
+		std::copy(v.begin(),v.end(),std::ostream_iterator<string>(std::cout,"\n"));
+
 	}
 	void test_out()
 	{
