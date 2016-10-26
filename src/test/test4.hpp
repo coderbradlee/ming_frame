@@ -400,9 +400,67 @@ namespace test4_namespace
 		reversestring(p,p+5);
 		std::cout<<s<<std::endl;
 	}
+	string LCS(const char* str1,const char* str2)
+	{
+		int len1=strlen(str1);
+		int len2=strlen(str2);
+		std::vector<std::vector<int>> graph(len1+1,std::vector<int>(len2+1));
+		for(int i=0;i<len1+1;++i)
+		{
+			graph[i][0]=0;
+		}
+		for(int i=0;i<len2+1;++i)
+		{
+			graph[0][i]=0;
+		}
+		for(int i=1;i<len1+1;++i)
+		{
+			for(int j=1;j<len2+1;++j)
+			{
+				if(str1[i]==str2[j])
+				{
+					graph[i][j]=graph[i-1][j-1]+1;
+				}
+				else
+				{
+					if(graph[i-1][j]>graph[i][j-1])
+						graph[i][j]=graph[i-1][j];
+					else
+						graph[i][j]=graph[i][j-1];
+				}
+			}
+		}	
+		int row=len1;
+		int col=len2;
+		string ret;
+		while(row>0&&col>0)
+		{
+			if(str1[row]==str2[col])
+			{
+				ret.push_back(str1[row]);
+			}
+			else
+			{
+				if(graph[row][col-1]>graph[row-1][col])
+				{
+					--col;
+				}
+				else
+					--row;
+			}
+		}
+		return std:reverse(ret.begin(),ret.end());
+	}
+	void test_lcs()
+	{
+		const char* str1 = "TCGGATCGACTT";//BDCABA
+		const char* str2 = "AGCCTACGTA";//ABCBDAB
+		std::cout<<LCS(str1,str2)<<std::endl;
+	}
 	void test_out()
 	{
-		shift();
+		test_lcs();
+		//shift();
 		//test_reversepolishnotation();
 		//test_parenthesis();
 		//testshortpath();
