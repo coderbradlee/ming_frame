@@ -380,9 +380,29 @@ namespace test4_namespace
 		int ret=reversepolishnotation(s);
 		std::cout<<ret<<std::endl;
 	}
+	void reversestring(char* start,char* end)
+	{
+		while(start<end)
+		{
+			char c=*start;
+			*start=*end;
+			*end=c;
+			++start;
+			--end;
+		}
+	}
+	void shift()
+	{
+		char s[]="abcdef";
+		reversestring(s[0],s[1]);
+		reversestring(s[2],s[5]);
+		reversestring(s[0],s[5]);
+		std::cout<<s<<std::endl;
+	}
 	void test_out()
 	{
-		test_reversepolishnotation();
+		shift();
+		//test_reversepolishnotation();
 		//test_parenthesis();
 		//testshortpath();
 		//testtopologic();
