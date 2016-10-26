@@ -344,7 +344,7 @@ namespace test4_namespace
 				}
 				else if(s[i]=='-')
 				{
-					stack_num.push(first-second;
+					stack_num.push(first-second);
 				}
 				else if(s[i]=='*')
 				{
