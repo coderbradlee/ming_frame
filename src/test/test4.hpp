@@ -336,9 +336,9 @@ namespace test4_namespace
 		{
 			if(is_operator(s[i]))
 			{
-				int second=atoi(stack_num.top());
+				int second=stack_num.top();
 				stack_num.pop();
-				int first=atoi(stack_num.top());
+				int first=stack_num.top();
 				stack_num.pop();
 				std::cout<<first<<":"<<second<<std::endl;
 				if(s[i]=='+')
@@ -360,7 +360,7 @@ namespace test4_namespace
 			}
 			else
 			{
-				stack_num.push(s[i]);
+				stack_num.push(atoi(s[i]));
 			}
 		}
 		ret=stack_num.top();
