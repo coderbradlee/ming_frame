@@ -376,7 +376,8 @@ namespace test4_namespace
 	}
 	void test_out()
 	{
-		test_parenthesis();
+		test_reversepolishnotation();
+		//test_parenthesis();
 		//testshortpath();
 		//testtopologic();
 	}
