@@ -498,6 +498,10 @@ namespace test4_namespace
 				b[index]+=b[index-1];
 				v[index]=a[index];
 			}
+			else
+			{
+				b[index]=b[index-1];
+			}
 		}
 	}
 	int LIS(int* a,int len)
