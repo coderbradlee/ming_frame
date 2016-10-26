@@ -361,6 +361,7 @@ namespace test4_namespace
 			else
 			{
 				const char* num=&s[i];
+				std::cout<<"push:"<<num<<std::endl;
 				stack_num.push(atoi(num));
 			}
 		}
