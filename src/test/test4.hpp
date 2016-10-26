@@ -317,7 +317,7 @@ namespace test4_namespace
 	}
 	void test_parenthesis()
 	{
-		string parenthesis="(())()";
+		string parenthesis="(())()()";
 		int maxlength=get_ml(parenthesis);
 		std::cout<<maxlength<<std::endl;
 	}
