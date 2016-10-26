@@ -360,7 +360,8 @@ namespace test4_namespace
 			}
 			else
 			{
-				stack_num.push(atoi(s[i]));
+				const char* num=s[i];
+				stack_num.push(atoi(num));
 			}
 		}
 		ret=stack_num.top();
