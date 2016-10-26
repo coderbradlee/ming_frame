@@ -325,6 +325,7 @@ namespace test4_namespace
 	{
 		return c=='+'||c=='-'||c=='*'||c=='/';
 	}
+	
 	int reversepolishnotation(const string& s)
 	{
 		int len=s.length();
@@ -334,9 +335,9 @@ namespace test4_namespace
 		{
 			if(is_operator(s[i]))
 			{
-				int second=stack_num.top();
+				int second=atoi(stack_num.top());
 				stack_num.pop();
-				int first=stack_num.top();
+				int first=atoi(stack_num.top());
 				stack_num.pop();
 				std::cout<<first<<":"<<second<<std::endl;
 				if(s[i]=='+')
