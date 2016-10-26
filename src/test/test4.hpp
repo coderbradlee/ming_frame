@@ -513,6 +513,11 @@ namespace test4_namespace
 			std::cout<<v[i]<<"->";
 		}
 		std::cout<<"end"<<std::endl;
+		for(int i=0;i<len;++i)
+		{
+			std::cout<<b[i]<<"->";
+		}
+		std::cout<<"end"<<std::endl;
 		return b[len-1];
 	}
 	void test_lis()
