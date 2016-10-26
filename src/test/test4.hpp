@@ -405,6 +405,7 @@ namespace test4_namespace
 	{
 		int len1=strlen(str1);
 		int len2=strlen(str2);
+
 		std::vector<std::vector<int>> graph(len1+1,std::vector<int>(len2+1));
 		for(int i=0;i<len1+1;++i)
 		{
@@ -439,6 +440,7 @@ namespace test4_namespace
 			if(str1[row]==str2[col])
 			{
 				ret.push_back(str1[row]);
+				--row;--col;
 			}
 			else
 			{
