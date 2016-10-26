@@ -239,16 +239,20 @@ namespace test4_namespace
 			q.pop();
 			for(int i=1;i<N;++i)
 			{
-				if(graph[from][i]==0||step[i]>step[from]+1)
+				if(graph[from][i]==1)
 				{
-					step[i]=step[from]+1;
-					path[i]=path[from];
-					q.push(i);
+					if(step[i]==0||step[i]>step[from]+1)
+					{
+						step[i]=step[from]+1;
+						path[i]=path[from];
+						q.push(i);
+					}
+					else if(step[i]==step[from]+1)
+					{
+						path[i]+=path[from];
+					}
 				}
-				else if(step[i]==step[from]+1)
-				{
-					path[i]+=path[from];
-				}
+				
 			}
 		}
 		return path[N-1];
