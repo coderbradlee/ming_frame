@@ -401,7 +401,7 @@ namespace test4_namespace
 		reversestring(p,p+5);
 		std::cout<<s<<std::endl;
 	}
-	void FindAnswer(const char* str1,const char* str2,vector<vector<int>>& graph, vector<string>& solution,string& answer,int row,int col)
+	void FindAnswer(const char* str1,const char* str2,std::vector<std::vector<int>>& graph, std::vector<string>& solution,string& answer,int row,int col)
 	{
 		while(row>0&&col>0)
 		{
