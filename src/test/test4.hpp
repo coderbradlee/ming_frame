@@ -284,7 +284,7 @@ namespace test4_namespace
 		int len=p.length();
 		std::queue<int> q;
 		int ml=0;
-		int start=0;
+		int start=-1;
 		for(int i=0;i<len;++i)
 		{
 			if(p[i]=='(')
