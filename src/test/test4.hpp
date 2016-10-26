@@ -401,7 +401,7 @@ namespace test4_namespace
 		reversestring(p,p+5);
 		std::cout<<s<<std::endl;
 	}
-	void FindAnswer(const char* str1,const char* str2,std::vector<std::vector<int>>& graph, std::vector<string>& solution,string& answer,int row,int col)
+	void FindAnswer(const char* str1,const char* str2,const std::vector<std::vector<int>>& graph, std::vector<string>& solution,string& answer,int row,int col)
 	{
 		while(row>0&&col>0)
 		{
@@ -414,8 +414,11 @@ namespace test4_namespace
 			{
 				if(graph[row][col-1]==graph[row-1][col])
 				{
+					int s = (int)answer.size();
 					FindAnswer(str1,str2, graph,solution,answer,row-1,col);
+					answer.resize(s);
 					FindAnswer(str1,str2, graph,solution,answer,row,col-1);
+					answer.resize(s);
 					break;
 				}
 				else if(graph[row][col-1]>graph[row-1][col])
@@ -465,7 +468,7 @@ namespace test4_namespace
 			}
 		}	
 		string answer;
-		//FindAnswer(str1-1, str2-1, graph,solution,answer,len1,len2);
+		FindAnswer(str1, str2, graph,solution,answer,len1,len2);
 	}
 	void test_lcs()
 	{
