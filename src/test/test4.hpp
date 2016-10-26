@@ -478,8 +478,9 @@ namespace test4_namespace
 		//std::cout<<LCS(str1,str2)<<std::endl;
 		std::vector<string> v;
 		LCS2(str1,str2,v);
+		std::cout<<"----------------"<<std::endl;
 		std::copy(v.begin(),v.end(),std::ostream_iterator<string>(std::cout,"\n"));
-
+		std::cout<<std::endl;
 	}
 	void test_out()
 	{
