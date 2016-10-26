@@ -313,6 +313,7 @@ namespace test4_namespace
 				}
 			}
 		}
+		return ml;
 	}
 	void test_parenthesis()
 	{
