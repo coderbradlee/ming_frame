@@ -551,13 +551,45 @@ namespace test4_namespace
 			std::swap(a[i],a[n]);
 		}
 	}
+	bool is_duplicate(int* a,int i,int j)
+	{
+		while(i<j)
+		{
+			if(a[i]==a[j])
+				return true;
+			++i;
+		}
+		return false;
+	}
+	void permutation2(int* a,int size,int n)
+	{
+		if(n==size-1)
+		{
+			print(a,size);
+			return;
+		}
+		for(int i=n;i<size;++i)
+		{
+			if(is_duplicate(a,n,i))
+				continue;
+			std::swap(a[i],a[n]);
+			permutation(a,size,n+1);
+			std::swap(a[i],a[n]);
+		}
+	}
 	void test_permutation()
 	{
 		int x[]={1,2,3};
-		permutation(x,3,0);
-		std::cout<<"-----------------"<<std::endl;
+		//permutation(x,3,0);
+		//std::cout<<"-----------------"<<std::endl;
 		int y[]={2,1,3};
-		permutation(y,3,0);
+		//permutation(y,3,0);
+		//std::cout<<"-----------------"<<std::endl;
+		int z[]={1,2,2,3};
+		permutation2(z,4,0);
+		std::cout<<"-----------------"<<std::endl;
+		int zz[]={2,1,2,3};
+		permutation2(zz,4,0);
 	}
 	void test_out()
 	{
