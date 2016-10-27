@@ -537,7 +537,7 @@ namespace test4_namespace
 			std::cout<<a[i]<<' ';
 		std::cout<<std::endl;
 	}
-	void permutation(char* a,int size,int i)
+	void permutation(int* a,int size,int i)
 	{
 		if(i==size-1)
 		{
