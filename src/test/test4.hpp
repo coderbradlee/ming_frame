@@ -659,8 +659,8 @@ namespace test4_namespace
 			// p[i]++;
 			while(1)
 			{
-				char prev=s[i-p[i]];
-				char after=s[i+p[i]];
+				char prev=s[i-p[i]-1];
+				char after=s[i+p[i]-1];
 				if(prev==after)
 				{
 					p[i]++;
