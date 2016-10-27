@@ -636,6 +636,38 @@ namespace test4_namespace
 		next_permutation(a,6);
 		print(a,6);
 	}
+	void manacher(char* s,int* p,int len)
+	{
+		//s="abba"; after pad:"$#a#b#b#a"
+		int size=2*len+1;
+		p[0]=1;
+		int mx=1;
+		int id=0;
+		for(int i=1;i<size;++i)
+		{
+			if(i<mx&&(2*id-i)>0)
+			{
+				p[i]=std::min(p[2*id-i],mx-i);
+			}
+			else
+			{
+				p[i]=1;
+			}
+			for(;(s[i-p[i]]==s[i+p[i]])&&(i-p[i])>0;p[i]++);
+			if(mx<p[i])
+			{
+				mx=p[i];
+				id=i;
+			}
+		}
+	}
+	void test_manacher()
+	{
+		char s[11]="abbac";
+		int p[11]={0};
+		manacher(s,p,5);
+		print(p,11);
+	}
 	void test_out()
 	{
 		test_next_permutation();
