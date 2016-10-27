@@ -556,7 +556,10 @@ namespace test4_namespace
 		while(i<j)
 		{
 			if(a[i]==a[j])
+			{
+				std::cout<<a[i]<<std::endl;
 				return true;
+			}	
 			++i;
 		}
 		return false;
