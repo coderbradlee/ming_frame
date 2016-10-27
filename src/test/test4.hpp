@@ -655,7 +655,7 @@ namespace test4_namespace
 			}
 			//for(;(s[i-p[i]]==s[i+p[i]]);p[i]++);
 			while((i != p[i]) && (((i+p[i]) % 2 == 1)
-			|| (str[(i+p[i])/2-1] == str[(i-p[i])/2-1])))
+			|| (s[(i+p[i])/2-1] == s[(i-p[i])/2-1])))
 			p[i]++;
 			if(mx<i + p[i])
 			{
