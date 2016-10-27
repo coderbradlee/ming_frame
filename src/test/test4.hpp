@@ -702,7 +702,7 @@ namespace test4_namespace
 		int max,max_index;
 		find_max_index(p,size,max_index,max);
 		for(int i=max_index-max;i<max_index+max;++i)
-			std::cout<<p[i]<<" ";
+			std::cout<<s[i]<<" ";
 		std::cout<<std::endl;
 	}
 	void test_out()
