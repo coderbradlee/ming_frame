@@ -670,7 +670,8 @@ namespace test4_namespace
 	}
 	void test_out()
 	{
-		test_next_permutation();
+		test_manacher();
+		//test_next_permutation();
 		//test_permutation();
 		//test_lis();//result is not right,rewrite it later
 		//test_lcs();
