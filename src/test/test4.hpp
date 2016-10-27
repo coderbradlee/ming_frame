@@ -657,7 +657,7 @@ namespace test4_namespace
 			// while((i != p[i]) && (((i+p[i]) % 2 == 1)
 			// || (s[(i+p[i])/2-1] == s[(i-p[i])/2-1])))
 			// p[i]++;
-			while(1)
+			while(i!=p[i])
 			{
 				char prev=s[i-p[i]-1];
 				char after=s[i+p[i]-1];
