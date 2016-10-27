@@ -645,7 +645,7 @@ namespace test4_namespace
 		int id=0;
 		for(int i=1;i<size;++i)
 		{
-			if(i<mx&&(2*id-i)>0)
+			if(i<mx&&((2*id-i)>0))
 			{
 				p[i]=std::min(p[2*id-i],mx-i);
 			}
@@ -653,7 +653,7 @@ namespace test4_namespace
 			{
 				p[i]=1;
 			}
-			for(;(s[i-p[i]]==s[i+p[i]])&&(i-p[i])>0;p[i]++);
+			for(;(s[i-p[i]]==s[i+p[i]]);p[i]++);
 			if(mx<i + p[i])
 			{
 				mx=i + p[i];
