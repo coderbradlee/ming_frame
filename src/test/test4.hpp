@@ -639,9 +639,9 @@ namespace test4_namespace
 	void manacher(char* s,int* p,int len)
 	{
 		//s="abba"; after pad:"$#a#b#b#a"
-		int size=2*len+1;
+		int size=len;
 		p[0]=1;
-		int mx=1;
+		int mx=1;//最远可达的位置的下标
 		int id=0;
 		for(int i=1;i<size;++i)
 		{
@@ -679,9 +679,9 @@ namespace test4_namespace
 	}
 	void test_manacher()
 	{
-		char s[17]="12212321";
+		char s[17]="$#1#2#2#1#2#3#2#1#";
 		int len=strlen(s);
-		int size=2*len+1;
+		int size=len;
 		int p[size]={0};
 		manacher(s,p,len);
 		print(p,size);
