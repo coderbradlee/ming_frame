@@ -556,10 +556,10 @@ namespace test4_namespace
 		while(i<j)
 		{
 			if(a[i]==a[j])
-				return true;
+				return false;
 			++i;
 		}
-		return false;
+		return true;
 	}
 	void permutation2(int* a,int size,int n)
 	{
@@ -570,7 +570,7 @@ namespace test4_namespace
 		}
 		for(int i=n;i<size;++i)
 		{
-			if(is_duplicate(a,n,i))
+			if(!is_duplicate(a,n,i))
 				continue;
 			std::swap(a[i],a[n]);
 			permutation(a,size,n+1);
