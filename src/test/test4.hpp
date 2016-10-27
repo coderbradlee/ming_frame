@@ -654,9 +654,9 @@ namespace test4_namespace
 				p[i]=1;
 			}
 			for(;(s[i-p[i]]==s[i+p[i]])&&(i-p[i])>0;p[i]++);
-			if(mx<p[i])
+			if(mx<i + p[i])
 			{
-				mx=p[i];
+				mx=i + p[i];
 				id=i;
 			}
 		}
