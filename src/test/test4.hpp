@@ -482,7 +482,7 @@ namespace test4_namespace
 		std::copy(v.begin(),v.end(),std::ostream_iterator<string>(std::cout,"\n"));
 		std::cout<<std::endl;
 	}
-	void insert2(int* a,int* b,int* v,int index)
+	void insert2(const int* a,int* b,int* prev,int index,int& bsize)
 	{
 		if(index<=0)
 		{
@@ -531,9 +531,35 @@ namespace test4_namespace
 		int len = LIS(a, size);
 		std::cout << len << std::endl;
 	}
+	void print(const int* a,int size)
+	{
+		for(int i=0;i<size;++i)
+			std::cout<<a[i]<<' ';
+		std::cout<<std::endl;
+	}
+	void permutation(char* a,int size,int i)
+	{
+		if(i==size-1)
+		{
+			print(a,size);
+			return;
+		}
+		for(int i=n;i<size;++i)
+		{
+			std::swap(a[i],a[n]);
+			permutation(a,size,n+1);
+			std::swap(a[i],a[n]);
+		}
+	}
+	void test_permutation()
+	{
+		int x[]={1,2,3,4};
+		permutation(x,4,0);
+	}
 	void test_out()
 	{
-		test_lis();
+		test_permutation();
+		//test_lis();//result is not right,rewrite it later
 		//test_lcs();
 		//shift();
 		//test_reversepolishnotation();
