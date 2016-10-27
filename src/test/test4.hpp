@@ -579,10 +579,10 @@ namespace test4_namespace
 	}
 	void test_permutation()
 	{
-		int x[]={1,2,3};
+		//int x[]={1,2,3};
 		//permutation(x,3,0);
 		//std::cout<<"-----------------"<<std::endl;
-		int y[]={2,1,3};
+		//int y[]={2,1,3};
 		//permutation(y,3,0);
 		//std::cout<<"-----------------"<<std::endl;
 		int z[]={1,2,2,3};
