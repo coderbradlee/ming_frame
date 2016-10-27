@@ -654,22 +654,22 @@ namespace test4_namespace
 				p[i]=1;
 			}
 			//for(;(s[i-p[i]]==s[i+p[i]]);p[i]++);
-			// while((i != p[i]) && (((i+p[i]) % 2 == 1)
-			// || (s[(i+p[i])/2-1] == s[(i-p[i])/2-1])))
-			// p[i]++;
-			while(i!=p[i])
-			{
-				char prev=s[i-p[i]];
-				char after=s[i+p[i]];
-				if(prev==after)
-				{
-					p[i]++;
-				}
-				else
-				{
-					break;
-				}
-			}
+			while((i != p[i]) && (((i+p[i]) % 2 == 1)
+			|| (s[(i+p[i])/2-1] == s[(i-p[i])/2-1])))
+			p[i]++;
+			// while(i!=p[i])
+			// {
+			// 	char prev=s[i-p[i]];
+			// 	char after=s[i+p[i]];
+			// 	if(prev==after)
+			// 	{
+			// 		p[i]++;
+			// 	}
+			// 	else
+			// 	{
+			// 		break;
+			// 	}
+			// }
 			if(mx<i + p[i])
 			{
 				mx=i + p[i];
@@ -680,7 +680,7 @@ namespace test4_namespace
 	void test_manacher()
 	{
 		char s[19]="$#1#2#2#1#2#3#2#1#";
-		int len=strlen(s)-1;
+		int len=strlen(s);//18
 		std::cout<<len<<std::endl;
 		int size=len;
 		int p[size]={0};
