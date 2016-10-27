@@ -553,8 +553,11 @@ namespace test4_namespace
 	}
 	void test_permutation()
 	{
-		int x[]={1,2,3,4};
+		int x[]={1,2,3};
 		permutation(x,4,0);
+		std::cout<<"-----------------"<<std::endl;
+		int y[]={2,1,3};
+		permutation(y,4,0);
 	}
 	void test_out()
 	{
