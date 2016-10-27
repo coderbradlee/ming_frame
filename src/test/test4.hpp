@@ -663,7 +663,7 @@ namespace test4_namespace
 	}
 	void test_manacher()
 	{
-		char s[11]="abbac";
+		char s[11]="12212321";
 		int p[11]={0};
 		manacher(s,p,5);
 		print(p,11);
