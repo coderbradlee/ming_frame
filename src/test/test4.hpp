@@ -680,7 +680,7 @@ namespace test4_namespace
 	void test_manacher()
 	{
 		char s[19]="$#1#2#2#1#2#3#2#1#";
-		int len=strlen(s);
+		int len=strlen(s)-1;
 		std::cout<<len<<std::endl;
 		int size=len;
 		int p[size]={0};
