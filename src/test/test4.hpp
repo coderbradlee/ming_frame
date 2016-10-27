@@ -482,35 +482,35 @@ namespace test4_namespace
 		std::copy(v.begin(),v.end(),std::ostream_iterator<string>(std::cout,"\n"));
 		std::cout<<std::endl;
 	}
-	void insert2(const int* a,int* b,int* prev,int index,int& bsize)
-	{
-		if(index<=0)
-		{
-			b[0]=1;
-			v[0]=a[0];
-			return;
-		}
-		else
-		{
-			insert2(a,b,v,index-1);
-			if(a[index]>v[index-1])
-			{
-				b[index]+=b[index-1];
-				v[index]=a[index];
-			}
-			else
-			{
-				b[index]=b[index-1];
-			}
-		}
-	}
+	// void insert2(const int* a,int* b,int* prev,int index,int& bsize)
+	// {
+	// 	if(index<=0)
+	// 	{
+	// 		b[0]=1;
+	// 		v[0]=a[0];
+	// 		return;
+	// 	}
+	// 	else
+	// 	{
+	// 		insert2(a,b,v,index-1);
+	// 		if(a[index]>v[index-1])
+	// 		{
+	// 			b[index]+=b[index-1];
+	// 			v[index]=a[index];
+	// 		}
+	// 		else
+	// 		{
+	// 			b[index]=b[index-1];
+	// 		}
+	// 	}
+	// }
 	int LIS(int* a,int len)
 	{
 		int* b=new int[len];
 		int* v=new int[len];
 		//for(int i=0;i<len;++i)
 		{
-			insert2(a,b,v,len-1);
+			//insert2(a,b,v,len-1);
 		}
 		for(int i=0;i<len;++i)
 		{
