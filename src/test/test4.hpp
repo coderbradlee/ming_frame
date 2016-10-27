@@ -654,9 +654,22 @@ namespace test4_namespace
 				p[i]=1;
 			}
 			//for(;(s[i-p[i]]==s[i+p[i]]);p[i]++);
-			while((i != p[i]) && (((i+p[i]) % 2 == 1)
-			|| (s[(i+p[i])/2-1] == s[(i-p[i])/2-1])))
-			p[i]++;
+			// while((i != p[i]) && (((i+p[i]) % 2 == 1)
+			// || (s[(i+p[i])/2-1] == s[(i-p[i])/2-1])))
+			// p[i]++;
+			while(1)
+			{
+				char prev=s[i-p[i]];
+				char after=s[i+p[i]];
+				if(prev==after)
+				{
+					p[i]++;
+				}
+				else
+				{
+					break;
+				}
+			}
 			if(mx<i + p[i])
 			{
 				mx=i + p[i];
