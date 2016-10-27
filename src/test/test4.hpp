@@ -551,15 +551,15 @@ namespace test4_namespace
 			std::swap(a[i],a[n]);
 		}
 	}
-	bool is_duplicate(int* a,int i,int j)
+	bool is_duplicate(const int* a,int i,int j)
 	{
 		while(i<j)
 		{
 			if(a[i]==a[j])
-				return false;
+				return true;
 			++i;
 		}
-		return true;
+		return false;
 	}
 	void permutation2(int* a,int size,int n)
 	{
@@ -570,7 +570,7 @@ namespace test4_namespace
 		}
 		for(int i=n;i<size;++i)
 		{
-			if(!is_duplicate(a,n,i))
+			if(is_duplicate(a,n,i))
 				continue;
 			std::swap(a[i],a[n]);
 			permutation(a,size,n+1);
