@@ -627,7 +627,7 @@ namespace test4_namespace
 		int min=find_min(a,place_to_swap,size);
 		std::swap(a[place_to_swap],a[min]);
 		print(a,size);
-		std::reverse(&a[place_to_swap+1],&a[size-1]);
+		std::reverse(&a[place_to_swap+1],&a[size]);
 		return true;
 	}  
 	void test_next_permutation()
