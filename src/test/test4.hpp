@@ -699,6 +699,7 @@ namespace test4_namespace
 		int p[size]={0};
 		manacher(s,p,len);
 		print(p,size);
+		int max,max_index;
 		find_max_index(p,size,max_index,max);
 		print(max_index-max,max*2);
 	}
