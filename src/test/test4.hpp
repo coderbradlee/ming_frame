@@ -595,10 +595,48 @@ namespace test4_namespace
 		int zz[]={2,1,2,3};
 		permutation2(zz,4,0);
 	}
-	  
+	int find_min(int *a,int start,int size)
+	{
+		int min=a[start];
+		int index=start;
+		while(start<size)
+		{
+			if(a[start]<min)
+			{
+				min=a[start];
+				index=start;
+			}	
+			++start;
+		}
+		return index;
+	}
+	bool next_permutation(int *a,int size)
+	{
+		int place_to_swap=-1;
+		for(int i=size-1;i>0;--i)
+		{
+			if(a[i-1]<a[i])
+			{
+				place_to_swap=i-1;
+			}
+		}
+		if(place_to_swap==-1)
+			return false;
+		int min=find_min(a,place_to_swap+1,size);
+		std::swap(a[place_to_swap],a[min]);
+		std::reverse(&a[place_to_swap+1],&a[size-1]);
+		return true;
+	}  
+	void test_next_permutation()
+	{
+		int a[]={9,2,6,5,2,0};
+		next_permutation(a,6);
+		print(a,6);
+	}
 	void test_out()
 	{
-		test_permutation();
+		test_next_permutation();
+		//test_permutation();
 		//test_lis();//result is not right,rewrite it later
 		//test_lcs();
 		//shift();
