@@ -666,10 +666,12 @@ namespace test4_namespace
 	}
 	void test_manacher()
 	{
-		char s[11]="12212321";
-		int p[11]={0};
-		manacher(s,p,5);
-		print(p,11);
+		char s[17]="12212321";
+		int len=strlen(s);
+		int size=2*len+1;
+		int p[size]={0};
+		manacher(s,p,len);
+		print(p,size);
 	}
 	void test_out()
 	{
