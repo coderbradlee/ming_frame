@@ -597,11 +597,13 @@ namespace test4_namespace
 	}
 	int find_min(int *a,int start,int size)
 	{
-		int min=a[start];
+		int place=a[start];
+		int min=a[start+1];
 		int index=start;
+		++start;
 		while(start<size)
 		{
-			if(a[start]<min)
+			if(a[start]>place&&a[start]<min)
 			{
 				min=a[start];
 				index=start;
@@ -622,7 +624,7 @@ namespace test4_namespace
 		}
 		if(place_to_swap==-1)
 			return false;
-		int min=find_min(a,place_to_swap+1,size);
+		int min=find_min(a,place_to_swap,size);
 		std::swap(a[place_to_swap],a[min]);
 		std::reverse(&a[place_to_swap+1],&a[size-1]);
 		return true;
