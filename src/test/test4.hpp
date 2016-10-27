@@ -679,8 +679,9 @@ namespace test4_namespace
 	}
 	void test_manacher()
 	{
-		char s[17]="$#1#2#2#1#2#3#2#1#";
+		char s[19]="$#1#2#2#1#2#3#2#1#";
 		int len=strlen(s);
+		std::cout<<len<<std::endl;
 		int size=len;
 		int p[size]={0};
 		manacher(s,p,len);
