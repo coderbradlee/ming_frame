@@ -677,6 +677,19 @@ namespace test4_namespace
 			}
 		}
 	}
+	void find_max_index(int *p,int size,int& max_index,int& max)
+	{
+		max_index=0;
+		max=1;
+		for(int i=0;i<size;++i)
+		{
+			if(p[i]>max)
+			{
+				max=p[i];
+				max_index=i;
+			}
+		}
+	}
 	void test_manacher()
 	{
 		char s[19]="$#1#2#2#1#2#3#2#1#";
@@ -686,6 +699,8 @@ namespace test4_namespace
 		int p[size]={0};
 		manacher(s,p,len);
 		print(p,size);
+		find_max_index(p,size,max_index,max);
+		print(max_index-max,max*2);
 	}
 	void test_out()
 	{
