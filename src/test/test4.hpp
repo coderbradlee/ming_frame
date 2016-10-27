@@ -645,7 +645,7 @@ namespace test4_namespace
 		int id=0;
 		for(int i=1;i<size;++i)
 		{
-			if(i<mx&&((2*id-i)>0))
+			if(i<mx)
 			{
 				p[i]=std::min(p[2*id-i],mx-i);
 			}
