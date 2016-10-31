@@ -842,6 +842,30 @@ namespace test4_namespace
 					
 		}
 	}
+	int KMP(const char* s,const char* p,int *next)
+	{
+		int len=strlen(s);
+		int size=strlen(p);
+		int i=0,j=0;
+		while(i<len-size)
+		{
+			if(j==-1||s[i]==p[j])
+			{
+				++i;
+				++j;
+			}
+			else
+			{
+				//i-=next[j];
+				j=next[j];
+			}
+			if(j==size)
+			{
+				return i-size;
+			}
+		}
+		return -1;
+	}
 	void test_KMP()
 	{
 		const int N=9;
@@ -852,6 +876,8 @@ namespace test4_namespace
 		{
 			std::cout<<i<<std::endl;
 		}
+		std::cout<<"---------------"<<std::endl;
+		std::cout<<KMP("abcabaabcabaasfdasfdafd",s,p)<<std::endl;
 	}
 	void test_out()
 	{
