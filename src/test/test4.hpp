@@ -842,25 +842,7 @@ namespace test4_namespace
 					
 		}
 	}
-	void get_next_forminperiod(const char* s,int* p)
-	{
-		int len=strlen(s);
-		p[0]=-1;
-		int k=-1;
-		int j=0;
-		while(j<len)
-		{
-			if(k==-1||s[j]==s[k])
-			{
-				++j;++k;
-				p[j]=k;
-			}
-			else
-			{
-				k=p[k];
-			}
-		}
-	}
+	
 	void get_next2(const char* s,int* p)
 	{
 		int len=strlen(s);
@@ -931,6 +913,25 @@ namespace test4_namespace
 		std::cout<<"---------------"<<std::endl;
 		std::cout<<KMP("abcabaabcabaasfdasfdafd",s,p)<<std::endl;
 	}
+	void get_next_forminperiod(const char* s,int* p)
+	{
+		int len=strlen(s);
+		p[0]=-1;
+		int k=-1;
+		int j=0;
+		while(j<len+1)
+		{
+			if(k==-1||s[j]==s[k])
+			{
+				++j;++k;
+				p[j]=k;
+			}
+			else
+			{
+				k=p[k];
+			}
+		}
+	}
 	void test_minperiod()
 	{
 		const char *s="abcdabcdabcdabcdabcdabcdabcd";
@@ -942,9 +943,9 @@ namespace test4_namespace
 		{
 			std::cout<<i<<std::endl;
 		}
-		if(N%p[N]==0)
+		if(N%(N-p[N])==0)
 		{
-			std::cout<<"found:"<<p[N]<<std::endl;
+			std::cout<<"found:"<<N-p[N]<<std::endl;
 		}
 		std::cout<<"---------------"<<std::endl;
 
