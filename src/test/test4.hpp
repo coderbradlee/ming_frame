@@ -919,7 +919,7 @@ namespace test4_namespace
 		p[0]=-1;
 		int k=-1;
 		int j=0;
-		while(j<len+1)
+		while(j<len)
 		{
 			if(k==-1||s[j]==s[k])
 			{
