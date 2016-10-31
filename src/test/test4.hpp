@@ -858,7 +858,7 @@ namespace test4_namespace
 						p[i]=next+1;
 					else
 					{
-						p[i]=p[next];
+						p[i]=p[next+1];
 					}
 					
 					break;
