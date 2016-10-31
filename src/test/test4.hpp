@@ -722,7 +722,7 @@ namespace test4_namespace
 	}
 	void test_count()
 	{
-		std::vector<std::vector<int>> graph(2 ,std::vector<int>(2,0));
+		std::vector<std::vector<int>> graph(3 ,std::vector<int>(2,0));
 		cal_count(2,graph);
 		for(int i=1;i<=2;++i)
 		{	for(int j=1;j<=2;++j)
