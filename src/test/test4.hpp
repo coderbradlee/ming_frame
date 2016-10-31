@@ -780,6 +780,7 @@ namespace test4_namespace
 		m.set(2,2,1,0);
 		matrix n=m;
 		bool odd=false;
+		len-=1;
 		if(len%2!=0)
 		{
 			odd=true;
