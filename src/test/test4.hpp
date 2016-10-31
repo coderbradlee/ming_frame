@@ -803,12 +803,16 @@ namespace test4_namespace
 	{
 		int len=strlen(s);
 		p[0]=-1;
+		for(int i=0;i<len;++i)
+		{
+			std::cout<<":s["<<i<<"]:"<<s[i]<<std::endl;
+		}
 		for(int i=1;i<len;++i)
 		{
 			int next=p[i-1];
 			while(next!=-1&&s[i]!=s[next])
 			{
-				std::cout<<"next:"<<next<<":s[next]:"<<s[next]<<":s[i]:"<<s[i]<<std::endl;
+				//std::cout<<"next:"<<next<<":s[next]:"<<s[next]<<":s[i]:"<<s[i]<<std::endl;
 				next=p[next];
 			}
 			if(next==-1)
