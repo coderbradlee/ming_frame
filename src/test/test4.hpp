@@ -705,9 +705,36 @@ namespace test4_namespace
 			std::cout<<s[i]<<" ";
 		std::cout<<std::endl;
 	}
+	void cal_count(int len,std::vector<std::vector<int>>& graph)
+	{
+		if(len==1)
+		{
+			graph[1][0]=3;
+			graph[1][1]=0;
+			return;
+		}
+		else
+		{
+			cal_count(len-1,graph);
+			graph[len][0]=2*graph[len-1][0]+2*graph[len-1][1];
+			graph[len][1]=graph[len-1][0];
+		}
+	}
+	void test_count()
+	{
+		std::vector<std::vector<int>> graph(2 ,std::vector<int>(2,0));
+		cal_count(2,graph);
+		for(int i=0;i<2;++i)
+			for(int j=0;j<2;++j)
+			{
+				std::cout<<graph[i][i]<<std::endl;
+			}
+		std::cout<<graph[1][1]+graph[1][0]<<std::endl;
+	}
 	void test_out()
 	{
-		test_manacher();
+		test_count();
+		//test_manacher();
 		//test_next_permutation();
 		//test_permutation();
 		//test_lis();//result is not right,rewrite it later
