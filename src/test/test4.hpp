@@ -846,39 +846,27 @@ namespace test4_namespace
 	{
 		int len=strlen(s);
 		p[0]=-1;
-		
-		for(int i=1;i<len;++i)
+		int k=-1;
+		int j=0;
+		while(j<len-1)
 		{
-			int next=p[i-1];
-			while(next!=-1)
+			if(k==-1||s[j]==s[k])
 			{
-				if(s[i-1]==s[next])
+				++j;
+				++k;
+				if(s[j]==s[k])
 				{
-					if(s[i]==s[next+1])
-						p[i]=next+1;
-					else
-					{
-						p[i]=p[next+1];
-					}
-					
-					break;
+					p[j]=p[k];
 				}
 				else
 				{
-					next=p[next];
+					p[j]=k;
 				}
 			}
-			if(next==-1)
+			else
 			{
-				//p[i]=0;
-				if(s[i]==s[next+1])
-					p[i]=next+1;
-				else
-				{
-					p[i]=-1;
-				}
+				k=p[k];
 			}
-		
 		}
 	}
 	int KMP(const char* s,const char* p,int *next)
