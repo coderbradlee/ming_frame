@@ -724,12 +724,13 @@ namespace test4_namespace
 	{
 		std::vector<std::vector<int>> graph(2 ,std::vector<int>(2,0));
 		cal_count(2,graph);
-		for(int i=0;i<2;++i)
-			for(int j=0;j<2;++j)
+		for(int i=1;i<=2;++i)
+		{	for(int j=1;j<=2;++j)
 			{
 				std::cout<<graph[i][j]<<std::endl;
 			}
-		std::cout<<graph[1][1]+graph[1][0]<<std::endl;
+		}
+		std::cout<<graph[2][1]+graph[2][0]<<std::endl;
 	}
 	void test_out()
 	{
