@@ -779,7 +779,9 @@ namespace test4_namespace
 		matrix m;
 		m.set(2,2,1,0);
 		matrix n=m;
-		bool odd=false;
+		bool odd=false,lenbigthanone=false;
+		if(len>2)
+			lenbigthanone=true;
 		len-=1;
 		if(len%2!=0)
 		{
@@ -790,7 +792,7 @@ namespace test4_namespace
 			multiMatrix(m,m);
 			len/=2;
 		}
-		if(odd)
+		if(odd&&lenbigthanone)
 		{
 			n.set(2,2,1,0);
 			multiMatrix(m,n);
