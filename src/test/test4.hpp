@@ -727,7 +727,7 @@ namespace test4_namespace
 		for(int i=0;i<2;++i)
 			for(int j=0;j<2;++j)
 			{
-				std::cout<<graph[i][i]<<std::endl;
+				std::cout<<graph[i][j]<<std::endl;
 			}
 		std::cout<<graph[1][1]+graph[1][0]<<std::endl;
 	}
