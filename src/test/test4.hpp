@@ -815,15 +815,16 @@ namespace test4_namespace
 				std::cout<<"next:"<<next<<":s[next]:"<<s[next]<<":s["<<i<<"]:"<<s[i]<<std::endl;
 				next=p[next];
 			}
-			if(next==-1)
-			{
-				p[i]=p[0]+1;
-			}
-			else
-			{
-				p[i]=p[next]+1;	
-				//std::cout<<"p[i]:"<<p[i]<<std::endl;
-			}
+			p[i]=next+1;
+			// if(next==-1)
+			// {
+			// 	p[i]=p[0]+1;
+			// }
+			// else
+			// {
+			// 	p[i]=p[next]+1;	
+			// 	//std::cout<<"p[i]:"<<p[i]<<std::endl;
+			// }
 					
 		}
 	}
