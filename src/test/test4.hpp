@@ -778,14 +778,19 @@ namespace test4_namespace
 		}		
 		matrix m;
 		m.set(2,2,1,0);
+		matrix n=m;
+		bool odd=false;
+		if(len%2!=0)
+		{
+			odd=true;
+		}
 		while(len/2!=0)
 		{
 			multiMatrix(m,m);
 			len/=2;
 		}
-		if(len%2!=0)
+		if(odd)
 		{
-			matrix n;
 			n.set(2,2,1,0);
 			multiMatrix(m,n);
 		}
