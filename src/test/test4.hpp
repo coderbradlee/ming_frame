@@ -930,6 +930,7 @@ namespace test4_namespace
 			{
 				k=p[k];
 			}
+			std::cout<<"j:"<<j<<std::endl;
 		}
 	}
 	void test_minperiod()
@@ -941,7 +942,7 @@ namespace test4_namespace
 		get_next_forminperiod(s,p);
 		for(auto i:p)
 		{
-			std::cout<<i<<std::endl;
+			std::cout<<"i:"<<i<<std::endl;
 		}
 		if(N%(N-p[N])==0)
 		{
