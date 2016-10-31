@@ -842,6 +842,25 @@ namespace test4_namespace
 					
 		}
 	}
+	void get_next_forminperiod(const char* s,int* p)
+	{
+		int len=strlen(s);
+		p[0]=-1;
+		int k=-1;
+		int j=0;
+		while(j<len)
+		{
+			if(k==-1||s[j]==s[k])
+			{
+				++j;++k;
+				p[j]=k;
+			}
+			else
+			{
+				k=p[k];
+			}
+		}
+	}
 	void get_next2(const char* s,int* p)
 	{
 		int len=strlen(s);
@@ -912,9 +931,27 @@ namespace test4_namespace
 		std::cout<<"---------------"<<std::endl;
 		std::cout<<KMP("abcabaabcabaasfdasfdafd",s,p)<<std::endl;
 	}
+	void test_minperiod()
+	{
+		const char *s="abcdabcdabcdabcdabcdabcdabcd";
+		const int N=strlen(s);
+		
+		int p[N+1]={0};
+		get_next_forminperiod(s,p);
+		for(auto i:p)
+		{
+			std::cout<<i<<std::endl;
+		}
+		if(N%p[N]==0)
+		{
+			std::cout<<"found:"<<p[N]<<std::endl;
+		}
+		std::cout<<"---------------"<<std::endl;
+
+	}
 	void test_out()
 	{
-		test_KMP();
+		//test_KMP();
 		// std::cout<<countMatrix(2)<<std::endl;//9
 		// std::cout<<countMatrix(3)<<std::endl;//24
 		// std::cout<<countMatrix(4)<<std::endl;//66
