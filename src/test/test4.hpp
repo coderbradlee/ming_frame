@@ -870,7 +870,13 @@ namespace test4_namespace
 			}
 			if(next==-1)
 			{
-				p[i]=0;
+				//p[i]=0;
+				if(s[i]==s[next+1])
+					p[i]=next+1;
+				else
+				{
+					p[i]=-1;
+				}
 			}
 		
 		}
