@@ -734,7 +734,7 @@ namespace test4_namespace
 	}
 	void test_count()
 	{
-		const int N=3;
+		const int N=4;
 		std::vector<std::vector<int>> graph(N+1 ,std::vector<int>(2,0));
 		cal_count(N,graph);
 		for(int i=1;i<=N;++i)
@@ -803,7 +803,9 @@ namespace test4_namespace
 	{
 		std::cout<<countMatrix(2)<<std::endl;//9
 		std::cout<<countMatrix(3)<<std::endl;//24
-		//test_count();
+		std::cout<<countMatrix(4)<<std::endl;//66
+		std::cout<<"----------------"<<std::endl;//24
+		test_count();
 		//test_manacher();
 		//test_next_permutation();
 		//test_permutation();
