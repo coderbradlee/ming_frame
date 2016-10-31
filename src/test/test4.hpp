@@ -799,13 +799,42 @@ namespace test4_namespace
 		}
 		return 3*(m.a+m.c);
 	}
+	void get_next(const char* s,int*p)
+	{
+		int len=strlen(s);
+		p[0]=-1;
+		for(int i=1;i<len;++i)
+		{
+			int next=p[i-1];
+			while(next!=-1&&p[i]!=p[next])
+			{
+				next=p[next];
+			}
+			if(next!=-1)
+				p[i]=p[next]+1;
+			else
+				p[i]=p[0]+1;			
+		}
+	}
+	void test_KMP()
+	{
+		const int N=9;
+		char *s="abaabcaba";
+		int p[n]={'a','b','a','a','b','c','a','b','a',};
+		get_next(s,p);
+		for(auto& i:p)
+		{
+			std::cout<<i<<std::endl;
+		}
+	}
 	void test_out()
 	{
-		std::cout<<countMatrix(2)<<std::endl;//9
-		std::cout<<countMatrix(3)<<std::endl;//24
-		std::cout<<countMatrix(4)<<std::endl;//66
-		std::cout<<"----------------"<<std::endl;//24
-		test_count();
+		test_KMP();
+		// std::cout<<countMatrix(2)<<std::endl;//9
+		// std::cout<<countMatrix(3)<<std::endl;//24
+		// std::cout<<countMatrix(4)<<std::endl;//66
+		// std::cout<<"----------------"<<std::endl;//24
+		// test_count();
 		//test_manacher();
 		//test_next_permutation();
 		//test_permutation();
