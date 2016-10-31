@@ -809,7 +809,7 @@ namespace test4_namespace
 			int next=p[i-1];
 			while(next!=-1)
 			{
-				if(s[i]==s[next])
+				if(s[i-1]==s[next])
 				{
 					p[i]=next+1;
 					break;
