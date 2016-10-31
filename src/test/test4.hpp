@@ -786,14 +786,15 @@ namespace test4_namespace
 		if(len%2!=0)
 		{
 			matrix n;
-			n.set(3,0,0,0);
+			n.set(2,2,1,0);
 			multiMatrix(m,n);
 		}
 		return 3*(m.a+m.c);
 	}
 	void test_out()
 	{
-		std::cout<<countMatrix(3)<<std::endl;
+		std::cout<<countMatrix(2)<<std::endl;//9
+		std::cout<<countMatrix(3)<<std::endl;//24
 		//test_count();
 		//test_manacher();
 		//test_next_permutation();
