@@ -808,7 +808,7 @@ namespace test4_namespace
 			int next=p[i-1];
 			while(next!=-1&&s[i]!=s[next])
 			{
-				std::cout<<"next:"<<next<<":s[next]:"<<s[next]<<std::endl;
+				std::cout<<"next:"<<next<<":s[next]:"<<s[next]<<":s[i]:"<<s[i]<<std::endl;
 				next=p[next];
 			}
 			if(next==-1)
@@ -818,7 +818,7 @@ namespace test4_namespace
 			else
 			{
 				p[i]=p[next]+1;	
-				std::cout<<"p[i]:"<<p[i]<<std::endl;
+				//std::cout<<"p[i]:"<<p[i]<<std::endl;
 			}
 					
 		}
