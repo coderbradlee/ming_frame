@@ -720,6 +720,21 @@ namespace test4_namespace
 			graph[len][1]=graph[len-1][0];
 		}
 	}
+	void cal_count(int len,std::vector<int>& graph)
+	{
+		if(len==1)
+		{
+			graph[0]=3;
+			graph[1]=0;
+			return;
+		}
+		else
+		{
+			cal_count(len-1,graph);
+			graph[0]=2*graph[0]+2*graph[1];
+			graph[1]=graph[0];
+		}
+	}
 	void test_count()
 	{
 		std::vector<std::vector<int>> graph(3 ,std::vector<int>(2,0));
@@ -731,6 +746,10 @@ namespace test4_namespace
 			}
 		}
 		std::cout<<graph[2][1]+graph[2][0]<<std::endl;
+		std::cout<<"-----rolling array------------"<<std::endl;
+		std::vector<int> v(2,0);
+		cal_count2(2,v);
+		std::cout<<graph[0]+graph[1]<<std::endl;
 	}
 	void test_out()
 	{
