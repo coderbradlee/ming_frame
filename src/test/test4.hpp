@@ -953,6 +953,7 @@ namespace test4_namespace
 	}
 	void test_out()
 	{
+		test_minperiod();
 		//test_KMP();
 		// std::cout<<countMatrix(2)<<std::endl;//9
 		// std::cout<<countMatrix(3)<<std::endl;//24
