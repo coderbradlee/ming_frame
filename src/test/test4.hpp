@@ -806,7 +806,7 @@ namespace test4_namespace
 		for(int i=1;i<len;++i)
 		{
 			int next=p[i-1];
-			while(next!=-1&&p[i]!=p[next])
+			while(next!=-1&&s[i]!=s[next])
 			{
 				next=p[next];
 			}
@@ -825,7 +825,7 @@ namespace test4_namespace
 	{
 		const int N=9;
 		char *s="abaabcaba";
-		int p[N]={'a','b','a','a','b','c','a','b','a',};
+		int p[N]={'a','b','a','a','b','c','a','b','a'};
 		get_next(s,p);
 		for(auto& i:p)
 		{
