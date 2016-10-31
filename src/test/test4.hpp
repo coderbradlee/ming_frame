@@ -810,10 +810,15 @@ namespace test4_namespace
 			{
 				next=p[next];
 			}
-			if(next!=-1)
-				p[i]=p[next]+1;
+			if(next==-1)
+			{
+				p[i]=p[0]+1;
+			}
 			else
-				p[i]=p[0]+1;			
+			{
+				p[i]=p[next]+1;	
+			}
+					
 		}
 	}
 	void test_KMP()
