@@ -764,10 +764,10 @@ namespace test4_namespace
 	}matrix;
 	void multiMatrix(matrix& m,matrix n)
 	{
-		int a=a*a+c*b;
-		int b=b*a+d*b;
-		int c=a*c+c*d;
-		int d=b*c+d*d;
+		int a=m.a*n.a+m.c*n.b;
+		int b=m.b*n.a+m.d*n.b;
+		int c=m.a*n.c+m.c*n.d;
+		int d=m.b*n.c+m.d*n.d;
 		m.set(a,b,c,d);
 	}
 	int countMatrix(int len)
@@ -776,7 +776,7 @@ namespace test4_namespace
 		{
 			return 3;
 		}		
-		multiMatrix m;
+		matrix m;
 		m.set(2,2,1,0);
 		while(len/2!=0)
 		{
