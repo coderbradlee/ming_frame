@@ -747,9 +747,54 @@ namespace test4_namespace
 		std::cout<<"-----rolling array------------"<<std::endl;		
 		std::cout<<cal_count(N)<<std::endl;
 	}
+	typedef struct Matrix
+	{
+		int a;
+		int b;
+		int c;
+		int d;
+		void set(int a_,int b_,int c_,int d_)
+		{
+			a=a_;
+			b=b_;
+
+			c=c_;
+			d=d_;
+		}
+	}matrix;
+	void multiMatrix(matrix& m,matrix n)
+	{
+		int a=a*a+c*b;
+		int b=b*a+d*b;
+		int c=a*c+c*d;
+		int d=b*c+d*d;
+		m.set(a,b,c,d);
+	}
+	int countMatrix(int len)
+	{
+		if(len==1)
+		{
+			reutrn 3;
+		}		
+		multiMatrix m;
+		m.set(2,2,1,0);
+		while(len/2!=0)
+		{
+			multiMatrix(m,m);
+			len/=2;
+		}
+		if(len%2!=0)
+		{
+			multiMatrix n;
+			n.set(3,0,0,0);
+			multiMatrix(m,n);
+		}
+		return 3*(m.a+m.c);
+	}
 	void test_out()
 	{
-		test_count();
+		std::cout<<countMatrix(3)<<std::endl;
+		//test_count();
 		//test_manacher();
 		//test_next_permutation();
 		//test_permutation();
