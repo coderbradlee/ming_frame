@@ -842,6 +842,39 @@ namespace test4_namespace
 					
 		}
 	}
+	void get_next2(const char* s,int* p)
+	{
+		int len=strlen(s);
+		p[0]=-1;
+		
+		for(int i=1;i<len;++i)
+		{
+			int next=p[i-1];
+			while(next!=-1)
+			{
+				if(s[i-1]==s[next])
+				{
+					if(s[i]==s[next+1])
+						p[i]=next+1;
+					else
+					{
+						p[i]=p[next];
+					}
+					
+					break;
+				}
+				else
+				{
+					next=p[next];
+				}
+			}
+			if(next==-1)
+			{
+				p[i]=0;
+			}
+		
+		}
+	}
 	int KMP(const char* s,const char* p,int *next)
 	{
 		int len=strlen(s);
@@ -872,6 +905,12 @@ namespace test4_namespace
 		char *s="abaabcaba";
 		int p[N]={0};
 		get_next(s,p);
+		for(auto i:p)
+		{
+			std::cout<<i<<std::endl;
+		}
+		std::cout<<"---------------"<<std::endl;
+		get_next2(s,p);
 		for(auto i:p)
 		{
 			std::cout<<i<<std::endl;
