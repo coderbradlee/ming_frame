@@ -820,7 +820,7 @@ namespace test4_namespace
 	{
 		const int N=9;
 		char *s="abaabcaba";
-		int p[n]={'a','b','a','a','b','c','a','b','a',};
+		int p[N]={'a','b','a','a','b','c','a','b','a',};
 		get_next(s,p);
 		for(auto& i:p)
 		{
