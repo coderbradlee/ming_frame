@@ -799,7 +799,7 @@ namespace test4_namespace
 		}
 		return 3*(m.a+m.c);
 	}
-	void get_next(const char* s,int*p)
+	void get_next(const char* s,int* p)
 	{
 		int len=strlen(s);
 		p[0]=-1;
@@ -808,6 +808,7 @@ namespace test4_namespace
 			int next=p[i-1];
 			while(next!=-1&&s[i]!=s[next])
 			{
+				std::cout<<"next:"<<next<<":s[next]:"<<s[next]<<std::endl;
 				next=p[next];
 			}
 			if(next==-1)
@@ -817,6 +818,7 @@ namespace test4_namespace
 			else
 			{
 				p[i]=p[next]+1;	
+				std::cout<<"p[i]:"<<p[i]<<std::endl;
 			}
 					
 		}
@@ -825,9 +827,9 @@ namespace test4_namespace
 	{
 		const int N=9;
 		char *s="abaabcaba";
-		int p[N]={'a','b','a','a','b','c','a','b','a'};
+		int p[N]={0};
 		get_next(s,p);
-		for(auto& i:p)
+		for(auto i:p)
 		{
 			std::cout<<i<<std::endl;
 		}
