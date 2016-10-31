@@ -774,7 +774,7 @@ namespace test4_namespace
 	{
 		if(len==1)
 		{
-			reutrn 3;
+			return 3;
 		}		
 		multiMatrix m;
 		m.set(2,2,1,0);
@@ -785,7 +785,7 @@ namespace test4_namespace
 		}
 		if(len%2!=0)
 		{
-			multiMatrix n;
+			matrix n;
 			n.set(3,0,0,0);
 			multiMatrix(m,n);
 		}
