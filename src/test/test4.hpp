@@ -1129,9 +1129,9 @@ namespace test4_namespace
 	{
 		//10001000
 		unsigned char x=129;
-		std::cout<<(int)x<<std::endl;
+		printf("%d\n",x );
 		const int N=8;
-		std::cout<<(int)rotateShiftLeft(x,N)<<std::endl;
+		printf("%d\n",rotateShiftLeft(x,N) );
 	}
 	void test_out()
 	{
