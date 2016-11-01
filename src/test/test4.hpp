@@ -1089,17 +1089,20 @@ namespace test4_namespace
 	{
 		int i=2;
 		int p=i*i;
+		int j=i;
 		while(i<(int)cal_sqrt2(size))
 		{
 			while(p<size)
 			{
 				v[p]=false;
-				p*=i;
+				p*=j;
+				++j;
 			}
 			++i;
 			while(!v[i])
 				++i;
 			p=i*i;
+			j=i;
 		}
 	}
 	void test_eratosthenes()
