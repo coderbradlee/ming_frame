@@ -981,9 +981,28 @@ namespace test4_namespace
 		}
 		std::cout<<sum<<std::endl;
 	}
+	double cal_sqrt(double a)
+	{
+		if(a<1e-6)
+		{
+			return 0;
+		}
+		double x=a/2;
+		double temp=x;
+		while(std::fabs(x-t)>1e-6)
+		{
+			temp=x;
+			x=(x+a/x)/2;
+		}
+		return x;
+	}
+	void test_sqrt_by_division()
+	{
+		std::cout<<cal_sqrt(2.0)<<std::endl;
+	}
 	void test_out()
 	{
-		test_square_sum();
+		//test_square_sum();
 		//test_minperiod();
 		//test_KMP();
 		// std::cout<<countMatrix(2)<<std::endl;//9
