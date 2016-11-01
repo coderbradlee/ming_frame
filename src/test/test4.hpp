@@ -1048,7 +1048,7 @@ namespace test4_namespace
 			std::cout<<cal_sqrt2(1.0+i)<<std::endl;
 		}
 	}
-	void calc_callatz(int i,std::vector<int>& v,int size)
+	void calc_callatz(int i,std::vector<int>& v,int N)
 	{
 		int step=0;
 		int origin=i;
