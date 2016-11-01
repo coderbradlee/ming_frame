@@ -1238,9 +1238,44 @@ namespace test4_namespace
 		std::cout<<quick_find(arr2,7,4)<<std::endl;
 		std::cout<<quick_find(arr2,7,5)<<std::endl;
 	}
+	int zhongshu(const int* arr,int size)
+	{
+		int count=0;
+		int ret=0;
+		int count_sum=0;
+		for(int i=0;i<size;++i)
+		{
+			if(count==0)
+			{
+				ret=arr[i];
+				++count;
+				++count_sum;
+			}
+			else if(ret==arr[i])
+			{
+				++count;
+				++count_sum;
+			}
+			else
+			{
+				--count;
+			}
+		}
+		std::cout<<count_sum<<std::endl;
+		if(count_sum>size/2)
+			return ret;
+		else
+			return -1;
+	}
+	void test_zhongshu()
+	{
+		int arr[11]={8,5,6,8,8,8,3,8,9,2,8};
+		std::cout<<zhongshu(arr,11)<<std::endl;
+	}
 	void test_out()
 	{
-		test_quick_find();
+		test_zhongshu();
+		//test_quick_find();
 		// test_hanoi();
 		//test_polya();
 		//test_eratosthenes();
