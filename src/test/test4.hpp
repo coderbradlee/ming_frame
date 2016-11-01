@@ -1075,7 +1075,7 @@ namespace test4_namespace
 	{
 		const int N=10;
 		std::vector<int> v(N,0);
-		for(int i=0;i<N;++i)
+		for(int i=2;i<N;++i)
 		{
 			calc_callatz(i,v,N);
 		}
