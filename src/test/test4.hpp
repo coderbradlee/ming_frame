@@ -998,7 +998,11 @@ namespace test4_namespace
 	}
 	void test_sqrt_by_division()
 	{
-		std::cout<<cal_sqrt(2.0)<<std::endl;
+		for(int i=0;i<10;++i)
+		{
+			std::cout<<cal_sqrt(1.0+i)<<std::endl;
+		}
+		
 	}
 	void test_out()
 	{
