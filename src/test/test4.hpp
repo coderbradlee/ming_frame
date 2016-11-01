@@ -1005,9 +1005,53 @@ namespace test4_namespace
 		}
 		
 	}
+	double reciprocal(double a)
+	{
+		double x=1;
+		while(x*a>=2)
+		{
+			if(a>1)
+				x/=10;
+			else
+				x*=10;
+		}
+		double temp=a;
+		while(fabs(x-temp)>1e-6)
+		{
+			temp=x;
+			//x=(3-a*x)*x/2;
+			x=x*(2-a*x);
+		}
+		return x;
+	}
+	double cal_sqrt2(double a)
+	{
+		if(a<1e-6)
+			return 0;
+		double x=1;
+		while(a*x*x>=3)
+		{
+			x*=0.1;
+		}
+		double temp=a;
+		while(fabs(x-temp)>1e-6)
+		{
+			temp=x;
+			x=(3-a*x*x)*x/2;
+		}
+		return reciprocal(x);
+	}
+	void test_sqrt_by_multi()
+	{
+		for(int i=0;i<10;++i)
+		{
+			std::cout<<cal_sqrt2(1.0+i)<<std::endl;
+		}
+	}
 	void test_out()
 	{
-		test_sqrt_by_division();
+		test_sqrt_by_multi();
+		//test_sqrt_by_division();
 		//test_square_sum();
 		//test_minperiod();
 		//test_KMP();
