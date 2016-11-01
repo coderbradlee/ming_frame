@@ -1115,7 +1115,8 @@ namespace test4_namespace
 	}
 	void test_out()
 	{
-		test_callatz();
+		test_eratosthenes();
+		// test_callatz();
 		//test_sqrt_by_multi();
 		//test_sqrt_by_division();
 		//test_square_sum();
