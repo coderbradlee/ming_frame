@@ -1116,7 +1116,7 @@ namespace test4_namespace
 				std::cout<<i<<std::endl;
 		}
 	}
-	unsigned char rotateShiftLeft(unsigned char x,int N)
+	uint8_t rotateShiftLeft(uint8_t x,int N)
 	{
 		//rotate shift left one bit
 		int high=x>>(N-1);
@@ -1128,7 +1128,7 @@ namespace test4_namespace
 	void test_polya()
 	{
 		//10001000
-		unsigned char x=129;
+		uint8_t x=129;
 		printf("%d\n",x );
 		const int N=8;
 		printf("%d\n",rotateShiftLeft(x,N) );
