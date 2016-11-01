@@ -951,9 +951,40 @@ namespace test4_namespace
 		std::cout<<"---------------"<<std::endl;
 
 	}
+	void test_square_sum()
+	{
+		const int row=19;
+		const int col=19;
+		std::vector<std::vector<int>> graph(row,std::vector<int>(col,0));
+		int sum=0;
+		for(int i=1;i<row;++i)
+		{
+			for(int j=1;j<col;++j)
+			{
+				if(i!=j)
+				{
+					graph[i][j]=std::max(graph[i-1][j],graph[i][j-1]);
+					sum+=graph[i][j];
+				}
+				else
+				{
+					graph[i][j]=graph[i-1][j]+1;
+					sum+=graph[i][j];
+				}
+			}
+		}
+		for(auto i:graph)
+		{
+			for(auto j:i)
+				std::cout<<j<<" ";
+			std::cout<<std::endl;
+		}
+		std::cout<<sum<<std::endl;
+	}
 	void test_out()
 	{
-		test_minperiod();
+		test_square_sum();
+		//test_minperiod();
 		//test_KMP();
 		// std::cout<<countMatrix(2)<<std::endl;//9
 		// std::cout<<countMatrix(3)<<std::endl;//24
