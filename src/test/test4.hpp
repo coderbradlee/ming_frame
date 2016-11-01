@@ -897,7 +897,7 @@ namespace test4_namespace
 	void test_KMP()
 	{
 		const int N=9;
-		char *s="abaabcaba";
+		const char *s="abaabcaba";
 		int p[N]={0};
 		get_next(s,p);
 		for(auto i:p)
