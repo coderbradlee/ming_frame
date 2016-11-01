@@ -993,6 +993,7 @@ namespace test4_namespace
 		{
 			temp=x;
 			x=(x+a/x)/2;
+			std::cout<<x<<std::endl;
 		}
 		return x;
 	}
