@@ -1116,7 +1116,7 @@ namespace test4_namespace
 				std::cout<<i<<std::endl;
 		}
 	}
-	char rotateShiftLeft(char x,char N)
+	char rotateShiftLeft(char x,int N)
 	{
 		//rotate shift left one bit
 		int high=x>>(N-1);
