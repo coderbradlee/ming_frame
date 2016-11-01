@@ -1088,20 +1088,20 @@ namespace test4_namespace
 	void eratosthenes(std::vector<bool>& v,int size)
 	{
 		int i=2;
-		int p=i*i;
+		int p=i;
 		int j=i;
 		while(i<(int)cal_sqrt2(size))
 		{
 			while(p<size)
 			{
-				v[p]=false;
-				p*=j;
+				p=i*j;
 				++j;
+				v[p]=false;
 			}
 			++i;
 			while(!v[i])
 				++i;
-			p=i*i;
+			p=i;
 			j=i;
 		}
 	}
