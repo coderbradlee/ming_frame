@@ -1064,7 +1064,7 @@ namespace test4_namespace
 				i=i*3+1;
 				++step;
 			}
-			if(i<N&&v[i]!=0)
+			if(i<N&&v[i]!=-1)
 			{
 				v[origin]=v[i]+step;
 				break;
@@ -1074,7 +1074,8 @@ namespace test4_namespace
 	void test_callatz()
 	{
 		const int N=10;
-		std::vector<int> v(N,0);
+		std::vector<int> v(N,-1);
+		v[1]=0;
 		for(int i=2;i<N;++i)
 		{
 			calc_callatz(i,v,N);
