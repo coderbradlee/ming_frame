@@ -1052,7 +1052,7 @@ namespace test4_namespace
 	{
 		int step=0;
 		int origin=i;
-		while(i!=1)
+		while(i>0)
 		{
 			if(i%2==0)
 			{
