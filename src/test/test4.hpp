@@ -989,7 +989,7 @@ namespace test4_namespace
 		}
 		double x=a/2;
 		double temp=x;
-		while(std::fabs(x-temp)>1e-6)
+		while(fabs(x-temp)>1e-6)
 		{
 			temp=x;
 			x=(x+a/x)/2;
