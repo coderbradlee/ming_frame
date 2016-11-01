@@ -988,12 +988,12 @@ namespace test4_namespace
 			return 0;
 		}
 		double x=a/2;
-		double temp=x;
+		double temp=a;
 		while(fabs(x-temp)>1e-6)
 		{
 			temp=x;
 			x=(x+a/x)/2;
-			std::cout<<x<<std::endl;
+			//std::cout<<x<<std::endl;
 		}
 		return x;
 	}
