@@ -1002,6 +1002,7 @@ namespace test4_namespace
 	}
 	void test_out()
 	{
+		test_sqrt_by_division();
 		//test_square_sum();
 		//test_minperiod();
 		//test_KMP();
