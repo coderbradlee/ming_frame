@@ -1085,6 +1085,34 @@ namespace test4_namespace
 			std::cout<<i<<std::endl;
 		}
 	}
+	void eratosthenes(std::vector<bool>& v,int size)
+	{
+		int i=2;
+		int p=i*i;
+		while(i<(int)cal_sqrt2(size))
+		{
+			while(p<size)
+			{
+				v[p]=false;
+				p*=i;
+			}
+			++i;
+			while(!v[i])
+				++i;
+			p=i*i;
+		}
+	}
+	void test_eratosthenes()
+	{
+		const int N=100;
+		std::vector<bool> v(N,true);
+		eratosthenes(v,N);
+		for(int i=2;i<N;++i)
+		{
+			if(v[i])
+				std::cout<<i<<std::endl;
+		}
+	}
 	void test_out()
 	{
 		test_callatz();
