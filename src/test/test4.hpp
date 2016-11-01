@@ -1128,7 +1128,8 @@ namespace test4_namespace
 	{
 		//10001000
 		char x=129;
-		std::cout<<rotateShiftLeft(x)<<std::endl;
+		const int N=8;
+		std::cout<<rotateShiftLeft(x,N)<<std::endl;
 	}
 	void test_out()
 	{
