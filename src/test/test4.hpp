@@ -1116,9 +1116,24 @@ namespace test4_namespace
 				std::cout<<i<<std::endl;
 		}
 	}
+	int rotateShiftLeft(int x,int N)
+	{
+		//rotate shift left one bit
+		int high=x>>(N-1);
+		x<<=1;
+		x|=high;
+		return x;
+	}
+	void test_polya()
+	{
+		//10001000
+		char x=129;
+		std::cout<<rotateShiftLeft(x)<<std::endl;
+	}
 	void test_out()
 	{
-		test_eratosthenes();
+		test_polya();
+		//test_eratosthenes();
 		// test_callatz();
 		//test_sqrt_by_multi();
 		//test_sqrt_by_division();
