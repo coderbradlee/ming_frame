@@ -1048,6 +1048,42 @@ namespace test4_namespace
 			std::cout<<cal_sqrt2(1.0+i)<<std::endl;
 		}
 	}
+	void calc_callatz(int i,std::vector<int>& v,int size)
+	{
+		int step=0;
+		int origin=i;
+		while(i!=1)
+		{
+			if(i%2==0)
+			{
+				i/=2;
+				++step;
+			}
+			else
+			{
+				i=i*3+1;
+				++step;
+			}
+			if(i<N&&v[i]!=0)
+			{
+				v[origin]=v[i]+step;
+				break;
+			}
+		}
+	}
+	void test_callatz()
+	{
+		const int N=10;
+		std::vector<int> v(N,0);
+		for(int i=0;i<N;++i)
+		{
+			calc_callatz(i,v,N);
+		}
+		for(auto i:v)
+		{
+			std::cout<<i<<std::endl;
+		}
+	}
 	void test_out()
 	{
 		test_sqrt_by_multi();
