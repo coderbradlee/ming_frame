@@ -964,13 +964,13 @@ namespace test4_namespace
 				if(i!=j)
 				{
 					graph[i][j]=std::max(graph[i-1][j],graph[i][j-1]);
-					sum+=graph[i][j];
+					//sum+=graph[i][j];
 				}
 				else
 				{
 					graph[i][j]=graph[i-1][j]+1;
-					sum+=graph[i][j];
 				}
+				sum+=graph[i][j];
 			}
 		}
 		for(auto i:graph)
