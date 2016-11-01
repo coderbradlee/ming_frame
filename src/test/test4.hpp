@@ -53,7 +53,7 @@ namespace test4_namespace
 	}
 	void reverse(node* phead,int start,int end)
 	{
-		node* prev;
+		node* prev=nullptr;
 		for(int i=0;i<start-1;++i)
 		{	
 			prev=phead->next;
@@ -1120,22 +1120,129 @@ namespace test4_namespace
 	{
 		//rotate shift left one bit
 		int high=x>>(N-1);
-		x&=((1<<(N-1))-1);
+		//printf("%d\n", high);
+		//10001000 0111 1111
+		uint8_t temp=(1<<(N-1))-1;
+		//printf("%d\n", temp);
+		//printf("%d\n", x);
+		//x=x&temp;
+		//printf("%d\n", x);
 		x<<=1;
+		//printf("%d\n", x);
 		x|=high;
+		//printf("%d\n", x);
 		return x;
+	}
+	void polya(int size,std::vector<bool>& v)
+	{
+		for(int i=0;i<256;++i)
+		{
+
+			uint8_t temp=i;
+			uint8_t min=i;
+			for(int j=0;j<8;++j)
+			{
+				temp=rotateShiftLeft(temp,size);
+				if(min>temp)
+					min=temp;
+				if(temp==i)
+					break;
+				else if(v[temp])
+					v[temp]=false;
+			}
+			if(min!=i)
+			{
+				v[min]=true;
+				v[i]=false;
+			}
+			
+		}
 	}
 	void test_polya()
 	{
 		//10001000
-		uint8_t x=129;
-		printf("%d\n",x );
+		uint8_t x=136;
+		//printf("%d\n",x );
 		const int N=8;
-		printf("%d\n",rotateShiftLeft(x,N) );
+		//printf("%d\n",rotateShiftLeft(x,N) );
+		std::vector<bool> v(256,true);
+		polya(N,v);
+		for(int i=0;i<256;++i)
+		{
+			if(v[i])
+				printf("%d\n", i);
+		}
+	}
+	int calc_hanoi(const char* s,int size,char from,char to,char aux)
+	{
+		if(size==0)
+		{
+			return 0;
+		}
+		if(s[size-1]==aux)
+			return -1;
+		else if(s[size-1]==to)
+		{
+			//int temp=calc_hanoi(s,size-1,from,aux,to);
+			// if(temp!=-1)
+			//    temp=temp+1;
+			// return temp;
+			int temp=calc_hanoi(s,size-1,aux,to,from);
+			if(temp==-1)
+			   return -1;
+			return (1<<(size-1))+temp;
+		}
+		// int n=calc_hanoi(s,size-1,aux,to,from);
+		// if(n==-1)
+		// 	return n;
+		// else
+		// 	return n+(1<<(size-1));
+		return calc_hanoi(s,size-1,from,aux,to);
+	}
+	void test_hanoi()
+	{
+		const char* s="abc";
+
+		std::cout<<calc_hanoi(s,3,'a','c','b')<<std::endl;
+		s="aac";
+		std::cout<<calc_hanoi(s,3,'a','c','b')<<std::endl;
+	}
+	int quick_find(const int* arr,int size,int a)
+	{
+		int mid=size/2;
+		int low=0;
+		int high=size;
+		while(low<high)
+		{
+			if(arr[mid]==a)
+				return mid;
+			else if(arr[mid]>a)
+			{
+				high=mid;				
+			}
+			else
+			{
+				low=mid;
+			}
+			mid=(low+high)/2;
+		}
+	}
+	void test_quick_find()
+	{
+		int arr[6]={1,2,3,4,5,6};
+		std::cout<<quick_find(arr,6,3)<<std::endl;
+		std::cout<<quick_find(arr,6,4)<<std::endl;
+		std::cout<<quick_find(arr,6,5)<<std::endl;
+		int arr2[7]={1,2,3,4,5,6,7};
+		std::cout<<quick_find(arr2,7,3)<<std::endl;
+		std::cout<<quick_find(arr2,7,4)<<std::endl;
+		std::cout<<quick_find(arr2,7,5)<<std::endl;
 	}
 	void test_out()
 	{
-		test_polya();
+		test_quick_find();
+		// test_hanoi();
+		//test_polya();
 		//test_eratosthenes();
 		// test_callatz();
 		//test_sqrt_by_multi();
