@@ -1116,7 +1116,7 @@ namespace test4_namespace
 				std::cout<<i<<std::endl;
 		}
 	}
-	char rotateShiftLeft(char x,int N)
+	uint8_t rotateShiftLeft(uint8_t x,int N)
 	{
 		//rotate shift left one bit
 		int high=x>>(N-1);
@@ -1128,10 +1128,10 @@ namespace test4_namespace
 	void test_polya()
 	{
 		//10001000
-		char x=129;
-		std::cout<<(int)x<<std::endl;
+		uint8_t x=129;
+		std::cout<<x<<std::endl;
 		const int N=8;
-		std::cout<<(int)rotateShiftLeft(x,N)<<std::endl;
+		std::cout<<rotateShiftLeft(x,N)<<std::endl;
 	}
 	void test_out()
 	{
