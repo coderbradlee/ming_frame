@@ -173,7 +173,7 @@ namespace test5_namespace
 	{
 		int len=0;
 		int max=0;
-		int from=0;
+		int to=0;
 		for(int i=0;i<size-1;++i)
 		{
 			if((arr[i]+1)==arr[i+1])
@@ -182,23 +182,24 @@ namespace test5_namespace
 				if(len>max)
 				{
 					max=len;
-
 				}
-				std::cout<<len<<":"<<max<<std::endl;
+				//std::cout<<len<<":"<<max<<std::endl;
 			}
 			else
 			{
 				//i+=len;
 				len=0;
-				from=i-max;
+				to=i;
 			}
 		}
-		std::cout<<from<<":"<<from+max<<std::endl;
+		std::cout<<to<<":"<<to-max<<std::endl;
 	}
 	void test_max_subsequence()
 	{
 		int arr[]={1,2,39,2,3,4,5,10,22};
 		max_subsequence(arr,9);
+		int arr2[]={1,2,39,2,3,4,5,6,10};
+		max_subsequence(arr2,9);
 	}
 	void test_out()
 	{
