@@ -79,7 +79,7 @@ namespace test5_namespace
     			index=i;
     		}
     	}
-    	std::cout<<index<<std::endl;
+    	std::cout<<min<<std::endl;
     }
 	void test_min_subarray()
 	{
