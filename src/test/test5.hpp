@@ -81,9 +81,36 @@ namespace test5_namespace
     	}
     	std::cout<<min<<std::endl;
     }
+    void find_min_subarray(int* arr,int size)
+    {
+    	std::vector<std::pair<int,int>> sum(size,std::pair(0,0));
+    	sum[0]=std::make_pair(0,0);
+    	int index=1;
+    	for(int i=1;i<size;++i)
+    	{
+    		sum[i]=std::make_pair(sum[i-1].first+arr[i],i);
+    		// sum[i]=sum[i-1]+arr[i];
+    		// if(sum[i]==0)
+    		// 	index=i;
+    	}
+    	std::sort(sum,sum+size,[](int x,int y){return x.first<y.first;});
+    	int min=std::abs(sum[1].first-sum[0].first);
+    	
+    	for(int i=1;i<size;++i)
+    	{
+    		if(std::abs(sum[i].first-sum[i-1].first)<min)
+    		{
+    			min=std::abs(sum[i].first-sum[i-1].first);
+    			index=i;
+    		}
+    	}
+
+    	std::cout<<sum[index].second<<":"<<sum[index-1].second<<std::endl;
+    }
 	void test_min_subarray()
 	{
 		int arr[]={1,-2,3,10,-4,7,2,-5};
+		///////////0 1 -1 2 12 8 15 17 12
 		min_subarray(arr,8);
 	}
 	void test_out()
