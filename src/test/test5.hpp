@@ -216,11 +216,9 @@ namespace test5_namespace
 				if(arr[begin]!=0)
 				{
 					std::swap(arr[begin],arr[cur]);
-					++begin;
-					++cur;
 				}
-				else
-					++begin;
+				++begin;
+				++cur;
 			}
 			else if(arr[cur]==1)
 			{
