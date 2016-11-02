@@ -34,14 +34,13 @@ namespace test5_namespace
 		{
 			if(min<arr[mid])//min in right half
 			{
-				low=mid;
-				mid=(low+high)/2;
+				low=mid+1;
 			}
 			else
 			{
-				high=mid;
-				mid=(low+high)/2;
+				high=mid-1;
 			}
+			mid=(low+high)/2;
 			min=arr[low];
 		}
 		return min; 
