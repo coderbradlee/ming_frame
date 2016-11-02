@@ -43,12 +43,14 @@ namespace test5_namespace
 			mid=(low+high)/2;
 			min=arr[low];
 		}
-		return min; 
+		return arr[mid]; 
 	}
 	void test_find_min_in_rotated_array()
 	{
 		int arr[]={4,5,6,7,8,2,3};
 		std::cout<<find_min_in_rotated_array(arr,7)<<std::endl;
+		int arr1[]={44,55,66,7,8,9,10};
+		std::cout<<find_min_in_rotated_array(arr1,7)<<std::endl;
 	}
 	void test_out()
 	{
