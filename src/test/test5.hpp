@@ -310,6 +310,8 @@ namespace test5_namespace
 	{
 		int arr[]={1,7,14,9,4,13};
 		std::cout<<cal_gap(arr,6)<<std::endl;
+		int arr2[]={10,7,14,80,4,13,30};
+		std::cout<<cal_gap(arr2,7)<<std::endl;
 	}
 	void test_out()
 	{
