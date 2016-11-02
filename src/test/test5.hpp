@@ -46,6 +46,7 @@ namespace test5_namespace
 			// 	return arr[mid];
 			// }
 			mid=(low+high)/2;
+			std::cout<<low<<":"<<mid<<":"<<high<<std::endl;
 		}
 		return arr[mid]; 
 	}
