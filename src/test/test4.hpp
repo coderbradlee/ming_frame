@@ -1290,7 +1290,7 @@ namespace test4_namespace
 			}
 			else
 			{
-				std::swap(arr[i],arr[arr[i]]);
+				std::swap(arr[i],arr[arr[i]-1]);
 			}
 		}
 		return i+1;
