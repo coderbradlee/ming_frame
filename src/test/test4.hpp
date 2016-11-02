@@ -1298,11 +1298,12 @@ namespace test4_namespace
 	{
 		const int N=8;
 		int arr[N]={2,3,5,6,88,78,1,-89};
+		std::cout<<first_missing_number(arr,N)<<std::endl;
 		for(auto i:arr)
 		{
 			std::cout<<i<<std::endl;
 		}
-		std::cout<<first_missing_number(arr,N)<<std::endl;
+		
 	}
 	void test_out()
 	{
