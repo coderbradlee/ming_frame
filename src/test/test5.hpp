@@ -182,6 +182,7 @@ namespace test5_namespace
 				if(len>max)
 				{
 					max=len;
+					to=i+1;
 				}
 				//std::cout<<len<<":"<<max<<std::endl;
 			}
@@ -189,7 +190,6 @@ namespace test5_namespace
 			{
 				//i+=len;
 				len=1;
-				to=i+1;
 			}
 		}
 		std::cout<<to<<":"<<max<<std::endl;
