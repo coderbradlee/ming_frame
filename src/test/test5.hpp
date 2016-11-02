@@ -105,7 +105,7 @@ namespace test5_namespace
     		}
     	}
 
-    	std::cout<<sum[index].second<<":"<<sum[index-1].second<<std::endl;
+    	std::cout<<sum[index+1].second<<":"<<sum[index].second<<std::endl;
     }
 	void test_min_subarray()
 	{
@@ -114,9 +114,34 @@ namespace test5_namespace
 		//min_subarray(arr,8);
 		find_min_subarray(arr,8);
 	}
+	void max_subarray(int* arr,int size)
+	{
+		int ret=arr[0];
+		int sum=arr[0];
+		for(int i=0;i<size;++i)
+		{
+			if(sum>0)
+			{
+				sum+=arr[i];
+			}
+			else
+			{
+				sum=arr[i];
+			}
+			ret=std::max(ret,sum);
+		}
+		std::cout<<ret<<std::endl;
+	}
+	void test_max_subarray()
+	{
+		int arr[]={1,-2,3,10,-4,7,2,-5};
+		///////////0 1 -1 2 12 8 15 17 12
+		max_subarray(arr,8);
+	}
 	void test_out()
 	{
-		test_min_subarray();
+		test_max_subarray();
+		//test_min_subarray();
 		//test_find_min_in_rotated_array();
 	}
 }
