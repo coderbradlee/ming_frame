@@ -1282,7 +1282,7 @@ namespace test4_namespace
 			{
 				++i;
 			}
-			else if(arr[i]<i+1||arr[i]>size||arr[i]<0||arr[i]==arr[arr[i]])
+			else if((arr[i]<i+1)||(arr[i]>size)||(arr[i]<0)||(arr[i]==arr[arr[i]]))
 			{
 				arr[i]=arr[size-1];
 				--size;
@@ -1292,7 +1292,7 @@ namespace test4_namespace
 				std::swap(arr[i],arr[arr[i]]);
 			}
 		}
-		return size;
+		return i+1;
 	}
 	void test_first_missing_number()
 	{
