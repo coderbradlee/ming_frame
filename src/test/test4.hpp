@@ -1282,7 +1282,7 @@ namespace test4_namespace
 			{
 				++i;
 			}
-			else if((arr[i]<i+1)||(arr[i]>size)||(arr[i]<0)||(arr[i]==arr[arr[i]]))
+			else if((arr[i]<i+1)||(arr[i]>size)||(arr[i]<0)||(arr[i]==arr[arr[i]]+1))
 			{
 				arr[i]=arr[size-1];
 				--size;
