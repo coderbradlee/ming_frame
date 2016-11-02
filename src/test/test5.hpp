@@ -182,7 +182,7 @@ namespace test5_namespace
 				if(len>max)
 				{
 					max=len;
-					
+					std::cout<<max<<std::endl;
 				}
 			}
 			else
