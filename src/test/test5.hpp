@@ -276,11 +276,12 @@ namespace test5_namespace
 				min=i;
 		}
 		int size_of_bucket=(max-min)/size;
-		for(auto i:arr)//arr[i]-min除以桶的大小可得位于哪个桶，桶的大小为max-min/size
+		for(int i=0;i<size;++i)
+		//arr[i]-min除以桶的大小可得位于哪个桶，桶的大小为max-min/size
 		{
-			int location=(i-min)/size_of_bucket;
+			int location=(arr[i]-min)/size_of_bucket;
 			bucket b;
-			b.add(i);
+			b.add(arr[i]);
 			v[location]=b;
 		}
 		int j=0;
