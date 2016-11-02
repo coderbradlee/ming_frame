@@ -31,6 +31,7 @@ namespace test5_namespace
 		int mid=(low+high)/2;
 		while(low<high)
 		{
+			mid=(low+high)/2;
 			if(arr[high]<arr[mid])//min in right half
 			{
 				low=mid+1;
@@ -39,13 +40,14 @@ namespace test5_namespace
 			{
 				high=mid;
 			}
-			else
-			{
-				return arr[mid];
-			}
-			mid=(low+high)/2;
+			// else
+			// {
+
+			// 	return arr[mid];
+			// }
+			
 		}
-		return arr[mid]; 
+		return arr[low]; 
 	}
 	void test_find_min_in_rotated_array()
 	{
