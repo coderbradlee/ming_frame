@@ -83,7 +83,7 @@ namespace test5_namespace
     }
     void find_min_subarray(int* arr,int size)
     {
-    	std::vector<std::pair<int,int>> sum(size,std::pair(0,0));
+    	std::vector<std::pair<int,int>> sum(size,std::pair<int,int>(0,0));
     	sum[0]=std::make_pair(0,0);
     	int index=1;
     	for(int i=1;i<size;++i)
