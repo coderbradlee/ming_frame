@@ -1284,6 +1284,7 @@ namespace test4_namespace
 			}
 			else if((arr[i]<i+1)||(arr[i]>size)||(arr[i]<0)||(arr[i]==arr[arr[i]-1]))
 			{
+				std::cout<<arr[i]<<":"<<arr[arr[i]-1]<<std::endl;
 				arr[i]=arr[size-1];
 				--size;
 			}
