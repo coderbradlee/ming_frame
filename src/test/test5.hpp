@@ -203,9 +203,50 @@ namespace test5_namespace
 		int arr3[]={1,2,3,4,5,6,2,39,10};
 		max_subsequence(arr3,9);
 	}
+	void holland(int* arr,int size)
+	{
+			//begin cur end
+		int begin=0;
+		int cur=0;
+		int end=size-1;
+		while(cur<end)
+		{
+			if(arr[cur]==0)
+			{
+				if(arr[begin]!=0)
+				{
+					std::swap(arr[begin],arr[cur]);
+					++begin;
+					++cur;
+				}
+				else
+					++begin;
+			}
+			else if(arr[cur]==1)
+			{
+				++cur;
+			}
+			else if(arr[cur]==2)
+			{
+				std::swap(arr[cur],arr[end]);
+				--end;
+			}
+		}
+	}
+	void test_holland()
+	{
+		int arr[]={1,2,0,2,1,2,1,0,1};
+		holland(arr,9);
+		for(auto i:arr)
+		{
+			std::cout<<i<<" ";
+		}
+		std::cout<<std::endl;
+	}
 	void test_out()
 	{
-		test_max_subsequence();
+		test_holland();
+		//test_max_subsequence();
 		//test_max_subarray();
 		//test_min_subarray();
 		//test_find_min_in_rotated_array();
