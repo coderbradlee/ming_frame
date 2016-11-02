@@ -1272,7 +1272,7 @@ namespace test4_namespace
 		int arr[11]={8,5,6,8,8,8,3,8,9,2,8};
 		std::cout<<zhongshu(arr,11)<<std::endl;
 	}
-	int first_missing_number(const int* arr,int size)
+	int first_missing_number(int* arr,int size)
 	{
 		int i=0;
 		//put 1 in arr[0],2 in arr[1]
@@ -1298,6 +1298,10 @@ namespace test4_namespace
 	{
 		const int N=8;
 		int arr[N]={2,3,5,6,88,78,1,-89};
+		for(auto i:arr)
+		{
+			std::cout<<i<<std::endl;
+		}
 		std::cout<<first_missing_number(arr,N)<<std::endl;
 	}
 	void test_out()
