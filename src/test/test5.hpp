@@ -169,9 +169,39 @@ namespace test5_namespace
 		//max_subarray(arr,8);
 		find_max_subarray(arr,8);
 	}
+	void max_subsequence(int* arr,int size)
+	{
+		int len=0;
+		int max=0;
+		int from=0;
+		for(int i=0;i<size-1;++i)
+		{
+			if(arr[i]==arr[i+1]+1)
+			{
+				++len;
+				if(len>max)
+				{
+					max=len;
+					from=i;
+				}
+			}
+			else
+			{
+				len=0;
+				++i;
+			}
+		}
+		std::cout<<from<<":"<<from+max<<std::endl;
+	}
+	void test_max_subsequence()
+	{
+		int arr[]={1,2,39,2,3,4,5,10,22};
+		max_subsequence(arr,9);
+	}
 	void test_out()
 	{
-		test_max_subarray();
+		test_max_subsequence();
+		//test_max_subarray();
 		//test_min_subarray();
 		//test_find_min_in_rotated_array();
 	}
