@@ -93,7 +93,7 @@ namespace test5_namespace
     		// if(sum[i]==0)
     		// 	index=i;
     	}
-    	std::sort(sum,sum+size,[](auto x,auto y){return x.first<y.first;});
+    	std::sort(sum,sum+size,[](std::pair<int,int> x,std::pair<int,int> y){return x.first<y.first;});
     	int min=std::abs(sum[1].first-sum[0].first);
     	
     	for(int i=1;i<size;++i)
