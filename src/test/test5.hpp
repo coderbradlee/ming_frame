@@ -301,6 +301,7 @@ namespace test5_namespace
 		}
 		for(auto& i:v)
 		{
+			if(i.valid)
 			std::cout<<"["<<i.min<<","<<i.max<<"]"<<std::endl;
 		}
 		return ret;
