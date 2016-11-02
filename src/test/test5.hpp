@@ -29,10 +29,9 @@ namespace test5_namespace
 		int low=0;
 		int high=size-1;
 		int mid=(low+high)/2;
-		int min=arr[low];
 		while(low<high)
 		{
-			if(min<arr[mid])//min in right half
+			if(arr[high]<arr[mid])//min in right half
 			{
 				low=mid+1;
 			}
@@ -41,7 +40,6 @@ namespace test5_namespace
 				high=mid-1;
 			}
 			mid=(low+high)/2;
-			min=arr[low];
 		}
 		return arr[mid]; 
 	}
