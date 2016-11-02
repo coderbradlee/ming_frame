@@ -306,7 +306,8 @@ namespace test5_namespace
 	}
 	void test_out()
 	{
-		test_holland();
+		test_cal_gap();
+		//test_holland();
 		//test_max_subsequence();
 		//test_max_subarray();
 		//test_min_subarray();
