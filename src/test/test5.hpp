@@ -241,7 +241,7 @@ namespace test5_namespace
 		}
 		std::cout<<std::endl;
 	}
-	typedef Bucket
+	typedef struct Bucket
 	{
 		bool valid;
 		int min;
