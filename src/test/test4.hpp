@@ -1274,6 +1274,7 @@ namespace test4_namespace
 	}
 	int first_missing_number(const int* arr,int size)
 	{
+		int i=0;
 		//put 1 in arr[0],2 in arr[1]
 		while(i<size)
 		{
