@@ -192,7 +192,7 @@ namespace test5_namespace
 				len=1;
 			}
 		}
-		std::cout<<to<<":"<<max<<std::endl;
+		std::cout<<to+1-max<<":"<<to<<std::endl;
 	}
 	void test_max_subsequence()
 	{
