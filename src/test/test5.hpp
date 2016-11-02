@@ -268,12 +268,12 @@ namespace test5_namespace
 		std::vector<bucket> v(size);
 		int max=arr[0];
 		int min=arr[0];
-		for(auto i:arr)
+		for(int i=0;i<size;++i)
 		{
-			if(i>max)
-				max=i;
-			else if(i<min)
-				min=i;
+			if(arr[i]>max)
+				max=arr[i];
+			else if(arr[i]<min)
+				min=arr[i];
 		}
 		int size_of_bucket=(max-min)/size;
 		for(int i=0;i<size;++i)
