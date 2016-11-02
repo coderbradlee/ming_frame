@@ -35,9 +35,13 @@ namespace test5_namespace
 			{
 				low=mid+1;
 			}
+			else if(arr[high]>arr[mid])
+			{
+				high=mid;
+			}
 			else
 			{
-				high=mid-1;
+				return arr[mid];
 			}
 			mid=(low+high)/2;
 		}
