@@ -187,8 +187,8 @@ namespace test5_namespace
 			}
 			else
 			{
+				//i+=len;
 				len=0;
-				++i;
 			}
 		}
 		std::cout<<from<<":"<<from+max<<std::endl;
