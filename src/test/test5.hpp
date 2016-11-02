@@ -57,6 +57,35 @@ namespace test5_namespace
 		int arr1[]={44,55,66,7,8,9,10};
 		std::cout<<find_min_in_rotated_array(arr1,7)<<std::endl;
 	}
+    void min_subarray(int* arr,int size)
+    {
+    	int* sum=new int[size];
+    	sum[0]=0;
+    	int index=1;
+    	for(int i=1;i<size;++i)
+    	{
+    		sum[i]=sum[i-1]+arr[i];
+    		if(sum[i]==0)
+    			index=i;
+    	}
+    	std::sort(sum,sum+size);
+    	int min=std::abs(sum[1]-sum[0]);
+    	
+    	for(int i=1;i<size;++i)
+    	{
+    		if(std::abs(sum[i]-sum[i-1])<min)
+    		{
+    			min=std::abs(sum[i]-sum[i-1]);
+    			index=i;
+    		}
+    	}
+    	std::cout<<index<<std::endl;
+    }
+	void test_min_subarray()
+	{
+		int arr[]={1,-2,3,10,-4,7,2,-5};
+		min_subarray(arr,8);
+	}
 	void test_out()
 	{
 		test_find_min_in_rotated_array();
