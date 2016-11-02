@@ -280,13 +280,15 @@ namespace test5_namespace
 		//arr[i]-min除以桶的大小可得位于哪个桶，桶的大小为max-min/size
 		{
 			int location=(arr[i]-min)/size_of_bucket;
+			if(location>=size)
+				location=size-1;
 			bucket b;
 			b.add(arr[i]);
 			v[location]=b;
 		}
 		int j=0;
 		int ret=0;
-		for(int i=0;i<size;++i)
+		for(int i=1;i<size;++i)
 		{
 			if(v[i].valid)
 			{
@@ -296,6 +298,10 @@ namespace test5_namespace
 				}	
 				j=i;
 			}
+		}
+		for(auto& i:v)
+		{
+			std::cout<<"["<<i.min<<","<<i.max<<"]"<<std::endl;
 		}
 		return ret;
 	}
