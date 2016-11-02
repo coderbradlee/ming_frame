@@ -1306,6 +1306,7 @@ namespace test4_namespace
 		}
 		
 	}
+	
 	void test_out()
 	{
 		test_first_missing_number();
