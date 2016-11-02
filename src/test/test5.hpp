@@ -132,11 +132,42 @@ namespace test5_namespace
 		}
 		std::cout<<ret<<std::endl;
 	}
+	void find_max_subarray(int* arr,int size)
+	{
+		int ret=arr[0];
+		int sum=arr[0];
+		int ret_low_index=0;
+		int ret_high_index=0;
+		int sum_low_index=0;
+		int sum_high_index=0;
+		for(int i=0;i<size;++i)
+		{
+			if(sum>0)
+			{
+				sum+=arr[i];
+				sum_high_index=i;
+			}
+			else
+			{
+				sum=arr[i];
+				sum_low_index=sum_high_index=i;
+			}
+			if(ret<sum)
+			{
+				ret=sum;
+				ret_low_index=sum_low_index;
+				ret_high_index=sum_high_index;
+			}
+		}
+		std::cout<<ret_low_index<<":"<<ret_high_index<<std::endl;
+		std::cout<<ret<<std::endl;
+	}
 	void test_max_subarray()
 	{
 		int arr[]={1,-2,3,10,-4,7,2,-5};
 		///////////0 1 -1 2 12 8 15 17 12
-		max_subarray(arr,8);
+		//max_subarray(arr,8);
+		find_max_subarray(arr,8);
 	}
 	void test_out()
 	{
