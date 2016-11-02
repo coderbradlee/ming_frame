@@ -1122,7 +1122,7 @@ namespace test4_namespace
 		int high=x>>(N-1);
 		//printf("%d\n", high);
 		//10001000 0111 1111
-		uint8_t temp=(1<<(N-1))-1;
+		//uint8_t temp=(1<<(N-1))-1;
 		//printf("%d\n", temp);
 		//printf("%d\n", x);
 		//x=x&temp;
@@ -1161,7 +1161,7 @@ namespace test4_namespace
 	void test_polya()
 	{
 		//10001000
-		uint8_t x=136;
+		//uint8_t x=136;
 		//printf("%d\n",x );
 		const int N=8;
 		//printf("%d\n",rotateShiftLeft(x,N) );
