@@ -241,6 +241,66 @@ namespace test5_namespace
 		}
 		std::cout<<std::endl;
 	}
+	typedef Bucket
+	{
+		bool valid;
+		int min;
+		int max;
+		Bucket():valid(false){}
+		void add(int n)
+		{
+			if(!valid)
+			{
+				min=max=n;
+				valid=true;
+			}
+			else
+			{
+				if(max<n)
+					max=n;
+				else if(min>n)
+					min=n;
+			}
+		}
+	}bucket;
+	int cal_gap(int* arr,int size)
+	{
+		std::vector<bucket> v(size);
+		int max=arr[0];
+		int min=arr[0];
+		for(auto i:arr)
+		{
+			if(i>max)
+				max=i;
+			else if(i<min)
+				min=i;
+		}
+		int size_of_bucket=(max-min)/size;
+		for(auto i:arr)//arr[i]-min除以桶的大小可得位于哪个桶，桶的大小为max-min/size
+		{
+			int location=(i-min)/size_of_bucket;
+			v[location].add(i);
+		}
+		int j=0;
+		int ret=0;
+		for(int i=0;i<size;++i)
+		{
+			if(v[i].valid)
+			{
+				if(v[i].min-v[j].max>ret)
+				{
+					ret=v[i].min-v[j].max;
+				}	
+				j=i;
+			}
+		}
+		return ret;
+	}
+	void test_cal_gap()
+	{
+		int arr[]={1,7,14,9,4,13};
+		std::cout<<cal_gap(arr,6)<<std::endl;
+	}
 	void test_out()
 	{
 		test_holland();
