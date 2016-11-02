@@ -28,7 +28,7 @@ namespace test5_namespace
 	{
 		int low=0;
 		int high=size-1;
-		mid=(low+high)/2;
+		int mid=(low+high)/2;
 		int min=arr[low];
 		while(low<high)
 		{
