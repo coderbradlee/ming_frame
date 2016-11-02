@@ -279,7 +279,9 @@ namespace test5_namespace
 		for(auto i:arr)//arr[i]-min除以桶的大小可得位于哪个桶，桶的大小为max-min/size
 		{
 			int location=(i-min)/size_of_bucket;
-			v[location].add(i);
+			bucket b;
+			b.add(i);
+			v[location]=b;
 		}
 		int j=0;
 		int ret=0;
