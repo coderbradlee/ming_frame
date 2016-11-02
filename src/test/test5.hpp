@@ -182,13 +182,14 @@ namespace test5_namespace
 				if(len>max)
 				{
 					max=len;
-					from=i-len;
+					
 				}
 			}
 			else
 			{
 				//i+=len;
 				len=0;
+				from=i-max;
 			}
 		}
 		std::cout<<from<<":"<<from+max<<std::endl;
