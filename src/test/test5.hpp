@@ -111,7 +111,8 @@ namespace test5_namespace
 	{
 		int arr[]={1,-2,3,10,-4,7,2,-5};
 		///////////0 1 -1 2 12 8 15 17 12
-		min_subarray(arr,8);
+		//min_subarray(arr,8);
+		find_min_subarray(arr,8);
 	}
 	void test_out()
 	{
