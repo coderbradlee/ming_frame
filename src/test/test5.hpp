@@ -171,7 +171,7 @@ namespace test5_namespace
 	}
 	void max_subsequence(int* arr,int size)
 	{
-		int len=0;
+		int len=1;
 		int max=0;
 		int to=0;
 		for(int i=0;i<size-1;++i)
@@ -188,8 +188,8 @@ namespace test5_namespace
 			else
 			{
 				//i+=len;
-				len=0;
-				to=i;
+				len=1;
+				to=i+1;
 			}
 		}
 		std::cout<<to<<":"<<max<<std::endl;
@@ -200,6 +200,8 @@ namespace test5_namespace
 		max_subsequence(arr,9);
 		int arr2[]={1,2,39,2,3,4,5,6,10};
 		max_subsequence(arr2,9);
+		int arr3[]={1,2,3,4,5,6,2,39,10};
+		max_subsequence(arr3,9);
 	}
 	void test_out()
 	{
