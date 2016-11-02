@@ -88,7 +88,7 @@ namespace test5_namespace
 	}
 	void test_out()
 	{
-		test_find_min_in_rotated_array();
-		
+		test_min_subarray();
+		//test_find_min_in_rotated_array();
 	}
 }
