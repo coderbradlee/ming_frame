@@ -391,17 +391,17 @@ namespace test5_namespace
 	{
 		std::vector<int> arr{3,4,1,2,1,0};
 		std::vector<int> ori(6,0);
-		cantor1(arr,ori,6);
-		for(auto i:ori)
-		{
-			std::cout<<i<<std::endl;
-		}
-		// ori.clear();
-		// cantor2(arr,ori,6);
+		// cantor1(arr,ori,6);
 		// for(auto i:ori)
 		// {
 		// 	std::cout<<i<<std::endl;
 		// }
+		// ori.clear();
+		cantor2(arr,ori,6);
+		for(auto i:ori)
+		{
+			std::cout<<i<<std::endl;
+		}
 	}
 	void test_out()
 	{
