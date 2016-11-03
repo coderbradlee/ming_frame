@@ -346,6 +346,7 @@ namespace test5_namespace
 		}
 		for(int i=0;i<size;++i)
 		{
+			if(pbucket[i].valid)
 			std::cout<<"["<<pbucket[i].min<<","<<pbucket[i].max<<"]"<<std::endl;
 		}
 		return ngap;
