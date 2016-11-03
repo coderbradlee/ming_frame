@@ -617,7 +617,7 @@ namespace test5_namespace
 		inpre2post(inorder,preorder,8,postorder);
 		for(auto i:postorder)
 		{
-			printf("%d", i);
+			printf("%c", i);
 		}
 		printf("\n");
 	}
