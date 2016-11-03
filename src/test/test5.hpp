@@ -364,6 +364,44 @@ namespace test5_namespace
 		
 		std::cout<<cal_gap2(arr2,7)<<std::endl;
 	}
+	void cantor1(std::vector<int> arr,std::vector<int>& ori,int size)
+	{
+		for(int i=0;i<size;++i)
+		{
+			for(int j=i+1;j<size;++j)
+			{
+				if(arr[j]<arr[i])
+					++ori[i];
+			}
+		}
+	}
+	void cantor2(std::vector<int> arr,std::vector<int>& ori,int size)
+	{
+		std::vector<int> v;
+		for(int i=0;i<size;++i)
+			v[i]=i+1;
+		for(int i=0;i<size;++i)
+		{
+			ori[i]=v[arr[i]];
+			v.erase(v.begin()+arr[i]);
+		}
+	}
+	void test_cantor()
+	{
+		std::vector<int> arr{3,4,1,2,1,0};
+		std::vector<int> ori(6,0);
+		cantor1(arr,ori,6);
+		for(auto i:ori)
+		{
+			std::cout<<i<<std::endl;
+		}
+		ori.clear();
+		cantor2(arr,ori,6);
+		for(auto i:ori)
+		{
+			std::cout<<i<<std::endl;
+		}
+	}
 	void test_out()
 	{
 		test_cal_gap();
