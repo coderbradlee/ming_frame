@@ -498,6 +498,7 @@ namespace test5_namespace
 		{
 			//choose two minner between 0-i 
 			select2min(huffmanNode,i,one,two);
+			printf("/////////////%d:%d\n",one,two);
 			huffmanNode[i].data=huffmanNode[one].data+huffmanNode[two].data;
 			huffmanNode[i].left=one;
 			huffmanNode[i].right=two;
@@ -518,7 +519,12 @@ namespace test5_namespace
 				{
 					code.push_back('1');
 				}
-				cur=huffmanNode[cur].parent;
+				if(cur!=huffmanNode[cur].parent)
+					cur=huffmanNode[cur].parent;
+				else
+				{
+					break;
+				}
 			}
 			std::reverse(code.begin(),code.end());
 			huffman[i]=code;
@@ -565,11 +571,11 @@ namespace test5_namespace
 				printf("\n");
 			}	
 		}
-		printf("------------------\n");
+		printf("\n------------------\n");
 		std::vector<std::vector<char>> v(exist_key.size());
-		//huffman_code(frequence,N,v);
+		huffman_code(frequence,N,v);
 		
-		print_huffman(exist_key,v);
+		//print_huffman(exist_key,v);
 	}
 	void test_out()
 	{
