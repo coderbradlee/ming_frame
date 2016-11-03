@@ -606,7 +606,8 @@ namespace test5_namespace
 	}
 	void inpre2post(const char* inorder,const char* preorder,int size,char* postorder)
 	{
-		inpre2post(inorder,preorder,size,postorder,0);
+		int index=0;
+		inpre2post(inorder,preorder,size,postorder,index);
 	}
 	void test_inpre2post()
 	{
