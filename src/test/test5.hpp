@@ -331,7 +331,7 @@ namespace test5_namespace
 		}
 		int ngap=delta/size;
 		int gap;
-		int i=0;
+		int z=0;
 		for(int j=1;j<size;++j)
 		{
 			if(pbucket[j].valid)
@@ -341,12 +341,12 @@ namespace test5_namespace
 				{
 					ngap=gap;
 				}
-				i=j;
+				z=j;
 			}
 		}
-		for(auto i:pbucket)
+		for(int i=0;i<size;++i)
 		{
-			std::cout<<"["<<i.min<<","<<i.max<<"]"<<std::endl;
+			std::cout<<"["<<pbucket[i].min<<","<<pbucket[i].max<<"]"<<std::endl;
 		}
 		return ngap;
 	}
