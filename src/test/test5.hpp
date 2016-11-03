@@ -441,10 +441,13 @@ namespace test5_namespace
 		for(int i=0;i<N;++i)
 		{
 			if(i=='\t')
+			{
+				std::cout<<i<<std::endl;
 				frequence[i]=0;
+			}
 			if(frequence[i]!=0)
 			{
-				printf("%c:%d",i,frequence[i]);
+				printf("%c:%d ",i,frequence[i]);
 				++j;
 			}	
 			
