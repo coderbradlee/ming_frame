@@ -548,13 +548,17 @@ namespace test5_namespace
 		const int N=256;
 		const char str[]="when I was young I'd listen to the radio\
 						waiting for my favorite songs\
-						when they played I'd sing along, it make me smile.\
+						when they played I'd sing along, \
+						it make me smile.\
 						those were such happy times and not so long ago\
-						how I wondered where they'd gone\
+						how I wondered where they'd gone.\
 						but they're back again just like a long lost friend\
 						all the songs I love so well.\
-						every shalala every wo'wo still shines.\
-						every shing-a-ling-a-ling that they're starting to sing so fine";
+						every shalala every wo'wo\
+						still shines.\
+						every shing-a-ling-a-ling\
+						that they're starting\
+						to sing so fine";
 
 		int frequence[N]={0};
 		cal_frequence(str,frequence);
