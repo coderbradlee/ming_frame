@@ -404,7 +404,8 @@ namespace test5_namespace
 	}
 	void test_out()
 	{
-		test_cal_gap();
+		test_cantor();
+		// test_cal_gap();
 		//test_holland();
 		//test_max_subsequence();
 		//test_max_subarray();
