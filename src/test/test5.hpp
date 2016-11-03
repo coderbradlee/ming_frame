@@ -531,7 +531,7 @@ namespace test5_namespace
 			printf("%c:", exist_key[i]);
 			for(auto j:huffman[i])
 			{
-				printf("%c:",j);
+				printf("%c",j);
 			}
 			printf("\n");
 		}
@@ -565,10 +565,11 @@ namespace test5_namespace
 				printf("\n");
 			}	
 		}
+		printf("------------------\n");
 		std::vector<std::vector<char>> v(exist_key.size());
 		//huffman_code(frequence,N,v);
 		
-		//print_huffman(exist_key,v);
+		print_huffman(exist_key,v);
 	}
 	void test_out()
 	{
