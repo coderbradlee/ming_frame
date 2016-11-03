@@ -510,7 +510,7 @@ namespace test5_namespace
 			int cur=i;
 			while(huffmanNode[cur].parent!=-1)
 			{
-				if(cur==(huffmanNode[cur].parent.left))
+				if(cur==(huffmanNode[huffmanNode[cur].parent].left))
 				{
 					code.push_back('0');
 				}
