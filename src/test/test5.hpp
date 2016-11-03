@@ -421,22 +421,8 @@ namespace test5_namespace
 			++frequence[str[i]];
 		}
 	}
-	void test_huffman()
+	void print_frequence(int *frequence,int N)
 	{
-		const int N=256;
-		const char str[]="When I was young I'd listen to the radio\
-						Waitin' for my favorite songs\
-						When they played I'd sing along, it made me smile\
-						Those were such happy times and not so long ago\
-						How I wondered where they'd gone\
-						But they're back again just like a long lost friend\
-						All the songs I loved so well\
-						Every sha-la-la-la\
-						Every wo-o-wo-o, still shines\
-						Every shing-a-ling-a-ling, that they're startin' to sing's, so fine";
-
-		int frequence[N]={0};
-		cal_frequence(str,frequence);
 		int j=0;
 		for(int i=0;i<N;++i)
 		{
@@ -458,6 +444,50 @@ namespace test5_namespace
 			}	
 		}
 		std::cout<<std::endl;
+	}
+	void cal_exist_char(int* frequence,int N,std::vector<int>& exist_key)
+	{
+		int j=0;
+		for(int i=0;i<N;++i)
+		{
+			if(frequence[i]!=0)
+			{
+				frequence[j]=frequence[i];
+				++j;
+				exist_key.push_back(i);
+			}
+		}
+	}
+	void test_huffman()
+	{
+		const int N=256;
+		const char str[]="When I was young I'd listen to the radio\
+						Waitin' for my favorite songs\
+						When they played I'd sing along, it made me smile\
+						Those were such happy times and not so long ago\
+						How I wondered where they'd gone\
+						But they're back again just like a long lost friend\
+						All the songs I loved so well\
+						Every sha-la-la-la\
+						Every wo-o-wo-o, still shines\
+						Every shing-a-ling-a-ling, that they're startin' to sing's, so fine";
+
+		int frequence[N]={0};
+		cal_frequence(str,frequence);
+		print_frequence(frequence,N);
+		std::vector<int> exist_key;
+		//存在的字符保存的exist_key中，个数还是保存在frequence里
+		cal_exist_char(frequence,exist_key);
+		//this should be the same with print_frequence
+		for(int i=0;i<exist_key.size();++i)
+		{
+			printf("%c:%d ",exist_key[i],frequence[i]);
+			if(i!=0&&i%10==0)
+			{
+				printf("\n");
+			}	
+		}
+
 	}
 	void test_out()
 	{
