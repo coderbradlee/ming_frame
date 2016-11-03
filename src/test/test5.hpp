@@ -440,6 +440,8 @@ namespace test5_namespace
 		int j=0;
 		for(int i=0;i<N;++i)
 		{
+			if(i=='\t')
+				frequence[i]=0;
 			if(frequence[i]!=0)
 			{
 				printf("%c:%d",i,frequence[i]);
