@@ -268,7 +268,7 @@ namespace test5_namespace
 		std::vector<bucket> v(size);
 		int max=arr[0];
 		int min=arr[0];
-		for(int i=0;i<size;++i)
+		for(int i=1;i<size;++i)
 		{
 			if(arr[i]>max)
 				max=arr[i];
@@ -282,9 +282,10 @@ namespace test5_namespace
 			int location=(arr[i]-min)/size_of_bucket;
 			if(location>=size)
 				location=size-1;
-			bucket b;
-			b.add(arr[i]);
-			v[location]=b;
+			// bucket b;
+			// b.add(arr[i]);
+			//v[location]=b;
+			v[location].add(arr[i]);
 		}
 		int j=0;
 		int ret=0;
