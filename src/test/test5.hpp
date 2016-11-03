@@ -477,7 +477,7 @@ namespace test5_namespace
 		print_frequence(frequence,N);
 		std::vector<int> exist_key;
 		//存在的字符保存的exist_key中，个数还是保存在frequence里
-		cal_exist_char(frequence,exist_key);
+		cal_exist_char(frequence,N,exist_key);
 		//this should be the same with print_frequence
 		for(int i=0;i<exist_key.size();++i)
 		{
