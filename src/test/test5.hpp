@@ -368,7 +368,7 @@ namespace test5_namespace
 	{
 		for(int i=0;i<size;++i)
 		{
-			ori[i]=arr[i];
+			ori[i]=0;
 			for(int j=i+1;j<size;++j)
 			{
 				if(arr[j]<arr[i])
@@ -396,12 +396,12 @@ namespace test5_namespace
 		{
 			std::cout<<i<<std::endl;
 		}
-		ori.clear();
-		cantor2(arr,ori,6);
-		for(auto i:ori)
-		{
-			std::cout<<i<<std::endl;
-		}
+		// ori.clear();
+		// cantor2(arr,ori,6);
+		// for(auto i:ori)
+		// {
+		// 	std::cout<<i<<std::endl;
+		// }
 	}
 	void test_out()
 	{
