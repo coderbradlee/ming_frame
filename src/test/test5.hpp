@@ -306,12 +306,61 @@ namespace test5_namespace
 		}
 		return ret;
 	}
+	int cal_gap2(int* arr,int size)
+	{
+		bucket* pbucket=new bucket[size];
+		int max=arr[0];
+		int min=arr[0];
+		for(int i=1;i<size;++i)
+		{
+			if(max<arr[i])
+				max=arr[i];
+			else if(min>a[i])
+				min=arr[i];
+		}
+		int delta=max-min;
+		int numbucket;
+		for(int i=0;i<size;++i)
+		{
+			numbucket=(arr[i]-min)*size/delta;
+			if(numbucket>=size)
+			{
+				numbucket=size-1;
+			}
+			pbucket[numbucket].add(arr[i]);
+		}
+		int ngap=delta/size;
+		int gap;
+		int i=0;
+		for(int j=1;j<size;++j)
+		{
+			if(pbucket[j].valid)
+			{
+				gap=pbucket[j].min-pbucket[i].max;
+				if(ngap<gap)
+				{
+					ngap=gap;
+				}
+				i=j;
+			}
+		}
+		for(auto i:pbucket)
+		{
+			std::cout<<"["<<i.min<<","<<i.max<<"]"<<std::endl;
+		}
+		return ngap;
+	}
 	void test_cal_gap()
 	{
 		int arr[]={1,7,14,9,4,13};
 		std::cout<<cal_gap(arr,6)<<std::endl;
 		int arr2[]={10,7,14,80,4,13,30};
 		std::cout<<cal_gap(arr2,7)<<std::endl;
+		std::cout<<"----------------"<<std::endl;
+		
+		std::cout<<cal_gap2(arr,6)<<std::endl;
+		
+		std::cout<<cal_gap2(arr2,7)<<std::endl;
 	}
 	void test_out()
 	{
