@@ -442,7 +442,7 @@ namespace test5_namespace
 		{
 			if(i=='\t')
 			{
-				std::cout<<i<<std::endl;
+				//std::cout<<i<<std::endl;
 				frequence[i]=0;
 			}
 			if(frequence[i]!=0)
@@ -452,7 +452,10 @@ namespace test5_namespace
 			}	
 			
 			if(j!=0&&j%10==0)
+			{
 				printf("\n");
+				j=0;
+			}	
 		}
 		std::cout<<std::endl;
 	}
