@@ -468,7 +468,7 @@ namespace test5_namespace
 		int min2=min1;
 		for(int i=0;i<N;++i)
 		{
-			if(huffmanNode[i].parent==-1)
+			if((huffmanNode[i].parent)==-1)
 			{
 				if((one<0)||(huffmanNode[i].data<min1))
 				{
