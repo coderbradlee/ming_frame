@@ -315,7 +315,7 @@ namespace test5_namespace
 		{
 			if(max<arr[i])
 				max=arr[i];
-			else if(min>a[i])
+			else if(min>arr[i])
 				min=arr[i];
 		}
 		int delta=max-min;
@@ -336,7 +336,7 @@ namespace test5_namespace
 		{
 			if(pbucket[j].valid)
 			{
-				gap=pbucket[j].min-pbucket[i].max;
+				gap=pbucket[j].min-pbucket[z].max;
 				if(ngap<gap)
 				{
 					ngap=gap;
