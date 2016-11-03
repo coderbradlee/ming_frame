@@ -499,7 +499,7 @@ namespace test5_namespace
 		{
 			//choose two minner between 0-i 
 			select2min(huffmanNode,i,one,two);
-			printf("/////////////%d\n",i);
+			//printf("/////////////%d\n",i);
 			huffmanNode[i].data=huffmanNode[one].data+huffmanNode[two].data;
 			huffmanNode[i].left=one;
 			huffmanNode[i].right=two;
@@ -576,7 +576,7 @@ namespace test5_namespace
 		std::vector<std::vector<char>> v(exist_key.size());
 		huffman_code(frequence,exist_key.size(),v);
 		
-		//print_huffman(exist_key,v);
+		print_huffman(exist_key,v);
 	}
 	void test_out()
 	{
