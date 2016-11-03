@@ -387,7 +387,7 @@ namespace test5_namespace
 			v.erase(v.begin()+arr[i]);
 		}
 	}
-	void CantorExpansion(std::vector<int> a, std::vector<int> b, int size)
+	void CantorExpansion(std::vector<int> a, std::vector<int>& b, int size)
 	{
 		int i,j;
 		for(i = 0; i < size; i++)
