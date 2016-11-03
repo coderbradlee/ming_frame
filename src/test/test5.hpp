@@ -409,10 +409,10 @@ namespace test5_namespace
 	typedef struct Node
 	{
 		int data;
-		Node* parent;
-		Node* left;
-		Node* right;
-		Node():data(0),parent(nullptr),left(nullptr),right(nullptr){}
+		int parent;
+		int left;
+		int right;
+		Node():data(-1),parent(-1),left(-1),right(-1){}
 	}node;
 	void cal_frequence(const char* str,int* frequence)
 	{
@@ -468,7 +468,7 @@ namespace test5_namespace
 		int min2=min1;
 		for(int i=0;i<N;++)
 		{
-			if(huffmanNode[i].parent==nullptr)
+			if(huffmanNode[i].parent==-1)
 			{
 				if((one<0)||(huffmanNode[i].data<min1))
 				{
@@ -507,10 +507,10 @@ namespace test5_namespace
 		for(int i=0;i<N;++i)//前N个为叶子节点，需要求编码
 		{
 			std::vector<char> code;
-			node* cur=huffmanNode[i];
-			while(cur.parent!=nullptr)
+			int cur=i;
+			while(huffmanNode[cur].parent!=-1)
 			{
-				if(cur==cur.parent.left)
+				if(cur==huffmanNode[cur].parent.left)
 				{
 					code.push_back('0');
 				}
@@ -518,10 +518,10 @@ namespace test5_namespace
 				{
 					code.push_back('1');
 				}
-				cur=cur.parent;
+				cur=huffmanNode[cur].parent;
 			}
-			std::reverse(cur.begin(),cur.end());
-			huffman[0]=cur;
+			std::reverse(code.begin(),code.end());
+			huffman[i]=code;
 		}
 	}
 	void print_huffman(std::vector<int> exist_key,std::vector<std::vector<char>>& huffman)
