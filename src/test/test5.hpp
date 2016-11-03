@@ -424,10 +424,9 @@ namespace test5_namespace
 	void test_huffman()
 	{
 		const int N=256;
-		const char str[]=R"When I was young I'd listen to the radio\
+		const char str[]="When I was young I'd listen to the radio\
 						Waitin' for my favorite songs\
 						When they played I'd sing along, it made me smile\
-
 						Those were such happy times and not so long ago\
 						How I wondered where they'd gone\
 						But they're back again just like a long lost friend\
