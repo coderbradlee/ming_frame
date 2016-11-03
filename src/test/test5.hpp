@@ -437,9 +437,12 @@ namespace test5_namespace
 
 		int frequence[N]={0};
 		cal_frequence(str,frequence);
-		for(auto i:frequence)
+		for(int i=0;i<N;++i)
 		{
-			std::cout<<i<<" ";
+			if(frequence[i]!=0)
+			printf("%c:%d",i,frequence[i]);
+			if(i%10==0)
+				printf("\n");
 		}
 		std::cout<<std::endl;
 	}
