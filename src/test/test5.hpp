@@ -451,7 +451,7 @@ namespace test5_namespace
 				++j;
 			}	
 			
-			if(j%10==0)
+			if(j!=0&&j%10==0)
 				printf("\n");
 		}
 		std::cout<<std::endl;
