@@ -406,9 +406,48 @@ namespace test5_namespace
 			std::cout<<i<<std::endl;
 		}
 	}
+	typedef struct Node
+	{
+		int data;
+		Node* parent;
+		Node* left;
+		Node* right;
+	}Node;
+	void cal_frequence(const char* str,int* frequence)
+	{
+		int len=strlen(str);
+		for(int i=0;i<len;++i)
+		{
+			++frequence[str[i]];
+		}
+	}
+	void test_huffman()
+	{
+		const int N=256;
+		const char str[]="When I was young I'd listen to the radio\
+						Waitin' for my favorite songs\
+						When they played I'd sing along, it made me smile\
+
+						Those were such happy times and not so long ago\
+						How I wondered where they'd gone\
+						But they're back again just like a long lost friend\
+						All the songs I loved so well\
+						Every sha-la-la-la\
+						Every wo-o-wo-o, still shines\
+						Every shing-a-ling-a-ling, that they're startin' to sing's, so fine";
+
+		int frequence[N]={0};
+		cal_frequence(str,frequence);
+		for(auto i:frequence)
+		{
+			std::cout<<i<<" ";
+		}
+		std::cout<<std::endl;
+	}
 	void test_out()
 	{
-		test_cantor();
+		test_huffman();
+		// test_cantor();
 		// test_cal_gap();
 		//test_holland();
 		//test_max_subsequence();
