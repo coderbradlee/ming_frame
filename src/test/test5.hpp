@@ -546,16 +546,15 @@ namespace test5_namespace
 	void test_huffman()
 	{
 		const int N=256;
-		const char str[]="When I was young I'd listen to the radio\
-						Waitin' for my favorite songs\
-						When they played I'd sing along, it made me smile\
-						Those were such happy times and not so long ago\
-						How I wondered where they'd gone\
-						But they're back again just like a long lost friend\
-						All the songs I loved so well\
-						Every sha-la-la-la\
-						Every wo-o-wo-o, still shines\
-						Every shing-a-ling-a-ling, that they're startin' to sing's, so fine";
+		const char str[]="when I was young I'd listen to the radio\
+						waiting for my favorite songs\
+						when they played I'd sing along, it make me smile.\
+						those were such happy times and not so long ago\
+						how I wondered where they'd gone\
+						but they're back again just like a long lost friend\
+						all the songs I love so well.\
+						every shalala every wo'wo still shines.\
+						every shing-a-ling-a-ling that they're starting to sing so fine";
 
 		int frequence[N]={0};
 		cal_frequence(str,frequence);
