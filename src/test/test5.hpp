@@ -566,7 +566,7 @@ namespace test5_namespace
 			}	
 		}
 		std::vector<std::vector<char>> v(exist_key.size());
-		huffman_code(frequence,v);
+		huffman_code(frequence,N,v);
 		// for(int i=0;i<exist_key.size();++i)
 		// {	
 		// 	printf("%c:",exist_key[i] );
