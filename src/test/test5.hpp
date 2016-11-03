@@ -466,7 +466,7 @@ namespace test5_namespace
 		two=-1;
 		int min1=-1;
 		int min2=min1;
-		for(int i=0;i<N;++)
+		for(int i=0;i<N;++i)
 		{
 			if(huffmanNode[i].parent==-1)
 			{
@@ -510,7 +510,7 @@ namespace test5_namespace
 			int cur=i;
 			while(huffmanNode[cur].parent!=-1)
 			{
-				if(cur==huffmanNode[cur].parent.left)
+				if(cur==(huffmanNode[cur].parent.left))
 				{
 					code.push_back('0');
 				}
