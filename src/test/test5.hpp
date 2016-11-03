@@ -581,9 +581,49 @@ namespace test5_namespace
 		
 		print_huffman(exist_key,v);
 	}
+	void inpre2post(const char* inorder,const char* preorder,int size,const char* postorder,int& index)
+	{
+		if(size<=0)
+			return;
+		if(size==1)
+		{
+			postorder[index]=postorder[0];
+			++index;
+			return;
+		}
+		char root=preorder[0];
+		int inorderIndex=0;
+		for(int i=0;i<size;++i)
+		{
+			if(root==inorder[i])
+				inorderIndex=i;
+		}
+		int right=size-inorderIndex-1;
+		inpre2post(inorder,preorder+1,inorderIndex,postorder,index);
+		inpre2post(inorder+inorderIndex+1,preorder+size-right,right,postorder,index);
+		postorder[index]=root;
+		++index;
+	}
+	void inpre2post(const char* inorder,const char* preorder,int size,const char* postorder)
+	{
+		inpre2post(inorder,preorder,size,postorder,0);
+	}
+	void test_inpre2post()
+	{
+		char preorder[]="GDAFEMHZ";
+		char inorder[]="ADEFGHMZ";
+		char postorder[8]={0};
+		inpre2post(inorder,preorder,8,postorder);
+		for(auto i:postorder)
+		{
+			printf("%d", i);
+		}
+		printf("\n");
+	}
 	void test_out()
 	{
-		test_huffman();
+		test_inpre2post();
+		//test_huffman();
 		// test_cantor();
 		// test_cal_gap();
 		//test_holland();
