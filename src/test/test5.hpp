@@ -581,13 +581,13 @@ namespace test5_namespace
 		
 		print_huffman(exist_key,v);
 	}
-	void inpre2post(const char* inorder,const char* preorder,int size,const char* postorder,int& index)
+	void inpre2post(const char* inorder,const char* preorder,int size,char* postorder,int& index)
 	{
 		if(size<=0)
 			return;
 		if(size==1)
 		{
-			postorder[index]=postorder[0];
+			postorder[index]=preorder[0];
 			++index;
 			return;
 		}
@@ -604,7 +604,7 @@ namespace test5_namespace
 		postorder[index]=root;
 		++index;
 	}
-	void inpre2post(const char* inorder,const char* preorder,int size,const char* postorder)
+	void inpre2post(const char* inorder,const char* preorder,int size,char* postorder)
 	{
 		inpre2post(inorder,preorder,size,postorder,0);
 	}
