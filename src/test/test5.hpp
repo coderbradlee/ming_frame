@@ -412,7 +412,8 @@ namespace test5_namespace
 		Node* parent;
 		Node* left;
 		Node* right;
-	}Node;
+		Node():data(0),parent(nullptr),left(nullptr),right(nullptr){}
+	}node;
 	void cal_frequence(const char* str,int* frequence)
 	{
 		int len=strlen(str);
@@ -458,6 +459,83 @@ namespace test5_namespace
 			}
 		}
 	}
+	void select2min(node* huffmanNode,int N,int& one,int& two)
+	{
+		//make two is bigger one of one and two
+		one=-1;
+		two=-1;
+		int min1=-1;
+		int min2=min1;
+		for(int i=0;i<N;++)
+		{
+			if(huffmanNode[i].parent==nullptr)
+			{
+				if((one<0)||(huffmanNode[i].data<min1))
+				{
+					min2=min1;
+					two=one;
+					min1=huffmanNode[i].data;
+					one=i;
+				}
+				else if((two<0)||(huffmanNode[i].data<min2))
+				{
+					min2=huffmanNode[i].data;
+					two=i;
+				}
+			}
+		}
+	}
+	void huffman_code(int* frequence,int N,std::vector<std::vector<char>>& huffman)
+	{
+		int size=2*N-1;
+		node* huffmanNode=new node[size];
+		for(int i=0;i<N;++i)
+		{
+			huffmanNode[i].data=frequence[i];
+		}
+		int one,two;
+		for(int i=N;i<size;++i)
+		{
+			//choose two minner between 0-i 
+			select2min(huffmanNode,i,one,two);
+			huffmanNode[i].data=huffmanNode[one].data+huffmanNode[two].data;
+			huffmanNode[i].left=one;
+			huffmanNode[i].right=two;
+			huffmanNode[one].parent=i;
+			huffmanNode[two].parent=i;
+		}
+		for(int i=0;i<N;++i)//前N个为叶子节点，需要求编码
+		{
+			std::vector<char> code;
+			node* cur=huffmanNode[i];
+			while(cur.parent!=nullptr)
+			{
+				if(cur==cur.parent.left)
+				{
+					code.push_back('0');
+				}
+				else
+				{
+					code.push_back('1');
+				}
+				cur=cur.parent;
+			}
+			std::reverse(cur.begin(),cur.end());
+			huffman[0]=cur;
+		}
+	}
+	void print_huffman(std::vector<int> exist_key,std::vector<std::vector<char>>& huffman)
+	{
+		for(int i=0;i<exist_key.size();++i)
+		{
+			printf("%c:", exist_key[i]);
+			for(auto j:huffman[i])
+			{
+				printf("%c:",j);
+			}
+			printf("\n");
+		}
+	}
 	void test_huffman()
 	{
 		const int N=256;
@@ -487,7 +565,18 @@ namespace test5_namespace
 				printf("\n");
 			}	
 		}
-
+		std::vector<std::vector<char>> v(exist_key.size());
+		huffman_code(frequence,v);
+		for(int i=0;i<exist_key.size();++i)
+		{	
+			printf("%c:",exist_key[i] );
+			for(auto j:v[i])
+			{
+				printf("%c",j );
+			}
+			printf("\n");
+		}
+		print_huffman(exist_key,huffman);
 	}
 	void test_out()
 	{
