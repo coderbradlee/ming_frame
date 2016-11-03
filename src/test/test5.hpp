@@ -368,7 +368,6 @@ namespace test5_namespace
 	{
 		for(int i=0;i<size;++i)
 		{
-			//ori[i]=0;
 			for(int j=i+1;j<size;++j)
 			{
 				if(arr[j]<arr[i])
@@ -387,25 +386,14 @@ namespace test5_namespace
 			v.erase(v.begin()+arr[i]);
 		}
 	}
-	void CantorExpansion(std::vector<int> a, std::vector<int>& b, int size)
-	{
-		int i,j;
-		for(i = 0; i < size; i++)
-		{
-			b[i] = 0;
-			for(j = i+1; j < size; j++)
-			{
-				if(a[j] < a[i])
-					b[i]++;
-			}
-		}
-	}
+	
 	void test_cantor()
 	{
+		std::vector<int> array{4,6,2,5,3,1};
 		std::vector<int> arr{3,4,1,2,1,0};
 		std::vector<int> ori(6,0);
-		//cantor1(arr,ori,6);
-		CantorExpansion(arr,ori,6);
+		cantor1(array,ori,6);
+		
 		for(auto i:ori)
 		{
 			std::cout<<i<<std::endl;
