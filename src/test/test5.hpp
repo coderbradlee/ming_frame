@@ -574,7 +574,7 @@ namespace test5_namespace
 		}
 		printf("\n------------------\n");
 		std::vector<std::vector<char>> v(exist_key.size());
-		huffman_code(frequence,N,v);
+		huffman_code(frequence,exist_key.size(),v);
 		
 		//print_huffman(exist_key,v);
 	}
