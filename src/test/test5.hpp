@@ -396,7 +396,7 @@ namespace test5_namespace
 		// {
 		// 	std::cout<<i<<std::endl;
 		// }
-		// ori.clear();
+		ori.clear();
 		cantor2(arr,ori,6);
 		for(auto i:ori)
 		{
