@@ -647,7 +647,7 @@ namespace test5_namespace
 			return false;
 		
 		bool ileft=is_post_order(arr,i+1);
-		boot iright=is_post_order(arr+i+1,size-i-1-1);
+		bool iright=is_post_order(arr+i+1,size-i-1-1);
 		return ileft&&iright;
 	}
 	void test_is_post_order()
