@@ -621,9 +621,46 @@ namespace test5_namespace
 		}
 		printf("\n");
 	}
+	bool is_post_order(const int* arr,int size)
+	{
+		int i=size-1;
+		if(i<=0)
+			return true;
+		int root=arr[i];
+		int right=size-2;
+		while(right>0)
+		{
+			if(arr[right]>root)
+				--right;
+			else
+				break;
+		}
+		int left=0;
+		while(left<size)
+		{
+			if(arr[left]<root)
+				++left;
+			else
+				break;
+		}
+		if(left!=(right+1))
+			return false;
+		
+		bool ileft=is_post_order(arr,i+1);
+		boot iright=is_post_order(arr+i+1,size-i-1-1);
+		return ileft&&iright;
+	}
+	void test_is_post_order()
+	{
+		int arr[]={1,2,5,4,3};
+		int arr2[]={3,5,1,4,2};
+		std::cout<<is_post_order(arr,5)<<std::endl;
+		std::cout<<is_post_order(arr2,5)<<std::endl;
+	}
 	void test_out()
 	{
-		test_inpre2post();
+		test_is_post_order();
+		//test_inpre2post();
 		//test_huffman();
 		// test_cantor();
 		// test_cal_gap();
