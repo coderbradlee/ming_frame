@@ -22,6 +22,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <algorithm>
+#include "tree.hpp"
 namespace test5_namespace
 {
 	int find_min_in_rotated_array(const int* arr,int size)
@@ -628,7 +629,7 @@ namespace test5_namespace
 			return true;
 		int root=arr[i];
 		int right=size-2;
-		while(right>0)
+		while(right>=0)
 		{
 			if(arr[right]>root)
 				--right;
@@ -636,7 +637,7 @@ namespace test5_namespace
 				break;
 		}
 		int left=0;
-		while(left<size)
+		while(left<size-1)
 		{
 			if(arr[left]<root)
 				++left;
@@ -646,20 +647,50 @@ namespace test5_namespace
 		if(left!=(right+1))
 			return false;
 		
-		bool ileft=is_post_order(arr,i+1);
-		bool iright=is_post_order(arr+i+1,size-i-1-1);
+		bool ileft=is_post_order(arr,left);
+		bool iright=is_post_order(arr+left,size-left-1);
 		return ileft&&iright;
 	}
 	void test_is_post_order()
 	{
-		int arr[]={1,2,5,4,3};
+		int arr1[]={1,2,3,4,5};
 		int arr2[]={3,5,1,4,2};
-		std::cout<<is_post_order(arr,5)<<std::endl;
+		int arr3[]={1,2,5,4,3};
+		int arr4[]={5,4,3,2,1};
+		std::cout<<is_post_order(arr1,5)<<std::endl;
 		std::cout<<is_post_order(arr2,5)<<std::endl;
+		std::cout<<is_post_order(arr3,5)<<std::endl;
+		std::cout<<is_post_order(arr4,5)<<std::endl;
+	}
+	void print(treeNode* root)
+	{
+		printf("%d ", root->data);
+	}
+	void changeValue(treeNode* tn)
+	{
+		tn->data=rand()%100;
+	}
+	void test_tree()
+	{
+		int arr[]={1,2,3,4,5,6,7,8};
+		binaryTree bt;
+		for(auto& i:arr)
+		{
+			bt.insert(i);
+		}
+		bt.inOrder(print);
+		bt.preOrder(print);
+
+		bt.inOrder(changeValue);
+		bt.inOrder(print);
+		bt.preOrder(print);
+		treeNode* tn;
+		int num=bt.largestBST(tn);
+		printf("%d %d\n", tn->data,num);
 	}
 	void test_out()
 	{
-		test_is_post_order();
+		//test_is_post_order();
 		//test_inpre2post();
 		//test_huffman();
 		// test_cantor();
