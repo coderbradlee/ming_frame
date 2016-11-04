@@ -25,9 +25,9 @@ public:
 	{
 		_preOrder(m_root,print);
 	}
-	int largestBST()
+	int largestBST(treeNode*& tn)
 	{
-		return _largestBST(m_root);
+		
 	}
 private:
 	void _insert(treeNode* root,int value)
@@ -73,10 +73,7 @@ private:
 			_preOrder(root->right,print);
 		}
 	}
-	int _largestBST(m_root)
-	{
-		
-	}
+	
 private:
 	treeNode* m_root;
 };
