@@ -672,7 +672,7 @@ namespace test5_namespace
 	}
 	void test_tree()
 	{
-		int arr[]={1,2,3,4,5,6,7,8};
+		int arr[]={1,5,2,3,7,4,6,8};
 		binaryTree bt;
 		for(auto& i:arr)
 		{
@@ -687,9 +687,9 @@ namespace test5_namespace
 		printf("\n");
 		bt.preOrder(print);
 		printf("\n");
-		// treeNode* tn;
-		// int num=bt.largestBST(tn);
-		// printf("%d %d\n", tn->data,num);
+		treeNode* tn;
+		int num=bt.largestBST(tn);
+		printf("%d %d\n", tn->data,num);
 	}
 	void test_out()
 	{
