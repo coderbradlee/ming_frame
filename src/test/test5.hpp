@@ -679,14 +679,17 @@ namespace test5_namespace
 			bt.insert(i);
 		}
 		bt.inOrder(print);
+		printf("\n");
 		bt.preOrder(print);
-
+		printf("\n");
 		bt.inOrder(changeValue);
 		bt.inOrder(print);
+		printf("\n");
 		bt.preOrder(print);
-		treeNode* tn;
-		int num=bt.largestBST(tn);
-		printf("%d %d\n", tn->data,num);
+		printf("\n");
+		// treeNode* tn;
+		// int num=bt.largestBST(tn);
+		// printf("%d %d\n", tn->data,num);
 	}
 	void test_out()
 	{

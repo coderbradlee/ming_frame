@@ -27,53 +27,64 @@ public:
 	}
 	int largestBST(treeNode*& tn)
 	{
-		
+		tn=m_root;
+		return 0;
+	}
+	~binaryTree()
+	{
+		if(m_root)
+		{	
+			_destroy(m_root);
+			m_root=nullptr;
+		}
 	}
 private:
-	void _insert(treeNode* root,int value)
+	void _insert(treeNode*& root,int value)
 	{
+		//std::cout<<value<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
 		if(root==nullptr)
 		{
 			root=new treeNode(value);
+			return;
 		}
 		else if(value>root->data)
 		{
-			insert(root->right,value);
+			_insert(root->right,value);
 		}
 		else 
 		{
-			insert(root->left,value);
+			_insert(root->left,value);
 		}
 	}
 	void _inOrder(treeNode* root,callback print)
 	{
+		//std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
 		if(root==nullptr)
 			return;
-		if(root->left)
-		{
-			_inOrder(root->left,print);
-		}
+		_inOrder(root->left,print);
 		print(root);
-		if(root->right)
-		{
-			_inOrder(root->right,print);
-		}
+		_inOrder(root->right,print);
+		
 	}
 	void _preOrder(treeNode* root,callback print)
 	{
 		if(root==nullptr)
 			return;
-		if(root->left)
-		{
-			_preOrder(root->left,print);
-		}
 		print(root);
-		if(root->right)
-		{
-			_preOrder(root->right,print);
-		}
+		_preOrder(root->left,print);
+		_preOrder(root->right,print);
+		
 	}
-	
+	void _destroy(treeNode* node)
+	{
+		if(node)
+		{
+			_destroy(node->left);
+			_destroy(node->right);
+			delete node;
+		}
+
+	}
 private:
 	treeNode* m_root;
 };
