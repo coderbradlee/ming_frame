@@ -841,9 +841,37 @@ namespace test5_namespace
 		}
 		printf("\n");
 	}
-	void dijkstra(const std::vector<std::vector<int>>& graph,int start,std::vector<int> choiced)
+	void dijkstra(
+		const std::vector<std::vector<int>>& graph,
+		int start,
+		std::vector<int>& choiced,
+		std::vector<int>& dist)
 	{
-
+		int size=graph.size();
+		if(choiced.size()==0)
+		{
+			choiced.push_back(0);
+			for(int i=1;i<size;++i)
+			{
+				if(graph[0][i]<INFINITY)
+				{
+					dist[i]=graph[0][i];
+				}
+			}
+		}
+		else
+		{
+			while(choiced.size()<size-1)
+			{
+				int newNode=findNewNode(choiced,dist);
+				choiced.push_back(newNode);
+				for(int i=1;i<size;++i)
+				{
+					dist[i]=std::min(dist[i],dist[newNode]+graph[newNode][i]);
+				}
+			}
+			
+		}
 	}
 	void test_dijkstra()
 	{
@@ -860,7 +888,14 @@ namespace test5_namespace
 		std::vector<int> dist(N,INFINITY);
 		dist[0]=0;//到自己的距离
 		//计算0点到其他节点的距离
-		dijkstra(v,0,choiced);
+
+		dijkstra(v,0,choiced,dist);
+		for(auto i:choiced)
+			printf("%d\n",i );
+		printf("\n");
+		for(auto i:dist)
+			printf("%d\n",i );
+		printf("\n");
 	}
 	void test_out()
 	{
