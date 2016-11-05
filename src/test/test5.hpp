@@ -691,6 +691,73 @@ namespace test5_namespace
 		int num=bt.largestBST(tn);
 		printf("%d %d\n", tn->data,num);
 	}
+	class unionFindSet
+	{
+	public:
+		unionFindSet():m_N(0){}
+		unionFindSet(int n):m_N(n),m_parent(n,0){}
+		~unionFindSet(){}
+		
+		int find(int i)
+		{
+			if(i<0)||(i>=m_N)
+				return -1;
+			int t=i;
+			while(i!=m_parent[i])
+			{
+				i=m_parent[i];
+			}
+			
+			while(t!=m_parent[t])
+			{
+				int temp=m_parent[t];
+				m_parent[t]=i;
+				t=temp;
+			}
+			return i;
+		}
+		void union(int i,int j)
+		{
+			int left=find(i);
+			int right=find(j);
+			if(left==-1||right==-1)
+				return;
+			if(left!=right)
+			{
+				m_parent[left]=right;
+			}
+		}
+		void print()
+		{
+			for(auto i=0;i<10;++i)
+			{
+				find(i);
+			}
+			for(auto i:m_parent)
+			{
+				//if(i!=0)
+				{
+					std::cout<<i<<std::endl;
+				}
+			}
+		}
+	private:
+		int m_N;
+		std::vector<int> m_parent;
+	};
+	void test_unionFindSet()
+	{
+		unionFindSet ufs(10);
+		ufs.union(2,6);
+		ufs.union(5,6);
+		ufs.union(1,8);
+		ufs.union(2,9);
+		ufs.union(5,3);
+		ufs.union(4,8);
+		ufs.union(4,0);
+		ufs.print();
+
+	}
 	void test_out()
 	{
 		test_tree();
