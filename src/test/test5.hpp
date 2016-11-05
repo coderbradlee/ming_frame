@@ -938,6 +938,9 @@ namespace test5_namespace
 		for(auto i:dist)
 			printf("%d ",i );
 		printf("\n");
+		for(auto i:pre)
+			printf("%d ",i );
+		printf("\n");
 		//print 0-7 min path
 		minPath(0,7,pre);
 	}
