@@ -847,13 +847,13 @@ namespace test5_namespace
 		int minIndex=0;
 		for(int i=1;i<dist.size();++i)
 		{
+			printf("dist[i]:%d,i:%d\n",dist[i],i );
 			if((dist[i]<min)&&(!choiced[i]))
 			{
 				min=dist[i];
 				minIndex=i;
 			}	
 		}
-		printf("new %d\n",minIndex );
 		return minIndex;
 	}
 	void dijkstra(
