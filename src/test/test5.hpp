@@ -889,8 +889,7 @@ namespace test5_namespace
 				if(temp==dist[i])
 				{
 					pre[i]=newNode;
-				}
-				
+				}		
 			}
 		}
 			
@@ -906,10 +905,12 @@ namespace test5_namespace
 			int t=pre[i];
 			path.push_back(t);
 			i=t;
+			printf("----------------------%d\n",i);
 		}
 		path.push_back(start);
 		for(auto it=path.rbegin();it!=path.rend();++it)
-			printf("%d\n",*it );
+			printf("%d ",*it );
+		printf("\n");
 	}
 	void test_dijkstra()
 	{
