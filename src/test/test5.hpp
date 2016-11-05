@@ -841,13 +841,13 @@ namespace test5_namespace
 		}
 		printf("\n");
 	}
-	int findNewNode(const std::vector<int> choiced,const std::vector<int> dist)
+	int findNewNode(const std::vector<bool> choiced,const std::vector<int> dist)
 	{
 		int min=dist[0];
 		int minIndex=0;
 		for(int i=0;i<dist.size();++i)
 		{
-			if(dist[i]<min&&(choiced.find(i)==choiced.end()))
+			if(dist[i]<min&&(!choiced[i]))
 			{
 				min=dist[i];
 				minIndex=i;
@@ -858,13 +858,13 @@ namespace test5_namespace
 	void dijkstra(
 		const std::vector<std::vector<int>>& graph,
 		int start,
-		std::vector<int>& choiced,
+		std::vector<bool>& choiced,
 		std::vector<int>& dist)
 	{
 		int size=graph.size();
-		if(choiced.size()==0)
 		{
-			choiced.push_back(0);
+			//init
+			choiced[0]=true;
 			for(int i=1;i<size;++i)
 			{
 				if(graph[0][i]<INFINITY)
@@ -873,19 +873,17 @@ namespace test5_namespace
 				}
 			}
 		}
-		else
+		for(int num=0;num<size-1;++num)
 		{
-			while(choiced.size()<size-1)
+			int newNode=findNewNode(choiced,dist);
+			choiced[newNode]=true;
+			for(int i=1;i<size;++i)
 			{
-				int newNode=findNewNode(choiced,dist);
-				choiced.push_back(newNode);
-				for(int i=1;i<size;++i)
-				{
-					dist[i]=std::min(dist[i],dist[newNode]+graph[newNode][i]);
-				}
+				dist[i]=std::min(dist[i],dist[newNode]+graph[newNode][i]);
 			}
-			
 		}
+			
+		
 	}
 	void test_dijkstra()
 	{
@@ -898,14 +896,17 @@ namespace test5_namespace
 		v[4][4]=0;v[4][5]=10;v[4][6]=70;
 		v[5][5]=0;v[5][6]=50;
 		v[6][6]=0;
-		std::vector<int> choiced;
+		std::vector<bool> choiced(N,false);
 		std::vector<int> dist(N,INFINITY);
 		dist[0]=0;//到自己的距离
 		//计算0点到其他节点的距离
 
 		dijkstra(v,0,choiced,dist);
-		for(auto i:choiced)
+		for(int i=0;i<choiced.size();++i)
+		{
+			if(choiced[i])
 			printf("%d\n",i );
+		}
 		printf("\n");
 		for(auto i:dist)
 			printf("%d\n",i );
