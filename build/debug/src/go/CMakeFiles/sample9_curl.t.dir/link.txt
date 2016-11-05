@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11 -g -Wall -O0    CMakeFiles/sample9_curl.t.dir/sample9_curl.cpp.o  -o ../../bin/sample9_curl.t -rdynamic -llibgo ../../lib/liblibgo_main.a -lboost_coroutine -lboost_context -lboost_system -lboost_thread -lpthread -ldl -lrt -lcurl 

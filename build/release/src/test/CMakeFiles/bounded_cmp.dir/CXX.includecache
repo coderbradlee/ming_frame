@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/root/ming_frame/src/test/bounded_buffer_comparison.cpp
+boost/circular_buffer.hpp
+-
+boost/thread/mutex.hpp
+-
+boost/thread/condition.hpp
+-
+boost/thread/thread.hpp
+-
+boost/call_traits.hpp
+-
+boost/progress.hpp
+-
+boost/bind.hpp
+-
+deque
+-
+list
+-
+string
+-
+iostream
+-
+

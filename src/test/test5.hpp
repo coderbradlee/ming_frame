@@ -879,18 +879,19 @@ namespace test5_namespace
 		{
 			int newNode=findNewNode(choiced,dist);
 			choiced[newNode]=true;
-			for(int i=1;i<size;++i)
+			for(int i=0;i<size;++i)
 			{	
 				int temp=dist[newNode]+graph[newNode][i];
 				// printf("%d\n",temp);
 				if(temp>0)
 				{
-					dist[i]=std::min(dist[i],temp);
-				}
-				if(temp==dist[i])
-				{
-					pre[i]=newNode;
-					printf("pre[i]:%d,i:%d\n",pre[i],i);
+					//dist[i]=std::min(dist[i],temp);
+                    if(dist[i]>temp)
+                    {
+                        dist[i]=temp;
+                        pre[i]=newNode;
+                    }
+					printf("pre[%d]=%d,newNode:%d\n",i,pre[i],newNode);
 				}		
 			}
 		}
@@ -898,15 +899,21 @@ namespace test5_namespace
 		{
 			std::cout<<i<<" ";
 		}
-		std::endl;
+        std::cout<<std::endl;
 		
 	}
 	void minPath(int start,int end,const std::vector<int>& pre)
 	{
+		for(auto i:pre)
+		{
+			std::cout<<i<<" ";
+		}
+        std::cout<<std::endl;
 		int i=end;
 		std::vector<int> path;
 		path.push_back(end);
-		while(pre[i]!=start)
+        //--i;
+		while((pre[i]!=start)&&(pre[i]!=i))
 		{
 			i=pre[i];
 			path.push_back(i);
@@ -932,6 +939,10 @@ namespace test5_namespace
 		dist[0]=0;//到自己的距离
 		//计算0点到其他节点的距离
 		std::vector<int> pre(N,-1);
+        for(int i=0;i<N;++i)
+        {
+            pre[i]=i;
+        }
 		dijkstra(v,0,choiced,dist,pre);
 		for(int i=0;i<choiced.size();++i)
 		{
@@ -946,7 +957,8 @@ namespace test5_namespace
 			printf("%d ",i );
 		printf("\n");
 		//print 0-7 min path
-		minPath(0,7,pre);
+		minPath(0,6,pre);
+		minPath(0,2,pre);
 	}
 	void test_out()
 	{
