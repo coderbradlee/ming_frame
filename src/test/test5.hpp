@@ -841,18 +841,19 @@ namespace test5_namespace
 		}
 		printf("\n");
 	}
-	int findNewNode(const std::vector<bool> choiced,const std::vector<int> dist)
+	int findNewNode(const std::vector<bool>& choiced,const std::vector<int>& dist)
 	{
 		int min=dist[0];
 		int minIndex=0;
-		for(int i=0;i<dist.size();++i)
+		for(int i=1;i<dist.size();++i)
 		{
-			if(dist[i]<min&&(!choiced[i]))
+			if((dist[i]<min)&&(!choiced[i]))
 			{
 				min=dist[i];
 				minIndex=i;
 			}	
 		}
+		printf("new %d\n",minIndex );
 		return minIndex;
 	}
 	void dijkstra(
@@ -905,11 +906,11 @@ namespace test5_namespace
 		for(int i=0;i<choiced.size();++i)
 		{
 			if(choiced[i])
-			printf("%d\n",i );
+			printf("%d ",i );
 		}
 		printf("\n");
 		for(auto i:dist)
-			printf("%d\n",i );
+			printf("%d ",i );
 		printf("\n");
 	}
 	void test_out()
