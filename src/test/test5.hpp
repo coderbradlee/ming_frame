@@ -860,7 +860,7 @@ namespace test5_namespace
 		const std::vector<std::vector<int>>& graph,
 		int start,
 		std::vector<bool>& choiced,
-		std::vector<int>& dist)
+		std::vector<int>& dist,std::vector<int>& pre)
 	{
 		int size=graph.size();
 		{
@@ -884,13 +884,32 @@ namespace test5_namespace
 				printf("%d\n",temp);
 				if(temp>0)
 				{
-					dist[i]=std::min(dist[i],dist[newNode]+graph[newNode][i]);
+					dist[i]=std::min(dist[i],temp);
+				}
+				if(temp==dist[i])
+				{
+					pre[i]=newNode;
 				}
 				
 			}
 		}
 			
 		
+	}
+	void minPath(int start,int end,const std::vector<int>& pre)
+	{
+		int i=end;
+		std::vector<int> path;
+		path.push_back(end);
+		while(pre[i]!=start)
+		{
+			int t=pre[i];
+			path.push_back(t);
+			i=t;
+		}
+		path.push_back(start);
+		for(auto it=path.rbegin();it!=path.rend();++it)
+			printf("%d\n",*it );
 	}
 	void test_dijkstra()
 	{
@@ -907,8 +926,8 @@ namespace test5_namespace
 		std::vector<int> dist(N,INFINITY);
 		dist[0]=0;//到自己的距离
 		//计算0点到其他节点的距离
-
-		dijkstra(v,0,choiced,dist);
+		std::vector<int> pre(N,-1);
+		dijkstra(v,0,choiced,dist,pre);
 		for(int i=0;i<choiced.size();++i)
 		{
 			if(choiced[i])
@@ -918,6 +937,8 @@ namespace test5_namespace
 		for(auto i:dist)
 			printf("%d ",i );
 		printf("\n");
+		//print 0-7 min path
+		minPath(0,7,pre);
 	}
 	void test_out()
 	{
