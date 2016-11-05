@@ -763,9 +763,27 @@ namespace test5_namespace
 		ufs.print();
 
 	}
-	void articulationPoint(const std::vector<std::vector<int>>& graph,std::vector<bool> ret)
+	void articulationPoint(
+		const std::vector<std::vector<int>>& graph,
+		int root,
+		int parent,
+		int root,
+		std::vector<int>& dfn,
+		std::vector<int>& low,
+		int& n,
+		std::vector<bool> ret)
 	{
 
+	}
+	void articulationPoint(const std::vector<std::vector<int>>& graph,std::vector<bool>& ret)
+	{
+		int N=graph.size();
+		std::cout<<N<<std::endl;
+		std::vector<int> dfn(N,0);
+		std::vector<int> low(N,0);
+		int root=0;
+		int n=0;
+		articulationPoint(graph,root,-1,root,dfn,low,n,ret);
 	}
 	void test_articulationPoint()
 	{
