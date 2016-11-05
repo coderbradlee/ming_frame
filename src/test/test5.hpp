@@ -880,7 +880,7 @@ namespace test5_namespace
 			choiced[newNode]=true;
 			for(int i=1;i<size;++i)
 			{	
-				int temp=graph[newNode][i]+graph[newNode][i];
+				int temp=dist[newNode]+graph[newNode][i];
 				// printf("%d\n",temp);
 				if(temp>0)
 				{
