@@ -700,7 +700,7 @@ namespace test5_namespace
 		
 		int find(int i)
 		{
-			if(i<0)||(i>=m_N)
+			if((i<0)||(i>=m_N))
 				return -1;
 			int t=i;
 			while(i!=m_parent[i])
