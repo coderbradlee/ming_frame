@@ -763,9 +763,39 @@ namespace test5_namespace
 		ufs.print();
 
 	}
+	void articulationPoint(const std::vector<std::vector<int>>& graph,std::vector<bool> ret)
+	{
+
+	}
+	void test_articulationPoint()
+	{
+		const int N=13;
+		std::vector<std::vector<int>> v(N,std::vector<int>(N,0));
+		//A B C D E F G H I J K  L  M 
+		//0 1 2 3 4 5 6 7 8 9 10 11 12
+		v[0][1]=1;v[0][2]=1;v[0][5]=1;v[0][11]=1;
+		v[1][0]=1;v[1][2]=1;v[1][3]=1;v[1][4]=1;
+		v[1][6]=1;v[1][7]=1;v[2][0]=1;v[2][1]=1;
+		v[3][1]=1;v[3][4]=1;v[4][1]=1;v[4][3]=1;
+		v[4][0]=1;v[6][1]=1;v[6][7]=1;v[6][8]=1;
+		v[6][10]=1;v[7][1]=1;v[7][9]=1;v[7][10]=1;
+		v[8][9]=1;v[9][11]=1;v[9][12]=1;v[10][6]=1;
+		v[10][7]=1;v[11][0]=1;v[11][12]=1;v[12][1]=1;
+		v[12][9]=1;v[12][11]=1;
+		std::vector<bool> ret(N,false);
+		articulationPoint(v,ret);
+		for(int i=0;i<N;++i)
+		{
+			if(ret[i])
+			{
+				std::cout<<i+'A'<<std::endl;
+			}
+		}
+	}
 	void test_out()
 	{
-		test_unionFindSet();
+		test_articulationPoint();
+		// test_unionFindSet();
 		//test_tree();
 		//test_is_post_order();
 		//test_inpre2post();
