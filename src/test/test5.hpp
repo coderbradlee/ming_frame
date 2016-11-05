@@ -773,7 +773,29 @@ namespace test5_namespace
 		int& n,
 		std::vector<bool>& ret)
 	{
+		dfn[i]=low[i]=n;
+		++n;
 
+		for(int j=0;j<graph.size();++j)
+		{
+			if(graph[i][j]!=0)
+			{
+				if(dfn[j]==0)
+				{
+					++child;
+					articulationPoint(graph,j,i,root,dfn,low,n,ret);
+					low[i]=std::min(low[i],low[j]);
+					if((i!=root)&&(low[j]>dfn[i]))
+						ret[i]=true;
+					else if((i==root)&&(child==2))
+						ret[i]=true;
+				}
+				else if(parent!=j)
+				{
+					low[i]=std::min(low[i],dfn[j]);
+				}
+			}
+		}
 	}
 	void articulationPoint(const std::vector<std::vector<int>>& graph,std::vector<bool>& ret)
 	{
