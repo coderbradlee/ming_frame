@@ -803,7 +803,7 @@ namespace test5_namespace
 	void articulationPoint(const std::vector<std::vector<int>>& graph,std::vector<bool>& ret)
 	{
 		int N=graph.size();
-		std::cout<<N<<std::endl;
+		//std::cout<<N<<std::endl;
 		std::vector<int> dfn(N,0);
 		std::vector<int> low(N,0);
 		int root=0;
@@ -831,9 +831,10 @@ namespace test5_namespace
 		{
 			if(ret[i])
 			{
-				std::cout<<i+'A'<<std::endl;
+				printf("%c ",i+'A');
 			}
 		}
+		printf("\n");
 	}
 	void test_out()
 	{
