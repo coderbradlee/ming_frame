@@ -765,7 +765,7 @@ namespace test5_namespace
 	}
 	void articulationPoint(
 		const std::vector<std::vector<int>>& graph,
-		int index,
+		int i,
 		int parent,
 		int root,
 		std::vector<int>& dfn,
