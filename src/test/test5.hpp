@@ -847,7 +847,7 @@ namespace test5_namespace
 		int minIndex=0;
 		for(int i=1;i<dist.size();++i)
 		{
-			printf("dist[i]:%d,i:%d\n",dist[i],i );
+			//printf("dist[i]:%d,i:%d\n",dist[i],i );
 			if((dist[i]<min)&&(!choiced[i]))
 			{
 				min=dist[i];
@@ -879,8 +879,12 @@ namespace test5_namespace
 			int newNode=findNewNode(choiced,dist);
 			choiced[newNode]=true;
 			for(int i=1;i<size;++i)
-			{
-				dist[i]=std::min(dist[i],dist[newNode]+graph[newNode][i]);
+			{	
+				if(graph[newNode][i]<INFINITY)
+				{
+					dist[i]=std::min(dist[i],dist[newNode]+graph[newNode][i]);
+				}
+				
 			}
 		}
 			
