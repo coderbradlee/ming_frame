@@ -880,6 +880,7 @@ namespace test5_namespace
 			choiced[newNode]=true;
 			for(int i=1;i<size;++i)
 			{	
+				printf("%d %d\n", dist[newNode],graph[newNode][i]);
 				if(graph[newNode][i]<INFINITY)
 				{
 					dist[i]=std::min(dist[i],dist[newNode]+graph[newNode][i]);
