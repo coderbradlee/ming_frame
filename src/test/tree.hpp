@@ -30,7 +30,7 @@ public:
 		int count=0;
 		int maxcount=0;
 		int leftmax,rightmin;
-		_largestBST(m_root,count,maxcount,leftmax,rightmin,tn)
+		//_largestBST(m_root,count,maxcount,leftmax,rightmin,tn)
 		return maxcount;
 	}
 	~binaryTree()
@@ -71,7 +71,7 @@ private:
 			if(count>maxcount)
 			{
 				maxcount=count;
-				tn=m_root;
+		//		tn=m_root;
 			}
 			return true;
 		}
