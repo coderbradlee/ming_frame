@@ -695,7 +695,12 @@ namespace test5_namespace
 	{
 	public:
 		unionFindSet():m_N(0){}
-		unionFindSet(int n):m_N(n),m_parent(n,0){}
+		unionFindSet(int n):m_N(n),m_parent(n,0)
+		{
+			for(int i=0;i<m_N;++i)
+				m_parent[i]=i;
+
+		}
 		~unionFindSet(){}
 		
 		int find(int i)
