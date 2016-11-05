@@ -860,7 +860,8 @@ namespace test5_namespace
 		const std::vector<std::vector<int>>& graph,
 		int start,
 		std::vector<bool>& choiced,
-		std::vector<int>& dist,std::vector<int>& pre)
+		std::vector<int>& dist,
+		std::vector<int>& pre)
 	{
 		int size=graph.size();
 		{
@@ -893,7 +894,11 @@ namespace test5_namespace
 				}		
 			}
 		}
-			
+		for(auto i:pre)
+		{
+			std::cout<<i<<" ";
+		}
+		std::endl;
 		
 	}
 	void minPath(int start,int end,const std::vector<int>& pre)
@@ -903,9 +908,8 @@ namespace test5_namespace
 		path.push_back(end);
 		while(pre[i]!=start)
 		{
-			int t=pre[i];
+			i=pre[i];
 			path.push_back(t);
-			i=t;
 		}
 		path.push_back(start);
 		for(auto it=path.rbegin();it!=path.rend();++it)
