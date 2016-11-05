@@ -841,9 +841,31 @@ namespace test5_namespace
 		}
 		printf("\n");
 	}
+	void dijkstra(const std::vector<std::vector<int>>& graph,int start,std::vector<int> choiced)
+	{
+
+	}
+	void test_dijkstra()
+	{
+		const int N=7;
+		std::vector<std::vector<int>> v(N,std::vector<int>(N,INFINITY));
+		v[0][0]=0;v[0][1]=20;v[0][2]=50;v[0][3]=30;
+		v[1][1]=0;v[1][2]=25;v[1][5]=70;
+		v[2][2]=0;v[2][3]=40;v[2][4]=25;v[2][5]=50;
+		v[3][3]=0;v[3][4]=55;
+		v[4][4]=0;v[4][5]=10;v[4][6]=70;
+		v[5][5]=0;v[5][6]=50;
+		v[6][6]=0;
+		std::vector<int> choiced;
+		std::vector<int> dist(N,INFINITY);
+		dist[0]=0;//到自己的距离
+		//计算0点到其他节点的距离
+		dijkstra(v,0,choiced);
+	}
 	void test_out()
 	{
-		test_articulationPoint();
+		test_dijkstra();
+		// test_articulationPoint();
 		// test_unionFindSet();
 		//test_tree();
 		//test_is_post_order();
