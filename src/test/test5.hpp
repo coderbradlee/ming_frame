@@ -841,6 +841,20 @@ namespace test5_namespace
 		}
 		printf("\n");
 	}
+	int findNewNode(const std::vector<int> choiced,const std::vector<int> dist)
+	{
+		int min=dist[0];
+		int minIndex=0;
+		for(int i=0;i<dist.size();++i)
+		{
+			if(dist[i]<min&&(choiced.find(i)==choiced.end()))
+			{
+				min=dist[i];
+				minIndex=i;
+			}	
+		}
+		return minIndex;
+	}
 	void dijkstra(
 		const std::vector<std::vector<int>>& graph,
 		int start,
