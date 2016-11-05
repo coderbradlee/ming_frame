@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11 -g -Wall -O0    CMakeFiles/sample5_asio.t.dir/sample5_asio.cpp.o  -o ../../bin/sample5_asio.t -rdynamic -llibgo ../../lib/liblibgo_main.a -lboost_coroutine -lboost_context -lboost_system -lboost_thread -lpthread -ldl -lrt 

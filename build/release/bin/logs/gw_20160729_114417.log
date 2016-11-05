@@ -1,9 +1,0 @@
-20160729 11:44:17.029994  6639 DEBUG EventLoop EventLoop created 0x7FFC71203BC0 in thread 6639 - EventLoop.cc:76
-20160729 11:44:17.030022  6639 INFO  pid = 6639, idle seconds = 10 - test1.cpp:113
-20160729 11:44:17.030334  6639 INFO  size = 0 - test1.cpp:88
-20160729 11:44:18.030725  6639 INFO  size = 1 - test1.cpp:88
-20160729 11:44:19.031563  6639 INFO  size = 2 - test1.cpp:88
-20160729 11:44:20.031917  6639 INFO  size = 3 - test1.cpp:88
-20160729 11:44:21.032687  6639 INFO  size = 4 - test1.cpp:88
-20160729 11:44:22.033465  6639 INFO  size = 5 - test1.cpp:88
-20160729 11:44:23.034159  6639 INFO  size = 6 - test1.cpp:88

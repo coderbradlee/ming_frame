@@ -1,2 +1,0 @@
-20161105 17:14:10.057290 48799 INFO  ./test_main [number of IO threads] [number of worker threads] [-n] - test_main.cpp:302
-20161105 17:14:10.057894 48799 INFO  pid = 48799, tid = 48799 - test_main.cpp:303

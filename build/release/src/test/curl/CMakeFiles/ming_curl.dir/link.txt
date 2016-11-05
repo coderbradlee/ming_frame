@@ -1,2 +1,0 @@
-/usr/bin/ar cr ../../../lib/libming_curl.a  CMakeFiles/ming_curl.dir/Curl.cc.o
-/usr/bin/ranlib ../../../lib/libming_curl.a
