@@ -716,7 +716,7 @@ namespace test5_namespace
 			}
 			return i;
 		}
-		void union(int i,int j)
+		void _union(int i,int j)
 		{
 			int left=find(i);
 			int right=find(j);
@@ -748,13 +748,13 @@ namespace test5_namespace
 	void test_unionFindSet()
 	{
 		unionFindSet ufs(10);
-		ufs.union(2,6);
-		ufs.union(5,6);
-		ufs.union(1,8);
-		ufs.union(2,9);
-		ufs.union(5,3);
-		ufs.union(4,8);
-		ufs.union(4,0);
+		ufs._union(2,6);
+		ufs._union(5,6);
+		ufs._union(1,8);
+		ufs._union(2,9);
+		ufs._union(5,3);
+		ufs._union(4,8);
+		ufs._union(4,0);
 		ufs.print();
 
 	}
