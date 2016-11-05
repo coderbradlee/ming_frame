@@ -881,7 +881,7 @@ namespace test5_namespace
 			for(int i=1;i<size;++i)
 			{	
 				int temp=graph[newNode][i]+graph[newNode][i];
-				printf("%d\n",temp);
+				// printf("%d\n",temp);
 				if(temp>0)
 				{
 					dist[i]=std::min(dist[i],temp);
