@@ -771,7 +771,7 @@ namespace test5_namespace
 		std::vector<int>& dfn,
 		std::vector<int>& low,
 		int& n,
-		std::vector<bool> ret)
+		std::vector<bool>& ret)
 	{
 
 	}
