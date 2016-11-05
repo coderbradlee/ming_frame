@@ -780,7 +780,7 @@ namespace test5_namespace
 		{
 			if(graph[i][j]!=0)
 			{
-				if(dfn[j]==0)
+				if(dfn[j]==-1)
 				{
 					++child;
 					articulationPoint(graph,j,i,root,dfn,low,n,ret);
@@ -804,7 +804,7 @@ namespace test5_namespace
 	{
 		int N=graph.size();
 		//std::cout<<N<<std::endl;
-		std::vector<int> dfn(N,0);
+		std::vector<int> dfn(N,-1);
 		std::vector<int> low(N,0);
 		int root=0;
 		int n=0;
