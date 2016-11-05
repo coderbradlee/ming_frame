@@ -909,7 +909,7 @@ namespace test5_namespace
 		while(pre[i]!=start)
 		{
 			i=pre[i];
-			path.push_back(t);
+			path.push_back(i);
 		}
 		path.push_back(start);
 		for(auto it=path.rbegin();it!=path.rend();++it)
