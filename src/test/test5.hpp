@@ -843,7 +843,7 @@ namespace test5_namespace
 	}
 	int findNewNode(const std::vector<bool>& choiced,const std::vector<int>& dist)
 	{
-		int min=dist[0];
+		int min=INFINITY;
 		int minIndex=0;
 		for(int i=1;i<dist.size();++i)
 		{
