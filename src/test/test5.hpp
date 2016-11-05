@@ -760,7 +760,8 @@ namespace test5_namespace
 	}
 	void test_out()
 	{
-		test_tree();
+		test_unionFindSet();
+		//test_tree();
 		//test_is_post_order();
 		//test_inpre2post();
 		//test_huffman();
