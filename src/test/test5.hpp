@@ -775,7 +775,7 @@ namespace test5_namespace
 	{
 		dfn[i]=low[i]=n;
 		++n;
-
+		int child=0;
 		for(int j=0;j<graph.size();++j)
 		{
 			if(graph[i][j]!=0)
@@ -788,7 +788,10 @@ namespace test5_namespace
 					if((i!=root)&&(low[j]>dfn[i]))
 						ret[i]=true;
 					else if((i==root)&&(child==2))
+					{
 						ret[i]=true;
+						child=0;
+					}
 				}
 				else if(parent!=j)
 				{
