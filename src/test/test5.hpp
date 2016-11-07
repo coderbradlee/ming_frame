@@ -1282,11 +1282,49 @@ namespace test5_namespace
 	{
 		const char in[]="ABCDEFG";
 		const char out[]="BAEDFGC";
+		const char out1[]="CABEDFG";
 		std::cout<<is_possible(in,7,out)<<std::endl;
+		std::cout<<is_possible(in,7,out1)<<std::endl;
+	}
+	void catalanResult(std::vector<std::string>& prefix,std::vector<std::string>& suffix,std::vector<std::string>& out)
+	{
+		for(auto i:prefix)
+			for(auto j:suffix)
+			{
+				out.push_back(i+"("+j+")");
+			}
+	}
+	void catalan(std::vector<std::string>& out,int size,const std::string& in)
+	{
+		if(size==0)
+			out.push_back("");
+		else if(size==1)
+			out.push_back(in[size]);
+		int ret=0;
+		for(int i=0;i<size;++i)
+		{	
+			std::vector<std::string> prefix,suffix;
+			catalan(prefix,i,in);
+			catalan(suffix,size-1-i,in.substr(size-1-i));
+			catalanResult(prefix,suffix,out);
+		}
+	}
+	void test_catalan()
+	{
+		const int N=5;
+		std::cout<<allParentheses(N)<<std::endl;
+		std::string in="ABCDE";
+		std::vector<std::string> out;
+		catalan(out,5,in);
+		for(int i=0;i<catalan(N);++i)
+		{
+			std::cout<<i<<": "<<out[i]<<std::endl;
+		}
 	}
 	void test_out()
 	{
-		test_pushStack();
+		test_catalan();
+		// test_pushStack();
 		// test_prim();
 		// test_bellmanFord();
 		// test_floyd();
