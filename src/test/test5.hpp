@@ -1064,7 +1064,7 @@ namespace test5_namespace
 		v[5][5]=0;v[5][6]=50;
 		v[6][6]=0;
 		std::vector<std::vector<int>> shortestPath(N,std::vector<int>(N,INFINITY));
-		std::vector<std::vector<int>> next(N,-1);
+		std::vector<std::vector<int>> next(N,std::vector<int>(N,-1));
 		floyd(v,shortestPath,next);
 		
 		floydMinPath(0,6,next);
