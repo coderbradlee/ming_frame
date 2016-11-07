@@ -1029,16 +1029,28 @@ namespace test5_namespace
 			for(int i=0;i<size;++i)
 				for(int j=0;j<size;++j)
 				{
-					if(graph[i][j]>graph[i][k]+graph[k][j])
+					int temp=sp[i][k]+sp[k][j];
+					if(temp>0)
 					{
-						sp[i][j]=graph[i][k]+graph[k][j];
-						next[i][j]=next[i][k];
+						if(sp[i][j]>sp[i][k]+sp[k][j])
+						{
+							sp[i][j]=sp[i][k]+sp[k][j];
+							next[i][j]=next[i][k];
+						}
 					}
 				}
 		}
 	}
 	void floydMinPath(int start,int end,const std::vector<std::vector<int>>& next)
 	{
+		for(auto i:next)
+		{	
+			for(auto j:i)
+			{
+				std::cout<<j<<" ";
+			}
+			std::cout<<std::endl;
+		}
 		std::vector<int> v;
 		v.push_back(start);
 		int k=next[start][end];
@@ -1048,9 +1060,14 @@ namespace test5_namespace
 			k=next[k][end];
 		}
 		v.push_back(end);
-		for(auto i:v)
-			printf("%d ", i);
-		printf("\n");
+		for(int i=0;i<v.size();++i)
+		{
+			std::cout<<v[i]<<" ";
+		}
+		std::cout<<std::endl;
+		// for(auto i:v)
+		// 	printf("%d ", i);
+		// printf("\n");
 	}
 	void test_floyd()
 	{
@@ -1063,16 +1080,176 @@ namespace test5_namespace
 		v[4][4]=0;v[4][5]=10;v[4][6]=70;
 		v[5][5]=0;v[5][6]=50;
 		v[6][6]=0;
-		std::vector<std::vector<int>> shortestPath(N,std::vector<int>(N,INFINITY));
+		std::vector<std::vector<int>> shortestPath(N,std::vector<int>(N,INT_MAX));
 		std::vector<std::vector<int>> next(N,std::vector<int>(N,-1));
 		floyd(v,shortestPath,next);
+		for(auto i:shortestPath)
+		{
+			for(auto j:i)
+			{
+				std::cout<<j<<" ";
+			}
+			std::cout<<std::endl;
+		}
+		floydMinPath(0,6,next);
+		floydMinPath(0,2,next);
+
+	}
+	void bellmanFord(const std::vector<std::vector<int>>& graph,
+		std::vector<int>& sp,std::vector<std::vector<int>>& next,int start)
+	{
+		int size=graph.size();
+		for(int i=0;i<size;++i)
+			sp[i]=graph[start][i];
+		for(int k=0;k<size;++k)
+		{   
+			//sp[k] 表示到k的距离
+			for(int i=0;i<size;++i)
+			{
+				for(int j=0;j<size;++j)
+				{
+					if((graph[i][j]<INFINITY)&&(i!=j))
+					{
+						int temp=sp[i]+graph[i][j];
+						if((temp>0)&&(sp[j]>temp))
+						{
+							sp[j]=temp;
+							std::cout<<i<<":"<<j<<":"<<graph[i][j]<<":"<<temp<<":"<<sp[j]<<std::endl;
+						}
+					}
+					
+				}
+			}
+		}
+	}
+	void test_bellmanFord()
+	{
+		const int N=7;
+		std::vector<std::vector<int>> v(N,std::vector<int>(N,INFINITY));
+		v[0][0]=0;v[0][1]=20;v[0][2]=50;v[0][3]=30;
+		v[1][1]=0;v[1][2]=25;v[1][5]=70;
+		v[2][2]=0;v[2][3]=40;v[2][4]=25;v[2][5]=50;
+		v[3][3]=0;v[3][4]=55;
+		v[4][4]=0;v[4][5]=10;v[4][6]=70;
+		v[5][5]=0;v[5][6]=50;
+		v[6][6]=0;
+		std::vector<int> shortestPath(N,INT_MAX);
+		std::vector<std::vector<int>> next(N,std::vector<int>(N,-1));
+		bellmanFord(v,shortestPath,next,0);
 		
+		for(auto j:shortestPath)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	
 		// floydMinPath(0,6,next);
 		// floydMinPath(0,2,next);
 	}
+	typedef struct Edge
+	{
+		int from;
+		int to;
+		int value;
+		Edge(int froms,int tos,int values):from(froms),to(tos),value(values){}
+	}edge;
+	void addEdge(
+		std::vector<edge>& edges,
+		int from,
+		const std::vector<std::vector<int>>& graph,
+		const std::vector<bool>& s)
+	{
+		for(int i=0;i<graph.size();++i)
+		{
+			if((graph[from][i]!=INT_MAX)&&(!s[i]))
+			{
+				//std::cout<<"add edge:"<<graph[from][i]<<std::endl;
+				edges.push_back(edge(from,i,graph[from][i]));
+			}
+		}
+	}
+	void deleteEdge(std::vector<edge>& edges,int to)
+	{
+		for(auto it=edges.begin();it!=edges.end();++it)
+		{
+			if(it->to==to)
+				edges.erase(it);
+		}
+	}
+	edge minEdge(const std::vector<edge>& edges)
+	{
+		int minValue=edges[0].value;
+		int index=0;
+		for(int i=0;i<edges.size();++i)
+		{
+			if(edges[i].value<minValue)
+			{
+				minValue=edges[i].value;
+				index=i;
+			}
+		}
+		return edges[index];
+	}
+	void printEdge(const std::vector<edge>& edges)
+	{
+		for(auto minE:edges)
+		{
+			std::cout<<"("<<minE.from<<","<<minE.to<<"):"<<minE.value<<std::endl;
+		}
+		std::cout<<"-----------------"<<std::endl;
+	}
+	void prim(
+		const std::vector<std::vector<int>>& graph,
+		std::vector<edge>& result)
+	{
+		//add node to result until all node in set
+		int N=graph.size();
+		std::vector<bool> s(N,false);
+		s[0]=true;
+		std::vector<edge> edges;
+		edge minE(0,0,0);
+		int from=0;
+		addEdge(edges,from,graph,s);
+
+		for(int i=0;i<N;++i)
+		{	
+			if(edges.empty())
+				return;
+			
+			minE=minEdge(edges);
+			
+			result[i]=minE;
+			s[minE.to]=true;
+			deleteEdge(edges,minE.to);
+			printEdge(edges);
+			//from=minE.to;
+			addEdge(edges,minE.to,graph,s);
+			std::cout<<"min:("<<minE.from<<","<<minE.to<<"):"<<minE.value<<std::endl;
+		}
+	}
+	void test_prim()
+	{
+		const int N=7;
+		std::vector<std::vector<int>> v(N,std::vector<int>(N,INT_MAX));
+		v[0][0]=0;v[0][1]=20;v[0][2]=50;v[0][3]=30;
+		v[1][1]=0;v[1][2]=25;v[1][5]=70;
+		v[2][2]=0;v[2][3]=40;v[2][4]=25;v[2][5]=50;
+		v[3][3]=0;v[3][4]=55;
+		v[4][4]=0;v[4][5]=10;v[4][6]=70;
+		v[5][5]=0;v[5][6]=50;
+		v[6][6]=0;
+		std::vector<edge> ret(N,edge(0,0,0));
+		prim(v,ret);
+		std::cout<<"---------------"<<std::endl;
+		for(auto& i:ret)
+			std::cout<<"("<<i.from<<","<<i.to<<"):"<<i.value<<std::endl;
+		
+	}
 	void test_out()
 	{
-		test_floyd();
+		test_prim();
+		// test_bellmanFord();
+		// test_floyd();
 		// test_dijkstra();
 		// test_articulationPoint();
 		// test_unionFindSet();
