@@ -29,9 +29,13 @@ public:
 	{
 		int count=0;
 		int maxcount=0;
-		int leftmax,rightmin;
-		//_largestBST(m_root,count,maxcount,leftmax,rightmin,tn)
+		int nodemax=0,nodemin=0;
+		_largestBST(m_root,count,maxcount,nodemin,nodemax,tn);
 		return maxcount;
+	}
+	void reverseTree()
+	{
+		_reverseTree(m_root);
 	}
 	~binaryTree()
 	{
@@ -42,36 +46,67 @@ public:
 		}
 	}
 private:
-	bool _largestBST(const treeNode* m_root,int& count,int& maxcount,int& min,int& max,treeNode*& tn)
+	void _reverseTree(treeNode* root)
 	{
-		if(!m_root)
+		if(!root)
+			return;
+		std::swap(root->left,root->right);
+		_reverseTree(root->left);
+		_reverseTree(root->right);
+
+	}
+	bool _largestBST(treeNode* root,int& count,int& maxcount,int& nodemin,int& nodemax,treeNode*& tn)
+	{
+		// count = 0;
+		// if(!root)
+		// 	return true;
+		// int nMin1 = INT_MAX, nMin2 = INT_MAX;
+		// int nMax1 = INT_MIN, nMax2 = INT_MIN;
+		// int c1, c2;
+		// if(!_largestBST(root->left, c1, maxcount, nMin1, nMax1, tn))
+		// 	return false;
+		// if(!_largestBST(root->right, c2, maxcount, nMin2, nMax2, tn))
+		// 	return false;
+		// if((root->data < nMax1) || (root->data > nMin2))
+		// 	return false;
+		// count = c1 + c2 + 1;
+		// nodemin = std::min(nMin1, root->data);
+		// nodemax = std::max(nMax2, root->data);
+		// if(count > maxcount)
+		// {
+		// 	maxcount = count;
+		// 	tn = root;
+		// }
+		// return true;
+
+
+		if(!root)
 		{
 			return true;
 		}
-
+		printf("%d %d %d %d %d\n", count,maxcount,nodemin,nodemax,root->data);
 		int leftcount=0;
 		int rightcount=0;
-		int leftmax=-1,leftmin=-1;
-		int rightmin=-1,rightmax=-1;
+		int leftmax=INT_MIN,leftmin=INT_MAX;
+		int rightmin=INT_MAX,rightmax=INT_MIN;
 		count=0;
-		if(!_largestBST(m_root->left,leftcount,maxcount,leftmin,leftmax,tn))
+		if(!_largestBST(root->left,leftcount,maxcount,leftmin,leftmax,tn))
 		{
 			return false;
 		}
-		if(!_largestBST(m_root->right,rightcount,maxcount,rightmin,rightmax,tn))
+		if(!_largestBST(root->right,rightcount,maxcount,rightmin,rightmax,tn))
 		{
 			return false;
 		}
-		
-		if((leftmax<m_root->data)&&(rightmin>m_root->data))
+		if((leftmax<(root->data))&&(rightmin>(root->data)))
 		{
-			max=std::max(leftmax,m_root->data);
-			min=std::min(rightmin,m_root->data);
+			nodemax=std::max(rightmax,root->data);
+			nodemin=std::min(leftmin,root->data);
 			count=leftcount+rightcount+1;
 			if(count>maxcount)
 			{
 				maxcount=count;
-		//		tn=m_root;
+				tn=root;
 			}
 			return true;
 		}

@@ -672,7 +672,7 @@ namespace test5_namespace
 	}
 	void test_tree()
 	{
-		int arr[]={1,5,2,3,7,4,6,8};
+		int arr[]={1,5,2,3,7,4};
 		binaryTree bt;
 		for(auto& i:arr)
 		{
@@ -690,6 +690,60 @@ namespace test5_namespace
 		treeNode* tn;
 		int num=bt.largestBST(tn);
 		printf("%d %d\n", tn->data,num);
+		bt.reverseTree();
+		bt.inOrder(print);
+		printf("\n");
+		bt.preOrder(print);
+		printf("\n");
+	}
+	int allParentheses(int size)
+	{
+		if(size==0)
+			return 1;
+		else if(size==1)
+			return 1;
+		int ret=0;
+		for(int i=0;i<size;++i)
+		{	
+			ret=ret+allParentheses(i)*allParentheses(size-1-i);
+		}
+		return ret;
+
+	}
+	void unionResult(std::vector<std::string>& prefix,std::vector<std::string>& suffix,std::vector<std::string>& out)
+	{
+		for(auto i:prefix)
+			for(auto j:suffix)
+			{
+				out.push_back(i+"("+j+")");
+			}
+	}
+	void allParentheses(std::vector<std::string>& out,int size)
+	{
+		if(size==0)
+			out.push_back("");
+		else if(size==1)
+			out.push_back("()");;
+		int ret=0;
+		for(int i=0;i<size;++i)
+		{	
+			std::vector<std::string> prefix,suffix;
+			allParentheses(prefix,i);
+			allParentheses(suffix,size-1-i);
+			unionResult(prefix,suffix,out);
+		}
+	}
+	void test_allparentheses()
+	{
+		const int N=5;
+		std::cout<<allParentheses(N)<<std::endl;
+		std::cout<<allParentheses(15)<<std::endl;
+		std::vector<std::string> out;
+		allParentheses(out,5);
+		for(int i=0;i<allParentheses(N);++i)
+		{
+			std::cout<<i<<": "<<out[i]<<std::endl;
+		}
 	}
 	class unionFindSet
 	{
@@ -960,9 +1014,66 @@ namespace test5_namespace
 		minPath(0,6,pre);
 		minPath(0,2,pre);
 	}
+	void floyd(const std::vector<std::vector<int>>& graph,
+		std::vector<std::vector<int>>& sp,std::vector<std::vector<int>>& next)
+	{
+		int size=graph.size();
+		sp=graph;
+		for(int i=0;i<size;++i)
+			for(int j=0;j<size;++j)
+			{
+				next[i][j]=j;
+			}
+		for(int k=0;k<size;++k)
+		{
+			for(int i=0;i<size;++i)
+				for(int j=0;j<size;++j)
+				{
+					if(graph[i][j]>graph[i][k]+graph[k][j])
+					{
+						sp[i][j]=graph[i][k]+graph[k][j];
+						next[i][j]=next[i][k];
+					}
+				}
+		}
+	}
+	void floydMinPath(int start,int end,const std::vector<std::vector<int>>& next)
+	{
+		std::vector<int> v;
+		v.push_back(start);
+		int k=next[start][end];
+		while(k!=end)
+		{
+			v.push_back(k);
+			k=next[k][end];
+		}
+		v.push_back(end);
+		for(auto i:v)
+			printf("%d ", i);
+		printf("\n");
+	}
+	void test_floyd()
+	{
+		const int N=7;
+		std::vector<std::vector<int>> v(N,std::vector<int>(N,INFINITY));
+		v[0][0]=0;v[0][1]=20;v[0][2]=50;v[0][3]=30;
+		v[1][1]=0;v[1][2]=25;v[1][5]=70;
+		v[2][2]=0;v[2][3]=40;v[2][4]=25;v[2][5]=50;
+		v[3][3]=0;v[3][4]=55;
+		v[4][4]=0;v[4][5]=10;v[4][6]=70;
+		v[5][5]=0;v[5][6]=50;
+		v[6][6]=0;
+		std::vector<std::vector<int>> shortestPath(N,std::vector<int>(N,INFINITY));
+		std::vector<std::vector<int>> next(N,-1);
+		floyd(v,shortestPath,next);
+		
+		floydMinPath(0,6,next);
+		floydMinPath(0,2,next);
+	}
 	void test_out()
 	{
-		test_dijkstra();
+		test_floyd();
+		// test_dijkstra();
 		// test_articulationPoint();
 		// test_unionFindSet();
 		//test_tree();
