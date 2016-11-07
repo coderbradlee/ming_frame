@@ -1245,9 +1245,49 @@ namespace test5_namespace
 			std::cout<<"("<<i.from<<","<<i.to<<"):"<<i.value<<std::endl;
 		
 	}
+	bool(const char* in,int len,const char* out)
+	{
+		int outIndex=0;
+		int inIndex=0;
+		std::stack<char> q;
+		while(outIndex<len)
+		{
+			if(!q.empty())
+			{
+				if(q.top()!=out[outIndex])
+				{
+					if(inIndex>=len)
+						return false;
+					q.push(in[inIndex]);
+					++inIndex;
+				}
+				else
+				{
+					q.pop();
+					++outIndex;
+				}
+			}
+			else
+			{
+				if(inIndex>=len)
+						return false;
+				q.push(in[inIndex]);
+				++inIndex;
+			}
+
+		}
+		return true;
+	}
+	void test_pushStack()
+	{
+		const char in[]="ABCDEFG";
+		const char out[]="BAEDFGC";
+		std::cout<<is_possible(in,7,out)<<std::endl;
+	}
 	void test_out()
 	{
-		test_prim();
+		test_pushStack();
+		// test_prim();
 		// test_bellmanFord();
 		// test_floyd();
 		// test_dijkstra();
