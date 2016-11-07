@@ -1245,7 +1245,7 @@ namespace test5_namespace
 			std::cout<<"("<<i.from<<","<<i.to<<"):"<<i.value<<std::endl;
 		
 	}
-	bool(const char* in,int len,const char* out)
+	bool is_possible(const char* in,int len,const char* out)
 	{
 		int outIndex=0;
 		int inIndex=0;
