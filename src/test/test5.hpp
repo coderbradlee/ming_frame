@@ -1299,7 +1299,7 @@ namespace test5_namespace
 		if(size==0)
 			out.push_back("");
 		else if(size==1)
-			out.push_back(in[size]);
+			out.push_back(std::string(in[size]));
 		int ret=0;
 		for(int i=0;i<size;++i)
 		{	
@@ -1316,7 +1316,7 @@ namespace test5_namespace
 		std::string in="ABCDE";
 		std::vector<std::string> out;
 		catalan(out,5,in);
-		for(int i=0;i<catalan(N);++i)
+		for(int i=0;i<allParentheses(N);++i)
 		{
 			std::cout<<i<<": "<<out[i]<<std::endl;
 		}
