@@ -22,6 +22,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <algorithm>
+#include <set>
 #include "tree.hpp"
 namespace test5_namespace
 {
@@ -1294,18 +1295,34 @@ namespace test5_namespace
 				out.push_back(i+"("+j+")");
 			}
 	}
-	void catalan(std::vector<std::string>& out,int size,const std::string& in)
+	void catalan(std::vector<std::string>& out,int size,const std::string& in,int wholeSize)
 	{
 		if(size==0)
-			out.push_back("");
+		{
+			for(auto i:out)
+			{
+				i.append(std::string(in.c_str()+size));
+			}
+			//out[].push_back("");
+			return;
+		}	
 		else if(size==1)
-			out.push_back(std::string(in[size]));
-		int ret=0;
+		{
+			for(auto i:out)
+			{
+				i.append(std::string(in.c_str()+size));
+			}
+			//out.push_back(std::string(in.c_str()+size));
+			return;
+		}
+		//int ret=0;
 		for(int i=0;i<size;++i)
 		{	
+			std::cout<<i<<":"<<size-1-i<<std::endl;
 			std::vector<std::string> prefix,suffix;
-			catalan(prefix,i,in);
-			catalan(suffix,size-1-i,in.substr(size-1-i));
+			catalan(prefix,i,in,wholeSize);
+			int temp=size-1-i;
+			catalan(suffix,temp,in.substr(wholeSize-temp),wholeSize);
 			catalanResult(prefix,suffix,out);
 		}
 	}
@@ -1313,17 +1330,90 @@ namespace test5_namespace
 	{
 		const int N=5;
 		std::cout<<allParentheses(N)<<std::endl;
+		int num=allParentheses(N);
 		std::string in="ABCDE";
-		std::vector<std::string> out;
-		catalan(out,5,in);
-		for(int i=0;i<allParentheses(N);++i)
+		std::vector<std::string> out(num);
+		catalan(out,5,in,5);
+		for(int i=0;i<num;++i)
 		{
 			std::cout<<i<<": "<<out[i]<<std::endl;
 		}
 	}
+	void extending(
+		std::string& cur,
+		std::vector<std::string>& children,
+		const std::set<std::string>& dict,
+		const std::string& end,
+		std::set<std::string>& visit)
+	{
+		std::string child=cur;
+		children.clear();
+		for(int i=0;i<cur.size();++i)
+		{
+			char t=cur[i];
+			for(char c='a';c!='z';++c)
+			{
+				if(c==t)
+					continue;
+				child[i]=c;
+				if((child==end)||((dict.find(child)!=dict.end())&&(visit.find(child)==visit.end())))
+				{
+					children.push_back(child);
+					visit.insert(child);
+				}
+			}
+			child[i]=t;
+		}
+	}
+	int calcLadderLength(const std::string& start,const std::string& end,const std::set<std::string>& dict)
+	{
+		std::queue<std::string> q;
+		q.push(start);
+		std::vector<std::string> children;
+		std::set<std::string> visit;
+		int step=0;
+		std::string cur;
+		int curNumber=1;
+		int nextNumber=0;
+		while(!q.empty())
+		{
+			cur=q.front();
+			q.pop();
+			--curNumber;
+			extending(cur,children,dict,end,visit);
+
+			nextNumber+=children.size();
+			if(curNumber==0)
+			{
+				++step;
+				curNumber=nextNumber;
+				nextNumber=0;
+			}
+			for(auto i:children)
+			{
+				if(i==end)
+					return step;
+				q.push(i);
+			}
+		}
+		return 0;
+	}
+	void test_wordLadder()
+	{
+		std::set<std::string> dict;
+		dict.insert("hot");
+		dict.insert("dot");
+		dict.insert("dog");
+		dict.insert("lot");
+		dict.insert("log");
+		std::string start="hit";
+		std::string end="cog";
+		std::cout<<calcLadderLength(start,end,dict)<<std::endl;
+	}
 	void test_out()
 	{
-		test_catalan();
+		test_wordLadder();
+		//test_catalan();
 		// test_pushStack();
 		// test_prim();
 		// test_bellmanFord();

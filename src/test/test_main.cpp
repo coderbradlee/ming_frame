@@ -5,7 +5,7 @@
 #include <boost/circular_buffer.hpp>
 #include <boost/noncopyable.hpp>
 #include "../procmon.hpp"
-#include "test5.hpp"
+#include "test6.hpp"
 //#include <unistd.h>
 
 using namespace muduo;
@@ -302,7 +302,7 @@ int main(int argc, char* argv[])
     LOG_INFO << argv[0] << " [number of IO threads] [number of worker threads] [-n]";
     LOG_INFO << "pid = " << getpid() << ", tid = " << CurrentThread::tid();
   
-    test5_namespace::test_out();
+    test6_namespace::test_out();
     //foo();
     sleep(10);
    
