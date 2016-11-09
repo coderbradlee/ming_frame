@@ -302,8 +302,16 @@ int main(int argc, char* argv[])
     LOG_INFO << argv[0] << " [number of IO threads] [number of worker threads] [-n]";
     LOG_INFO << "pid = " << getpid() << ", tid = " << CurrentThread::tid();
   
-    test6_namespace::test_out();
-    //foo();
+
+    {
+        muduo::Timestamp start = muduo::Timestamp::now();
+        test6_namespace::test_out();
+        
+        muduo::Timestamp end = muduo::Timestamp::now();
+        printf("%f\n", timeDifference(end, start));
+    }
+    
+
     sleep(10);
    
 }
