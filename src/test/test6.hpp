@@ -663,7 +663,7 @@ private:
 			return true;
 		}
 		std::vector<horseStep> hs(8);
-		int numOfNextStep=gatherHorseStep(hs,i,j,step==m_rowSize*m_colSize-1);
+		int numOfNextStep=gatherHorseStep(hs,i,j,step==m_rowSize*m_colSize);
 		for(int k=0;k<numOfNextStep;++k)
 		{
 			int direct=hs[k].directIndex;
