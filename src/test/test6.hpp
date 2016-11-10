@@ -827,13 +827,13 @@ public:
 			if(m_young[i][c]>m_young[r][j])
 			{
 				std::swap(m_young[i][c],m_young[i][j]);
-				--i;	
+				--j;	
 			}
 			else
 			{
 				//std::cout<<i<<":"<<j<<" "<<m_young[i][j]<<std::endl;
 				std::swap(m_young[r][j],m_young[i][j]);
-				--j;
+				--i;
 			}
 			if(r==i&&j==c)
 			{
