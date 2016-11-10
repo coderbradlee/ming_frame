@@ -899,11 +899,11 @@ void test_youngTableau()
 		you.inserts(10);
 		you.inserts(9);
 		you.inserts(3);
-		you.prints();
+		//you.prints();
 		you.inserts(2);
-		you.prints();
+		//you.prints();
 		you.inserts(8);
-		you.prints();
+		//you.prints();
 		you.inserts(6);
 		you.prints();
 	}
@@ -917,7 +917,7 @@ void test_youngTableau()
 		you.inserts2(2);
 		you.inserts2(8);
 		you.inserts2(6);
-		//you.prints();
+		you.prints();
 	}
 }
 void test_out()
