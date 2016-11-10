@@ -731,7 +731,7 @@ void test_horseJump()
 	h.solve(0,0);
 	h.print();
 }
-void merge(std::vector<int>& arr,int low,int mid,int high)
+void merge(std::vector<int>& arr,int low,int mid,int high,int& count)
 {
 	std::vector<int> temp;
 	int midIndex=mid+1;
@@ -747,14 +747,17 @@ void merge(std::vector<int>& arr,int low,int mid,int high)
 		else
 		{
 			temp.push_back(arr[midIndex]);
+			count+=mid-lowIndex+1;
+			for(int k=lowIndex;k<=mid;++k)
+			{
+				std::cout<<"("<<arr[k]<<","<<arr[midIndex]<<")"<<std::endl;
+			}
+			
 			++midIndex;
+			
 		}
 	}
-	for(auto& i:temp)
-	{
-		std::cout<<i<<" ";
-	}
-	std::cout<<std::endl;
+	
 	if(lowIndex<=mid)
 	{
 		std::copy(arr.begin()+lowIndex,arr.begin()+mid+1,std::back_inserter(temp));
@@ -768,28 +771,157 @@ void merge(std::vector<int>& arr,int low,int mid,int high)
 		arr[low+i]=temp[i];
 	}
 }
-void mergeSort(std::vector<int>& arr,int low,int high)
+void mergeSort(std::vector<int>& arr,int low,int high,int& count)
 {
 	if(low>=high)
 		return;
 	int mid=(low+high)/2;
-	mergeSort(arr,low,mid);
-	mergeSort(arr,mid+1,high);
-	merge(arr,low,mid,high);
+	
+	mergeSort(arr,low,mid,count);
+	mergeSort(arr,mid+1,high,count);
+	merge(arr,low,mid,high,count);
 }
 void test_merge()
 {
-	std::vector<int> arr{3,56,2,7,45,8,1};
-	mergeSort(arr,0,arr.size()-1);
+	//std::vector<int> arr{3,56,2,7,45,8,1};
+	std::vector<int> arr{2,4,6,34,9,7,5,44,3};
+	int count=0;
+	mergeSort(arr,0,arr.size()-1,count);
 	for(auto& i:arr)
 	{
 		std::cout<<i<<" ";
 	}
-	std::cout<<std::endl;
+	std::cout<<std::endl<<count<<std::endl;
+}
+class youngTableau
+{
+public:
+	youngTableau(int rowSize,int colSize):m_rowSize(rowSize),m_colSize(colSize),m_young(rowSize,std::vector<int>(colSize,99))
+	{}
+	void prints()
+	{
+		for(auto& i:m_young)
+		{
+			for(auto& j:i)
+			{
+				//std::cout<<j<<" ";
+				printf("%2d ",j );
+			}
+			std::cout<<std::endl;
+		}
+		std::cout<<"--------------------"<<std::endl;
+	}
+	void inserts(int num)
+	{
+		int i=m_rowSize-1;
+		int j=m_colSize-1;
+		if(m_young[i][j]<99)
+			return;//matrix is full 
+		m_young[i][j]=num;
+		
+		while(i>=0&&j>=0)
+		{
+			int r=((i>=1)?i-1:i);
+			int c=((j>=1)?j-1:j);
+			
+			if(m_young[i][c]>m_young[r][j])
+			{
+				std::swap(m_young[i][c],m_young[i][j]);
+				--i;	
+			}
+			else
+			{
+				//std::cout<<i<<":"<<j<<" "<<m_young[i][j]<<std::endl;
+				std::swap(m_young[r][j],m_young[i][j]);
+				--j;
+			}
+			if(r==i&&j==c)
+			{
+				break;
+			}
+			
+		}
+	}
+	bool rowOrCol()
+	{
+		return rand()%2==0;
+	}
+	void inserts2(int num)
+	{
+		int i=m_rowSize-1;
+		int j=m_colSize-1;
+		if(m_young[i][j]<1000)
+			return;//matrix is full 
+		m_young[i][j]=num;
+		
+		while(i>=0&&j>=0)
+		{
+			bool row=rowOrCol();
+			if(i>=1&&m_young[i-1][j]>m_young[i][j]&&row)
+			{
+				std::swap(m_young[i-1][j],m_young[i][j]);
+				--i;
+			}
+			else if(j>=1&&m_young[i][j-1]>m_young[i][j])
+			{
+				std::swap(m_young[i][j-1],m_young[i][j]);
+				--j;
+			}
+			else
+			{
+				//std::swap(m_young[row][col],m_young[i][j]);
+				break;
+			}
+			
+		}
+	}
+	void finds(int num)
+	{
+
+	}
+	void deletes(int num)
+	{
+
+	}
+private:
+	int m_rowSize;
+	int m_colSize;
+	std::vector<std::vector<int>> m_young;
+};
+void test_youngTableau()
+{
+	{
+		youngTableau you(4,5);
+		you.inserts(5);
+		you.inserts(4);
+		you.inserts(10);
+		you.inserts(9);
+		you.inserts(3);
+		you.prints();
+		you.inserts(2);
+		you.prints();
+		you.inserts(8);
+		you.prints();
+		you.inserts(6);
+		you.prints();
+	}
+	{
+		youngTableau you(4,5);
+		you.inserts2(5);
+		you.inserts2(4);
+		you.inserts2(10);
+		you.inserts2(9);
+		you.inserts2(3);
+		you.inserts2(2);
+		you.inserts2(8);
+		you.inserts2(6);
+		//you.prints();
+	}
 }
 void test_out()
 {
-	test_merge();
+	test_youngTableau();
+	// test_merge();
 	// test_horseJump();
 	// test_sudoku();
 	// test_queen();
