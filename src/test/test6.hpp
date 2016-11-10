@@ -576,6 +576,7 @@ class horseJump
 	{
 		int directIndex;
 		int numOfchoices;
+		HorseStep():directIndex(0),numOfchoices(0){}
 		// bool operator <(const horseStep& h)
 		// {
 		// 	return numOfchoices<h.numOfchoices;
@@ -662,19 +663,29 @@ private:
 			m_all.push_back(m_chess);
 			return true;
 		}
-		std::vector<horseStep> hs(8);
+		std::vector<horseStep> hs(8,horseStep());
 		int numOfNextStep=gatherHorseStep(hs,i,j,step==m_rowSize*m_colSize);
+		// for(auto& h:hs)
+		// {
+		// 	std::cout<<h.directIndex<<":"<<h.numOfchoices<<std::endl;
+		// }
+		std::cout<<numOfNextStep<<":"<<step+1<<std::endl;
 		for(int k=0;k<numOfNextStep;++k)
 		{
 			int direct=hs[k].directIndex;
 			int iCur=i+m_adjacentRow[direct];
 			int jCur=j+m_adjacentCol[direct];
-			m_chess[iCur][jCur]=step+1;
-			if(jumpWithNumOfChoices(iCur,jCur,step+1))
+			//std::cout<<direct<<":"<<iCur<<":"<<jCur<<std::endl;
+			if(canJump(iCur,jCur))
 			{
-				std::cout<<numOfNextStep<<std::endl;
+				m_chess[iCur][jCur]=step+1;
+
+				if(jumpWithNumOfChoices(iCur,jCur,step+1))
+				{
+					return true;
+				}
+				m_chess[iCur][jCur]=0;
 			}
-			m_chess[iCur][jCur]=0;
 		}
 		return false;
 	}
@@ -716,7 +727,7 @@ private:
 void test_horseJump()
 {
 	//horseJump h(8,9);
-	horseJump h(5,6);
+	horseJump h(4,5);
 	h.solve(0,0);
 	h.print();
 }
