@@ -850,26 +850,28 @@ public:
 	{
 		int i=m_rowSize-1;
 		int j=m_colSize-1;
-		if(m_young[i][j]<1000)
+		if(m_young[i][j]<99)
 			return;//matrix is full 
 		m_young[i][j]=num;
 		
 		while(i>=0&&j>=0)
 		{
-			bool row=rowOrCol();
-			if(i>=1&&m_young[i-1][j]>m_young[i][j]&&row)
+			int r=((i>=1)?i-1:i);
+			int c=((j>=1)?j-1:j);
+			
+			if(m_young[i][c]>m_young[r][j])
 			{
-				std::swap(m_young[i-1][j],m_young[i][j]);
+				std::swap(m_young[i][c],m_young[i][j]);
+				--j;	
+			}
+			if(m_young[i][c]<=m_young[r][j]&&rowOrCol())
+			{
+				//std::cout<<i<<":"<<j<<" "<<m_young[i][j]<<std::endl;
+				std::swap(m_young[r][j],m_young[i][j]);
 				--i;
 			}
-			else if(j>=1&&m_young[i][j-1]>m_young[i][j])
+			if(r==i&&j==c)
 			{
-				std::swap(m_young[i][j-1],m_young[i][j]);
-				--j;
-			}
-			else
-			{
-				//std::swap(m_young[row][col],m_young[i][j]);
 				break;
 			}
 			
