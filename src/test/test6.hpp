@@ -731,9 +731,66 @@ void test_horseJump()
 	h.solve(0,0);
 	h.print();
 }
+void merge(std::vector<int>& arr,int low,int mid,int high)
+{
+	std::vector<int> temp;
+	int midIndex=mid+1;
+	int lowIndex=low;
+	//++midIndex;
+	while((lowIndex<=mid)&&(midIndex<=high))
+	{	
+		if(arr[lowIndex]<arr[midIndex])
+		{
+			temp.push_back(arr[lowIndex]);
+			++lowIndex;
+		}
+		else
+		{
+			temp.push_back(arr[midIndex]);
+			++midIndex;
+		}
+	}
+	for(auto& i:temp)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+	if(lowIndex<=mid)
+	{
+		std::copy(arr.begin()+lowIndex,arr.begin()+mid+1,std::back_inserter(temp));
+	}
+	if(midIndex<=high)
+	{
+		std::copy(arr.begin()+midIndex,arr.begin()+high+1,std::back_inserter(temp));
+	}
+	for(int i=0;i<temp.size();++i)
+	{
+		arr[low+i]=temp[i];
+	}
+}
+void mergeSort(std::vector<int>& arr,int low,int high)
+{
+	if(low>=high)
+		return;
+	int mid=(low+high)/2;
+	mergeSort(arr,low,mid);
+	mergeSort(arr,mid+1,high);
+	merge(arr,low,mid,high);
+}
+void test_merge()
+{
+	std::vector<int> arr{3,56,2,7,45,8,1};
+	mergeSort(arr,0,arr.size()-1);
+	for(auto& i:arr)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
 void test_out()
 {
-	test_horseJump();
+	test_merge();
+	// test_horseJump();
 	// test_sudoku();
 	// test_queen();
 	//test_fillLake();
