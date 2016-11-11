@@ -1227,9 +1227,44 @@ void test_countSort()
 	}
 	std::cout<<std::endl;
 }
+int LIS1(const std::vector<int>& arr)
+{
+	int size=arr.size();
+	std::vector<int> lis(size,1);
+	int ret=0;
+	for(int i=1;i<size;++i)
+	{
+		for(int j=1;j<i;++j)
+		{
+			if(arr[i]>arr[j])
+			{
+				lis[i]=std::max(lis[i],lis[j]+1);
+
+			}
+		}
+		ret=std::max(ret,lis[i]);
+	}
+	return ret;
+}
+void test_LIS()
+{
+	{
+		std::vector<int> arr{1,4,6,2,8,9,7};
+		std::cout<<LIS1(arr)<<std::endl;;
+	}
+	{
+		std::vector<int> arr{1,2,3,4,5,6,7};
+		std::cout<<LIS1(arr)<<std::endl;;
+	}
+	{
+		std::vector<int> arr{2,3,1,4,9,5};
+		std::cout<<LIS1(arr)<<std::endl;;
+	}
+}
 void test_out()
 {
-	test_countSort();
+	test_LIS();
+	// test_countSort();
 	// test_primeSum();
 	//test_twoSum();
 	// test_youngTableau();
