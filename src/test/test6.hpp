@@ -1183,9 +1183,54 @@ void test_primeSum()
 	// 	std::cout<<index<<":"<<v[index]<<std::endl;
 	// }
 }
+void countSort(std::vector<int>& arr)
+{
+	int maxN=0;
+	int minN=0;
+	for(auto& i:arr)
+	{
+		if(i>maxN)
+			maxN=i;
+		if(i<minN)
+			minN=i;
+	}
+	std::vector<int> aux(maxN-minN+1,0);
+	for(int i=0;i<arr.size();++i)
+	{
+		++aux[arr[i]];
+	}
+	for(int i=1;i<aux.size();++i)
+	{
+		aux[i]+=aux[i-1];
+	}
+	// for(auto& i:aux)
+	// {
+	// 	std::cout<<i<<" ";
+	// }
+	// std::cout<<std::endl;
+	std::vector<int> ret(arr.size(),0);
+	for(int i=arr.size()-1;i>=0;--i)
+	{
+		int temp=arr[i];
+		int locate=--aux[temp];
+		ret[locate]=arr[i];
+	}
+	arr=ret;
+}
+void test_countSort()
+{
+	std::vector<int> arr{2,5,3,0,2,3,0,3};
+	countSort(arr);
+	for(auto& i:arr)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
 void test_out()
 {
-	test_primeSum();
+	test_countSort();
+	// test_primeSum();
 	//test_twoSum();
 	// test_youngTableau();
 	// test_merge();
