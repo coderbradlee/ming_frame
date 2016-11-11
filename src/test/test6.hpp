@@ -818,33 +818,36 @@ public:
 		if(m_young[i][j]<99)
 			return;//matrix is full 
 		m_young[i][j]=num;
-		
-		while(i>=0&&j>=0)
+		int r=i;
+		int c=j;
+		while(i>=0||j>=0)
 		{
-			int r=((i>=1)?i-1:i);
-			int c=((j>=1)?j-1:j);
-			
-			if(m_young[i][c]>m_young[r][j])
+			if((i>=1)&&(m_young[i-1][j]>m_young[r][c]))
 			{
-				std::swap(m_young[i][c],m_young[i][j]);
-				--j;	
+				//std::swap(m_young[i-1][j],m_young[i][j]);
+				r=i-1;
+				c=j;	
 			}
-			else
+			if((j>=1)&&(m_young[i][j-1]>m_young[r][c]))
 			{
 				//std::cout<<i<<":"<<j<<" "<<m_young[i][j]<<std::endl;
-				std::swap(m_young[r][j],m_young[i][j]);
-				--i;
+				r=i;
+				c=j-1;
 			}
-			if(r==i&&j==c)
+			if((r==i)&&(j==c))
 			{
 				break;
 			}
-			
+			std::swap(m_young[i][j],m_young[r][c]);
+			i=r;
+			j=c;
 		}
 	}
-	bool rowOrCol()
+	bool isBig(int a,int b)
 	{
-		return rand()%2==0;
+		if(rand()%2==0)
+		return a>=b;
+		return a>b;
 	}
 	void inserts2(int num)
 	{
@@ -853,37 +856,128 @@ public:
 		if(m_young[i][j]<99)
 			return;//matrix is full 
 		m_young[i][j]=num;
-		
-		while(i>=0&&j>=0)
+		int r=i;
+		int c=j;
+		while(i>=0||j>=0)
 		{
-			int r=((i>=1)?i-1:i);
-			int c=((j>=1)?j-1:j);
-			
-			if(m_young[i][c]>m_young[r][j])
+			if((i>=1)&&(m_young[i-1][j]>m_young[r][c]))
 			{
-				std::swap(m_young[i][c],m_young[i][j]);
-				--j;	
+				//std::swap(m_young[i-1][j],m_young[i][j]);
+				r=i-1;
+				c=j;	
 			}
-			if(m_young[i][c]<=m_young[r][j]&&rowOrCol())
+			if((j>=1)&&isBig(m_young[i][j-1],m_young[r][c]))
 			{
 				//std::cout<<i<<":"<<j<<" "<<m_young[i][j]<<std::endl;
-				std::swap(m_young[r][j],m_young[i][j]);
-				--i;
+				r=i;
+				c=j-1;
 			}
-			if(r==i&&j==c)
+			if((r==i)&&(j==c))
 			{
 				break;
 			}
-			
+			std::swap(m_young[i][j],m_young[r][c]);
+			i=r;
+			j=c;
 		}
 	}
-	void finds(int num)
+	bool finds(int num,int& row,int& col)
 	{
-
+		//search from top right
+		
+		// while(m_young[row][col]>num)
+		// {
+		// 	if(col==0)
+		// 		return false;
+		// 	--col;
+		// }
+		// while(m_young[row][col]<num)
+		// {
+		// 	if(row==m_rowSize-1)
+		// 		return false;
+		// 	++row;
+		// }
+		col=m_colSize-1;
+		for(row=0;row<m_rowSize;++row)
+		{
+			for(;col>=0;--col)
+			{
+				if(m_young[row][col]<num)
+				{
+					break;
+				}
+				else if(m_young[row][col]==num)
+					return true;
+			}
+		}
+		
+		return false;
 	}
-	void deletes(int num)
+	bool deletes(int num)
 	{
+		int i=0;
+		int j=0;
+		if(finds(num,i,j))
+		{
+			int r=i;
+			int c=j;
+			while(i<m_rowSize&&j<m_colSize)
+			{
+				if(m_young[r][c]==99)
+					break;
+				//if((i<m_rowSize-1)&&(m_young[i+1][j]<m_young[r][c]))
+				if(i<m_rowSize-1)
+				{
+					//std::swap(m_young[i-1][j],m_young[i][j]);
+					r=i+1;
+					c=j;	
+				}
+				if((j<m_colSize-1)&&m_young[i][j+1]<m_young[r][c])
+				{
+					//std::cout<<i<<":"<<j<<" "<<m_young[i][j]<<std::endl;
+					r=i;
+					c=j+1;
+				}
+				if((r==i)&&(j==c))
+				{
 
+					return true;
+				}
+				m_young[i][j]=m_young[r][c];
+				i=r;
+				j=c;
+			}
+		}
+		return false;
+	}
+	bool deletes2(int num)
+	{
+		int row=0;
+		int col=0;
+		std::vector<int> v;
+		if(finds(num,row,col))
+		{
+			for(int i=row;i<m_rowSize;++i)
+			{
+				for(int j=col;j<m_colSize;++j)
+				{
+					if(i==row&&j==col)
+					{	
+						m_young[i][j]=99;
+						continue;
+					}
+					v.push_back(m_young[i][j]);
+					m_young[i][j]=99;
+				}
+			}
+			
+			for(auto& i:v)
+			{
+				inserts2(i);
+			}
+		
+		}
+		return false;
 	}
 private:
 	int m_rowSize;
@@ -905,7 +999,7 @@ void test_youngTableau()
 		you.inserts(8);
 		//you.prints();
 		you.inserts(6);
-		you.prints();
+		//you.prints();
 	}
 	{
 		youngTableau you(4,5);
@@ -918,11 +1012,182 @@ void test_youngTableau()
 		you.inserts2(8);
 		you.inserts2(6);
 		you.prints();
+		int row=0;
+		int col=0;
+		if(you.finds(8,row,col))
+		{
+			std::cout<<row<<":"<<col<<std::endl;
+		}
+		// if(!you.finds(20,row,col))
+		// {
+		// 	std::cout<<row<<":"<<col<<std::endl;
+		// }
+		if(you.finds(5,row,col))
+		{
+			std::cout<<row<<":"<<col<<std::endl;
+		}
+		// you.deletes2(5);
+		// you.prints();
+		// you.deletes2(8);
+		// you.prints();
+		you.deletes(5);
+		you.prints();
+		you.deletes(8);
+		you.prints();
 	}
+	
+}
+void twoSum(std::vector<int> arr,int sum)
+{
+	int i=0;
+	int j=arr.size()-1;
+	while(i<j)
+	{
+		if(arr[i]+arr[j]>sum)
+		{
+			--j;
+		}
+		else if(arr[i]+arr[j]<sum)
+		{
+			++i;
+		}
+		else
+		{
+			std::cout<<arr[i]<<"+"<<arr[j]<<"="<<sum<<std::endl;
+			++i;
+			--j;
+		}
+	}
+}
+void eratosthenes(std::vector<int>& prime,int n)
+{
+	std::vector<bool> v(n+1,true);//set all prime
+	for(int i=2;i<=(int)std::sqrt(n);++i)
+	{
+		if(v[i])
+		{
+			for(int t=i;;++t)
+			{
+				int num=t*i;
+				if(num<=n)
+				{
+					
+					v[num]=false;
+				}
+				else
+				{
+					//std::cout<<num<<std::endl;
+					break;
+				}
+			}
+		}			
+	}
+	std::cout<<"---------------------"<<std::endl;
+	for(int j=2;j<n+1;++j)
+	{
+		if(v[j])
+			prime.push_back(j);
+	}
+}
+void test_twoSum()
+{
+	std::vector<int> v{0,3,7,9,11,14,16,17};
+	twoSum(v,20);
+}
+int twoSum2(const std::vector<int>& arr,int index,int sum)
+{
+	int i=0;
+	int j=index-1;
+	int count=0;
+	//int sum=arr[index];
+	while(i<j)
+	{
+		if((arr[i]+arr[j])>sum)
+		{
+			--j;
+		}
+		else if((arr[i]+arr[j])<sum)
+		{
+			++i;
+		}
+		else
+		{
+			++count;
+			//std::cout<<arr[i]<<"+"<<arr[j]<<"="<<sum<<"---->"<<count<<std::endl;
+			++i;
+			--j;
+		}
+	}
+	return count;
+}
+int findMinIndex(const std::vector<int>& arr,int interNum)
+{
+	int low=0;
+	int high=arr.size()-1;
+	
+    while(low<=high)
+    {
+    	int mid=(low+high)/2;
+    	if(arr[mid]==interNum)
+    	{
+    		return mid;
+    	}
+    	else if(arr[mid]>interNum)
+    	{
+    		high=mid-1;
+    	}
+    	else
+    	{
+    		low=mid+1;
+    	}
+    }
+    return low;
+}
+void primeSum(const std::vector<int>& arr,int size)
+{
+	int num=0;
+	int prime=0;
+	for(int i=0;i<size;++i)
+	{
+		int j=findMinIndex(arr,i);
+		j=twoSum2(arr,j,i);
+		//std::cout<<arr[i]<<": "<<j<<std::endl;
+		if(j>num)
+		{
+			num=j;
+			prime=i;
+			std::cout<<prime<<": "<<num<<std::endl;
+		}
+	}
+	std::cout<<prime<<": "<<num<<std::endl;
+}
+void test_primeSum()
+{
+	std::vector<int> v;
+	const int N=1000000;
+	eratosthenes(v,N);
+	
+	// for(auto& i:v)
+	// {
+	// 	std::cout<<i<<" ";
+	// }
+	// std::cout<<std::endl;
+	// std::cout<<v.size()<<std::endl;
+	 primeSum(v,N);
+	// {
+	// 	int index=findMinIndex(v,10);
+	// 	std::cout<<index<<":"<<v[index]<<std::endl;
+	// 	index=findMinIndex(v,50);
+	// 	std::cout<<index<<":"<<v[index]<<std::endl;
+	// 	index=findMinIndex(v,100);
+	// 	std::cout<<index<<":"<<v[index]<<std::endl;
+	// }
 }
 void test_out()
 {
-	test_youngTableau();
+	test_primeSum();
+	//test_twoSum();
+	// test_youngTableau();
 	// test_merge();
 	// test_horseJump();
 	// test_sudoku();
