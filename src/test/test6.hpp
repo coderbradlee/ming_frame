@@ -1258,37 +1258,38 @@ int LIS1(const std::vector<int>& arr,std::vector<int>& pre)
 	}
 	return ret;
 }
+void getLis(const std::vector<int>& arr,const std::vector<int>& pre)
+{
+	int lis=0;
+	for(int i=0;i<arr.size();++i)
+	{
+		if(pre[i]==lis)
+		{
+			std::cout<<arr[i]<<" ";
+			++lis;
+		}
+	}
+	std::cout<<std::endl;
+}
 void test_LIS()
 {
 	{
 		std::vector<int> arr{1,4,6,2,8,9,7};
 		std::vector<int> pre(arr.size(),-1);
 		std::cout<<LIS1(arr,pre)<<std::endl;
-		for(auto& i:pre)
-		{
-			std::cout<<i<<" ";
-		}
-		std::cout<<std::endl;
+		getLis(arr,pre);
 	}
 	{
 		std::vector<int> arr{1,2,3,4,5,6,7};
 		std::vector<int> pre(arr.size(),-1);
 		std::cout<<LIS1(arr,pre)<<std::endl;
-		for(auto& i:pre)
-		{
-			std::cout<<i<<" ";
-		}
-		std::cout<<std::endl;
+		getLis(arr,pre);
 	}
 	{
 		std::vector<int> arr{2,3,1,4,9,5};
 		std::vector<int> pre(arr.size(),-1);
 		std::cout<<LIS1(arr,pre)<<std::endl;
-		for(auto& i:pre)
-		{
-			std::cout<<i<<" ";
-		}
-		std::cout<<std::endl;
+		getLis(arr,pre);
 	}
 }
 void test_out()
