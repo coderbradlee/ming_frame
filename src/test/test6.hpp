@@ -1388,7 +1388,7 @@ bool isTaskable(
 	{
 		ele.push_back(std::make_pair(i,runUseMemory[i]-useMemory[i]));
 	}
-	std::sort(ele.begin(),ele.end(),[](auto a,auto b)
+	std::sort(ele.begin(),ele.end(),[](std::pair<int,int> a,std::pair<int,int> b)
 		{
 			return a.second<b.second;
 		});
