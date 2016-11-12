@@ -1315,9 +1315,45 @@ void test_maxProfitOneTime()
 	int one=maxProfitOneTime(arr);
 	std::cout<<one<<std::endl;
 }
+int maxProfitMultiTimes(const std::vector<int>& prices)
+{
+	const int K=3;
+	int size=prices.size();
+	std::vector<std::vector<int>> dp(K,std::vector<int>(size,0));
+	int ret=0;
+	for(int k=1;k<=K;++k)
+	{
+		for(int i=1;i<size;++i)
+		{
+			int maxSell=0;
+			for(int j=0;i<i-1;++j)
+			{
+				maxSell=std::max(maxSell,dp[k-1][j]+prices[i]-prices[j]);
+			}
+			dp[k][i]=std::max(maxSell,dp[k][i-1]);
+			ret=std::max(dp[k][i],ret);
+		}
+	}
+	for(auto& i:dp)
+	{
+		for(auto& j:i)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+	return ret;
+}
+void test_maxProfitMultiTimes()
+{
+	std::vector<int> arr{7,1,5,3,6,4};
+	int mul=maxProfitMultiTimes(arr);
+	std::cout<<mul<<std::endl;
+}
 void test_out()
 {
-	test_maxProfitOneTime();
+	test_maxProfitMultiTimes();
+	//test_maxProfitOneTime();
 	// test_LIS();
 	// test_countSort();
 	// test_primeSum();
