@@ -1452,9 +1452,23 @@ int countToNum(int num)
 	std::cout<<std::endl;
 	return step;
 }
+int countToNum2(int n)
+{
+	if(n==1)
+		return 0;
+	if(n%2!=0)
+	{
+		return countToNum2(n-1)+1;
+	}
+	else
+	{
+		return std::min(countToNum2(n-1),countToNum2(n/2))+1;
+	}
+}
 void test_countToNum()
 {
-	int step=countToNum(2015);
+	//int step=countToNum(2015);
+	int step=countToNum2(2015);
 	std::cout<<step<<std::endl;
 }
 void test_out()
