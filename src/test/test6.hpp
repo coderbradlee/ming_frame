@@ -1297,9 +1297,28 @@ void test_LIS()
 		getLis(arr,pre);
 	}
 }
+int maxProfitOneTime(const std::vector<int> arr)
+{
+	int size=arr.size();
+	int minValue=arr[0];
+	int profit=0;
+	for(int i=1;i<size;++i)
+	{
+		minValue=std::min(minValue,arr[i-1]);
+		profit=std::max(profit,arr[i]-minValue);
+	}
+	return profit;
+}
+void test_maxProfitOneTime()
+{
+	std::vector<int> arr{7,1,5,3,6,4};
+	int one=maxProfitOneTime(arr);
+	std::cout<<one<<std::endl;
+}
 void test_out()
 {
-	test_LIS();
+	test_maxProfitOneTime();
+	// test_LIS();
 	// test_countSort();
 	// test_primeSum();
 	//test_twoSum();
