@@ -1461,8 +1461,9 @@ int countToNum2(int n,std::vector<int>& count)
 	{
 		if(count[n-1]==0)
 		{
-			count[n-1]=countToNum2(n-1,count)+1;
-			return count[n-1];
+			count[n-1]=countToNum2(n-1,count)
+			count[n]=count[n-1]+1;
+			return count[n];
 		}
 		
 	}
@@ -1481,13 +1482,15 @@ int countToNum2(int n,std::vector<int>& count)
 		
 		if(one>two)
 		{
-			count[n/2]=1;
-			return two;
+			count[n/2]=two;
+			count[n]=count[n/2]+1;
+			return count[n];
 		}
 		else
 		{
-			count[n-1]=1;
-			return one;
+			count[n-1]=one;
+			count[n]=one+1;
+			return count[n];
 		}
 		
 	}
