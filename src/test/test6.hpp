@@ -1481,12 +1481,12 @@ int countToNum2(int n,std::vector<int>& count)
 		
 		if(one>two)
 		{
-			countToNum2(n/2)=1;
+			count[n/2]=1;
 			return two;
 		}
 		else
 		{
-			countToNum2(n-1)=1;
+			count[n-1]=1;
 			return one;
 		}
 		
