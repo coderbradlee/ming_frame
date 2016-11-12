@@ -1454,7 +1454,7 @@ int countToNum(int num)
 }
 int countToNum2(int n,std::vector<int>& count,std::vector<int>& pre)
 {
-	std::cout<<n<<std::endl;
+	//std::cout<<n<<std::endl;
 	if(n==1)
 		return 0;
 	if(n%2==1)
@@ -1499,6 +1499,12 @@ void test_countToNum()
 	std::vector<int> pre;
 	int step=countToNum2(2015,v,pre);
 	std::cout<<step<<std::endl;
+	std::reverse(pre.begin().pre.end());
+	for(auto& i:pre)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
 }
 void test_out()
 {
