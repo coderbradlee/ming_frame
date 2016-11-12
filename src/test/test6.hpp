@@ -1264,7 +1264,7 @@ void getLis(const std::vector<int>& arr,const std::vector<int>& pre)
 	{
 		std::cout<<i<<" ";
 	}
-	std::cout<<endl;
+	std::cout<<std::endl;
 	// int lis=0;
 	// for(int i=0;i<arr.size();++i)
 	// {
