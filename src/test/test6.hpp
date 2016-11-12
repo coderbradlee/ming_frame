@@ -1461,7 +1461,7 @@ int countToNum2(int n,std::vector<int>& count)
 	{
 		if(count[n-1]==0)
 		{
-			count[n-1]=countToNum2(n-1,count)
+			count[n-1]=countToNum2(n-1,count);
 			count[n]=count[n-1]+1;
 			return count[n];
 		}
