@@ -1439,7 +1439,7 @@ int countToNum(int num)
 			// else
 			{
 				//step[i]=step[i-1]+1;
-				--i;
+				i/=2;
 			}
 		}
 		++step;
