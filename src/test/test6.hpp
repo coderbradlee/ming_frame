@@ -1346,10 +1346,39 @@ int maxProfitMultiTimes(const std::vector<int>& prices)
 	}
 	return ret;
 }
+int maxProfitMultiTimes2(const std::vector<int>& prices)
+{
+	const int N=3;
+	int size=prices.size();
+	std::vector<std::vector<int>> dp(N+1,std::vector<int>(size,0));
+	for(int k=1;k<=N;++k)
+	{
+		for(int i=1;i<size;++i)
+		{
+			int maxSell=0;
+			for(int j=0;j<i;++j)
+			{
+				if(prices[i]>prices[j])
+				maxSell=std::max(maxSell,dp[k-1][j]-prices[j]);
+				std::cout<<maxSell<<std::endl;
+			}
+			dp[k][i]=std::max(maxSell+prices[i],dp[k][i-1]);
+		}
+	}
+	for(auto& i:dp)
+	{
+		for(auto& j:i)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+	return dp[N][size-1];
+}
 void test_maxProfitMultiTimes()
 {
 	std::vector<int> arr{7,1,5,3,6,4};
-	int mul=maxProfitMultiTimes(arr);
+	int mul=maxProfitMultiTimes2(arr);
 	std::cout<<mul<<std::endl;
 }
 void test_out()
