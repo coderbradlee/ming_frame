@@ -1462,10 +1462,8 @@ int countToNum2(int n,std::vector<int>& count)
 		if(count[n-1]==0)
 		{
 			count[n-1]=countToNum2(n-1,count);
-			count[n]=count[n-1]+1;
-			return count[n];
 		}
-		
+		count[n]=count[n-1]+1;
 	}
 	else
 	{
@@ -1473,27 +1471,25 @@ int countToNum2(int n,std::vector<int>& count)
 		int two=0;
 		if(count[n-1]==0)
 		{
-			one=countToNum2(n-1,count)+1;
+			count[n-1]=countToNum2(n-1,count);
+			one=count[n-1]+1;
 		}
 		if(count[n/2]==0)
 		{
-			two=countToNum2(n/2,count)+1;
+			count[n/2]=countToNum2(n/2,count);
+			two=count[n/2]+1;
 		}
 		
 		if(one>two)
 		{
-			count[n/2]=two;
-			count[n]=count[n/2]+1;
-			return count[n];
+			count[n]=two;
 		}
 		else
 		{
-			count[n-1]=one;
-			count[n]=one+1;
-			return count[n];
+			count[n]=one;
 		}
-		
 	}
+	return count[n];
 }
 void test_countToNum()
 {
