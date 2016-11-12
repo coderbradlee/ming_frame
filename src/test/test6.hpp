@@ -1377,9 +1377,49 @@ void test_maxProfitMultiTimes()
 	int mul=maxProfitMultiTimes2(arr);
 	std::cout<<mul<<std::endl;
 }
+bool isTaskable(
+	const std::vector<int>& runUseMemory,
+	const std::vector<int>& useMemory,
+	int memorySize)
+{
+	int size=runUseMemory.size();
+	std::vector<std::pair<int,int>> ele;
+	for(int i=0;i<size;++i)
+	{
+		ele.push_back(std::make_pair(i,runUseMemory[i]-useMemory[i]));
+	}
+	std::sort(ele.begin(),ele.end(),[](auto a,auto b)
+		{
+			return a.second<b.second;
+		});
+	for(auto& i:ele)
+	{
+		std::cout<<i.first<<":"<<i.second<<" ";
+	}
+	std::cout<<std::endl;
+	bool ret=true;
+	int sum=0;
+	for(int i=0;i<size;++i)
+	{
+		sum+=useMemory[ele[i].first];
+		if(sum>memorySize)
+			ret=false;
+	}
+	return ret;
+}
+void test_taskSchedule()
+{
+	const int N=3;//3 tasks
+	const int M=14;//memory size
+	std::vector<int> runUseMemory{10,8,7};
+	std::vector<int> useMemory{4,3,6};
+	bool b=isTaskable(runUseMemory,useMemory,M);
+	std::cout<<b<<std::endl;
+}
 void test_out()
 {
-	test_maxProfitMultiTimes();
+	test_taskSchedule();
+	// test_maxProfitMultiTimes();
 	//test_maxProfitOneTime();
 	// test_LIS();
 	// test_countSort();
