@@ -1463,7 +1463,8 @@ int countToNum2(int n)
 	}
 	else
 	{
-		return std::min(countToNum2(n-1),countToNum2(n/2))+1;
+		return countToNum2(n/2)+1;
+		//return std::min(countToNum2(n-1),countToNum2(n/2))+1;
 	}
 }
 void test_countToNum()
