@@ -1413,7 +1413,7 @@ void test_taskSchedule()
 	const int N=3;//3 tasks
 	const int M=14;//memory size
 	std::vector<int> runUseMemory{10,8,14};
-	std::vector<int> useMemory{4,3,6};
+	std::vector<int> useMemory{4,3,10};
 	bool b=isTaskable(runUseMemory,useMemory,M);
 	std::cout<<b<<std::endl;
 }
