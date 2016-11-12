@@ -1499,7 +1499,7 @@ void test_countToNum()
 	std::vector<int> pre;
 	int step=countToNum2(2015,v,pre);
 	std::cout<<step<<std::endl;
-	std::reverse(pre.begin().pre.end());
+	std::reverse(pre.begin(),pre.end());
 	for(auto& i:pre)
 	{
 		std::cout<<i<<" ";
