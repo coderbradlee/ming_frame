@@ -1330,6 +1330,7 @@ int maxProfitMultiTimes(const std::vector<int>& prices)
 			{
 				if(prices[i]>prices[j])
 				maxSell=std::max(maxSell,dp[k-1][j]+prices[i]-prices[j]);
+				std::cout<<maxSell<<std::endl;
 			}
 			dp[k][i]=std::max(maxSell,dp[k][i-1]);
 			ret=std::max(dp[k][i],ret);
