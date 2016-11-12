@@ -1457,7 +1457,7 @@ int countToNum2(int n,std::vector<int>& count)
 	std::cout<<n<<std::endl;
 	if(n==1)
 		return 0;
-	if(n%2!=0)
+	if(n%2==1)
 	{
 		if(count[n-1]==0)
 		{
