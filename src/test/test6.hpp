@@ -1417,9 +1417,50 @@ void test_taskSchedule()
 	bool b=isTaskable(runUseMemory,useMemory,M);
 	std::cout<<b<<std::endl;
 }
+int countToNum(int num)
+{
+	std::vector<int> footprint;
+	int step=0;
+	for(int i=num;i>=1;)
+	{
+		footprint.push_back(i);
+		if(i%2!=0)
+		{
+			//step[i]=step[i-1]+1;
+			--i;
+		}
+		else
+		{
+			// if(step[i-1]>step[i/2])
+			// {
+			// 	//step[i]=step(i/2)+1;
+			// 	i/=2;
+			// }
+			// else
+			{
+				//step[i]=step[i-1]+1;
+				--i;
+			}
+		}
+		++step;
+	}
+	std::reverse(footprint.begin(),footprint.end());
+	for(auto& i:footprint)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+	return step;
+}
+void test_countToNum()
+{
+	int step=countToNum(2015);
+	std::cout<<step<<std::endl;
+}
 void test_out()
 {
-	test_taskSchedule();
+	test_countToNum();
+	// test_taskSchedule();
 	// test_maxProfitMultiTimes();
 	//test_maxProfitOneTime();
 	// test_LIS();
