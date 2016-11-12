@@ -1265,16 +1265,16 @@ void getLis(const std::vector<int>& arr,const std::vector<int>& pre)
 		std::cout<<i<<" ";
 	}
 	std::cout<<std::endl;
-	// int lis=0;
-	// for(int i=0;i<arr.size();++i)
-	// {
-	// 	if(pre[i]==lis)
-	// 	{
-	// 		std::cout<<arr[i]<<" ";
-	// 		++lis;
-	// 	}
-	// }
-	// std::cout<<std::endl;
+	int lis=0;
+	for(int i=0;i<arr.size();++i)
+	{
+		if(pre[i]!=-1)
+		{
+			std::cout<<arr[pre[i]]<<" ";
+			lis=i;
+		}
+	}
+	std::cout<<arr[lis]<<std::endl;
 }
 void test_LIS()
 {
