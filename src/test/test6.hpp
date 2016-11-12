@@ -1319,7 +1319,7 @@ int maxProfitMultiTimes(const std::vector<int>& prices)
 {
 	const int K=3;
 	int size=prices.size();
-	std::vector<std::vector<int>> dp(K,std::vector<int>(size,0));
+	std::vector<std::vector<int>> dp(K+1,std::vector<int>(size,0));
 	int ret=0;
 	for(int k=1;k<=K;++k)
 	{
