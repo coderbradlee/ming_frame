@@ -1402,6 +1402,7 @@ bool isTaskable(
 	for(int i=0;i<size;++i)
 	{
 		sum+=useMemory[ele[i].first];
+		std::cout<<sum<<std::endl;
 		if(sum>memorySize)
 			ret=false;
 	}
