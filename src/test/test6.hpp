@@ -1464,7 +1464,7 @@ int countToNum2(int n,std::vector<int>& count,std::vector<int>& pre)
 			count[n-1]=countToNum2(n-1,count,pre);
 		}
 		count[n]=count[n-1]+1;
-		pre.push_back(n-1);
+		pre[n]=(n-1);
 	}
 	else
 	{
@@ -1482,12 +1482,12 @@ int countToNum2(int n,std::vector<int>& count,std::vector<int>& pre)
 		if(count[n/2]<count[n-1])
 		{
 			count[n]=count[n/2]+1;
-			pre.push_back(n/2);
+			pre[n]=(n/2);
 		}
 		else
 		{
 			count[n]=count[n-1]+1;
-			pre.push_back(n-1);
+			pre[n]=(n-1);
 		}
 	}
 	return count[n];
@@ -1496,14 +1496,19 @@ void test_countToNum()
 {
 	//int step=countToNum(2015);
 	std::vector<int> v(2016,0);
-	std::vector<int> pre;
+	std::vector<int> pre(2016,0);
 	int step=countToNum2(2015,v,pre);
 	std::cout<<step<<std::endl;
-	std::reverse(pre.begin(),pre.end());
-	for(auto& i:pre)
+	//std::reverse(pre.begin(),pre.end());
+	std::vector<int> temp;
+	for(int i=2015;i>=1;)
 	{
-		std::cout<<i<<" ";
+		temp.push_back(pre[i]);
+		i=pre[i];
 	}
+	std::reverse(temp.begin(),temp.end());
+	for(auto& i:temp)
+		std::cout<<i<<" ";
 	std::cout<<std::endl;
 }
 void test_out()
