@@ -1317,16 +1317,16 @@ void test_maxProfitOneTime()
 }
 int maxProfitMultiTimes(const std::vector<int>& prices)
 {
-	const int K=3;
+	const int N=3;
 	int size=prices.size();
-	std::vector<std::vector<int>> dp(K+1,std::vector<int>(size,0));
+	std::vector<std::vector<int>> dp(N+1,std::vector<int>(size,0));
 	int ret=0;
-	for(int k=1;k<=K;++k)
+	for(int k=1;k<=N;++k)
 	{
 		for(int i=1;i<size;++i)
 		{
 			int maxSell=0;
-			for(int j=0;j<i-1;++j)
+			for(int j=0;j<i;++j)
 			{
 				if(prices[i]>prices[j])
 				maxSell=std::max(maxSell,dp[k-1][j]+prices[i]-prices[j]);
