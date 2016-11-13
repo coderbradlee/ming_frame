@@ -1513,7 +1513,8 @@ void test_countToNum()
 }
 void test_size()
 {
-	#define foo(x) {std::cout<<"1"<<std::endl;std::cout<<"2"<<std::endl;}
+	// #define foo(x) {std::cout<<"1"<<std::endl;std::cout<<"2"<<std::endl;}
+	#define foo(x) do{std::cout<<"1"<<std::endl;std::cout<<"2"<<std::endl;}while(0)
 	if(1)
 		foo(x)
 	else
