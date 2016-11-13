@@ -1513,7 +1513,18 @@ void test_countToNum()
 }
 void test_out()
 {
-	test_countToNum();
+	std::cout<<sizeof(char)<<std::endl;
+	std::cout<<sizeof(short)<<std::endl;
+	std::cout<<sizeof(int)<<std::endl;
+	std::cout<<sizeof(long)<<std::endl;
+	std::cout<<sizeof(long long)<<std::endl;
+	std::cout<<sizeof(uint8_t)<<std::endl;
+	std::cout<<sizeof(uint16_t)<<std::endl;
+	std::cout<<sizeof(uint32_t)<<std::endl;
+	std::cout<<sizeof(uint64_t)<<std::endl;
+	std::cout<<sizeof(float)<<std::endl;
+	std::cout<<sizeof(double)<<std::endl;
+	// test_countToNum();
 	// test_taskSchedule();
 	// test_maxProfitMultiTimes();
 	//test_maxProfitOneTime();
