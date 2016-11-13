@@ -1511,19 +1511,30 @@ void test_countToNum()
 		std::cout<<i<<" ";
 	std::cout<<std::endl;
 }
+void test_size()
+{
+	union te
+	{
+		int test[5];
+		char c;
+		double d;
+	};
+	std::cout<<sizeof(te)<<std::endl;
+	// std::cout<<sizeof(char)<<std::endl;
+	// std::cout<<sizeof(short)<<std::endl;
+	// std::cout<<sizeof(int)<<std::endl;
+	// std::cout<<sizeof(long)<<std::endl;
+	// std::cout<<sizeof(long long)<<std::endl;
+	// std::cout<<sizeof(uint8_t)<<std::endl;
+	// std::cout<<sizeof(uint16_t)<<std::endl;
+	// std::cout<<sizeof(uint32_t)<<std::endl;
+	// std::cout<<sizeof(uint64_t)<<std::endl;
+	// std::cout<<sizeof(float)<<std::endl;
+	// std::cout<<sizeof(double)<<std::endl;
+}
 void test_out()
 {
-	std::cout<<sizeof(char)<<std::endl;
-	std::cout<<sizeof(short)<<std::endl;
-	std::cout<<sizeof(int)<<std::endl;
-	std::cout<<sizeof(long)<<std::endl;
-	std::cout<<sizeof(long long)<<std::endl;
-	std::cout<<sizeof(uint8_t)<<std::endl;
-	std::cout<<sizeof(uint16_t)<<std::endl;
-	std::cout<<sizeof(uint32_t)<<std::endl;
-	std::cout<<sizeof(uint64_t)<<std::endl;
-	std::cout<<sizeof(float)<<std::endl;
-	std::cout<<sizeof(double)<<std::endl;
+	test_size();
 	// test_countToNum();
 	// test_taskSchedule();
 	// test_maxProfitMultiTimes();
