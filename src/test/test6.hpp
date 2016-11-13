@@ -1513,13 +1513,18 @@ void test_countToNum()
 }
 void test_size()
 {
-	union te
-	{
-		int test[5];
-		char c;
-		double d;
-	};
-	std::cout<<sizeof(te)<<std::endl;
+	#define foo(x) {std::cout<<"1"<<std::endl;std::cout<<"2"<<std::endl;}
+	if(1)
+		foo(x)
+	else
+		;
+	// union te
+	// {
+	// 	int test[5];
+	// 	char c;
+	// 	double d;
+	// };
+	// std::cout<<sizeof(te)<<std::endl;
 	// std::cout<<sizeof(char)<<std::endl;
 	// std::cout<<sizeof(short)<<std::endl;
 	// std::cout<<sizeof(int)<<std::endl;
