@@ -1857,19 +1857,35 @@ bool wordBreak(const std::set<std::string>& dict,const std::string& str)
 {
 	std::vector<bool> f(str.length()+1,false);
 	f[0]=true;
-	for(int i=1;i<str.length();++i)
+	for(int i=1;i<=str.length();++i)
 	{
-		for(int j=i-1;j>0;--j)
+		for(int j=i-1;j>=0;--j)
 		{
-			if(f[j]&&dict.find(str.substr(j,i-j))!=dict.end())
+			if(f[j]&&(dict.find(str.substr(j,i-j))!=dict.end()))
 			{
 				f[i]=true;
-				std::cout<<j<<std::endl;
+
+				std::cout<<j<<":"<<str.substr(j,i-j)<<std::endl;
 				break;
 			}
 		}
 	}
 	return f[str.length()];
+}
+bool wordBreak2(const std::set<std::string>& dict,const std::string& str)
+{
+	if(str.length()==0)
+		return true;
+	
+	for(int i=str.length()-1;i>=0;--i)
+	{
+		if(wordBreak2(dict,str.substr(0,i)))
+		{
+			if(dict.find(str.substr(i,str.length()-i))!=dict.end())
+				return true;
+		}
+	}
+	return false;
 }
 void test_wordBreak()
 {
@@ -1881,6 +1897,8 @@ void test_wordBreak()
 	dict.insert("dog");
 	std::string str="catsanddog";
 	if(wordBreak(dict,str))
+		std::cout<<"true"<<std::endl;
+	if(wordBreak2(dict,str))
 		std::cout<<"true"<<std::endl;
 }
 void test_out()
