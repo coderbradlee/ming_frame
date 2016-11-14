@@ -1795,26 +1795,54 @@ bool isInterlace(const std::string& s1,const std::string& s2,const std::string& 
 		return false;
 	
 	dp[0][0]=true;
-	for(int i=1;i<M1;++i)
+	for(int i=1;i<=M1;++i)
 	{
 		dp[i][0]=dp[i-1][0]&&(s1[i-1]==s3[i-1]);
 	}
 	
-	for(int j=1;j<M2;++j)
+	for(int j=1;j<=M2;++j)
 	{
 		dp[0][j]=dp[0][j-1]&&(s2[j-1]==s3[j-1]);
 	}
-	for(int i=1;i<M1;++i)
+	for(int i=1;i<=M1;++i)
 	{
-		for(int j=1;j<M2;++j)
+		for(int j=1;j<=M2;++j)
 		{
 			bool one=dp[i-1][j]&&(s1[i-1]==s3[i+j-1]);
-			boot two=dp[i][j-1]&&(s2[j-1]==s3[i+j-1]);
+			bool two=dp[i][j-1]&&(s2[j-1]==s3[i+j-1]);
 			if(one||two)
 				dp[i][j]=true;
 		}
 	}
 	return dp[M1][M2];
+}
+bool isInterlace2(const std::string& s1,const std::string& s2,const std::string& s3)
+{
+	int M1=s1.length();
+	int M2=s2.length();
+	int M3=s3.length();
+	
+	if(M1+M2!=M3)
+		return false;
+	std::vector<bool> dp(M2+1);
+	dp[0]=true;
+	for(int i=1;i<=M2;++i)
+	{
+		dp[i]=dp[i-1]&&(s2[i-1]==s3[i-1]);
+	}
+	
+	for(int i=1;i<=M1;++i)
+	{
+		dp[0]=dp[0]&&(s1[i-1]==s3[i-1]);
+		for(int j=1;j<=M2;++j)
+		{
+			bool one=dp[j]&&(s1[i-1]==s3[i+j-1]);
+			bool two=dp[j-1]&&(s2[j-1]==s3[i+j-1]);
+			dp[j]=(one||two);
+				//dp[j]=true;
+		}
+	}
+	return dp[M2];
 }
 void test_isInterlace()
 {
@@ -1822,12 +1850,43 @@ void test_isInterlace()
 	std::string s2="dbbca";
 	std::string s3="aadbbcbcac";//should be true
 	std::string s4="accabdbbca";//should be false
-	std::cout<<isInterlace(s1,s2,s3)<<std::endl;
-	std::cout<<isInterlace(s1,s2,s4)<<std::endl;
+	std::cout<<isInterlace2(s1,s2,s3)<<std::endl;
+	std::cout<<isInterlace2(s1,s2,s4)<<std::endl;
+}
+bool wordBreak(const std::set<std::string>& dict,const std::string& str)
+{
+	std::vector<bool> f(str.length()+1,false);
+	f[0]=true;
+	for(int i=1;i<str.length();++i)
+	{
+		for(int j=i-1;j>0;--j)
+		{
+			if(f[j]&&dict.find(str.substr(j,i-j))!=dict.end())
+			{
+				f[i]=true;
+				std::cout<<j<<std::endl;
+				break;
+			}
+		}
+	}
+	return f[str.length()];
+}
+void test_wordBreak()
+{
+	std::set<std::string> dict;
+	dict.insert("cat");
+	dict.insert("cats");
+	dict.insert("and");
+	dict.insert("sand");
+	dict.insert("dog");
+	std::string str="catsanddog";
+	if(wordBreak(dict,str))
+		std::cout<<"true"<<std::endl;
 }
 void test_out()
 {
-	test_isInterlace();
+	test_wordBreak();
+	// test_isInterlace();
 	// test_blockChessPath();
 	// test_size();
 	//test_countToNum();
