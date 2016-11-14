@@ -1492,33 +1492,91 @@ int countToNum2(int n,std::vector<int>& count,std::vector<int>& pre)
 	}
 	return count[n];
 }
+int countToNum3(int n,std::vector<int>& count,std::vector<int>& pre,int num)
+{
+	//std::cout<<n<<std::endl;
+	if(n==num)
+		return 0;
+	if(n%2==1)
+	{
+		if(count[n-1]==0)
+		{
+			count[n-1]=countToNum3(n-1,count,pre,num);
+		}
+		count[n]=count[n-1]+1;
+		pre[n]=(n-1);
+	}
+	else
+	{
+		int one=0;
+		int two=0;
+		if(count[n-1]==0)
+		{
+			count[n-1]=countToNum3(n-1,count,pre,num);
+		}
+		if(count[n/2]==0)
+		{
+			count[n/2]=countToNum3(n/2,count,pre,num);
+		}
+		
+		if(count[n/2]<count[n-1])
+		{
+			count[n]=count[n/2]+1;
+			pre[n]=(n/2);
+		}
+		else
+		{
+			count[n]=count[n-1]+1;
+			pre[n]=(n-1);
+		}
+	}
+	return count[n];
+}
 void test_countToNum()
 {
-	//int step=countToNum(2015);
-	std::vector<int> v(2016,0);
-	std::vector<int> pre(2016,0);
-	int step=countToNum2(2015,v,pre);
-	std::cout<<step<<std::endl;
-	//std::reverse(pre.begin(),pre.end());
-	std::vector<int> temp;
-	for(int i=2015;i>=1;)
-	{
-		temp.push_back(pre[i]);
-		i=pre[i];
+	{//int step=countToNum(2015);
+		// std::vector<int> v(2016,0);
+		// std::vector<int> pre(2016,0);
+		// int step=countToNum2(2015,v,pre);
+		// std::cout<<step<<std::endl;
+		// //std::reverse(pre.begin(),pre.end());
+		// std::vector<int> temp;
+		// for(int i=2015;i>=1;)
+		// {
+		// 	temp.push_back(pre[i]);
+		// 	i=pre[i];
+		// }
+		// std::reverse(temp.begin(),temp.end());
+		// for(auto& i:temp)
+		// 	std::cout<<i<<" ";
+		// std::cout<<std::endl;
 	}
-	std::reverse(temp.begin(),temp.end());
-	for(auto& i:temp)
-		std::cout<<i<<" ";
-	std::cout<<std::endl;
+	{//int step=countToNum(2015);
+		std::vector<int> v(2016,0);
+		std::vector<int> pre(2016,0);
+		int step=countToNum3(2015,v,pre,100);
+		std::cout<<step<<std::endl;
+		//std::reverse(pre.begin(),pre.end());
+		std::vector<int> temp;
+		for(int i=2015;i>=1;)
+		{
+			temp.push_back(pre[i]);
+			i=pre[i];
+		}
+		std::reverse(temp.begin(),temp.end());
+		for(auto& i:temp)
+			std::cout<<i<<" ";
+		std::cout<<std::endl;
+	}
 }
 void test_size()
 {
-	 #define fooxx(x) {std::cout<<"1"<<std::endl;std::cout<<"2"<<std::endl;}
-	//#define fooxx(x) do{std::cout<<"1"<<std::endl;std::cout<<"2"<<std::endl;}while(0)
-	if(1)
-		fooxx(x);
-	else
-		;
+	//  #define fooxx(x) {std::cout<<"1"<<std::endl;std::cout<<"2"<<std::endl;}
+	// //#define fooxx(x) do{std::cout<<"1"<<std::endl;std::cout<<"2"<<std::endl;}while(0)
+	// if(1)
+	// 	fooxx(x);
+	// else
+	// 	;
 	// union te
 	// {
 	// 	int test[5];
@@ -1540,8 +1598,8 @@ void test_size()
 }
 void test_out()
 {
-	test_size();
-	// test_countToNum();
+	// test_size();
+	test_countToNum();
 	// test_taskSchedule();
 	// test_maxProfitMultiTimes();
 	//test_maxProfitOneTime();
