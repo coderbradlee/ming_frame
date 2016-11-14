@@ -1790,64 +1790,31 @@ bool isInterlace(const std::string& s1,const std::string& s2,const std::string& 
 	int M1=s1.length();
 	int M2=s2.length();
 	int M3=s3.length();
-	std::vector<std::vector<bool>> dp(M1,std::vector<bool>(M2,false));
+	std::vector<std::vector<bool>> dp(M1+1,std::vector<bool>(M2+1,false));
 	if(M1+M2!=M3)
 		return false;
-	if(s1[0]==s3[0])
-		dp[0][0]=true;
+	
+	dp[0][0]=true;
 	for(int i=1;i<M1;++i)
 	{
-		dp[i][0]=dp[i-1][0]&&(s1[i]==s3[i]);
+		dp[i][0]=dp[i-1][0]&&(s1[i-1]==s3[i-1]);
 	}
-	dp[0][0]=false;
-	if(s2[0]==s3[0])
-		dp[0][0]=true;
-
+	
 	for(int j=1;j<M2;++j)
 	{
-		dp[0][j]=dp[0][j-1]&&(s2[j]==s3[j]);
+		dp[0][j]=dp[0][j-1]&&(s2[j-1]==s3[j-1]);
 	}
-	int s1Index=0;
-	int s2Index=0;
-	for(int i=1,j=1;i<M1&&j<M2;)
+	for(int i=1;i<M1;++i)
 	{
-		if((s1[i]==s3[i+j])&&dp[i-1][j])
+		for(int j=1;j<M2;++j)
 		{
-			++i;
-			s1Index=i;
-			dp[i][j]=true;
-		}
-		else if((s2[j]==s3[i+j])&&dp[i][j-1])
-		{
-			++j;
-			s2Index=j;
-			dp[i][j]=true;
-		}
-		else
-		{
-			return false;
+			bool one=dp[i-1][j]&&(s1[i-1]==s3[i+j-1]);
+			boot two=dp[i][j-1]&&(s2[j-1]==s3[i+j-1]);
+			if(one||two)
+				dp[i][j]=true;
 		}
 	}
-	if((s1Index>=M1)&&dp[s1Index-1][s2Index])
-	{
-		for(int i=s2Index;i<M2;++i)
-		{
-			if(s2[i]==s3[s1Index+s2Index-1])
-				dp[s1Index-1][i]=true;
-			else
-				 return false;
-		}
-	}
-	if((s2Index>=M2)&&dp[s1Index][s2Index-1])
-	{
-		for(int i=s1Index;i<M1;++i)
-		{
-			if(s1[i]==s3[s1Index+s2Index-1])
-				dp[i][s2Index-1]=true;
-			else
-				 return false;
-		}
-	}
+	return dp[M1][M2];
 }
 void test_isInterlace()
 {
