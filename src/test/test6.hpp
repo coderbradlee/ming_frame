@@ -1514,12 +1514,12 @@ int countToNum3(int n,std::vector<int>& count,std::vector<int>& pre,int num)
 		{
 			count[n-1]=countToNum3(n-1,count,pre,num);
 		}
-		if(count[n/2]==0)
+		if((n/2>=num)&&(count[n/2]==0))
 		{
 			count[n/2]=countToNum3(n/2,count,pre,num);
 		}
 		
-		if(count[n/2]<count[n-1])
+		if((n/2>=num)&&(count[n/2]<count[n-1]))
 		{
 			count[n]=count[n/2]+1;
 			pre[n]=(n/2);
@@ -1531,6 +1531,28 @@ int countToNum3(int n,std::vector<int>& count,std::vector<int>& pre,int num)
 		}
 	}
 	return count[n];
+}
+int countToNum4(int from,int to,std::vector<int>& path)
+{
+	while(to<from)
+	{
+		std::cout<<from<<std::endl;
+		if((from%2!=0))
+		{
+			--from;
+		}
+		else if((from/2)>to)
+		{
+			from/=2;
+		}
+		else
+		{
+			--from;
+		}
+		path.push_back(from);
+	}
+	std::reverse(path.begin(),path.end());
+	return path.size();
 }
 void test_countToNum()
 {
@@ -1552,23 +1574,33 @@ void test_countToNum()
 		// std::cout<<std::endl;
 	}
 	{//int step=countToNum(2015);
-		std::vector<int> v(2016,0);
-		std::vector<int> pre(2016,0);
-		int step=countToNum3(2015,v,pre,100);
+		// std::vector<int> v(2016,0);
+		// std::vector<int> pre(2016,0);
+		// int step=countToNum3(2015,v,pre,100);
+		// std::cout<<step<<std::endl;
+		// //std::reverse(pre.begin(),pre.end());
+		// std::vector<int> temp;
+		// for(int i=2015;i>=100;)
+		// {
+		// 	temp.push_back(pre[i]);
+		// 	i=pre[i];
+		// }
+		// std::reverse(temp.begin(),temp.end());
+		// for(auto& i:temp)
+		// 	std::cout<<i<<" ";
+		// std::cout<<std::endl;
+	}
+	{
+		std::vector<int> path;
+		int step=countToNum4(2015,100,path);
 		std::cout<<step<<std::endl;
-		//std::reverse(pre.begin(),pre.end());
-		std::vector<int> temp;
-		for(int i=2015;i>=1;)
-		{
-			temp.push_back(pre[i]);
-			i=pre[i];
-		}
-		std::reverse(temp.begin(),temp.end());
-		for(auto& i:temp)
+		
+		for(auto& i:path)
 			std::cout<<i<<" ";
 		std::cout<<std::endl;
 	}
 }
+
 void test_size()
 {
 	//  #define fooxx(x) {std::cout<<"1"<<std::endl;std::cout<<"2"<<std::endl;}
@@ -1596,10 +1628,168 @@ void test_size()
 	// std::cout<<sizeof(float)<<std::endl;
 	// std::cout<<sizeof(double)<<std::endl;
 }
+int chessPath1(const std::vector<std::vector<int>>& chess)
+{
+	int rowSize=chess.size();
+	int colSize=chess[0].size();
+	std::vector<int> pathLength(colSize);
+	pathLength[0]=chess[0][0];
+	for(int j=1;j<colSize;++j)
+	{
+		pathLength[j]=pathLength[j-1]+chess[0][j];
+	}
+	for(int i=1;i<rowSize;++i)
+	{
+		pathLength[0]+=chess[i][0];
+		for(int j=1;j<colSize;++j)
+		{
+			if(pathLength[j-1]>pathLength[j])
+			{
+				pathLength[j]+=chess[i][j];
+			}
+			else
+			{
+				pathLength[j]=pathLength[j-1]+chess[i][j];
+			}
+		}
+	}
+	return pathLength[colSize-1];
+}
+int chessPath2(const std::vector<std::vector<int>>& chess,std::vector<std::vector<int>>& dp)
+{
+	int rowSize=chess.size();
+	int colSize=chess[0].size();
+	
+	dp[0][0]=chess[0][0];
+	for(int j=1;j<colSize;++j)
+	{
+		dp[0][j]=dp[0][j-1]+chess[0][j];
+	}
+	for(int i=1;i<rowSize;++i)
+	{
+		dp[i][0]=dp[i-1][0]+chess[i][0];
+	}
+	for(int i=1;i<rowSize;++i)
+	{
+		for(int j=1;j<colSize;++j)
+		{
+			dp[i][j]=std::min(dp[i][j-1]+chess[i][j],dp[i-1][j]+chess[i][j]);
+		}
+	}
+	return dp[rowSize-1][colSize-1];
+}
+void test_chessPath()
+{
+	const int M=10;
+	const int N=8;
+	std::vector<std::vector<int>> chess(M,std::vector<int>(N,0));
+	for(auto& i:chess)
+	{
+		for(auto& j:i)
+		{
+			j=rand()%10;
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+	std::vector<std::vector<int>> dp(M,std::vector<int>(N,0));
+	std::cout<<chessPath2(chess,dp)<<std::endl;
+	std::cout<<chessPath1(chess)<<std::endl;
+}
+int blockChessPath(
+	const std::vector<std::vector<int>>& chess,
+	std::vector<std::vector<int>>& dp)
+{
+	int rowSize=chess.size();
+	int colSize=chess[0].size();
+
+	if(!chess[rowSize-1][0])
+		return 0;
+	dp[rowSize-1][0]=chess[rowSize-1][0];
+	for(int j=1;j<colSize;++j)
+	{
+		if(chess[rowSize-1][j]&&dp[rowSize-1][j-1])
+			dp[rowSize-1][j]=1;
+	}
+	
+	for(int i=rowSize-2;i>=0;--i)
+	{
+		if(chess[i+1][0]&&dp[i+1][0])
+			dp[i][0]=1;
+		for(int j=1;j<colSize;++j)
+		{
+			if(chess[i][j])
+			{
+				dp[i][j]=dp[i+1][j]+dp[i][j-1];
+			}
+			else
+			{
+				dp[i][j]=0;
+			}
+			
+		}
+	}
+	return dp[0][colSize-1];
+}
+int blockChessPath2(
+	const std::vector<std::vector<int>>& chess)
+{
+	int rowSize=chess.size();
+	int colSize=chess[0].size();
+	std::vector<int> dp(colSize,0);
+	if(!chess[rowSize-1][0])
+		return 0;
+	dp[0]=chess[rowSize-1][0];
+	for(int j=1;j<colSize;++j)
+	{
+		if(chess[rowSize-1][j]&&dp[j-1])
+			dp[j]=1;
+	}
+	
+	for(int i=rowSize-2;i>=0;--i)
+	{
+		if(!chess[i+1][0])
+			dp[0]=0;
+		for(int j=1;j<colSize;++j)
+		{
+			if(chess[i][j])
+			{
+				dp[j]+=dp[j-1];
+			}
+			else
+			{
+				dp[j]=0;
+			}
+		}
+	}
+	return dp[colSize-1];
+}
+void test_blockChessPath()
+{
+	const int M=6;
+	const int N=8;
+	std::vector<std::vector<int>> chess(M,std::vector<int>(N,1));
+	chess[2][5]=0;
+	
+	std::vector<std::vector<int>> dp(M,std::vector<int>(N,0));
+	//from bottom left to top right,chess[2][5] is blocked
+	// std::cout<<blockChessPath(chess,dp)<<std::endl;
+	// for(auto& i:dp)
+	// {
+	// 	for(auto& j:i)
+	// 	{
+	// 		//std::cout<<j<<" ";
+	// 		printf("%3d ",j );
+	// 	}
+	// 	std::cout<<std::endl;
+	// }
+	std::cout<<blockChessPath2(chess)<<std::endl;
+}
 void test_out()
 {
+	test_blockChessPath();
 	// test_size();
-	test_countToNum();
+	//test_countToNum();
 	// test_taskSchedule();
 	// test_maxProfitMultiTimes();
 	//test_maxProfitOneTime();
