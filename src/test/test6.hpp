@@ -1887,23 +1887,311 @@ bool wordBreak2(const std::set<std::string>& dict,const std::string& str)
 	}
 	return false;
 }
+bool wordBreak3(const std::set<std::string>& dict,const std::string& str,std::vector<bool>& f)
+{
+	if(str.length()==0)
+		return true;
+	
+	for(int i=str.length()-1;i>=0;--i)
+	{
+		if(f[i])
+		{
+			if(dict.find(str.substr(i,str.length()-i))!=dict.end())
+				return true;
+		}
+		else
+		{
+			f[i]=wordBreak3(dict,str.substr(0,i),f);
+		}
+	}
+	return false;
+}
+void addAnswer(const std::string& str,const std::vector<int>& oneBreak,std::vector<std::string>& answer)
+{
+	int s=oneBreak.size();
+	int size=str.length();
+	answer.push_back(std::string());
+	std::string& sentence=answer.back();
+	sentence.reserve(size+s);
+	int start=0,end=0;
+	for(int i=s-2;i>=0;--i)
+	{
+		end=oneBreak[i];
+		sentence+=str.substr(start,end-start);
+		sentence+=' ';
+		start=end;
+	}
+	sentence+=str.substr(start,size-start);
+}
+void findAnswer(const std::vector<std::vector<bool>>& chess,const std::string& str,int cur,std::vector<int>& oneBreak,std::vector<std::string>& answer)
+{
+	if(cur==0)
+	{
+		addAnswer(str,oneBreak,answer);
+		return;
+	}
+	int size=str.length();
+	for(int i=0;i<cur-1;++i)
+	{
+		if(chess[cur][i])
+		{
+			oneBreak.push_back(i);
+			findAnswer(chess,str,i,oneBreak,answer);
+			oneBreak.pop_back();
+		}
+	}
+}
+void wordBreak(const std::set<std::string>& dict,const std::string& str,std::vector<std::string>& answer)
+{
+	int size=str.length();
+	std::vector<std::vector<bool>> chess(size+1,std::vector<bool>(size,false));
+	std::vector<bool> f(size+1);
+	f[0]=true;
+	for(int i=1;i<=size;++i)
+	{
+		for(int j=i-1;j>=0;--j)
+		{
+			if(f[j]&&(dict.find(str.substr(j,i-j))!=dict.end()))
+			{
+				f[i]=true;
+				chess[i][j]=true;
+			}
+		}
+	}	
+	std::vector<int> oneBreak;
+	findAnswer(chess,str,size,oneBreak,answer);
+	for(auto& i:answer)
+	{
+		std::cout<<i<<std::endl;
+	}
+}
 void test_wordBreak()
 {
+
+	// std::set<std::string> dict;
+	// dict.insert("cat");
+	// dict.insert("cats");
+	// dict.insert("and");
+	// dict.insert("sand");
+	// dict.insert("dog");
+	// std::string str="catsanddog";
+	// if(wordBreak(dict,str))
+	// 	std::cout<<"true"<<std::endl;
+	// if(wordBreak2(dict,str))
+	// 	std::cout<<"true"<<std::endl;
+	// std::vector<bool> f(str.length()+1,false);
+	// f[0]=true;
+	// if(wordBreak3(dict,str,f))
+	// 	std::cout<<"true"<<std::endl;
+	// for(const auto& i:f)
+	// {
+	// 	if(i)
+	// 		std::cout<<"1 ";
+	// 	else
+	// 		std::cout<<"0 ";
+	// }
+	// std::cout<<std::endl;
 	std::set<std::string> dict;
-	dict.insert("cat");
-	dict.insert("cats");
-	dict.insert("and");
-	dict.insert("sand");
-	dict.insert("dog");
-	std::string str="catsanddog";
-	if(wordBreak(dict,str))
-		std::cout<<"true"<<std::endl;
-	if(wordBreak2(dict,str))
-		std::cout<<"true"<<std::endl;
+	dict.insert("下雨天");
+	dict.insert("留客天");
+	dict.insert("留客");
+	dict.insert("天留");
+	dict.insert("留我不");
+	dict.insert("我不留");
+	dict.insert("留");
+	std::string str="下雨天留客天留我不留";
+	std::vector<std::string> answer;
+	wordBreak(dict,str,answer);
+}
+void matrixMultiply(std::vector<std::vector<int>>& m,int from,int to,std::vector<int>& p)
+{
+	// for(int k=2;k<to;++k)
+	// {
+	// 	for(int i=2;i<=k;++i)
+	// 	{
+	// 		for(int j=k+1;j<to;++j)
+	// 		{
+	// 			int temp=p[i-1]*p[k]*p[j];
+	// 			m[i][j]=std::min(m[i][k],m[k+1][j]+temp);
+	// 		}
+	// 	}
+	// }
+	for(int i=1;i<to;++i)
+	{
+		for(int j=i+1;j<to;++j)
+		{
+			m[i][j]=m[i][i+1]+m[i+2][j]+p[i-1]*p[i+1]*p[j];
+			for(int k=i+1;k<=j;++k)
+			{
+				int temp=m[i][k]+m[k+1][j]+p[i-1]*p[k]*p[j];
+				std::cout<<i<<":"<<k<<":"<<j<<":"<<m[i][j]<<":"<<temp<<std::endl;
+				if(m[i][j]>temp)
+				{
+
+					m[i][j]=temp;
+				}
+			}
+		}
+	}
+}
+void matrixMultiply2(std::vector<std::vector<int>>& m,int from,int n,std::vector<int>& p)
+{
+	int r,i,j,k,t;
+	for(i=1;i<=n;i++)
+		m[i][i]=0;
+	for(r=2;r<=n;r++)
+	{
+		for(i=1;i<=n-r+1;i++)
+		{
+			j=i+r-1;
+			m[i][j]=m[i+1][j]+p[i-1]*p[i]*p[j];
+			//s[i][j]=i;
+			for(k=i+1;k<j;k++)
+			{
+				t=m[i][k]+m[k+1][j]+p[i-1]*p[k]*p[j];
+				if(t<m[i][j])
+				{
+					m[i][j]=t;
+					//s[i][j]=k;
+				}
+			}
+		}
+	}
+}
+void test_matrixMultiply()
+{
+	const int from=1;
+	const int to=10;
+	const int N=to;
+	std::vector<std::vector<int>> m(N,std::vector<int>(N,0));//记录矩阵从A[i]到A[j]连乘的最小值
+	std::vector<int> p;//A[i]的维度为 p[i-1]×p[i]
+	p.push_back(1);
+	for(int i=1;i<11;++i)
+	{
+		p.push_back(i);
+	}
+	for(auto& i:p)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+
+	matrixMultiply(m,from,to,p);
+	//matrixMultiply2(m,from,to,p);
+	for(auto& i:m)
+	{
+		for(auto& j:i)
+		{
+			//std::cout<<j<<" ";
+			printf("%3d ", j);
+		}
+		std::cout<<std::endl;
+	}
+}
+void distinctSubsequence(char* text,char* pattern,int M,int N,std::vector<std::vector<int>>& dp)
+{
+	if(N>M)
+		return;
+	for(int i=0;i<M;++i)
+		dp[i][0]=1;
+	// for(int i=1;i<N;++i)
+	// 	dp[0][i]=0;
+	for(int i=1;i<M;++i)
+	{
+		for(int j=1;j<N;++j)
+		{
+			if(text[i-1]!=pattern[j-1])
+			{
+				dp[i][j]=dp[i-1][j];
+			}
+			else
+			{
+				dp[i][j]=dp[i-1][j]+dp[i-1][j-1];
+			}
+		}
+	}
+	for(auto& i:dp)
+	{
+		for(auto& j:i)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+}
+void distinctSubsequence(char* text,char* pattern,int M,int N)
+{
+	if(N>M)
+		return;
+	std::vector<int> dp(N,0);
+	//for(int i=0;i<M;++i)
+	dp[0]=1;
+	// for(int i=1;i<N;++i)
+	// 	dp[0][i]=0;
+	for(int i=1;i<M;++i)
+	{
+		for(int j=1;j<N;++j)
+		{
+			if(text[i-1]!=pattern[j-1])
+			{
+				//dp[j]=dp[j];
+			}
+			else
+			{
+				dp[j]+=dp[j-1];
+			}
+		}
+	}
+	for(auto& i:dp)
+	{
+		//for(auto& j:i)
+		{
+			std::cout<<i<<" ";
+		}
+		std::cout<<std::endl;
+	}
+}
+void test_distinctSubsequence()
+{
+	char text[]="abacab";
+	char pattern[]="ab";
+	const int M=6;
+	const int N=2;
+	std::vector<std::vector<int>> dp(M+1,std::vector<int>(N+1,0));
+	distinctSubsequence(text,pattern,M+1,N+1,dp);
+	distinctSubsequence(text,pattern,M+1,N+1);
+}
+void longestUniqueSubstring(char* str,int size)
+{
+	int lastLocation[26]={-1};
+	int max_value=0;
+	int start=0;
+	for(int i=0;i<size;++i)
+	{
+		if(lastLocation[str[i]-'a']>=start)
+		{
+			if((i-lastLocation[str[i]-'a'])>max_value)
+			{
+				max_value=i-lastLocation[str[i]-'a'];
+			}
+			start=lastLocation[str[i]-'a']+1;
+		}
+		lastLocation[str[i]-'a']=i;
+	}
+	std::cout<<max_value<<std::endl;
+	std::cout<<size-start<<std::endl;
+}
+void test_longestUniqueSubstring()
+{
+	char str[]="abcabcbbabcdefghxyz";
+	longestUniqueSubstring(str,strlen(str));
 }
 void test_out()
 {
-	test_wordBreak();
+	test_longestUniqueSubstring();
+	// test_distinctSubsequence();
+	// test_matrixMultiply();
+	// test_wordBreak();
 	// test_isInterlace();
 	// test_blockChessPath();
 	// test_size();
