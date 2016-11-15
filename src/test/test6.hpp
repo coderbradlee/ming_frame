@@ -2186,9 +2186,22 @@ void test_longestUniqueSubstring()
 	char str[]="abcabcbbabcdefghxyz";
 	longestUniqueSubstring(str,strlen(str));
 }
+void jump(std::vector<int>& arr,int size)
+{
+	// std::vector<std::vector<int>> dp;
+	int i=0;
+	int j=arr[0];
+	while(j<size)
+}
+void test_jump()
+{
+	std::vector<int> arr{2,3,1,1,2,4,1,1,6,1,7};
+	jump(arr);
+}
 void test_out()
 {
-	test_longestUniqueSubstring();
+	test_jump();
+	// test_longestUniqueSubstring();
 	// test_distinctSubsequence();
 	// test_matrixMultiply();
 	// test_wordBreak();
