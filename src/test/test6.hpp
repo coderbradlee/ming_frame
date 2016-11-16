@@ -2186,17 +2186,60 @@ void test_longestUniqueSubstring()
 	char str[]="abcabcbbabcdefghxyz";
 	longestUniqueSubstring(str,strlen(str));
 }
-void jump(std::vector<int>& arr,int size)
+int jump(std::vector<int>& arr,int size)
 {
+	if(size==1)
+		return 0;
 	// std::vector<std::vector<int>> dp;
+	int step=0;
 	int i=0;
-	int j=arr[0];
+	int j=0;
 	while(j<size)
+	{
+		++step;
+		int max_value=j;
+		for(int k=i;k<=j;++k)
+		{
+			// if((arr[k]+k)>max_value)
+			// {
+			// 	max_value=arr[k]+k;
+			// }
+			max_value=std::max(max_value,arr[k]+k);
+			if(max_value>=size-1)
+					return step;
+		}
+		i=j+1;
+		j=max_value;
+		if(j<i)
+		{
+			std::cout<<"no answer"<<std::endl;
+			return -1;//无法跳到末尾
+		}
+	}
+	//std::cout<<step<<std::endl;
+	return step;
+	
+}
+void jump2(const std::vector<int> arr,int size)
+{
+	//dp[i+1]=max(dp[i],arr[i])-1
+	//dp[i]表示：到达arr[i]时，还剩余多少步没有用
+	std::vector<int> dp(size+1,0);
+	dp[0]=0;
+	for(int i=0;i<size;++i)
+	{
+		dp[i+1]=std::max(dp[i],arr[i])-1;
+		std::cout<<dp[i]<<" ";
+	}
+	std::cout<<std::endl;
+	std::cout<<size-dp[size]<<std::endl;
 }
 void test_jump()
 {
-	std::vector<int> arr{2,3,1,1,2,4,1,1,6,1,7};
-	jump(arr);
+	//std::vector<int> arr{2,3,1,1,2,4,1,1,6,1,7};
+	std::vector<int> arr{2,3,1,1,2,4};
+	std::cout<<jump(arr,arr.size())<<std::endl;
+	jump2(arr,arr.size());
 }
 void test_out()
 {

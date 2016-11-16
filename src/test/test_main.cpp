@@ -5,7 +5,7 @@
 #include <boost/circular_buffer.hpp>
 #include <boost/noncopyable.hpp>
 #include "../procmon.hpp"
-#include "test6.hpp"
+#include "test7.hpp"
 //#include <unistd.h>
 
 using namespace muduo;
@@ -305,7 +305,7 @@ int main(int argc, char* argv[])
 
     {
         muduo::Timestamp start = muduo::Timestamp::now();
-        test6_namespace::test_out();
+        test7_namespace::test_out();
         
         muduo::Timestamp end = muduo::Timestamp::now();
         printf("%f\n", timeDifference(end, start));
