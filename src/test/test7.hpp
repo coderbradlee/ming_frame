@@ -83,7 +83,7 @@ void squareSplit(int n)
 int squareSplitRecursion(int n,int dp,int& step)
 {
 	// if(dp==1)
-	// 	return 1;
+	 return 1;
 	// int k=getSqrt2(dp);
 	// for(int j=1;j<k;++j)
 	// {
@@ -118,11 +118,11 @@ void chargeChange(std::vector<int> dom,int n)
 	{
 		dp[0][i]=1;
 	}
-	for(int i=0;i<dom.size();++i)
+	for(size_t i=0;i<dom.size();++i)
 	{
 		dp[i][0]=1;
 	}
-	for(int i=1;i<dom.size();++i)
+	for(size_t i=1;i<dom.size();++i)
 	{
 		for(int j=0;j<=n;++j)
 		{
@@ -142,7 +142,7 @@ void chargeChange2(std::vector<int> dom,int n)
 	std::vector<int> dp(n+1,1);
 	std::vector<int> last(n+1,1);
 	 
-	for(int i=1;i<dom.size();++i)
+	for(size_t i=1;i<dom.size();++i)
 	{
 		for(int j=0;j<=n;++j)
 		{
