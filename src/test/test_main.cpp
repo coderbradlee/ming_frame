@@ -308,7 +308,7 @@ int main(int argc, char* argv[])
         test7_namespace::test_out();
         
         muduo::Timestamp end = muduo::Timestamp::now();
-        printf("%f\n", timeDifference(end, start));
+        printf("\n\n\n------------------\nspend time:%f\n", timeDifference(end, start));
     }
     
 
