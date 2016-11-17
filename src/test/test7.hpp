@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <set>
+#include <random>
 namespace test7_namespace
 {
 int getSqrt(int a)
@@ -80,6 +81,7 @@ void squareSplit(int n)
 		std::cout<<std::endl;
 	}
 }
+
 int squareSplitRecursion(int n,int dp,int& step)
 {
 	// if(dp==1)
@@ -191,9 +193,80 @@ void test_isScramble()
 	std::cout<<isScramble(one,two)<<std::endl;
 	std::cout<<isScramble(one,three)<<std::endl;
 }
+double buffon2(double a,double L)
+{
+	double X=a*1000;
+	double Y=a*1000;
+	int N=100000;
+	int c=0;
+	double x1,x2,y1,y2;
+	double d,y;
+	//////////////////////////////////
+	std::random_device rd;
+    std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis_y(0,X);  
+	auto dice_y= std::bind(dis_y,gen);
+	////////////////////////////////////////
+	for(int i=0;i<N;++i)
+	{
+		x1=dice_y();
+		y1=dice_y();
+		x2=dice_y();
+		y2=dice_y();
+		d=std::sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+		y=(y2-y1)*L/d+y1;
+		if ((int)(y1/a)!=(int)(y/a))
+		{
+			++c;
+		}
+	}	
+	return 2*L*N/(a*c);
+}
+double buffon(double a,double L)
+{
+	double y;
+	double theta;
+	int c=0;
+	int n=1000000;
+	std::random_device rd;
+    std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis_y(0,a/2);  
+	auto dice_y= std::bind(dis_y,gen);
+	std::uniform_real_distribution<> dis_theta(0,180);  
+	auto dice_theta= std::bind(dis_theta,gen);
+	for(int i=0;i<n;++i)
+	{
+		y=dice_y();
+		theta=dice_theta();
+		if(y<L*std::sin(theta)/2)
+			++c;
+	}
+	printf("%10f:%10f||",y,theta);
+	return 2*(double)(n*L)/(double)(c*a);
+}
+void test_buffon()
+{
+	double a=100;
+	double L;
+	double pi;
+	double avg=0;
+	double count=0;
+	for(L=a;L>1;L-=1)
+	{
+		//pi=buffon(a,L);
+		pi=buffon2(a,L);
+		//std::cout<<"pi:"<<pi<<std::endl;
+		printf("%3d:%8f\n",(int)L ,pi);
+		avg+=pi;
+		++count;
+	}
+	avg/=count;
+	std::cout<<"avg:"<<avg<<std::endl;
+}
 void test_out()
 {
-	test_isScramble();
+	test_buffon();
+	// test_isScramble();
 	// test_chargeChange();
 	// test_squareSplit();
 	// 	std::cout<<getSqrt(10)<<std::endl;
