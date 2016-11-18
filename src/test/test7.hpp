@@ -263,9 +263,125 @@ void test_buffon()
 	avg/=count;
 	std::cout<<"avg:"<<avg<<std::endl;
 }
+int randomSong1(const std::vector<int>& song)
+{
+	int N=song.size();
+	std::vector<int> accumulate(N,0);
+	accumulate[0]=song[0];
+	for(int i=1;i<N;++i)
+	{
+		accumulate[i]=accumulate[i-1]+song[i];
+	}
+	std::random_device rd;
+    std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis_y(0,accumulate[N-1]);  
+	auto dice_y= std::bind(dis_y,gen);
+	int songChoiced=dice_y();
+	//std::cout<<songChoiced<<std::endl;
+	int low=0;
+	int high=N-1;
+	int mid=(low+high)/2;
+	while(low<high)
+	{
+		if(accumulate[mid]>songChoiced)
+		{
+			high=mid;
+		}
+		else if (accumulate[mid]<songChoiced)
+		{
+			low=mid+1;
+		}
+		else
+		{
+			low=mid;
+			break;
+		}
+		mid=(low+high)/2;
+	}
+	//std::cout<<"choice song["<<low<<"]:"<<song[low]<<std::endl;
+	return low;
+}
+int randomSong2(const std::vector<int>& song)
+{
+	int N=song.size();
+	int sum=0;
+	for(int i=0;i<N;++i)
+	{
+		sum+=song[i];
+	}
+	std::vector<float> probability(N,0);
+	for(int i=0;i<N;++i)
+	{
+		probability[i]=(float)song[i]/sum;
+		//printf("%f ", probability[i]);
+	}
+	//printf("\n");
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis_index(0,N);  
+	auto dice_index= std::bind(dis_index,gen);
+	////////////////////////////////////
+	std::random_device rd1;
+	std::mt19937 gen1(rd1());
+	std::uniform_real_distribution<> dis_y(0,1);  
+	auto dice_y= std::bind(dis_y,gen1);
+
+	while(1)
+	{
+		int index=(int)dice_index();
+		float songChoiced=dice_y();
+		
+		if(probability[index]>songChoiced)
+		{
+			//printf("probability[%d]=%f:%f\n", index,probability[index],songChoiced);
+			return index;
+		}
+	}
+}
+void test_randomSong()
+{
+	std::vector<int> song{43,63,43,89,322,2,5,32};
+	float sum = std::accumulate(song.begin(), song.end(), 0);
+	for(auto& i:song)
+	{
+		printf("%f ", i/sum);
+	}
+	printf("\n");
+	{
+		std::cout<<"--------1--------"<<std::endl;
+		std::vector<int> accumulateTimes(song.size(),0);
+		for(int i=0;i<10000;++i)
+		{
+			++accumulateTimes[randomSong1(song)];
+		}
+		for(int i=0;i<accumulateTimes.size();++i)
+		{
+			printf("%f ", (float)accumulateTimes[i]/10000);
+		}
+		printf("\n");
+	}
+	{
+		std::cout<<"--------2--------"<<std::endl;
+		std::vector<int> accumulateTimes(song.size(),0);
+		for(int i=0;i<10000;++i)
+		{
+			++accumulateTimes[randomSong2(song)];
+		}
+		for(int i=0;i<accumulateTimes.size();++i)
+		{
+			//printf("%d ", accumulateTimes[i]);
+			printf("%f ", (float)accumulateTimes[i]/10000);
+		}
+		printf("\n");
+	}
+}
 void test_out()
 {
-	test_buffon();
+	test_randomSong();
+	// test_buffon();
+	// std::cout<<sizeof(float)<<std::endl;//4B,6-7位精度
+	// std::cout<<sizeof(double)<<std::endl;//8B，15-16位精度
+	// std::cout<<sizeof(long double)<<std::endl;
 	// test_isScramble();
 	// test_chargeChange();
 	// test_squareSplit();
