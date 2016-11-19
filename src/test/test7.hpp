@@ -382,12 +382,12 @@ void test_map()
 
 	maps.insert(std::make_pair(2,"2"));
 
-	auto test=maps.insert(std::pair(3,"3"));
+	auto test=maps.insert(std::pair<int, std::string>(3,"3"));
 	if(test.second)
 	{
 		std::cout<<"insert successfully"<<std::endl;
 	}
-	auto test22=maps.insert(std::pair(3,"3"));
+	auto test22=maps.insert(std::pair<int, std::string>(3,"3"));
 	if(test22.second)
 	{
 		std::cout<<"insert successfully"<<std::endl;
