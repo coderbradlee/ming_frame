@@ -397,7 +397,8 @@ void test_map()
 }
 void test_out()
 {
-	test_randomSong();
+	test_map();
+	// test_randomSong();
 	// test_buffon();
 	// std::cout<<sizeof(float)<<std::endl;//4B,6-7位精度
 	// std::cout<<sizeof(double)<<std::endl;//8B，15-16位精度
