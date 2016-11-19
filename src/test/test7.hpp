@@ -395,12 +395,20 @@ void test_map()
 	}
 	// for(auto& i:maps)
 	// 	std::cout<<i.first<<":"<<i.second<<std::endl;
+	for(auto it=map.begin();it!=map.end())
+	{
+		if(it->second=="2")
+			it=map.erase(it);
+		else
+			++it;
+	}
 	int x=maps.size();
 	std::cout<<x<<std::endl;
 	for(int i=0;i<x;++i)
 	{
 		std::cout<<i<<"::"<<maps[i]<<std::endl;
 	}
+
 }
 void test_out()
 {
