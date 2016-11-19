@@ -398,7 +398,8 @@ void test_map()
 	for(auto it=maps.begin();it!=maps.end();)
 	{
 		if(it->second=="2")
-			it=maps.erase(it);
+			//it=maps.erase(it);
+			maps.erase(it++);
 		else
 			++it;
 	}
