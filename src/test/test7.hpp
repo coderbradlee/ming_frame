@@ -394,7 +394,9 @@ void test_map()
 	}
 	// for(auto& i:maps)
 	// 	std::cout<<i.first<<":"<<i.second<<std::endl;
-	for(int i=0;i<=maps.size();++i)
+	int x=maps.size();
+	std::cout<<x<<std::endl;
+	for(int i=0;i<=x;++i)
 	{
 		std::cout<<i<<"::"<<maps[i]<<std::endl;
 	}
