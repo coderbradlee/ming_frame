@@ -395,7 +395,7 @@ void test_map()
 	}
 	// for(auto& i:maps)
 	// 	std::cout<<i.first<<":"<<i.second<<std::endl;
-	for(auto it=map.begin();it!=map.end();)
+	for(auto it=maps.begin();it!=maps.end();)
 	{
 		if(it->second=="2")
 			it=maps.erase(it);
