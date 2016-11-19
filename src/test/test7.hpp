@@ -388,9 +388,9 @@ void test_map()
 		std::cout<<"insert successfully"<<std::endl;
 	}
 	auto test22=maps.insert(std::pair<int, std::string>(3,"3"));
-	if(test22.second)
+	if(!test22.second)
 	{
-		std::cout<<"insert successfully"<<std::endl;
+		std::cout<<"insert fail"<<std::endl;
 	}
 	for(auto& i:maps)
 		std::cout<<i.first<<":"<<i.second<<std::endl;
