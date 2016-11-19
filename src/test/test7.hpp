@@ -375,6 +375,17 @@ void test_randomSong()
 		printf("\n");
 	}
 }
+void test_map()
+{
+	std::map<int, std::string> maps;
+	maps.insert(std::map<int, std::string>::value_type(1,"1"));
+
+	maps.insert(std::make_pair(2,"2"));
+
+	maps.insert(std::pair(3,"3"));
+	for(auto& i:maps)
+		std::cout<<i.first<<":"<<i.second<<std::endl;
+}
 void test_out()
 {
 	test_randomSong();
