@@ -396,7 +396,7 @@ void test_map()
 	// 	std::cout<<i.first<<":"<<i.second<<std::endl;
 	for(int i=0;i<maps.size();++i)
 	{
-		std::cout<<maps[i]<<std::endl;
+		std::cout<<i<<"::"<<maps[i]<<std::endl;
 	}
 }
 void test_out()
