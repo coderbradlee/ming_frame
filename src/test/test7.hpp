@@ -807,10 +807,73 @@ void LIS(std::vector<int> arr)
 	}
 	std::cout<<std::endl;
 }
+void LIS_HAVA_PRE(const std::vector<int>& arr,std::vector<int>& pathLength,std::vector<int>& pre)
+{
+	const int N=arr.size();
+	//std::vector<int> b(N,0);
+	pathLength[0]=1;
+	for(int i=0;i<N;++i)
+	{
+		pre[i]=i;
+	}
+	for(int i=0;i<N;++i)
+	{
+		//b[i]=0;
+		for(int j=0;j<i;++j)
+		{
+			if(arr[i]>arr[j])
+			{
+				//pathLength[i]=std::max(pathLength[i],pathLength[j]+1);
+				int len=pathLength[j]+1;
+				if(len>pathLength[i])
+				{
+					pathLength[i]=len;
+					pre[i]=j;
+				}
+			}
+		}
+	}
+}
+void get_lis(const std::vector<int>& arr,const std::vector<int>& pathLength,const std::vector<int>& pre)
+{
+	int ml=0;
+	int index=0;
+	for(int i=0;i<pathLength.size();++i)
+	{
+		if(pathLength[i]>ml)
+		{
+			ml=pathLength[i];
+			index=i;
+		}
+	}
+	std::vector<int> seq;
+
+	while(pre[index]!=index)
+	{
+		seq.push_back(arr[index]);
+		index=pre[index];
+	}
+	std::reverse(seq.begin(),seq.end());
+	for(auto& i:seq)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
 void test_LIS()
 {
 	std::vector<int> arr{1,4,6,2,8,9,7};
-	LIS(arr);
+	// LIS(arr);
+	const int N=7;
+	std::vector<int> pathLength(N,0);
+	std::vector<int> pre(N,0);
+	LIS_HAVA_PRE(arr,pathLength,pre);
+	for(auto& i:pathLength)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+	get_lis(pathLength,pre);
 }
 void test_out()
 {
