@@ -724,9 +724,9 @@ void findAnswer(const std::string& str1,int i,const std::string& str2,int j,cons
 	
 	if((i==0)||(j==0))
 	{
-		std::cout<<i<<":"<<j<<":"<<__LINE__<<":"<<__FILE__<<std::endl;
+		//std::cout<<i<<":"<<j<<":"<<__LINE__<<":"<<__FILE__<<std::endl;
 		allAnswer.push_back(oneAnswer);
-		std::cout<<oneAnswer<<std::endl;		
+		//std::cout<<oneAnswer<<std::endl;		
 		std::reverse(allAnswer.back().begin(),allAnswer.back().end());
 		//oneAnswer.clear();
 		return;
@@ -768,7 +768,7 @@ int LCS(const std::string& str1,const std::string& str2)
 	//FindAnswer(ret, allAnswer, oneAnswer, str1, str2, M, N);
 	for(auto& x:allAnswer)
 	{
-		//std::cout<<x<<std::endl;
+		std::cout<<x<<std::endl;
 	}
 	return ret[M][N];
 }
