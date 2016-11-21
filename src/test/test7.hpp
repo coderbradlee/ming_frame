@@ -880,11 +880,11 @@ void test_LIS()
 	std::cout<<std::endl;
 	get_lis(arr,pathLength,pre);
 }
-bool isDuplicate(const std::vector<int>& arr,int n,int i)
+bool isDuplicate(const std::vector<int>& arr,int n,int t)
 {
-	while(n<i)
+	while(n<t)
 	{
-		if(arr[i]==arr[n])
+		if(arr[n]==arr[t])
 		{
 			std::cout<<"dup"<<std::endl;
 			return true;
@@ -935,7 +935,7 @@ void test_permutation()
 {
 	//std::vector<int> arr{1,2,3,4};
 	//permutation(arr,4,0);
-	std::vector<int> arr2{1,3,3,4};
+	std::vector<int> arr2{1,2,2,3};
 	permutation2(arr2,4,0);
 }
 void test_out()
