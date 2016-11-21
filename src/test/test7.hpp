@@ -847,8 +847,8 @@ void get_lis(const std::vector<int>& arr,const std::vector<int>& pathLength,cons
 		}
 	}
 	std::vector<int> seq;
-
-	while(pre[index]!=-1)
+	
+	while(index>=0)
 	{
 		seq.push_back(arr[index]);
 		index=pre[index];
