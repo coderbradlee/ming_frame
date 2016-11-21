@@ -880,6 +880,16 @@ void test_LIS()
 	std::cout<<std::endl;
 	get_lis(arr,pathLength,pre);
 }
+bool isDuplicate(const std::vector<int>& arr,int i,int n)
+{
+	while(i<n)
+	{
+		if(arr[i]==arr[n])
+			return true;
+		++i;
+	}
+	return false;
+}
 void permutation(std::vector<int> arr,int size,int n)
 {
 	if(n==size-1)
@@ -898,10 +908,32 @@ void permutation(std::vector<int> arr,int size,int n)
 		std::swap(arr[i],arr[n]);
 	}
 }
+void permutation2(std::vector<int> arr,int size,int n)
+{
+	if(n==size-1)
+	{
+		for(auto& i:arr)
+		{
+			std::cout<<i;
+		}
+		std::cout<<std::endl;
+		return;
+	}
+	for(int i=n;i<size;++i)
+	{
+		if(isDuplicate(arr,n,i))
+			continue;
+		std::swap(arr[i],arr[n]);
+		permutation(arr,size,n+1);
+		std::swap(arr[i],arr[n]);
+	}
+}
 void test_permutation()
 {
 	std::vector<int> arr{1,2,3,4};
 	permutation(arr,4,0);
+	std::vector<int> arr2{1,3,3,4};
+	permutation2(arr2,4,0);
 }
 void test_out()
 {
