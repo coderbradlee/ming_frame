@@ -792,7 +792,7 @@ void LIS(std::vector<int> arr)
 	b[0]=1;
 	for(int i=0;i<N;++i)
 	{
-		b[i]=0;
+		//b[i]=0;
 		for(int j=0;j<i;++j)
 		{
 			if(arr[i]>arr[j])
