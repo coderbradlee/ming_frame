@@ -930,8 +930,8 @@ void permutation2(std::vector<int> arr,int size,int n)
 }
 void test_permutation()
 {
-	std::vector<int> arr{1,2,3,4};
-	permutation(arr,4,0);
+	//std::vector<int> arr{1,2,3,4};
+	//permutation(arr,4,0);
 	std::vector<int> arr2{1,3,3,4};
 	permutation2(arr2,4,0);
 }
