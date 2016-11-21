@@ -880,13 +880,13 @@ void test_LIS()
 	std::cout<<std::endl;
 	get_lis(arr,pathLength,pre);
 }
-bool isDuplicate(const std::vector<int>& arr,int i,int n)
+bool isDuplicate(const std::vector<int>& arr,int n,int i)
 {
-	while(i<n)
+	while(n<i)
 	{
 		if(arr[i]==arr[n])
 			return true;
-		++i;
+		++n;
 	}
 	return false;
 }
