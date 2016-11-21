@@ -885,7 +885,10 @@ bool isDuplicate(const std::vector<int>& arr,int n,int i)
 	while(n<i)
 	{
 		if(arr[i]==arr[n])
+		{
+			std::cout<<"dup"<<std::endl;
 			return true;
+		}
 		++n;
 	}
 	return false;
