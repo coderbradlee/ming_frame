@@ -785,9 +785,37 @@ void test_LCS()
 	std::cout<<LCS(str1,str2)<<std::endl;
 
 }
+void LIS(std::vector<int> arr)
+{
+	const int N=arr.size();
+	std::vector<int> b(N,0);
+	b[0]=1;
+	for(int i=0;i<N;++i)
+	{
+		b[i]=0;
+		for(int j=0;j<i;++j)
+		{
+			if(arr[i]>arr[j])
+			{
+				b[i]=std::max(b[i],b[j]+1);
+			}
+		}
+	}
+	for(auto& i:b)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+void test_LIS()
+{
+	std::vector<int> arr{1,4,6,2,8,9,7};
+	LIS(arr);
+}
 void test_out()
 {
-	test_LCS();
+	test_LIS();
+	// test_LCS();
 	// test_rotate();
 	// test_parenthese();
 	// test_bfs();
