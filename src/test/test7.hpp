@@ -646,6 +646,47 @@ void test_rotate()
 	std::vector<char> arr(str.begin(),str.end());
 	rotate(arr,2);
 }
+void FindAnswer(vector<vector<int> >& chess, vector<string>& solution, string& answer, const char* str1, const char* str2, int i, int j)
+{
+	while((i != 0) && (j != 0))
+	{
+		if(str1[i] == str2[j])
+		{
+			answer.push_back(str1[i]);
+			i--;
+			j--;
+		}
+		else
+		{
+			if(chess[i][j-1] == chess[i-1][j])
+			{
+				int s = (int)answer.size();
+				FindAnswer(chess, solution, answer, str1, str2, i-1, j);
+				answer.resize(s);
+
+				FindAnswer(chess, solution, answer, str1, str2, i, j-1);
+				answer.resize(s);
+				break;
+			}
+			else if(chess[i][j-1] > chess[i-1][j])
+			{
+				j--;
+			}
+			else
+			{
+				i--;
+			}
+		}
+	}
+
+	if((i == 0) || (j == 0))
+	{
+		solution.push_back(answer);
+		reverse(solution.back().begin(), solution.back().end());
+		return;
+	}
+}
+
 void findAnswer(const std::string& str1,int i,const std::string& str2,int j,const std::vector<std::vector<int>>& chess,std::string& oneAnswer,std::vector<std::string>& allAnswer)
 {
 	while((i>0)&&(j>0))
@@ -720,7 +761,8 @@ int LCS(const std::string& str1,const std::string& str2)
 		}
 		std::cout<<std::endl;
 	}
-	findAnswer(str1,M,str2,N,ret,oneAnswer, allAnswer);
+	// findAnswer(str1,M,str2,N,ret,oneAnswer, allAnswer);
+	FindAnswer(ret, allAnswer, oneAnswer, str1-1, str2-1, M, N);
 	for(auto& x:allAnswer)
 	{
 		//std::cout<<x<<std::endl;
