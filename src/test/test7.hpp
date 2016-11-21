@@ -848,7 +848,7 @@ void get_lis(const std::vector<int>& arr,const std::vector<int>& pathLength,cons
 	}
 	std::vector<int> seq;
 
-	while(pre[index]!=index)
+	while(pre[index]!=-1)
 	{
 		seq.push_back(arr[index]);
 		index=pre[index];
@@ -866,7 +866,7 @@ void test_LIS()
 	// LIS(arr);
 	const int N=7;
 	std::vector<int> pathLength(N,0);
-	std::vector<int> pre(N,0);
+	std::vector<int> pre(N,-1);
 	LIS_HAVA_PRE(arr,pathLength,pre);
 	for(auto& i:pathLength)
 	{
