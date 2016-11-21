@@ -873,6 +873,11 @@ void test_LIS()
 		std::cout<<i<<" ";
 	}
 	std::cout<<std::endl;
+	for(auto& i:pre)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
 	get_lis(arr,pathLength,pre);
 }
 void test_out()
