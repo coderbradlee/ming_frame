@@ -94,7 +94,7 @@ message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_T
 
 if (NOT NO_SUB)
     option(ENABLE_BOOST_CONTEXT "use boost coroutine" ON)
-    add_subdirectory("libgo")
+    #add_subdirectory("libgo")
 endif()
 
 #########################add libgo submodule
@@ -108,7 +108,7 @@ include_directories("${PROJECT_SOURCE_DIR}/libgo/test")
 add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(src)
-add_subdirectory(src/go)
+#add_subdirectory(src/go)
 #add_subdirectory(libmicrohttpd)
 add_definitions(-DMUDUO_STD_STRING)
 

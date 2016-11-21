@@ -196,7 +196,7 @@ void test_isScramble()
 double buffon2(double a,double L)
 {
 	double X=a*1000;
-	double Y=a*1000;
+	//double Y=a*1000;
 	int N=100000;
 	int c=0;
 	double x1,x2,y1,y2;
@@ -354,7 +354,7 @@ void test_randomSong()
 		{
 			++accumulateTimes[randomSong1(song)];
 		}
-		for(int i=0;i<accumulateTimes.size();++i)
+		for(size_t i=0;i<accumulateTimes.size();++i)
 		{
 			printf("%f ", (float)accumulateTimes[i]/10000);
 		}
@@ -367,7 +367,7 @@ void test_randomSong()
 		{
 			++accumulateTimes[randomSong2(song)];
 		}
-		for(int i=0;i<accumulateTimes.size();++i)
+		for(size_t i=0;i<accumulateTimes.size();++i)
 		{
 			//printf("%d ", accumulateTimes[i]);
 			printf("%f ", (float)accumulateTimes[i]/10000);
@@ -412,9 +412,330 @@ void test_map()
 	for(auto& i:maps)
 		std::cout<<i.first<<":"<<i.second<<std::endl;
 }
+int chessCount(int N)
+{
+	int ret=0;
+	for(int i=1;i<N;++i)
+	{
+		for(int j=1;j<N;++j)
+		{
+			ret+=std::min(i,j);
+		}
+	}
+	return ret;
+}
+void test_chessCount()
+{
+	const int N=19;
+	int n=chessCount(N);
+	std::cout<<n<<std::endl;
+}
+
+void bigInt()
+{
+	std::list<int> sum{1};
+
+	for(int i=1;i<=100;++i)
+	{
+		int carry=0;
+		for(auto& j:sum)
+		{
+			int temp=j*i+carry;
+			j=temp%10;
+			carry=temp/10;
+		}
+		while(carry!=0)
+		{
+			sum.push_back(carry%10);
+			carry/=10;
+		}
+	}
+	std::cout<<sum.size()<<std::endl;
+	int line=0;
+	int space=0;
+	for(auto i=sum.rbegin();i!=sum.rend();++i)
+	{
+		std::cout<<*i;
+		++space;
+		if(space%10==0)
+		{
+			std::cout<<" ";
+			++line;
+		}	
+		if(line==5)
+		{
+			std::cout<<std::endl;
+			line=0;
+		}
+	}
+}
+void test_bigInt()
+{
+	bigInt();
+}
+void bfs(const std::vector<std::vector<int>>& chess)
+{
+	const int N=chess.size();
+	std::vector<int> step(N,0);
+	std::vector<int> path(N,0);
+	path[0]=1;
+	std::queue<int> q;
+	q.push(0);
+	while(!q.empty())
+	{
+		int from =q.front();
+		q.pop();
+		for(int i=0;i<N;++i)
+		{
+			if(chess[from][i]!=0)
+			{
+				if((step[i]>step[from]+1)||(step[i]==0))
+				{
+					step[i]=step[from]+1;
+					q.push(i);
+					path[i]=path[from];
+				}
+				else if(step[i]==step[from]+1)
+				{
+					path[i]+=path[from];
+				}
+			}
+		}
+	}
+	std::cout<<step[N-1]<<":"<<path[N-1]<<std::endl;
+}
+void test_bfs()
+{
+	const int N=16;
+	std::vector<std::vector<int>> chess(N,std::vector<int>(N,0));
+	chess[0][1]=chess[0][4]=1;
+	chess[1][5]=chess[1][0]=chess[1][2]=1;
+	chess[2][1]=chess[2][6]=chess[2][3]=1;
+	chess[3][2]=chess[3][7]=1;
+	chess[4][0]=chess[4][5]=1;
+	chess[5][1]=chess[5][4]=chess[5][6]=chess[5][9]=1;
+	chess[6][2]=chess[6][5]=chess[6][7]=chess[6][10]=1;
+	chess[7][3]=chess[7][6]=1;
+	chess[8][9]=chess[8][12]=1;
+	chess[9][8]=chess[9][13]=chess[9][10]=1;
+	chess[10][9]=chess[10][14]=chess[10][11]=1;
+	chess[11][10]=chess[11][15]=1;
+	chess[12][8]=chess[12][13]=1;
+	chess[13][9]=chess[13][12]=chess[13][14]=1;
+	chess[14][10]=chess[14][13]=chess[14][15]=1;
+	chess[15][11]=chess[15][14]=1;
+	bfs(chess);
+}
+void parentheses(const std::string& str)
+{
+	int start=-1;
+	//int t=0;
+	std::stack<int> s;
+	int maxLength=0;
+	for(int i=0;i<str.length();++i)
+	{
+		if(str[i]=='(')
+		{
+			s.push(i);
+		}
+		else//')'
+		{
+			if(!s.empty())
+			{
+				//t=s.top();
+				s.pop();
+				if(s.empty())
+				{
+					maxLength=std::max(maxLength,i-start);
+					//start=i;
+				}
+				else
+				{
+					maxLength=std::max(maxLength,i-s.top());
+				}
+			}
+			else
+			{
+				start=i;
+			}
+		}
+	}
+	std::cout<<maxLength<<std::endl;
+}
+void parentheses2(const std::string& str)
+{
+	int start=-1;
+	int deep=0;
+	//std::stack<int> s;
+	int maxLength=0;
+	for(int i=0;i<str.length();++i)
+	{
+		if(str[i]=='(')
+		{
+			//s.push(i);
+			++deep;
+		}
+		else//')'
+		{
+			--deep;
+			if(deep==0)
+			{
+				maxLength=std::max(maxLength,i-start);
+			}
+			else if(deep<0)
+			{
+				deep=0;
+				start=i;
+			}
+		}
+	}
+	std::cout<<maxLength<<std::endl;
+	deep=0;
+	start=str.length();
+	for(int i=str.length()-1;i>=0;--i)
+	{
+		if(str[i]==')')
+		{
+			//s.push(i);
+			++deep;
+		}
+		else//')'
+		{
+			--deep;
+			if(deep>0)
+			{
+				maxLength=std::max(maxLength,start-i);
+			}
+			else
+			{
+				deep=0;
+				start=i;
+			}
+		}
+	}
+	std::cout<<maxLength<<std::endl;
+}
+void test_parenthese()
+{
+	//parentheses("()(())");
+	parentheses2("()(())");
+}
+void rotate(std::vector<char>& arr,int from,int to)
+{
+	while(from<to)
+	{
+		char c=arr[from];
+		arr[from]=arr[to];
+		arr[to]=c;
+		++from;
+		--to;
+	}
+}
+void rotate(std::vector<char>& arr,int rotateLocate)
+{
+	rotateLocate%=arr.size();
+	rotate(arr,0,rotateLocate-1);
+	rotate(arr,rotateLocate,arr.size()-1);
+	rotate(arr,0,arr.size()-1);
+	std::string t(arr.begin(),arr.end());
+	std::cout<<t<<std::endl;
+}
+void test_rotate()
+{
+	string str = "abcdef";
+	std::vector<char> arr(str.begin(),str.end());
+	rotate(arr,2);
+}
+void findAnswer(const std::string& str1,int i,const std::string& str2,int j,const std::vector<std::vector<int>>& chess,std::string& oneAnswer,std::vector<std::string>& allAnswer)
+{
+	while((i>0)&&(j>0))
+	{
+		if(str1[i-1]==str2[j-1])
+		{
+			std::cout<<str1[i-1]<<":"<<str2[j-1]<<std::endl;
+			oneAnswer.push_back(str1[i-1]);
+			--i;
+			--j;
+		}
+		else
+		{
+			if(chess[i-1][j]==chess[i][j-1])
+			{
+				findAnswer(str1,i-1,str2,j,chess,oneAnswer, allAnswer);
+				//oneAnswer.clear();
+				findAnswer(str1,i,str2,j-1,chess,oneAnswer, allAnswer);
+				//oneAnswer.clear();
+				break;
+			}
+			else if(chess[i-1][j]>chess[i][j-1])
+			{
+				--i;
+			}
+			else
+			{
+				--j;
+			}
+		}
+	}
+	if((i==0)||(j==0))
+	{
+		allAnswer.push_back(oneAnswer);
+		std::cout<<oneAnswer<<std::endl;		
+		std::reverse(allAnswer.back().begin(),allAnswer.back().end());
+		//oneAnswer.clear();
+		return;
+	}
+}
+int LCS(const std::string& str1,const std::string& str2)
+{
+	const int M=str1.length();
+	const int N=str2.length();
+	std::vector<std::vector<int>> ret(M+1,std::vector<int>(N+1,0));
+	for(int i=1;i<=M;++i)
+	{
+		for(int j=1;j<=N;++j)
+		{
+			if(str1[i]==str2[j])
+			{
+				
+				ret[i][j]=ret[i-1][j-1]+1;
+			}
+			else
+			{
+
+				ret[i][j]=std::max(ret[i-1][j],ret[i][j-1]);
+			}
+		}
+	}
+	//findAnswer(ret);
+	std::string oneAnswer;
+	std::vector<std::string> allAnswer;
+	findAnswer(str1,M,str2,N,ret,oneAnswer, allAnswer);
+	for(auto& x:allAnswer)
+	{
+		//std::cout<<x<<std::endl;
+	}
+	return ret[M][N];
+}
+
+void test_LCS()
+{
+	std::string str1="BCDABAB";
+	
+	std::string str2="CBACBAABA";
+	
+	std::cout<<LCS(str1,str2)<<std::endl;
+
+}
 void test_out()
 {
-	test_map();
+	test_LCS();
+	// test_rotate();
+	// test_parenthese();
+	// test_bfs();
+	// test_bigInt();
+	// test_chessCount();
+	// test_map();
 	// test_randomSong();
 	// test_buffon();
 	// std::cout<<sizeof(float)<<std::endl;//4B,6-7位精度
