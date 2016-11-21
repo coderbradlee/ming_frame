@@ -722,7 +722,7 @@ int LCS(const std::string& str1,const std::string& str2)
 	findAnswer(str1,M,str2,N,ret,oneAnswer, allAnswer);
 	for(auto& x:allAnswer)
 	{
-		//std::cout<<x<<std::endl;
+		std::cout<<x<<std::endl;
 	}
 	return ret[M][N];
 }
