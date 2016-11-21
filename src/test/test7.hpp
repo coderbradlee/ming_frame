@@ -847,7 +847,7 @@ void get_lis(const std::vector<int>& arr,const std::vector<int>& pathLength,cons
 		}
 	}
 	std::vector<int> seq;
-	
+
 	while(index>=0)
 	{
 		seq.push_back(arr[index]);
@@ -880,9 +880,33 @@ void test_LIS()
 	std::cout<<std::endl;
 	get_lis(arr,pathLength,pre);
 }
+void permutation(std::vector<int> arr,int size,int n)
+{
+	if(n==size-1)
+	{
+		for(auto& i:arr)
+		{
+			std::cout<<i;
+		}
+		std::cout<<std::endl;
+		return;
+	}
+	for(int i=n;i<size;++i)
+	{
+		std::swap(arr[i],arr[n]);
+		permutation(arr,size,n+1);
+		std::swap(arr[i],arr[n]);
+	}
+}
+void test_permutation()
+{
+	std::vector<int> arr{1,2,3,4};
+	permutation(arr,4,0);
+}
 void test_out()
 {
-	test_LIS();
+	test_permutation();
+	// test_LIS();
 	// test_LCS();
 	// test_rotate();
 	// test_parenthese();
