@@ -812,10 +812,10 @@ void LIS_HAVA_PRE(const std::vector<int>& arr,std::vector<int>& pathLength,std::
 	const int N=arr.size();
 	//std::vector<int> b(N,0);
 	pathLength[0]=1;
-	for(int i=0;i<N;++i)
-	{
-		pre[i]=i;
-	}
+	// for(int i=0;i<N;++i)
+	// {
+	// 	pre[i]=i;
+	// }
 	for(int i=0;i<N;++i)
 	{
 		//b[i]=0;
