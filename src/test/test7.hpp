@@ -650,9 +650,10 @@ void findAnswer(const std::string& str1,int i,const std::string& str2,int j,cons
 {
 	while((i>0)&&(j>0))
 	{
+		std::cout<<i<<":"<<j<<":"<<__LINE__<<":"<<__FILE__<<std::endl;
 		if(str1[i-1]==str2[j-1])
 		{
-			std::cout<<str1[i-1]<<":"<<str2[j-1]<<std::endl;
+			
 			oneAnswer.push_back(str1[i-1]);
 			--i;
 			--j;
