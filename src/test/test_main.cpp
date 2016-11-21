@@ -298,9 +298,9 @@ void foo()
 }
 int main(int argc, char* argv[])
 {
-    init_log();
-    LOG_INFO << argv[0] << " [number of IO threads] [number of worker threads] [-n]";
-    LOG_INFO << "pid = " << getpid() << ", tid = " << CurrentThread::tid();
+    // init_log();
+    // LOG_INFO << argv[0] << " [number of IO threads] [number of worker threads] [-n]";
+    // LOG_INFO << "pid = " << getpid() << ", tid = " << CurrentThread::tid();
   
 
     {
