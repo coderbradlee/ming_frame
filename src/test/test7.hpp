@@ -683,7 +683,7 @@ void findAnswer(const std::string& str1,int i,const std::string& str2,int j,cons
 		allAnswer.push_back(oneAnswer);
 	//	std::cout<<oneAnswer<<std::endl;		
 		std::reverse(allAnswer.back().begin(),allAnswer.back().end());
-		//oneAnswer.clear();
+		oneAnswer.clear();
 		return;
 	}
 }
