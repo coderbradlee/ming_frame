@@ -702,10 +702,13 @@ void findAnswer(const std::string& str1,int i,const std::string& str2,int j,cons
 		{
 			if(chess[i-1][j]==chess[i][j-1])
 			{
+				int s = (int)answer.size();
 				findAnswer(str1,i-1,str2,j,chess,oneAnswer, allAnswer);
 				//oneAnswer.clear();
+				answer.resize(s);
 				findAnswer(str1,i,str2,j-1,chess,oneAnswer, allAnswer);
 				//oneAnswer.clear();
+				answer.resize(s);
 				break;
 			}
 			else if(chess[i-1][j]>chess[i][j-1])
@@ -725,7 +728,7 @@ void findAnswer(const std::string& str1,int i,const std::string& str2,int j,cons
 		allAnswer.push_back(oneAnswer);
 		std::cout<<oneAnswer<<std::endl;		
 		std::reverse(allAnswer.back().begin(),allAnswer.back().end());
-		oneAnswer.clear();
+		//oneAnswer.clear();
 		return;
 	}
 }
@@ -761,8 +764,8 @@ int LCS(const std::string& str1,const std::string& str2)
 		}
 		std::cout<<std::endl;
 	}
-	// findAnswer(str1,M,str2,N,ret,oneAnswer, allAnswer);
-	FindAnswer(ret, allAnswer, oneAnswer, str1-1, str2-1, M, N);
+	 findAnswer(str1,M,str2,N,ret,oneAnswer, allAnswer);
+	//FindAnswer(ret, allAnswer, oneAnswer, str1, str2, M, N);
 	for(auto& x:allAnswer)
 	{
 		//std::cout<<x<<std::endl;
