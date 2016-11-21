@@ -646,7 +646,7 @@ void test_rotate()
 	std::vector<char> arr(str.begin(),str.end());
 	rotate(arr,2);
 }
-void FindAnswer(vector<vector<int> >& chess, vector<string>& solution, string& answer, const char* str1, const char* str2, int i, int j)
+void FindAnswer(std::vector<std::vector<int>>& chess, std::vector<std::string>& solution, std::string& answer, const std::string str1, const std::string str2, int i, int j)
 {
 	while((i != 0) && (j != 0))
 	{
