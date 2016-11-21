@@ -702,13 +702,13 @@ void findAnswer(const std::string& str1,int i,const std::string& str2,int j,cons
 		{
 			if(chess[i-1][j]==chess[i][j-1])
 			{
-				int s = (int)answer.size();
+				int s = (int)oneAnswer.size();
 				findAnswer(str1,i-1,str2,j,chess,oneAnswer, allAnswer);
 				//oneAnswer.clear();
-				answer.resize(s);
+				oneAnswer.resize(s);
 				findAnswer(str1,i,str2,j-1,chess,oneAnswer, allAnswer);
 				//oneAnswer.clear();
-				answer.resize(s);
+				oneAnswer.resize(s);
 				break;
 			}
 			else if(chess[i-1][j]>chess[i][j-1])
