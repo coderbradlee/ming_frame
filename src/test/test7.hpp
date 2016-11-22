@@ -1374,7 +1374,7 @@ double power(double x,int n)
 	}
 	return pow(x,n);
 }
-bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vector<std::vector<bool>>& visit,std::vector<std::pair<int,int>>& path)
+bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vector<std::vector<bool>>& visit,std::vector<std::pair<int,int>>& path,std::vector<std::vector<std::pair<int,int>>>& all)
 {
 	if(chess[i][j]==9)
 	{
@@ -1382,6 +1382,7 @@ bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vect
 		{
 			std::cout<<i.first<<":"<<i.second<<std::endl;
 		}
+		all.push_back(path);
 		return true;
 	}
 	int row[]={-1,1,0,0};
@@ -1397,7 +1398,7 @@ bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vect
 		{
 			path.push_back(std::make_pair(icur,jcur));
 			visit[icur][jcur]=true;
-			if(searchPath(chess,icur,jcur,visit,path))
+			if(searchPath(chess,icur,jcur,visit,path,all))
 			{
 				return true;
 			}
@@ -1410,10 +1411,11 @@ bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vect
 void mousePath(const std::vector<std::vector<int>>& chess)
 {
 	std::vector<std::pair<int,int>> path;
+	std::vector<std::vector<std::pair<int,int>>> all;
 	std::vector<std::vector<bool>> visit(chess.size(),std::vector<bool>(chess[0].size(),false));
 	path.push_back(std::make_pair(0,0));
 	visit[0][0]=true;
-	searchPath(chess,0,0,visit,path);
+	searchPath(chess,0,0,visit,path,all);
 	
 }
 void test_mouse()
