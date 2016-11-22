@@ -1332,7 +1332,7 @@ int calc(const std::string& str,int size,char from,char to,char aux)
 	}
 	if(str[size-1]==to)
 	{
-		int i=calc(str,size,aux,to,from);
+		int i=calc(str,size-1,aux,to,from);
 		if(i==-1)
 			return i;
 		else
@@ -1341,7 +1341,7 @@ int calc(const std::string& str,int size,char from,char to,char aux)
 			return ret;
 		}		
 	}
-	return calc(str,size,from,aux,to);
+	return calc(str,size-1,from,aux,to);
 }
 void test_hanoi()
 {
