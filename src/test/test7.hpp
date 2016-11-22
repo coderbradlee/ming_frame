@@ -1313,7 +1313,7 @@ void moveOne(char from,char to)
 {
 	std::cout<<from<<"-->"<<to<<std::endl;
 }
-void move(char from,char to,char aux,n)
+void move(char from,char to,char aux,int n)
 {
 	if(n==1)
 	{
