@@ -880,6 +880,58 @@ void test_LIS()
 	std::cout<<std::endl;
 	get_lis(arr,pathLength,pre);
 }
+namespace beforePermutation
+{
+	void print(const int* a,int size)
+	{
+		for(int i=0;i<size;++i)
+			std::cout<<a[i]<<' ';
+		std::cout<<std::endl;
+	}
+	bool is_duplicate(const int* a,int i,int j)
+	{
+		while(i<j)
+		{
+			if(a[i]==a[j])
+			{
+				std::cout<<a[i]<<std::endl;
+				return true;
+			}	
+			++i;
+		}
+		return false;
+	}
+	void permutation2(int* a,int size,int n)
+	{
+		if(n==size-1)
+		{
+			print(a,size);
+			return;
+		}
+		for(int i=n;i<size;++i)
+		{
+			if(is_duplicate(a,n,i))
+				continue;
+			std::swap(a[i],a[n]);
+			permutation2(a,size,n+1);
+			std::swap(a[i],a[n]);
+		}
+	}
+	void test_permutation()
+	{
+		//int x[]={1,2,3};
+		//permutation(x,3,0);
+		//std::cout<<"-----------------"<<std::endl;
+		//int y[]={2,1,3};
+		//permutation(y,3,0);
+		//std::cout<<"-----------------"<<std::endl;
+		int z[]={1,2,2,3};
+		permutation2(z,4,0);
+		std::cout<<"-----------------"<<std::endl;
+		int zz[]={2,1,2,3};
+		permutation2(zz,4,0);
+	}
+}
 bool isDuplicate(const std::vector<int>& arr,int n,int t)
 {
 	while(n<t)
@@ -911,7 +963,7 @@ void permutation(std::vector<int> arr,int size,int n)
 		std::swap(arr[i],arr[n]);
 	}
 }
-void permutation2(std::vector<int> arr,int size,int n)
+void permutation2(std::vector<int>& arr,int size,int n)
 {
 	if(n==size-1)
 	{
@@ -927,7 +979,7 @@ void permutation2(std::vector<int> arr,int size,int n)
 		if(isDuplicate(arr,n,i))
 			continue;
 		std::swap(arr[i],arr[n]);
-		permutation(arr,size,n+1);
+		permutation2(arr,size,n+1);//第二次写又一次写错了这个地方，调用了第一个版本的permutation
 		std::swap(arr[i],arr[n]);
 	}
 }
@@ -937,6 +989,7 @@ void test_permutation()
 	//permutation(arr,4,0);
 	std::vector<int> arr2{1,2,2,3};
 	permutation2(arr2,4,0);
+	//beforePermutation::test_permutation();
 }
 void test_out()
 {
