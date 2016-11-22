@@ -1374,9 +1374,66 @@ double power(double x,int n)
 	}
 	return pow(x,n);
 }
+bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vector<std::vector<bool>>& visit,std::vector<std::pair<int,int>>& path)
+{
+	if(chess[i][j]==9)
+	{
+		return true;
+	}
+	int row[]={-1,1,0,0};
+	int col[]={0,0,-1,1};
+	for(int k=0;k<4;++k)
+	{
+		//visit[i][j]=true;
+		i+=row[k];
+		j+=col[k];
+		if((i<0)||(i>=chess.size())||(j<0)||(j>=chess[0].size()))
+			continue;
+		if((!visit[i][j])&&(chess[i][j]!=0))
+		{
+			path.push_back(std::make_pair(i,j));
+			visit[i][j]=true;
+			if(searchPath(chess,i,j,visit,path))
+			{
+				return true;
+			}
+			path.pop_back();
+			visit[i][j]=false;
+		}
+	}
+	return false;
+}
+void mousePath(const std::vector<std::vector<int>>& chess)
+{
+	std::vector<std::pair<int,int>> path;
+	std::vector<std::vector<bool>> visit(chess.size(),std::vector<bool>(chess[0].size(),false));
+	path.push_back(std::make_pair(0,0));
+	visit[0][0]=true;
+	searchPath(chess,0,0,visit,path);
+	for(auto& i:path)
+	{
+		std::cout<<i.first<<":"<<i.second<<std::endl;
+	}
+}
+void test_mouse()
+{
+	std::vector<std::vector<int>> chess=
+	{
+		{1, 1, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 1, 0, 0, 1},
+		{1, 1, 1, 0, 1, 0, 0, 1},
+		{0, 1, 0, 0, 1, 1, 1, 1},
+		{0, 1, 0, 0, 0, 0, 0, 1},
+		{0, 1, 0, 9, 1, 1, 1, 1},
+		{0, 1, 1, 1, 0, 0, 1, 0}
+	};
+	mousePath(chess);
+}
 void test_out()
 {
-	std::cout<<power(1.01,365)<<std::endl;
+	test_mouse();
+	// std::cout<<power(1.01,365)<<std::endl;
 	// test_hanoi();
 	// test_color();
 	// test_eratosthenes();
