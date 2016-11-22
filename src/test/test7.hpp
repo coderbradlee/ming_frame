@@ -1378,10 +1378,10 @@ bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vect
 {
 	if(chess[i][j]==9)
 	{
-		for(auto& i:path)
-		{
-			std::cout<<i.first<<":"<<i.second<<std::endl;
-		}
+		// for(auto& i:path)
+		// {
+		// 	std::cout<<i.first<<":"<<i.second<<std::endl;
+		// }
 		all.push_back(path);
 		return true;
 	}
@@ -1416,7 +1416,14 @@ void mousePath(const std::vector<std::vector<int>>& chess)
 	path.push_back(std::make_pair(0,0));
 	visit[0][0]=true;
 	searchPath(chess,0,0,visit,path,all);
-	
+	for(auto& a:all)
+	{	
+		for(auto& i:a)
+		{
+			std::cout<<i.first<<":"<<i.second<<" ";
+		}
+		std::cout<<std::endl;
+	}
 }
 void test_mouse()
 {
