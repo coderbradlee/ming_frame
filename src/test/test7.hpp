@@ -1364,7 +1364,7 @@ double pow(double x,int n)
 		return x*x;
 	double temp=pow(x,n/2)*pow(x,n/2);
 	double temps=temp*x;
-	return (x%2==0)?temp:temps;
+	return (n%2==0)?temp:temps;
 }
 double power(double x,int n)
 {
