@@ -1345,11 +1345,11 @@ int calc(const std::string& str,int size,char from,char to,char aux)
 }
 void test_hanoi()
 {
-	move('A','C','B',3);
+	//move('A','C','B',3);
 	std::string str="ABC";
 	int one=calc(str,3,'A','C','B');
-	str="AAC";
-	int two=calc(str,3,'A','C','B');
+	std::string str1="AAC";
+	int two=calc(str1,3,'A','C','B');
 	std::cout<<one<<":"<<two<<std::endl;
 }
 void test_out()
