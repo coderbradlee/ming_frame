@@ -991,9 +991,343 @@ void test_permutation()
 	permutation2(arr2,4,0);
 	//beforePermutation::test_permutation();
 }
+bool next_permutation(std::vector<int>& arr)
+{
+	int size=arr.size()-1;
+	int swap_index=0;
+	//find swap index
+	for(int i=size;i>=0;--i)
+	{
+		if(i==0)
+			return false;
+		
+		if(arr[i]>arr[i-1])
+		{
+			swap_index=i-1;
+			//std::swap(arr[i-1],arr[min_index]);
+			break;
+		}
+	}
+	for(int i=size;i>=0;--i)
+	{
+		if(arr[i]>arr[swap_index])
+		{
+			std::swap(arr[i],arr[swap_index]);
+			break;
+		}
+	}
+	std::reverse(arr.begin()+swap_index+1,arr.end());
+	return true;
+}
+void test_next_permutation()
+{
+	std::vector<int> arr{1,2,2,3};
+	while(next_permutation(arr))
+	{
+		for(auto& i:arr)
+		{
+			std::cout<<i;
+		}
+		std::cout<<std::endl;
+	}
+}
+void manacher(const std::vector<int>& arr,std::vector<int>& p)
+{
+	const int len=arr.size();
+	int id=0;
+	p[0]=1;
+	int mx=1;
+	for(int i=0;i<len;++i)
+	{
+		if(mx>i)
+		{
+			p[i]=std::min(p[2*id-i],mx-i);
+		}
+		while(arr[i+p[i]]==arr[i-p[i]])
+		{
+			++p[i];
+		}
+		if(i+p[i]>mx)
+		{
+			id=i;
+			mx=i+p[i];
+		}
+	}
+}
+void test_manacher()
+{
+	std::vector<int> arr{-2,-1,1,-1,2,-1,2,-1,1,-1,2,-1,3,-1,2,-1,1,-1};
+	const int len=arr.size();
+	std::vector<int> p(len,0);
+	manacher(arr,p);
+	for(auto& i:p)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+void get_next(const std::vector<char>& arr,std::vector<int>& next)
+{
+	next[1]=0;
+	for(int i=2;i<arr.size();++i)
+	{
+		int k=next[i-1];
+		while(1)
+		{
+			if((k==-1)||(arr[i-1]==arr[k]))
+			{
+				next[i]=k+1;
+				break;
+			}
+			else
+			{
+				k=next[k];
+			}
+		}
+	}
+}
+void get_next2(const std::vector<char>& arr,std::vector<int>& next)
+{
+	next[1]=0;
+	int i=2;
+	int k=-1;
+	while(i<arr.size())
+	{
+		if((k==-1)||(arr[i-1]==arr[k]))
+		{
+			int temp=k+1;
+			if(arr[i]==arr[temp])
+			{
+				std::cout<<arr[i]<<":"<<temp<<std::endl;
+				next[i]=next[temp];
+			}
+			else
+			{
+				next[i]=temp;
+			}
+			++i;
+			++k;
+		}
+		else
+		{
+			k=next[k];
+		}
+	}
+	
+}
+void test_KMP()
+{
+	// std::vector<char> arr{'a','b','a','a','b','c','a','b','a'};
+	std::vector<char> arr{'a','b','c','a','b','c','a','b','c','a','b','c','\0'};
+	std::vector<int> next(arr.size(),-1);
+	get_next(arr,next);
+	// get_next2(arr,next);
+	for(auto& i:next)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+void count()
+{
+	const int N=10;
+	std::vector<std::vector<int>> dp(N,std::vector<int>(2,0));
+	dp[0][0]=3;
+	dp[0][1]=0;
+	for(int i=1;i<N;++i)
+	{
+		dp[i][0]=(dp[i-1][0]+dp[i-1][1])*2;
+		dp[i][1]=dp[i-1][0];
+	}
+	for(auto& i:dp)
+	{
+		for(auto& j:i)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+}
+void count2()
+{
+	const int N=10;
+	std::vector<int> dp(N,0);
+	int notEqual=3;
+	int equ=0;
+	for(int i=1;i<N;++i)
+	{
+		int temp=notEqual;
+		notEqual=(notEqual+equ)*2;
+		equ=temp;
+		dp[i]=notEqual+equ;
+	}
+	for(auto& i:dp)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+typedef struct Matrix
+{
+	int a;
+	int b;
+	int c;
+	int d;
+	void set(int aa,int bb,int cc,int dd)
+	{
+		a=aa;
+		b=bb;
+		c=cc;
+		d=dd;
+	}
+}matrix;
+void multiMatrix(matrix& m,const matrix& n)
+{
+	int a=m.a*n.a+m.c*n.b;
+	int b=m.b*n.a+m.d*n.b;
+	int c=m.a*n.c+m.c*n.d;
+	int d=m.b*n.c+m.d*n.d;
+	m.set(a,b,c,d);
+}
+void multiN(matrix& m,int n)
+{
+	if(n==0)
+	{
+		m.set(1,0,0,1);
+		return;
+	}
+	if(n==1)
+	{
+		return;
+	}
+	if(n%2==0)
+	{
+		multiN(m,n/2);
+		multiMatrix(m,m);
+	}
+	else
+	{
+		matrix x=m;
+		multiN(m,n/2);
+		multiMatrix(m,m);
+		multiMatrix(m,x);
+	}
+}
+void count3()
+{
+	const int N=10;
+	// int nonRepeat=3;
+	// int repeat=1;
+	matrix m;
+	m.set(2,2,1,0);
+	multiN(m,N-1);
+	std::cout<<(m.a+m.c)*3<<std::endl;
+}
+void test_count()
+{
+	count();
+	count2();
+	count3();
+}
+void eratosthenes(std::vector<bool>& v)
+{
+	int size=std::sqrt(v.size());
+
+	for(int i=2;i<size;++i)
+	{
+		for(int j=i;j*i<size*size;++j)
+		{
+			v[i*j]=false;
+		}
+	}
+	for(int i=0;i<v.size();++i)
+	{
+		if(v[i])
+			std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+void test_eratosthenes()
+{
+	std::vector<bool> v(100,true);
+	eratosthenes(v);
+}
+int rotateLeftShift(int x,int N)
+{
+	int high=x>>(N-1);
+	x&=(1<<(N-1))-1;
+	x<<=1;
+	x|=high;
+	return x;
+}
+void color(int n)
+{
+	int size=1<<n;
+	std::vector<int> v(size,1);
+	for(int i=0;i<size;++i)
+	{
+		int k1=i;
+		for(int j=0;j<n;++j)
+		{
+			int x=rotateLeftShift(k1,n);
+			if(x==i)
+			{
+				break;
+			}
+			else if(x>i)
+			{
+				v[x]=0;
+			}
+			else
+			{
+				v[i]=0;
+				break;
+			}
+			k1=x;
+		}
+	}
+	int num=0;
+	for(int i=0;i<size;++i)
+	{
+		if(v[i]==1)
+		{
+			++num;
+			std::cout<<i<<" ";
+		}
+	}
+	std::cout<<std::endl<<num<<std::endl;
+}
+void test_color()
+{
+
+	//for(int i)
+	int x=-1;
+	x=x<<1;
+
+	std::cout<<x<<std::endl;
+	color(6);
+	color(7);
+	color(8);
+}
 void test_out()
 {
-	test_permutation();
+	test_color();
+	// test_eratosthenes();
+	// test_count();
+	// test_KMP();
+	// test_manacher();
+	// test_next_permutation();
+	// std::cout<<"--------------------"<<std::endl;
+	// std::cout<<sizeof(int)<<std::endl;
+	// std::cout<<sizeof(long)<<std::endl;
+	// std::cout<<sizeof(long long)<<std::endl;
+	
+	// std::cout<<sizeof(float)<<std::endl;
+	// std::cout<<sizeof(double)<<std::endl;
+	// std::cout<<sizeof(long double)<<std::endl;
+	// std::cout<<sizeof(std::string)<<std::endl;
+	// std::cout<<sizeof(size_t)<<std::endl;
+	// test_permutation();
 	// test_LIS();
 	// test_LCS();
 	// test_rotate();
