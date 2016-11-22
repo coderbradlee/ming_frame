@@ -1382,7 +1382,7 @@ bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vect
 		// {
 		// 	std::cout<<i.first<<":"<<i.second<<std::endl;
 		// }
-		all.push_back(path);
+		//all.push_back(path);
 		return true;
 	}
 	int row[]={-1,1,0,0};
@@ -1400,7 +1400,8 @@ bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vect
 			visit[icur][jcur]=true;
 			if(searchPath(chess,icur,jcur,visit,path,all))
 			{
-				return true;
+				// return true;
+				all.push_back(path);
 			}
 			path.pop_back();
 			visit[icur][jcur]=false;
