@@ -1309,9 +1309,29 @@ void test_color()
 	color(7);
 	color(8);
 }
+void moveOne(char from,char to)
+{
+	std::cout<<from<<"-->"<<to<<std::endl;
+}
+void move(char from,char to,char aux,n)
+{
+	if(n==1)
+	{
+		moveOne(from,to);
+		return;
+	}
+	move(from,aux,to,n-1);
+	moveOne(from,to);
+	move(aux,to,from,n-1);
+}
+void test_hanoi()
+{
+	move('A','C','B',3);
+}
 void test_out()
 {
-	test_color();
+	test_hanoi();
+	// test_color();
 	// test_eratosthenes();
 	// test_count();
 	// test_KMP();
