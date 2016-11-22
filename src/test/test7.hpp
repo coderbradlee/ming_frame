@@ -1389,20 +1389,20 @@ bool searchPath(const std::vector<std::vector<int>>& chess,int i,int j,std::vect
 	for(int k=0;k<4;++k)
 	{
 		//visit[i][j]=true;
-		i+=row[k];
-		j+=col[k];
-		if((i<0)||(i>=chess.size())||(j<0)||(j>=chess[0].size()))
+		int icur=i+row[k];
+		int jcur=j+col[k];
+		if((icur<0)||(icur>=chess.size())||(jcur<0)||(jcur>=chess[0].size()))
 			continue;
-		if((!visit[i][j])&&(chess[i][j]!=0))
+		if((!visit[icur][jcur])&&(chess[icur][jcur]!=0))
 		{
-			path.push_back(std::make_pair(i,j));
-			visit[i][j]=true;
-			if(searchPath(chess,i,j,visit,path))
+			path.push_back(std::make_pair(icur,jcur));
+			visit[icur][jcur]=true;
+			if(searchPath(chess,icur,jcur,visit,path))
 			{
 				return true;
 			}
 			path.pop_back();
-			visit[i][j]=false;
+			visit[icur][jcur]=false;
 		}
 	}
 	return false;
