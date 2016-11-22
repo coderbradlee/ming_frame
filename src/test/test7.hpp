@@ -1354,9 +1354,30 @@ void test_hanoi()
 	int two=calc(str1,3,'A','C','B');
 	std::cout<<one<<":"<<two<<std::endl;
 }
+double pow(double x,int n)
+{
+	if(n==0)
+		return 1;
+	if(n==1)
+		return x;
+	if(n==2)
+		return x*x;
+	double temp=pow(x,n/2)*pow(x,n/2);
+	double temps=temp*x;
+	return (x%2==0)?temp:temps;
+}
+double power(double x,int n)
+{
+	if(n<0)
+	{
+		return 1/pow(x,-n);
+	}
+	return pow(x,n);
+}
 void test_out()
 {
-	test_hanoi();
+	std::cout<<power(1.01,365)<<std::endl;
+	// test_hanoi();
 	// test_color();
 	// test_eratosthenes();
 	// test_count();
