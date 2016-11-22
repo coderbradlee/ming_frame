@@ -1324,9 +1324,33 @@ void move(char from,char to,char aux,int n)
 	moveOne(from,to);
 	move(aux,to,from,n-1);
 }
+int calc(const std::string& str,int size,char from,char to,char aux)
+{
+	if(str[size-1]==aux)
+	{
+		return -1;
+	}
+	if(str[size-1]==to)
+	{
+		int i=calc(str,size,aux,to,from);
+		if(i==-1)
+			return i;
+		else
+		{
+			int ret=1<<(size-1)+i;
+			return ret;
+		}		
+	}
+	return calc(str,size,from,aux,to);
+}
 void test_hanoi()
 {
 	move('A','C','B',3);
+	std::string str="ABC";
+	int one=calc(str,3,'A','C','B');
+	str="AAC";
+	int two=calc(str,3,'A','C','B');
+	std::cout<<one<<":"<<two<<std::endl;
 }
 void test_out()
 {
