@@ -1337,7 +1337,7 @@ int calc(const std::string& str,int size,char from,char to,char aux)
 			return i;
 		else
 		{
-			int ret=1<<(size-1)+i;
+			int ret=(1<<(size-1))+i;
 			return ret;
 		}		
 	}
