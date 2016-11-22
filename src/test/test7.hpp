@@ -1326,6 +1326,8 @@ void move(char from,char to,char aux,int n)
 }
 int calc(const std::string& str,int size,char from,char to,char aux)
 {
+	if(size==0)
+		return 0;
 	if(str[size-1]==aux)
 	{
 		return -1;
