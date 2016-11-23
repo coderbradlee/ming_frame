@@ -1496,7 +1496,9 @@ void test_localMax()
 }
 void test_out()
 {
-	test_localMax();
+	std::vector<int> v;
+	v[2]=0;
+	//test_localMax();
 	// test_mode();
 	// test_mouse();
 	// std::cout<<power(1.01,365)<<std::endl;
