@@ -1494,9 +1494,563 @@ void test_localMax()
 	std::vector<int> arr{8,8,1,11,3,8,4,5,6,2,8};
 	localMax(arr);
 }
+int firstMissingNumber(std::vector<int> arr)
+{
+	int N=arr.size();
+	int size=N-1;
+	int i=0;
+	while(i<=size)
+	{
+		if(arr[i]==(i+1))
+		{
+			++i;
+		}
+		else if(arr[i]<(i+1)||arr[i]>(N+1)||arr[arr[i]-1]==arr[i])
+		{
+			std::swap(arr[i],arr[size]);
+			--size;
+		}
+		else if(arr[i]>(i+1))
+		{
+			std::swap(arr[arr[i]-1],arr[i]);
+		}
+	}
+	return i+1;
+}
+void test_firstMissingNumber()
+{
+	std::vector<int> arr{3,5,1,2,-3,7,6,8};
+	std::cout<<firstMissingNumber(arr)<<std::endl;
+}
+void rotateArrayMin(std::vector<int> arr)
+{
+	int size=arr.size();
+	int low=0;
+	int high=size-1;
+	int mid;//=(low+high)/2;
+	while(low<=high)
+	{
+		mid=(low+high)/2;
+		std::cout<<low<<":"<<mid<<":"<<high<<std::endl;
+		if(arr[mid]>arr[high])
+		{
+			low=mid+1;
+		}
+		else if(mid==high)
+		{
+			break;
+		}
+		else
+		{
+			high=mid;
+		}
+	}
+	
+	std::cout<<arr[mid]<<std::endl;
+}
+void test_rotateArrayMin()
+{
+	std::vector<int> arr{5,6,7,2,3,4};
+	rotateArrayMin(arr);
+}
+void zeroSubarray(std::vector<int> arr)
+{
+	std::vector<int> sum(arr.size(),0);
+	sum[0]=arr[0];
+	for(int i=0;i<arr.size()-1;++i)
+	{
+		sum[i+1]=sum[i]+arr[i+1];
+	}
+	std::sort(sum.begin(),sum.end());
+	int ml=0;
+	for(int i=1;i<sum.size();++i)
+	{
+		if(sum[i]-sum[i-1]<ml)
+			ml=sum[i]-sum[i-1];
+	}
+	std::cout<<ml<<std::endl;
+}
+void zeroSubarray2(std::vector<int> arr)
+{
+	std::vector<std::pair<int,int>> sum(arr.size(),std::pair<int,int>(0,0));
+	sum[0]=std::make_pair(arr[0],0);
+	for(int i=0;i<arr.size()-1;++i)
+	{
+		//sum[i+1]=sum[i]+arr[i+1];
+		sum[i+1]=std::make_pair(sum[i].first+arr[i+1],i+1);
+
+	}
+	std::sort(sum.begin(),sum.end(),
+		[](std::pair<int,int> a,std::pair<int,int> b)
+		{
+			return a.first<b.first;
+		});
+	// for(auto i:sum)
+	// {
+	// 	std::cout<<i.first<<":"<<i.second<<std::endl;
+	// }
+	int ml=100;
+	int from=0;
+	int to=0;
+	for(int i=1;i<sum.size();++i)
+	{
+		if(sum[i].first-sum[i-1].first<ml)
+		{	
+			ml=sum[i].first-sum[i-1].first;
+			from=sum[i-1].second;
+			to=sum[i].second;
+			std::cout<<ml<<":"<<from<<":"<<to<<std::endl;
+		}
+	}
+	std::cout<<ml<<":"<<from<<":"<<to<<std::endl;
+}
+void test_zeroSubarray()
+{
+	std::vector<int> arr{1,-2,3,10,-4,7,2,-5};
+	//zeroSubarray(arr);
+	zeroSubarray2(arr);
+}
+void maxSubarray(std::vector<int> arr)
+{
+	int size=arr.size();
+	std::vector<int> sum(size,0);
+	sum[0]=arr[0];
+	for(int i=1;i<size;++i)
+	{
+		sum[i]=std::max(sum[i-1]+arr[i],arr[i]);
+	}
+	for(auto& i:sum)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+void maxSubarray2(std::vector<int> arr)
+{
+	int size=arr.size();
+	std::vector<int> sum(size,0);
+	sum[0]=arr[0];
+	int from=0;
+	int to=0;
+	int ml=sum[0];
+
+	for(int i=1;i<size;++i)
+	{
+		bool updateTo=false;
+		bool updateFrom=false;
+		int temp=sum[i-1]+arr[i];
+		if(temp>arr[i])
+		{
+			sum[i]=temp;
+			//to=i;
+			updateTo=true;
+		}
+		else
+		{
+			sum[i]=arr[i];
+			//from=i;
+			updateFrom=true;
+		}
+		if(ml<sum[i])
+		{
+			ml=sum[i];
+			if(updateTo)
+			{
+				to=i;
+			}
+			else
+			{
+				from=i;
+			}
+		}
+	}
+	for(auto& i:sum)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+	std::cout<<ml<<":"<<from<<":"<<to<<std::endl;
+}
+void test_maxSubarray()
+{
+	std::vector<int> arr{1,-2,3,10,-4,7,2,-5};
+	maxSubarray(arr);
+	maxSubarray2(arr);
+}
+void continueSubarray(std::vector<int> arr)
+{
+	int size=arr.size();
+	std::vector<int> len(size,1);
+	int ml=1;
+	int index=0;
+	for(int i=1;i<size;++i)
+	{
+		if(arr[i]-arr[i-1]==1)
+		{
+			len[i]=len[i-1]+1;
+			if(len[i]>ml)
+			{
+				ml=len[i];
+				index=i;
+			}
+		}
+	}
+	std::cout<<ml<<":"<<index<<std::endl;
+}
+void test_continueSubarray()
+{
+	std::vector<int> arr{1,2,3,34,56,57,58,59,60,61,99,121};
+	continueSubarray(arr);
+}
+void holland(std::vector<int>& arr)
+{
+	int begin=0;
+	int cur=0;
+	int end=arr.size()-1;
+	while(cur<end)
+	{
+		if(arr[cur]==2)
+		{
+			std::swap(arr[cur],arr[end]);
+			--end;
+		}
+		else
+		{
+			if(arr[cur]==0)
+			{
+				std::swap(arr[begin],arr[cur]);
+				++begin;
+			}
+			++cur;
+		}
+	}
+	for(auto& i:arr)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+void test_holland()
+{
+	std::vector<int> arr{1,2,2,1,2,1,2,1,0,2,1,0};
+	holland(arr);
+}
+typedef struct Bucket
+{
+	int maxValue;
+	int minValue;
+	bool valid;
+	Bucket():valid(false){}
+	void add(int n)
+	{
+		if(!valid)
+		{
+			maxValue=minValue=n;
+			valid=true;
+		}
+		else
+		{
+			if(maxValue<n)
+			{
+				maxValue=n;
+			}
+			else if(minValue>n)
+			{
+				minValue=n;
+			}
+		}
+	}
+}bucket;
+void maxGap(std::vector<int> arr)
+{
+	int maxValue=arr[0];
+	int minValue=arr[0];
+	std::vector<bucket> v(arr.size(),bucket());
+	for(int i=0;i<arr.size();++i)
+	{
+		maxValue=std::max(maxValue,arr[i]);
+		minValue=std::min(minValue,arr[i]);
+	}
+	int delta=maxValue-minValue;
+	for(int i=0;i<arr.size();++i)
+	{
+		int loc=(arr[i]-minValue)*arr.size()/delta;
+		if(loc>=arr.size())
+		{
+			loc=arr.size()-1;
+		}
+		v[loc].add(arr[i]);
+	}
+	{
+		for(auto& i:v)
+		{
+			if(i.valid)
+			{
+				std::cout<<i.minValue<<":"<<i.maxValue<<std::endl;
+			}
+		}
+	}
+	int ret=0;
+	int firstBuckt=0;
+	for(int i=1;i<v.size();++i)
+	{
+		if(v[i].valid)
+		{
+			ret=std::max(ret,v[i].minValue-v[firstBuckt].maxValue);
+			firstBuckt=i;
+		}
+	}
+	std::cout<<ret<<std::endl;
+}
+void test_maxGap()
+{
+	std::vector<int> arr{1,7,14,9,4,13,28,23,20,40,30,22};
+	maxGap(arr);
+}
+void cantorR(std::vector<int> can)
+{
+	int size=can.size();
+	std::vector<int> ret(size,0);
+	std::vector<int> aux(size,0);
+	for(int i=0;i<size;++i)
+	{
+		aux[i]=i+1;
+	}
+	for(int i=0;i<size;++i)
+	{
+		ret[i]=aux[can[i]];
+		aux.erase(aux.begin()+can[i]);
+	}
+	for(auto& i:ret)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+void cantorR2(std::vector<int> can)
+{
+	int size=can.size();
+	std::vector<int> ret(size,0);
+	int j=1;
+	while(j<size+1)
+	{
+		for(int i=0;i<size;++i)
+		{
+			if(can[i]!=-1)//提取过一次设置为-1
+			{
+				if(can[i]!=0)
+				{
+					--can[i];
+				}
+				else
+				{
+					ret[i]=j;
+					can[i]=-1;
+					++j;
+					break;
+				}
+			}
+		}
+	}
+	for(auto& i:ret)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+void test_cantor()
+{
+	std::vector<int> can{3,4,1,2,1,0};
+	cantorR(can);
+	cantorR2(can);
+}
+typedef struct Node
+{
+	int data;
+	int parent;
+	int left;
+	int right;
+	Node():data(-1),parent(-1),left(-1),right(-1){}
+}node;
+void cal_frequence(const char* str,int* frequence)
+{
+	int len=strlen(str);
+	for(int i=0;i<len;++i)
+	{
+		++frequence[str[i]];
+	}
+}
+void print_frequence(int *frequence,int N)
+{
+	int j=0;
+	for(int i=0;i<N;++i)
+	{
+		if(i=='\t')
+		{
+			//std::cout<<i<<std::endl;
+			frequence[i]=0;
+		}
+		if(frequence[i]!=0)
+		{
+			printf("%c:%d ",i,frequence[i]);
+			++j;
+		}	
+		
+		if(j!=0&&j%10==0)
+		{
+			printf("\n");
+			j=0;
+		}	
+	}
+	std::cout<<std::endl;
+}
+void cal_exist_char(int* frequence,int N,std::vector<int>& exist_key)
+{
+	int j=0;
+	for(int i=0;i<N;++i)
+	{
+		if(frequence[i]!=0)
+		{
+			frequence[j]=frequence[i];
+			++j;
+			exist_key.push_back(i);
+		}
+	}
+}
+void select2min(node* huffmanNode,int N,int& one,int& two)
+{
+	//make two is bigger one of one and two
+	one=-1;
+	two=-1;
+	int min1=-1;
+	int min2=min1;
+	for(int i=0;i<N;++i)
+	{
+		if((huffmanNode[i].parent)==-1)
+		{
+			if((one<0)||(huffmanNode[i].data<min1))
+			{
+				min2=min1;
+				two=one;
+				min1=huffmanNode[i].data;
+				one=i;
+			}
+			else if((two<0)||(huffmanNode[i].data<min2))
+			{
+				min2=huffmanNode[i].data;
+				two=i;
+			}
+			//printf("/////////////%d:%d\n",one,two);
+		}
+	}
+}
+void huffman_code(int* frequence,int N,std::vector<std::vector<char>>& huffman)
+{
+	int size=2*N-1;
+	node* huffmanNode=new node[size];
+	for(int i=0;i<N;++i)
+	{
+		huffmanNode[i].data=frequence[i];
+	}
+	int one,two;
+	for(int i=N;i<size;++i)
+	{
+		//choose two minner between 0-i 
+		select2min(huffmanNode,i,one,two);
+		//printf("/////////////%d\n",i);
+		huffmanNode[i].data=huffmanNode[one].data+huffmanNode[two].data;
+		huffmanNode[i].left=one;
+		huffmanNode[i].right=two;
+		huffmanNode[one].parent=i;
+		huffmanNode[two].parent=i;
+	}
+	for(int i=0;i<N;++i)//前N个为叶子节点，需要求编码
+	{
+		std::vector<char> code;
+		int cur=i;
+		while(huffmanNode[cur].parent!=-1)
+		{
+			if(cur==(huffmanNode[huffmanNode[cur].parent].left))
+			{
+				code.push_back('0');
+			}
+			else
+			{
+				code.push_back('1');
+			}
+			if(cur!=huffmanNode[cur].parent)
+				cur=huffmanNode[cur].parent;
+			else
+			{
+				break;
+			}
+		}
+		std::reverse(code.begin(),code.end());
+		huffman[i]=code;
+	}
+}
+void print_huffman(std::vector<int> exist_key,std::vector<std::vector<char>>& huffman)
+{
+	for(int i=0;i<exist_key.size();++i)
+	{
+		printf("%c:", exist_key[i]);
+		for(auto j:huffman[i])
+		{
+			printf("%c",j);
+		}
+		printf("\n");
+	}
+}
+void test_huffman()
+{
+	const int N=256;
+	const char str[]="when I was young I'd listen to the radio\
+					waiting for my favorite songs\
+					when they played I'd sing along, \
+					it make me smile.\
+					those were such happy times and not so long ago\
+					how I wondered where they'd gone.\
+					but they're back again just like a long lost friend\
+					all the songs I love so well.\
+					every shalala every wo'wo\
+					still shines.\
+					every shing-a-ling-a-ling\
+					that they're starting\
+					to sing so fine";
+
+	int frequence[N]={0};
+	cal_frequence(str,frequence);
+	print_frequence(frequence,N);
+	std::vector<int> exist_key;
+	//存在的字符保存的exist_key中，个数还是保存在frequence里
+	cal_exist_char(frequence,N,exist_key);
+	//this should be the same with print_frequence
+	for(int i=0;i<exist_key.size();++i)
+	{
+		printf("%c:%d ",exist_key[i],frequence[i]);
+		if(i!=0&&i%10==0)
+		{
+			printf("\n");
+		}	
+	}
+	printf("\n------------------\n");
+	std::vector<std::vector<char>> v(exist_key.size());
+	huffman_code(frequence,exist_key.size(),v);
+	
+	print_huffman(exist_key,v);
+}
 void test_out()
 {
-	test_localMax();
+	test_huffman();
+	// test_cantor();
+	// test_maxGap();
+	// test_holland();
+	// test_continueSubarray();
+	// test_maxSubarray();
+	// test_zeroSubarray();
+	// test_rotateArrayMin();
+	// test_firstMissingNumber();
+	// test_localMax();
 	// test_mode();
 	// test_mouse();
 	// std::cout<<power(1.01,365)<<std::endl;
