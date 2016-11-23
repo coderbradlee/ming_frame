@@ -1441,9 +1441,64 @@ void test_mouse()
 	};
 	mousePath(chess);
 }
+int mode(const std::vector<int>& arr)
+{
+	int count=0;
+	int ret;
+	for(int i=0;i<arr.size();++i)
+	{
+		if(count==0)
+		{
+			ret=arr[i];
+			++count;
+		}
+		else if(arr[i]==ret)
+		{
+			++count;
+		}
+		else
+		{
+			--count;
+		}
+	}
+	std::cout<<count<<std::endl;
+	return ret;
+}
+void test_mode()//众数
+{
+	std::vector<int> arr{8,8,1,1,1,8,1,1,6,1,8};
+	int m=mode(arr);
+	std::cout<<m<<std::endl;
+}
+void localMax(const std::vector<int>& arr)
+{
+	int high=arr.size()-1;
+	int low=0;
+	int mid=(low+high)/2;
+	while(low<high)
+	{
+		if(arr[mid]>arr[mid+1])
+		{
+			high=mid;
+		}
+		else
+		{
+			low=mid+1;
+		}
+		mid=(low+high)/2;
+	}
+	std::cout<<"arr["<<mid<<"]="<<arr[mid]<<std::endl;
+}
+void test_localMax()
+{
+	std::vector<int> arr{8,8,1,11,3,8,4,5,6,2,8};
+	localMax(arr);
+}
 void test_out()
 {
-	test_mouse();
+	test_localMax();
+	// test_mode();
+	// test_mouse();
 	// std::cout<<power(1.01,365)<<std::endl;
 	// test_hanoi();
 	// test_color();
