@@ -2041,7 +2041,7 @@ void test_huffman()
 }
 void test_out()
 {
-	test_huffman();
+	// test_huffman();
 	// test_cantor();
 	// test_maxGap();
 	// test_holland();
@@ -2051,8 +2051,8 @@ void test_out()
 	// test_rotateArrayMin();
 	// test_firstMissingNumber();
 	// test_localMax();
-	std::vector<int> v;
-	v[2]=0;
+	// std::vector<int> v;
+	// v[2]=0;
 	//test_localMax();
 	// test_mode();
 	// test_mouse();
