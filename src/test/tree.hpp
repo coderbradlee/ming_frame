@@ -79,7 +79,6 @@ private:
 		// }
 		// return true;
 
-
 		if(!root)
 		{
 			return true;
@@ -109,6 +108,7 @@ private:
 				tn=root;
 			}
 			return true;
+			//ret=true;
 		}
 		
 		return false;
