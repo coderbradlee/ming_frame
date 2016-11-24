@@ -20,11 +20,11 @@ void inpost2pre(std::string in,std::string post)
 		return;
 	}
 	int i=in.find(post[post.size()-1]);//i=4
-	if(i!=in.end())
+	if(i!=std::string::npos)
 	{
 		int len=in.size()-i-1;
-		inpost2pre(in.substring(0,i),post.substring(0,i));
-		inpost2pre(in.substring(i+1,len),post.substring(post.size()-1-len,len));
+		inpost2pre(in.substr(0,i),post.substr(0,i));
+		inpost2pre(in.substr(i+1,len),post.substr(post.size()-1-len,len));
 	}
 }
 void test_inpost2pre()
