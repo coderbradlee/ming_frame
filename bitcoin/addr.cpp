@@ -9,8 +9,8 @@ int main()
         "038109007313a5807b2eccc082c8c3fbb988a973cacf1a7df9ce725c31b14776");
     assert(success);
     // Get public key.
-    ec_point public_key = secret_to_public_key(secret);
-    std::cout << "Public key: " << encode_hex(public_key) << std::endl;
+    libbitcoin::ec_point public_key = secret_to_public_key(secret);
+    std::cout << "Public key: " << libbitcoin::encode_hex(public_key) << std::endl;
 
     // Create Bitcoin address.
     // Normally you can use:
