@@ -1,5 +1,6 @@
 #include <bitcoin/bitcoin.hpp>
 // namespace bc=libbitcoin;
+using namespace bc;
 int main()
 {
     // Private secret key.
