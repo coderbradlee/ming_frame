@@ -1,5 +1,5 @@
 #include <bitcoin/bitcoin.hpp>
-
+using bc=bitcoin;
 int main()
 {
     // Private secret key.
