@@ -197,9 +197,185 @@ void test_longestKsubstring()
 	int len=longestKsubstring(str,3);
 	std::cout<<len<<std::endl;
 }
+class unionFindSet
+{
+public:
+	unionFindSet(int n):m_size(n),m_parents(n,0)
+	{
+		for(int i=0;i<n;++i)
+		{
+			m_parents[i]=i;
+		}
+	}
+	int finds(int i)
+	{
+		if(i<0||i>=m_size)
+		{
+			return -1;
+		}
+		int root=i;
+		while(root!=m_parents[root])
+		{
+			root=m_parents[root];
+		}
+		while(i!=root)
+		{
+			int temp=m_parents[i];
+			m_parents[i]=root;
+			i=temp;
+		}
+		return root;
+	}
+	void unions(int i,int j)
+	{
+		if(i<0||i>=m_size||j<0||j>=m_size)
+		{
+			return;
+		}
+		int findi=finds(i);
+		int findj=finds(j);
+		if(findi!=findj)
+		{
+			m_parents[findi]=findj;
+		}
+	}
+	void print()
+	{
+		for(auto& i:m_parents)
+		{
+			std::cout<<i<<" ";
+		}
+		std::cout<<std::endl;
+	}
+private:
+	int m_size;
+	std::vector<int> m_parents;
+};
+
+void test_unionFindSet()
+{
+	const int N=10;
+	unionFindSet u(N);
+	u.unions(2,6);
+	u.unions(5,6);
+	u.unions(1,8);
+	u.unions(2,9);
+	u.unions(5,3);
+	u.unions(4,8);
+	u.unions(4,0);
+	for(int i=0;i<N;++i)
+	{
+		u.finds(i);
+	}
+	u.print();
+}
+void print(const std::vector<int>& v)
+{
+	for(auto& i:v)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl<<"---------------------"<<std::endl;
+}
+void dijkstra(const std::vector<std::vector<int>>& v,std::vector<bool>& choiced,std::vector<int>& dist,std::vector<int>& pre)
+{
+	int size=v.size();
+	//dist[0]=0;//到自己的距离
+	//计算0点到其他节点的距离
+	for(int i=0;i<size;++i)
+	{
+		dist[i]=v[0][i];
+	}
+	int choicedSize=0;
+	int minIndex=0;
+	int minValue=dist[0];
+	while(choicedSize<size)
+	{
+		minValue=INT_MAX;
+		minIndex=size;
+		for(int i=0;i<size;++i)
+		{
+			if(!choiced[i])
+			{
+				if(dist[i]<minValue)
+				{
+					minValue=dist[i];
+					minIndex=i;
+				}
+			}
+		}
+		
+		if((minIndex<size)&&(!choiced[minIndex]))
+		{
+			for(int i=0;i<size;++i)
+			{
+				//dist[i]=std::min(dist[i],dist[minIndex]+v[minIndex][i]);
+				//std::cout<<minIndex<<":"<<i<<":"<<dist[i]<<std::endl;
+				if(dist[i]>(dist[minIndex]+v[minIndex][i]))
+				{
+					dist[i]=dist[minIndex]+v[minIndex][i];
+					pre[i]=minIndex;
+				}
+			}
+			choiced[minIndex]=true;
+		}	
+		++choicedSize;
+		//std::cout<<minIndex<<":"<<i<<":"<<dist[i]<<std::endl;
+		//print(dist);
+	}
+}
+void findRoute(int from,int to,const std::vector<int>& pre)
+{
+	for(auto& t:pre)
+	{
+		std::cout<<t<<" ";
+	}
+	std::cout<<std::endl;
+	int i=to;
+	std::stack<int> s;
+	s.push(to);
+	while(i!=pre[i])
+	{
+		s.push(pre[i]);
+		i=pre[i];
+	}
+	s.push(from);
+	while(!s.empty())
+	{
+		std::cout<<s.top()<<" ";
+		s.pop();
+	}
+	std::cout<<std::endl;
+}
+void test_dijkstra()
+{
+	const int N=7;
+	std::vector<std::vector<int>> v(N,std::vector<int>(N,INT_MAX/2));
+	v[0][0]=0;v[0][1]=20;v[0][2]=50;v[0][3]=30;
+	v[1][1]=0;v[1][2]=25;v[1][5]=70;
+	v[2][2]=0;v[2][3]=40;v[2][4]=25;v[2][5]=50;
+	v[3][3]=0;v[3][4]=55;
+	v[4][4]=0;v[4][5]=10;v[4][6]=70;
+	v[5][5]=0;v[5][6]=50;
+	v[6][6]=0;
+	std::vector<bool> choiced(N,false);
+	std::vector<int> dist(N,INT_MAX/2);
+	std::vector<int> pre(N,0);
+	for(int i=0;i<N;++i)
+	{
+		pre[i]=i;
+	}
+	dijkstra(v,choiced,dist,pre);
+	print(dist);
+	int from=0;
+	int to=5;
+	findRoute(from,to,pre);
+}
 void test_out()
 {
-	test_longestKsubstring();
+	test_dijkstra();
+	// test_unionFindSet();
+	// test_longestKsubstring();
 	// test_catalan();
 	// test_largestBST();
 	// test_inpost2pre();
