@@ -1,4 +1,4 @@
-#include <openssl/bn.h>
+#include <openssl/ssl23.h>
 #include <bitcoin/bitcoin.hpp>
 // namespace bc=libbitcoin;
 using namespace bc;
