@@ -664,7 +664,7 @@ void kruskal(const std::vector<std::vector<int>>& arr)
 		{
 			ufs.unions(ri,rj);
 		}
-		std::erase(it);
+		ufs.erase(it);
 	}
 	ufs.print();
 }
