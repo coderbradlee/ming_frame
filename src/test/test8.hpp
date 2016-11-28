@@ -658,13 +658,13 @@ void kruskal(const std::vector<std::vector<int>>& arr)
 	while(!temp.empty())
 	{
 		auto it=temp.begin();
-		int ri=ufs.find((*it).m_from);
-		int rj=ufs.find((*it).m_to);
+		int ri=ufs.finds((*it).m_from);
+		int rj=ufs.finds((*it).m_to);
 		if(ri!=rj)
 		{
 			ufs.unions(ri,rj);
 		}
-		ufs.erase(it);
+		temp.erase(it);
 	}
 	ufs.print();
 }
