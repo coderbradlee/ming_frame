@@ -686,9 +686,52 @@ void test_kruskal()
 		std::cout<<"("<<i.m_from+1<<","<<i.m_to+1<<"):"<<i.m_value<<std::endl;
 	}
 }
+bool outStackSequence(std::string in,std::string out)
+{
+	int inLen=in.length();
+	int outLen=out.length();
+	std::stack<char> s;
+	s.push(in[0]);
+	int i=1;
+	int j=0;
+	while((i<inLen)&&(j<outLen))
+	{
+		if(!s.empty())
+		{
+			char c=s.top();
+			if(c!=out[j])
+			{
+				s.push(in[i++]);
+			}
+			else
+			{
+				if(s.top()!=out[++j])
+					return false;
+				s.pop();
+				++j;
+			}
+		}
+		else
+		{
+			if(in[i]!=out[j])
+			{
+				s.push(in[i++]);
+			}
+		}
+		
+	}
+}
+void test_outStackSequence()
+{
+	std::string in="ABCDEFG";
+	std::string out="BAEDFGC";
+	bool b=outStackSequence(in,out);
+	std::cout<<b<<std::endl;
+}
 void test_out()
 {
-	test_kruskal();
+	test_outStackSequence();
+	// test_kruskal();
 	// test_prim();
 	// test_bellmanFord();
 	// test_floyd();
