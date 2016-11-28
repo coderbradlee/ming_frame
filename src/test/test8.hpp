@@ -548,7 +548,14 @@ typedef struct Edge
 	int m_value;
 	Edge(int from,int to,int data):m_from(from),m_to(to),m_value(data)
 	{}
-	
+	// bool operator<(const edge& x,const edge& y)
+	// {
+	// 	return x.m_value<y.m_value;
+	// }
+	bool operator()( const edge& l, const edge& r )
+    { 
+    	return l.m_value<r.m_value;
+    }
 }edge;
 bool operator==(const edge& x,const edge& y)
 {
@@ -633,9 +640,50 @@ void test_prim()
 	for(auto& i:ret)
 		std::cout<<"("<<i.m_from<<","<<i.m_to<<"):"<<i.m_value<<std::endl;
 }
+void kruskal(const std::vector<std::vector<int>>& arr)
+{
+	std::set<edge> temp;
+	for(int i=0;i<arr.size();++i)
+	{
+		for(int j=0;j<arr[0].size();++j)
+		{
+			if(arr[i][j]<INT_MAX)
+			{
+				temp.insert(edge(i,j,arr[i][j]));
+			}
+		}
+	}
+	unionFindSet ufs(arr.size());
+	while(!temp.empty())
+	{
+		auto it=temp.begin();
+		int ri=usf.find((*it).m_from);
+		int rj=usf.find((*it).m_to);
+		if(ri!=rj)
+		{
+			usf.unions(ri,rj);
+		}
+		std::erase(it);
+	}
+	usf.print();
+}
+void test_kruskal()
+{
+	const int N=6;
+	std::vector<std::vector<int>> v(N,std::vector<int>(N,INT_MAX));
+	v[0][0]=0;v[0][1]=10;v[0][3]=30;v[0][4]=45;
+	v[1][1]=0;v[1][2]=50;v[1][5]=25;
+	v[2][2]=0;v[2][4]=35;v[2][5]=15;
+	v[3][3]=0;v[3][5]=20;
+	v[4][4]=0;v[4][5]=55;
+	v[5][5]=0;
+
+	kruskal(v);
+}
 void test_out()
 {
-	test_prim();
+	test_kruskal();
+	// test_prim();
 	// test_bellmanFord();
 	// test_floyd();
 	// test_caLcHundred();
