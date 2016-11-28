@@ -641,7 +641,7 @@ void test_prim()
 	for(auto& i:ret)
 		std::cout<<"("<<i.m_from<<","<<i.m_to<<"):"<<i.m_value<<std::endl;
 }
-void kruskal(const std::vector<std::vector<int>>& arr)
+void kruskal(const std::vector<std::vector<int>>& arr,std::vector<edge>& mst)
 {
 	std::set<edge> temp;
 	for(int i=0;i<arr.size();++i)
@@ -663,10 +663,11 @@ void kruskal(const std::vector<std::vector<int>>& arr)
 		if(ri!=rj)
 		{
 			ufs.unions(ri,rj);
+			mst.push_back(*it);
 		}
 		temp.erase(it);
 	}
-	ufs.print();
+	// ufs.print();
 }
 void test_kruskal()
 {
@@ -678,8 +679,8 @@ void test_kruskal()
 	v[3][3]=0;v[3][5]=20;
 	v[4][4]=0;v[4][5]=55;
 	v[5][5]=0;
-
-	kruskal(v);
+	std::vector<edge> mst;
+	kruskal(v,mst);
 }
 void test_out()
 {
