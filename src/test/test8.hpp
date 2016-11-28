@@ -696,29 +696,33 @@ bool outStackSequence(const std::string& in,const std::string& out)
 	int j=0;
 	while(j<outLen)
 	{
-		if(!s.empty())
+		if(in[i]==out[j])
 		{
-			char c=s.top();
-			if(c!=out[j])
-			{
-				s.push(in[i++]);
-			}
-			else
-			{
-				if(s.top()!=out[j])
-					return false;
-				s.pop();
-				++j;
-			}
+			++i;
+			++j;
 		}
 		else
 		{
-			if(in[i]!=out[j])
+			if(!s.empty())
+			{
+				char c=s.top();
+				if(c!=out[j])
+				{
+					s.push(in[i++]);
+				}
+				else
+				{
+					if(s.top()!=out[j])
+						return false;
+					s.pop();
+					++j;
+				}
+			}
+			else if(in[i]!=out[j])
 			{
 				s.push(in[i++]);
 			}
 		}
-		
 	}
 }
 void test_outStackSequence()
