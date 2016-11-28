@@ -706,7 +706,7 @@ bool outStackSequence(const std::string& in,const std::string& out)
 			if(!s.empty())
 			{
 				char c=s.top();
-				if(c!=out[j])
+				if((c!=out[j])&&(i<inLen))
 				{
 					s.push(in[i++]);
 				}
