@@ -371,9 +371,275 @@ void test_dijkstra()
 	int to=5;
 	findRoute(from,to,pre);
 }
+void print(int count,const std::vector<int>& arr,const std::vector<std::pair<int,char>>& op,int size)
+{
+	auto it=op.begin();
+	for(int i=0;i<arr.size();++i)
+	{
+		if(i==arr.size()-1)
+		{
+			std::cout<<arr[i];
+			break;
+		}
+		std::cout<<arr[i];
+		if((it!=op.end())&&(it->first==i))
+		{
+			std::cout<<it->second;
+			++it;
+		}
+	}
+	std::cout<<std::endl;
+}
+bool calcHundred(const std::vector<int>& arr,int size,int cur,int curSum,int last,std::vector<std::pair<int,char>>& op,int sum,int& count)
+{
+	if(cur==(size-1))
+	{
+		// std::cout<<last<<":"<<arr[size-1]<<std::endl;
+		last=10*last+arr[size-1];
+		// std::cout<<curSum<<":"<<last<<std::endl;
+		// std::cout<<op.size()<<std::endl;
+		if(op.size()>=1)
+		{
+			if(((op[op.size()-1].second=='+')&&((curSum+last)==sum))||((op[op.size()-1].second=='-')&&((curSum-last)==sum)))
+			{
+				++count;
+				print(count,arr,op,size);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	last=10*last+arr[cur];
+	calcHundred(arr,size,cur+1,curSum,last,op,sum,count);
+
+	bool isAdd=false;
+	if(op.size()>=1)
+	{
+		isAdd=op[op.size()-1].second=='+';
+	}
+	else
+	{
+		isAdd=true;
+	}
+	op.push_back(std::make_pair(cur,'+'));
+	calcHundred(arr,size,cur+1,isAdd?curSum+last:curSum-last,0,op,sum,count);
+	op.back().second='-';
+	calcHundred(arr,size,cur+1,isAdd?curSum+last:curSum-last,0,op,sum,count);
+	op.pop_back();
+	return count!=0;
+}
+void test_caLcHundred()
+{
+	std::vector<int> arr{1,2,3,4,5,6,7,8,9};
+	std::vector<std::pair<int,char>> op;
+	int count=0;
+	calcHundred(arr,9,0,0,0,op,100,count);
+}
+void floyd(const std::vector<std::vector<int>>& v,std::vector<std::vector<int>>& shortestPath,std::vector<std::vector<int>>& next)
+{
+	shortestPath=v;
+	int size=v.size();
+	for(int i=0;i<size;++i)
+	{
+		for(int j=0;j<size;++j)
+		{
+			next[i][j]=j;
+		}
+	}
+	for(int k=0;k<size;++k)
+	{
+		for(int i=0;i<size;++i)
+		{
+			for(int j=0;j<size;++j)
+			{
+				int t=shortestPath[i][k]+shortestPath[k][j];
+				if((t>0)&&(t<shortestPath[i][j]))
+				{
+					shortestPath[i][j]=t;
+					next[i][j]=next[i][k];
+				}
+			}
+		}
+	}
+}
+void floydMinPath(int from,int to,const std::vector<std::vector<int>>& next)
+{
+	std::cout<<from<<"->";
+	int k=next[from][to];
+	while(k!=to)
+	{
+		std::cout<<k<<"->";
+		k=next[k][to];
+	}
+	std::cout<<to<<std::endl;
+}
+void test_floyd()
+{
+	const int N=7;
+	std::vector<std::vector<int>> v(N,std::vector<int>(N,INFINITY));
+	v[0][0]=0;v[0][1]=20;v[0][2]=50;v[0][3]=30;
+	v[1][1]=0;v[1][2]=25;v[1][5]=70;
+	v[2][2]=0;v[2][3]=40;v[2][4]=25;v[2][5]=50;
+	v[3][3]=0;v[3][4]=55;
+	v[4][4]=0;v[4][5]=10;v[4][6]=70;
+	v[5][5]=0;v[5][6]=50;
+	v[6][6]=0;
+	std::vector<std::vector<int>> shortestPath(N,std::vector<int>(N,INT_MAX));
+	std::vector<std::vector<int>> next(N,std::vector<int>(N,-1));
+	floyd(v,shortestPath,next);
+	for(auto i:shortestPath)
+	{
+		for(auto j:i)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+	floydMinPath(0,6,next);
+	floydMinPath(0,2,next);
+
+}
+void bellmanFord(const std::vector<std::vector<int>>& arr,std::vector<int>& shortestPath,std::vector<std::vector<int>>& next,int from)
+{
+	int size=arr.size();
+	int minValue=0;
+	shortestPath[from]=0;
+	for(int k=0;k<size;++k)
+	{
+		for(int i=0;i<size;++i)
+		{
+			for(int j=0;j<size;++j)
+			{
+				if(arr[i][j]<INT_MAX)
+				{
+					shortestPath[j]=std::min(shortestPath[j],shortestPath[i]+arr[i][j]);
+				}
+			}
+		}
+	}
+	
+}
+void test_bellmanFord()
+{
+	const int N=7;
+	std::vector<std::vector<int>> v(N,std::vector<int>(N,INT_MAX));
+	v[0][0]=0;v[0][1]=20;v[0][2]=50;v[0][3]=30;
+	v[1][1]=0;v[1][2]=25;v[1][5]=70;
+	v[2][2]=0;v[2][3]=40;v[2][4]=25;v[2][5]=50;
+	v[3][3]=0;v[3][4]=55;
+	v[4][4]=0;v[4][5]=10;v[4][6]=70;
+	v[5][5]=0;v[5][6]=50;
+	v[6][6]=0;
+	std::vector<int> shortestPath(N,INT_MAX);
+	std::vector<std::vector<int>> next(N,std::vector<int>(N,-1));
+	bellmanFord(v,shortestPath,next,0);
+	
+	for(auto j:shortestPath)
+	{
+		std::cout<<j<<" ";
+	}
+	std::cout<<std::endl;
+}
+typedef struct Edge
+{
+	int m_from;
+	int m_to;
+	int m_value;
+	Edge(int from,int to,int data):m_from(from),m_to(to),m_value(data)
+	{}
+	
+}edge;
+bool operator==(const edge& x,const edge& y)
+{
+	//std::cout<<__LINE__<<std::endl;
+	return (x.m_from==y.m_from)&&(x.m_to==y.m_to)&&(x.m_value==y.m_value);
+}
+bool isAdded(const std::vector<edge>& ret,int from,int to,int value)
+{
+	edge temp=edge(from,to,value);
+	for(auto& x:ret)
+	{
+		if(x==temp)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+edge minEdges(const std::vector<std::vector<int>>& arr,std::vector<int>& points,std::vector<edge>& ret)
+{
+	//以points里面的点为起点，寻找不在ret中的最小边
+	int minValue=INT_MAX;
+	int minFrom=INT_MAX;
+	int minTo=INT_MAX;
+	for(int i=0;i<points.size();++i)
+	{
+		for(int j=0;j<arr[0].size();++j)
+		{
+			int t=arr[points[i]][j];
+			if((t>0)&&(t<minValue))
+			{
+				if(!isAdded(ret,points[i],j,t))
+				{
+					minValue=t;
+					minFrom=points[i];
+					minTo=j;
+					std::cout<<minTo<<":"<<minValue<<std::endl;
+				}
+			}
+		}
+	}
+
+	return edge(minFrom,minTo,minValue);
+}
+void addEdge(std::vector<edge>& ret,edge minEdge,std::vector<int>& points)
+{
+	//for(int i=0;i<)
+	ret.push_back(minEdge);
+	 points.push_back(minEdge.m_to);
+	//points[minEdge.m_to]=true;
+}
+void prim(const std::vector<std::vector<int>>& arr,std::vector<edge>& ret)
+{
+	int N=arr.size();
+	std::vector<int> points;
+	//std::vector<bool> points(N,false);
+	points.push_back(0);
+	// for(int i=0;i<N;++i)
+	// 	points[i]=i;
+//	deleteEdge(ret,minEdge);
+	for(int i=0;i<N-1;++i)//repeat n-1
+	{
+		edge minEdge=minEdges(arr,points,ret);
+		if((minEdge.m_value!=INT_MAX)&&(minEdge.m_value!=0))
+			addEdge(ret,minEdge,points);
+	}
+}
+void test_prim()
+{
+	const int N=7;
+	std::vector<std::vector<int>> v(N,std::vector<int>(N,INT_MAX));
+	v[0][0]=0;v[0][1]=20;v[0][2]=50;v[0][3]=30;
+	v[1][1]=0;v[1][2]=25;v[1][5]=70;
+	v[2][2]=0;v[2][3]=40;v[2][4]=25;v[2][5]=50;
+	v[3][3]=0;v[3][4]=55;
+	v[4][4]=0;v[4][5]=10;v[4][6]=70;
+	v[5][5]=0;v[5][6]=50;
+	v[6][6]=0;
+	std::vector<edge> ret;
+	prim(v,ret);
+	std::cout<<"---------------"<<std::endl;
+	for(auto& i:ret)
+		std::cout<<"("<<i.m_from<<","<<i.m_to<<"):"<<i.m_value<<std::endl;
+}
 void test_out()
 {
-	test_dijkstra();
+	test_prim();
+	// test_bellmanFord();
+	// test_floyd();
+	// test_caLcHundred();
+	// test_dijkstra();
 	// test_unionFindSet();
 	// test_longestKsubstring();
 	// test_catalan();
