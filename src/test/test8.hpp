@@ -683,7 +683,7 @@ void test_kruskal()
 	kruskal(v,mst);
 	for(auto& i:mst)
 	{
-		std::cout<<"("<<i.m_from<<","<<i.m_to<<"):"<<i.m_value<<std::endl;
+		std::cout<<"("<<i.m_from+1<<","<<i.m_to+1<<"):"<<i.m_value<<std::endl;
 	}
 }
 void test_out()
