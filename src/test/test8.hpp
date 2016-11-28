@@ -681,6 +681,10 @@ void test_kruskal()
 	v[5][5]=0;
 	std::vector<edge> mst;
 	kruskal(v,mst);
+	for(auto& i:mst)
+	{
+		std::cout<<"("<<i.m_from<<","<<i.m_to<<"):"<<i.m_value<<std::endl;
+	}
 }
 void test_out()
 {
