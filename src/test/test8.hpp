@@ -705,7 +705,7 @@ bool outStackSequence(const std::string& in,const std::string& out)
 			}
 			else
 			{
-				if(s.top()!=out[++j])
+				if(s.top()!=out[j])
 					return false;
 				s.pop();
 				++j;
