@@ -694,7 +694,7 @@ bool outStackSequence(const std::string& in,const std::string& out)
 	s.push(in[0]);
 	int i=1;
 	int j=0;
-	while((i<inLen)&&(j<outLen))
+	while(j<outLen)
 	{
 		if(!s.empty())
 		{
