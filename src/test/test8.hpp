@@ -552,11 +552,12 @@ typedef struct Edge
 	// {
 	// 	return x.m_value<y.m_value;
 	// }
-	bool operator<( const Edge& l, const Edge& r )
-    { 
-    	return l.m_value<r.m_value;
-    }
+	
 }edge;
+bool operator<( const edge& l, const edge& r )
+{ 
+	return l.m_value<r.m_value;
+}
 bool operator==(const edge& x,const edge& y)
 {
 	//std::cout<<__LINE__<<std::endl;
