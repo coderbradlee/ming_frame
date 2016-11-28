@@ -686,7 +686,7 @@ void test_kruskal()
 		std::cout<<"("<<i.m_from+1<<","<<i.m_to+1<<"):"<<i.m_value<<std::endl;
 	}
 }
-bool outStackSequence(std::string in,std::string out)
+bool outStackSequence(const std::string& in,const std::string& out)
 {
 	int inLen=in.length();
 	int outLen=out.length();
