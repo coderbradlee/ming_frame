@@ -728,8 +728,10 @@ bool outStackSequence(const std::string& in,const std::string& out)
 }
 void test_outStackSequence()
 {
-	std::string in="ABCDEFG";
-	std::string out="BAEDFGC";
+	// std::string in="ABCDEFG";
+	// std::string out="BAEDFGC";
+	std::string in="ABCD"
+	std::string out="BDAC";
 	bool b=outStackSequence(in,out);
 	std::cout<<b<<std::endl;
 }
