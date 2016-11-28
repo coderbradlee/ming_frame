@@ -724,6 +724,7 @@ bool outStackSequence(const std::string& in,const std::string& out)
 			}
 		}
 	}
+	return true;
 }
 void test_outStackSequence()
 {
