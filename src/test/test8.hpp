@@ -1277,7 +1277,7 @@ bool horseJump(std::vector<std::vector<int>>& chess,int row,int col,int step,std
 		if(canJump(chess,icur,jcur))
 		{
 			chess[icur][jcur]=step+1;
-			if(horseJump(chess,icur,jcur,step+1))
+			if(horseJump(chess,icur,jcur,step+1,ret))
 			{
 				ret.push_back(chess);
 				// return true;
