@@ -1252,11 +1252,11 @@ void test_sudoku()
 	cout << sudoku.GetCount() << endl;
 }
 }
-bool canJump(std::vector<std::vector<int>>& chess,int row,int col)
+bool canJump(const std::vector<std::vector<int>>& chess,int row,int col)
 {
 	int rowLen=chess.size();
 	int colLen=chess[0].size();
-	if(row<0||row>rowLen||col<0||col>colLen)
+	if(row<0||row>=rowLen||col<0||col>=colLen)
 		return false;
 	return (chess[row][col]==0);	
 }
