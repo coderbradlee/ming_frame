@@ -735,9 +735,208 @@ void test_outStackSequence()
 	bool b=outStackSequence(in,out);
 	std::cout<<b<<std::endl;
 }
+bool onlyChangeone(const std::string& cur,const std::string& dict)
+{
+	if(cur.length()!=dict.length())
+		return false;
+	int change=0;
+	for(int i=0;i<cur.length();++i)
+	{
+		if(cur[i]!=dict[i])
+			++change;
+	}
+	if(change>1)
+		return false;
+	return true;
+}
+int extend(const std::string& cur,std::queue<std::string>& que,const std::set<std::string>& dict,const std::set<std::string>& visited)
+{
+	int len=0;
+	for(auto& i:dict)
+	{
+		if(onlyChangeone(cur,i)&&(visited.find(i)==visited.end()))
+		{
+			que.push(i);
+			
+			++len;
+		}
+	}
+	return len;
+}
+int wordLadder(const std::string& start,const std::string& end,const std::set<std::string>& dict,std::queue<std::string>& ret)
+{
+	std::queue<std::string> que;
+	
+	int step=0;
+	que.push(start);
+	std::vector<std::string> children;
+	std::set<std::string> visited;
+	int curLevel=1;
+	int nextLevel=0;
+	while(!que.empty())
+	{
+		std::string cur=que.front();
+		que.pop();
+		--curLevel;
+		nextLevel+=extend(cur,que,dict,visited);
+		visited.insert(cur);
+		ret.push(cur);
+		if(onlyChangeone(cur,end))
+		{
+			return step;
+		}
+		else if(curLevel==0)
+		{
+			++step;
+			curLevel=nextLevel;
+			nextLevel=0;
+		}
+	}
+
+	return 0;
+}
+void test_wordLadder()
+{
+	std::set<std::string> dict;
+	std::queue<std::string> ret;
+	dict.insert("hot");
+	dict.insert("dot");
+	dict.insert("dog");
+	dict.insert("lot");
+	dict.insert("log");
+	std::string start="hit";
+	std::string end="cog";
+	std::cout<<wordLadder(start,end,dict,ret)<<std::endl;
+
+	std::cout<<ret.size()<<std::endl;
+	while(!ret.empty())
+	{
+		std::cout<<ret.front()<<"->";
+		ret.pop();
+	}
+	std::cout<<end<<std::endl;
+}
+enum class suit { soil,water,lake,ocean};
+bool isOcean(const std::vector<std::vector<suit>>& graph,int row,int col)
+{
+	if(row<0||row>graph.size()||col<0||col>graph[0].size())
+		return false;
+	return graph[row][col]==suit::water;
+}
+void fillOcean(std::vector<std::vector<suit>>& graph,int row,int col)
+{
+	std::vector<int> iDirect{-1,1,0,0};
+	std::vector<int> jDirect{0,0,-1,1};
+	std::stack<std::pair<int,int>> s;
+	s.push(std::make_pair(row,col));
+	while(!s.empty())
+	{
+		int i=s.top().first;
+		int j=s.top().second;
+		s.pop();
+		for(int k=0;k<4;++k)
+		{
+			int ri=i+iDirect[k];
+			int rj=j+jDirect[k];
+			if(isOcean(graph,ri,rj))
+			{
+				graph[ri][rj]=suit::ocean;
+				s.push(std::make_pair(ri,rj));
+			}
+		}
+	}
+	
+}
+void ocean(std::vector<std::vector<suit>>& graph)
+{
+	
+	for(int j=0;j<graph[0].size();++j)
+	{
+		if(graph[0][j]==suit::water)
+		{
+			graph[0][j]=suit::ocean;
+			fillOcean(graph,0,j);//
+		}
+		if(graph[graph.size()-1][j]==suit::water)
+		{
+			graph[graph.size()-1][j]=suit::ocean;
+			fillOcean(graph,graph.size()-1,j);//
+		}
+	}
+	for(int i=1;i<graph.size()-1;++i)
+	{
+		if(graph[i][0]==suit::water)
+		{
+			graph[i][0]=suit::ocean;
+			fillOcean(graph,i,0);//
+		}
+		if(graph[i][graph[0].size()-1]==suit::water)
+		{
+			graph[i][graph[0].size()-1]=suit::ocean;
+			fillOcean(graph,i,graph[0].size()-1);//
+		}
+	}
+}
+void fillLake(std::vector<std::vector<suit>>& graph)
+{
+	ocean(graph);
+	for(int i=0;i<graph.size();++i)
+	{
+		for(int j=0;j<graph[0].size();++j)
+		{
+			if(graph[i][j]==suit::water)
+			{
+				graph[i][j]=suit::soil;
+			}
+			else if(graph[i][j]==suit::ocean)
+			{
+				graph[i][j]=suit::water;
+			}
+		}
+	}
+	
+}
+void test_fillLake()
+{
+	//把边界上的water变为ocean，遍历和它相连的water，变为ocean
+	//然后把其余的water变为soil，最后把ocean变为water
+	
+	// const int N=4;
+	// std::vector<std::vector<suit>> graph(N,std::vector<suit>(N,suit::soil));
+	// graph[1][1]=suit::water;graph[1][2]=suit::water;
+	// graph[2][2]=suit::water;graph[3][1]=suit::water;
+	const int N=5;
+	std::vector<std::vector<suit>> graph(N,std::vector<suit>(N,suit::soil));
+	graph[1][1]=suit::water;graph[1][2]=suit::water;graph[1][3]=suit::water;
+	graph[3][3]=suit::water;graph[4][3]=suit::water;
+	fillLake(graph);
+	for(auto& i:graph)
+	{
+		for(auto& j:i)
+		{
+			using color_rep_type = std::underlying_type<suit>::type;
+			std::cout << static_cast<color_rep_type>(j) <<" ";
+		}
+		std::cout<<std::endl;
+	}
+}
+int queens(int n)
+{
+	std::vector<int> v(n,0);//第i行的皇后放在第几列
+	
+
+}
+void test_queen()
+{
+	int N=8;
+	std::cout<<queens(N)<<std::endl;
+}
 void test_out()
 {
-	test_outStackSequence();
+	test_queen();
+	// test_fillLake();
+	// test_wordLadder();
+	// test_outStackSequence();
 	// test_kruskal();
 	// test_prim();
 	// test_bellmanFord();
