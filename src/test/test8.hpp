@@ -1260,7 +1260,7 @@ bool canJump(const std::vector<std::vector<int>>& chess,int row,int col)
 		return false;
 	return (chess[row][col]==0);	
 }
-bool horseJump(std::vector<std::vector<int>>& chess,int row,int col,int step)
+bool horseJump(std::vector<std::vector<int>>& chess,int row,int col,int step,std::vector<std::vector<std::vector<int>>>& ret)
 {
 	int m=chess.size();
 	int n=chess[0].size();
@@ -1279,7 +1279,8 @@ bool horseJump(std::vector<std::vector<int>>& chess,int row,int col,int step)
 			chess[icur][jcur]=step+1;
 			if(horseJump(chess,icur,jcur,step+1))
 			{
-				return true;
+				ret.push_back(chess);
+				// return true;
 			}
 			chess[icur][jcur]=0;
 		}
@@ -1295,15 +1296,18 @@ void test_horseJump()
 	std::vector<std::vector<int>> chess(m,std::vector<int>(n,0));
 	int step=1;
 	chess[0][0]=1;
-	std::cout<<horseJump(chess,0,0,step)<<std::endl;
+	std::vector<std::vector<std::vector<int>>> ret;
+	std::cout<<horseJump(chess,0,0,step,ret)<<std::endl;
 
 	for(auto& i:chess)
 	{
 		for(auto& j:i)
 		{
-			std::cout<<j<<" ";
+			for(auto& k:j)
+				std::cout<<k<<" ";
+			std::cout<<std::endl;
 		}
-		std::cout<<std::endl;
+		std::cout<<"---------------"<<std::endl;
 	}
 }
 void test_out()
