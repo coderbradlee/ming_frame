@@ -920,20 +920,204 @@ void test_fillLake()
 		std::cout<<std::endl;
 	}
 }
-int queens(int n)
-{
-	std::vector<int> v(n,0);//第i行的皇后放在第几列
-	
 
-}
+class queens
+{
+public:
+	queens(int n):m_size(n),m_path(n,-1),m_cols(n,true),
+	m_mainDiagonal(2*(n-1),true),
+	m_minorDiagonal(2*(n-1),true)
+	{}
+	int calc()
+	{
+		calcQueens(0);
+		return m_ret.size();
+	}
+	void print()
+	{
+		for(auto& i:m_ret)
+		{
+			for(auto& j:i)
+			{
+				std::cout<<j<<" ";
+			}
+			std::cout<<std::endl;
+		}
+	}
+private:
+	bool canLay(int row,int col)
+	{
+		if((m_path[row]==-1)&&(m_cols[col])
+			&&m_mainDiagonal[m_size-1+(col-row)]
+			&&m_minorDiagonal[col+row])
+			return true;
+		
+		return false;
+	}
+	void calcQueens(int row)
+	{
+		if(row==m_size)
+		{
+			m_ret.push_back(m_path);
+			return;
+		}
+		else
+		{
+			for(int col=0;col<m_size;++col)
+			{
+				if(canLay(row,col))
+				{
+					m_path[row]=col;
+					m_cols[col]=false;
+					m_mainDiagonal[m_size-1+(col-row)]=false;
+					m_minorDiagonal[col+row]=false;
+				
+					calcQueens(row+1);
+					//回溯
+					m_path[row]=-1;
+					m_cols[col]=true;
+					m_mainDiagonal[m_size-1+(col-row)]=true;
+					m_minorDiagonal[col+row]=true;
+				}
+			}
+		}
+	}
+	
+private:
+	int m_size;
+	std::vector<int> m_path;//第i行的皇后放在第几列
+	std::vector<bool> m_cols;
+	std::vector<bool> m_mainDiagonal;
+	std::vector<bool> m_minorDiagonal;
+	std::vector<std::vector<int>> m_ret;
+};
 void test_queen()
 {
-	int N=8;
-	std::cout<<queens(N)<<std::endl;
+	{
+		int N=8;
+		queens q(N);
+		std::cout<<q.calc()<<std::endl;
+	}
+	{
+		int N=6;
+		queens q(N);
+		std::cout<<q.calc()<<std::endl;
+		q.print();
+	}
+}
+class sudoku
+{
+public:
+	sudoku(const std::vector<std::vector<int>>& chess):m_solved(false),m_chess(chess)
+	{
+		m_size=m_chess.size();
+	}
+	bool solve()
+	{
+		for(int i=0;i<m_size;++i)
+		{
+			for(int j=0;j<m_size;++j)
+			{
+				if(m_chess[i][j]==0)
+				{
+					for(int k=1;k<10;++k)
+					{
+						m_chess[i][j]=k;
+						if(isValid(i,j)&&solve())
+						{
+							if(!m_solved)
+								m_ret.push_back(m_chess);
+							m_solved=true;
+							return true;
+						}
+						m_chess[i][j]=0;
+					}
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	void print()
+	{
+		std::cout<<m_ret.size()<<std::endl;
+		for(auto& i:m_ret)
+		{
+			for(auto& j:i)
+			{
+				for(auto& k:j)
+					std::cout<<k<<" ";
+				std::cout<<std::endl;
+			}
+			std::cout<<"---------------"<<std::endl;
+		}
+	}
+private:
+	bool isValid(int row,int col)
+	{
+		//std::cout<<row<<":"<<col<<std::endl;
+		int value=m_chess[row][col];
+		for(int i=0;i<m_size;++i)
+		{
+			if((i!=row)&&(m_chess[i][col]==value))
+				return false;
+			if((i!=col)&&(m_chess[row][i]==value))
+				return false;
+		}
+		int rowStart=(row/3)*3;
+		int colStart=(col/3)*3;
+		for(int i=rowStart;i<rowStart+3;++i)
+		{
+			for(int j=colStart;j<colStart+3;++j)
+			{
+				if((i==row)&&(j==col))
+					continue;
+				if(m_chess[i][j]==value)
+					return false;
+			}
+		}
+		return true;
+	}
+private:
+	bool m_solved;
+	int m_size;
+	std::vector<std::vector<int>> m_chess;
+	std::vector<std::vector<std::vector<int>>> m_ret;
+};
+void test_sudoku()
+{
+	// std::vector<std::vector<int>> chess=
+	// {
+	// 	{0,0,0,0,0,0,0,1,0},
+	// 	{4,0,0,0,0,0,0,0,0},
+	// 	{0,2,0,0,0,0,0,0,0},
+	// 	{0,0,0,0,5,0,4,0,7},
+	// 	{0,0,8,0,0,0,3,0,0},
+	// 	{0,0,1,0,9,0,0,0,0},
+	// 	{3,0,0,4,0,0,2,0,0},
+	// 	{0,5,0,1,0,0,0,0,0},
+	// 	{0,0,0,8,0,6,0,0,0}
+	// };
+	std::vector<std::vector<int>> chess=
+	{
+		{0, 4, 2, 0, 6, 3, 0, 0, 9},
+		{6, 0, 0, 0, 1, 0, 0, 0, 5},
+		{3, 0, 0, 0, 2, 0, 4, 8, 0},
+		{1, 0, 0, 5, 0, 2, 6, 0, 8},
+		{4, 0, 0, 0, 0, 7, 0, 0, 1},
+		{9, 0, 5, 6, 0, 0, 0, 0, 7},
+		{0, 3, 6, 0, 5, 0, 0, 0, 2},
+		{2, 0, 0, 0, 7, 0, 0, 0, 4},
+		{7, 0, 0, 2, 9, 0, 8, 5, 0}
+	};
+	sudoku s(chess);
+	s.solve();
+	s.print();
 }
 void test_out()
 {
-	test_queen();
+	test_sudoku();
+	// test_queen();
 	// test_fillLake();
 	// test_wordLadder();
 	// test_outStackSequence();
