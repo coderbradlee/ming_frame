@@ -1116,6 +1116,7 @@ void test_sudoku()
 }
 namespace test_good
 {
+	using namespace std;
 class CSudoku
 {
 private:
