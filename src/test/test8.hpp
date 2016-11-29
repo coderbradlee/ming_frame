@@ -1252,10 +1252,62 @@ void test_sudoku()
 	cout << sudoku.GetCount() << endl;
 }
 }
+bool canJump(std::vector<std::vector<int>>& chess,int row,int col)
+{
+	int rowLen=chess.size();
+	int colLen=chess[0].size();
+	if(row<0||row>rowLen||col<0||col>colLen)
+		return false;
+	return (chess[row][col]==0);	
+}
+bool horseJump(std::vector<std::vector<int>>& chess,int row,int col,int step)
+{
+	int m=chess.size();
+	int n=chess[0].size();
+	if(step==m*n)
+	{
+		return true;
+	}
+	std::vector<int> ri{-2,-2,-1,+1,+2,+2,+1,-1};
+	std::vector<int> rj{-1,+1,+2,+2,+1,-1,-2,-2};
+	for(int i=0;i<8;++i)
+	{
+		int icur=row+ri[i];
+		int jcur=col+rj[i];
+		if(canJump(chess,icur,jcur))
+		{
+			chess[icur][jcur]=step+1;
+			if(horseJump(chess,icur,jcur,step+1))
+			{
+				return true;
+			}
+			chess[icur][jcur]=0;
+		}
+	}
+	return false;
+}
+void test_horseJump()
+{
+	int m=5;
+	int n=6;
+	std::vector<std::vector<int>> chess(m,std::vector<int>(n,0));
+	int step=1;
+	chess[0][0]=1;
+	horseJump(chess,0,0,step);
+	for(auto& i:chess)
+	{
+		for(auto& j:i)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+}
 void test_out()
 {
-	test_good::test_sudoku();
-	test_sudoku();
+	test_horseJump();
+	// test_good::test_sudoku();
+	// test_sudoku();
 	// test_queen();
 	// test_fillLake();
 	// test_wordLadder();
