@@ -1114,7 +1114,7 @@ void test_sudoku()
 	s.solve();
 	s.print();
 }
-namespace test_good()
+namespace test_good
 {
 class CSudoku
 {
