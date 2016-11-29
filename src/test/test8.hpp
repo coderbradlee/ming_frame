@@ -1266,6 +1266,7 @@ bool horseJump(std::vector<std::vector<int>>& chess,int row,int col,int step,std
 	int n=chess[0].size();
 	if(step==m*n)
 	{
+		ret.push_back(chess);
 		return true;
 	}
 	std::vector<int> ri{-2,-2,-1,+1,+2,+2,+1,-1};
@@ -1279,7 +1280,7 @@ bool horseJump(std::vector<std::vector<int>>& chess,int row,int col,int step,std
 			chess[icur][jcur]=step+1;
 			if(horseJump(chess,icur,jcur,step+1,ret))
 			{
-				ret.push_back(chess);
+				//ret.push_back(chess);
 				// return true;
 			}
 			chess[icur][jcur]=0;
@@ -1309,6 +1310,7 @@ void test_horseJump()
 		}
 		std::cout<<"---------------"<<std::endl;
 	}
+	std::cout<<ret.size()<<std::endl;
 }
 void test_out()
 {
