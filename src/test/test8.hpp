@@ -1299,7 +1299,7 @@ void test_horseJump()
 	std::vector<std::vector<std::vector<int>>> ret;
 	std::cout<<horseJump(chess,0,0,step,ret)<<std::endl;
 
-	for(auto& i:chess)
+	for(auto& i:ret)
 	{
 		for(auto& j:i)
 		{
