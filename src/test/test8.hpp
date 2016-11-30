@@ -1266,7 +1266,7 @@ bool horseJump(std::vector<std::vector<int>>& chess,int row,int col,int step,std
 	int n=chess[0].size();
 	if(step==m*n)
 	{
-		ret.push_back(chess);
+		//ret.push_back(chess);
 		return true;
 	}
 	std::vector<int> ri{-2,-2,-1,+1,+2,+2,+1,-1};
@@ -1281,7 +1281,7 @@ bool horseJump(std::vector<std::vector<int>>& chess,int row,int col,int step,std
 			if(horseJump(chess,icur,jcur,step+1,ret))
 			{
 				//ret.push_back(chess);
-				// return true;
+				return true;
 			}
 			chess[icur][jcur]=0;
 		}
@@ -1300,21 +1300,362 @@ void test_horseJump()
 	std::vector<std::vector<std::vector<int>>> ret;
 	std::cout<<horseJump(chess,0,0,step,ret)<<std::endl;
 
-	for(auto& i:ret)
+	for(auto& j:chess)
 	{
-		for(auto& j:i)
+		for(auto& k:j)
+			std::cout<<k<<" ";
+		std::cout<<std::endl;
+	}
+	// for(auto& i:ret)
+	// {
+	// 	for(auto& j:i)
+	// 	{
+	// 		for(auto& k:j)
+	// 			std::cout<<k<<" ";
+	// 		std::cout<<std::endl;
+	// 	}
+	// 	std::cout<<"---------------"<<std::endl;
+	// }
+	//std::cout<<ret.size()<<std::endl;
+}
+typedef struct HorseStep
+{
+	int m_direct;
+	int m_step;
+	HorseStep():m_direct(0),m_step(0){}
+	HorseStep(int i,int j):m_direct(i),m_step(j){}
+	bool operator<(const HorseStep& horse)
+	{
+		return m_step<horse.m_step;
+	}
+}horseStep;
+int haveSonNum(const std::vector<std::vector<int>>& chess,int row,int col)
+{
+	int ret=0;
+	std::vector<int> ri{-2,-2,-1,+1,+2,+2,+1,-1};
+	std::vector<int> rj{-1,+1,+2,+2,+1,-1,-2,-2};
+	for(int i=0;i<8;++i)
+	{
+		int icur=row+ri[i];
+		int jcur=col+rj[i];
+		if(canJump(chess,icur,jcur))
 		{
-			for(auto& k:j)
-				std::cout<<k<<" ";
+			++ret;
+		}
+	}
+	return ret;
+}
+int gatherHorseDirect(std::vector<horseStep>& hs,int row,int col,const std::vector<std::vector<int>>& chess,bool last)
+{
+	int ret=0;//记录son的个数
+	std::vector<int> ri{-2,-2,-1,+1,+2,+2,+1,-1};
+	std::vector<int> rj{-1,+1,+2,+2,+1,-1,-2,-2};
+	for(int i=0;i<8;++i)
+	{
+		int icur=row+ri[i];
+		int jcur=col+rj[i];
+		if(last)
+		{
+			if(canJump(chess,icur,jcur))
+			{
+				//hs.push_back(horseStep(i,1));
+				hs[ret].m_step=1;
+				hs[ret].m_direct=i;
+				++ret;
+				break;
+			}
+		}
+		else
+		{
+			if(canJump(chess,icur,jcur))
+			{
+				int step=haveSonNum(chess,icur,jcur);
+				if(step!=0)
+				{
+					//hs.push_back(horseStep(i,step));
+					hs[ret].m_step=step;
+					hs[ret].m_direct=i;
+					++ret;
+				}
+			}
+		}
+	}
+	if(ret==0)
+		return 0;
+	std::sort(hs.begin(),hs.begin()+ret);
+	return ret;
+}
+bool horseJump2(std::vector<std::vector<int>>& chess,int row,int col,int step,std::vector<std::vector<std::vector<int>>>& ret)
+{
+	int m=chess.size();
+	int n=chess[0].size();
+	if(step==m*n)
+	{
+		//ret.push_back(chess);
+		return true;
+	}
+	std::vector<int> ri{-2,-2,-1,+1,+2,+2,+1,-1};
+	std::vector<int> rj{-1,+1,+2,+2,+1,-1,-2,-2};
+	std::vector<horseStep> hs(8);
+	int son=gatherHorseDirect(hs,row,col,chess,step==m*n-1);
+	++step;
+	for(int i=0;i<son;++i)
+	{
+
+		int direct=hs[i].m_direct;
+		int icur=row+ri[direct];
+		int jcur=col+rj[direct];
+		chess[icur][jcur]=step;
+		if(horseJump2(chess,icur,jcur,step,ret))
+		{
+			return true;
+		}
+		chess[icur][jcur]=0;
+	}
+	return false;
+}
+void test_horseJump2()
+{
+	// int m=5;
+	// int n=6;
+	int m=8;
+	int n=8;
+	std::vector<std::vector<int>> chess(m,std::vector<int>(n,0));
+	int step=1;
+	chess[0][0]=1;
+	std::vector<std::vector<std::vector<int>>> ret;
+	std::cout<<horseJump2(chess,0,0,step,ret)<<std::endl;
+
+	for(auto& j:chess)
+	{
+		for(auto& k:j)
+			std::cout<<k<<" ";
+		std::cout<<std::endl;
+	}
+
+	// for(auto& i:ret)
+	// {
+	// 	for(auto& j:i)
+	// 	{
+	// 		for(auto& k:j)
+	// 			std::cout<<k<<" ";
+	// 		std::cout<<std::endl;
+	// 	}
+	// 	std::cout<<"---------------"<<std::endl;
+	// }
+	//std::cout<<ret.size()<<std::endl;
+}
+void print(const std::vector<int>& arr,int low,int mid,int value)
+{
+	for(int i=low;i<=mid;++i)
+	{
+		std::cout<<"("<<arr[i]<<","<<value<<")"<<std::endl;
+	}
+	
+}
+void merge(std::vector<int>& arr,int low,int mid,int high,int& count)
+{
+	std::vector<int> temp;
+	int i=low;
+	int j=mid+1;
+	while((i<=mid)&&(j<=high))
+	{
+		if(arr[i]<arr[j])
+		{
+			temp.push_back(arr[i++]);
+		}
+		else
+		{
+			count+=mid-i+1;
+			print(arr,i,mid,arr[j]);
+			temp.push_back(arr[j++]);
+		}
+	}
+	while((i<=mid))
+	{
+		temp.push_back(arr[i++]);
+	}
+	while((j<=high))
+	{
+		temp.push_back(arr[j++]);
+	}
+	std::copy_n(temp.begin(), temp.size(), arr.begin()+low);
+}
+void mergeSort(std::vector<int>& arr,int low,int high,int& count)
+{
+	if(low>=high)
+		return;
+	int mid=(low+high)/2;
+	mergeSort(arr,low,mid,count);
+	mergeSort(arr,mid+1,high,count);
+	merge(arr,low,mid,high,count);
+}
+void test_reversePair()
+{
+	// std::vector<int> arr{3,56,2,7,45,8,1};
+	std::vector<int> arr{2,4,6,34,9,7,5,44,3};
+	int count=0;
+	mergeSort(arr,0,arr.size()-1,count);
+	for(auto& i:arr)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+	std::cout<<count<<std::endl;
+}
+class youngTableaus
+{
+public:
+	youngTableaus(int m,int n):m_rowSize(m),m_colSize(n),m_matrix(std::vector<std::vector<int>>(m,std::vector<int>(n,INT_MAX)))
+	{}
+	bool insert(int num)
+	{
+		int i=m_rowSize-1;
+		int j=m_colSize-1;
+		if(m_matrix[i][j]<INT_MAX)
+			return false;
+		m_matrix[i][j]=num;
+		int row=i;
+		int col=j;
+		while((i>=0)||(j>=0))
+		{
+			if((i>=1)&&m_matrix[i-1][j]>m_matrix[row][col])
+			{
+				row=i-1;
+				col=j;
+			}
+			if((col>=1)&&isBig(m_matrix[i][j-1],m_matrix[row][col]))
+			{
+				row=i;
+				col=j-1;
+			}
+			if((row==i)&&(col==j))
+			{
+				break;
+			}
+			std::swap(m_matrix[row][col],m_matrix[i][j]);
+			i=row;
+			j=col;
+		}
+		return true;
+	}
+	bool find(int num)	
+	{
+		int i=0;
+		int j=m_colSize-1;
+		while(i<m_rowSize&&j>=0)
+		{
+			if(m_matrix[i][j]==num)
+			{
+				std::cout<<i<<":"<<j<<":"<<num<<std::endl;
+				return true;
+			}
+			if(num<m_matrix[i][j])
+			{
+				--j;
+			}
+			else
+			{
+				++i;
+			}
+		}
+		return false;
+		// while((j>=0)&&(num<m_matrix[i][j]))
+		// {
+		// 	--j;
+		// }
+		// if(j==-1)
+		// {
+		// 	std::cout<<i<<":"<<j<<":"<<num<<std::endl;
+		// 	return false;
+		// }
+		// else if(num==m_matrix[i][j])
+		// {
+		// 	std::cout<<i<<":"<<j<<":"<<num<<std::endl;
+		// 	return true;
+		// }
+		// while((i<m_rowSize)&&(num>m_matrix[i][j]))
+		// {
+		// 	++i;
+		// }
+		// if(i==m_rowSize)
+		// {
+		// 	std::cout<<i<<":"<<j<<":"<<num<<std::endl;
+		// 	return false;
+		// }
+		// else if(num==m_matrix[i][j])
+		// {
+		// 	std::cout<<i<<":"<<j<<":"<<num<<std::endl;
+		// 	return true;
+		// }
+		// return false;
+	}
+	void print()
+	{
+		for(auto& i:m_matrix)
+		{
+			for(auto& j:i)
+			{
+				if(j==INT_MAX)
+				{
+					std::cout<<"∞"<<" ";
+				}
+				else
+				{
+					std::cout<<j<<" ";
+				}
+			}
 			std::cout<<std::endl;
 		}
-		std::cout<<"---------------"<<std::endl;
 	}
-	std::cout<<ret.size()<<std::endl;
+private:
+	bool isBig(int a,int b)
+	{
+		if(rand()%2==0)
+			return a>=b;
+		return a>b;
+	}
+private:
+	int m_rowSize;
+	int m_colSize;
+	std::vector<std::vector<int>> m_matrix;
+};
+void test_youngTableaus()
+{
+	int m=5;
+	int n=4;
+
+	youngTableaus y(m,n);
+	y.insert(2);
+	y.insert(5);
+	y.insert(34);
+	y.insert(1);
+	y.insert(78);
+	y.insert(20);
+	y.insert(50);
+	y.insert(35);
+	y.insert(11);
+	y.insert(77);
+	y.print();
+	std::cout<<y.find(1)<<std::endl;
+	std::cout<<y.find(2)<<std::endl;
+	std::cout<<y.find(5)<<std::endl;
+	std::cout<<y.find(34)<<std::endl;
+	std::cout<<y.find(78)<<std::endl;
+	std::cout<<y.find(3)<<std::endl;
 }
 void test_out()
 {
-	test_horseJump();
+	test_youngTableaus();
+
+	// std::cout<<(INFINITY<INFINITY)<<std::endl;
+	// std::cout<<(INT_MAX<INT_MAX)<<std::endl;
+	// std::cout<<(INFINITY==INFINITY)<<std::endl;
+	// std::cout<<(INT_MAX==INT_MAX)<<std::endl;
+	// std::cout<<(INT_MAX<INFINITY)<<std::endl;
+	// test_reversePair();
+	// test_horseJump2();
+	// test_horseJump();
 	// test_good::test_sudoku();
 	// test_sudoku();
 	// test_queen();
