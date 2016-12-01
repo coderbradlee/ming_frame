@@ -1644,9 +1644,251 @@ void test_youngTableaus()
 	std::cout<<y.find(78)<<std::endl;
 	std::cout<<y.find(3)<<std::endl;
 }
+void eratosthenes(std::vector<bool>& v,std::vector<int>& ret)
+{
+	int size=std::sqrt(v.size());
+
+	for(int i=2;i<size;++i)
+	{
+		for(int j=i;j*i<size*size;++j)
+		{
+			v[i*j]=false;
+		}
+	}
+	for(int i=0;i<v.size();++i)
+	{
+		if(v[i])
+			ret.push_back(i);
+	}
+	//std::cout<<std::endl;
+}
+int finds(const std::vector<int>& prime,int num)
+{
+	int size=prime.size();
+	int low=0;
+	int high=size-1;
+	while(low<=high)
+	{
+		int mid=(low+high)/2;
+		if(prime[mid]==num)
+		{
+			return mid;
+		}
+		else if(prime[mid]>num)
+		{
+			high=mid-1;
+		}
+		else
+		{
+			low=mid+1;
+		}
+	}
+	//std::cout<<size<<std::endl;
+	// for(int i=1;i<size;++i)
+	// {
+	// 	if(prime[i]>num)
+	// 	{
+	// 		return prime[i-1];
+	// 	}
+	// }
+	return low;
+}
+int twoSum(int sum,const std::vector<int>& ret,int to)
+{
+	int i=0;
+	int j=to-1;
+	int count=0;
+	while(i<j)
+	{
+		int s=ret[i]+ret[j];
+		if(s<sum)
+		{
+			++i;
+		}
+		else if(s==sum)
+		{
+			++i;
+			--j;
+			++count;
+		}
+		else
+		{
+			--j;
+		}
+
+	}
+	return count;
+}
+void primeSum(const std::vector<int>& ret,int N)
+{
+	int maxCount=0;
+	int maxIndex=0;
+	for(int i=0;i<N;++i)
+	{
+		int j=finds(ret,i);//找到小于i的最小素数的下标
+		//std::cout<<i<<":::::"<<ret[j]<<std::endl;
+		if(j!=0)
+		{
+			int count=twoSum(i,ret,j);
+			if(count>maxCount)
+			{
+				maxCount=count;
+				maxIndex=i;
+				// std::cout<<maxIndex<<":"<<maxCount<<std::endl;
+			}
+		}
+	}
+	std::cout<<maxIndex<<":"<<maxCount<<std::endl;
+}
+void test_primeSum()
+{
+	// int N=1000000;
+	// int N=100;
+	int N=100000;
+	std::vector<bool> arr(N,true);
+	std::vector<int> ret;
+	eratosthenes(arr,ret);
+	// for(auto& i:ret)
+	// {
+	// 	std::cout<<i<<" ";
+	// }
+	std::cout<<std::endl;
+	primeSum(ret,N);
+}
+int maxProfitOneTime(const std::vector<int>& prices)
+{
+	int minValue=prices[0];
+	int maxProfit=0;
+	for(int i=1;i<prices.size();++i)
+	{
+		minValue=std::min(minValue,prices[i-1]);
+		maxProfit=std::max(maxProfit,prices[i]-minValue);
+	}
+	return maxProfit;
+}
+void test_maxProfitOneTime()
+{
+	std::vector<int> prices{7,1,5,3,6,4};
+	std::cout<<maxProfitOneTime(prices)<<std::endl;
+}
+void maxProfitMultiTimes(const std::vector<int>& prices,std::vector<std::vector<int>>& profit)
+{
+	int K=profit.size();
+	int size=prices.size();
+	for(int k=1;k<K;++k)
+	{
+		for(int i=1;i<size;++i)
+		{
+			int temp=0;
+			for(int j=0;j<i;++j)
+			{
+				temp=std::max(temp,profit[k-1][j]+prices[i]-prices[j]);
+			}
+			
+			profit[k][i]=std::max(profit[k][i-1],temp);
+		}
+	}
+}
+void maxProfitMultiTimes2(const std::vector<int>& prices,std::vector<std::vector<int>>& profit)
+{
+	int K=profit.size();
+	int size=prices.size();
+	for(int k=1;k<K;++k)
+	{
+		int temp=profit[k-1][0]-prices[0];
+		for(int i=1;i<size;++i)
+		{
+			profit[k][i]=std::max(profit[k][i-1],temp+prices[i]);
+			temp=std::max(temp,profit[k-1][i]-prices[i]);
+		}
+	}
+}
+void test_maxProfitMultiTimes()
+{
+	std::vector<int> prices{7,1,5,3,6,4};
+	int K=3;
+	std::vector<std::vector<int>> profit(K,std::vector<int>(prices.size(),0));
+	// maxProfitMultiTimes(prices,profit);
+	maxProfitMultiTimes2(prices,profit);
+	for(auto& i:profit)
+	{
+		for(auto& j:i)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+}
+int minPath(const std::vector<std::vector<int>>& chess,int M,int N)
+{
+	std::vector<std::vector<int>> dp(M,std::vector<int>(N,0));
+	dp[0][0]=chess[0][0];
+	for(int i=1;i<M;++i)
+	{
+		dp[i][0]=dp[i-1][0]+chess[i][0];
+	}
+	for(int i=1;i<N;++i)
+	{
+		dp[0][i]=dp[0][i-1]+chess[0][i];
+	}
+	for(int i=1;i<M;++i)
+	{
+		for(int j=1;j<N;++j)
+		{
+			dp[i][j]=std::min(dp[i-1][j],dp[i][j-1])+chess[i][j];
+		}
+	}
+	return dp[M-1][N-1];
+}
+int minPath2(const std::vector<std::vector<int>>& chess,int M,int N)
+{
+	std::vector<int> dp(N,0);
+	dp[0]=chess[0][0];
+	for(int i=1;i<N;++i)
+	{
+		dp[i]=dp[i-1]+chess[0][i];
+	}
+	for(int i=1;i<M;++i)
+	{
+		dp[0]+=chess[i][0];
+		for(int j=1;j<N;++j)
+		{
+			dp[j]=std::min(dp[j],dp[j-1])+chess[i][j];
+		}
+	}
+	return dp[N-1];
+}
+void test_minPath()
+{
+	int M=3;
+	int N=4;
+	std::vector<std::vector<int>> chess(M,std::vector<int>(N,0));
+	for(int i=0;i<M;++i)
+	{
+		for(int j=0;j<N;++j)
+		{
+			chess[i][j]=rand()%10;
+		}
+	}
+
+	std::cout<<minPath(chess,M,N)<<std::endl;
+	std::cout<<minPath2(chess,M,N)<<std::endl;
+	for(auto& i:chess)
+	{
+		for(auto& j:i)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+}
 void test_out()
 {
-	test_youngTableaus();
+	test_minPath();
+	// test_maxProfitMultiTimes();
+	// test_maxProfitOneTime();
+	// test_primeSum();
+	// test_youngTableaus();
 
 	// std::cout<<(INFINITY<INFINITY)<<std::endl;
 	// std::cout<<(INT_MAX<INT_MAX)<<std::endl;
