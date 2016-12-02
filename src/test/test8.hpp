@@ -1858,6 +1858,7 @@ int minPath2(const std::vector<std::vector<int>>& chess,int M,int N)
 	}
 	return dp[N-1];
 }
+
 void test_minPath()
 {
 	int M=3;
@@ -1882,9 +1883,201 @@ void test_minPath()
 		std::cout<<std::endl;
 	}
 }
+int pathNumberWithBlock(const std::vector<std::vector<bool>>& chess,std::vector<std::vector<int>>& dp)
+{
+	int M=chess.size();
+	int N=chess[0].size();
+	dp[M-1][0]=chess[M-1][0]?1:0;
+	for(int i=M-2;i>=0;--i)
+	{
+		if(chess[i][0])
+		{
+			dp[i][0]=1;
+		}
+		else
+		{
+			dp[i][0]=0;
+		}
+	}
+	for(int i=1;i<N;++i)
+	{
+		if(chess[M-1][i])
+		{
+			dp[M-1][i]=1;
+		}
+		else
+		{
+			dp[M-1][i]=0;
+		}
+	}
+	for(int i=M-2;i>=0;--i)
+	{
+		for(int j=1;j<N;++j)
+		{
+			if(chess[i][j])
+			{
+				dp[i][j]=dp[i+1][j]+dp[i][j-1];
+			}
+			else
+			{
+				dp[i][j]=0;
+			}
+		}
+	}
+	return dp[0][N-1];
+}
+int pathNumberWithBlock2(const std::vector<std::vector<bool>>& chess,std::vector<int>& dp)
+{
+	int M=chess.size();
+	int N=chess[0].size();
+	dp[0]=chess[M-1][0]?1:0;
+	
+	for(int i=1;i<N;++i)
+	{
+		if(chess[M-1][i])
+		{
+			dp[i]=1;
+		}
+		else
+		{
+			dp[i]=0;
+		}
+	}
+	for(int i=M-2;i>=0;--i)
+	{
+		dp[0]=chess[i][0]?1:0;
+		for(int j=1;j<N;++j)
+		{
+			if(chess[i][j])
+			{
+				dp[j]=dp[j]+dp[j-1];
+			}
+			else
+			{
+				dp[j]=0;
+			}
+		}
+	}
+	return dp[N-1];
+}
+void test_pathNumberWithBlock()
+{
+	int M=6;
+	int N=8;
+	std::vector<std::vector<bool>> chess(M,std::vector<bool>(N,true));
+	// std::vector<std::vector<int>> dp(M,std::vector<int>(N,0));
+	chess[2][5]=false;
+	// std::cout<<pathNumberWithBlock(chess,dp)<<std::endl;
+	std::vector<int> dp(N,0);
+	std::cout<<pathNumberWithBlock2(chess,dp)<<std::endl;
+
+	// for(auto& i:dp)
+	// {
+	// 	for(auto& j:i)
+	// 	{
+	// 		std::cout<<j<<" ";
+	// 	}
+	// 	std::cout<<std::endl;
+	// }
+}
+bool isInterlace(const std::string& s1,const std::string& s2,const std::string& s3)
+{
+	int len1=s1.length();
+	int len2=s2.length();
+	int len3=s3.length();
+	if((len1+len2)!=len3)
+		return false;
+	std::vector<std::vector<bool>> dp(len1+1,std::vector<bool>(len2+1,false));
+	dp[0][0]=true;
+	
+	for(int i=1;i<=len1;++i)
+	{
+		if((s1[i-1]==s3[i-1])&&dp[i-1][0])
+		{
+			dp[i][0]=true;
+		}
+	}
+	
+	//std::cout<<dp[0][0]<<":"<<__LINE__<<std::endl;
+	for(int i=1;i<=len2;++i)
+	{
+		if((s2[i-1]==s3[i-1])&&dp[0][i-1])
+		{
+			dp[0][i]=true;
+		}
+	}
+	for(int i=1;i<=len1;++i)
+	{
+		for(int j=1;j<=len2;++j)
+		{
+			if(((s1[i-1]==s3[i+j-1])&&dp[i-1][j])||((s2[j-1]==s3[i+j-1])&&dp[i][j-1]))
+			{
+				dp[i][j]=true;
+			}
+		}
+	}
+	for(const auto& ii:dp)
+	{
+		for(const auto& jj:ii)
+		{
+			std::cout<<jj<<" ";
+		}
+		std::cout<<std::endl;
+	}
+	return dp[len1][len2];
+}
+bool isInterlace2(const std::string& s1,const std::string& s2,const std::string& s3)
+{
+	int len1=s1.length();
+	int len2=s2.length();
+	int len3=s3.length();
+	if((len1+len2)!=len3)
+		return false;
+	std::vector<bool> dp(len2+1,false);
+	dp[0]=true;
+	
+	for(int i=1;i<=len2;++i)
+	{
+		if((s2[i-1]==s3[i-1])&&dp[i-1])
+		{
+			dp[i]=true;
+		}
+	}
+	for(int i=1;i<=len1;++i)
+	{
+		dp[0]=dp[0]&&(s1[i-1]==s3[i-1]);
+		for(int j=1;j<=len2;++j)
+		{
+			if(((s1[i-1]==s3[i+j-1])&&dp[j])||((s2[j-1]==s3[i+j-1])&&dp[j-1]))
+			{
+				dp[j]=true;
+			}
+		}
+	}
+	for(const auto& i:dp)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+	return dp[len2];
+}
+void test_isInterlace()
+{
+	std::string s1="aabcc";
+	std::string s2="dbbca";
+	std::string s3="aadbbcbcac";
+	std::string s4="accabdbbca";
+	std::cout<<isInterlace(s1,s2,s3)<<std::endl;//true
+	std::cout<<isInterlace(s1,s2,s4)<<std::endl;//false
+
+	std::cout<<isInterlace2(s1,s2,s3)<<std::endl;//true
+	std::cout<<isInterlace2(s1,s2,s4)<<std::endl;//false
+}
 void test_out()
 {
-	test_minPath();
+	test_isInterlace();
+	// test_pathNumberWithBlock();
+	// test_minPath();
 	// test_maxProfitMultiTimes();
 	// test_maxProfitOneTime();
 	// test_primeSum();
