@@ -2073,9 +2073,41 @@ void test_isInterlace()
 	std::cout<<isInterlace2(s1,s2,s3)<<std::endl;//true
 	std::cout<<isInterlace2(s1,s2,s4)<<std::endl;//false
 }
+bool wordBreak(const std::string& str,const std::set<std::string>& dict,std::vector<std::vector<bool>>& ret)
+{
+	int N=str.length();
+	std::vector<bool> dp(N+1,false);
+	dp[0]=true;
+	for(int i=0;i<N;++i)
+	{
+		for(int j=i-1;j>=0;--j)
+		{
+			dp[i+1]=dp[j+1]&&(dict.find(str.substr(j+1,i-j))!=dict.end());
+			if(dp[i+1])
+				ret[i][j]=true;
+		}
+	}
+	return dp[N];
+}
+void test_wordBreak()
+{
+	std::set<std::string> dict{"cat","cats","and","sand","dog"};
+	std::string str="catsanddog";
+	std::vector<std::vector<bool>> ret(str.length(),std::vector<bool>(str.length(),false));
+	std::cout<<wordBreak(str,dict,ret)<<std::endl;
+	for(auto& i:ret)
+	{
+		for(auto& j:i)
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
+	}
+}
 void test_out()
 {
-	test_isInterlace();
+	test_wordBreak();
+	// test_isInterlace();
 	// test_pathNumberWithBlock();
 	// test_minPath();
 	// test_maxProfitMultiTimes();
