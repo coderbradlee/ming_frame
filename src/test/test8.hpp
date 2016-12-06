@@ -2078,30 +2078,64 @@ bool wordBreak(const std::string& str,const std::set<std::string>& dict,std::vec
 	int N=str.length();
 	std::vector<bool> dp(N+1,false);
 	dp[0]=true;
-	for(int i=0;i<N;++i)
+	for(int i=1;i<=N;++i)
 	{
 		for(int j=i-1;j>=0;--j)
 		{
-			dp[i+1]=dp[j+1]&&(dict.find(str.substr(j+1,i-j))!=dict.end());
-			if(dp[i+1])
+			dp[i]=(dp[j]&&(dict.find(str.substr(j,i-j))!=dict.end()));
+			if(dp[i])
+			{
 				ret[i][j]=true;
+				break;
+			}
 		}
 	}
+	for(const auto& i:dp)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
 	return dp[N];
+}
+void findAnswer(
+	const std::vector<std::vector<bool>>& ret,
+	const std::string& str,
+	int cur,
+	std::vector<std::string>& oneBreak,
+	std::vector<std::vector<std::string>>& answer)
+{
+	if(cur==0)
+	{
+		answer.push_back(oneBreak);
+		return;
+	}
+	for(int i=0;i<cur-1;++i)
+	{
+		if(ret[cur][i])
+		{
+			oneBreak.push_back(str.substr(i,cur-i));
+			findAnswer(ret,str,i,oneBreak,answer);
+			oneBreak.pop_back();
+		}
+	}
+
 }
 void test_wordBreak()
 {
 	std::set<std::string> dict{"cat","cats","and","sand","dog"};
 	std::string str="catsanddog";
-	std::vector<std::vector<bool>> ret(str.length(),std::vector<bool>(str.length(),false));
+	std::vector<std::vector<bool>> ret(str.length()+1,std::vector<bool>(str.length()+1,false));
 	std::cout<<wordBreak(str,dict,ret)<<std::endl;
-	// for(auto& i:ret)
-	// {
-	// 	for(auto& j:i)
-	// 	{
-	// 		std::cout<<j<<" ";
-	// 	}
-	// 	std::cout<<std::endl;
+	std::vector<std::vector<std::string>> answer;
+	std::vector<std::string> oneBreak;
+	findAnswer(ret,str,str.length()-1,oneBreak,answer);
+	for(const auto& i:answer)
+	{
+		for(const auto& j:i)//bool have to add const or auto&&
+		{
+			std::cout<<j<<" ";
+		}
+		std::cout<<std::endl;
 	// }
 }
 void test_zombieProcess()
