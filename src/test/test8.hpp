@@ -2095,18 +2095,49 @@ void test_wordBreak()
 	std::string str="catsanddog";
 	std::vector<std::vector<bool>> ret(str.length(),std::vector<bool>(str.length(),false));
 	std::cout<<wordBreak(str,dict,ret)<<std::endl;
-	for(auto& i:ret)
-	{
-		for(auto& j:i)
-		{
-			std::cout<<j<<" ";
-		}
-		std::cout<<std::endl;
-	}
+	// for(auto& i:ret)
+	// {
+	// 	for(auto& j:i)
+	// 	{
+	// 		std::cout<<j<<" ";
+	// 	}
+	// 	std::cout<<std::endl;
+	// }
+}
+void test_zombieProcess()
+{
+	// #ifdef __cplusplus
+	// extern "C" 
+	// {
+	// #endif
+	 
+		// #include <sys/types.h>
+		// #include <sys/wait.h>
+		// #include <unistd.h>
+		// #include <stdlib.h>
+		// #include <stdio.h>
+		// pid_t pid=fork();
+		// if(pid>0)
+		// {
+		// 	printf("in parent process,sleep for one minute\n");
+		// 	// pid_t pr=::wait(NULL);
+		// 	// printf("in parent process,%d\n",pr);
+		// 	sleep(300);
+		// 	printf("in parent process,after sleep\n");
+		// }
+		// else if(pid==0)
+		// {
+		// 	printf("in parent process,pid:%u,ppid:%u\n",getpid(),getppid());
+		// 	exit(0);
+		// }
+	// #ifdef __cplusplus
+	// }
+	// #endif
 }
 void test_out()
 {
-	test_wordBreak();
+	test_zombieProcess();
+	// test_wordBreak();
 	// test_isInterlace();
 	// test_pathNumberWithBlock();
 	// test_minPath();
