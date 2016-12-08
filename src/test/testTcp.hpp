@@ -14,7 +14,7 @@ namespace testTcp
 class client
 {
 public:
-	client():m_sendBuffer(MAXLINE,0)
+	client()
 	{
 		
 	}
@@ -52,7 +52,7 @@ public:
 			{
 				return;
 			}
-			writeLen=write(m_connfd,m_sendBuffer,m_sendBuffer.size());
+			writeLen=write(m_connfd,m_sendBuffer,sizeof(m_sendBuffer));
 			if(writeLen<0)
 			{
 				printf("write failed\n");
@@ -71,7 +71,7 @@ public:
 	}
 private:
 	int m_connfd;
-	std::vector<char> m_sendBuffer;
+	char m_sendBuffer[MAXLINE];
 	sockaddr_in m_servaddr;
 };
 class server
@@ -113,7 +113,7 @@ public:
 	}
 	void accept()
 	{
-		m_acceptfd=accept(m_listenfd,(sockaddr*)NULL,NULL);
+		m_acceptfd=accept(m_listenfd,(sockaddr*)0,0);
 		if(m_acceptfd==-1)
 		{
 			printf("accept socket error:%s(errno:%d)\n",strerror(errno),errno );
@@ -132,7 +132,7 @@ public:
 			while(1)
 			{
 				sleep(1);
-				ssize_t read_len=read(m_acceptfd,m_recvBuffer,m_recvBuffer.size());
+				ssize_t read_len=read(m_acceptfd,m_recvBuffer,sizeof(m_recvBuffer));
 				printf("read len %ld\n",read_len );
 				if(read_len<0)
 				{
@@ -155,12 +155,12 @@ public:
 	
 	~server()
 	{
-		close(m_connfd);
+		//close(m_connfd);
 	}
 private:
 	int m_listenfd;
 	int m_acceptfd;
-	std::vector<char> m_recvBuffer;
+	char m_recvBuffer[MAXLINE];
 	sockaddr_in m_servaddr;
 };
 void test_out()
