@@ -6,6 +6,7 @@
 #include <boost/noncopyable.hpp>
 #include "../procmon.hpp"
 #include "test8.hpp"
+#include "testTcp.hpp"
 //#include <unistd.h>
 
 using namespace muduo;
@@ -306,7 +307,7 @@ int main(int argc, char* argv[])
     {
         muduo::Timestamp start = muduo::Timestamp::now();
         test8_namespace::test_out();
-        
+        testTcp::test_out();
         muduo::Timestamp end = muduo::Timestamp::now();
         printf("\n\n\n------------------\nspend time:%f\n", timeDifference(end, start));
     }
