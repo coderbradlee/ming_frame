@@ -18,7 +18,7 @@ public:
 	{
 		
 	}
-	void connect(string addr,int port)
+	void connects(string addr,int port)
 	{
 		m_connfd=socket(AF_INET,SOCK_STREAM,0);
 		if(m_connfd<0)
@@ -41,7 +41,7 @@ public:
 		}
 		send();
 	}
-	void send()
+	void sends()
 	{
 		ssize_t writeLen;
 		int count=0;
@@ -77,11 +77,11 @@ private:
 class server
 {
 public:
-	server():m_recvBuffer(MAXLINE/2,0)
+	server()
 	{
 		
 	}
-	void listen(int port)
+	void listens(int port)
 	{
 		m_listenfd=socket(AF_INET,SOCK_STREAM,0);
 		if(m_listenfd<0)
@@ -111,7 +111,7 @@ public:
 			printf("listening...\n");
 		}
 	}
-	void accept()
+	void accepts()
 	{
 		m_acceptfd=accept(m_listenfd,(sockaddr*)0,0);
 		if(m_acceptfd==-1)
@@ -166,12 +166,12 @@ private:
 void test_out()
 {
 	server s;
-	s.listen(6666);
-	s.accept();
+	s.listens(6666);
+	s.accepts();
 
 	// client c;
-	// c.connect("127.0.0.1",6666);
-	// c.send();
+	// c.connects("127.0.0.1",6666);
+	// c.sends();
 }	
 }
 
