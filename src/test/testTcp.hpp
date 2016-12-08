@@ -166,9 +166,12 @@ private:
 void test_out()
 {
 	server s;
-	s.listen();
+	s.listen(6666);
 	s.accept();
 
+	// client c;
+	// c.connect("127.0.0.1",6666);
+	// c.send();
 }	
 }
 
