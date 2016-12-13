@@ -2170,7 +2170,7 @@ void test_zombieProcess()
 }
 void test_malloc()
 {
-	int size=1200000000;
+	int size=12000000000;
 	malloc(size);
 }
 void test_out()
