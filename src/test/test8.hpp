@@ -2168,10 +2168,15 @@ void test_zombieProcess()
 	// }
 	// #endif
 }
+#include <errno.h>
 void test_malloc()
 {
 	int size=12000000000;
-	malloc(size);
+	void* t=malloc(size);
+	if(!t)
+	{
+		printf(":%s(errno:%d)\n",strerror(errno),errno );
+	}
 }
 void test_out()
 {
