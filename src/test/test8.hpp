@@ -2178,9 +2178,15 @@ void test_malloc()
 		printf(":%s(errno:%d)\n",strerror(errno),errno );
 	}
 }
+void test_n()
+{
+	int n=9999;
+	cout<<n&(n-1)<<endl;
+}
 void test_out()
 {
-	test_malloc();
+	test_n();
+	// test_malloc();
 	// test_zombieProcess();
 	// test_wordBreak();
 	// test_isInterlace();
