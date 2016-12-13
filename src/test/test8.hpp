@@ -2189,7 +2189,8 @@ void test_rb_tree()
 {
 	std::set<int> x;
 	x.insert(5);
-	std::cout<<sizeof(*(x.begin()))<<std::endl;
+	std::cout<<sizeof(std::set<int>)<<std::endl;
+	std::cout<<sizeof(x)<<std::endl;
 }
 void test_out()
 {
