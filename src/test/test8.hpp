@@ -2168,9 +2168,15 @@ void test_zombieProcess()
 	// }
 	// #endif
 }
+void test_malloc()
+{
+	int size=1200000000;
+	malloc(size);
+}
 void test_out()
 {
-	test_zombieProcess();
+	test_malloc();
+	// test_zombieProcess();
 	// test_wordBreak();
 	// test_isInterlace();
 	// test_pathNumberWithBlock();

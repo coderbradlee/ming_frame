@@ -8,7 +8,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#define MAXLINE 4096
+#define MAXLINE 40960
 namespace testTcp
 {
 class client
@@ -16,14 +16,14 @@ class client
 public:
 	client()
 	{
-		
+		memset(m_sendBuffer,0,sizeof(m_sendBuffer));
 	}
-	void connects(string addr,int port)
+	void connects(const char* addr,int port)
 	{
 		m_connfd=socket(AF_INET,SOCK_STREAM,0);
 		if(m_connfd<0)
 		{
-			printf("create socket error:%s(errno:%d)\n",strerror(errno),errno );
+			printf("client create socket error:%s(errno:%d)\n",strerror(errno),errno );
 			return;
 		}
 		memset(&m_servaddr,0,sizeof(m_servaddr));
@@ -31,15 +31,15 @@ public:
 		m_servaddr.sin_port=htons(port);
 		if(inet_pton(AF_INET,addr,&m_servaddr.sin_addr)<=0)
 		{
-			printf("inet_pton error for %s\n", addr);
+			printf("client inet_pton error for %s\n", addr);
 			return;
 		}
 		if(connect(m_connfd,(sockaddr*)&m_servaddr,sizeof(m_servaddr))<0)
 		{
-			printf("connect error:%s(errno:%d)\n",strerror(errno),errno );
+			printf("client connect error:%s(errno:%d)\n",strerror(errno),errno );
 			return;
 		}
-		send();
+		sends();
 	}
 	void sends()
 	{
@@ -55,13 +55,13 @@ public:
 			writeLen=write(m_connfd,m_sendBuffer,sizeof(m_sendBuffer));
 			if(writeLen<0)
 			{
-				printf("write failed\n");
+				printf("client write failed\n");
 				close(m_connfd);
 				return;
 			}
 			else
 			{
-				printf("write success,writeLen:%d\n",writeLen );
+				printf("client write success,writeLen:%ld\n",writeLen );
 			}
 		}
 	}
@@ -86,62 +86,63 @@ public:
 		m_listenfd=socket(AF_INET,SOCK_STREAM,0);
 		if(m_listenfd<0)
 		{
-			printf("listen socket error:%s(errno:%d)\n",strerror(errno),errno );
+			printf("server listen socket error:%s(errno:%d)\n",strerror(errno),errno );
 			return;
 		}
 		memset(&m_servaddr,0,sizeof(m_servaddr));
 		m_servaddr.sin_family=AF_INET;
 		m_servaddr.sin_addr.s_addr=htonl(INADDR_ANY);
 		m_servaddr.sin_port=htons(port);
-		if(bind(m_listenfd,(sockaddr*)&m_servaddr,sizeof(m_servaddr))<=0)
+		if(bind(m_listenfd,(sockaddr*)&m_servaddr,sizeof(m_servaddr))==-1)
 		{
-			printf("bind socket error: %s(errno:%d)\n", strerror(errno),errno);
+			printf("server bind socket error: %s(errno:%d)\n", strerror(errno),errno);
 			return;
 		}
 		else
 		{
-			printf("bind success\n");
+			printf("server bind success\n");
 		}
-		if(listen(m_listenfd,10)<=0)
+		if(listen(m_listenfd,10)==-1)
 		{
-			printf("listen socket error:%s(errno:%d)\n",strerror(errno),errno );
+			printf("server listen socket error:%s(errno:%d)\n",strerror(errno),errno );
+			return;
 		}
 		else
 		{
-			printf("listening...\n");
+			printf("server listening...\n");
 		}
 	}
 	void accepts()
 	{
-		m_acceptfd=accept(m_listenfd,(sockaddr*)0,0);
+		m_acceptfd=accept(m_listenfd,(struct sockaddr*)NULL,NULL);
 		if(m_acceptfd==-1)
 		{
-			printf("accept socket error:%s(errno:%d)\n",strerror(errno),errno );
+			printf("server accept socket error:%s(errno:%d)\n",strerror(errno),errno );
 		}
 		else
 		{
-			printf("accept success\n");
+			printf("server accept success\n");
 			int rcvbuf_len;
 			socklen_t len=sizeof(rcvbuf_len);
 			if(getsockopt(m_acceptfd,SOL_SOCKET,SO_RCVBUF,(void*)&rcvbuf_len,&len)<0)
 			{
-				printf("getsockopt error\n");
+				printf("server getsockopt error\n");
 			}
-			printf("recv buf len:%d\n",rcvbuf_len );
+			printf("server recv buf len:%d\n",rcvbuf_len );
 			ssize_t total_len=0;
 			while(1)
 			{
 				sleep(1);
 				ssize_t read_len=read(m_acceptfd,m_recvBuffer,sizeof(m_recvBuffer));
-				printf("read len %ld\n",read_len );
+				printf("server read len %ld\n",read_len );
 				if(read_len<0)
 				{
-					printf("read error\n");
+					printf("server read error\n");
 					return;
 				}
 				else if(read_len==0)
 				{
-					printf("read finish:len=%ld\n",total_len );
+					printf("server read finish:len=%ld\n",total_len );
 					close(m_acceptfd);
 					return;
 				}
@@ -168,7 +169,7 @@ void test_out()
 	server s;
 	s.listens(6666);
 	s.accepts();
-
+	// sleep(1);
 	// client c;
 	// c.connects("127.0.0.1",6666);
 	// c.sends();
