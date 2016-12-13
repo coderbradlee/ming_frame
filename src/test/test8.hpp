@@ -2171,7 +2171,7 @@ void test_zombieProcess()
 #include <errno.h>
 void test_malloc()
 {
-	int size=3200000000;
+	int size=2200000000;
 	void* t=malloc(size);
 	if(!t)
 	{
