@@ -2185,9 +2185,16 @@ void test_n()
 	
 	std::cout<<n<<std::endl;
 }
+void test_rb_tree()
+{
+	std::set<int> x;
+	x.insert(5);
+	std::cout<<sizeof(*(x.begin()))<<std::endl;
+}
 void test_out()
 {
-	test_n();
+	test_rb_tree();
+	// test_n();
 	// test_malloc();
 	// test_zombieProcess();
 	// test_wordBreak();
