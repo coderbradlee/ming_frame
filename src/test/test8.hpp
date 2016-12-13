@@ -2181,7 +2181,11 @@ void test_malloc()
 void test_n()
 {
 	int n=9999;
-	std::cout<<(n&(n-1))<<std::endl;
+	while(n)
+	{
+		n=(n&(n-1));
+	}
+	std::cout<<n<<std::endl;
 }
 void test_out()
 {
