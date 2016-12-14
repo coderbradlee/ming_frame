@@ -2220,7 +2220,7 @@ void kth(const std::vector<int>& v,int k)
 	}
 	print_set(s);
 }
-int partion(std::vector<int>& v,int n)
+int partion(int* v,int n)
 {
 	int mid=n/2;
 	std::swap(v[mid],v[n-1]);
@@ -2235,7 +2235,7 @@ int partion(std::vector<int>& v,int n)
 	std::swap(v[++i],v[n-1]);
 	return i;
 }
-int kths(std::vector<int>& v,int n,int k)
+int kths(int* v,int n,int k)
 {
 	int mid;
 	if(k<=0||n<k)
@@ -2247,7 +2247,7 @@ int kths(std::vector<int>& v,int n,int k)
 	}
 	else if(mid<n-k)
 	{
-		return kths(v.begin()+mid+1,n-mid-1,k);
+		return kths(v+mid+1,n-mid-1,k);
 	}
 	else
 	{
@@ -2256,13 +2256,59 @@ int kths(std::vector<int>& v,int n,int k)
 }
 void test_find_kth()
 {
-	std::vector<int> v{22,33,44,11,66,77,88};
+	//std::vector<int> v{22,33,44,11,66,77,88};
 	//kth(v,3);
-	std::cout<<kths(v,v.size(),3)<<std::endl;
+	int v[]={22,33,44,11,66,77,88};
+	std::cout<<kths(v,7,3)<<std::endl;
+}
+void quick_sort(int* arr,int start,int to)
+{
+	if((to-start)<=1)
+		return;
+	int i=start;
+	int j=to;
+	int pivotal=arr[i];
+
+	while(i<j)
+	{
+		while(arr[j]>=pivotal)
+		{
+			--j;
+		}
+		if(i<j)
+		{
+			arr[i]=arr[j];
+			++i;
+		}
+		
+		while(arr[i]<pivotal)
+		{
+			++i;
+		}
+		if(i<j)
+		{
+			arr[j]=arr[i];
+			--j;
+		}
+	}
+	arr[i]=pivotal;
+	quick_sort(arr,start,i-1);
+	quick_sort(arr,i+1,to);
+}
+void test_quick_sort()
+{
+	int arr[]={2,3,5,1,7,8,3,4};
+	quick_sort(arr,0,8);
+	for(int i=0;i<8;++i)
+	{
+		std::cout<<arr[i]<<" ";
+	}
+	std::cout<<std::endl;
 }
 void test_out()
 {
-	test_find_kth();
+	test_quick_sort();
+	// test_find_kth();
 	// test_rb_tree();
 	// test_n();
 	// test_malloc();
