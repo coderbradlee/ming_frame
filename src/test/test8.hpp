@@ -2192,9 +2192,36 @@ void test_rb_tree()
 	std::cout<<sizeof(std::set<int>)<<std::endl;
 	std::cout<<sizeof(x)<<std::endl;
 }
+int kth(const std::vector<int>& v,int k)
+{
+	std::set<int> s;
+	for(int i=0;i<k;++i)
+	{
+		s.insert(v[k]);
+	}
+	for(int i=k;i<v.size();++i)
+	{
+		if(v[i]>*(s.begin()))
+		{
+			s.insert(v[i]);
+			s.erase(s.begin());
+		}
+	}
+	for(const auto& i:s)
+	{
+		std::cout<<i<<" ";
+	}
+	std::cout<<std::endl;
+}
+void test_find_kth()
+{
+	std::vector<int> v{22,33,44,11,66,77,88};
+	std::cout<<kth(v,3)<<std::endl;
+}
 void test_out()
 {
-	test_rb_tree();
+	test_find_kth();
+	// test_rb_tree();
 	// test_n();
 	// test_malloc();
 	// test_zombieProcess();
