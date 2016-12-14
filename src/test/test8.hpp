@@ -2192,31 +2192,73 @@ void test_rb_tree()
 	std::cout<<sizeof(std::set<int>)<<std::endl;
 	std::cout<<sizeof(x)<<std::endl;
 }
-int kth(const std::vector<int>& v,int k)
+void print_set(const std::set<int>& s)
 {
-	std::set<int> s;
-	for(int i=0;i<k;++i)
-	{
-		s.insert(v[k]);
-	}
-	for(int i=k;i<v.size();++i)
-	{
-		if(v[i]>*(s.begin()))
-		{
-			s.insert(v[i]);
-			s.erase(s.begin());
-		}
-	}
+	std::cout<<s.size()<<std::endl;
 	for(const auto& i:s)
 	{
 		std::cout<<i<<" ";
 	}
 	std::cout<<std::endl;
 }
+void kth(const std::vector<int>& v,int k)
+{
+	std::set<int> s;
+	for(int i=0;i<k;++i)
+	{
+		s.insert(v[i]);
+	}
+	//print_set(s);
+	for(int i=k;i<v.size();++i)
+	{
+		if(v[i]>*(s.begin()))
+		{
+			s.insert(v[i]);
+			s.erase(s.begin());
+			
+		}
+	}
+	print_set(s);
+}
+int partion(std::vector<int>& v,int n)
+{
+	int mid=n/2;
+	std::swap(v[mid],v[n-1]);
+	int i=-1;
+	for(int j=0;j<n-1;++j)
+	{
+		if(v[j]<v[n-1])
+		{
+			std::swap(v[++i],v[j]);
+		}
+	}
+	std::swap(v[++i],v[n-1]);
+	return i;
+}
+int kths(std::vector<int>& v,int n,int k)
+{
+	int mid;
+	if(k<=0||n<k)
+		return -1;
+	mid=partion(v,n);
+	if(mid==n-k)
+	{
+		return v[mid];
+	}
+	else if(mid<n-k)
+	{
+		return kths(v.begin()+mid+1,n-mid-1,k);
+	}
+	else
+	{
+		return kths(v,mid,k-(n-mid));
+	}
+}
 void test_find_kth()
 {
 	std::vector<int> v{22,33,44,11,66,77,88};
-	std::cout<<kth(v,3)<<std::endl;
+	//kth(v,3);
+	std::cout<<kths(v,v.size(),3)<<std::endl;
 }
 void test_out()
 {
