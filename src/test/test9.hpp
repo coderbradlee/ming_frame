@@ -13,7 +13,38 @@
 #include "tree.hpp"
 namespace test9_namespace
 {
-
+int calcpath1(const std::vector<std::vector<int>>& graph)
+{
+	const int N=16;
+	int step[N]={0};//how many step to i
+	int path[N]={0};//how many path to i
+	path[0]=1;
+	std::queue<int> q;
+	q.push(0);
+	while(!q.empty())
+	{
+		int from=q.front();
+		q.pop();
+		for(int i=1;i<N;++i)
+		{
+			if(graph[from][i]==1)
+			{
+				if(step[i]==0||step[i]>step[from]+1)
+				{
+					step[i]=step[from]+1;
+					path[i]=path[from];
+					q.push(i);
+				}
+				else if(step[i]==step[from]+1)
+				{
+					path[i]+=path[from];
+				}
+			}
+			
+		}
+	}
+	return path[N-1];
+}
 int calcpath(const std::vector<std::vector<int>>& graph)
 {
 	const int N=graph.size();
@@ -21,12 +52,11 @@ int calcpath(const std::vector<std::vector<int>>& graph)
 	std::vector<int> path(N,0);//从0到i的路径数
 	path[0]=1;
 	int i=0;
-	int j=1;
 	std::queue<int> q;
 	q.push(0);
 	while(!q.empty())
 	{
-		int i=q.front();
+		i=q.front();
 		q.pop();
 		for(int j=0;j<N;++j)
 		{
@@ -36,6 +66,7 @@ int calcpath(const std::vector<std::vector<int>>& graph)
 				{
 					step[j]=step[i]+1;
 					path[j]=path[i];
+					q.push(j);
 				}
 				else if(step[j]==(step[i]+1))
 				{
@@ -45,8 +76,9 @@ int calcpath(const std::vector<std::vector<int>>& graph)
 				{
 					step[j]=step[i]+1;
 					path[j]=path[i];
+					q.push(j);
 				}
-				q.push(j);
+				
 			}
 		}
 	}
@@ -73,10 +105,138 @@ void test_sp()
 	graph[14][10]=graph[14][13]=graph[14][15]=1;
 	graph[15][11]=graph[15][14]=1;
 	std::cout<<calcpath(graph)<<std::endl;
+	std::cout<<calcpath1(graph)<<std::endl;
+}
+int parenthesisLen(const string& p)
+{
+	int ret=0;
+	int len=0;
+	std::stack<int> s;
+	for(int i=0;i<p.length();++i)
+	{
+		if(p[i]=='(')
+		{
+			s.push(i);
+		}
+		else
+		{
+			if(!s.empty())
+			{
+				int start=s.top();
+				s.pop();
+				if(s.empty())
+				{
+					len+=i-start+1;
+				}
+				else
+				{
+					// len=0;
+				}
+				if(len>ret)
+				{
+					ret=len;
+				}
+			}
+			else
+			{
+				len=0;
+				// allStart=i;
+			}
+		}
+	}
+	return ret;
+}
+void test_parenthesisLen()
+{
+	string p="()(())";//6
+	string p2="((((()))))";//10
+	string p3="(())(";//4
+	string p4="()(()))";//4
+	std::cout<<parenthesisLen(p)<<std::endl;
+	std::cout<<parenthesisLen(p2)<<std::endl;
+	std::cout<<parenthesisLen(p3)<<std::endl;
+	std::cout<<parenthesisLen(p4)<<std::endl;
+}
+bool isDigit(char c)
+{
+	return (c<='z')&&(c>='a');
+}
+bool priorityIsLess(char left,char right)
+{
+	if(left=='(')
+		return true;
+
+	if(((left=='+')||(left=='-'))&&((right=='*')||(right=='/')))
+		return true;
+	return false;
+}
+void changeToPolishNotation(const string& in,string& out)
+{
+	const int len=in.length();
+	std::stack<char> s;
+	for(int i=0;i<len;++i)
+	{
+		if(isDigit(in[i]))
+		{
+			out+=in[i];
+		}
+		else if(in[i]=='(')
+		{
+			s.push(in[i]);
+		}
+		else if(in[i]==')')
+		{
+			while((!s.empty())&&(s.top()!='('))
+			{
+				out+=s.top();
+				s.pop();
+			}
+			s.pop();
+		}
+		else
+		{
+			if(!s.empty())
+			{
+				if(priorityIsLess(s.top(),in[i]))//in[i]优先级高
+				{
+					s.push(in[i]);
+				}
+				else
+				{
+					while((!s.empty())&&(!priorityIsLess(s.top(),in[i])))
+					{
+						out+=s.top();
+						s.pop();
+					}
+					s.push(in[i]);
+				}
+			}
+			else
+			{
+				s.push(in[i]);
+			}
+		}
+	}
+	while(!s.empty())
+	{
+		out+=s.top();
+		s.pop();
+	}
+}
+void test_changeToPolishNotation()
+{
+	//a + b*c + (d * e + f) * g
+	//a b c * + d e * f  + g * +
+	string in="a+b*c+(d*e+f)*g";
+	string out;
+	changeToPolishNotation(in,out);
+	std::cout<<out<<std::endl;
 }
 void test_out()
 {
-	test_sp();
+	test_changeToPolishNotation();
+	// test_parenthesisLen();
+	// test_sp();
 	
 }
 }
