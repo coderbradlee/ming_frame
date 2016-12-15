@@ -22,25 +22,32 @@ int calcpath(const std::vector<std::vector<int>>& graph)
 	path[0]=1;
 	int i=0;
 	int j=1;
-	while(j<N)
+	std::queue<int> q;
+	q.push(0);
+	while(!q.empty())
 	{
-		if(graph[i][j]==1)
+		int i=q.front();
+		q.pop();
+		for(int j=0;j<N;++j)
 		{
-			if(step[j]==0)
+			if(graph[i][j]==1)
 			{
-				step[j]=step[i]+1;
-				path[j]=path[i];
+				if(step[j]==0)
+				{
+					step[j]=step[i]+1;
+					path[j]=path[i];
+				}
+				else if(step[j]==(step[i]+1))
+				{
+					path[j]+=path[i];
+				}
+				else if(step[j]>(step[i]+1))
+				{
+					step[j]=step[i]+1;
+					path[j]=path[i];
+				}
+				q.push(j);
 			}
-			else if(step[j]==(step[i]+1))
-			{
-				path[j]+=path[i];
-			}
-			++i;
-			++j;
-		}
-		else
-		{
-			++j;
 		}
 	}
 	return path[N-1];
