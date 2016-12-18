@@ -107,7 +107,7 @@ void test_sp()
 	std::cout<<calcpath(graph)<<std::endl;
 	std::cout<<calcpath1(graph)<<std::endl;
 }
-int parenthesisLen(const string& p)
+int parenthesisLen1(const string& p)
 {
 	int ret=0;
 	int len=0;
@@ -146,12 +146,45 @@ int parenthesisLen(const string& p)
 	}
 	return ret;
 }
+int parenthesisLen(const string& p)
+{
+	int ret=0;
+	int len=0;
+	std::stack<int> s;
+	for(int i=0;i<p.length();++i)
+	{
+		if(p[i]=='(')
+		{
+			s.push(i);
+		}
+		else if(!s.empty())
+		{
+			int start=s.top();
+			s.pop();
+			if(s.empty())
+			{
+				len+=i-start+1;
+			}
+			
+			if(len>ret)
+			{
+				ret=len;
+			}
+		}
+		else
+		{
+			len=0;
+		}
+		
+	}
+	return ret;
+}
 void test_parenthesisLen()
 {
 	string p="()(())";//6
 	string p2="((((()))))";//10
 	string p3="(())(";//4
-	string p4="()(()))";//4
+	string p4="()(()))";//6
 	std::cout<<parenthesisLen(p)<<std::endl;
 	std::cout<<parenthesisLen(p2)<<std::endl;
 	std::cout<<parenthesisLen(p3)<<std::endl;
@@ -232,10 +265,23 @@ void test_changeToPolishNotation()
 	changeToPolishNotation(in,out);
 	std::cout<<out<<std::endl;
 }
+struct test_struct
+{
+	
+};
+class test_class
+{
+public:
+	test_class();
+	~test_class();
+	
+};
 void test_out()
 {
-	test_changeToPolishNotation();
-	// test_parenthesisLen();
+	// test_changeToPolishNotation();
+	test_parenthesisLen();
+	std::cout<<sizeof(test_struct)<<std::endl;
+	std::cout<<sizeof(test_class)<<std::endl;
 	// test_sp();
 	
 }

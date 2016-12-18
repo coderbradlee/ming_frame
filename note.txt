@@ -1,3 +1,6 @@
+redis 删除key
+redis-cli DEL 'redis-cli KEYS"user:*"'
+
 openssl genrsa -des3 -out root.key 2048
 
 openssl req -new -x509 -key root.key -out root.crt -days 365
