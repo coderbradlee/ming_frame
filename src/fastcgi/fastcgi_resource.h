@@ -13,7 +13,7 @@
 #include "../mysql_connect.hpp"
 using namespace muduo::net;
 
-const muduo::string kPath = "/sudoku/";
+const std::string kPath = "/sudoku/";
 
 void onRequest(const TcpConnectionPtr& conn,
                FastCgiCodec::ParamMap& params,
@@ -21,41 +21,41 @@ void onRequest(const TcpConnectionPtr& conn,
 
 void onConnection(const TcpConnectionPtr& conn);
 void parser_param(
-	const muduo::string& uri,
-  const muduo::string& query_string,
-  const muduo::string& content,
+	const std::string& uri,
+  const std::string& query_string,
+  const std::string& content,
   const TcpConnectionPtr& conn);
 void start_fastcgi();
 
 class request_parser_base:boost::noncopyable
 {
 public:
-	request_parser_base(const muduo::string& query_string,const muduo::string& content);
-	virtual muduo::string get_result()=0;
+	request_parser_base(const std::string& query_string,const std::string& content);
+	virtual std::string get_result()=0;
 	virtual ~request_parser_base(){}
 protected:
-	std::map<muduo::string,muduo::string> m_query_string;
-	muduo::string m_content;
+	std::map<std::string,std::string> m_query_string;
+	std::string m_content;
 };
 class request_parser_get:public request_parser_base
 {
 public:
-	request_parser_get(const muduo::string& query_string,const muduo::string& content);
-	muduo::string get_result();
+	request_parser_get(const std::string& query_string,const std::string& content);
+	std::string get_result();
 };
 class get_rate
 {
 public:
-	get_rate(const muduo::string& src,const muduo::string& des,const muduo::string& time,boost::shared_ptr<mysql_connect> m_);
-	muduo::string get_rates();
+	get_rate(const std::string& src,const std::string& des,const std::string& time,boost::shared_ptr<mysql_connect> m_);
+	std::string get_rates();
 private:
-	muduo::string get_currency_id(const muduo::string& code);
-	muduo::string get_rate_from_myql(const muduo::string& exchange_rate_id,const muduo::string& which_day);
-	muduo::string get_exchange_rate_id(const muduo::string& source,const muduo::string& target);
+	std::string get_currency_id(const std::string& code);
+	std::string get_rate_from_myql(const std::string& exchange_rate_id,const std::string& which_day);
+	std::string get_exchange_rate_id(const std::string& source,const std::string& target);
 	
-	muduo::string m_src;
-	muduo::string m_des;
-	muduo::string m_time;
+	std::string m_src;
+	std::string m_des;
+	std::string m_time;
 	boost::shared_ptr<mysql_connect> m_conn;
 };
 #endif  

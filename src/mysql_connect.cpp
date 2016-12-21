@@ -1,5 +1,5 @@
 #include "mysql_connect.hpp"
-
+using std::string;
 
 mysql_connect::mysql_connect(boost::shared_ptr<mysql_info> in):m_mysql_info(in),m_res(nullptr),m_stmt(nullptr),m_pstmt(nullptr)
 {
