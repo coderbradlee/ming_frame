@@ -177,7 +177,13 @@ ab -k -n 500000 -c 5 http://127.0.0.1:12345/
 ab -k -n 500000 -c 5 http://www.renesola.com/
 ab -n 10000 -c 100 http://127.0.0.1:12345/
 ab -k -n 500000 -c 50 http://127.0.0.1/exchange_rate/
-ab -k -n 500000 -c 50 http://127.0.0.1/redis/
+ab -A test:test -k -n 500000 -c 50 http://127.0.0.1/redis/
+
+siege -c 300 -r 500000 http://127.0.0.1/redis/
+
+auth = echo -n 'test:test' | openssl base64
+siege -t60s -c20 -d10 --header="Authorization:Basic test:test" 'http://127.0.0.1/redis/'
+
 线上配置：
 [mysql]
 ip=172.30.1.1
