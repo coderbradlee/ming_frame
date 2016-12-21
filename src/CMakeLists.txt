@@ -9,7 +9,7 @@
 #add_library(ming_config config.cpp)
 #target_link_libraries(ming_config muduo_net)
 
-#add_subdirectory(fastcgi)
+add_subdirectory(fastcgi)
 add_subdirectory(test)
 #add_subdirectory(sudoku)
 #add_subdirectory(memcached/client)
