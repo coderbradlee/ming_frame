@@ -98,19 +98,10 @@ if (NOT NO_SUB)
     #add_subdirectory("libgo")
 endif()
 
-#########################add libgo submodule
-set(ENABLE_SSL 1)
-include_directories("${PROJECT_SOURCE_DIR}/libgo")
-include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo")
-include_directories("${PROJECT_SOURCE_DIR}/libgo/libgo/linux")
-include_directories("${PROJECT_SOURCE_DIR}/libgo/test")
-###################################################################
 
 add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(src)
-#add_subdirectory(src/go)
-#add_subdirectory(libmicrohttpd)
 add_definitions(-DMUDUO_STD_STRING)
 #add_subdirectory(bitcoin)
 configure_file(${PROJECT_SOURCE_DIR}/config.ini  ${PROJECT_BINARY_DIR}/bin/config.ini COPYONLY)
