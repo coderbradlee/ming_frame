@@ -45,7 +45,10 @@ curl -u test:test -X GET http://127.0.0.1/exchange_rate/?source=USD\&target=CNY\
 
 
 ab -k -n 500000 -c 50 http://127.0.0.1/exchange_rate/
-ab -A test:test -k -n 500000 -c 50 http://127.0.0.1/redis/
+
+ab -A -k -n 500000 -c 100 http://127.0.0.1/redis/
+
+ab -A test:test -k -n 500000 -c 100 http://127.0.0.1/redis/
 
 siege -c 300 -r 500000 http://127.0.0.1/redis/
 
