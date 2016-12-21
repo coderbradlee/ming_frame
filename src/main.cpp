@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
     init_log();
     muduo::Timestamp start = muduo::Timestamp::now();
 
-    //start_fastcgi();
+    start_fastcgi();
 
     //test1::test1();
     //short_url::test();

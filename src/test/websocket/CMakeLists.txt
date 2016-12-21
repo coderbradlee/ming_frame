@@ -1,2 +1,0 @@
-add_executable(websocketServer websocketServer.cpp main.cpp)
-target_link_libraries(websocketServer muduo_net_cpp11)

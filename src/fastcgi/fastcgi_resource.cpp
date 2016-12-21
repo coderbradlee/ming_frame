@@ -183,11 +183,17 @@ void parser_param(
     //uri.compare(0,get_config->m_url.length(),get_config->m_url)
     size_t len=(get_config->m_url).length();
     string url=get_config->m_url;
+    size_t redis_url_len=(get_config->m_redis_url).length();
+    string redis_url=get_config->m_redis_url;
     string result="0";
     if(request_method=="GET"&&uri.compare(0,len,url) == 0)
     {
         boost::shared_ptr<request_parser_base> pa(new request_parser_get(query_string,content));
         result=pa->get_result();
+    } 
+    else if(request_method=="GET"&&uri.compare(0,redis_url_len,redis_url) == 0)
+    {
+        LOG_INFO << conn->name() << ": " << uri;
     } 
     Buffer response;
     response.append("Context-Type: text/plain\r\n\r\n");
@@ -240,10 +246,7 @@ void start_fastcgi()
   InetAddress addr(static_cast<uint16_t>(port));
   LOG_INFO << "FastCGI listens on " << addr.toIpPort()
            << " threads " << threads;
-#ifdef MING_DEBUG
-  std::cout<< "FastCGI listens on " << addr.toIpPort()
-           << " threads " << threads<<std::endl;
-#endif
+
   muduo::net::EventLoop loop;
   boost::shared_ptr<TcpServer> server(new TcpServer(&loop, addr, "FastCGI"));
   server->setConnectionCallback(onConnection);

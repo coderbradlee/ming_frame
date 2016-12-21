@@ -75,6 +75,7 @@ class iconfig:boost::noncopyable
 		std::string m_log_console_level;
 		size_t m_log_size;
 		size_t m_log_numbers;
+		std::string m_redis_url;
 };
 // boost::shared_ptr<iconfig> iconfig::m_ps = nullptr;
 // boost::mutex iconfig::m_mu;
