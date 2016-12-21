@@ -39,7 +39,22 @@ nginx -s reload
 
 spawn-fcgi -a 127.0.0.1 -p 8888 -f demo
 
+curl -X GET 127.0.0.1/redis/
+
 curl -u test:test -X GET http://127.0.0.1/exchange_rate/?source=USD\&target=CNY\&time=2016-07-04\&database=os
+
+
+ab -k -n 500000 -c 50 http://127.0.0.1/exchange_rate/
+ab -A test:test -k -n 500000 -c 50 http://127.0.0.1/redis/
+
+siege -c 300 -r 500000 http://127.0.0.1/redis/
+
+auth = echo -n 'test:test' | openssl base64
+siege -t60s -c20 -d10 --header="Authorization:Basic test:test" 'http://127.0.0.1/redis/'
+
+
+
+
 
 2、mysql connect ok based on mysql-connector-cpp,tag 1.1.6,版本高的编译有问题，不支持MYSQL_TYPE_JSON
 git checkout -b branch_name 1.1.6
