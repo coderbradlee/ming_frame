@@ -6,7 +6,7 @@ using std::exception;
 request_parser_base::request_parser_base(const string& query_string,const string& content):m_content(content)
 {
   std::vector<std::string> param_pair;
-  boost::split(param_pair,query_string , boost::is_any_of("&"));
+  boost::split(param_pair,query_string , boost::is_any_of("\&"));
   for(auto& p:param_pair)
   {
      std::vector<std::string> one_pair;
