@@ -276,12 +276,24 @@ public:
 	~test_class();
 	
 };
+union s
+{
+	int i;
+	char x;
+};
+void test_endian()
+{
+	s u;
+	u.i=0x12345678;
+	printf("%x\n", u.x);
+}
 void test_out()
 {
+	test_endian();
 	// test_changeToPolishNotation();
-	test_parenthesisLen();
-	std::cout<<sizeof(test_struct)<<std::endl;
-	std::cout<<sizeof(test_class)<<std::endl;
+	// test_parenthesisLen();
+	// std::cout<<sizeof(test_struct)<<std::endl;
+	// std::cout<<sizeof(test_class)<<std::endl;
 	// test_sp();
 	
 }
