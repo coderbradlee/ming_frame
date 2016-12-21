@@ -2,6 +2,7 @@
 
 using namespace muduo::net;
 using std::string;
+using std::exception;
 request_parser_base::request_parser_base(const string& query_string,const string& content):m_content(content)
 {
   std::vector<std::string> param_pair;
