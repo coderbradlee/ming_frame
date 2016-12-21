@@ -2,3 +2,6 @@
 #target_link_libraries(fastcgi_test muduo_net_cpp11)
 
 #add_subdirectory(muduo_fastcgi)
+
+add_executable(demo demo.cpp)
+target_link_libraries(demo fcgi)

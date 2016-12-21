@@ -1,4 +1,4 @@
-
+add_subdirectory(fastcgi)
 set(PRODUCT_SRC_LIST config.cpp log.cpp procmon.cpp plot.cpp fastcgi/fastcgi.cpp fastcgi/fastcgi_resource.cpp mysql_connect.cpp main.cpp)
 add_executable(ming ${PRODUCT_SRC_LIST})
 
