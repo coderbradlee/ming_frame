@@ -1,7 +1,7 @@
 #include "fastcgi_resource.h"
 
 using namespace muduo::net;
-
+using std::string;
 request_parser_base::request_parser_base(const string& query_string,const string& content):m_content(content)
 {
   std::vector<std::string> param_pair;
