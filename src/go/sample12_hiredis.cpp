@@ -273,7 +273,7 @@ void call_redis2()
 void call_redis3()
 {
     RedisPipeline r;
-    if (!r.Connect("127.0.0.1", 6379)) {
+    if (!r.Connect("127.0.0.1", 6380)) {
         printf("connect error\n");
         return ;
     }
@@ -286,7 +286,7 @@ void call_redis3()
     for (int i = 0; i < count; ++i) {
         go [&, exit_c] {
             while (!stop) {
-                test_call(r, "hgetall ahash", false);
+                test_call(r, "dbsize", false);
                 ++total;
             }
             exit_c << nullptr;
@@ -308,9 +308,9 @@ void call_redis3()
 co_main()
 {
 //    co_sched.GetOptions().debug = co::dbg_syncblock | co::dbg_hook | co::dbg_switch;
-    printf("--------------- correct test ---------------\n");
-    go call_redis2;
-    printf("--------------------------------------------\n");
+    // printf("--------------- correct test ---------------\n");
+    // go call_redis2;
+    // printf("--------------------------------------------\n");
 
     printf("--------------- benchmark test ---------------\n");
     go call_redis3;
