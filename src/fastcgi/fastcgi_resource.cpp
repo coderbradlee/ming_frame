@@ -187,7 +187,7 @@ void parser_param(
     size_t redis_url_len=(get_config->m_redis_url).length();
     string redis_url=get_config->m_redis_url;
     string result="0";
-    //std::cout<<uri<<std::endl;
+    std::cout<<uri<<std::endl;
     if(request_method=="GET"&&uri.compare(0,len,url) == 0)
     {
         boost::shared_ptr<request_parser_base> pa(new request_parser_get(query_string,content));
