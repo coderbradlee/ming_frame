@@ -286,7 +286,7 @@ void call_redis3()
     for (int i = 0; i < count; ++i) {
         go [&, exit_c] {
             while (!stop) {
-                test_call(r, "dbsize", false);
+                test_call(r, "get key:000000571961", false);
                 ++total;
             }
             exit_c << nullptr;
