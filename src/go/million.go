@@ -13,8 +13,8 @@ import (
 
 func main() {
 	var (
-		maxWorkers   = flag.Int("max_workers", 5, "The number of workers to start")
-		maxQueueSize = flag.Int("max_queue_size", 100, "The size of job queue")
+		maxWorkers   = flag.Int("max_workers", 1024, "The number of workers to start")
+		maxQueueSize = flag.Int("max_queue_size", 1000, "The size of job queue")
 		port         = flag.String("port", "8080", "The server port")
 	)
 	flag.Parse()
