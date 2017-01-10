@@ -45,8 +45,25 @@ private chain
 
 ./build/bin/geth --identity "PICCetherum"  --rpc  --rpccorsdomain "*" --datadir "/root/go-ethereum/private_chain/chain" --port "30303"  --rpcapi "db,eth,net,web3" --networkid 95518 --ipcpath ~/.ethereum/geth.ipc console
 
+
+./build/bin/geth --identity "PICCetherum"  --rpc --rpcport 8545 --rpccorsdomain "*" --datadir "/root/go-ethereum/private_chain/chain" --port "30303"  --rpcapi "db,eth,net,web3" --networkid 95518 --ipcpath ~/.ethereum/geth.ipc console
+
 ./ethereumwallet --rpc ~/.ethereum --node geth --network test --gethpath /root/go-ethereum/build/bin
 
 ./ethereumwallet --rpc ~/.ethereum --node geth --gethpath /root/go-ethereum/build/bin
 
 ./ethereumwallet --rpc /root/.ethereum/geth.ipc
+
+////////////////////////////////////////////////////////
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_compileSolidity","params":["contract test { function multiply(uint a) returns(uint d) {   return a * 7;   } }"],"id":1}' localhost:8545
+
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0x1b4", true],"id":1}' localhost:8545
+
+git clone --recursive https://github.com/ethereum/solidity.git   
+cd solidity
+mkdir build
+cd build
+cmake .. && make
+
+
+admin.setSolc("path/to/solc")
