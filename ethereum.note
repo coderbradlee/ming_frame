@@ -45,5 +45,8 @@ private chain
 
 ./build/bin/geth --identity "PICCetherum"  --rpc  --rpccorsdomain "*" --datadir "/root/go-ethereum/private_chain/chain" --port "30303"  --rpcapi "db,eth,net,web3" --networkid 95518 --ipcpath ~/.ethereum/geth.ipc console
 
+./ethereumwallet --rpc ~/.ethereum --node geth --network test --gethpath /root/go-ethereum/build/bin
+
+./ethereumwallet --rpc ~/.ethereum --node geth --gethpath /root/go-ethereum/build/bin
 
 ./ethereumwallet --rpc /root/.ethereum/geth.ipc
