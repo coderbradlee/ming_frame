@@ -1,0 +1,13 @@
+$ pip install mezzanine
+python 
+# Create a project
+$ mezzanine-project myproject
+$ cd myproject
+
+# Create a database
+$ python manage.py createdb
+
+# Run the web server
+$ python manage.py runserver
+
+use pass:  demo demo 

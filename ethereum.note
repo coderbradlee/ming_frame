@@ -39,6 +39,22 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockNumberA
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_compileSolidity","params":["contract test { function multiply(uint a) returns(uint d) {   return a * 7;   } }"],"id":1}' localhost:8545
 
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_version","params":[],"id":67}' localhost:8545
+
+curl -X POST --data '{"jsonrpc":"2.0","method":"shh_getMessages","params":["0x7"],"id":73}' localhost:8545
+
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getCompilers","params":[],"id":1}' localhost:8545
+
+echo '{"jsonrpc":"2.0","method":"modules","params":[],"id":1}' | nc -U ~/.ethereum/geth.ipc
+will give all enabled modules including the version number
+
+echo '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}' | nc -U /root/.ethereum/geth.ipc
+
+tx = {from: "0x9972c5C975Ee61a1A6c20b01Bb19015e131eBB49", to: "0xF91bA837B2903701d2E1c6b9E9750a45b7fe111F", value: web3.toWei(70.23, "ether")}
+
+personal.signAndSendTransaction(tx, "840825")
+
+
 ////////////////////////////////////////////////////
 private chain
 ./build/bin/geth  --datadir "/root/go-ethereum/private_chain/chain" init /root/go-ethereum/private_chain/piccgenesis.json
