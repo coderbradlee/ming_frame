@@ -115,3 +115,19 @@ bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=12
 bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=123 sendtoaddress "n1bnrtuqShki6wUSUVHRJ6dvc3EH46H38a" 12
 
 bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=123 getinfo
+
+bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=123 getaccountaddress ""
+output::mkxoF3Vqa3D2EtBPEYbhsZgXfpKuoHyqP2
+bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19011 -rpcuser=admin2 -rpcpassword=123 getaccountaddress ""
+output::n1Dgewo57eFPcRRPanSwzcAdYbLQ8saH8S
+
+bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=123 sendtoaddress "n1bnrtuqShki6wUSUVHRJ6dvc3EH46H38a" 12
+output::3e3b7baf784266230691a0939fcb8409766e82a0e79bca20b1dc29f38c3840d7
+
+bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=123 getaccount mkxoF3Vqa3D2EtBPEYbhsZgXfpKuoHyqP2 
+bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=123 getreceivedbyaddress n1bnrtuqShki6wUSUVHRJ6dvc3EH46H38a
+
+bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=123 gettransaction 3e3b7baf784266230691a0939fcb8409766e82a0e79bca20b1dc29f38c3840d7
+
+bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=123 getbalance n1bnrtuqShki6wUSUVHRJ6dvc3EH46H38a
+bitcoin-cli -rpcconnect=127.0.0.1 -rpcport=19001 -rpcuser=admin1 -rpcpassword=123 generate 100
