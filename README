@@ -50,7 +50,8 @@ curl -u test:test -X GET http://127.0.0.1/exchange_rate/?source=USD\&target=CNY\
 ab -k -n 500000 -c 50 http://127.0.0.1/exchange_rate/
 
 ab -r -k -n 500000 -c 100 http://127.0.0.1/redis/
-
+ab -r -k -n 2000000 -c 50 http://127.0.0.1/redis/
+ab -r -k -n 2000000 -c 50 http://172.18.100.87/redis/
 ab -r -k -n 100000 -c 1000 http://127.0.0.1/redis/
 
 ab -A test:test -k -n 500000 -c 100 http://127.0.0.1/redis/
@@ -59,11 +60,20 @@ siege -c 300 -r 500000 http://127.0.0.1/redis/
 
 auth = echo -n 'test:test' | openssl base64
 siege -t60s -c20 -d10 --header="Authorization:Basic test:test" 'http://127.0.0.1/redis/'
+////////////////////////////////////////////////////
+redis-benchmark -r 1000000 -n 2000000 -t get,set,lpush,lpop -P 16 -q -p 6380
+50w
+redis-benchmark -r 1000000 -n 2000000 -t get,set,lpush,lpop -P 16 -q -p 6382 -h 172.18.100.87
+10w
+redis-benchmark -r 1000000 -n 2000000 -t get,set,lpush,lpop -q -p 6380
+10w
+redis-benchmark -r 1000000 -n 2000000 -t get,set,lpush,lpop -q -p 6382 -h 172.18.100.87
+4w
+./weighttp -n 500000 -c 100 -t 2 -k 127.0.0.1/redis
 
 
 
-
-
+//////////////////////////////////////////////////////
 2、mysql connect ok based on mysql-connector-cpp,tag 1.1.6,版本高的编译有问题，不支持MYSQL_TYPE_JSON
 git checkout -b branch_name 1.1.6
 3、extends QuotationService  exportPDF 
