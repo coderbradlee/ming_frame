@@ -11,7 +11,7 @@
 
 #add_subdirectory(fastcgi)
 #add_subdirectory(test)
-#add_subdirectory(all_report)
+add_subdirectory(all_report)
 #add_subdirectory(sudoku)
 #add_subdirectory(memcached/client)
 #add_subdirectory(memcached/server)
