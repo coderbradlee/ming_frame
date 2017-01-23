@@ -72,26 +72,33 @@ struct report_data
  		std::ostringstream stream;
 			stream<<std::setprecision(8)<<quotation_no
 		 	<<","<<account_name
-		 	<<","<<approval_status
-		 	<<","<<sales_full_name
-		 	<<","<<receiving_countries
-		 	//<<","<<customer_countries
+		 	<<","<<sales_company_name
 		 	<<","<<country_region
+		 	<<","<<customer_countries
+		 	<<","<<receiving_countries
+		 	<<","<<"import area"
+		 	<<","<<approval_status
+		 	<<","<<"trade term"
 			<<","<<product_name_id//export as product_name_id
 			<<","<<product_name
-			<<","<<product_qty_pc
+		 	<<","<<product_qty_pc
 			<<","<<product_qty_w
-			<<","<<price_condition
 			<<","<<currency
 			<<","<<unit_price
+			<<","<<"zhidaojia"
+			<<","<<price_total
+			<<","<<"zhidaozhenggejiage"
+			<<","<<payment_term_desc
+		 	<<","<<creat_at
+		 	
+		 	
+		 	<<","<<sales_full_name
+			<<","<<price_condition
 			<<","<<currency
 			<<","<<price_total_currency
-			<<","<<price_total
 			<<","<<pi_no
 			<<","<<buyers_po
 			<<","<<contract_no
-		 	<<","<<payment_term_desc
-		 	<<","<<creat_at
 			<<"\r\n";
  		return stream.str();
  	}
