@@ -581,7 +581,7 @@ void month_report::start()
 	t_quotation_detail\
 	on\
 	t_quotation_detail.quotation_id = t_quotation.quotation_id\
-	and t_quotation_detail.dr=0 and t_quotation.createAt like \"2016-07%\"\
+	and t_quotation_detail.dr=0 and t_quotation.createAt >'2016-01-01 00:00:01' and t_quotation.createAt <'2016-12-31 23:59:59'\
 	ORDER BY t_quotation.createAt";
 	
 	query(query_string);
