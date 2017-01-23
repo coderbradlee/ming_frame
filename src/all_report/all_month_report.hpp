@@ -9,6 +9,7 @@
 #include <cppconn/prepared_statement.h>
 #include "../log.hpp"
 #include <iomanip>
+#include <xlnt/xlnt.hpp>
 struct report_data
  {
  	std::string quotation_id;
@@ -73,7 +74,7 @@ struct report_data
 			stream<<std::setprecision(8)<<quotation_no
 		 	<<","<<account_name
 		 	<<","<<sales_company_name
-		 	<<","<<country_region
+		 	<<","<<"customer_name"
 		 	<<","<<customer_countries
 		 	<<","<<receiving_countries
 		 	<<","<<"import area"
@@ -91,7 +92,7 @@ struct report_data
 			<<","<<payment_term_desc
 		 	<<","<<creat_at
 		 	
-		 	
+
 		 	<<","<<sales_full_name
 			<<","<<price_condition
 			<<","<<currency
@@ -130,6 +131,7 @@ private:
 	void deal_with_approved_status();
 	void deal_with_pi();
 	void write_to_csv();
+	void write_to_excel();
 private:
 	std::vector<boost::shared_ptr<report_data>> m_report_datas;
 	boost::shared_ptr<sql::ResultSet> m_res;
