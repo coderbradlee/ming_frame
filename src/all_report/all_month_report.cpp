@@ -588,9 +588,9 @@ void month_report::write_to_excel()
   	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 	{
 		*xlsxfile<<x->quotation_no;
-	 	*xlsxfile<<x->account_name;
+	 	*xlsxfile<<x->sales_full_name;
 	 	*xlsxfile<<x->sales_company_name;
-	 	*xlsxfile<<"customer_name";
+	 	*xlsxfile<<x->account_name;
 	 	*xlsxfile<<x->customer_countries;
 	 	*xlsxfile<<x->receiving_countries;
 	 	*xlsxfile<<"import area";
