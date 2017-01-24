@@ -608,11 +608,8 @@ void month_report::write_to_excel()
 		*xlsxfile<<x->payment_term_desc;
 	 	*xlsxfile<<x->creat_at;
 		xlsxfile->NextRow();
-	});
-    
+	}); 
   }
-
-}
 void month_report::start()
 {
 	try
