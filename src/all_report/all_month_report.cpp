@@ -581,7 +581,7 @@ void month_report::write_to_excel()
   
   	for(const auto& i:v)
   	{
-    	xlsxfile->AddColumn(i);
+    	xlsxfile->AddColumn(i.c_str());
   	}
   	xlsxfile->NextRow();
   
