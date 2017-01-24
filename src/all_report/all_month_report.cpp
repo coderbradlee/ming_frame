@@ -516,10 +516,11 @@ void month_report::insert_data()
 	 	{
 	 		temp->product_qty_w=0;
 	 	}
-	 	// if(!m_res->isNull("guidance_price"))
-	 	// {
-	 	// 	temp->price_total_guided=temp->product_qty_w*m_res->getDouble("guidance_price");
-	 	// }
+	 	if(!m_res->isNull("guidance_price"))
+	 	{
+	 		temp->guidance_price=m_res->getDouble("guidance_price");
+	 		temp->total_guidance_price=temp->product_qty_w*m_res->getDouble("guidance_price");
+	 	}
 	 	if(!m_res->isNull("unit_price"))
 	 	{
 	 		temp->unit_price=m_res->getDouble("unit_price");
@@ -595,17 +596,17 @@ void month_report::write_to_excel()
 	 	*xlsxfile<<x->receiving_countries;
 	 	*xlsxfile<<"import area";
 	 	*xlsxfile<<x->approval_status;
-	 	*xlsxfile<<"trade term";
+	 	*xlsxfile<<x->price_condition;
 		*xlsxfile<<x->product_name_id;//export as product_name_id
 		*xlsxfile<<x->product_name;
 	 	*xlsxfile<<x->product_qty_pc;
 		*xlsxfile<<x->product_qty_w;
 		*xlsxfile<<x->currency;
 		*xlsxfile<<x->unit_price;
-		*xlsxfile<<x->currency;
-		*xlsxfile<<"zhidaojia";
+		*xlsxfile<<x->guided_currency;
+		*xlsxfile<<x->guidance_price;
 		*xlsxfile<<x->price_total;
-		*xlsxfile<<"zhenggezhidaojia";
+		*xlsxfile<<x->total_guidance_price;
 		*xlsxfile<<x->payment_term_desc;
 	 	*xlsxfile<<x->creat_at;
 		xlsxfile->NextRow();

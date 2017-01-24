@@ -40,6 +40,8 @@ struct report_data
 	std::string contract_no;
  	std::string payment_term_desc;
  	std::string creat_at;
+ 	double guidance_price;
+ 	double total_guidance_price;
  	void print()
  	{
  		std::cout<<std::setprecision(8)<<quotation_id
