@@ -1,5 +1,4 @@
 #include "all_month_report.hpp"
-#include "xlsxio/include/xlsxio_write.h"
 month_report::month_report(boost::shared_ptr<mysql_info_> in)
 {
 	m_driver = get_driver_instance();
