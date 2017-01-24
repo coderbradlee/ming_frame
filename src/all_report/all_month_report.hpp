@@ -9,7 +9,7 @@
 #include <cppconn/prepared_statement.h>
 #include "../log.hpp"
 #include <iomanip>
-#include <xlnt/xlnt.hpp>
+#include "xlnt/xlnt.hpp"
 struct report_data
  {
  	std::string quotation_id;
