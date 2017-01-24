@@ -587,26 +587,26 @@ void month_report::write_to_excel()
   
   	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
 	{
-		*xlsxfile<<quotation_no;
-	 	*xlsxfile<<account_name;
-	 	*xlsxfile<<sales_company_name;
+		*xlsxfile<<x.quotation_no;
+	 	*xlsxfile<<x.account_name;
+	 	*xlsxfile<<x.sales_company_name;
 	 	*xlsxfile<<"customer_name";
-	 	*xlsxfile<<customer_countries;
-	 	*xlsxfile<<receiving_countries;
+	 	*xlsxfile<<x.customer_countries;
+	 	*xlsxfile<<x.receiving_countries;
 	 	*xlsxfile<<"import area";
-	 	*xlsxfile<<approval_status;
+	 	*xlsxfile<<x.approval_status;
 	 	*xlsxfile<<"trade term";
-		*xlsxfile<<product_name_id;//export as product_name_id
-		*xlsxfile<<product_name;
-	 	*xlsxfile<<product_qty_pc;
-		*xlsxfile<<product_qty_w;
-		*xlsxfile<<currency;
-		*xlsxfile<<unit_price;
+		*xlsxfile<<x.product_name_id;//export as product_name_id
+		*xlsxfile<<x.product_name;
+	 	*xlsxfile<<x.product_qty_pc;
+		*xlsxfile<<x.product_qty_w;
+		*xlsxfile<<x.currency;
+		*xlsxfile<<x.unit_price;
 		*xlsxfile<<"zhidaojia";
-		*xlsxfile<<price_total;
+		*xlsxfile<<x.price_total;
 		*xlsxfile<<"zhidaozhenggejiage";
-		*xlsxfile<<payment_term_desc;
-	 	*xlsxfile<<creat_at;
+		*xlsxfile<<x.payment_term_desc;
+	 	*xlsxfile<<x.creat_at;
 		xlsxfile->NextRow();
 	});
     
