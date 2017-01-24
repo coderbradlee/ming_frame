@@ -574,7 +574,7 @@ void month_report::write_to_excel()
 
 	boost::shared_ptr<XLSXIOWriter> xlsxfile(new XLSXIOWriter("all_report.xlsx"));
     xlsxfile->SetRowHeight(1);
-  	std::vector<string> v
+  	std::vector<std::string> v
   	{	
 		"Quotation_NO.","Sales","Sales_Company","Customer","Country","Destination_Country","Import_Area","Approval_Status","Trade_Term","Product_Classification","Product_Code","Qty(PCS)","Power(Wp)","Unit_price_Currency","Unit_price","Guidance_Price_Currency","Guidance_Price","Total_Price","Guided_Total_Price","Payment_Terms","Quotation_Date"
   	};
