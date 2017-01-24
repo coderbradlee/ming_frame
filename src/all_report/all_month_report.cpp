@@ -1,5 +1,5 @@
 #include "all_month_report.hpp"
-
+#include "xlsxio/include/xlsxio_write.h"
 month_report::month_report(boost::shared_ptr<mysql_info_> in)
 {
 	m_driver = get_driver_instance();
@@ -573,15 +573,23 @@ void month_report::write_to_excel()
 	// 		}
 	// 	});
 
-	xlnt::workbook wb;
-    xlnt::worksheet ws = wb.active_sheet();
-    ws.cell("A1").value(5);
-    ws.cell("B2").value("string data");
-    ws.cell("C3").formula("=RAND()");
-    ws.merge_cells("C3:C4");
-    ws.freeze_panes("B2");
+	XLSXIOWriter* xlsxfile = new XLSXIOWriter("all_report.xlsx");
+  xlsxfile->SetRowHeight(1);
+  xlsxfile->AddColumn("Col1");
+  xlsxfile->AddColumn("Col2");
+  xlsxfile->AddColumn("Col3");
+  xlsxfile->AddColumn("Col4");
+  xlsxfile->AddColumn("Col5");
+  xlsxfile->NextRow();
+  int i;
+  for (i = 0; i < 10; i++) {
+    *xlsxfile << "Test" << (char*)NULL << (int64_t)i;
+    xlsxfile->AddCellDateTime(time(NULL));
+    *xlsxfile << 3.1415926;
+    xlsxfile->NextRow();
+  }
+  delete xlsxfile;
 
-    wb.save("all_report.xlsx");
 }
 void month_report::start()
 {
