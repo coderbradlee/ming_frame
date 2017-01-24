@@ -573,19 +573,43 @@ void month_report::write_to_excel()
 	// 	});
 
 	XLSXIOWriter* xlsxfile = new XLSXIOWriter("all_report.xlsx");
-  xlsxfile->SetRowHeight(1);
-  xlsxfile->AddColumn("Col1");
-  xlsxfile->AddColumn("Col2");
-  xlsxfile->AddColumn("Col3");
-  xlsxfile->AddColumn("Col4");
-  xlsxfile->AddColumn("Col5");
-  xlsxfile->NextRow();
-  int i;
-  for (i = 0; i < 10; i++) {
-    *xlsxfile << "Test" << (char*)NULL << (int64_t)i;
-    xlsxfile->AddCellDateTime(time(NULL));
-    *xlsxfile << 3.1415926;
-    xlsxfile->NextRow();
+    xlsxfile->SetRowHeight(1);
+  	std::vector<string> v
+  	{	
+		"Quotation_NO.","Sales","Sales_Company","Customer","Country","Destination_Country","Import_Area","Approval_Status","Trade_Term","Product_Classification","Product_Code","Qty(PCS)","Power(Wp)","Unit_price_Currency","Unit_price","Guidance_Price_Currency","Guidance_Price","Total_Price","Guided_Total_Price","Payment_Terms","Quotation_Date"
+  	};
+  
+  	for(const auto& i:v)
+  	{
+    	xlsxfile->AddColumn(i);
+  	}
+  	xlsxfile->NextRow();
+  
+  	std::for_each(m_report_datas.begin(),m_report_datas.end(),[&](boost::shared_ptr<report_data>& x)
+	{
+		*xlsxfile<<quotation_no;
+	 	*xlsxfile<<account_name;
+	 	*xlsxfile<<sales_company_name;
+	 	*xlsxfile<<"customer_name";
+	 	*xlsxfile<<customer_countries;
+	 	*xlsxfile<<receiving_countries;
+	 	*xlsxfile<<"import area";
+	 	*xlsxfile<<approval_status;
+	 	*xlsxfile<<"trade term";
+		*xlsxfile<<product_name_id;//export as product_name_id
+		*xlsxfile<<product_name;
+	 	*xlsxfile<<product_qty_pc;
+		*xlsxfile<<product_qty_w;
+		*xlsxfile<<currency;
+		*xlsxfile<<unit_price;
+		*xlsxfile<<"zhidaojia";
+		*xlsxfile<<price_total;
+		*xlsxfile<<"zhidaozhenggejiage";
+		*xlsxfile<<payment_term_desc;
+	 	*xlsxfile<<creat_at;
+		xlsxfile->NextRow();
+	});
+    
   }
   delete xlsxfile;
 
@@ -624,7 +648,7 @@ void month_report::start()
 	deal_with_sales_country();
 	deal_with_approved_status();
 	deal_with_pi();
-	write_to_csv();
+	// write_to_csv();
 	write_to_excel();
    } 
 	catch (sql::SQLException &e) 
