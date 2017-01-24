@@ -9,7 +9,7 @@
 #include <cppconn/prepared_statement.h>
 #include "../log.hpp"
 #include <iomanip>
-#include "all_report/xlsxio/include/xlsxio_write.h"
+#include "xlsxio_write.h"
 struct report_data
  {
  	std::string quotation_id;

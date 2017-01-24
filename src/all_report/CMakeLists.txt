@@ -2,7 +2,7 @@
 
 set(PRODUCT_SRC_LIST ../config.cpp ../log.cpp all_month_report.cpp all_month_report_main.cpp)
 add_executable(all_month_report ${PRODUCT_SRC_LIST})
-
+include_directories(xlsxio/include)
 set(main_name all_month_report)
 target_link_libraries(${main_name} xlsxio_write)
 target_link_libraries(${main_name} muduo_net_cpp11)
