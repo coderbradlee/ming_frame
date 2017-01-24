@@ -380,12 +380,21 @@ void month_report::deal_with_customer_info()
 		
 		query(query_string);
 		m_res->next();
-		query_string="select full_name from t_country where country_id='"+m_res->getString(1)+"'";
+		query_string="select full_name,area_id from t_country where country_id='"+m_res->getString(1)+"'";
 	
 		query(query_string);
 		m_res->next();
-		
-		i->receiving_countries=m_res->getString("full_name");
+		if(!(m_res->isNull("full_name")))
+			i->receiving_countries=m_res->getString("full_name");
+		if(!(m_res->isNull("area_id")))
+		{	
+			query_string="select short_name from t_area where area_id='"+m_res->getString("area_id")+"'";
+			//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
+			query(query_string);
+			m_res->next();
+			if(!(m_res->isNull("short_name"))) 
+				i->import_area=m_res->getString("short_name");
+		}
 		////////////////////////////////////////////////
 		query_string="select customer_basic_id from t_quotation where quotation_id='"+i->quotation_id+"'";
 		//std::cout<<query_string<<":"<<__FILE__<<":"<<__LINE__<<std::endl;
@@ -594,11 +603,11 @@ void month_report::write_to_excel()
 	 	*xlsxfile<<x->account_name;
 	 	*xlsxfile<<x->customer_countries;
 	 	*xlsxfile<<x->receiving_countries;
-	 	*xlsxfile<<"import area";
+	 	*xlsxfile<<x->import_area;
 	 	*xlsxfile<<x->approval_status;
 	 	*xlsxfile<<x->price_condition;
+	 	*xlsxfile<<x->product_name;
 		*xlsxfile<<x->product_name_id;//export as product_name_id
-		*xlsxfile<<x->product_name;
 	 	*xlsxfile<<x->product_qty_pc;
 		*xlsxfile<<x->product_qty_w;
 		*xlsxfile<<x->currency;

@@ -42,6 +42,7 @@ struct report_data
  	std::string creat_at;
  	double guidance_price;
  	double total_guidance_price;
+ 	std::string import_area;
  	void print()
  	{
  		std::cout<<std::setprecision(8)<<quotation_id
