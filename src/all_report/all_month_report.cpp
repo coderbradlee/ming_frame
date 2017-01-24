@@ -602,9 +602,10 @@ void month_report::write_to_excel()
 		*xlsxfile<<x->product_qty_w;
 		*xlsxfile<<x->currency;
 		*xlsxfile<<x->unit_price;
+		*xlsxfile<<x->currency;
 		*xlsxfile<<"zhidaojia";
 		*xlsxfile<<x->price_total;
-		*xlsxfile<<"zhidaozhenggejiage";
+		*xlsxfile<<"zhenggezhidaojia";
 		*xlsxfile<<x->payment_term_desc;
 	 	*xlsxfile<<x->creat_at;
 		xlsxfile->NextRow();
